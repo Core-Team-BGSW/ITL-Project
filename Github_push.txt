@@ -1,0 +1,16 @@
+For pushing to Git
+
+
+git add -A
+git commit -m "new git Push"
+git remote add origin https://github.com/Core-Team-BGSW/ITL-Project
+git push -u origin master  
+
+
+
+
+For pulling from Git
+
+git init (for first time only )
+git remote add origin https://github.com/Core-Team-BGSW/ITL-Project 
+git pull origin master
