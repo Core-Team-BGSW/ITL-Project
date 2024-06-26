@@ -40,24 +40,26 @@ mat-icon{
   font-weight: 900;
   margin-left: 15px;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
 
 }
 .menu-item{
   margin: 0 10px 0 10px ;
+  text-align: left;
   .menu-button{
-    display: block;
+
     width: 100%;
     position: relative;
     display: flex;
-    padding-left: 40px;
+    padding-left: 4px;
     margin-bottom: 10px;
+    text-align: left;
   }
   .menu-button span{
     margin-left: 20px;
     color: white;
-    text-align: center;
-    text-align: justify;
+    text-align: left;
+
 
   }
   .menu-button:hover{

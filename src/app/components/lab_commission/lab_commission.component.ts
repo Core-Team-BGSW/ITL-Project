@@ -5,6 +5,8 @@ import * as ExcelJS from 'exceljs';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     templateUrl: './lab_commission.component.html',
     styleUrl: './lab_commission.component.scss',
-    imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule],
+    imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,MatTabsModule,MatButtonModule],
 })
 export class LabCommissionComponent {
   fileSelected = false;
@@ -72,7 +74,7 @@ export class LabCommissionComponent {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Template Sheet');
 
-    const headerRow = worksheet.addRow(['Location', 'Location Code', 'Building','GB','Dept Name','Lab No','Cost Center','Purpose','Lab Responsible','Lab resposibe (s)','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','Present DH','DH NTID','KAM','KAM NTID','ACL Required','ACL Implemented(Yes/NO)']);
+    const headerRow = worksheet.addRow(['Sr.No','Location', 'Location Code', 'Building','GB','Dept Name','Lab No','Cost Center','Purpose','Lab Responsible','Lab resposibe (s)','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','Present DH','DH NTID','KAM','KAM NTID','ACL Required','ACL Implemented(Yes/NO)']);
     headerRow.font = { bold: true };
     headerRow.alignment = { vertical: 'middle', horizontal: 'center' };
     headerRow.eachCell((cell, number) => {

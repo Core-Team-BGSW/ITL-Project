@@ -217,8 +217,19 @@ body {
 
 }
 
-.button1{
-  margin-left: 4px;
+.importfile{
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 
@@ -240,4 +251,117 @@ body {
   text-decoration: none;
   font-weight: lighter;
   box-sizing: content-box;
+}
+
+
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+
+
+.importbutton{
+  margin-top: 20px;
+}
+.importbutton a{
+  font-weight: bold;
+}
+
+
+.importbutton input[type='file'] {
+  position: absolute;
+  font-size: 16px;
+  right:auto;
+  top: auto;
+}
+
+.subbutton {
+  background-color: #005816; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-left: 20px
+
+}
+
+
+
+.subbutton:hover {
+  background-color: #00b33c; /* green on hover */
+}
+
+
+
+.previewbutton{
+  background-color: #50cb09; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+
+
+}
+.previewbutton:hover{
+  background-color: yellowgreen;
+}
+
+.previewbutton:disabled {
+  background-color: #ccc; /* Light gray background when disabled */
+  color: #666; /* Darker text color when disabled */
+  cursor: not-allowed; /* Disable cursor */
+}
+
+
+
+.templatebutton{
+  background-color: #3eaeca; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+
+
+}
+.templatebutton:hover{
+  background-color: rgb(29, 112, 236);
+}
+
+
+.buttons{
+  display: flex;
+  gap: 20px;
+}
+
+
+
+.button2{
+  margin-right: 20px;
+}
+
+.previewtextheading h4{
+
+
+  margin-top: 30px;
+  margin-bottom: 8px;
+  justify-content: center;
+  display: flex;
+  background-color:#ee8802;
+  color: rgb(252, 251, 249);
+  padding: 10px;
+  border-radius: 8px;
 }
