@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
+
 /*basic reset*/
 * {
     margin: 0;
@@ -201,4 +202,42 @@ body {
 .dme_link a:hover, .dme_link a:focus {
     background: #C5C5F1;
     text-decoration: none;
+}
+
+
+
+
+.button{
+  text-decoration: none;
+  margin-left: 0%;
+  display: flex;
+  list-style-type: none;
+  display: inline-table;
+  padding: 4px;
+
+}
+
+.button1{
+  margin-left: 4px;
+}
+
+
+.excel-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px; /* Optional: Adjust spacing */
+}
+
+.excel-table th, .excel-table td {
+  border: 1px solid #ddd; /* Border style */
+  padding: 8px; /* Cell padding */
+  text-align: center; /* Optional: Align text */
+}
+
+.excel-table th {
+  background-color: #4CAF50; /* Optional: Header background color */
+  color: white;
+  text-decoration: none;
+  font-weight: lighter;
+  box-sizing: content-box;
 }
