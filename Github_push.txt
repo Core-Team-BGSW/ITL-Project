@@ -6,7 +6,7 @@ git commit -m "new git Push"
 git remote add origin https://github.com/Core-Team-BGSW/ITL-Project
 git push -u origin master
 
-Krantiiiii
+Fein (feat .Krantiiiii)
 
 
 For pulling from Git
