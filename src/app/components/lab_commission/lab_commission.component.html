@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <!--------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------------------------------------------------>
 
     <div *ngIf="previewVisible">
       <div class="previewtextheading">
@@ -67,7 +67,7 @@
       </a>
     </div>
   </mat-tab>
-  <!--------------------------------------------------------------------->
+  <!---------------------------------------------------------------------------------------------------------------------------------->
   <mat-tab label="Fill Form">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -77,26 +77,51 @@
               LAB DETAILS
               <br />
             </h2>
-            <h4 style="color: rgb(152, 156, 152)">
-              (Fill the new lab details here)
-            </h4>
             <table>
-              <th></th>
-              <th></th>
               <tr>
-                <td>Country</td>
+                <td>Region</td>
                 <td>
-                  <input type="text" name="lab_name" placeholder="Country" />
+                  <select name="regionSelect" id="regionSelect">
+                    <option value="">Select a Region</option>
+                    <option value="APAC">APAC</option>
+                    <option value="EMEA">EMEA</option>
+                    <option value="AMERICA">AMERICA</option>
+                  </select>
                 </td>
               </tr>
               <tr>
-                <td>Location Code</td>
+                <td>Country</td>
                 <td>
-                  <input
-                    type="text"
-                    name="lab_name"
-                    placeholder="Location Code"
-                  />
+                  <select name="countrySelect" id="countrySelect">
+                    <option value="">Select a country</option>
+                    <option value="IN">India</option>
+                    <option value="DE">Germany</option>
+                    <option value="VN">Vietnam</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Location</td>
+                <td>
+                  <select name="location" id="locationSelect">
+                    <option value="">Select Location</option>
+                    <option value="Ban">Bangalore</option>
+                    <option value="Cob">Coimbatore</option>
+                    <option value="Pun">Pune</option>
+                    <option value="Hyd">Hyderabad</option>
+                  </select>
+                </td>
+                <td>Code</td>
+                <td>
+                  <select name="locationcode" id="locationcodeSelect">
+                    <option value="">Select Location code</option>
+                    <option value="Ban">RBIN</option>
+                    <option value="Bani">ADUGODI</option>
+                    <option value="Cob">COB-SEZ1</option>
+                    <option value="Cob">COB-SEZ2</option>
+                    <option value="Pun">Pune</option>
+                    <option value="Hyd">Hyderabad</option>
+                  </select>
                 </td>
               </tr>
               <tr>
@@ -165,5 +190,3 @@
     </div>
   </mat-tab>
 </mat-tab-group>
-
-<!-------------------------------------------------------------------------------------------->

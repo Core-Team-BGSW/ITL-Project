@@ -9,6 +9,7 @@ import { HomeComponent } from "./admin/home/home.component";
 import { LabCommissionComponent } from "./components/lab_commission/lab_commission.component";
 import {MatTabsModule} from '@angular/material/tabs';
 import { SelfCheckComponent } from './components/self-check/self-check.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,7 @@ import { SelfCheckComponent } from './components/self-check/self-check.component
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
-      SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent
+      SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule
     ]
 })
 export class AppComponent {
