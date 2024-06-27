@@ -57,15 +57,28 @@ mat-icon{
   }
   .menu-button span{
     margin-left: 20px;
-    color: white;
+
     text-align: left;
 
 
   }
   .menu-button:hover{
     background-color: gray;
+
   }
   .menu-button:focus{
     background-color: aliceblue;
+    color:black;
   }
+}
+
+
+.dropdown{
+  display:block;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  padding: 5px 20px;
 }

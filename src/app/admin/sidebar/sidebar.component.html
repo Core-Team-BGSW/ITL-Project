@@ -1,10 +1,11 @@
 <div class="navbar">
-
   <div class="user">
-    <img src="https://cdn3.iconfinder.com/data/icons/avatars-collection/256/22-512.png" alt="">
+    <img
+      src="https://cdn3.iconfinder.com/data/icons/avatars-collection/256/22-512.png"
+      alt=""
+    />
     <h4 class="name">Admin</h4>
     <p class="mail">gmail.com</p>
-
   </div>
   <div class="menu">
     <div class="menu-head">
@@ -19,10 +20,34 @@
         <mat-icon>message</mat-icon>
         <span>Lab Commission</span>
       </button>
-      <button mat-button class="menu-button">
+      <button mat-button class="menu-button" [matMenuTriggerFor]="menu">
         <mat-icon>dashboard</mat-icon>
         <span>Lab Operations</span>
       </button>
+
+      <mat-menu #menu="matMenu">
+        <div class="dropdown">
+          <button
+            routerLink="self-check"
+            mat-menu-item
+            (click)="menuItemClicked('Item 1')"
+          >
+            Annual Self Check Audit
+          </button>
+          <button mat-menu-item (click)="menuItemClicked('Item 2')">
+            Software Tracking
+          </button>
+          <button mat-menu-item (click)="menuItemClicked('Item 3')">
+            ACL IP Management
+          </button>
+          <button mat-menu-item (click)="menuItemClicked('Item 4')">
+            Audit
+          </button>
+          <button mat-menu-item (click)="menuItemClicked('Item 4')">
+            Lab Movement
+          </button>
+        </div>
+      </mat-menu>
       <button mat-button class="menu-button">
         <mat-icon>dashboard</mat-icon>
         <span>Lab Decommission</span>
