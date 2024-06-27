@@ -1,1 +1,19 @@
-<p>dashboard works!</p>
+<div class="container">
+  <div [ngClass]="toggleProperty ? 'flipped' : ''" class="card">
+    <div class="front">
+      <ng-content select="flip-card-front">
+        <h1>Monitoring</h1>
+        <img src="https://www.bing.com/ck/a?!&&p=44299430439528d2JmltdHM9MTcxOTQ0NjQwMCZpZ3VpZD0wZmYwMDllZS1kNTNlLTY1Y2EtMmQzYS0xZDYwZDRiMzY0OWYmaW5zaWQ9NTgyMA&ptn=3&ver=2&hsh=3&fclid=0ff009ee-d53e-65ca-2d3a-1d60d4b3649f&u=a1L2ltYWdlcy9zZWFyY2g_cT1kaWdpdGFsJTIwdHJhbnNmb3JtYXRpb24lMjBpbWFnZSZGT1JNPUlRRlJCQSZpZD1GM0U0RUM3NTRCNjZDN0Q2MkQyRTAwQUQ3MEY0MkFERkY3M0E0N0JD&ntb=1" alt="KK">
+      </ng-content>
+      <div class="arrow-icon" (click)="toggle()">
+        <i class="ion-ios-arrow-back"></i>
+      </div>
+    </div>
+    <div class="back">
+      <ng-content select="flip-card-back"></ng-content>
+      <div class="arrow-icon" (click)="toggle()">
+        <i class="ion-ios-arrow-back"></i>
+      </div>
+    </div>
+  </div>
+</div>
