@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -18,8 +19,15 @@ import { MatSelectModule } from '@angular/material/select';
     templateUrl: './lab_commission.component.html',
     styleUrl: './lab_commission.component.scss',
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
-      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule ],
+      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule ],
 })
+
+
+
+
+
+
+
 export class LabCommissionComponent {
   fileSelected = false;
   selectedFile: File | null = null; // Initialize selectedFile to null
@@ -99,5 +107,112 @@ export class LabCommissionComponent {
     });
 
   }
+
+
+
+
+  regionchange(event: Event) {
+    const selectedregion = (event.target as HTMLSelectElement).value;
+    const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
+
+    // Clear previous options
+    countrySelect.innerHTML = '';
+
+    if (selectedregion === 'APAC') {
+      this.populateOptionsR(["AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
+    } else if (selectedregion === 'EMEA') {
+      this.populateOptionsR(["DE",'PL']);
+    } else if (selectedregion === 'AMERICA') {
+      this.populateOptionsR(['Pune']);
+
+    }
+  }
+
+  populateOptionsR(options: string[]) {
+    const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
+
+    options.forEach(option => {
+      const optionElem = document.createElement('option');
+      optionElem.value = option;
+      optionElem.textContent = option;
+      countrySelect.appendChild(optionElem);
+    });
+  }
+  countrychange(event: Event) {
+    const selectedcountry = (event.target as HTMLSelectElement).value;
+    const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
+
+    // Clear previous options
+    locationselect.innerHTML = '';
+
+    if (selectedcountry === 'IN') {
+      this.populateOptionsL(["Select location","Bangalore", "Hyderabad",'Pune', 'Coimbatore']);
+    } else if (selectedcountry === 'CN') {
+      this.populateOptionsL(['Beijing']);
+
+    }
+  }
+
+  populateOptionsL(options: string[]) {
+    const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
+
+    options.forEach(option => {
+      const optionElem = document.createElement('option');
+      optionElem.value = option;
+      optionElem.textContent = option;
+      locationselect.appendChild(optionElem);
+    });
+  }
+
+  locationchangeha(event: Event) {
+    const selectedlocation = (event.target as HTMLSelectElement).value;
+    const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
+
+    // Clear previous options
+    buildingSelect.innerHTML = ' ';
+
+    if (selectedlocation === 'Bangalore') {
+      this.populateOptionsB(["Select Building","ADUGODI-601","ADUGODI-602","ADUGODI-603","ADUGODI-605",]);
+    } else if (selectedlocation === 'CN') {
+      this.populateOptionsB(['Beijing']);
+
+    }
+  }
+
+  populateOptionsB(options: string[]) {
+    const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
+
+    options.forEach(option => {
+      const optionElem = document.createElement('option');
+      optionElem.value = option;
+      optionElem.textContent = option;
+      buildingSelect.appendChild(optionElem);
+    });
+  }
+
+
+  selectedEntity: string = '';
+  localITL: string = '';
+  localITLproxy: string = '';
+
+  entityChange(event: Event) {
+    this.selectedEntity = (event.target as HTMLSelectElement).value;
+    // Automatically fill Local-ITL based on selected entity
+    if (this.selectedEntity === 'BGSW') {
+      this.localITL = 'ada3kor';
+      this.localITLproxy ='muk3kor';
+    } else {
+      this.localITL = ''; // Clear localITL for other entities
+      this.localITLproxy ='';
+    }
+  }
+
+
+
 }
+
+
+
+
+
 

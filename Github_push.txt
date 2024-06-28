@@ -14,3 +14,130 @@ For pulling from Git
 git init (for first time only )
 git remote add origin https://github.com/Core-Team-BGSW/ITL-Project
 git pull origin master
+
+
+
+
+
+<div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <form id="msform">
+          <fieldset>
+            <h2>
+              LAB DETAILS
+              <br />
+            </h2>
+            <table>
+              <tr>
+                <td>Region<span class="required"> *</span></td>
+                <td>
+                  <select name="regionSelect" id="regionSelect">
+                    <option value="">Select a Region</option>
+                    <option value="APAC">APAC</option>
+                    <option value="EMEA">EMEA</option>
+                    <option value="AMERICA">AMERICA</option>
+                  </select>
+                </td>
+
+                <td class="secondrow">
+                  Country<span class="required"> *</span>
+                </td>
+                <td>
+                  <select name="countrySelect" id="countrySelect">
+                    <option value="">Select a country</option>
+                    <option value="IN">India</option>
+                    <option value="DE">Germany</option>
+                    <option value="VN">Vietnam</option>
+                  </select>
+                </td>
+              </tr>
+              <tr class="column-header">
+                <td>Location<span class="required"> *</span></td>
+                <td>
+                  <select
+                    name="location"
+                    id="locationSelect"
+                    (change)="locationChanged($event)"
+                  >
+                    <option value="">Select Location</option>
+                    <option value="Ban">Bangalore</option>
+                    <option value="Cob">Coimbatore</option>
+                    <option value="Pun">Pune</option>
+                    <option value="Hyd">Hyderabad</option>
+                  </select>
+                </td>
+                <td class="secondrow">Code<span class="required"> *</span></td>
+                <td>
+                  <select name="locationcode" id="locationcodeSelect">
+                    <option value="">Select Location code</option>
+                    <!-- Options will be dynamically populated based on selection -->
+                  </select>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Department<span class="required"> *</span></td>
+                <td>
+                  <input type="text" name="lab_name" placeholder="Department" />
+                </td>
+
+                <td class="secondrow">
+                  Building<span class="required"> *</span>
+                </td>
+                <td>
+                  <input type="text" name="lab_name" placeholder="Building" />
+                </td>
+
+                <td class="secondrow">
+                  Room No.<span class="required"> *</span>
+                </td>
+                <td>
+                  <input type="text" name="lab_name" placeholder="Room No." />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Name of Lab Coordinator <span class="required"> *</span>
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    name="lab_name"
+                    placeholder="Name of Lab Coordinator"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Name Of DH <span class="required"> *</span></td>
+                <td>
+                  <input type="text" name="lab_name" placeholder="Name of DH" />
+                </td>
+              </tr>
+              <tr>
+                <td>Name Of KAM <span class="required"> *</span></td>
+                <td>
+                  <input
+                    type="text"
+                    name="lab_name"
+                    placeholder="Name of KAM"
+                  />
+                </td>
+              </tr>
+            </table>
+
+            <input
+              type="button"
+              name="button"
+              class="action-button"
+              value="Submit"
+            />
+            <input
+              type="button"
+              name="button1"
+              class="action-button"
+              value="Reset"
+            />
+          </fieldset>
+        </form>
+      </div>
+    </div>
