@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports:[CommonModule],
+  imports:[CommonModule, MatButtonModule, MatCardModule,],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 
@@ -12,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  toggleProperty = false;
+  toggleProperty = true;
 
   constructor() { }
   ngOnInit(): void {
