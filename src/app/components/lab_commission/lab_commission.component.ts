@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+
 import { HomeComponent } from "../../admin/home/home.component";
 import { SidebarComponent } from "../../admin/sidebar/sidebar.component";
 import * as ExcelJS from 'exceljs';
@@ -10,7 +10,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import {ChangeDetectionStrategy, Component, model} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import { FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -19,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     templateUrl: './lab_commission.component.html',
     styleUrl: './lab_commission.component.scss',
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
-      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule ],
+      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -76,10 +81,38 @@ export class LabCommissionComponent {
       });
   }
 
-  onSubmit() {
-    // Implement submit functionality
-    console.log('Submit button clicked');
-    // You can implement further logic here, such as uploading the file to a server
+  onSubmit(): void {
+    if (this.isFormValid()) {
+      // Proceed with form submission logic
+      console.log('Form is valid. Submitting...');
+    } else {
+      // Display alert or message for missing fields
+      const missingFields = this.getMissingFields();
+      alert(`Please fill in the following required fields: ${missingFields.join(', ')}`);
+    }
+  }
+
+  isFormValid(): boolean {
+    // Implement your validation logic here
+    return !!this.localITLproxy; // Example validation for one field
+  }
+
+  getMissingFields(): string[] {
+    const missingFields: string[] = [];
+    if (!this.localITL) {
+      missingFields.push('Local-ITL');
+    }
+    if (!this.localITLproxy) {
+      missingFields.push('Local-ITL Proxy');
+    }
+    if (!this.selectedEntity) {
+      missingFields.push('Entity');
+    }
+    if (!this.selectedGB) {
+      missingFields.push('GB');
+    }
+    // Add more fields as needed
+    return missingFields;
   }
 
   onDownloadTemplate(){
@@ -119,7 +152,7 @@ export class LabCommissionComponent {
     countrySelect.innerHTML = '';
 
     if (selectedregion === 'APAC') {
-      this.populateOptionsR(["AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
+      this.populateOptionsR(["Select Location","AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
     } else if (selectedregion === 'EMEA') {
       this.populateOptionsR(["DE",'PL']);
     } else if (selectedregion === 'AMERICA') {
@@ -194,6 +227,9 @@ export class LabCommissionComponent {
   selectedEntity: string = '';
   localITL: string = '';
   localITLproxy: string = '';
+  selectedGB : string='';
+  //DH: string = '';
+  KAM: string = '';
 
   entityChange(event: Event) {
     this.selectedEntity = (event.target as HTMLSelectElement).value;
@@ -207,6 +243,28 @@ export class LabCommissionComponent {
     }
   }
 
+
+  GBChange(event: Event) {
+    this.selectedGB = (event.target as HTMLSelectElement).value;
+    // Automatically fill Local-ITL based on selected entity
+    if (this.selectedGB === 'PG') {
+      //this.DH = 'ada3kor';
+      this.KAM ='grs2kor';
+    } else {
+      //this.DH = ''; // Clear localITL for other entities
+      this.KAM ='';
+    }
+  }
+
+
+
+  readonly labelPosition = model<'before' | 'after'>('after');
+
+
+  onReset() {
+    // Reload the page
+    window.location.reload();
+  }
 
 
 }

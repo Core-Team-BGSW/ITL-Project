@@ -122,7 +122,7 @@
     </div>
 
 
-
+<!-------------------------------------------Site Details--------------------------------------------------------------------------------->
     <div class="entity/GB">
       <p>Entity and GB</p>
       <div class="dropdown-container">
@@ -130,11 +130,11 @@
           <label for="entityselect"
             >Entity <span class="required"> *</span></label
           >
-          <select id="entitySelect" name="entity" (change)="entityChange($event)">
-          <option value="">Select Building</option>
-          <option value="BGSW">BGSW</option>
-          <option value="BGSV">BGSV</option>
-          <option value="RBIN">RBIN</option>
+          <select  id="entitySelect" name="entity" (change)="entityChange($event)">
+          <option value="">Select Entity</option>
+            <option value="BGSW">BGSW</option>
+            <option value="BGSV">BGSV</option>
+            <option value="RBIN">RBIN</option>
         </select>
         </div>
 
@@ -142,7 +142,7 @@
           <label for="GBselect"
             >GB <span class="required"> *</span></label
           >
-          <select id="GBSelect" name="GB">
+          <select id="GBSelect" name="GB" (change)="GBChange($event)">
           <option value="">Select GB</option>
           <option value="PS">PS</option>
           <option value="PG">PG</option>
@@ -162,6 +162,9 @@
       </div>
     </div>
 
+
+    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+
     <div class="ITL">
       <p>ITL's</p>
       <div class="dropdown-container">
@@ -169,7 +172,15 @@
         <label for="local-ITL"
           >Local-ITL <span class="required"> *</span></label
         >
-        <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" />
+        <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" required minlength="7" #localITLProxyInput="ngModel" />
+        <div *ngIf="localITLProxyInput.invalid && (localITLProxyInput.dirty || localITLProxyInput.touched)">
+          <div *ngIf="localITLProxyInput.errors?.['required']">
+            Local-ITL Proxy is required.
+          </div>
+          <div *ngIf="localITLProxyInput.errors?.['minlength']">
+            Local-ITL Proxy must be at least 7 characters long.
+          </div>
+        </div>
       </div>
 
       <div class="dropdown-item">
@@ -177,6 +188,29 @@
           >Local-ITL Proxy <span class="required"> *</span></label
         >
         <input type="text" id="localITLproxy" [(ngModel)]="localITLproxy" placeholder="NTID" />
+      </div>
+    </div>
+    </div>
+
+
+    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+
+
+    <div class="DH-KAM">
+      <p>DH & KAM</p>
+      <div class="dropdown-container">
+      <div class="dropdown-item">
+        <label for="DH"
+          >Department Head (DH) <span class="required"> *</span></label
+        >
+        <input type="text" id="DH" name="DH"  placeholder="NTID" />
+      </div>
+
+      <div class="dropdown-item">
+        <label for="KAM"
+          >Key Account Manager (KAM) <span class="required"> *</span></label
+        >
+        <input type="text" id="KAM" [(ngModel)]="KAM" placeholder="NTID" />
       </div>
     </div>
     </div>
@@ -232,10 +266,49 @@
           >
           <input type="text" id="fieldfill" placeholder="NTID" />
         </div>
+
+        <div class="dropdown-item">
+          <label for="CC"
+            >Cost Center<span class="required"> *</span> </label
+          >
+          <input type="text" id="fieldfill" placeholder="Cost Center" />
+        </div>
       </div>
       </div>
 
 
     </div>
+    <mat-card>
+      <mat-card-content>
+        <p class="ACL-p">ACL Implemented<span class="required"> *</span></p>
+        <section class="ACL-container">
+          <mat-radio-group [(ngModel)]="labelPosition">
+            <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
+            <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
+          </mat-radio-group>
+        </section>
+        </mat-card-content>
+        </mat-card>
+
+        <div class="form-button-container">
+          <button
+            mat-button
+            class="form-button-res"
+            (click)="onReset()"
+
+          >
+            Reset
+          </button>
+
+          <button
+            mat-button
+            class="form-button-sub"
+            (click)="onSubmit()"
+          >
+            Submit
+          </button>
+        </div>
+
+
   </mat-tab>
 </mat-tab-group>
