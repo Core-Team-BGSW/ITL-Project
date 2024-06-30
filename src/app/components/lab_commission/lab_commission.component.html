@@ -38,7 +38,7 @@
           mat-button
           class="subbutton"
           [disabled]="!fileSelected"
-          (click)="onSubmit()"
+          (click)="onfileSubmit()"
         >
           Submit
         </button>
@@ -60,7 +60,7 @@
           mat-button
           class="subbutton"
           [disabled]="!fileSelected"
-          (click)="onSubmit()"
+          (click)="onfileSubmit()"
         >
           Submit
         </button>
@@ -118,6 +118,13 @@
           </select>
         </div>
 
+        <div class="dropdown-item">
+          <label for="code">Location-Code<span class="required"> *</span></label>
+          <select id="codeSelect" name="codeSelect" (change)="codechange($event)">
+            <option value="">Select Location-Code</option>
+          </select>
+        </div>
+
       </div>
     </div>
 
@@ -134,7 +141,14 @@
           <option value="">Select Entity</option>
             <option value="BGSW">BGSW</option>
             <option value="BGSV">BGSV</option>
+            <option value="DCIN">DCIN</option>
             <option value="RBIN">RBIN</option>
+
+            <option value="RBDI">RBDI</option>
+            <option value="RBIN">RBIC</option>
+            <option value="RBIN">RBCN</option>
+            <option value="RBJP">RBJP</option>
+
         </select>
         </div>
 
@@ -144,19 +158,18 @@
           >
           <select id="GBSelect" name="GB" (change)="GBChange($event)">
           <option value="">Select GB</option>
+          <option value="2WP">2WP</option>
+          <option value="BEG">BEG</option>
+          <option value="CS">CS</option>
+          <option value="EM">EM</option>
+          <option value="EHM">EHM</option>
+          <option value="ES">ES</option>
+          <option value="ESU">ESU</option>
           <option value="PS">PS</option>
           <option value="PG">PG</option>
-          <option value="VM">VM</option>
-          <option value="2WP">2WP</option>
-          <option value="TE">TE</option>
-          <option value="CS">CS</option>
-          <option value="BEG">BEG</option>
-          <option value="EHM">EHM</option>
           <option value="SDS">SDS</option>
-          <option value="ESU">ESU</option>
-          <option value="EM">EM</option>
-          <option value="ES">ES</option>
-
+          <option value="TE">TE</option>
+          <option value="VM">VM</option>
         </select>
       </div>
       </div>
