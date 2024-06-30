@@ -68,125 +68,247 @@
     </div>
   </mat-tab>
   <!---------------------------------------------------------------------------------------------------------------------------------->
-  <mat-tab label="Fill Form">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <form id="msform">
-          <fieldset>
-            <h2 style="color: rgb(87, 87, 81)">
-              LAB DETAILS
-              <br />
-            </h2>
-            <table>
-              <tr>
-                <td>Region</td>
-                <td>
-                  <select name="regionSelect" id="regionSelect">
-                    <option value="">Select a Region</option>
-                    <option value="APAC">APAC</option>
-                    <option value="EMEA">EMEA</option>
-                    <option value="AMERICA">AMERICA</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>Country</td>
-                <td>
-                  <select name="countrySelect" id="countrySelect">
-                    <option value="">Select a country</option>
-                    <option value="IN">India</option>
-                    <option value="DE">Germany</option>
-                    <option value="VN">Vietnam</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>Location</td>
-                <td>
-                  <select name="location" id="locationSelect">
-                    <option value="">Select Location</option>
-                    <option value="Ban">Bangalore</option>
-                    <option value="Cob">Coimbatore</option>
-                    <option value="Pun">Pune</option>
-                    <option value="Hyd">Hyderabad</option>
-                  </select>
-                </td>
-                <td>Code</td>
-                <td>
-                  <select name="locationcode" id="locationcodeSelect">
-                    <option value="">Select Location code</option>
-                    <option value="Ban">RBIN</option>
-                    <option value="Bani">ADUGODI</option>
-                    <option value="Cob">COB-SEZ1</option>
-                    <option value="Cob">COB-SEZ2</option>
-                    <option value="Pun">Pune</option>
-                    <option value="Hyd">Hyderabad</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>Department</td>
-                <td>
-                  <input type="text" name="lab_name" placeholder="Department" />
-                </td>
-              </tr>
-              <tr>
-                <td>Building</td>
-                <td>
-                  <input type="text" name="lab_name" placeholder="Building" />
-                </td>
-              </tr>
-              <tr>
-                <td>Room No.</td>
-                <td>
-                  <input type="text" name="lab_name" placeholder="Room No." />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Name of Lab Coordinator <span class="required"> *</span>
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="lab_name"
-                    placeholder="Name of Lab Coordinator"
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>Name Of DH <span class="required"> *</span></td>
-                <td>
-                  <input type="text" name="lab_name" placeholder="Name of DH" />
-                </td>
-              </tr>
-              <tr>
-                <td>Name Of KAM <span class="required"> *</span></td>
-                <td>
-                  <input
-                    type="text"
-                    name="lab_name"
-                    placeholder="Name of KAM"
-                  />
-                </td>
-              </tr>
-            </table>
+  <mat-tab label="Fill Form" class="formfill">
+    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+    <div class="sitedetails">
+      <p>Site Details</p>
+      <div class="dropdown-container">
+        <div class="dropdown-item">
+          <label for="regionSelect"
+            >Region <span class="required"> *</span></label
+          >
+          <select
+            id="regionSelect"
+            name="region"
+            (change)="regionchange($event)"
+          >
+            <option value="">Select a Region</option>
+            <option value="APAC">APAC</option>
+            <option value="EMEA">EMEA</option>
+            <option value="AMERICA">AMERICA</option>
+            <!-- Add more regions as needed -->
+          </select>
+        </div>
 
-            <input
-              type="button"
-              name="button"
-              class="action-button"
-              value="Submit"
-            />
-            <input
-              type="button"
-              name="button1"
-              class="action-button"
-              value="Reset"
-            />
-          </fieldset>
-        </form>
+        <div class="dropdown-item">
+          <label for="countrySelect"
+            >Country<span class="required"> *</span></label
+          >
+          <select
+            id="countrySelect"
+            name="country"
+            (change)="countrychange($event)"
+          >
+            <option value="">Select Country</option>
+            <!-- Options will be dynamically populated based on selection -->
+          </select>
+        </div>
+
+        <div class="dropdown-item">
+          <label for="locationselect"
+            >Location <span class="required"> *</span></label
+          >
+          <select
+            id="locationselect"
+            name="location"
+            (change)="locationchangeha($event)"
+          >
+            <option value="">Select Location</option>
+            <!-- Options will be dynamically populated based on selection -->
+          </select>
+        </div>
+
       </div>
     </div>
+
+
+<!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+    <div class="entity/GB">
+      <p>Entity and GB</p>
+      <div class="dropdown-container">
+        <div class="dropdown-item">
+          <label for="entityselect"
+            >Entity <span class="required"> *</span></label
+          >
+          <select  id="entitySelect" name="entity" (change)="entityChange($event)">
+          <option value="">Select Entity</option>
+            <option value="BGSW">BGSW</option>
+            <option value="BGSV">BGSV</option>
+            <option value="RBIN">RBIN</option>
+        </select>
+        </div>
+
+        <div class="dropdown-item">
+          <label for="GBselect"
+            >GB <span class="required"> *</span></label
+          >
+          <select id="GBSelect" name="GB" (change)="GBChange($event)">
+          <option value="">Select GB</option>
+          <option value="PS">PS</option>
+          <option value="PG">PG</option>
+          <option value="VM">VM</option>
+          <option value="2WP">2WP</option>
+          <option value="TE">TE</option>
+          <option value="CS">CS</option>
+          <option value="BEG">BEG</option>
+          <option value="EHM">EHM</option>
+          <option value="SDS">SDS</option>
+          <option value="ESU">ESU</option>
+          <option value="EM">EM</option>
+          <option value="ES">ES</option>
+
+        </select>
+      </div>
+      </div>
+    </div>
+
+
+    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+
+    <div class="ITL">
+      <p>ITL's</p>
+      <div class="dropdown-container">
+      <div class="dropdown-item">
+        <label for="local-ITL"
+          >Local-ITL <span class="required"> *</span></label
+        >
+        <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" required minlength="7" #localITLProxyInput="ngModel" />
+        <div *ngIf="localITLProxyInput.invalid && (localITLProxyInput.dirty || localITLProxyInput.touched)">
+          <div *ngIf="localITLProxyInput.errors?.['required']">
+            Local-ITL Proxy is required.
+          </div>
+          <div *ngIf="localITLProxyInput.errors?.['minlength']">
+            Local-ITL Proxy must be at least 7 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown-item">
+        <label for="local-ITL Proxy"
+          >Local-ITL Proxy <span class="required"> *</span></label
+        >
+        <input type="text" id="localITLproxy" [(ngModel)]="localITLproxy" placeholder="NTID" />
+      </div>
+    </div>
+    </div>
+
+
+    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+
+
+    <div class="DH-KAM">
+      <p>DH & KAM</p>
+      <div class="dropdown-container">
+      <div class="dropdown-item">
+        <label for="DH"
+          >Department Head (DH) <span class="required"> *</span></label
+        >
+        <input type="text" id="DH" name="DH"  placeholder="NTID" />
+      </div>
+
+      <div class="dropdown-item">
+        <label for="KAM"
+          >Key Account Manager (KAM) <span class="required"> *</span></label
+        >
+        <input type="text" id="KAM" [(ngModel)]="KAM" placeholder="NTID" />
+      </div>
+    </div>
+    </div>
+    <!-------------------------------------------Location Details--------------------------------------------------------------------------------->
+    <div class="locationdetails">
+      <p>Location Details</p>
+      <div class="dropdown-container">
+        <div class="dropdown-item">
+          <label for="deptselect"
+            >Department <span class="required"> *</span></label
+          >
+          <input type="text" id="fieldfill" placeholder="Department" />
+        </div>
+
+        <div class="dropdown-item">
+          <label for="building">Building<span class="required"> *</span></label>
+          <select id="buildingSelect" name="buildingSelect" >
+            <option value="">Select Building</option>
+          </select>
+        </div>
+
+        <div class="dropdown-item">
+          <label for="floorselect"
+            >Floor <span class="required"> *</span></label
+          >
+          <input type="text" id="fieldfill" placeholder="Floor" />
+        </div>
+
+
+        <div class="dropdown-item">
+          <label for="labselect"
+            >Lab No. <span class="required"> *</span></label
+          >
+          <input type="text" id="fieldfill" placeholder="Lab No." />
+        </div>
+      </div>
+
+
+
+      <div class="labcoordinatordetails">
+        <p>Lab Coordinator</p>
+        <div class="dropdown-container">
+        <div class="dropdown-item">
+          <label for="primary"
+            >Primary Lab Coordinator <span class="required"> *</span></label
+          >
+          <input type="text" id="fieldfill" placeholder="NTID" />
+        </div>
+
+        <div class="dropdown-item">
+          <label for="secondary"
+            >Secondary Lab Coordinator </label
+          >
+          <input type="text" id="fieldfill" placeholder="NTID" />
+        </div>
+
+        <div class="dropdown-item">
+          <label for="CC"
+            >Cost Center<span class="required"> *</span> </label
+          >
+          <input type="text" id="fieldfill" placeholder="Cost Center" />
+        </div>
+      </div>
+      </div>
+
+
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <p class="ACL-p">ACL Implemented<span class="required"> *</span></p>
+        <section class="ACL-container">
+          <mat-radio-group [(ngModel)]="labelPosition">
+            <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
+            <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
+          </mat-radio-group>
+        </section>
+        </mat-card-content>
+        </mat-card>
+
+        <div class="form-button-container">
+          <button
+            mat-button
+            class="form-button-res"
+            (click)="onReset()"
+
+          >
+            Reset
+          </button>
+
+          <button
+            mat-button
+            class="form-button-sub"
+            (click)="onSubmit()"
+          >
+            Submit
+          </button>
+        </div>
+
+
   </mat-tab>
 </mat-tab-group>
