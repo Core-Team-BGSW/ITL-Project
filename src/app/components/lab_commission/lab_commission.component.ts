@@ -10,13 +10,42 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {ChangeDetectionStrategy, Component, model} from '@angular/core';
+import {ChangeDetectionStrategy, Component, model,inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog,MatDialogConfig  } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule  } from '@angular/material/dialog';
+import { DialogModule } from "@angular/cdk/dialog";
+import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
+
+
+interface FormData {
+  region: string;
+  country: string;
+  location: string;
+  locationCode: string;
+  entity: string;
+  GB: string;
+  localITL: string;
+  localITLProxy: string;
+  KAM: string;
+  department: string;
+  building: string;
+  floor: string;
+  labNo: string;
+  primaryCoordinator: string;
+  costCenter: string;
+  kindOfLab: string;
+  purposeOfLab: string;
+  brief: string;
+  ACLRequired: boolean;
+  CMDBRequired: boolean;
+  greenPorts?: number;
+  yellowPorts?: number;
+  redPorts?: number;
+}
 
 
 @Component({
@@ -25,9 +54,8 @@ import { MatDialog,MatDialogConfig  } from '@angular/material/dialog';
     templateUrl: './lab_commission.component.html',
     styleUrl: './lab_commission.component.scss',
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
-      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule ], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,MatDialogModule,DialogModule ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 
 
 
@@ -41,8 +69,9 @@ export class LabCommissionComponent {
   excelData: any[] = []; // Array to store parsed Excel data
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
+  dialog1= inject(MatDialog);
 
-  constructor(private dialog: MatDialog) { }
+
 
 
     // /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
@@ -94,35 +123,10 @@ export class LabCommissionComponent {
     //this.openConfirmationDialog();
   }
 
-  // openConfirmationDialog(): void {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.width = '400px'; // Set the width of the dialog
-
-  //   const dialogRef = this.dialog.open(DialogContentComponent, dialogConfig);
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result) {
-  //       // User confirmed, proceed with form submission logic
-  //       console.log('Form submitted');
-  //       this.submitForm(); // Example: Call a method to submit form
-  //     } else {
-  //       // User canceled, do nothing or handle accordingly
-  //       console.log('Form submission canceled');
-  //     }
-  //   });
-  // }
-
-
-  // submitForm(): void {
-  //   // Implement your form submission logic here
-  //   console.log('Submitting form...');
-  //   // Example: Call a service to submit the form data
-  // }
 
 
 
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -370,14 +374,71 @@ export class LabCommissionComponent {
 
 
 
-submittedForms: any[] = [];
-formData: any = {};
+
+
 nextUniqueId: number = 1; // Initial unique ID counter
 
-onSubmit(): void {
-  console.log("Form Submitted")
+formData: FormData = {
+  region: '',
+  country: '',
+  location: '',
+  locationCode: '',
+  entity: '',
+  GB: '',
+  localITL: '',
+  localITLProxy: '',
+  KAM: '',
+  department: '',
+  building: '',
+  floor: '',
+  labNo: '',
+  primaryCoordinator: '',
+  costCenter: '',
+  kindOfLab: '',
+  purposeOfLab: '',
+  brief: '',
+  ACLRequired: false,
+  CMDBRequired: false
+};
 
+
+onSubmit(): void {
+
+  console.log('Form Submitted', this.formData);
+  this.dialog1.open(DialogboxsubmitComponent, {
+    width: '800px',
+    data: {form: this.formData} // Pass formData to dialog
+  });
 }
+
+
+  resetForm(): void {
+    this.formData = {
+      region: '',
+      country: '',
+      location: '',
+      locationCode: '',
+      entity: '',
+      GB: '',
+      localITL: '',
+      localITLProxy: '',
+      KAM: '',
+      department: '',
+      building: '',
+      floor: '',
+      labNo: '',
+      primaryCoordinator: '',
+      costCenter: '',
+      kindOfLab: '',
+      purposeOfLab: '',
+      brief: '',
+      ACLRequired: false,
+      CMDBRequired: false
+    };
+  }
+
+
+
 
 getMissingFields(): string[] {
   const missingFields: string[] = [];
@@ -396,4 +457,6 @@ getMissingFields(): string[] {
   // Add more fields as needed
   return missingFields;
 }
+
 }
+

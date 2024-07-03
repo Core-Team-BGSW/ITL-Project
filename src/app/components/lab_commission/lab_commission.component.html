@@ -85,6 +85,7 @@
             title="APAC: Asia and Pacific
             EMEA: Europe, the Middle East, and Africa
             AMER: North, Central, and South America"
+            [(ngModel)]="formData.region"
           >
             <option value="">Select a Region</option>
             <option value="APAC">APAC</option>
@@ -396,18 +397,13 @@
       </button>
     </div>
   </mat-tab>
+
+
+
+
   <mat-tab label="Approvals" class="approve-reject">
-    <div *ngIf="submittedForms.length > 0">
-      <h2>Submitted Forms for Approval</h2>
-      <ul>
-        <li *ngFor="let form of submittedForms">
-          <h3>Form ID: {{ form.id }}</h3>
-          <pre>{{ form.data | json }}</pre>
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="submittedForms.length === 0">
-      <p>No forms submitted for approval.</p>
-    </div>
-    </mat-tab>
+
+
+
+  </mat-tab>
 </mat-tab-group>
