@@ -243,13 +243,13 @@ export class LabCommissionComponent {
     if (selectedlocation === 'Bangalore') {
       this.populateOptionsCo(["Select Location-Code","Bani-ADUGODI",'Ban-RBIN','BanM-BANGTP','BanO-OMTP','Kor-Kormangala']);
     } else if (selectedlocation === 'Hyderabad') {
-      this.populateOptionsCo(['HYD2-Hyderabad','HYD3-Hyderabad']);
+      this.populateOptionsCo(["Select Location-Code",'HYD-Hyderabad']);
     }else if (selectedlocation === 'Pune') {
-      this.populateOptionsCo(['PUA']);
+      this.populateOptionsCo(["Select Location-Code",'PUA']);
     }else if (selectedlocation === 'Coimbatore') {
-      this.populateOptionsCo(['Cob-SEZ','Cob2-ILKG','Cob5-GTP']);
+      this.populateOptionsCo(["Select Location-Code",'Cob-SEZ','Cob2-ILKG','Cob5-GTP']);
     }else if (selectedlocation === 'Nagnathpura') {
-      this.populateOptionsCo(['NH3-Nagnathpura']);
+      this.populateOptionsCo(["Select Location-Code",'NH3-Nagnathpura']);
     }
   }
 
@@ -273,27 +273,35 @@ export class LabCommissionComponent {
     buildingSelect.innerHTML = ' ';
 
     if (selectedCode === 'Bani-ADUGODI') {
-      this.populateOptionsB(["Select Location-Code","ADUGODI-601","ADUGODI-602","ADUGODI-603","ADUGODI-605"]);
-    } else if (selectedCode === 'HYD2-Hyderabad,HYD3-Hyderabad') {
-      this.populateOptionsB(['HYD2-Hyderabad','HYD3-Hyderabad']);
+      this.populateOptionsB(["Select Building","ADUGODI-601","ADUGODI-602","ADUGODI-603","ADUGODI-605"]);
+    } else if (selectedCode === 'HYD-Hyderabad') {
+      this.populateOptionsB(["Select Building",'HYD-Hyderabad']);
+    }else if (selectedCode === 'HYD2-Hyderabad') {
+      this.populateOptionsB(["Select Building",'HYD2-Hyderabad']);
     }else if (selectedCode === 'PUA') {
-      this.populateOptionsB(['PUA']);
-    }else if (selectedCode === 'Cob-SEZ') {
-      this.populateOptionsB(['Cob-SEZ1','Cob-SEZ2']);
+      this.populateOptionsB(["Select Building",'PUA']);
+    }
+    else if (selectedCode === 'Cob-SEZ') {
+      this.populateOptionsB(["Select Building",'Cob-SEZ1','Cob-SEZ2']);
+    }
+    else if (selectedCode === 'Cob2-ILKG') {
+      this.populateOptionsB(["Select Building",'Cob2-ILKG']);
+    }else if (selectedCode === 'Cob5-GTP') {
+      this.populateOptionsB(["Select Building",'Cob5-GTP']);
     }else if (selectedCode === 'NH3-Nagnathpura') {
-      this.populateOptionsB(['NH3-Nagnathpura']);
+      this.populateOptionsB(["Select Building",'NH3-Nagnathpura']);
     }
     else if (selectedCode === 'Ban-RBIN') {
-      this.populateOptionsB(['RBIN-103','RBIN-105']);
+      this.populateOptionsB(["Select Building",'RBIN-103','RBIN-105']);
     }
     else if (selectedCode === 'BanM-BANGTP') {
-      this.populateOptionsB(['BanM-BANGTP']);
+      this.populateOptionsB(["Select Building",'BanM-BANGTP']);
     }
     else if (selectedCode === 'BanO-OMTP') {
-      this.populateOptionsB(['BanO-OMTP']);
+      this.populateOptionsB(["Select Building",'BanO-OMTP']);
     }
     else if (selectedCode === 'Kor-Kormangala') {
-      this.populateOptionsB(['Kor-901','Kor-903','Kor-905']);
+      this.populateOptionsB(["Select Building",'Kor-901','Kor-903','Kor-905']);
     }
 
   }
@@ -316,18 +324,22 @@ export class LabCommissionComponent {
   selectedGB : string='';
   //DH: string = '';
   KAM: string = '';
+  labelPosition: string="";
 // //////////////////////////////////////////////////////////////////////onentityChange//////////////////////////////////////////////////////////////////////////////////////
 
   entityChange(event: Event) {
     this.selectedEntity = (event.target as HTMLSelectElement).value;
     // Automatically fill Local-ITL based on selected entity
     if (this.selectedEntity === 'BGSW') {
-      this.localITL = 'ada3kor';
-      this.localITLproxy ='muk3kor';
+      this.localITL = 'ada2kor';
+      this.localITLproxy ='MNU1KOR';
     } else {
       this.localITL = ''; // Clear localITL for other entities
       this.localITLproxy ='';
     }
+  }
+  isBGSWOrBGSV(): boolean {
+    return this.selectedEntity === 'BGSW' || this.selectedEntity === 'BGSV';
   }
 
 // //////////////////////////////////////////////////////////////////////onGBchange//////////////////////////////////////////////////////////////////////////////////////
@@ -344,9 +356,7 @@ export class LabCommissionComponent {
     }
   }
 
-
-
-  readonly labelPosition = model<'before' | 'after'>('after');
+  readonly cmdbradio = model<'before' | 'after'>('after');
 
 
   // /////////////////////////////////////////////////////////////////////onReset - formfill////////////////////////////////////////////////////////////////////////////
@@ -358,20 +368,15 @@ export class LabCommissionComponent {
   }
 // /////////////////////////////////////////////////////////////////////onSubmit - formfill////////////////////////////////////////////////////////////////////////////
 
-onSubmit(): void {
-  if (this.isFormValid()) {
-    // Proceed with form submission logic
-    console.log('Form is valid. Submitting...');
-  } else {
-    // Display alert or message for missing fields
-    const missingFields = this.getMissingFields();
-    alert(`Please fill in the following required fields: ${missingFields.join(', ')}`);
-  }
-}
 
-isFormValid(): boolean {
-  // Implement your validation logic here
-  return !!this.localITLproxy; // Example validation for one field
+
+submittedForms: any[] = [];
+formData: any = {};
+nextUniqueId: number = 1; // Initial unique ID counter
+
+onSubmit(): void {
+  console.log("Form Submitted")
+
 }
 
 getMissingFields(): string[] {
@@ -391,11 +396,4 @@ getMissingFields(): string[] {
   // Add more fields as needed
   return missingFields;
 }
-
 }
-
-
-
-
-
-

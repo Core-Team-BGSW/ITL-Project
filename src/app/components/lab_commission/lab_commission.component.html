@@ -1,5 +1,6 @@
 <h2>New Lab Commission</h2>
-<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="left">
+<p>*Choose either Import File or Fill Form</p>
+<mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
   <mat-tab label="Import File">
     <div class="importfile">
       <div class="importbutton">
@@ -10,18 +11,18 @@
       </div>
       <div class="buttons">
         <div class="buttons2">
+          <button class="templatebutton" (click)="onDownloadTemplate()">
+            Download template
+          </button>
+        </div>
+
+        <div class="buttons2">
           <button
             class="previewbutton"
             [disabled]="!fileSelected"
             (click)="onPreview()"
           >
             Preview
-          </button>
-        </div>
-
-        <div class="buttons2">
-          <button class="templatebutton" (click)="onDownloadTemplate()">
-            Download template
           </button>
         </div>
       </div>
@@ -81,6 +82,9 @@
             id="regionSelect"
             name="region"
             (change)="regionchange($event)"
+            title="APAC: Asia and Pacific
+            EMEA: Europe, the Middle East, and Africa
+            AMER: North, Central, and South America"
           >
             <option value="">Select a Region</option>
             <option value="APAC">APAC</option>
@@ -129,7 +133,7 @@
     </div>
 
 
-<!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+<!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
     <div class="entity/GB">
       <p>Entity and GB</p>
       <div class="dropdown-container">
@@ -143,7 +147,6 @@
             <option value="BGSV">BGSV</option>
             <option value="DCIN">DCIN</option>
             <option value="RBIN">RBIN</option>
-
             <option value="RBDI">RBDI</option>
             <option value="RBIN">RBIC</option>
             <option value="RBIN">RBCN</option>
@@ -270,14 +273,14 @@
           <label for="primary"
             >Primary Lab Coordinator <span class="required"> *</span></label
           >
-          <input type="text" id="fieldfill" placeholder="NTID" />
+          <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"/>
         </div>
 
         <div class="dropdown-item">
           <label for="secondary"
             >Secondary Lab Coordinator </label
           >
-          <input type="text" id="fieldfill" placeholder="NTID" />
+          <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"/>
         </div>
 
         <div class="dropdown-item">
@@ -289,39 +292,122 @@
       </div>
       </div>
 
+      <div class="labworkdetails">
+        <p>Lab work details</p>
+        <div class="dropdown-container">
+        <div class="dropdown-item">
+          <label for="kindoflab"
+            >Kind of Lab <span class="required"> *</span></label
+          >
+            <select id="kindoflabselect" name="GB">
+            <option value="">Select</option>
+            <option value="EMV">EMV</option>
+            <option value="Reliability">Reliability</option>
+            <option value="Devlopment">Devlopment</option>
+            <option value="Validation">Validation</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
+
+        <div class="dropdown-item">
+          <label for="pupose"
+            >Purpose of Lab</label
+          >
+          <input type="text" id="fieldfill" placeholder="Purpose" />
+        </div>
+
+        <div class="dropdown-item">
+          <label for="Brief"
+            >Brief<span class="required"> *</span> </label
+          >
+          <input type="text" id="fieldfill" placeholder="Brief" />
+        </div>
+      </div>
+      </div>
     </div>
+
+
     <mat-card>
       <mat-card-content>
-        <p class="ACL-p">ACL Implemented<span class="required"> *</span></p>
+        <p class="ACL-p">ACL Required<span class="required"> *</span></p>
         <section class="ACL-container">
           <mat-radio-group [(ngModel)]="labelPosition">
             <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
             <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
           </mat-radio-group>
         </section>
-        </mat-card-content>
-        </mat-card>
+      </mat-card-content>
+    </mat-card>
 
-        <div class="form-button-container">
-          <button
-            mat-button
-            class="form-button-res"
-            (click)="onReset()"
+    <div class="portdetails" *ngIf="labelPosition === 'ACL-yes'">
+      <p>Port Details</p>
+      <div class="dropdown-container">
+      <div class="dropdown-item">
+        <label for="greenPorts"
+          >No. of Green Ports<span class="required"> *</span></label
+        >
+        <input type="text" id="fieldfill" placeholder="Green Ports" />
+      </div>
 
-          >
-            Reset
-          </button>
+      <div class="dropdown-item">
+        <label for="yellowPort"
+          >No. of Yellow Ports</label
+        >
+        <input type="text" id="fieldfill" placeholder="Yellow Ports" />
+      </div>
 
-          <button
-            mat-button
-            class="form-button-sub"
-            (click)="onSubmit()"
-          >
-            Submit
-          </button>
-        </div>
+      <div class="dropdown-item">
+        <label for="redPorts"
+          >No. of Red Ports<span class="required"> *</span> </label
+        >
+        <input type="text" id="fieldfill" placeholder="Red Ports" />
+      </div>
+    </div>
+    </div>
 
+    <mat-card>
+      <mat-card-content>
+        <p class="ACL-p">CMDB<span class="required"> *</span></p>
+        <section class="cmdb-container">
+          <mat-radio-group [(ngModel)]="cmdbradio">
+            <mat-radio-button class="cmdb-margin" value="cmdb-yes">Yes</mat-radio-button>
+            <mat-radio-button class="cmdb-margin" value="cmdb-no">No</mat-radio-button>
+          </mat-radio-group>
+        </section>
+      </mat-card-content>
+    </mat-card>
+    <div class="form-button-container">
+      <button
+        mat-button
+        class="form-button-res"
+        (click)="onReset()"
 
+      >
+        Reset
+      </button>
+
+      <button
+        mat-button
+        class="form-button-sub"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+    </div>
   </mat-tab>
+  <mat-tab label="Approvals" class="approve-reject">
+    <div *ngIf="submittedForms.length > 0">
+      <h2>Submitted Forms for Approval</h2>
+      <ul>
+        <li *ngFor="let form of submittedForms">
+          <h3>Form ID: {{ form.id }}</h3>
+          <pre>{{ form.data | json }}</pre>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="submittedForms.length === 0">
+      <p>No forms submitted for approval.</p>
+    </div>
+    </mat-tab>
 </mat-tab-group>
