@@ -1,0 +1,524 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+
+/*basic reset*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    background: #907ff2; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #6441A5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
+}
+
+body {
+    font-family: montserrat, arial, verdana;
+    background: transparent;
+}
+ p{
+    text-align: left;
+ }
+/*form styles*/
+
+
+
+/*headings*/
+.fs-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.fs-subtitle {
+    font-weight: normal;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/*progressbar*/
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+
+#progressbar li {
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 9px;
+    width: 33.33%;
+    float: left;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 24px;
+    height: 24px;
+    line-height: 26px;
+    display: block;
+    font-size: 12px;
+    color: #333;
+    background: white;
+    border-radius: 25px;
+    margin: 0 auto 10px auto;
+}
+
+/*progressbar connectors*/
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: white;
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index: -1; /*put it behind the numbers*/
+}
+
+#progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+}
+
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+    background: #ee0979;
+    color: white;
+}
+
+
+/* Not relevant to this form */
+.dme_link {
+    margin-top: 30px;
+    text-align: center;
+}
+.dme_link a {
+    background: #FFF;
+    font-weight: bold;
+    color: #ee0979;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 5px 25px;
+    font-size: 12px;
+}
+
+.dme_link a:hover, .dme_link a:focus {
+    background: #C5C5F1;
+    text-decoration: none;
+}
+
+
+
+
+.button{
+  text-decoration: none;
+  margin-left: 0%;
+  display: flex;
+  list-style-type: none;
+  display: inline-table;
+  padding: 4px;
+
+}
+
+.importfile{
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-top: 10px;
+  width: 90%;
+}
+
+.note-choosemethod{
+  color:brown;
+  font-size: medium;
+  font-style: italic;
+}
+
+
+.heading-form li{
+  color: #000000;
+  align-items: center;
+  text-align: center;
+  font-size: 38px;
+  background-color: #71c4ff;
+
+  padding: 14px;
+}
+
+.heading-import li{
+  color: #000000;
+  align-items: center;
+  text-align: center;
+  font-size: 38px;
+  background-color: #71c4ff;
+  padding: 14px;
+}
+
+
+
+.excel-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px; /* Optional: Adjust spacing */
+}
+
+.excel-table th, .excel-table td {
+  border: 1px solid #ddd; /* Border style */
+  padding: 8px; /* Cell padding */
+  text-align: center; /* Optional: Align text */
+}
+
+.excel-table th {
+  background-color: #4CAF50; /* Optional: Header background color */
+  color: white;
+  text-decoration: none;
+  font-weight: lighter;
+  box-sizing: content-box;
+}
+
+
+
+
+
+
+
+.importbutton{
+  margin-top: 20px;
+}
+.importbutton a{
+  font-weight: bold;
+}
+
+
+.importbutton input[type='file'] {
+  position: absolute;
+  font-size: 16px;
+  right:auto;
+  top: auto;
+}
+
+.subbutton {
+  background-color: #005816; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-left: 20px
+
+}
+
+
+
+.subbutton:hover {
+  background-color: #00b33c; /* green on hover */
+}
+
+
+
+.previewbutton{
+  background-color: #50cb09; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+
+
+}
+.previewbutton:hover{
+  background-color: yellowgreen;
+}
+
+.previewbutton:disabled {
+  background-color: #ccc; /* Light gray background when disabled */
+  color: #666; /* Darker text color when disabled */
+  cursor: not-allowed; /* Disable cursor */
+}
+
+
+
+.templatebutton{
+  background-color: #3eaeca; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+
+
+}
+.templatebutton:hover{
+  background-color: rgb(29, 112, 236);
+}
+
+
+.buttons{
+  display: flex;
+  gap: 20px;
+}
+
+
+
+.button2{
+  margin-right: 20px;
+}
+
+.previewtextheading h4{
+
+
+  margin-top: 30px;
+  justify-content: center;
+  display: flex;
+  background-color:#ee8802;
+  color: rgb(252, 251, 249);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+select {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  border-bottom: 1px solid #990404;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-color: rgb(1, 134, 251); /* Ensures padding is included in width */
+  font-size: 14px;
+}
+
+#entitySelect option {
+  background-color: #fff; /* Default background color */
+  color: #333; /* Default text color */
+  gap: 20px;
+}
+
+
+
+.dropdown-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+}
+
+.dropdown-item {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+/* Optional: Style for labels and select elements */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight:500;
+
+}
+
+p{
+  font-size: 18px;
+  padding-top: 4px;
+  color: #2e72ee;
+}
+
+.sitedetails{
+  margin-top: 20px;
+
+}
+
+.required{
+  color: red;
+}
+
+
+.dropdown-item input[type="text"] {
+  /* Style for the input field */
+  width: 100%; /* Adjust width as needed */
+  padding: 8px; /* Adjust padding */
+  //border-bottom: 1px solid #000000; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+  font-size: 14px; /* Adjust font size */
+  color: #000000;
+  border-color: rgb(1, 134, 251);
+}
+
+.dropdown-item input[type="text"]:focus {
+  /* Style when input field is focused */
+  outline: none; /* Remove default outline */
+  border-color: #4d90fe; /* Example: Change border color on focus */
+  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5); /* Example: Add a box shadow */
+}
+
+.dropdown-item input:disabled {
+  background-color: #f2f2f2; /* Light gray background */
+  color: #999; /* Light gray text color */
+  cursor: not-allowed; /* Show a "not-allowed" cursor */
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 8px; /* Padding to maintain consistency */
+  /* You can add more styles as needed */
+}
+
+
+.fieldfill{
+  color: black;
+}
+.ACL-container{
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width:fit-content;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+
+}
+
+.choosemethod-container{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 8px 20px;
+  box-sizing: border-box;
+  width:90%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+
+}
+
+
+
+
+
+
+.cmdb-container{
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width:100%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+}
+
+.mat-mdc-card-content {
+  display: contents;
+  padding: 0px;
+  border-radius: 0%;
+}
+.mat-mdc-card{
+  display: block;
+  border: 0px;
+  border-radius: 0%;
+  box-shadow: none;
+  margin-top: 16px;
+}
+
+
+.form-button-container{
+  display: flex;
+  justify-content:center;
+
+}
+
+.form-button-sub{
+  background-color: #22bf49; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-left: 20px
+}
+
+.form-button-res{
+  background-color: #0daeff; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-left: 20px
+}
+
+.portdetails{
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+
+.choosemethod{
+  color: #2a0845;
+}
+
+.cmdb-sharedlabflex{
+  display: flex;
+  gap: 40px;
+
+}

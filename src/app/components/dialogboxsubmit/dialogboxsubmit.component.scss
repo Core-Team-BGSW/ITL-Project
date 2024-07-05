@@ -1,0 +1,32 @@
+.mat-mdc-dialog-content.mdc-dialog__content{
+  color: rgb(0, 0, 0);
+  font-size: medium;
+  width: 500px;
+}
+
+
+button{
+  padding: 12px;
+  background-color: rgb(255, 149, 0);
+  color: aliceblue;
+  font-size: medium;
+  border: none;
+  box-sizing: border-box;
+  font-family:Arial, Helvetica, sans-serif ;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+
+
+
+
+}
+.button:hover{
+  background-color: blueviolet;
+
+
+}
+.formfilldialogbuton{
+  display: flex;
+  justify-content: center;
+}
