@@ -145,9 +145,34 @@ body {
   margin-bottom: 20px;
   margin-left: 15px;
   margin-top: 10px;
-  width: 50%;
+  width: 90%;
 }
 
+.note-choosemethod{
+  color:brown;
+  font-size: medium;
+  font-style: italic;
+}
+
+
+.heading-form li{
+  color: #000000;
+  align-items: center;
+  text-align: center;
+  font-size: 38px;
+  background-color: #71c4ff;
+
+  padding: 14px;
+}
+
+.heading-import li{
+  color: #000000;
+  align-items: center;
+  text-align: center;
+  font-size: 38px;
+  background-color: #71c4ff;
+  padding: 14px;
+}
 
 
 
@@ -331,7 +356,7 @@ label {
 
 p{
   font-size: 18px;
-
+  padding-top: 4px;
   color: #2e72ee;
 }
 
@@ -396,6 +421,29 @@ p{
 
 }
 
+.choosemethod-container{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 8px 20px;
+  box-sizing: border-box;
+  width:90%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+
+}
+
+
+
+
+
+
 .cmdb-container{
 
   display: flex;
@@ -407,7 +455,7 @@ p{
   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
-  width:fit-content;
+  width:100%;
   margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 6px;
@@ -465,7 +513,12 @@ p{
 }
 
 
+.choosemethod{
+  color: #2a0845;
+}
 
-:root {
-  --mat-tab-header-label-text-size: 1.2rem; /* New font size value */
+.cmdb-sharedlabflex{
+  display: flex;
+  gap: 40px;
+
 }
