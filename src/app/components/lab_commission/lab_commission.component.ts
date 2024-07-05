@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {ChangeDetectionStrategy, Component, model,inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, model, Inject, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -21,31 +21,7 @@ import { DialogModule } from "@angular/cdk/dialog";
 import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
 
 
-interface FormData {
-  region: string;
-  country: string;
-  location: string;
-  locationCode: string;
-  entity: string;
-  GB: string;
-  localITL: string;
-  localITLProxy: string;
-  KAM: string;
-  department: string;
-  building: string;
-  floor: string;
-  labNo: string;
-  primaryCoordinator: string;
-  costCenter: string;
-  kindOfLab: string;
-  purposeOfLab: string;
-  brief: string;
-  ACLRequired: boolean;
-  CMDBRequired: boolean;
-  greenPorts?: number;
-  yellowPorts?: number;
-  redPorts?: number;
-}
+
 
 
 @Component({
@@ -54,7 +30,7 @@ interface FormData {
     templateUrl: './lab_commission.component.html',
     styleUrl: './lab_commission.component.scss',
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
-      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,MatDialogModule,DialogModule ], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,MatDialogModule,DialogModule], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -69,8 +45,28 @@ export class LabCommissionComponent {
   excelData: any[] = []; // Array to store parsed Excel data
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
-  dialog1= inject(MatDialog);
+  //dialog1=inject(MatDialog);
 
+
+  selectedRegion: string = '';
+  selectedCountry: string = '';
+  selectedLocation: string = '';
+  selectedCode: string = '';
+  selectedEntity: string = '';
+  selectedGB: string = '';
+  selectedLocal: string = '';
+  cmdbradio: string = ''; // Initialize cmdbradio
+  sharedlabradio: string = '';
+  ACLradio: string = '';
+  greenport: string = '';
+  redport: string = '';
+  yellowport: string = '';
+  // selectedRegion: string = '';
+  // selectedRegion: string = '';
+  // selectedRegion: string = '';
+  // selectedRegion: string = '';
+  // selectedRegion: string = '';
+  // selectedRegion: string = '';
 
 
 
@@ -161,10 +157,6 @@ export class LabCommissionComponent {
       };
     });
 
-    // Example: Adding headers to the worksheet
-    // worksheet?.addRow(['Location', 'Location Code', 'Building','GB','Dept Name','Lab No','Cost Center','Purpose','Lab Responsible','Lab resposibe (s)','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','Present DH','DH NTID','KAM','KAM NTID','ACL Required','ACL Implemented(Yes/NO)']);
-
-    // Generate Excel file and save
     workbook?.xlsx.writeBuffer().then((buffer: ArrayBuffer) => {
       const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       saveAs(blob, 'NewLabCommission_Template.xlsx');
@@ -180,6 +172,7 @@ export class LabCommissionComponent {
     const selectedregion = (event.target as HTMLSelectElement).value;
     const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
 
+
     // Clear previous options
     countrySelect.innerHTML = '';
 
@@ -191,6 +184,7 @@ export class LabCommissionComponent {
       this.populateOptionsR(['Pune']);
 
     }
+    this.selectedRegion = selectedregion;
   }
 
   populateOptionsR(options: string[]) {
@@ -218,8 +212,8 @@ export class LabCommissionComponent {
       this.populateOptionsL(["Select location","Bangalore", "Hyderabad",'Pune', 'Coimbatore','Nagnathpura']);
     } else if (selectedcountry === 'CN') {
       this.populateOptionsL(['Beijing']);
-
     }
+    this.selectedCountry = selectedcountry;
   }
 
   populateOptionsL(options: string[]) {
@@ -255,6 +249,7 @@ export class LabCommissionComponent {
     }else if (selectedlocation === 'Nagnathpura') {
       this.populateOptionsCo(["Select Location-Code",'NH3-Nagnathpura']);
     }
+    this.selectedLocation = selectedlocation;
   }
 
   populateOptionsCo(options: string[]) {
@@ -308,6 +303,7 @@ export class LabCommissionComponent {
       this.populateOptionsB(["Select Building",'Kor-901','Kor-903','Kor-905']);
     }
 
+    this.selectedCode = selectedCode;
   }
 
   populateOptionsB(options: string[]) {
@@ -322,13 +318,33 @@ export class LabCommissionComponent {
   }
 
 
-  selectedEntity: string = '';
+
   localITL: string = '';
   localITLproxy: string = '';
-  selectedGB : string='';
+
   //DH: string = '';
   KAM: string = '';
+  DH:string='';
+  Dept:string='';
+  Building:string='';
+  Floor:string='';
+  labno:string='';
+  primarylabco:string='';
+  secondarylabco:string='';
+  CC:string='';
+  kindoflab:string='';
+  purposeoflab:string='';
+  ACL:string='';
+  greenports:string='';
+  yellowports:string='';
+  redports:string='';
+  cmdb:string='';
   labelPosition: string="";
+  choosemethod: string="";
+  selectedLabType: string = '';
+  showOtherField: boolean = false;
+  otherLabType: string = '';
+
 // //////////////////////////////////////////////////////////////////////onentityChange//////////////////////////////////////////////////////////////////////////////////////
 
   entityChange(event: Event) {
@@ -341,6 +357,8 @@ export class LabCommissionComponent {
       this.localITL = ''; // Clear localITL for other entities
       this.localITLproxy ='';
     }
+
+
   }
   isBGSWOrBGSV(): boolean {
     return this.selectedEntity === 'BGSW' || this.selectedEntity === 'BGSV';
@@ -358,9 +376,11 @@ export class LabCommissionComponent {
       //this.DH = ''; // Clear localITL for other entities
       this.KAM ='';
     }
+
   }
 
-  readonly cmdbradio = model<'before' | 'after'>('after');
+  //readonly cmdbradio = model<'before' | 'after'>('after');
+  //readonly sharedlabradio = model<'before' | 'after'>('after');
 
 
   // /////////////////////////////////////////////////////////////////////onReset - formfill////////////////////////////////////////////////////////////////////////////
@@ -378,64 +398,28 @@ export class LabCommissionComponent {
 
 nextUniqueId: number = 1; // Initial unique ID counter
 
-formData: FormData = {
-  region: '',
-  country: '',
-  location: '',
-  locationCode: '',
-  entity: '',
-  GB: '',
-  localITL: '',
-  localITLProxy: '',
-  KAM: '',
-  department: '',
-  building: '',
-  floor: '',
-  labNo: '',
-  primaryCoordinator: '',
-  costCenter: '',
-  kindOfLab: '',
-  purposeOfLab: '',
-  brief: '',
-  ACLRequired: false,
-  CMDBRequired: false
-};
 
+constructor(private dialog: MatDialog) {}
 
-onSubmit(): void {
+onPreviewform(): void {
+  const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
+    width: '600px',
+    data: { region: this.selectedRegion, country: this.selectedCountry, location: this.selectedLocation, locationcode: this.selectedCode,
+      entity: this.selectedEntity,GB: this.selectedGB,localITL: this.localITL,localITLproxy: this.localITLproxy, DH: this.DH, KAM: this.KAM,Dept: this.Dept,
+      Building : this.Building,Floor: this.Floor,labno: this.labno,primarylabco: this.primarylabco, secondarylabco:this.secondarylabco,CC: this.CC,
+      kindoflab: this.selectedLabType, purposeoflab:this.purposeoflab, ACL:this.ACL, greenports:this.greenports, yellowport:this.yellowport, redport:this.redport,
+      cmdbradio: this.cmdbradio, otherLabType:this.otherLabType, sharedlabradio: this.sharedlabradio, ACLradio : this.ACLradio, greenport: this.greenports, yellowports: this.yellowports,redports : this.redports
+       }
+  });
 
-  console.log('Form Submitted', this.formData);
-  this.dialog1.open(DialogboxsubmitComponent, {
-    width: '800px',
-    data: {form: this.formData} // Pass formData to dialog
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('Dialog closed');
+    // Handle any actions after dialog is closed
   });
 }
 
 
-  resetForm(): void {
-    this.formData = {
-      region: '',
-      country: '',
-      location: '',
-      locationCode: '',
-      entity: '',
-      GB: '',
-      localITL: '',
-      localITLProxy: '',
-      KAM: '',
-      department: '',
-      building: '',
-      floor: '',
-      labNo: '',
-      primaryCoordinator: '',
-      costCenter: '',
-      kindOfLab: '',
-      purposeOfLab: '',
-      brief: '',
-      ACLRequired: false,
-      CMDBRequired: false
-    };
-  }
+
 
 
 
@@ -456,6 +440,17 @@ getMissingFields(): string[] {
   }
   // Add more fields as needed
   return missingFields;
+}
+
+
+
+
+onLabTypeChange() {
+  if (this.selectedLabType === 'Other') {
+    this.showOtherField = true;
+  } else {
+    this.showOtherField = false;
+  }
 }
 
 }

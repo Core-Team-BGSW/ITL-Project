@@ -1,7 +1,30 @@
 <h2>New Lab Commission</h2>
-<p>*Choose either Import File or Fill Form</p>
+
 <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
-  <mat-tab label="Import File">
+  <mat-tab label="Import File/Form Fill">
+
+
+    <mat-card>
+      <mat-card-content>
+        <p class="note-choosemethod">For multiple lab commission, Import File is recommended</p>
+        <p class="choosemethod">Choose Method<span class="required"> *</span></p>
+        <section class="choosemethod-container">
+          <mat-radio-group [(ngModel)]="choosemethod">
+            <mat-radio-button class="ACL-margin" value="choosemethod-import">Import File</mat-radio-button>
+            <mat-radio-button class="ACL-margin" value="choosemethod-form">Application Form</mat-radio-button>
+          </mat-radio-group>
+        </section>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="portdetails" *ngIf="choosemethod === 'choosemethod-import'">
+
+      <div class="heading-import">
+        <ul>
+        <li>Import File</li>
+      </ul>
+      </div>
+      <p>Upload File</p>
     <div class="importfile">
       <div class="importbutton">
         <a>
@@ -27,9 +50,6 @@
         </div>
       </div>
     </div>
-
-    <!------------------------------------------------------------------------------------------------------------------------------------>
-
     <div *ngIf="previewVisible">
       <div class="previewtextheading">
         <h4>Preview of Excel Data</h4>
@@ -67,343 +87,367 @@
         </button>
       </a>
     </div>
-  </mat-tab>
-  <!---------------------------------------------------------------------------------------------------------------------------------->
-  <mat-tab label="Fill Form" class="formfill">
-    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
-    <div class="sitedetails">
-      <p>Site Details</p>
-      <div class="dropdown-container">
-        <div class="dropdown-item">
-          <label for="regionSelect"
-            >Region <span class="required"> *</span></label
-          >
-          <select
-            id="regionSelect"
-            name="region"
-            (change)="regionchange($event)"
-            title="APAC: Asia and Pacific
-            EMEA: Europe, the Middle East, and Africa
-            AMER: North, Central, and South America"
-            [(ngModel)]="formData.region"
-          >
-            <option value="">Select a Region</option>
-            <option value="APAC">APAC</option>
-            <option value="EMEA">EMEA</option>
-            <option value="AMERICA">AMERICA</option>
-            <!-- Add more regions as needed -->
-          </select>
-        </div>
-
-        <div class="dropdown-item">
-          <label for="countrySelect"
-            >Country<span class="required"> *</span></label
-          >
-          <select
-            id="countrySelect"
-            name="country"
-            (change)="countrychange($event)"
-          >
-            <option value="">Select Country</option>
-            <!-- Options will be dynamically populated based on selection -->
-          </select>
-        </div>
-
-        <div class="dropdown-item">
-          <label for="locationselect"
-            >Location <span class="required"> *</span></label
-          >
-          <select
-            id="locationselect"
-            name="location"
-            (change)="locationchangeha($event)"
-          >
-            <option value="">Select Location</option>
-            <!-- Options will be dynamically populated based on selection -->
-          </select>
-        </div>
-
-        <div class="dropdown-item">
-          <label for="code">Location-Code<span class="required"> *</span></label>
-          <select id="codeSelect" name="codeSelect" (change)="codechange($event)">
-            <option value="">Select Location-Code</option>
-          </select>
-        </div>
-
-      </div>
     </div>
 
+    <!------------------------------------------------------------------------------------------------------------------------------------>
 
-<!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
-    <div class="entity/GB">
-      <p>Entity and GB</p>
-      <div class="dropdown-container">
-        <div class="dropdown-item">
-          <label for="entityselect"
-            >Entity <span class="required"> *</span></label
-          >
-          <select  id="entitySelect" name="entity" (change)="entityChange($event)">
-          <option value="">Select Entity</option>
-            <option value="BGSW">BGSW</option>
-            <option value="BGSV">BGSV</option>
-            <option value="DCIN">DCIN</option>
-            <option value="RBIN">RBIN</option>
-            <option value="RBDI">RBDI</option>
-            <option value="RBIN">RBIC</option>
-            <option value="RBIN">RBCN</option>
-            <option value="RBJP">RBJP</option>
 
-        </select>
-        </div>
 
-        <div class="dropdown-item">
-          <label for="GBselect"
-            >GB <span class="required"> *</span></label
-          >
-          <select id="GBSelect" name="GB" (change)="GBChange($event)">
-          <option value="">Select GB</option>
-          <option value="2WP">2WP</option>
-          <option value="BEG">BEG</option>
-          <option value="CS">CS</option>
-          <option value="EM">EM</option>
-          <option value="EHM">EHM</option>
-          <option value="ES">ES</option>
-          <option value="ESU">ESU</option>
-          <option value="PS">PS</option>
-          <option value="PG">PG</option>
-          <option value="SDS">SDS</option>
-          <option value="TE">TE</option>
-          <option value="VM">VM</option>
-        </select>
+    <div class="portdetails" *ngIf="choosemethod === 'choosemethod-form'">
+      <div class="heading-form">
+        <ul>
+        <li>Application Form</li>
+      </ul>
       </div>
-      </div>
-    </div>
+      <div class="sitedetails">
+        <p>Site Details</p>
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="regionSelect"
+              >Region <span class="required"> *</span></label
+            >
+            <select
+              id="regionSelect"
+              name="region"
+              (change)="regionchange($event)"
+              title="APAC: Asia and Pacific
+              EMEA: Europe, the Middle East, and Africa
+              AMER: North, Central, and South America"
 
-
-    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
-
-    <div class="ITL">
-      <p>ITL's</p>
-      <div class="dropdown-container">
-      <div class="dropdown-item">
-        <label for="local-ITL"
-          >Local-ITL <span class="required"> *</span></label
-        >
-        <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" required minlength="7" #localITLProxyInput="ngModel" />
-        <div *ngIf="localITLProxyInput.invalid && (localITLProxyInput.dirty || localITLProxyInput.touched)">
-          <div *ngIf="localITLProxyInput.errors?.['required']">
-            Local-ITL Proxy is required.
+            >
+              <option value="">Select a Region</option>
+              <option value="APAC">APAC</option>
+              <option value="EMEA">EMEA</option>
+              <option value="AMERICA">AMERICA</option>
+              <!-- Add more regions as needed -->
+            </select>
           </div>
-          <div *ngIf="localITLProxyInput.errors?.['minlength']">
-            Local-ITL Proxy must be at least 7 characters long.
+
+          <div class="dropdown-item">
+            <label for="countrySelect"
+              >Country<span class="required"> *</span></label
+            >
+            <select
+              id="countrySelect"
+              name="country"
+              (change)="countrychange($event)"
+            >
+              <option value="">Select Country</option>
+              <!-- Options will be dynamically populated based on selection -->
+            </select>
           </div>
+
+          <div class="dropdown-item">
+            <label for="locationselect"
+              >Location <span class="required"> *</span></label
+            >
+            <select
+              id="locationselect"
+              name="location"
+              (change)="locationchangeha($event)"
+            >
+              <option value="">Select Location</option>
+              <!-- Options will be dynamically populated based on selection -->
+            </select>
+          </div>
+
+          <div class="dropdown-item">
+            <label for="code">Location-Code<span class="required"> *</span></label>
+            <select id="codeSelect" name="codeSelect" (change)="codechange($event)">
+              <option value="">Select Location-Code</option>
+            </select>
+          </div>
+
         </div>
       </div>
 
-      <div class="dropdown-item">
-        <label for="local-ITL Proxy"
-          >Local-ITL Proxy <span class="required"> *</span></label
-        >
-        <input type="text" id="localITLproxy" [(ngModel)]="localITLproxy" placeholder="NTID" />
-      </div>
-    </div>
-    </div>
 
+  <!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
+      <div class="entity/GB">
+        <p>Entity and GB</p>
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="entityselect"
+              >Entity <span class="required"> *</span></label
+            >
+            <select  id="entitySelect" name="entity" (change)="entityChange($event)">
+            <option value="">Select Entity</option>
+              <option value="BGSW">BGSW</option>
+              <option value="BGSV">BGSV</option>
+              <option value="DCIN">DCIN</option>
+              <option value="RBIN">RBIN</option>
+              <option value="RBDI">RBDI</option>
+              <option value="RBIN">RBIC</option>
+              <option value="RBIN">RBCN</option>
+              <option value="RBJP">RBJP</option>
 
-    <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+          </select>
+          </div>
 
-
-    <div class="DH-KAM">
-      <p>DH & KAM</p>
-      <div class="dropdown-container">
-      <div class="dropdown-item">
-        <label for="DH"
-          >Department Head (DH) <span class="required"> *</span></label
-        >
-        <input type="text" id="DH" name="DH"  placeholder="NTID" />
-      </div>
-
-      <div class="dropdown-item">
-        <label for="KAM"
-          >Key Account Manager (KAM) <span class="required"> *</span></label
-        >
-        <input type="text" id="KAM" [(ngModel)]="KAM" placeholder="NTID" />
-      </div>
-    </div>
-    </div>
-    <!-------------------------------------------Location Details--------------------------------------------------------------------------------->
-    <div class="locationdetails">
-      <p>Location Details</p>
-      <div class="dropdown-container">
-        <div class="dropdown-item">
-          <label for="deptselect"
-            >Department <span class="required"> *</span></label
-          >
-          <input type="text" id="fieldfill" placeholder="Department" />
-        </div>
-
-        <div class="dropdown-item">
-          <label for="building">Building<span class="required"> *</span></label>
-          <select id="buildingSelect" name="buildingSelect" >
-            <option value="">Select Building</option>
+          <div class="dropdown-item">
+            <label for="GBselect"
+              >GB <span class="required"> *</span></label
+            >
+            <select id="GBSelect" name="GB" (change)="GBChange($event)">
+            <option value="">Select GB</option>
+            <option value="2WP">2WP</option>
+            <option value="BEG">BEG</option>
+            <option value="CS">CS</option>
+            <option value="EM">EM</option>
+            <option value="EHM">EHM</option>
+            <option value="ES">ES</option>
+            <option value="ESU">ESU</option>
+            <option value="PS">PS</option>
+            <option value="PG">PG</option>
+            <option value="SDS">SDS</option>
+            <option value="TE">TE</option>
+            <option value="VM">VM</option>
           </select>
         </div>
-
-        <div class="dropdown-item">
-          <label for="floorselect"
-            >Floor <span class="required"> *</span></label
-          >
-          <input type="text" id="fieldfill" placeholder="Floor" />
-        </div>
-
-
-        <div class="dropdown-item">
-          <label for="labselect"
-            >Lab No. <span class="required"> *</span></label
-          >
-          <input type="text" id="fieldfill" placeholder="Lab No." />
         </div>
       </div>
 
 
+      <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
 
-      <div class="labcoordinatordetails">
-        <p>Lab Coordinator</p>
+      <div class="ITL">
+        <p>ITL's</p>
         <div class="dropdown-container">
         <div class="dropdown-item">
-          <label for="primary"
-            >Primary Lab Coordinator <span class="required"> *</span></label
+          <label for="local-ITL"
+            >Local-ITL <span class="required"> *</span></label
           >
-          <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"/>
+          <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" required minlength="7" #localITLProxyInput="ngModel" />
+          <div *ngIf="localITLProxyInput.invalid && (localITLProxyInput.dirty || localITLProxyInput.touched)">
+            <div *ngIf="localITLProxyInput.errors?.['required']">
+              Local-ITL Proxy is required.
+            </div>
+            <div *ngIf="localITLProxyInput.errors?.['minlength']">
+              Local-ITL Proxy must be at least 7 characters long.
+            </div>
+          </div>
         </div>
 
         <div class="dropdown-item">
-          <label for="secondary"
-            >Secondary Lab Coordinator </label
+          <label for="local-ITL Proxy"
+            >Local-ITL Proxy <span class="required"> *</span></label
           >
-          <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"/>
-        </div>
-
-        <div class="dropdown-item">
-          <label for="CC"
-            >Cost Center<span class="required"> *</span> </label
-          >
-          <input type="text" id="fieldfill" placeholder="Cost Center" />
+          <input type="text" id="localITLproxy" [(ngModel)]="localITLproxy" placeholder="NTID" />
         </div>
       </div>
       </div>
 
-      <div class="labworkdetails">
-        <p>Lab work details</p>
+
+      <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+
+
+      <div class="DH-KAM">
+        <p>DH & KAM</p>
         <div class="dropdown-container">
         <div class="dropdown-item">
-          <label for="kindoflab"
-            >Kind of Lab <span class="required"> *</span></label
+          <label for="DH"
+            >Department Head (DH) <span class="required"> *</span></label
           >
-            <select id="kindoflabselect" name="GB">
-            <option value="">Select</option>
-            <option value="EMV">EMV</option>
-            <option value="Reliability">Reliability</option>
-            <option value="Devlopment">Devlopment</option>
-            <option value="Validation">Validation</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-
-        <div class="dropdown-item">
-          <label for="pupose"
-            >Purpose of Lab</label
-          >
-          <input type="text" id="fieldfill" placeholder="Purpose" />
+          <input type="text" id="DH" name="DH" [(ngModel)]="DH"  placeholder="NTID" />
         </div>
 
         <div class="dropdown-item">
-          <label for="Brief"
-            >Brief<span class="required"> *</span> </label
+          <label for="KAM"
+            >Key Account Manager (KAM) <span class="required"> *</span></label
           >
-          <input type="text" id="fieldfill" placeholder="Brief" />
+          <input type="text" id="KAM" [(ngModel)]="KAM" placeholder="NTID" />
         </div>
       </div>
       </div>
+      <!-------------------------------------------Location Details--------------------------------------------------------------------------------->
+      <div class="locationdetails">
+        <p>Location Details</p>
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="deptselect"
+              >Department <span class="required"> *</span></label
+            >
+            <input type="text" id="fieldfill" placeholder="Department" [(ngModel)]="Dept" />
+          </div>
+
+          <div class="dropdown-item">
+            <label for="building">Building<span class="required"> *</span></label>
+            <select id="buildingSelect" name="buildingSelect" [(ngModel)]="Building" >
+              <option value="">Select Building</option>
+            </select>
+          </div>
+
+          <div class="dropdown-item">
+            <label for="floorselect"
+              >Floor <span class="required"> *</span></label
+            >
+            <input type="text" id="fieldfill" placeholder="Floor" [(ngModel)]="Floor"/>
+          </div>
+
+
+          <div class="dropdown-item">
+            <label for="labselect"
+              >Lab No. <span class="required"> *</span></label
+            >
+            <input type="text" id="fieldfill" placeholder="Lab No." [(ngModel)]="labno"/>
+          </div>
+        </div>
+
+
+
+        <div class="labcoordinatordetails">
+          <p>Lab Coordinator</p>
+          <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="primary"
+              >Primary Lab Coordinator <span class="required"> *</span></label
+            >
+            <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="primarylabco"/>
+          </div>
+
+          <div class="dropdown-item">
+            <label for="secondary"
+              >Secondary Lab Coordinator </label
+            >
+            <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="secondarylabco"/>
+          </div>
+
+          <div class="dropdown-item">
+            <label for="CC"
+              >Cost Center<span class="required"> *</span> </label
+            >
+            <input type="text" id="fieldfill" placeholder="Cost Center" [(ngModel)]="CC"/>
+          </div>
+        </div>
+        </div>
+
+        <div class="labworkdetails">
+          <p>Lab work details</p>
+          <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="kindoflab"
+              >Kind of Lab <span class="required"> *</span></label
+            >
+              <select id="kindoflabselect" name="kindoflab" [(ngModel)]="selectedLabType" (change)="onLabTypeChange()">
+              <option value="">Select</option>
+              <option value="EMV">EMV</option>
+              <option value="Reliability">Reliability</option>
+              <option value="Devlopment">Devlopment</option>
+              <option value="Validation">Validation</option>
+              <option value="Other">Other</option>
+            </select>
+            <div *ngIf="showOtherField">
+              <label for="otherLab">Other Lab Type:</label>
+              <input type="text" id="otherLab" name="otherLab" [(ngModel)]="otherLabType" placeholder="other">
+            </div>
+          </div>
+
+
+          <div class="dropdown-item">
+            <label for="pupose"
+              >Purpose of Lab<span class="required"> *</span></label
+            >
+            <input type="text" id="fieldfill" placeholder="Purpose" />
+          </div>
+
+          <div class="dropdown-item">
+            <label for="Brief"
+              >Brief<span class="required"> *</span> </label
+            >
+            <input type="text" id="fieldfill" placeholder="Brief" />
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="cmdb-sharedlabflex">
+
+      <mat-card>
+        <mat-card-content>
+          <p class="ACL-p">CMDB<span class="required"> *</span></p>
+          <section class="cmdb-container">
+            <mat-radio-group [(ngModel)]="cmdbradio">
+              <mat-radio-button class="cmdb-margin" value="cmdb-yes">Yes</mat-radio-button>
+              <mat-radio-button class="cmdb-margin" value="cmdb-no">No</mat-radio-button>
+            </mat-radio-group>
+          </section>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-content>
+          <p class="ACL-p">Shared Lab<span class="required"> *</span></p>
+          <section class="cmdb-container">
+            <mat-radio-group [(ngModel)]="sharedlabradio">
+              <mat-radio-button class="sharedlab-margin" value="sharedlab-yes">Yes</mat-radio-button>
+              <mat-radio-button class="sharedlab-margin" value="sharedlab-no">No</mat-radio-button>
+            </mat-radio-group>
+          </section>
+        </mat-card-content>
+      </mat-card>
     </div>
 
 
-    <mat-card>
-      <mat-card-content>
-        <p class="ACL-p">ACL Required<span class="required"> *</span></p>
-        <section class="ACL-container">
-          <mat-radio-group [(ngModel)]="labelPosition">
-            <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
-            <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-      </mat-card-content>
-    </mat-card>
+      <mat-card>
+        <mat-card-content>
+          <p class="ACL-p">ACL Required<span class="required"> *</span></p>
+          <section class="ACL-container">
+            <mat-radio-group [(ngModel)]="ACLradio">
+              <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
+              <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
+            </mat-radio-group>
+          </section>
+        </mat-card-content>
+      </mat-card>
 
-    <div class="portdetails" *ngIf="labelPosition === 'ACL-yes'">
-      <p>Port Details</p>
-      <div class="dropdown-container">
-      <div class="dropdown-item">
-        <label for="greenPorts"
-          >No. of Green Ports<span class="required"> *</span></label
-        >
-        <input type="text" id="fieldfill" placeholder="Green Ports" />
+      <div class="portdetails" *ngIf="ACLradio === 'ACL-yes'">
+        <p>Port Details</p>
+        <div class="dropdown-container">
+        <div class="dropdown-item">
+          <label for="greenPorts"
+            >No. of Green Ports<span class="required"> *</span></label
+          >
+          <input type="text" id="fieldfill" placeholder="Green Ports" [(ngModel)]="greenports" />
+        </div>
+
+        <div class="dropdown-item">
+          <label for="yellowPort"
+            >No. of Yellow Ports</label
+          >
+          <input type="text" id="fieldfill" placeholder="Yellow Ports" [(ngModel)]="yellowports" />
+        </div>
+
+        <div class="dropdown-item">
+          <label for="redPorts"
+            >No. of Red Ports<span class="required"> *</span> </label
+          >
+          <input type="text" id="fieldfill" placeholder="Red Ports" [(ngModel)]="redports"/>
+        </div>
+      </div>
       </div>
 
-      <div class="dropdown-item">
-        <label for="yellowPort"
-          >No. of Yellow Ports</label
+
+      <div class="form-button-container">
+        <button
+          mat-button
+          class="form-button-res"
+          (click)="onReset()"
+
         >
-        <input type="text" id="fieldfill" placeholder="Yellow Ports" />
-      </div>
+          Reset
+        </button>
 
-      <div class="dropdown-item">
-        <label for="redPorts"
-          >No. of Red Ports<span class="required"> *</span> </label
+        <button
+          mat-button
+          class="form-button-sub"
+          (click)="onPreviewform()"
         >
-        <input type="text" id="fieldfill" placeholder="Red Ports" />
+          Preview
+        </button>
       </div>
-    </div>
-    </div>
-
-    <mat-card>
-      <mat-card-content>
-        <p class="ACL-p">CMDB<span class="required"> *</span></p>
-        <section class="cmdb-container">
-          <mat-radio-group [(ngModel)]="cmdbradio">
-            <mat-radio-button class="cmdb-margin" value="cmdb-yes">Yes</mat-radio-button>
-            <mat-radio-button class="cmdb-margin" value="cmdb-no">No</mat-radio-button>
-          </mat-radio-group>
-        </section>
-      </mat-card-content>
-    </mat-card>
-    <div class="form-button-container">
-      <button
-        mat-button
-        class="form-button-res"
-        (click)="onReset()"
-
-      >
-        Reset
-      </button>
-
-      <button
-        mat-button
-        class="form-button-sub"
-        (click)="onSubmit()"
-      >
-        Submit
-      </button>
     </div>
   </mat-tab>
 
-
-
-
-  <mat-tab label="Approvals" class="approve-reject">
-
-
-
+  <mat-tab label="My Applications" class="approve-reject">
   </mat-tab>
 </mat-tab-group>
