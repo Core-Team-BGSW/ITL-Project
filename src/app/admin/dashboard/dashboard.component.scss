@@ -1,49 +1,127 @@
+// .example-card{
+//   max-width: 100px;
+// }
+
+// .example-header-image{
+
+  @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+  .content {
+    display: flex; /* Establish flex container */
+    justify-content: space-between; /* Distribute items along the main axis (horizontally in this case) */
+    background-color: rgb(150, 91, 246);
+    width: 100%;
+    margin: 0; /* Reset default margin */
+    padding: 20px; /* Add padding as needed */
+    box-sizing: border-box;
+    color: white;
+
+  }
+
+  .row {
+    display: flex; /* Nested flex container for rows */
+
+  }
+
+  .col {
+    flex: 1; /* Each column takes equal space */
+    padding: 10px; /* Adjust padding as needed */
+    border: 0px solid #ccc; /* Example border for visualization */
+  }
+  .sub-heading {
+    font-size: 1.5rem; /* Adjust font size as needed */
+    font-weight: bold; /* Adjust font weight as needed */
+    margin-bottom: 2px; /* Adjust spacing between h4 and h2 */
+    margin-top: 70px;
+
+  }
+
+  .main-heading {
+    font-size: 2.5rem; /* Adjust font size as needed */
+    font-weight: bold; /* Adjust font weight as needed */
+    margin-top: 10px; /* Remove default margin */
+
+  }
+  .mid-content{
+    padding-top: 20px;
+  }
+  .sub-heading2{
+    color: #7841ed;
+    font-weight: bold;
+  }
+  .menu-button{
+
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding-left: 4px;
+    margin-bottom: 10px;
+    text-align: left;
+    border-radius:20px;
+  }
+  .menu-button span{
+    margin-left: 20px;
+
+    text-align: left;
+
+
+  }
+  .menu-button:hover{
+    background-color: gray;
+
+  }
+  .menu-button:focus{
+    background-color: aliceblue;
+    color:black;
+  }
+  h3{
+    padding-top: 90px;
+  }
+
 .image-container{
   text-align: right;
+  padding-top: 40px;
+  padding-left: 50px;
+  margin-left: 60px;
+  position: relative;
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #f0f0f0;
 
 }
-.example-card {
-  width: 30%; // Ensures cards take full width of their container
-  height: 30%; // Optional, adjust as needed
 
-  // Adjust padding or margin as needed for spacing
-  padding: 1rem;
-  margin-bottom: 1rem;
-
-  // Optional: Customize card content typography or colors
-  mat-card-content {
-    h2 {
-      font-size: 1.5rem; // Example size, adjust as needed
-      margin-bottom: 0.5rem;
-    }
-    p {
-      font-size: 1rem; // Example size, adjust as needed
-      margin-bottom: 0.5rem;
-    }
-    button {
-      font-size: 1rem; // Example size, adjust as needed
-    }
-  }
+.image-container img {
+  width: 100%; /* Ensures the image fills the circle */
+  height: auto;
 }
 
-@media (max-width: 768px) {
-  .row-cols-1 {
-    .col {
-      width: 100%; // Ensure cards take full width on small screens
-    }
-  }
-}
-
-.img{
-  width: 100px;
-}
-h1{
-  color: black;
-}
-h2{
-  font-family:'Inter', sans-serif ;
-  font-weight: 800;
-  font-size: large;
-  text-shadow: #245ee6;
+.text{
   text-align: center;
+  .courgette-regular {
+    font-family: "Courgette", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+}
+
+
+.container{
+  padding: 10px;
+  display: flex;
+  gap: 90px;
+  justify-content: space-between;
+}
+
+.example-card {
+  max-width: 300px;
+  flex: 1 1 300px;
+  gap: 20px;
+
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

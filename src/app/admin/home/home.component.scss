@@ -1,3 +1,15 @@
+.custom-toolbar {
+  mat-toolbar {
+    background-color: #daeaf2;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+  }
+}
+
 mat-sidenav{
   background-color: #0f1720;
   width: 270px;
@@ -16,6 +28,7 @@ mat-toolbar{
   mat-icon{
     margin-left: 15px;
     color: gray;
+
   }
   justify-content: space-between;
   .box{
