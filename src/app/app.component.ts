@@ -12,6 +12,7 @@ import { SelfCheckComponent } from './components/self-check/self-check.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
 
+
 @Component({
     selector: 'app-root',
     standalone: true,

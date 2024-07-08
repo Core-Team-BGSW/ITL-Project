@@ -6,8 +6,8 @@
 
     <mat-card>
       <mat-card-content>
-        <p class="note-choosemethod">For multiple lab commission, Import File is recommended</p>
         <p class="choosemethod">Choose Method<span class="required"> *</span></p>
+        <p class="note-choosemethod">For multiple lab commission, "Import File" is recommended</p>
         <section class="choosemethod-container">
           <mat-radio-group [(ngModel)]="choosemethod">
             <mat-radio-button class="ACL-margin" value="choosemethod-import">Import File</mat-radio-button>
@@ -29,7 +29,7 @@
       <div class="importbutton">
         <a>
           Choose File to upload:
-          <input type="file" (change)="onFileChanged($event)" />
+          <input type="file" (change)="onFileChanged($event)" placeholder="choose file"/>
         </a>
       </div>
       <div class="buttons">
@@ -345,16 +345,16 @@
 
           <div class="dropdown-item">
             <label for="pupose"
-              >Purpose of Lab<span class="required"> *</span></label
+              >Purpose of Lab in Brief<span class="required"> *</span></label
             >
             <input type="text" id="fieldfill" placeholder="Purpose" />
           </div>
 
           <div class="dropdown-item">
             <label for="Brief"
-              >Brief<span class="required"> *</span> </label
+              >Description<span class="required"> *</span> </label
             >
-            <input type="text" id="fieldfill" placeholder="Brief" />
+            <input type="text" id="fieldfill" placeholder="Description" />
           </div>
         </div>
         </div>
@@ -364,11 +364,12 @@
 
       <mat-card>
         <mat-card-content>
-          <p class="ACL-p">CMDB<span class="required"> *</span></p>
+          <p class="ACL-p">Is lab going to procure new equipment for Engineering/Red Zone?<span class="required"> *</span></p>
           <section class="cmdb-container">
             <mat-radio-group [(ngModel)]="cmdbradio">
               <mat-radio-button class="cmdb-margin" value="cmdb-yes">Yes</mat-radio-button>
               <mat-radio-button class="cmdb-margin" value="cmdb-no">No</mat-radio-button>
+              <p class = "cmdb-explain">If yes, as per MD-07151, all the Engineering/Red Zone devices should be updated in <a href="https://inside-docupedia.bosch.com/confluence/display/ITM/CMDB+Data+Model" target="_blank">SMT-CMDB</a></p>
             </mat-radio-group>
           </section>
         </mat-card-content>
@@ -381,6 +382,7 @@
             <mat-radio-group [(ngModel)]="sharedlabradio">
               <mat-radio-button class="sharedlab-margin" value="sharedlab-yes">Yes</mat-radio-button>
               <mat-radio-button class="sharedlab-margin" value="sharedlab-no">No</mat-radio-button>
+
             </mat-radio-group>
           </section>
         </mat-card-content>
@@ -449,5 +451,9 @@
   </mat-tab>
 
   <mat-tab label="My Applications" class="approve-reject">
+    <div>
+      <p>Submitted Form Data:</p>
+      <pre>{{ submittedFormData | json }}</pre>
+    </div>
   </mat-tab>
 </mat-tab-group>

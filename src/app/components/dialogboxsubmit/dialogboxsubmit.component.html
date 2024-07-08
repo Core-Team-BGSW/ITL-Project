@@ -21,12 +21,14 @@
   <p><strong>Purpose of Lab:</strong> {{ purposeoflab }}</p>
 
   <p>
-    <strong>CMDB:</strong>
-    {{ cmdbradio === "cmdb-no" ? "NO" : "YES" }}
+    <strong
+      >Is lab going to procure new equipment for Engineering/Red Zone?
+    </strong>
+    {{ cmdbradio === "cmdb-yes" ? "YES" : "NO" }}
   </p>
   <p>
     <strong>Shared Lab:</strong>
-    {{ sharedlabradio === "sharedlab-no" ? "NO" : "YES" }}
+    {{ sharedlabradio === "sharedlab-yes" ? "YES" : "NO" }}
   </p>
   <p>
     <strong>ACL Required:</strong>
@@ -42,7 +44,7 @@
 </div>
 <div class="formfilldialogbuton">
   <div mat-dialog-actions>
-    <button mat-button>Submit</button>
+    <button mat-button (click)="onformsubmit()">Submit</button>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="closeDialog()">Back</button>
