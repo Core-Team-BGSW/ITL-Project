@@ -61,12 +61,6 @@ export class LabCommissionComponent {
   greenport: string = '';
   redport: string = '';
   yellowport: string = '';
-  // selectedRegion: string = '';
-  // selectedRegion: string = '';
-  // selectedRegion: string = '';
-  // selectedRegion: string = '';
-  // selectedRegion: string = '';
-  // selectedRegion: string = '';
 
 
 

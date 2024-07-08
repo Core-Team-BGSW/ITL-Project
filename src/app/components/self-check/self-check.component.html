@@ -1,1 +1,2908 @@
-<h1>self-check works!</h1>
+<td>
+  <fieldset id="f2">
+    <h1 style="color: rgb(43, 41, 41)">Check List</h1>
+    <h2 style="color: rgb(154, 152, 152)">Organization :</h2>
+    <b>(1) Chapter MD 07151 Annex 2 (4.2.1.1 )</b> : Is a local ITL nominated
+    for the laboratory?
+    <span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Has the responsible laboratory management nominated a Local-ITL?
+        <p></p>
+        <br />
+        Is the Local-ITL an associate of the Bosch Group?
+        <p></p>
+        <br />
+        Is the Local-ITL known to the associates in the development lab? (e.g.
+        organizational chart, web site, Bosch Connect).
+        <p></p>
+        <br />
+        Is the nomination document signed by the responsible laboratory
+        management available? (MD 07151 Annex 4)</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <p></p>
+
+    <b>(2) Chapter MD 07151 Annex 2 (4.2.1.1 - 4.2.1.2)</b> : Is a local ITL
+    proxy nominated for the laboratory? <span class="required"> * </span> <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Has the responsible laboratory management nominated a Local-ITL?
+        <p></p>
+        <br />
+        Is the Local-ITL an associate of the Bosch Group?
+        <p></p>
+        <br />
+        Is the Local-ITL known to the associates in the development lab? (e.g.
+        organizational chart, web site, Bosch Connect).
+        <p></p>
+        <br />
+        Is the nomination document signed by the responsible laboratory
+        management available? (MD 07151 Annex 4)</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption1">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption1 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption1 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(3) Chapter MD 07151 Annex 2 (4.2.1.2-4.2.1.4)</b> : IIs there any
+    coordination between the responsible laboratory management and the
+    Local-ITL?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Is there coordination with the responsible laboratory management? E.g.
+        when releasing the self-audit.</span
+      >
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption2">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption2 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption2 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(4) Chapter MD 07151 Annex 2 (4.2.1.1)</b> :Does the Local-ITL have the
+    knowledge required to implement the ITE lab-specific tasks?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Training measures are to be planned and implemented.</span
+      >
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption3">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption3 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption3 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(5) Chapter MD 07151 Annex 2 (4.2.1.1)</b> :Does the Local-ITL proxy have
+    the knowledge required to implement the ITE lab-specific tasks?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+
+      <span class="tooltiptext"
+        >Training measures are to be planned and implemented.
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption4">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption4 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption4 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(6) Chapter MD 07151 Annex 2 (4.2.1.4)</b> :Have the associates in the
+    laboratory been instructed on the subject of "Compliance with IT security in
+    the laboratories"?
+    <span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Are corresponding measures included,<br />
+        e.g. in the induction plan for new associates?
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption5">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption5 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption5 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(7) Chapter MD 07151 Annex 2 (4.2.1.4)</b> :Is there a regular
+    information exchange between Local-ITL and VPR, DSO, network operators at
+    CI? Were these information exchange documented?
+    <span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >The frequency of information exchange and its documentation are defined
+        and followed.
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption6">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption6 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption6 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(8) Chapter MD 07151 Annex 2 (4.2.3-4.4.6)</b> :Are the purchasing
+    guidelines adhered to when procuring laboratory equipment that includes IT?
+    Were these information exchange documented?<span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Is a corresponding process described in the ITL documentation?
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption7">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption7 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption7 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(9) Chapter MD 07151 Annex 2 (4.2.1.1)</b> :Is the Local-ITL registered
+    in the division ITL distribution list? Were these information exchange
+    documented?<span class="required"> * </span><br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >To be found in the Outlook address book under ITL-XX (XX = GB
+        abbreviation).
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption8">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption8 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption8 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(10) Chapter MD 07151 Annex 2 (4.2.1.1)</b> :Is the Local-ITL proxy
+    registered in the division ITL distribution list? Were these information
+    exchange<br />
+    documented?<span class="required"> * </span>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption9">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption9 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption9 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(11) Chapter MD 07151 Annex 2 (4.7)</b> :Are the ITL audits/self-audits
+    of the last years available? Were these information exchange
+    documented?<span class="required"> * </span><br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >If this is the first time an audit is performed, do select "Not
+        applicable".
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption10">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption10 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption10 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(12) Chapter MD 07151 Annex 2 (4.7)</b> :Were deviations from the last
+    ITL audit/self-audit eliminated by measures or described and approved by
+    laboratory management as residual risk?<span class="required"> * </span
+    ><br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >If this is the first time an audit is performed, do select "Not
+        applicable".
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption11">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption11 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption11 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <h2 style="color: rgb(154, 152, 152)">Technology :</h2>
+    <br />
+    <b>(1) Chapter MD 07151 Annex 2 (4.5)</b> :Is the inventory of all assets
+    with the required attributes available?<span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >All assets subject to inventory must be documented in the CMDB.
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption12">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption12 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption12 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(2) Chapter MD 07151 Annex 2 (4.5)</b> :Is the inventory updated when
+    changes are made?<span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >The mandatory attributes of an asset must be kept up-to-date in the
+        CMDB.
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption13">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption13 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption13 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(3) Chapter MD 07151 Annex 2 (4.2.3)</b> :Are the responsibilities and
+    tasks described in the ITL documentation? <span class="required"> * </span>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption14">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption14 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption14 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(4) Chapter MD 07151 Annex 2 (4.2.3)</b> :Is the laboratory IT
+    infrastructure described in the ITL documentation?<span class="required">
+      * </span
+    ><br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Is an overview of all operated laboratory network zones available in
+        the ITL documentation?
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption15">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption15 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption15 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(5) Chapter MD 07151 Annex 2 (4.2.3)</b> :Are the responsibilities and
+    tasks described in the ITL documentation?
+    <span class="required"> * </span>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption14">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption14 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption14 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(6) Chapter MD 07151 Annex 2 (4.2.3)</b> :Is the data backup strategy
+    described in the ITL documentation?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Aim according to CD02900.001 Chap. A. 12.3 data are protected against
+        loss.
+      </span>
+    </div>
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+
+    <br />
+
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption16">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption16 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="portdetails" *ngIf="selectedOption16 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(7) Chapter MD 07151 Annex 2 (4.2.3 )</b> : Are deviations with residual
+    risk assessments documented?
+    <span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext">Storage in the IT documentation.</span>
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption17">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption17 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption17 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(8) Chapter MD 07151 Annex 2 (4.2.1.4)</b> : Are firewall or ACL changes
+    approved by the Zone Manager or proxy?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >The process of firewall and ACL changes and approval is described in
+        the ITL documentation.</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption23">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption23 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption23 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(9) Chapter MD 07151 Annex 2 (4.2.1.4 )</b> : Do regular checks (at least
+    1x per year) take place to determine whether firewall or ACL releases are
+    still required?
+
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Recommendation: Perform firewall or ACL check as part of ITL self-check
+        and describe results here.</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption19">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption19 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption19 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(10) Chapter MD 07151 Annex 2 (4.3.3 )</b> :Are the networks set up
+    according to the local zone concept of the ITL documentation?
+
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Review zone concept with actual data using tools provided by CI.</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption20">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption20 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption20 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(11) Chapter MD 07151 Annex 2 (4.4.2)</b> :Is a virus check carried out
+    before commissioning new laboratory IT end devices (if technically
+    possible)?
+
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Random questioning of laboratory associates as to whether this process
+        is lived.</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption21">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption21 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption21 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(12) Chapter MD 07151 Annex 2 (4.3.4 )</b> : Are the network connecting
+    box in the engineering or research labs labeled?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Network connecting box must be visually marked.
+      </span>
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption22">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption22 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption22 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(13) Chapter MD 07151 Annex 2 (4.3.7.2 )</b> : Are remote accesses
+    limited in time and ensured that only the approved target is directly
+    accessible (1:1 access)?
+    <span class="required"> * </span>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption24">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption24 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption24 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b> Chapter MD 07151 Annex 2 (4.3.7.5 )</b> : Are remote accesses
+    documented?
+    <span class="required"> * </span>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption25">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption25 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption25 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(14) Chapter MD 07151 Annex 2 (4.2.3)</b> : Do service agreements exist
+    for the laboratory systems if they are provided by other organizational
+    units?
+
+    <span class="required"> * </span>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption26">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption26 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption26 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(15) Chapter MD 07151 Annex 2 (4.4.1)</b> : Are the protection classes
+    (C-SC, A-SC, I-SC) for the IT systems in the laboratory documented in the
+    inventory?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >In accordance with CD02900-001 Chapter A8, information shall be
+        classified with respect to the protection objectives of confidentiality,
+        integrity, and availability.</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption27">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption27 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption27 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(16) Chapter MD 07151 Annex 2 (4.3.3.2 )</b> : Are insecure IT end
+    devices only operated in network-separated zones?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Insecure IT end devices are to be operated in engineering zones or
+        stand-alone.</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption28">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption28 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption28 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <h2 style="color: rgb(154, 152, 152)">Emergency Plan :</h2>
+    <br />
+    <b>(1) Chapter MD 07151 Annex 2 (4.2.4 )</b> : Are contact persons and
+    measures for possible IT security incidents at laboratory level documented
+    in the emergency <br />
+    plan?
+    <span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >The emergency plan contains the names of the contact person and proxy
+        with contact details (e.g. telephone number, email).</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption29">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption29 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption29 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <br />
+    <b>(2) Chapter MD 07151 Annex 2 (4.2.4 )</b> : After IT security incidents
+    occurred and measures were derived and included in the emergency plan?
+    <span class="required"> * </span>
+    <br />
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Measures have been established to prevent an IT security incident that
+        has already occurred. E. g. workaround in the event of a failed IT
+        system; switching from automatic to (partially) manual
+        processing".</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption30">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption30 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption30 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <b>(3) Chapter MD 07151 Annex 2 (4.2.4 )</b> : Has the emergency plan been
+    published?
+    <span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext"
+        >Publish emergency plan e.g. intranet, information board notice
+        board.</span
+      >
+    </div>
+
+    <p></p>
+    <br />
+    Evaluation <span class="required"> * </span>
+    <div class="tooltip1">
+      <svg
+        id="Layer_1"
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 121.86 122.88"
+      >
+        <title>comment</title>
+        <path
+          d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"
+        />
+      </svg>
+      <span class="tooltiptext1"
+        >'Partially fulfilled' : Local-ITL is nominated, Nomination document is
+        available, but not signed. <br />'Completely fulfilled': Local-ITL is
+        nominated. Nomination document is available and has been signed by the
+        responsible laboratory management.</span
+      >
+    </div>
+    <mat-card class="custom-card">
+      <mat-form-field>
+        <select [(ngModel)]="selectedOption31">
+          <option value=""></option>
+
+          <option value="completely-fulfilled">Completely Fulfilled</option>
+          <option value="partially-fulfilled">Partially Fulfilled</option>
+          <option value="not-fulfilled">Not Fulfilled</option>
+          <option value="not-applicable">Not Applicable</option>
+        </select>
+      </mat-form-field>
+    </mat-card>
+
+    <div class="dropdown" *ngIf="selectedOption31 === 'partially-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+    <div class="dropdown" *ngIf="selectedOption31 === 'not-fulfilled'">
+      <table>
+        <td>Explanation <span class="required"> *</span> :</td>
+        <td>Measures <span class="required"> *</span> :</td>
+        <td>Responsible<span class="required"> *</span> :</td>
+        <tr>
+          <td><input type="text" size="30" placeholder="Explanation" /></td>
+          <td><input type="text" size="30" placeholder="Measures" /></td>
+          <td><input type="text" size="30" placeholder="Responsible" /></td>
+        </tr>
+      </table>
+      <table>
+        <td>Due Date <span class="required"> *</span> :</td>
+        <td>Status <span class="required"> *</span> :</td>
+
+        <tr>
+          <td><input type="text" size="30" placeholder="Due Date" /></td>
+          <td><input type="text" size="30" placeholder="Status" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <p></p>
+
+    <button class="button3">Save as Draft</button>
+    <button class="button4">Submit</button>
+  </fieldset>
+</td>
