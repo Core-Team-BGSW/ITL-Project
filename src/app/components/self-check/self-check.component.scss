@@ -1,0 +1,246 @@
+input[type=text] {
+  width: 320px;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #6e6d6d;
+  background-color: rgb(219, 228, 233);
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 0px solid rgb(151, 147, 147);
+}
+select{
+  width: 400px;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #6e6d6d;
+  background-color: rgb(219, 228, 233);
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 0px solid rgb(151, 147, 147);
+}
+p{
+  text-align: left;
+  font-size: medium;
+}
+#f1{
+  width: 250px;
+  height: 730px;
+  background-color: rgb(41, 2, 45);
+  border: 0 none;
+  border-radius: 0px;
+
+  box-shadow: 0 0 15px 1px rgba(19, 19, 19, 0.4);
+
+  margin: 0 1%;
+  position: relative;
+
+
+}
+#f2{
+  width: 980px;
+  height:6890px;
+
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+
+  margin: 0 1%;
+  font-size: 15px;
+
+
+}
+.required{
+  color: red;
+}
+svg{
+  width: 20px;
+  height: 15px;
+}
+.tooltip {
+position: relative;
+display: inline-block;
+
+}
+.tooltiptext {
+visibility: hidden;
+
+--r: 10px; /* control the radius */
+--h: 10px; /* control the height of the tail */
+--p: 5%;  /* control the position of the tail */
+
+padding: 15px 0;
+width: 300px;
+background-color: rgb(95, 94, 97);
+color: white;
+text-align: center;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+border-radius: 10px;
+position: absolute;
+z-index: 1;
+top: -50px;
+left: 100%;
+border-bottom: var(--h) solid #0000;
+--m:
+  /* adjust the angles of the 1st conic-gradient to control the shape */
+  conic-gradient(from 30deg at var(--p) 100%,#0000,#000 1deg 30deg,#0000 31deg)
+   0 100%/100% calc(100% - var(--r)) no-repeat,
+  conic-gradient(at calc(var(--r)/2) calc(var(--r)/2),#000 270deg,#0000 0)
+   0 0/calc(100% - var(--r)/2) calc(100% - var(--r)/2) padding-box,
+  radial-gradient(50% 50%,#000 98%,#0000)
+   0 0/var(--r) var(--r) space padding-box;
+-webkit-mask: var(--m);
+        mask: var(--m);
+
+
+
+font-size: 15px;
+
+color: #fff;
+}
+.tooltip:hover .tooltiptext {
+
+  visibility: visible;
+
+}
+.tooltip1 {
+  position: relative;
+  display: inline-block;
+
+  }
+  .tooltiptext1 {
+  visibility: hidden;
+
+  --r: 10px; /* control the radius */
+  --h: 10px; /* control the height of the tail */
+  --p: 5%;  /* control the position of the tail */
+
+
+  padding: 10px 0;
+    width: 500px;
+  background-color: rgb(115, 207, 123);
+  color:black;
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 0px;
+
+  border-color: #000;
+  position: absolute;
+  z-index: 1;
+  top: -50px;
+  left: 100%;
+  border-bottom: var(--h) solid #0000;
+
+
+
+
+  font-size: 15px;
+
+  color: #fff;
+  }
+  .tooltip1:hover .tooltiptext1 {
+
+    visibility: visible;
+
+  }
+.button2 {
+  background-image: radial-gradient(100% 100% at 100% 0, #8cb8f2 0, rgb(78, 142, 225) 100%);
+  color: rgb(111, 109, 109);
+  padding: 16px;
+  font-weight: bold;
+  width: 220px;
+  font-size: 16px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+
+
+}
+.dropbtn {
+  background-image: radial-gradient(100% 100% at 100% 0, #8cb8f2 0, rgb(218, 214, 150) 100%);
+  color: rgb(111, 109, 109);
+  padding: 16px;
+  font-weight: bold;
+  width: 220px;
+  font-size: 16px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.button3{
+  left: 40%;
+  background-image: radial-gradient(100% 100% at 100% 0, #8cb8f2 0, rgb(78, 142, 225) 100%);
+  color: rgb(111, 109, 109);
+  padding: 16px;
+  font-weight: bold;
+  width: 200px;
+  font-size: 16px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+
+}
+.button4{
+  left: 40%;
+  background-image: radial-gradient(100% 100% at 100% 0, #8cb8f2 0, rgb(78, 142, 225) 100%);
+  color: rgb(111, 109, 109);
+  padding: 16px;
+  font-weight: bold;
+  width: 200px;
+  font-size: 16px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+
+}
+p{
+  text-align: center;
+}
+h3{
+  text-align: center;
+}
+u{
+  color: rgb(218, 214, 150);
+}
+.Layer_1{
+  color: #6e6d6d;
+}
