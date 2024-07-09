@@ -100,21 +100,62 @@ applications: any[] = []; // Array to hold submitted applications
   onformsubmit() {
 
     const uniqueInstanceId = uuidv4();
-    console.log('Generated unique instance ID:', uniqueInstanceId);
+console.log('Generated unique instance ID:', uniqueInstanceId);
 
-    // Example: Submit form data with unique instance ID
-    const formData = {
-      instanceId: uniqueInstanceId,
-      region: this.data.region,
-      country: this.data.country,
-      // Add other fields as needed
-    };
+// Example: Submit form data with unique instance ID
+const formData = {
+  instanceId: uniqueInstanceId,
+  region: this.data.region,
+  country: this.data.country,
+  location:this.data.location
+  // Add other fields as needed
+};
 
-    // Assuming you have a method to submit form data, you can call it here
-    // Replace submitForm with your actual method name
-    this.formDataSubmitted.emit(formData); // Emit event with unique ID
-    this.submitForm(formData);
-    this.dialogRef.close();
+// Assuming you have a method to submit form data, you can call it here
+// Replace submitForm with your actual method name
+this.formDataSubmitted.emit(formData);
+this.submitForm(formData);
+this.dialogRef.close();
+
+// Function to convert object to CSV format
+function convertToCSV(objArray: any[]) {
+  const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+  let str = '';
+
+  for (let i = 0; i < array.length; i++) {
+    let line = '';
+    for (let index in array[i]) {
+      if (line != '') line += ',';
+
+      line += array[i][index];
+    }
+    str += line + '\r\n';
+  }
+
+  return str;
+}
+
+// Function to download CSV file
+function downloadCSV(data: any[]) {
+  const csv = convertToCSV(data);
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  if (link.download !== undefined) {
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'formData.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+}
+
+// Trigger CSV download when form is submitted
+downloadCSV([formData]); // Pass your form data array here if it's an array
+
+
   }
 
   submitForm(formData: any): void {
