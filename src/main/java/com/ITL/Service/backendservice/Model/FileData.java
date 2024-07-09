@@ -30,6 +30,6 @@ public class FileData {
     private String cost_center;
     private String lab_responsible_NTID_primary;
     private String lab_responsible_NTID_secondary;
-    private Boolean acl_implemented;
+    private String acl_implemented;
 }
 
