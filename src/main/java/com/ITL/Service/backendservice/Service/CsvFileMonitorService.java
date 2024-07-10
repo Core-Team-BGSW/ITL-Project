@@ -2,22 +2,27 @@ package com.ITL.Service.backendservice.Service;
 
 import com.ITL.Service.backendservice.Controller.CsvToDatabaseController;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.*;
 
+@Service
 @RequiredArgsConstructor
 public class CsvFileMonitorService {
+    @Qualifier("applicationTaskExecutor")
     private final TaskExecutor taskExecutor;
     private final CsvToDatabaseController csvToDatabaseController;
     @Value("${csv.file.directory}")
     private String csvFileDirectory;
 
-    @Scheduled(cron = "0 0 */12 * * *")
+    @Scheduled(fixedRate = 60000)
     public void monitorCsvDirectory() {
+
         taskExecutor.execute(() -> {
             try {
                 WatchService watchService = FileSystems.getDefault().newWatchService();
@@ -39,7 +44,7 @@ public class CsvFileMonitorService {
                         Path filename = ev.context();
                         if(filename.toString().endsWith(".csv"))
                         {
-                            String response = csvToDatabaseController.uploadCsvToDatabase(csvFileDirectory);
+                            String response = csvToDatabaseController.uploadCsvToDatabase(path + "/file.csv");
                             System.out.println(response);
                         }
                     }

@@ -27,9 +27,17 @@ public class FileData {
     private String building;
     private String floor;
     private String lab_no;
+    private String primary_lab_cord;
+    private String secondary_lab_cord;
     private String cost_center;
-    private String lab_responsible_NTID_primary;
-    private String lab_responsible_NTID_secondary;
-    private String acl_implemented;
+    private String kind_of_lab;
+    private String purpose_of_lab;
+    private String description;
+    private String new_equipment;
+    private String shared_lab;
+    private String acl_req;
+    private String green_ports;
+    private String yellow_ports;
+    private String red_ports;
 }
 
