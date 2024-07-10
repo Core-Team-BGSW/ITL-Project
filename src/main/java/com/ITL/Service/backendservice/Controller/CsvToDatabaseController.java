@@ -3,9 +3,11 @@ package com.ITL.Service.backendservice.Controller;
 import com.ITL.Service.backendservice.Service.CsvToDatabaseService;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
+@Controller
 @RequiredArgsConstructor
 public class CsvToDatabaseController {
     private final CsvToDatabaseService csvToDatabaseService;
