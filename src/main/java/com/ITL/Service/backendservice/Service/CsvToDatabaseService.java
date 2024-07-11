@@ -1,65 +1,62 @@
 package com.ITL.Service.backendservice.Service;
 
-import com.ITL.Service.backendservice.Model.FileData;
-import com.ITL.Service.backendservice.Repository.FileDataRepo;
+import com.ITL.Service.backendservice.Model.LabData;
+import com.ITL.Service.backendservice.Repository.LabDataRepo;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CsvToDatabaseService {
-    private final FileDataRepo fileDataRepo;
+    private final LabDataRepo labDataRepo;
     public String saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
             String[] nextRecord;
             csvReader.skip(1);
-            List<FileData> fileDataList = new ArrayList<>();
+            List<LabData> labDataList = new ArrayList<>();
             nextRecord = csvReader.readNext();
             while((nextRecord != null))
             {
-                FileData fileData = new FileData();
+                LabData labData = new LabData();
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;
-                fileData.setSr_no(nextRecord[0]);
-                fileData.setRegion(nextRecord[1]);
-                fileData.setCountry(nextRecord[2]);
-                fileData.setLocation(nextRecord[3]);
-                fileData.setLocation_code(nextRecord[4]);
-                fileData.setEntity(nextRecord[5]);
-                fileData.setGb(nextRecord[6]);
-                fileData.setLocal_itl(nextRecord[7]);
-                fileData.setLocal_itl_proxy(nextRecord[8]);
-                fileData.setDh(nextRecord[9]);
-                fileData.setKam(nextRecord[10]);
-                fileData.setDep_name(nextRecord[11]);
-                fileData.setBuilding(nextRecord[12]);
-                fileData.setFloor(nextRecord[13]);
-                fileData.setLab_no(nextRecord[14]);
-                fileData.setPrimary_lab_cord(nextRecord[15]);
-                fileData.setSecondary_lab_cord(nextRecord[16]);
-                fileData.setCost_center(nextRecord[17]);
-                fileData.setKind_of_lab(nextRecord[18]);
-                fileData.setPurpose_of_lab(nextRecord[19]);
-                fileData.setDescription(nextRecord[20]);
-                fileData.setNew_equipment(nextRecord[21]);
-                fileData.setShared_lab(nextRecord[22]);
-                fileData.setAcl_req(nextRecord[23]);
-                fileData.setGreen_ports(nextRecord[24]);
-                fileData.setYellow_ports(nextRecord[25]);
-                fileData.setRed_ports(nextRecord[26]);
-                fileDataList.add(fileData);
+                labData.setSr_no(nextRecord[0]);
+                labData.setRegion(nextRecord[1]);
+                labData.setCountry(nextRecord[2]);
+                labData.setLocation(nextRecord[3]);
+                labData.setLocationCode(nextRecord[4]);
+                labData.setEntity(nextRecord[5]);
+                labData.setGb(nextRecord[6]);
+                labData.setLocal_itl(nextRecord[7]);
+                labData.setLocal_itl_proxy(nextRecord[8]);
+                labData.setDh(nextRecord[9]);
+                labData.setKam(nextRecord[10]);
+                labData.setDep_name(nextRecord[11]);
+                labData.setBuilding(nextRecord[12]);
+                labData.setFloor(nextRecord[13]);
+                labData.setLab_no(nextRecord[14]);
+                labData.setPrimary_lab_cord(nextRecord[15]);
+                labData.setSecondary_lab_cord(nextRecord[16]);
+                labData.setCost_center(nextRecord[17]);
+                labData.setKind_of_lab(nextRecord[18]);
+                labData.setPurpose_of_lab(nextRecord[19]);
+                labData.setDescription(nextRecord[20]);
+                labData.setNew_equipment(nextRecord[21]);
+                labData.setShared_lab(nextRecord[22]);
+                labData.setAcl_req(nextRecord[23]);
+                labData.setGreen_ports(nextRecord[24]);
+                labData.setYellow_ports(nextRecord[25]);
+                labData.setRed_ports(nextRecord[26]);
+                labDataList.add(labData);
                 nextRecord = csvReader.readNext();
             }
-            System.out.println("mohit");
-            fileDataRepo.saveAll(fileDataList);
+            labDataRepo.saveAll(labDataList);
             return "The file is Successfully stored into Database";
         }
         catch (IOException | CsvValidationException e) {

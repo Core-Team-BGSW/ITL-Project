@@ -10,13 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileData {
+public class LabData {
     @Id
     private String sr_no;
     private String region;
     private String country;
     private String location;
-    private String location_code;
+    private String locationCode;
     private String entity;
     private String gb;
     private String local_itl;
