@@ -56,7 +56,6 @@ public class ExcelToCsvService {
     {
         for (Row row : sheet) {
             int columnCount = row.getPhysicalNumberOfCells();
-            System.out.println(columnCount);
             String[] csvData = new String[columnCount];
             for (int i = 0; i < columnCount; i++) {
                 Cell cell = row.getCell(i);
