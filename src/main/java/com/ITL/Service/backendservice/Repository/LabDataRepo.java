@@ -11,4 +11,14 @@ public interface LabDataRepo extends MongoRepository<LabData,String> {
     List<LabData> findByCountryAndRegionAndLocationCode(String country, String region,String locationCode);
 
     List<LabData> findByCountryAndRegion(String country, String region);
+
+    List<LabData> findByCountryAndLocationCodeAndEntity(String country, String locationCode, String entity);
+
+    List<LabData> findByCountryAndLocationCodeAndEntityAndGb(String country, String locationCode, String entity, String gb);
+
+    LabData findByBuildingAndLabNo(String building, String labNo);
+
+    List<LabData> findByBuildingAndFloor(String building, String floor);
+
+    LabData findByBuildingAndFloorAndLabNo(String building, String floor, String labNo);
 }

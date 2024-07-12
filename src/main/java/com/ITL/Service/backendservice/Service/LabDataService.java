@@ -26,4 +26,24 @@ public class LabDataService {
     public List<LabData> searchLabsByCountryAndRegion(String country, String region) {
         return labDataRepo.findByCountryAndRegion(country,region);
     }
+
+    public List<LabData> searchLabsByCountryAndLocationCodeAndEntity(String country, String locationCode, String entity) {
+        return labDataRepo.findByCountryAndLocationCodeAndEntity(country,locationCode,entity);
+    }
+
+    public List<LabData> searchLabsByCountryAndLocationCodeAndEntityAndGb(String country, String locationCode, String entity, String gb) {
+        return labDataRepo.findByCountryAndLocationCodeAndEntityAndGb(country,locationCode,entity,gb);
+    }
+
+    public LabData searchLabsByBuildingAndLabNo(String building, String labNo) {
+        return labDataRepo.findByBuildingAndLabNo(building,labNo);
+    }
+
+    public List<LabData> searchByBuildingAndFloor(String building, String floor) {
+        return labDataRepo.findByBuildingAndFloor(building,floor);
+    }
+
+    public LabData searchByBuildingAndFloorAndLabNo(String building, String floor, String labNo) {
+        return labDataRepo.findByBuildingAndFloorAndLabNo(building,floor,labNo);
+    }
 }
