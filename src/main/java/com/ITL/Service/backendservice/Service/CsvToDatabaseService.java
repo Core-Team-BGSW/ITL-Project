@@ -40,7 +40,7 @@ public class CsvToDatabaseService {
                 labData.setDep_name(nextRecord[11]);
                 labData.setBuilding(nextRecord[12]);
                 labData.setFloor(nextRecord[13]);
-                labData.setLab_no(nextRecord[14]);
+                labData.setLabNo(nextRecord[14]);
                 labData.setPrimary_lab_cord(nextRecord[15]);
                 labData.setSecondary_lab_cord(nextRecord[16]);
                 labData.setCost_center(nextRecord[17]);

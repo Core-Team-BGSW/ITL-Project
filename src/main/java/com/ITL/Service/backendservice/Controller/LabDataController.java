@@ -22,11 +22,46 @@ public class LabDataController {
 
     @GetMapping("/labData")
     @ResponseStatus(HttpStatus.OK)
-    public List<LabData> getLabDataByCountryAndRegionAndLocationCode(@RequestParam String country, @RequestParam String region, @RequestParam(required = false) String locationCode) {
-        if(locationCode == null)
+    public List<LabData> getLabData(
+             @RequestParam String country,
+             @RequestParam(required = false) String region,
+             @RequestParam(required = false) String locationCode,
+             @RequestParam(required = false) String entity,
+             @RequestParam(required = false) String gb) {
+        if(locationCode == null && entity == null && gb == null)
         {
             return labDataService.searchLabsByCountryAndRegion(country,region);
         }
-        return labDataService.searchLabsByCountryAndRegionAndLocationCode(country,region,locationCode);
+        else if(entity == null && gb == null)
+        {
+           return labDataService.searchLabsByCountryAndRegionAndLocationCode(country,region,locationCode);
+        }
+        else if(region == null && gb == null)
+        {
+            return labDataService.searchLabsByCountryAndLocationCodeAndEntity(country,locationCode,entity);
+        }
+        return labDataService.searchLabsByCountryAndLocationCodeAndEntityAndGb(country,locationCode,entity,gb);
     }
+
+    @GetMapping("/labDataByBuilding")
+    @ResponseStatus(HttpStatus.OK)
+    public LabData getLabDataByBuildingAndFloor(
+            @RequestParam String building,
+            @RequestParam(required = false) String floor,
+            @RequestParam(required = false) String lab_no) {
+        if(floor == null)
+        {
+            return labDataService.searchLabsByBuildingAndLabNo(building,lab_no);
+        }
+        return labDataService.searchByBuildingAndFloorAndLabNo(building,floor,lab_no);
+    }
+
+    @GetMapping("labDataByFloor")
+    @ResponseStatus(HttpStatus.OK)
+    public List<LabData> getLabDataByBuildingAndFloor(
+            @RequestParam String building,
+            @RequestParam String floor) {
+        return labDataService.searchByBuildingAndFloor(building,floor);
+    }
+
 }

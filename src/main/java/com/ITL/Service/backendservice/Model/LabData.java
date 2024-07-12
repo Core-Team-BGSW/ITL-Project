@@ -26,7 +26,7 @@ public class LabData {
     private String dep_name;
     private String building;
     private String floor;
-    private String lab_no;
+    private String labNo;
     private String primary_lab_cord;
     private String secondary_lab_cord;
     private String cost_center;
