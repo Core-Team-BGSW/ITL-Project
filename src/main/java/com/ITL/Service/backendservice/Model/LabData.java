@@ -6,20 +6,16 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "file_data")
+@Document(collection = "lab_data")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LabData {
     @Id
     private String sr_no;
-    private String region;
-    private String country;
-    private String location;
-    private String locationCode;
-    private String entity;
     private String gb;
     private String local_itl;
+    private String entityName;
     private String local_itl_proxy;
     private String dh;
     private String kam;
