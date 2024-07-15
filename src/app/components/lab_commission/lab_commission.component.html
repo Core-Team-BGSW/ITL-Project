@@ -13,7 +13,7 @@
         </section>
       </mat-card-content>
     </mat-card>
-    <div class="portdetails" *ngIf="choosemethod === 'choosemethod-import'">
+    <div class="importfile" *ngIf="choosemethod === 'choosemethod-import'">
       <div class="heading-import">
         <ul>
         <li>Import File</li>
@@ -355,6 +355,7 @@
             <mat-radio-group [(ngModel)]="ACLradio">
               <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
               <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
+              <p class = "cmdb-explain">Note: ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/pages/viewpage.action?pageId=137473958" target="_blank">Click Here</a></p>
             </mat-radio-group>
           </section>
         </mat-card-content>
@@ -381,6 +382,89 @@
           <input type="text" id="fieldfill" placeholder="Red Ports" [(ngModel)]="redports"/>
         </div>
       </div>
+      </div>
+
+      <hr>
+
+      <div class="other-details">
+        <p class="other-heading" (click)="toggleOtherSection()">Other Information <span class="arrow" [@rotateArrow]="showOtherSection ? 'expanded' : 'collapsed'">&#11167;</span></p>
+        <div class="other-section" *ngIf="showOtherSection">
+          <p>Lab rack / tables Size</p>
+            <div class="dropdown-container">
+              <div class="dropdown-item">
+              <label for="setup"
+              >Setup </label
+            >
+              <select id="setupselect" name="setupselect" >
+                <!-- [(ngModel)]="setupselect" -->
+              <option value="">Select</option>
+              <option value="Vertical">Vertical</option>
+              <option value="Horizontal">Horizontal</option>
+            </select>
+          </div>
+
+
+          <div class="dropdown-item">
+            <label for="size"
+              >Size (in ft)</label
+            >
+            <input type="text" id="fieldfill" placeholder="L*W*H"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+
+          <div class="dropdown-item">
+            <label for="count"
+              >Count</label
+            >
+            <input type="text" id="fieldfill" placeholder="Count"  />
+            <!-- [(ngModel)]="countselect" -->
+          </div>
+        </div>
+
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="seatingfacility"
+              >Seating Facility</label
+            >
+            <input type="text" id="fieldfill" placeholder="Seating Facility"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+          <div class="dropdown-item">
+            <label for="powerloadbox"
+              >Power Load box</label
+            >
+            <input type="text" id="fieldfill" placeholder="Power Load box"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+          <div class="dropdown-item">
+            <label for="solderingstation"
+              >Soldering station</label
+            >
+            <input type="text" id="fieldfill" placeholder="Soldering station"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+        </div>
+        <p>Lab Space</p>
+          <div class="dropdown-container">
+
+            <div class="dropdown-item">
+              <label for="totallabspace "
+                >Total Lab space</label
+              >
+              <input type="text" id="fieldfill" placeholder="Total Lab space "  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+            <div class="dropdown-item">
+              <label for="freelabspace"
+                >Free Lab Space</label
+              >
+              <input type="text" id="fieldfill" placeholder="Free Lab Space"  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+          </div>
+
+
+        </div>
       </div>
       <div class="form-button-container">
         <button

@@ -19,6 +19,7 @@ import { MatDialog, MatDialogModule  } from '@angular/material/dialog';
 import { DialogModule } from "@angular/cdk/dialog";
 import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
 import { v4 as uuidv4 } from 'uuid';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 
 
@@ -29,6 +30,17 @@ import { v4 as uuidv4 } from 'uuid';
     standalone: true,
     templateUrl: './lab_commission.component.html',
     styleUrl: './lab_commission.component.scss',
+    animations: [
+      trigger('rotateArrow', [
+        state('collapsed', style({
+          transform: 'rotate(0)'
+        })),
+        state('expanded', style({
+          transform: 'rotate(180deg)'
+        })),
+        transition('collapsed <=> expanded', animate('0.3s ease'))
+      ])
+    ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
       MatDialogModule,DialogModule,], changeDetection: ChangeDetectionStrategy.OnPush,
@@ -460,5 +472,15 @@ submittedFormData: any = "";
   }
 
 
+  showOtherSection: boolean = false;
+  otherField: string = '';
+
+  toggleOtherSection() {
+    this.showOtherSection = !this.showOtherSection;
+  }
+
 }
+
+
+
 
