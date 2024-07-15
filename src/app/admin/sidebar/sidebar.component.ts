@@ -5,12 +5,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [MatSidenavModule, SidebarComponent, MatButtonModule, MatIconModule, MatToolbarModule, RouterLink,MatMenuModule],
+  imports: [MatSidenavModule, SidebarComponent, MatButtonModule, MatIconModule, MatToolbarModule, RouterLink,MatMenuModule,MatFormFieldModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

@@ -1,13 +1,10 @@
 <h2>New Lab Commission</h2>
-
 <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
   <mat-tab label="Import File/Form Fill">
-
-
     <mat-card>
       <mat-card-content>
-        <p class="note-choosemethod">For multiple lab commission, Import File is recommended</p>
         <p class="choosemethod">Choose Method<span class="required"> *</span></p>
+        <p class="note-choosemethod">For multiple lab commission, "Import File" is recommended</p>
         <section class="choosemethod-container">
           <mat-radio-group [(ngModel)]="choosemethod">
             <mat-radio-button class="ACL-margin" value="choosemethod-import">Import File</mat-radio-button>
@@ -16,9 +13,7 @@
         </section>
       </mat-card-content>
     </mat-card>
-
-    <div class="portdetails" *ngIf="choosemethod === 'choosemethod-import'">
-
+    <div class="importfile" *ngIf="choosemethod === 'choosemethod-import'">
       <div class="heading-import">
         <ul>
         <li>Import File</li>
@@ -29,7 +24,7 @@
       <div class="importbutton">
         <a>
           Choose File to upload:
-          <input type="file" (change)="onFileChanged($event)" />
+          <input type="file" (change)="onFileChanged($event)" placeholder="choose file"/>
         </a>
       </div>
       <div class="buttons">
@@ -38,7 +33,6 @@
             Download template
           </button>
         </div>
-
         <div class="buttons2">
           <button
             class="previewbutton"
@@ -88,11 +82,7 @@
       </a>
     </div>
     </div>
-
     <!------------------------------------------------------------------------------------------------------------------------------------>
-
-
-
     <div class="portdetails" *ngIf="choosemethod === 'choosemethod-form'">
       <div class="heading-form">
         <ul>
@@ -150,7 +140,6 @@
               <!-- Options will be dynamically populated based on selection -->
             </select>
           </div>
-
           <div class="dropdown-item">
             <label for="code">Location-Code<span class="required"> *</span></label>
             <select id="codeSelect" name="codeSelect" (change)="codechange($event)">
@@ -160,8 +149,6 @@
 
         </div>
       </div>
-
-
   <!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
       <div class="entity/GB">
         <p>Entity and GB</p>
@@ -180,10 +167,8 @@
               <option value="RBIN">RBIC</option>
               <option value="RBIN">RBCN</option>
               <option value="RBJP">RBJP</option>
-
           </select>
           </div>
-
           <div class="dropdown-item">
             <label for="GBselect"
               >GB <span class="required"> *</span></label
@@ -206,10 +191,7 @@
         </div>
         </div>
       </div>
-
-
       <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
-
       <div class="ITL">
         <p>ITL's</p>
         <div class="dropdown-container">
@@ -227,7 +209,6 @@
             </div>
           </div>
         </div>
-
         <div class="dropdown-item">
           <label for="local-ITL Proxy"
             >Local-ITL Proxy <span class="required"> *</span></label
@@ -236,11 +217,7 @@
         </div>
       </div>
       </div>
-
-
       <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
-
-
       <div class="DH-KAM">
         <p>DH & KAM</p>
         <div class="dropdown-container">
@@ -269,22 +246,18 @@
             >
             <input type="text" id="fieldfill" placeholder="Department" [(ngModel)]="Dept" />
           </div>
-
           <div class="dropdown-item">
             <label for="building">Building<span class="required"> *</span></label>
             <select id="buildingSelect" name="buildingSelect" [(ngModel)]="Building" >
               <option value="">Select Building</option>
             </select>
           </div>
-
           <div class="dropdown-item">
             <label for="floorselect"
               >Floor <span class="required"> *</span></label
             >
             <input type="text" id="fieldfill" placeholder="Floor" [(ngModel)]="Floor"/>
           </div>
-
-
           <div class="dropdown-item">
             <label for="labselect"
               >Lab No. <span class="required"> *</span></label
@@ -292,9 +265,6 @@
             <input type="text" id="fieldfill" placeholder="Lab No." [(ngModel)]="labno"/>
           </div>
         </div>
-
-
-
         <div class="labcoordinatordetails">
           <p>Lab Coordinator</p>
           <div class="dropdown-container">
@@ -304,14 +274,12 @@
             >
             <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="primarylabco"/>
           </div>
-
           <div class="dropdown-item">
             <label for="secondary"
               >Secondary Lab Coordinator </label
             >
             <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="secondarylabco"/>
           </div>
-
           <div class="dropdown-item">
             <label for="CC"
               >Cost Center<span class="required"> *</span> </label
@@ -320,7 +288,6 @@
           </div>
         </div>
         </div>
-
         <div class="labworkdetails">
           <p>Lab work details</p>
           <div class="dropdown-container">
@@ -341,39 +308,34 @@
               <input type="text" id="otherLab" name="otherLab" [(ngModel)]="otherLabType" placeholder="other">
             </div>
           </div>
-
-
           <div class="dropdown-item">
             <label for="pupose"
-              >Purpose of Lab<span class="required"> *</span></label
+              >Purpose of Lab in Brief<span class="required"> *</span></label
             >
             <input type="text" id="fieldfill" placeholder="Purpose" />
           </div>
-
           <div class="dropdown-item">
             <label for="Brief"
-              >Brief<span class="required"> *</span> </label
+              >Description<span class="required"> *</span> </label
             >
-            <input type="text" id="fieldfill" placeholder="Brief" />
+            <input type="text" id="fieldfill" placeholder="Description" />
           </div>
         </div>
         </div>
       </div>
-
       <div class="cmdb-sharedlabflex">
-
       <mat-card>
         <mat-card-content>
-          <p class="ACL-p">CMDB<span class="required"> *</span></p>
+          <p class="ACL-p">Is lab going to procure new equipment for Engineering/Red Zone?<span class="required"> *</span></p>
           <section class="cmdb-container">
             <mat-radio-group [(ngModel)]="cmdbradio">
               <mat-radio-button class="cmdb-margin" value="cmdb-yes">Yes</mat-radio-button>
               <mat-radio-button class="cmdb-margin" value="cmdb-no">No</mat-radio-button>
+              <p class = "cmdb-explain">If yes, as per MD-07151, all the Engineering/Red Zone devices should be updated in <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/CMDB" target="_blank">SMT-CMDB</a></p>
             </mat-radio-group>
           </section>
         </mat-card-content>
       </mat-card>
-
       <mat-card>
         <mat-card-content>
           <p class="ACL-p">Shared Lab<span class="required"> *</span></p>
@@ -386,8 +348,6 @@
         </mat-card-content>
       </mat-card>
     </div>
-
-
       <mat-card>
         <mat-card-content>
           <p class="ACL-p">ACL Required<span class="required"> *</span></p>
@@ -395,11 +355,11 @@
             <mat-radio-group [(ngModel)]="ACLradio">
               <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
               <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
+              <p class = "cmdb-explain">Note: ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/pages/viewpage.action?pageId=137473958" target="_blank">Click Here</a></p>
             </mat-radio-group>
           </section>
         </mat-card-content>
       </mat-card>
-
       <div class="portdetails" *ngIf="ACLradio === 'ACL-yes'">
         <p>Port Details</p>
         <div class="dropdown-container">
@@ -409,14 +369,12 @@
           >
           <input type="text" id="fieldfill" placeholder="Green Ports" [(ngModel)]="greenports" />
         </div>
-
         <div class="dropdown-item">
           <label for="yellowPort"
             >No. of Yellow Ports</label
           >
           <input type="text" id="fieldfill" placeholder="Yellow Ports" [(ngModel)]="yellowports" />
         </div>
-
         <div class="dropdown-item">
           <label for="redPorts"
             >No. of Red Ports<span class="required"> *</span> </label
@@ -426,17 +384,96 @@
       </div>
       </div>
 
+      <hr>
 
+      <div class="other-details">
+        <p class="other-heading" (click)="toggleOtherSection()">Other Information <span class="arrow" [@rotateArrow]="showOtherSection ? 'expanded' : 'collapsed'">&#11167;</span></p>
+        <div class="other-section" *ngIf="showOtherSection">
+          <p>Lab rack / tables Size</p>
+            <div class="dropdown-container">
+              <div class="dropdown-item">
+              <label for="setup"
+              >Setup </label
+            >
+              <select id="setupselect" name="setupselect" >
+                <!-- [(ngModel)]="setupselect" -->
+              <option value="">Select</option>
+              <option value="Vertical">Vertical</option>
+              <option value="Horizontal">Horizontal</option>
+            </select>
+          </div>
+
+
+          <div class="dropdown-item">
+            <label for="size"
+              >Size (in ft)</label
+            >
+            <input type="text" id="fieldfill" placeholder="L*W*H"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+
+          <div class="dropdown-item">
+            <label for="count"
+              >Count</label
+            >
+            <input type="text" id="fieldfill" placeholder="Count"  />
+            <!-- [(ngModel)]="countselect" -->
+          </div>
+        </div>
+
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="seatingfacility"
+              >Seating Facility</label
+            >
+            <input type="text" id="fieldfill" placeholder="Seating Facility"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+          <div class="dropdown-item">
+            <label for="powerloadbox"
+              >Power Load box</label
+            >
+            <input type="text" id="fieldfill" placeholder="Power Load box"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+          <div class="dropdown-item">
+            <label for="solderingstation"
+              >Soldering station</label
+            >
+            <input type="text" id="fieldfill" placeholder="Soldering station"  />
+            <!-- [(ngModel)]="sizeselect" -->
+          </div>
+        </div>
+        <p>Lab Space</p>
+          <div class="dropdown-container">
+
+            <div class="dropdown-item">
+              <label for="totallabspace "
+                >Total Lab space</label
+              >
+              <input type="text" id="fieldfill" placeholder="Total Lab space "  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+            <div class="dropdown-item">
+              <label for="freelabspace"
+                >Free Lab Space</label
+              >
+              <input type="text" id="fieldfill" placeholder="Free Lab Space"  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+          </div>
+
+
+        </div>
+      </div>
       <div class="form-button-container">
         <button
           mat-button
           class="form-button-res"
           (click)="onReset()"
-
         >
           Reset
         </button>
-
         <button
           mat-button
           class="form-button-sub"
@@ -447,7 +484,10 @@
       </div>
     </div>
   </mat-tab>
-
   <mat-tab label="My Applications" class="approve-reject">
+    <div>
+      <p>Submitted Form Data:</p>
+      <pre>{{ submittedFormData | json }}</pre>
+    </div>
   </mat-tab>
 </mat-tab-group>

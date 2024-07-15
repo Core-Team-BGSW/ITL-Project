@@ -10,15 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {ChangeDetectionStrategy, Component, model, Inject, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, model, Inject, inject, Output, EventEmitter} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
-import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogModule  } from '@angular/material/dialog';
 import { DialogModule } from "@angular/cdk/dialog";
 import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
+import { v4 as uuidv4 } from 'uuid';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 
 
@@ -29,8 +30,20 @@ import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.com
     standalone: true,
     templateUrl: './lab_commission.component.html',
     styleUrl: './lab_commission.component.scss',
+    animations: [
+      trigger('rotateArrow', [
+        state('collapsed', style({
+          transform: 'rotate(0)'
+        })),
+        state('expanded', style({
+          transform: 'rotate(180deg)'
+        })),
+        transition('collapsed <=> expanded', animate('0.3s ease'))
+      ])
+    ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
-      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,MatDialogModule,DialogModule], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
+      MatDialogModule,DialogModule,], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -45,9 +58,6 @@ export class LabCommissionComponent {
   excelData: any[] = []; // Array to store parsed Excel data
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
-  //dialog1=inject(MatDialog);
-
-
   selectedRegion: string = '';
   selectedCountry: string = '';
   selectedLocation: string = '';
@@ -62,6 +72,30 @@ export class LabCommissionComponent {
   redport: string = '';
   yellowport: string = '';
 
+  localITL: string = '';
+  localITLproxy: string = '';
+  KAM: string = '';
+  DH:string='';
+  Dept:string='';
+  Building:string='';
+  Floor:string='';
+  labno:string='';
+  primarylabco:string='';
+  secondarylabco:string='';
+  CC:string='';
+  kindoflab:string='';
+  purposeoflab:string='';
+  ACL:string='';
+  greenports:string='';
+  yellowports:string='';
+  redports:string='';
+  cmdb:string='';
+  labelPosition: string="";
+  choosemethod: string="";
+  selectedLabType: string = '';
+  showOtherField: boolean = false;
+  otherLabType: string = '';
+  applications: any[] = [];
 
 
     // /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
@@ -313,31 +347,7 @@ export class LabCommissionComponent {
 
 
 
-  localITL: string = '';
-  localITLproxy: string = '';
 
-  //DH: string = '';
-  KAM: string = '';
-  DH:string='';
-  Dept:string='';
-  Building:string='';
-  Floor:string='';
-  labno:string='';
-  primarylabco:string='';
-  secondarylabco:string='';
-  CC:string='';
-  kindoflab:string='';
-  purposeoflab:string='';
-  ACL:string='';
-  greenports:string='';
-  yellowports:string='';
-  redports:string='';
-  cmdb:string='';
-  labelPosition: string="";
-  choosemethod: string="";
-  selectedLabType: string = '';
-  showOtherField: boolean = false;
-  otherLabType: string = '';
 
 // //////////////////////////////////////////////////////////////////////onentityChange//////////////////////////////////////////////////////////////////////////////////////
 
@@ -391,9 +401,10 @@ export class LabCommissionComponent {
 
 
 nextUniqueId: number = 1; // Initial unique ID counter
+uniqueInstanceId: string = ''
 
 
-constructor(private dialog: MatDialog) {}
+constructor(private dialog: MatDialog,) {}
 
 onPreviewform(): void {
   const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
@@ -408,9 +419,13 @@ onPreviewform(): void {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('Dialog closed');
+
+
     // Handle any actions after dialog is closed
   });
+
 }
+
 
 
 
@@ -447,5 +462,25 @@ onLabTypeChange() {
   }
 }
 
+
+
+submittedFormData: any = "";
+
+  updateSubmittedFormData(formData: any): void {
+    this.submittedFormData = formData;
+    console.log('Updated submitted form data:', this.submittedFormData);
+  }
+
+
+  showOtherSection: boolean = false;
+  otherField: string = '';
+
+  toggleOtherSection() {
+    this.showOtherSection = !this.showOtherSection;
+  }
+
 }
+
+
+
 

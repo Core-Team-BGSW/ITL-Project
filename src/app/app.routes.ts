@@ -3,6 +3,7 @@ import { HomeComponent } from './admin/home/home.component';
 import { LabCommissionComponent } from './components/lab_commission/lab_commission.component';
 import { SelfCheckComponent } from './components/self-check/self-check.component';
 import { SoftwareTrackingComponent } from './components/software-tracking/software-tracking.component';
+import { ApplicationsComponent } from './components/applications/applications.component';
 
 export const routes: Routes = [
   {
@@ -11,7 +12,8 @@ export const routes: Routes = [
     children:[
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
-      {path:'software-track',component:SoftwareTrackingComponent}
+      {path:'software-track',component:SoftwareTrackingComponent},
+      {path:'applications', component: ApplicationsComponent}
     ]
   },
 
