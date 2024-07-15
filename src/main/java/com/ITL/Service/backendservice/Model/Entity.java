@@ -21,7 +21,7 @@ public class Entity {
     private String country;
     private String location;
     private String locationCode;
-    private String name;
+    private String entityName;
     @DBRef
     private List<LabData> labDataList = new ArrayList<>();
 }

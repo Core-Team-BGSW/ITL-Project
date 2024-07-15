@@ -57,7 +57,7 @@ public class CsvToDatabaseService {
         entity.setCountry(nextRecord[2]);
         entity.setLocation(nextRecord[3]);
         entity.setLocationCode(nextRecord[4]);
-        entity.setName(nextRecord[5]);
+        entity.setEntityName(nextRecord[5]);
         return entity;
     }
 
