@@ -17,13 +17,13 @@ import java.util.List;
 public class LabDataService {
     private final MongoTemplate mongoTemplate;
 
-    public List<LabData> getLabDataByEntityName(String name) {
+    public List<LabData> getLabDataByEntityName(String entityName) {
         LookupOperation lookupOperation = LookupOperation.newLookup()
                 .from("entity")
-                .localField("name")
-                .foreignField("name")
+                .localField("entityName")
+                .foreignField("entityName")
                 .as("entity");
-        Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("name").is(name)),lookupOperation);
+        Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("entityName").is(entityName)),lookupOperation);
         return mongoTemplate.aggregate(aggregation,"lab_data",LabData.class).getMappedResults();
     }
 }
