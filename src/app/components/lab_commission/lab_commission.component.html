@@ -355,7 +355,7 @@
             <mat-radio-group [(ngModel)]="ACLradio">
               <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
               <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
-              <p class = "cmdb-explain">Note: ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/pages/viewpage.action?pageId=137473958" target="_blank">Click Here</a></p>
+              <p class = "cmdb-explain" *ngIf="ACLradio === 'ACL-yes'"><strong>Note:</strong> ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/1.+ACL+Concept" target="_blank">Click Here</a></p>
             </mat-radio-group>
           </section>
         </mat-card-content>
@@ -371,7 +371,7 @@
         </div>
         <div class="dropdown-item">
           <label for="yellowPort"
-            >No. of Yellow Ports</label
+            >No. of Yellow Ports<span class="required"> *</span></label
           >
           <input type="text" id="fieldfill" placeholder="Yellow Ports" [(ngModel)]="yellowports" />
         </div>
@@ -408,13 +408,15 @@
             <label for="size"
               >Size (in ft)</label
             >
-            <input type="text" id="fieldfill" placeholder="L*W*H"  />
+            <input type="text" id="fieldfillsize" class ="labsizelwh" placeholder="Length"  />
+            <input type="text" id="fieldfillsize" class ="labsizelwh" placeholder="Width"  />
+            <input type="text" id="fieldfillsize" class ="labsizelwh" placeholder="Height"  />
             <!-- [(ngModel)]="sizeselect" -->
           </div>
 
           <div class="dropdown-item">
             <label for="count"
-              >Count</label
+              >Count of racks/tables</label
             >
             <input type="text" id="fieldfill" placeholder="Count"  />
             <!-- [(ngModel)]="countselect" -->
@@ -459,6 +461,44 @@
                 >Free Lab Space</label
               >
               <input type="text" id="fieldfill" placeholder="Free Lab Space"  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+          </div>
+
+          <p>AC</p>
+          <div class="dropdown-container">
+
+            <div class="dropdown-item">
+              <label for="ACinfo"
+                >PAC</label
+              >
+              <input type="text" id="fieldfill" placeholder="No. of PAC"  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+            <div class="dropdown-item">
+              <label for="ACinfo"
+                >Office AC</label
+              >
+              <input type="text" id="fieldfill" placeholder="No. of office AC"  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+          </div>
+
+          <p>Power Supply</p>
+          <div class="dropdown-container">
+
+            <div class="dropdown-item">
+              <label for="powersupplyinfo"
+                >Voltage(V)</label
+              >
+              <input type="text" id="fieldfill" placeholder="voltage"  />
+              <!-- [(ngModel)]="sizeselect" -->
+            </div>
+            <div class="dropdown-item">
+              <label for="powersupplyinfo"
+                >Plug point near the table</label
+              >
+              <input type="text" id="fieldfill" placeholder="Count"  />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
           </div>
