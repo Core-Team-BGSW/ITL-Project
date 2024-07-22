@@ -313,8 +313,13 @@ select {
   border-bottom: 1px solid #990404;
   border-radius: 4px;
   box-sizing: border-box;
-  border-color: rgb(1, 134, 251); /* Ensures padding is included in width */
+  border-color: rgb(72, 75, 79); /* Ensures padding is included in width */
   font-size: 14px;
+}
+
+select:hover{
+  border-color: #54b5ff;
+  border-width: 2px;
 }
 
 #entitySelect option {
@@ -379,7 +384,7 @@ p{
   box-sizing: border-box; /* Ensure padding and border are included in width */
   font-size: 14px; /* Adjust font size */
   color: #000000;
-  border-color: rgb(1, 134, 251);
+  border-color: rgb(73, 77, 80);
 }
 
 .dropdown-item input[type="text"]:focus {
@@ -402,6 +407,11 @@ p{
 .fieldfill{
   color: black;
 }
+
+.labsizelwh{
+margin-top: 3px;
+}
+
 .ACL-container{
 
   display: flex;
