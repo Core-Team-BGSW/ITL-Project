@@ -5,7 +5,7 @@
       alt=""
     />
     <h4 class="name">Admin</h4>
-    <p class="mail">gmail.com</p>
+    <p class="mail">NTID</p>
   </div>
   <div class="menu">
     <div class="menu-head">
@@ -34,7 +34,11 @@
           >
             Annual Self Check Audit
           </button>
-          <button mat-menu-item (click)="menuItemClicked('Item 2')">
+          <button
+            mat-menu-item
+            routerLink="/software-track"
+            (click)="menuItemClicked('Item 2')"
+          >
             Software Tracking
           </button>
           <button mat-menu-item (click)="menuItemClicked('Item 3')">
@@ -48,9 +52,13 @@
           </button>
         </div>
       </mat-menu>
-      <button mat-button class="menu-button">
+      <button mat-button routerLink="/labdecommission" class="menu-button">
         <mat-icon>dashboard</mat-icon>
         <span>Lab Decommission</span>
+      </button>
+      <button mat-button routerLink="/applications" class="menu-button">
+        <mat-icon>dashboard</mat-icon>
+        <span>Applications</span>
       </button>
     </div>
   </div>

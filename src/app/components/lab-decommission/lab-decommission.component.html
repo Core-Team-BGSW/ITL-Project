@@ -1,0 +1,55 @@
+<h2>Lab List</h2>
+<p>Select Lab for Decommission</p>
+
+<!-- Search Bar -->
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (keyup.enter)="onSearch()"
+    placeholder="Search labs..."
+  />
+  <button (click)="onSearch()">Search</button>
+</div>
+
+<ul class="lab-list">
+  <li *ngFor="let lab of labList" class="lab-item">
+    <div class="lab-detail">
+      <strong class="detail-label">Location:</strong>
+      <span class="detail-value">{{ lab.Location }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Building:</strong>
+      <span class="detail-value">{{ lab.Building }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Floor No:</strong>
+      <span class="detail-value">{{ lab["Floor No"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Lab No:</strong>
+      <span class="detail-value">{{ lab["Lab No"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Cost Center:</strong>
+      <span class="detail-value">{{ lab["Cost Center"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Lab Responsible Primary:</strong>
+      <span class="detail-value">{{ lab["Lab Responsible Primary"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Present DH:</strong>
+      <span class="detail-value">{{ lab["Present DH"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">KAM:</strong>
+      <span class="detail-value">{{ lab["KAM"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Shared/Individual:</strong>
+      <span class="detail-value">{{ lab["Shared/Individual"] }}</span>
+    </div>
+    <button (click)="removeLab(lab._id)" class="remove-button">Remove</button>
+  </li>
+</ul>

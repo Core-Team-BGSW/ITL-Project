@@ -21,92 +21,8 @@ body {
     text-align: left;
  }
 /*form styles*/
-#msform {
-    text-align: center;
-    position: relative;
-    margin-top: 30px;
-}
-
-#msform fieldset {
-    background: white;
-    border: 0 none;
-    border-radius: 0px;
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-    padding: 20px 30px;
-    box-sizing: border-box;
-    width: 80%;
-    margin: 0 10%;
-
-    /*stacking fieldsets above each other*/
-    position: relative;
-}
-
-/*Hide all except first fieldset*/
-#msform fieldset:not(:first-of-type) {
-    display: none;
-}
-
-/*inputs*/
-#msform input, #msform textarea {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    width: 800px;
-    box-sizing: border-box;
-    font-family: montserrat;
-    color: #2C3E50;
-    font-size: 13px;
-}
-.required{
-    color: red;
-}
 
 
-#msform input:focus, #msform textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #3e89e5;
-    outline-width: 0;
-    transition: All 0.5s ease-in;
-    -webkit-transition: All 0.5s ease-in;
-    -moz-transition: All 0.5s ease-in;
-    -o-transition: All 0.5s ease-in;
-}
-
-/*buttons*/
-#msform .action-button {
-    width: 100px;
-    background: #2babe6;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px;
-}
-
-#msform .action-button:hover, #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #2e72ee;
-}
-
-#msform .action-button-previous {
-    width: 100px;
-    background: #C5C5F1;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px;
-}
-
-#msform .action-button-previous:hover, #msform .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
-}
 
 /*headings*/
 .fs-title {
@@ -225,12 +141,39 @@ body {
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
-  width: 80%;
   margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 15px;
   margin-top: 10px;
+  width: 90%;
 }
+
+.note-choosemethod{
+  color:brown;
+  font-size: medium;
+  font-style: italic;
+}
+
+
+.heading-form p{
+  color: #000000;
+  align-items: center;
+  text-align: center;
+  font-size: 38px;
+  background-color: #71c4ff;
+
+  padding: 14px;
+}
+
+.heading-import p{
+  color: #000000;
+  align-items: center;
+  text-align: center;
+  font-size: 38px;
+  background-color: #71c4ff;
+  padding: 14px;
+}
+
 
 
 .excel-table {
@@ -255,9 +198,7 @@ body {
 
 
 
-.mat-tab-group {
-  margin-bottom: 48px;
-}
+
 
 
 
@@ -357,11 +298,291 @@ body {
 
 
   margin-top: 30px;
-  margin-bottom: 8px;
   justify-content: center;
   display: flex;
   background-color:#ee8802;
   color: rgb(252, 251, 249);
   padding: 10px;
   border-radius: 8px;
+}
+
+select {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  border-bottom: 1px solid #990404;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-color: rgb(72, 75, 79); /* Ensures padding is included in width */
+  font-size: 14px;
+}
+
+select:hover{
+  border-color: #54b5ff;
+  border-width: 2px;
+}
+
+#entitySelect option {
+  background-color: #fff; /* Default background color */
+  color: #333; /* Default text color */
+  gap: 20px;
+}
+
+
+
+.dropdown-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+}
+
+.dropdown-item {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+/* Optional: Style for labels and select elements */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight:500;
+
+}
+
+p{
+  font-size: 18px;
+  padding-top: 4px;
+  color: #2e72ee;
+}
+
+.sitedetails{
+  margin-top: 20px;
+
+}
+
+.required{
+  color: red;
+}
+
+
+.dropdown-item input[type="text"] {
+  /* Style for the input field */
+  width: 100%; /* Adjust width as needed */
+  padding: 8px; /* Adjust padding */
+  //border-bottom: 1px solid #000000; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+  font-size: 14px; /* Adjust font size */
+  color: #000000;
+  border-color: rgb(73, 77, 80);
+}
+
+.dropdown-item input[type="text"]:focus {
+  /* Style when input field is focused */
+  outline: none; /* Remove default outline */
+  border-color: #4d90fe; /* Example: Change border color on focus */
+  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5); /* Example: Add a box shadow */
+}
+
+.dropdown-item input:disabled {
+  background-color: #f2f2f2; /* Light gray background */
+  color: #999; /* Light gray text color */
+  cursor: not-allowed; /* Show a "not-allowed" cursor */
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 8px; /* Padding to maintain consistency */
+  /* You can add more styles as needed */
+}
+
+
+.fieldfill{
+  color: black;
+}
+
+.labsizelwh{
+margin-top: 3px;
+}
+
+.ACL-container{
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width:fit-content;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+
+}
+
+.choosemethod-container{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 8px 20px;
+  box-sizing: border-box;
+  width:90%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+
+}
+
+
+
+
+
+
+.cmdb-container{
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width:100%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+}
+
+.mat-mdc-card-content {
+  display: contents;
+  padding: 0px;
+  border-radius: 0%;
+}
+.mat-mdc-card{
+  display: block;
+  border: 0px;
+  border-radius: 0%;
+  box-shadow: none;
+  margin-top: 16px;
+}
+
+
+.form-button-container{
+  display: flex;
+  justify-content:center;
+
+}
+
+.form-button-sub{
+  background-color: #22bf49; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  border:#2e72ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-left: 20px
+}
+
+.form-button-res{
+  background-color: #0daeff; /* darkgreen background color */
+  color: #fff; /* White text color */
+  padding: 10px 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-left: 20px
+}
+
+.portdetails{
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+
+.choosemethod{
+  color: #2a0845;
+}
+
+.cmdb-sharedlabflex{
+  display: flex;
+  gap: 40px;
+
+}
+
+.cmdb-explain {
+  color: #000000;
+  font-size: small;
+}
+
+
+.other-heading {
+  color: #6a6868;
+  font-size: 28px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.arrow {
+  font-size: 28px; /* Adjust size as needed */
+  margin-left: 5px; /* Add spacing between "Other" and arrow */
+  transition: transform 0.3s ease; /* Smooth transition for rotation */
+}
+
+
+
+@keyframes rotate180 {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.expanded {
+  animation: rotate180 0.3s forwards; /* Play the animation forwards */
+}
+
+.collapsed {
+  animation: rotate180 0.3s reverse; /* Reverse the animation */
+}
+.other-section {
+  margin-top: 10px;
+  padding: 10px;
+  //border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc; /* Adjust color and thickness as needed */
+  margin-top: 12px;
+  margin-bottom: 12px;
+
 }

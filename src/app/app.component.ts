@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, InjectionToken } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
@@ -9,6 +9,17 @@ import { HomeComponent } from "./admin/home/home.component";
 import { LabCommissionComponent } from "./components/lab_commission/lab_commission.component";
 import {MatTabsModule} from '@angular/material/tabs';
 import { SelfCheckComponent } from './components/self-check/self-check.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
+import { ApplicationsComponent } from './components/applications/applications.component';
+
+import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
+import { DataService } from './data.service';
+import { HttpClient, HttpClientModule,  } from '@angular/common/http';
+
+
+
+
 
 @Component({
     selector: 'app-root',
@@ -16,10 +27,15 @@ import { SelfCheckComponent } from './components/self-check/self-check.component
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
-      SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent
+      SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
+      ApplicationsComponent, LabDecommissionComponent,HttpClientModule,
     ]
 })
 export class AppComponent {
   title = 'Angular_app';
 isOpen: any;
+
+
+
+
 }

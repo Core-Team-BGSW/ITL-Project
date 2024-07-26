@@ -100,3 +100,11 @@ mat-icon{
   transition: all 0.3s ease;
   padding: 5px 20px;
 }
+
+.mat-menu-item{
+  margin-left: 2px;
+}
+
+.mat-mdc-button {
+  justify-content: flex-start;
+}
