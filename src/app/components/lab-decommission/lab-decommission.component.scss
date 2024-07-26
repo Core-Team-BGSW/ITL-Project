@@ -1,0 +1,71 @@
+/* Style for the search container */
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+
+/* Container for error messages */
+.error {
+  color: red;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+/* List container */
+.lab-list {
+  list-style-type: none; /* Remove default bullets */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+/* List item styling */
+.lab-item {
+  border: 1px solid #ddd; /* Light border around items */
+  border-radius: 5px; /* Rounded corners */
+  padding: 15px; /* Padding inside each item */
+  margin-bottom: 15px; /* Space between items */
+  background-color: #f9f9f9; /* Light background color */
+}
+
+/* Styling for each detail */
+.lab-detail {
+  margin-bottom: 10px; /* Space between details */
+}
+
+/* Labels for details */
+.detail-label {
+  font-weight: bold;
+  color: #333; /* Darker text color for labels */
+}
+
+/* Values for details */
+.detail-value {
+  margin-left: 5px; /* Space between label and value */
+  color: #555; /* Slightly lighter color for values */
+}
+
+
+/* Styling for the Remove button */
+.remove-button {
+  background-color: #f44336; /* Red background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 8px 16px; /* Padding inside button */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 14px; /* Font size */
+  margin-top: 10px; /* Space above button */
+}
+
+/* Remove button hover effect */
+.remove-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}

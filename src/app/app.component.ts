@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, InjectionToken } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
@@ -12,7 +12,13 @@ import { SelfCheckComponent } from './components/self-check/self-check.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
-import { HttpClientModule } from '@angular/common/http';
+
+import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
+import { DataService } from './data.service';
+import { HttpClient, HttpClientModule,  } from '@angular/common/http';
+
+
+
 
 
 @Component({
@@ -22,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent,HttpClientModule
+      ApplicationsComponent, LabDecommissionComponent,HttpClientModule,
     ]
 })
 export class AppComponent {
