@@ -4,6 +4,7 @@ import { LabCommissionComponent } from './components/lab_commission/lab_commissi
 import { SelfCheckComponent } from './components/self-check/self-check.component';
 import { SoftwareTrackingComponent } from './components/software-tracking/software-tracking.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
+import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
 
 export const routes: Routes = [
   {
@@ -13,7 +14,8 @@ export const routes: Routes = [
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
       {path:'software-track',component:SoftwareTrackingComponent},
-      {path:'applications', component: ApplicationsComponent}
+      {path:'applications', component: ApplicationsComponent},
+      {path:'labdecommission', component: LabDecommissionComponent}
     ]
   },
 
