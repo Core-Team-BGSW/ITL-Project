@@ -34,6 +34,7 @@ mat-icon{
     color: gray;
   }
 }
+
 .menu-head{
   color: #466be0;
   text-transform: uppercase;
@@ -43,17 +44,34 @@ mat-icon{
   text-align: left;
 
 }
+.menu {
+  .menu-item {
+
+
+    .menu-button {
+      margin-bottom: 10px; /* Adjust spacing between buttons vertically */
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
 .menu-item{
   margin: 0 10px 0 10px ;
   text-align: left;
+  display: flex;
+    flex-direction: column; /* Stack items in a column */
+    align-items: flex-start; /* Align items to the left */
   .menu-button{
 
     width: 100%;
     position: relative;
     display: flex;
-    padding-left: 4px;
+    padding-left: 3px;
     margin-bottom: 10px;
-    text-align: left;
+    // text-align: left;
+    align-items: center;
+
   }
   .menu-button span{
     margin-left: 20px;

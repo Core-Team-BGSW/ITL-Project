@@ -8,13 +8,13 @@
   .content {
     display: flex; /* Establish flex container */
     justify-content: space-between; /* Distribute items along the main axis (horizontally in this case) */
-    background-color: rgb(150, 91, 246);
+    background-color: rgb(113, 121, 235);
     width: 100%;
     margin: 0; /* Reset default margin */
     padding: 20px; /* Add padding as needed */
     box-sizing: border-box;
     color: white;
-
+    height: 400px;
   }
 
   .row {
@@ -42,8 +42,13 @@
 
   }
   .mid-content{
-    padding-top: 20px;
+    padding-top: 150px;
   }
+  .mid-image{
+    padding-top: 80px;
+  }
+
+  .courgette-regular
   .sub-heading2{
     color: #7841ed;
     font-weight: bold;
@@ -79,7 +84,7 @@
 
 .image-container{
   text-align: right;
-  padding-top: 40px;
+  padding-top: 70px;
   padding-left: 50px;
   margin-left: 60px;
   position: relative;
@@ -93,7 +98,7 @@
 
 .image-container img {
   width: 100%; /* Ensures the image fills the circle */
-  height: auto;
+  height: 350px;
 }
 
 .text{
@@ -102,15 +107,44 @@
     font-family: "Courgette", cursive;
     font-weight: 400;
     font-style: normal;
+    padding-top: 50px;
   }
 
+}
+// variables for button colors
+$primary-color: #157df3;
+$hover-color: #5089cb;
+
+// Mixin for rounded button
+@mixin rounded-button($radius: 8px) {
+  border-radius: $radius;
+  padding: 10px 20px;
+  font-size: 16px;
+
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+// Style for the custom button
+.custom-button {
+  @include rounded-button;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
 }
 
 
 .container{
   padding: 10px;
   display: flex;
-  gap: 90px;
+  gap: 40px;
   justify-content: space-between;
 }
 
@@ -121,7 +155,4 @@
 
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
+
