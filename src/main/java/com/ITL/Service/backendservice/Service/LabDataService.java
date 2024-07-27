@@ -20,15 +20,12 @@ import java.util.Map;
 public class LabDataService {
     private final LabDataRepo labDataRepo;
     private final CustomLabDataRepoImpl customLabDataRepo;
-    public List<LabData> getLabDataByEntityNameAndFloor(String entityName,String floor) {
-        return labDataRepo.findLabDataByEntityNameAndFloor(entityName, floor);
+
+    public List<LabData> getLabDataByEntityNameWithLabDataFields(Map<String,Object> parameters) {
+        return customLabDataRepo.findLabDataByEntityNameWithLabDataFields(parameters);
     }
 
-    public List<LabData> getLabDataByEntityAndCountry(String entityName, String country) {
-        return labDataRepo.findLabDataByEntityNameAndCountry(entityName,country);
-    }
-
-    public List<LabData> getLabDataByEntityNameCountryDepNameFloor(Map<String,Object> parameters) {
-        return customLabDataRepo.findLabDataByEntityNameCountryDepNameFloor(parameters);
+    public List<LabData> getLabDataByEntityNameAndGB(String entityName, String gb) {
+        return labDataRepo.findLabDataByEntityNameAndGb(entityName,gb);
     }
 }

@@ -22,7 +22,7 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public List<LabData> findLabDataByEntityNameCountryDepNameFloor(Map<String,Object> parameters) {
+    public List<LabData> findLabDataByEntityNameWithLabDataFields(Map<String,Object> parameters) {
         if(parameters.isEmpty())
         {
             throw new ParametersNotValidException("Please provide the valid parameters! The parameters can't be blank");
@@ -46,8 +46,25 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
             operations.add(Aggregation.match(Criteria.where("entityDetails.locationCode").is(parameters.get("locationCode"))));
         }
 
+        if(parameters.containsKey(("gb")))
+        {
+            operations.add(Aggregation.match(Criteria.where("gb").is(parameters.get("gb"))));
+        }
+
         if (parameters.containsKey("country")) {
             operations.add(Aggregation.match(Criteria.where("entityDetails.country").is(parameters.get("country"))));
+        }
+
+        if(parameters.containsKey("gb"))
+        {
+            if(parameters.containsKey("depName"))
+            {
+                operations.add(Aggregation.match(Criteria.where("dep_name").is(parameters.get("depName"))));
+            }
+        }
+        if(parameters.containsKey("dh"))
+        {
+            operations.add(Aggregation.match(Criteria.where("dh").is(parameters.get("dh"))));
         }
 
         if(parameters.containsKey("locationCode"))
@@ -56,12 +73,12 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
             {
                 operations.add(Aggregation.match(Criteria.where("dep_name").is(parameters.get("depName"))));
             }
-            if(parameters.containsKey("floor")) {
-                operations.add(Aggregation.match(Criteria.where("floor").is(parameters.get("floor"))));
-            }
             if(parameters.containsKey("building"))
             {
                 operations.add(Aggregation.match(Criteria.where("building").is(parameters.get("building"))));
+            }
+            if(parameters.containsKey("building") && parameters.containsKey("floor")) {
+                operations.add(Aggregation.match(Criteria.where("floor").is(parameters.get("floor"))));
             }
             if(parameters.containsKey("building") && parameters.containsKey("labNo"))
             {
