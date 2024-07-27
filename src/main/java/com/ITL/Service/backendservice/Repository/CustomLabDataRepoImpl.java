@@ -50,12 +50,26 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
             operations.add(Aggregation.match(Criteria.where("entityDetails.country").is(parameters.get("country"))));
         }
 
-        if (parameters.containsKey("depName")) {
-            operations.add(Aggregation.match(Criteria.where("dep_name").is(parameters.get("depName"))));
+        if(parameters.containsKey("locationCode"))
+        {
+            if(parameters.containsKey("depName"))
+            {
+                operations.add(Aggregation.match(Criteria.where("dep_name").is(parameters.get("depName"))));
+            }
+            if(parameters.containsKey("floor")) {
+                operations.add(Aggregation.match(Criteria.where("floor").is(parameters.get("floor"))));
+            }
+            if(parameters.containsKey("building"))
+            {
+                operations.add(Aggregation.match(Criteria.where("building").is(parameters.get("building"))));
+            }
+            if(parameters.containsKey("building") && parameters.containsKey("labNo"))
+            {
+                operations.add(Aggregation.match(Criteria.where("labNo").is(parameters.get("labNo"))));
+            }
         }
-
-        if (parameters.containsKey("floor")) {
-            operations.add(Aggregation.match(Criteria.where("floor").is(parameters.get("floor"))));
+        else {
+            throw new ParametersNotValidException("Location Code is required to fetch lab Data");
         }
 
         //Logging the operations of aggregation
