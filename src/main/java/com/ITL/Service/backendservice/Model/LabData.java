@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class LabData {
     @Id
-    private String sr_no;
+    private String id;
     private String gb;
     private String local_itl;
     private String entityName;
