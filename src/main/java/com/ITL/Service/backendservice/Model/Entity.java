@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Entity {
     @Id
-    private String sr_no;
+    private String id;
     private String region;
     private String country;
     private String location;

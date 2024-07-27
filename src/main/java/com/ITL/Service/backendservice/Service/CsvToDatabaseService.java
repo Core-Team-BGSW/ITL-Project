@@ -52,7 +52,7 @@ public class CsvToDatabaseService {
 
     private static Entity getEntityData(String[] nextRecord) {
         Entity entity = new Entity();
-        entity.setSr_no(nextRecord[0]);
+        entity.setId(nextRecord[0]);
         entity.setRegion(nextRecord[1]);
         entity.setCountry(nextRecord[2]);
         entity.setLocation(nextRecord[3]);
@@ -63,7 +63,7 @@ public class CsvToDatabaseService {
 
     private static LabData getLabData(String[] nextRecord) {
         LabData labData = new LabData();
-        labData.setSr_no(nextRecord[0]);
+        labData.setId(nextRecord[0]);
         labData.setEntityName(nextRecord[5]);
         labData.setGb(nextRecord[6]);
         labData.setLocal_itl(nextRecord[7]);
