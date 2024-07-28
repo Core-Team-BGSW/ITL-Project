@@ -17,6 +17,7 @@ import java.util.List;
 public class Entity {
     @Id
     private String id;
+    private long seqId;
     private String region;
     private String country;
     private String location;

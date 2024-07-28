@@ -4,6 +4,7 @@ import com.ITL.Service.backendservice.Model.Entity;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
+import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -21,6 +20,7 @@ import java.util.Map;
 public class CsvToDatabaseService {
     private final LabDataRepo labDataRepo;
     private final EntityRepo entityRepo;
+    public final SequenceGeneratorService sequenceGeneratorService;
     public String saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
             Map<String, Entity> entityMap = new HashMap<>();
@@ -50,9 +50,10 @@ public class CsvToDatabaseService {
         }
     }
 
-    private static Entity getEntityData(String[] nextRecord) {
+    private Entity getEntityData(String[] nextRecord) {
         Entity entity = new Entity();
-        entity.setId(nextRecord[0]);
+//        entity.setId(nextRecord[0]);
+        entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
         entity.setRegion(nextRecord[1]);
         entity.setCountry(nextRecord[2]);
         entity.setLocation(nextRecord[3]);
@@ -61,9 +62,10 @@ public class CsvToDatabaseService {
         return entity;
     }
 
-    private static LabData getLabData(String[] nextRecord) {
+    private LabData getLabData(String[] nextRecord) {
         LabData labData = new LabData();
-        labData.setId(nextRecord[0]);
+        //labData.setId(nextRecord[0]);
+        labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
         labData.setEntityName(nextRecord[5]);
         labData.setGb(nextRecord[6]);
         labData.setLocal_itl(nextRecord[7]);
