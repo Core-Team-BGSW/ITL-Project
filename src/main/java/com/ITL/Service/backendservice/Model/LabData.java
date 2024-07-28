@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class LabData {
     @Id
     private String id;
+    private long seqId;
     private String gb;
     private String local_itl;
     private String entityName;

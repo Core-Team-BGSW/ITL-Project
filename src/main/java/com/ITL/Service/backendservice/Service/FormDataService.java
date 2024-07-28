@@ -5,6 +5,7 @@ import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Model.LabFormData;
 import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
+import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,18 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class FormDataService {
     private final EntityRepo entityRepo;
     private final LabDataRepo labDataRepo;
+    private final SequenceGeneratorService sequenceGeneratorService;
     @Transactional
     public void saveFormData(LabFormData labFormData) {
         LabData labData = getLabData(labFormData);
         labData = labDataRepo.save(labData);
-
         Entity entity = getEntityData(labFormData);
         entity.getLabDataList().add(labData);
         entityRepo.save(entity);
     }
-    public static LabData getLabData(LabFormData labFormData)
+    public LabData getLabData(LabFormData labFormData)
     {
         LabData labData = new LabData();
+        labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
         labData.setDh(labFormData.getDh());
         labData.setGb(labFormData.getGb());
         labData.setBuilding(labFormData.getBuilding());
@@ -50,9 +52,10 @@ public class FormDataService {
         labData.setPrimary_lab_cord(labData.getPrimary_lab_cord());
         return labData;
     }
-    public static Entity getEntityData(LabFormData labFormData)
+    public Entity getEntityData(LabFormData labFormData)
     {
         Entity entity = new Entity();
+        entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
         entity.setEntityName(labFormData.getEntityName());
         entity.setCountry(labFormData.getCountry());
         entity.setLocationCode(labFormData.getLocationCode());
