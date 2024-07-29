@@ -20,7 +20,14 @@ public class FormDataService {
     public void saveFormData(LabFormData labFormData) {
         LabData labData = getLabData(labFormData);
         labData = labDataRepo.save(labData);
-        Entity entity = getEntityData(labFormData);
+        Entity entity;
+        if(entityRepo.findByEntityName(labFormData.getEntityName()) instanceof org.w3c.dom.Entity)
+        {
+            entity = entityRepo.findByEntityName(labFormData.getEntityName());
+            entity.getLabDataList().add(labData);
+            return;
+        }
+        entity = getEntityData(labFormData);
         entity.getLabDataList().add(labData);
         entityRepo.save(entity);
     }
