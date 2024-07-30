@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -69,6 +71,10 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
 
         if(parameters.containsKey("locationCode"))
         {
+            if(parameters.containsKey("primary_lab_cord"))
+            {
+                operations.add(Aggregation.match(Criteria.where("primary_lab_cord").is(parameters.get("primaryLabCord"))));
+            }
             if(parameters.containsKey("depName"))
             {
                 operations.add(Aggregation.match(Criteria.where("dep_name").is(parameters.get("depName"))));
@@ -98,5 +104,19 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
         // Logging the results of the aggregation
         LOGGER.info("Aggregation Results: " + res.getMappedResults());
         return res.getMappedResults();
+    }
+
+    public ResponseEntity<String> deleteByPrimaryLabCoordinator(String primaryLabCord) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("primary_lab_cord").is(primaryLabCord));
+        Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("primary_lab_cord").is(primaryLabCord)));
+        AggregationResults<LabData> temp = mongoTemplate.aggregate(aggregation,LabData.class,LabData.class);
+        List<LabData> res = temp.getMappedResults();
+        if(res.isEmpty())
+        {
+            return ResponseEntity.ok("The primary lab coordinator is invalid please enter valid lab coordinator Id");
+        }
+        mongoTemplate.remove(query,LabData.class);
+        return ResponseEntity.ok("The lab data with given Primary Lab Coordinator is deleted successfully");
     }
 }

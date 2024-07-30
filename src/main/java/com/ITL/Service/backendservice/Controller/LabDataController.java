@@ -3,6 +3,7 @@ package com.ITL.Service.backendservice.Controller;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.LabDataService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -25,6 +26,12 @@ public class LabDataController {
     public List<LabData> getLabDataByEntityNameWithLabDataFields(@RequestParam Map<String, String> allParams){
         Map<String, Object> parameters = new HashMap<>(allParams);
         return labDataService.getLabDataByEntityNameWithLabDataFields(parameters);
+    }
+
+    @DeleteMapping("/delete/labData")
+    public ResponseEntity<String> deleteLabDataByPrimaryLabCoordinator(@RequestParam String primary_lab_cord)
+    {
+        return labDataService.deleteLabDataByPrimaryLabCoordinator(primary_lab_cord);
     }
 
 }
