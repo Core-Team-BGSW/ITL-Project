@@ -21,6 +21,7 @@ import { HttpClient, HttpClientModule,  } from '@angular/common/http';
 
 
 
+
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -28,7 +29,7 @@ import { HttpClient, HttpClientModule,  } from '@angular/common/http';
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent, LabDecommissionComponent,HttpClientModule,
+      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule
     ]
 })
 export class AppComponent {

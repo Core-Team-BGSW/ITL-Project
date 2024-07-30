@@ -5,6 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const ExcelJS = require('exceljs');
+//const upload = multer({ storage: multer.memoryStorage() });
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -120,3 +123,105 @@ const itemSchema = new mongoose.Schema({
 const Item = mongoose.model('Item', itemSchema);
 
 module.exports = Item;
+
+
+// Configure Multer for file upload
+const upload = multer({ storage: multer.memoryStorage() });
+
+// app.post('/upload-excel', upload.single('file'), async (req, res) => {
+//   if (!req.file) {
+//     return res.status(400).json({ error: 'No file uploaded' });
+//   }
+
+//   try {
+//     const workbook = new ExcelJS.Workbook();
+//     await workbook.xlsx.load(req.file.buffer);
+//     const worksheet = workbook.getWorksheet(1);
+
+//     if (!worksheet) {
+//       return res.status(400).json({ error: 'Worksheet not found' });
+//     }
+
+//     // Get the first row to use as headers
+//     const headerRow = worksheet.getRow(1);
+
+//     // Ensure headerRow.values is an array and has elements
+//     const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
+
+//     if (headers.length === 0) {
+//       return res.status(400).json({ error: 'No headers found' });
+//     }
+
+//     const items = [];
+
+//     worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
+//       const rowData = {};
+//       headers.forEach((header, index) => {
+//         if (header) {
+//           rowData[header] = row.values[index + 1] || null;
+//         }
+//       });
+//       items.push(rowData);
+//     });
+
+//     // Insert all items into the database
+//     await Item.insertMany(items);
+//     res.status(201).json();
+//   } catch (error) {
+//     console.error('Error processing file:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
+
+app.post('/upload-excel', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  try {
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(req.file.buffer);
+    const worksheet = workbook.getWorksheet(1);
+
+    if (!worksheet) {
+      return res.status(400).json({ error: 'Worksheet not found' });
+    }
+
+    // Get the first row to use as headers
+    const headerRow = worksheet.getRow(1);
+
+    // Ensure headerRow.values is an array and has elements
+    const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
+
+    if (headers.length === 0) {
+      return res.status(400).json({ error: 'No headers found' });
+    }
+
+    const items = [];
+
+    worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
+      const rowData = {};
+      headers.forEach((header, index) => {
+        if (header) {
+          rowData[header] = row.values[index + 1] || null;  // `index + 1` because `row.values` is 1-based index
+        }
+      });
+
+      // Skip if all values are header names
+      if (Object.values(rowData).every(value => headers.includes(value))) {
+        return;  // Skip this row
+      }
+
+      items.push(rowData);
+    });
+
+    console.log('Data to insert:', items); // Log data to check before insertion
+
+    // Insert all items into the database
+    await Item.insertMany(items);
+    res.status(201).json({ message: 'Data successfully uploaded and saved to MongoDB' });
+  } catch (error) {
+    console.error('Error processing file:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});

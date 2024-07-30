@@ -9,7 +9,7 @@ import { AboutComponent } from '../about/about.component';
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports:[CommonModule, MatButtonModule, MatCardModule, MatToolbar,RouterLink, AboutComponent],
+  imports:[CommonModule, MatButtonModule, MatCardModule, MatToolbar,RouterLink, AboutComponent,],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 

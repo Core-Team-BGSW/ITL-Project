@@ -19,7 +19,8 @@ export const routes: Routes = [
     path:'',
     component:HomeComponent,
     children:[
-      {path:'dashboard', component:DashboardComponent},
+
+      {path:'', component:DashboardComponent},
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
 
