@@ -34,6 +34,7 @@
         <div class="buttons2">
           <button
             class="previewbutton"
+            title ="Please choose file for upload"
             [disabled]="!fileSelected"
             (click)="onPreview()"
           >
@@ -327,8 +328,8 @@
           <p class="ACL-p">Is lab going to procure new equipment for Engineering/Red Zone?<span class="required"> *</span></p>
           <section class="cmdb-container">
             <mat-radio-group [(ngModel)]="cmdbradio">
-              <mat-radio-button class="cmdb-margin" value="cmdb-yes">Yes</mat-radio-button>
-              <mat-radio-button class="cmdb-margin" value="cmdb-no">No</mat-radio-button>
+              <mat-radio-button class="cmdb-margin" value="Yes">Yes</mat-radio-button>
+              <mat-radio-button class="cmdb-margin" value="No">No</mat-radio-button>
               <p class = "cmdb-explain">If yes, as per MD-07151, all the Engineering/Red Zone devices should be updated in <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/CMDB" target="_blank">SMT-CMDB</a></p>
             </mat-radio-group>
           </section>
@@ -339,8 +340,8 @@
           <p class="ACL-p">Shared Lab<span class="required"> *</span></p>
           <section class="cmdb-container">
             <mat-radio-group [(ngModel)]="sharedlabradio">
-              <mat-radio-button class="sharedlab-margin" value="sharedlab-yes">Yes</mat-radio-button>
-              <mat-radio-button class="sharedlab-margin" value="sharedlab-no">No</mat-radio-button>
+              <mat-radio-button class="sharedlab-margin" value="Yes">Yes</mat-radio-button>
+              <mat-radio-button class="sharedlab-margin" value="No">No</mat-radio-button>
             </mat-radio-group>
           </section>
         </mat-card-content>
@@ -351,14 +352,14 @@
           <p class="ACL-p">ACL Required<span class="required"> *</span></p>
           <section class="ACL-container">
             <mat-radio-group [(ngModel)]="ACLradio">
-              <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
-              <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
-              <p class = "cmdb-explain" *ngIf="ACLradio === 'ACL-yes'"><strong>Note:</strong> ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/1.+ACL+Concept" target="_blank">Click Here</a></p>
+              <mat-radio-button class="ACL-margin" value="Yes">Yes</mat-radio-button>
+              <mat-radio-button class="ACL-margin" value="No">No</mat-radio-button>
+              <p class = "cmdb-explain" *ngIf="ACLradio === 'Yes'"><strong>Note:</strong> ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/1.+ACL+Concept" target="_blank">Click Here</a></p>
             </mat-radio-group>
           </section>
         </mat-card-content>
       </mat-card>
-      <div class="portdetails" *ngIf="ACLradio === 'ACL-yes'">
+      <div class="portdetails" *ngIf="ACLradio === 'Yes'">
         <p>Port Details</p>
         <div class="dropdown-container">
         <div class="dropdown-item">

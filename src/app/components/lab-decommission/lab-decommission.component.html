@@ -15,41 +15,80 @@
 <ul class="lab-list">
   <li *ngFor="let lab of labList" class="lab-item">
     <div class="lab-detail">
+      <strong class="detail-label">Region:</strong>
+      <span class="detail-value">{{ lab.Region }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Country:</strong>
+      <span class="detail-value">{{ lab.Country }}</span>
+    </div>
+    <div class="lab-detail">
       <strong class="detail-label">Location:</strong>
       <span class="detail-value">{{ lab.Location }}</span>
     </div>
     <div class="lab-detail">
-      <strong class="detail-label">Building:</strong>
-      <span class="detail-value">{{ lab.Building }}</span>
+      <strong class="detail-label">Location-Code:</strong>
+      <span class="detail-value">{{ lab["Location-Code"] }}</span>
     </div>
     <div class="lab-detail">
+      <strong class="detail-label">Entity:</strong>
+      <span class="detail-value">{{ lab.Entity }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">GB:</strong>
+      <span class="detail-value">{{ lab.GB }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Local-ITL:</strong>
+      <span class="detail-value">{{ lab["Local-ITL"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Local-ITL Proxy:</strong>
+      <span class="detail-value">{{ lab["Local-ITL Proxy"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Department Head (DH):</strong>
+      <span class="detail-value">{{ lab["Department Head (DH)"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Key Account Manager (KAM):</strong>
+      <span class="detail-value">{{ lab["Key Account Manager (KAM)"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Department:</strong>
+      <span class="detail-value">{{ lab["Department"] }}</span>
+    </div>
+
+    <div class="lab-detail">
       <strong class="detail-label">Floor No:</strong>
-      <span class="detail-value">{{ lab["Floor No"] }}</span>
+      <span class="detail-value">{{ lab["Floor"] }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">Lab No:</strong>
       <span class="detail-value">{{ lab["Lab No"] }}</span>
     </div>
     <div class="lab-detail">
+      <strong class="detail-label">Primary Lab Coordinator:</strong>
+      <span class="detail-value">{{ lab["Primary Lab Coordinator"] }}</span>
+    </div>
+    <div class="lab-detail">
+      <strong class="detail-label">Secondary Lab Coordinator:</strong>
+      <span class="detail-value">{{ lab["Secondary Lab Coordinator"] }}</span>
+    </div>
+    <div class="lab-detail">
       <strong class="detail-label">Cost Center:</strong>
       <span class="detail-value">{{ lab["Cost Center"] }}</span>
     </div>
     <div class="lab-detail">
-      <strong class="detail-label">Lab Responsible Primary:</strong>
-      <span class="detail-value">{{ lab["Lab Responsible Primary"] }}</span>
+      <strong class="detail-label">Kind of Lab:</strong>
+      <span class="detail-value">{{ lab["Kind of Lab"] }}</span>
     </div>
     <div class="lab-detail">
-      <strong class="detail-label">Present DH:</strong>
-      <span class="detail-value">{{ lab["Present DH"] }}</span>
+      <strong class="detail-label">Shared Lab:</strong>
+      <span class="detail-value">{{ lab["Shared lab"] }}</span>
     </div>
-    <div class="lab-detail">
-      <strong class="detail-label">KAM:</strong>
-      <span class="detail-value">{{ lab["KAM"] }}</span>
-    </div>
-    <div class="lab-detail">
-      <strong class="detail-label">Shared/Individual:</strong>
-      <span class="detail-value">{{ lab["Shared/Individual"] }}</span>
-    </div>
-    <button (click)="removeLab(lab._id)" class="remove-button">Remove</button>
+    <button (click)="removeLab(lab._id)" class="remove-button">
+      Decommission
+    </button>
   </li>
 </ul>

@@ -1,6 +1,3 @@
-KKKKKKKKKKKKKK
-HElloooooo
-ABcccccc
 hahaha     nanakasuags
 hahaha     nanakasuags
 
@@ -9,3 +6,13 @@ trial error
 
 this is to add new data
 
+ {% comment %} <strong>Location:</strong> {{ lab.Location }} |
+    <strong>Building:</strong> {{ lab.Building }} | <strong>Floor No:</strong>
+    {{ lab["Floor No"] }} <strong>Lab No:</strong> {{ lab["Lab No"] }}
+    <strong>Cost Center:</strong> {{ lab["Cost Center"] }} <br />
+    <strong>Lab Responsible Primary:</strong>
+    {{ lab["Lab Responsible Primary"] }} <br />
+    <strong>Present DH:</strong> {{ lab["Present DH"] }} <br />
+    <strong>KAM:</strong> {{ lab["KAM"] }} <br />
+    <strong>Shared/Individual:</strong> {{ lab["Shared/Individual"] }} <br />
+    {% endcomment %}

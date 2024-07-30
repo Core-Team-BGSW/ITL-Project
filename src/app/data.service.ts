@@ -26,6 +26,9 @@ export class DataService {
       catchError(this.handleError)
     );
   }
+  submitForm(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, data);
+  }
 
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error.message);

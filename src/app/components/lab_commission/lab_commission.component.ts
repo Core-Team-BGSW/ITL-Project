@@ -20,6 +20,7 @@ import { DialogModule } from "@angular/cdk/dialog";
 import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
 import { v4 as uuidv4 } from 'uuid';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ChangeDetectorRef } from "@angular/core";
 
 
 
@@ -116,6 +117,8 @@ export class LabCommissionComponent {
     }
   }
 
+
+
   private parseExcel(arrayBuffer: any) {
     const workbook = new ExcelJS.Workbook();
     workbook.xlsx.load(arrayBuffer)
@@ -128,6 +131,9 @@ export class LabCommissionComponent {
           this.excelData.push(row.values);
         });
         this.previewVisible = true;
+
+        // Manually trigger change detection
+      this.changeDetectorRef.detectChanges();
 
         // Optionally, you can navigate to a new route or display a preview component here
         // For simplicity, we will log the data to console
@@ -404,7 +410,7 @@ nextUniqueId: number = 1; // Initial unique ID counter
 uniqueInstanceId: string = ''
 
 
-constructor(private dialog: MatDialog,) {}
+constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef) {}
 
 onPreviewform(): void {
   const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
@@ -480,6 +486,8 @@ submittedFormData: any = "";
   }
 
 }
+
+
 
 
 
