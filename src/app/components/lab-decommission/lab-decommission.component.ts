@@ -61,4 +61,20 @@ export class LabDecommissionComponent  implements OnInit  {
     );
   }
 
+  expandedLabId: string | null = null; // To track which lab is expanded
+
+  // Toggle the visibility of the details section
+  toggleDetails(labId: string): void {
+    if (this.expandedLabId === labId) {
+      this.expandedLabId = null; // Collapse if already expanded
+    } else {
+      this.expandedLabId = labId; // Expand the selected lab
+    }
+  }
+
+  // Check if a lab is expanded
+  isExpanded(labId: string): boolean {
+    return this.expandedLabId === labId;
+  }
+
 }
