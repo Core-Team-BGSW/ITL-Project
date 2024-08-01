@@ -1,19 +1,16 @@
 <h2>Lab List</h2>
-<p>Select Lab for Decommission</p>
+<div class="subheading">
+  <p>*Select Lab for Decommission</p>
+</div>
 
 <!-- Search Bar -->
 <div class="search-bar">
-  <input
-    type="text"
-    [(ngModel)]="searchQuery"
-    (keyup.enter)="onSearch()"
-    placeholder="Search labs..."
-  />
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Search labs..." />
   <button (click)="onSearch()">Search</button>
 </div>
 
 <ul class="lab-list">
-  <li *ngFor="let lab of labList" class="lab-item">
+  <li *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
     <!-- Collapsible Section Header -->
     <div class="collapsible-header">
       <span (click)="toggleDetails(lab._id)">
@@ -21,11 +18,8 @@
           >{{ lab.Entity }} - {{ lab.GB }} - {{ lab.Department }} -
           {{ lab["Lab No"] }}</strong
         >
-        <span
-          class="arrow"
-          [ngClass]="{ expanded: isExpanded(lab._id) }"
-        ></span>
       </span>
+
       <button
         *ngIf="!isExpanded(lab._id)"
         (click)="removeLab(lab._id)"
@@ -107,8 +101,38 @@
       </div>
       <div class="lab-detail">
         <strong class="detail-label">Shared Lab:</strong>
-        <span class="detail-value">{{ lab["Shared lab"] }}</span>
+        <span class="detail-value">{{ lab["Shared Lab"] }}</span>
       </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Purpose of Lab in Brief:</strong>
+        <span class="detail-value">{{ lab["Purpose of Lab in Brief"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Description:</strong>
+        <span class="detail-value">{{ lab["Description"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">No. of Green Ports:</strong>
+        <span class="detail-value">{{ lab["No of Green Ports"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">No. of Red Ports:</strong>
+        <span class="detail-value">{{ lab["No of Red Ports"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label"
+          >Is lab going to procure new equipment for Engineering/Red
+          Zone?:</strong
+        >
+        <span class="detail-value">{{
+          lab["Is lab going to procure new equipment for Engineering/Red Zone?"]
+        }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">ACL Required:</strong>
+        <span class="detail-value">{{ lab["ACL Required"] }}</span>
+      </div>
+
       <button (click)="removeLab(lab._id)" class="remove-button">
         Decommission
       </button>

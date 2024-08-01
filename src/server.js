@@ -28,12 +28,7 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-// Define a simple model
-// const Item = mongoose.model('Item', new mongoose.Schema({
-//   Location: String,
-//   Sl: { no: Number },
 
-// }));
 
 // Define routes
 app.get('/Lablist', async (req, res) => {
@@ -56,21 +51,6 @@ app.delete('/Lablist/:id', async (req, res) => {
   }
 });
 
-// app.post('/Lablist', async (req, res) => {
-//   const newItem = new Item(req.body);
-//   await newItem.save();
-//   res.json(newItem);
-// });
-
-// app.post('/Lablist', async (req, res) => {
-//   try {
-//     const lab = new Lab(req.body);
-//     await lab.save();
-//     res.status(201).send(lab);
-//   } catch (error) {
-//     res.status(400).send(error);
-//   }
-// });
 
 app.post('/Lablist', async (req, res) => {
   try {
@@ -103,7 +83,7 @@ const itemSchema = new mongoose.Schema({
   Department: String,
   Building: String,
   Floor: String,
-  "Lab No.": String,
+  "Lab No": String,
   "Primary Lab Coordinator": String,
   "Secondary Lab Coordinator": String,
   "Cost Center": String,
@@ -111,9 +91,9 @@ const itemSchema = new mongoose.Schema({
   "Purpose of Lab in Brief": String,
   Description : String,
   // ACL: String,
-  "No. of Green Ports": String,
-  "No. of Yellow Ports": String,
-  "No. of Red Ports": String,
+  "No of Green Ports": String,
+  "No of Yellow Ports": String,
+  "No of Red Ports": String,
   "Is lab going to procure new equipment for Engineering/Red Zone?": String,
   "Shared Lab": String,
   "ACL Required": String,
@@ -128,50 +108,6 @@ module.exports = Item;
 // Configure Multer for file upload
 const upload = multer({ storage: multer.memoryStorage() });
 
-// app.post('/upload-excel', upload.single('file'), async (req, res) => {
-//   if (!req.file) {
-//     return res.status(400).json({ error: 'No file uploaded' });
-//   }
-
-//   try {
-//     const workbook = new ExcelJS.Workbook();
-//     await workbook.xlsx.load(req.file.buffer);
-//     const worksheet = workbook.getWorksheet(1);
-
-//     if (!worksheet) {
-//       return res.status(400).json({ error: 'Worksheet not found' });
-//     }
-
-//     // Get the first row to use as headers
-//     const headerRow = worksheet.getRow(1);
-
-//     // Ensure headerRow.values is an array and has elements
-//     const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
-
-//     if (headers.length === 0) {
-//       return res.status(400).json({ error: 'No headers found' });
-//     }
-
-//     const items = [];
-
-//     worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
-//       const rowData = {};
-//       headers.forEach((header, index) => {
-//         if (header) {
-//           rowData[header] = row.values[index + 1] || null;
-//         }
-//       });
-//       items.push(rowData);
-//     });
-
-//     // Insert all items into the database
-//     await Item.insertMany(items);
-//     res.status(201).json();
-//   } catch (error) {
-//     console.error('Error processing file:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
 
 app.post('/upload-excel', upload.single('file'), async (req, res) => {
   if (!req.file) {

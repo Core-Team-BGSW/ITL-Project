@@ -145,7 +145,7 @@ body {
   margin-bottom: 20px;
   margin-left: 15px;
   margin-top: 10px;
-  width: 90%;
+  width: 95%;
 }
 
 .note-choosemethod{
@@ -165,6 +165,12 @@ body {
   padding: 14px;
 }
 
+.heading-form ul li{
+  background-color: #7fd4ff;
+  font-size: 40px;
+  padding: 16px;
+  text-align: center;
+}
 .heading-import p{
   color: #000000;
   align-items: center;
@@ -174,7 +180,11 @@ body {
   padding: 14px;
 }
 
-
+.table-container {
+  max-width: 100%; /* Ensures the container does not exceed the viewport width */
+  overflow-x: auto; /* Adds horizontal scrolling if needed */
+  margin-top: 20px; /* Adjust spacing if necessary */
+}
 
 .excel-table {
   border-collapse: collapse;
@@ -189,7 +199,7 @@ body {
 }
 
 .excel-table th {
-  background-color: #4CAF50; /* Optional: Header background color */
+  background-color: #219557; /* Optional: Header background color */
   color: white;
   text-decoration: none;
   font-weight: lighter;
@@ -211,14 +221,14 @@ body {
 
 
 .importbutton input[type='file'] {
-  position: absolute;
+  // position: absolute;
   font-size: 16px;
   right:auto;
   top: auto;
 }
 
 .subbutton {
-  background-color: #005816; /* darkgreen background color */
+  background-color: #37A264; /* darkgreen background color */
   color: #fff; /* White text color */
   padding: 10px 25px;
   border:#2e72ee;
@@ -234,17 +244,16 @@ body {
 
 
 .subbutton:hover {
-  background-color: #00b33c; /* green on hover */
+  background-color: #219557; /* green on hover */
 }
 
 
 
 .previewbutton{
-  background-color: #50cb09; /* darkgreen background color */
+  background-color: #C535BC; /* darkgreen background color */
   color: #fff; /* White text color */
   padding: 10px 25px;
   border:#2e72ee;
-
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -254,7 +263,7 @@ body {
 
 }
 .previewbutton:hover{
-  background-color: yellowgreen;
+  background-color: #9E2896;
 }
 
 .previewbutton:disabled {
@@ -266,7 +275,7 @@ body {
 
 
 .templatebutton{
-  background-color: #3eaeca; /* darkgreen background color */
+  background-color: #56B0FF; /* darkgreen background color */
   color: #fff; /* White text color */
   padding: 10px 25px;
   border:#2e72ee;
@@ -300,10 +309,11 @@ body {
   margin-top: 30px;
   justify-content: center;
   display: flex;
-  background-color:#ee8802;
+  background-color:#18837E;
   color: rgb(252, 251, 249);
   padding: 10px;
   border-radius: 8px;
+  color: white;
 }
 
 select {

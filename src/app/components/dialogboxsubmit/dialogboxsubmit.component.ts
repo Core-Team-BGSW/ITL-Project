@@ -115,7 +115,7 @@ applications: any[] = []; // Array to hold submitted applications
       Department: this.Dept,
       Building: this.Building,
       Floor: this.Floor,
-      "Lab No.": this.labno,
+      "Lab No": this.labno,
       "Primary Lab Coordinator": this.primarylabco,
       "Secondary Lab Coordinator": this.secondarylabco,
       "Cost Center": this.CC,
