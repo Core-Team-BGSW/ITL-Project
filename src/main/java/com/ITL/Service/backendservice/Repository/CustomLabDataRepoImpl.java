@@ -4,6 +4,7 @@ import com.ITL.Service.backendservice.Exception.ParametersNotValidException;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.LabDataService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
@@ -19,7 +20,8 @@ import java.util.logging.Logger;
 @Repository
 @RequiredArgsConstructor
 public class CustomLabDataRepoImpl implements CustomLabDataRepo{
-    private final MongoTemplate mongoTemplate;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Override
     public List<LabData> findLabDataByEntityNameWithLabDataFields(Map<String,Object> parameters) {

@@ -25,4 +25,68 @@ public class Entity {
     private String entityName;
     @DBRef
     private List<LabData> labDataList = new ArrayList<>();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public long getSeqId() {
+        return seqId;
+    }
+
+    public void setSeqId(long seqId) {
+        this.seqId = seqId;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLocationCode() {
+        return locationCode;
+    }
+
+    public void setLocationCode(String locationCode) {
+        this.locationCode = locationCode;
+    }
+
+    public String getEntityName() {
+        return entityName;
+    }
+
+    public void setEntityName(String entityName) {
+        this.entityName = entityName;
+    }
+
+    public List<LabData> getLabDataList() {
+        return labDataList;
+    }
+
+    public void setLabDataList(List<LabData> labDataList) {
+        this.labDataList = labDataList;
+    }
 }

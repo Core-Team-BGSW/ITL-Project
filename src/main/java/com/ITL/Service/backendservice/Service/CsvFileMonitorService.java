@@ -2,6 +2,7 @@ package com.ITL.Service.backendservice.Service;
 
 import com.ITL.Service.backendservice.Controller.CsvToDatabaseController;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.task.TaskExecutor;
@@ -15,8 +16,11 @@ import java.nio.file.*;
 @RequiredArgsConstructor
 public class CsvFileMonitorService {
     @Qualifier("applicationTaskExecutor")
-    private final TaskExecutor taskExecutor;
-    private final CsvToDatabaseController csvToDatabaseController;
+    @Autowired
+    private TaskExecutor taskExecutor;
+    @Autowired
+    private CsvToDatabaseController csvToDatabaseController;
+
     @Value("${csv.file.directory}")
     private String csvFileDirectory;
 

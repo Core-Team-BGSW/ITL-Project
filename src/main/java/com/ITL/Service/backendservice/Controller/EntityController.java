@@ -3,6 +3,7 @@ package com.ITL.Service.backendservice.Controller;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.EntityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,13 @@ import java.util.List;
 @RequestMapping("/boschLabsByEntity")
 @RestController
 public class EntityController {
+    @Autowired
     private final EntityService entityService;
+
+    public EntityController() {
+        entityService = null;
+    }
+
     @GetMapping("/labData")
     public List<LabData> getLabDataByEntityNameAndCountry(@RequestParam String entityName, @RequestParam String country)
     {

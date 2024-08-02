@@ -2,6 +2,7 @@ package com.ITL.Service.backendservice.Controller;
 
 import com.ITL.Service.backendservice.Service.ExcelToCsvService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/upload")
 @RequiredArgsConstructor
 public class ExcelToCsvController {
-    private final ExcelToCsvService excelToCsvService;
+    @Autowired
+    private ExcelToCsvService excelToCsvService;
+
+
 
     @PostMapping("/convert-excel-to-csv")
     public ResponseEntity<String> convert(@RequestParam("file") MultipartFile file) {

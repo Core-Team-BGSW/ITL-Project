@@ -3,6 +3,7 @@ package com.ITL.Service.backendservice.Controller;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.LabDataService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -13,7 +14,10 @@ import java.util.Map;
 @RequestMapping("/boschLabs")
 @RestController
 public class LabDataController {
-    private final LabDataService labDataService;
+    @Autowired
+    private LabDataService labDataService;
+
+
 
     @GetMapping("/labData/{gb}")
     public List<LabData> getLabDataByEntityNameAndGB(@RequestParam String entityName,@PathVariable("gb") String gb)

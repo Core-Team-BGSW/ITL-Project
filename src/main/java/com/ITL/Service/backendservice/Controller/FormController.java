@@ -3,6 +3,7 @@ package com.ITL.Service.backendservice.Controller;
 import com.ITL.Service.backendservice.Model.LabFormData;
 import com.ITL.Service.backendservice.Service.FormDataService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("boschLabs/form")
 @RequiredArgsConstructor
 public class FormController {
-   private final FormDataService formDataService;
+    @Autowired
+   private FormDataService formDataService;
+
 
     @PostMapping("/submit")
     public ResponseEntity<String> submitForm(@RequestBody LabFormData labFormData)

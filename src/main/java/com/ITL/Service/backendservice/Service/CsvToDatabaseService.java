@@ -8,6 +8,7 @@ import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
@@ -18,9 +19,12 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class CsvToDatabaseService {
-    private final LabDataRepo labDataRepo;
-    private final EntityRepo entityRepo;
-    public final SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    private LabDataRepo labDataRepo;
+    @Autowired
+    private EntityRepo entityRepo;
+    @Autowired
+    public SequenceGeneratorService sequenceGeneratorService;
     public String saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
             Map<String, Entity> entityMap = new HashMap<>();

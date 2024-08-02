@@ -7,15 +7,19 @@ import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
 import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class FormDataService {
-    private final EntityRepo entityRepo;
-    private final LabDataRepo labDataRepo;
-    private final SequenceGeneratorService sequenceGeneratorService;
+    @Autowired
+    private EntityRepo entityRepo;
+    @Autowired
+    private LabDataRepo labDataRepo;
+
+    private SequenceGeneratorService sequenceGeneratorService;
     @Transactional
     public void saveFormData(LabFormData labFormData) {
         LabData labData = getLabData(labFormData);
