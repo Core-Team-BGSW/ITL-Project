@@ -13,11 +13,13 @@
   <li *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
     <!-- Collapsible Section Header -->
     <div class="collapsible-header">
-      <span (click)="toggleDetails(lab._id)">
-        <strong
-          >{{ lab.Entity }} - {{ lab.GB }} - {{ lab.Department }} -
-          {{ lab["Lab No"] }}</strong
-        >
+      <span class="lab-header" (click)="toggleDetails(lab._id)">
+        <ul>
+          <li class="lab-number">{{ lab["Lab No"] }}</li>
+          <li class="lab-subheader">
+            {{ lab.Entity }} / {{ lab.GB }} / {{ lab.Department }}
+          </li>
+        </ul>
       </span>
 
       <button

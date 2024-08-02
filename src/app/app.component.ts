@@ -16,6 +16,8 @@ import { ApplicationsComponent } from './components/applications/applications.co
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
 import { DataService } from './data.service';
 import { HttpClient, HttpClientModule,  } from '@angular/common/http';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
@@ -29,7 +31,7 @@ import { HttpClient, HttpClientModule,  } from '@angular/common/http';
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule
+      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule
     ]
 })
 export class AppComponent {

@@ -11,6 +11,8 @@
 
 
 
+
+
 /* Container for the search bar */
 .search-bar {
   display: flex;
@@ -70,15 +72,58 @@
 /* List item styling */
 .lab-item {
   border: 1px solid #ddd; /* Light border around items */
-  border-radius: 5px; /* Rounded corners */
-  padding: 15px; /* Padding inside each item */
-  margin-bottom: 15px; /* Space between items */
+  border-radius: 12px; /* Rounded corners */
+  padding: 6px; /* Padding inside each item */
+  margin-bottom: 12px; /* Space between items */
   background-color: #f9f9f9; /* Light background color */
+  transition: background-color 0.3s;
+  box-shadow: 0 0 8px 1px #A4ABB3;
+  margin-right: 8px;
+
+}
+
+
+
+.lab-item:hover{
+
+  background: -webkit-linear-gradient(left, #FFD9D9, #FFEFD1);
+
 }
 
 /* Styling for each detail */
 .lab-detail {
   margin-bottom: 10px; /* Space between details */
+}
+/* Header row styling */
+.lab-header {
+  display: flex; /* Flexbox for alignment */
+  flex-direction: column; /* Stack items vertically */
+  margin-bottom: 10px; /* Space below header */
+  margin-top: 10px;;
+  align-items: flex-start; /* Align items to the start (left) */
+
+}
+
+.lab-header ul{
+  list-style-type: none;
+  padding: 0; /* Remove default padding */
+  margin: 0;
+}
+
+
+
+.lab-header .lab-number {
+  font-size: 20px; /* Adjust the font size as needed */
+  font-weight: bold; /* Optional: Ensure it remains bold */
+  color: #333; /* Optional: Adjust color if needed */
+  list-style-type: none;
+}
+
+.lab-header .lab-subheader{
+  font-size: 14px;
+}
+.lab-header .lab-number:hover {
+  text-shadow: #D543CB;
 }
 
 /* Labels for details */
@@ -100,10 +145,11 @@
   color: white; /* White text */
   border: none; /* No border */
   border-radius: 5px; /* Rounded corners */
-  padding: 8px 16px; /* Padding inside button */
+  padding: 8px 15px; /* Padding inside button */
   cursor: pointer; /* Pointer cursor on hover */
   font-size: 14px; /* Font size */
-  margin-top: 10px; /* Space above button */
+  margin-top: 10px;
+  margin-bottom: 10px; /* Space above button */
 }
 
 /* Remove button hover effect */
@@ -115,14 +161,19 @@
 .collapsible-header {
   cursor: pointer;
   display: flex;
-  align-items: center;
   font-weight: bold;
+  margin-left: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+
+
 }
 
 .collapsible-header > span {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-grow: 1;
+  justify-content: center;
 }
 
 .arrow {
@@ -144,3 +195,32 @@
   border: 1px solid #ddd;
   border-top: none;
 }
+
+.pagination-container {
+  position: relative; /* Fixed to stay in the viewport */
+  bottom: 0;
+  right: 0;
+  padding: 1rem; /* Optional padding for spacing */
+  z-index: 1000; /* Ensure it's above other content if necessary */
+  display: flex;
+  justify-content: right;
+}
+
+.pagination-container .ngx-pagination {
+  margin-right: 0rem;
+  margin-bottom: 1rem;
+
+}
+
+
+
+// <div class="pagination-container">
+//   <pagination-controls
+//     (pageChange)="p = $event"
+//     class="ngx-pagination"
+//   ></pagination-controls>
+// </div>
+
+
+
+// | paginate : { itemsPerPage: 10, currentPage: p }

@@ -1,16 +1,18 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit, ViewChild} from '@angular/core';
 import { DataService } from '../../data.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../filter.pipe';
+import { MatPaginator } from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe],
+  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe, MatPaginator, NgxPaginationModule],
   templateUrl: './lab-decommission.component.html',
   styleUrl: './lab-decommission.component.scss'
 })
@@ -22,6 +24,7 @@ export class LabDecommissionComponent  implements OnInit  {
   searchQuery: string = '';
   filteredLabList: any[] = [];
   expandedLabId: string | null = null; // To track which lab is expanded
+  p :any;
 
 
 
