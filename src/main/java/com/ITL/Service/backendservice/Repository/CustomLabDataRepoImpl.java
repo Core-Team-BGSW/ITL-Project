@@ -100,6 +100,7 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
         Aggregation aggregation = Aggregation.newAggregation(operations);
 
         AggregationResults<LabData> res = mongoTemplate.aggregate(aggregation, LabData.class, LabData.class);
+        if(res.getMappedResults().isEmpty()) throw new ParametersNotValidException("Please check all the values you have provided to search the lab data because there is no lab matches according to your query!");
 
         // Logging the results of the aggregation
         LOGGER.info("Aggregation Results: " + res.getMappedResults());
