@@ -1,15 +1,9 @@
 package com.ITL.Service.backendservice.Service;
 
-import com.ITL.Service.backendservice.Model.Entity;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Repository.CustomLabDataRepoImpl;
-import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.LookupOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
