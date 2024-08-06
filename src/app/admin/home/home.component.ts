@@ -8,6 +8,7 @@ import { RouterOutlet, RouterLink} from '@angular/router';
 import { ContactComponent } from "../contact/contact.component";
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 
 
 @Component({
@@ -15,7 +16,11 @@ import { MatCardModule } from '@angular/material/card';
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
-    imports: [MatButtonModule, MatIconModule, MatSidenavModule, MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule]
+    imports: [MatButtonModule, MatIconModule, MatSidenavModule,
+      MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule,
+
+
+    ]
 })
 export class HomeComponent {
 // showModal: any;

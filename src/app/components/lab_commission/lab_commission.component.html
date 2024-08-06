@@ -8,8 +8,8 @@
         <p class="note-choosemethod">For multiple lab commission, "Import File" is recommended</p>
         <section class="choosemethod-container">
           <mat-radio-group [(ngModel)]="choosemethod">
-            <mat-radio-button class="ACL-margin" value="choosemethod-import">Import File</mat-radio-button>
-            <mat-radio-button class="ACL-margin" value="choosemethod-form">Application Form</mat-radio-button>
+            <mat-radio-button  value="choosemethod-import">Import File</mat-radio-button>
+            <mat-radio-button  value="choosemethod-form">Application Form</mat-radio-button>
           </mat-radio-group>
         </section>
       </mat-card-content>
@@ -180,17 +180,22 @@
             <select id="GBSelect" name="GB" (change)="GBChange($event)">
             <option value="">Select GB</option>
             <option value="2WP">2WP</option>
-            <option value="BEG">BEG</option>
+            <option value="BEG">MS/ENG-BEG</option>
             <option value="CS">CS</option>
-            <option value="EM">EM</option>
-            <option value="EHM">EHM</option>
+            <option value="EM">SX/NE-EM</option>
+            <option value="EHM">MS/EHM</option>
             <option value="ES">ES</option>
             <option value="ESU">ESU</option>
-            <option value="PS">PS</option>
-            <option value="PG">PG</option>
-            <option value="SDS">SDS</option>
-            <option value="TE">TE</option>
-            <option value="VM">VM</option>
+            <option value="PS">MS/NE-PS</option>
+            <option value="PG">MS/NE-PG</option>
+            <option value="SDS">MS/ENG-SDS</option>
+            <option value="TE">BGSW/TE</option>
+            <option value="VM">MS/NE-VM</option>
+            <option value="ECE">MS/ECE</option>
+            <option value="BST">MS/EMS-BST</option>
+            <option value="ETH-PG">MS/ETH-PG</option>
+            <option value="ETAS">MS/NE-ETAS</option>
+            <option value="ETH-SX">MS/ETH-SX</option>
           </select>
         </div>
         </div>
@@ -248,7 +253,7 @@
             <label for="deptselect"
               >Department <span class="required"> *</span></label
             >
-            <input type="text" id="fieldfill" placeholder="Department" [(ngModel)]="Dept" />
+            <input type="text" id="fieldfill" placeholder="Department" [(ngModel)]="Dept" title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS"/>
           </div>
           <div class="dropdown-item">
             <label for="building">Building<span class="required"> *</span></label>

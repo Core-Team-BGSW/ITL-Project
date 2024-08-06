@@ -2,7 +2,7 @@
 import { HomeComponent } from "../../admin/home/home.component";
 import { SidebarComponent } from "../../admin/sidebar/sidebar.component";
 import * as ExcelJS from 'exceljs';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { CommonModule } from '@angular/common';
 import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {ChangeDetectionStrategy, Component, model, Inject, inject, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -18,11 +18,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatDialog, MatDialogModule  } from '@angular/material/dialog';
 import { DialogModule } from "@angular/cdk/dialog";
 import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
-import { v4 as uuidv4 } from 'uuid';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ChangeDetectorRef } from "@angular/core";
 import axios from 'axios';
-import { error } from "console";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -75,7 +73,6 @@ export class LabCommissionComponent {
   greenport: string = '';
   redport: string = '';
   yellowport: string = '';
-
   localITL: string = '';
   localITLproxy: string = '';
   KAM: string = '';

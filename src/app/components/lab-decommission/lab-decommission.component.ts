@@ -6,13 +6,24 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../filter.pipe';
 import { MatPaginator } from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {ChangeDetectionStrategy, inject} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
 
 
 
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe, MatPaginator, NgxPaginationModule],
+  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe, MatPaginator, NgxPaginationModule, MatButtonModule],
   templateUrl: './lab-decommission.component.html',
   styleUrl: './lab-decommission.component.scss'
 })
@@ -25,6 +36,7 @@ export class LabDecommissionComponent  implements OnInit  {
   filteredLabList: any[] = [];
   expandedLabId: string | null = null; // To track which lab is expanded
   p :any;
+  readonly dialog = inject(MatDialog);
 
 
 
@@ -53,6 +65,7 @@ export class LabDecommissionComponent  implements OnInit  {
           // Remove the item from the local list
           this.labList = this.labList.filter(lab => lab._id !== id);
           this.filteredLabList = this.filteredLabList.filter(lab => lab._id !== id);
+          this.dialog.open(DialogdecommissionComponent);
         console.log('Lab removed successfully');
         },
         error: (err) => this.errorMessage = err
@@ -85,4 +98,14 @@ export class LabDecommissionComponent  implements OnInit  {
     return this.expandedLabId === labId;
   }
 
+
+
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DialogdecommissionComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
 }

@@ -36,11 +36,10 @@ $Angular_app-theme: mat.define-theme((
 // @include mat.color-variants-backwards-compatibility($Angular_app-theme);
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Bosch Sans', sans-serif; }
 
 
 br{
@@ -52,6 +51,15 @@ br{
   --mat-tab-header-label-text-size: 1.2rem; /* New font size value */
 
 
+}
+
+
+@font-face {
+  font-family: 'Bosch Sans';
+  src: url('/assets/fonts/BoschSans-Regular-v5_003.woff') format('woff');
+
+  font-weight: normal;
+  font-style: normal;
 }
 
 

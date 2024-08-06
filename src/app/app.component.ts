@@ -12,12 +12,16 @@ import { SelfCheckComponent } from './components/self-check/self-check.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
-
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
-import { DataService } from './data.service';
-import { HttpClient, HttpClientModule,  } from '@angular/common/http';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { MsalModule, MsalRedirectComponent } from "@azure/msal-angular";
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MatListModule } from "@angular/material/list";
+import { DialogdecommissionComponent } from './lab-decommission/dialogdecommission/dialogdecommission.component';
+
+
 
 
 
@@ -31,7 +35,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule
+      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule,MatListModule,DialogdecommissionComponent
     ]
 })
 export class AppComponent {

@@ -37,6 +37,7 @@ app.get('/Lablist', async (req, res) => {
 });
 
 
+
 // DELETE endpoint
 app.delete('/Lablist/:id', async (req, res) => {
   try {
@@ -52,17 +53,18 @@ app.delete('/Lablist/:id', async (req, res) => {
 });
 
 
-app.post('/Lablist', async (req, res) => {
-  try {
-    const formData = req.body;
-    const item  = new Item(formData);
-    await item .save();
-    res.status(201).json(item);
-  } catch (error) {
-    console.error('Error saving data:', error); // Log the error
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// app.post('/Lablist', async (req, res) => {
+//   try {
+//     const formData = req.body;
+//     formData.approvalStatus = 'Pending'; // Set initial approval status
+//     const item  = new Item(formData);
+//     await item .save();
+//     res.status(201).json(item);
+//   } catch (error) {
+//     console.error('Error saving data:', error); // Log the error
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
@@ -97,7 +99,13 @@ const itemSchema = new mongoose.Schema({
   "Is lab going to procure new equipment for Engineering/Red Zone?": String,
   "Shared Lab": String,
   "ACL Required": String,
-  otherLabType: String
+  otherLabType: String,
+  approvalStatus: {
+    type: String,
+    enum: ['Pending', 'Approved', 'Rejected'],
+    default: 'Pending'
+  },
+  rejectionRemarks: String
 });
 
 const Item = mongoose.model('Item', itemSchema);
@@ -149,6 +157,7 @@ app.post('/upload-excel', upload.single('file'), async (req, res) => {
       }
 
       items.push(rowData);
+      rowData.approvalStatus = 'Pending'; // Set initial approval status
     });
 
     console.log('Data to insert:', items); // Log data to check before insertion
@@ -161,3 +170,124 @@ app.post('/upload-excel', upload.single('file'), async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+
+// Define the schema for pendingapp
+const pendingAppSchema = new mongoose.Schema({
+  Region: String,
+  Country: String,
+  Location: String,
+  "Location-Code": String,
+  Entity: String,
+  GB: String,
+  "Local-ITL": String,
+  "Local-ITL Proxy": String,
+  "Department Head (DH)": String,
+  "Key Account Manager (KAM)": String,
+  Department: String,
+  Building: String,
+  Floor: String,
+  "Lab No": String,
+  "Primary Lab Coordinator": String,
+  "Secondary Lab Coordinator": String,
+  "Cost Center": String,
+  "Kind of Lab": String,
+  "Purpose of Lab in Brief": String,
+  Description: String,
+  "No of Green Ports": String,
+  "No of Yellow Ports": String,
+  "No of Red Ports": String,
+  "Is lab going to procure new equipment for Engineering/Red Zone?": String,
+  "Shared Lab": String,
+  "ACL Required": String,
+  otherLabType: String,
+  approvalStatus: {
+    type: String,
+    enum: ['Pending', 'Approved', 'Rejected'],
+    default: 'Pending'
+  },
+  rejectionRemarks: String
+});
+
+const PendingApp = mongoose.model('PendingApp', pendingAppSchema);
+
+
+app.post('/Lablist', async (req, res) => {
+  try {
+    const formData = req.body;
+    formData.approvalStatus = 'Pending'; // Set initial approval status
+    const pendingApp = new PendingApp(formData);
+    await pendingApp.save();
+    res.status(201).json(pendingApp);
+  } catch (error) {
+    console.error('Error saving data:', error); // Log the error
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// API to get all pending items for approval
+app.get('/Lablist/pending', async (req, res) => {
+  try {
+    const pendingItems = await PendingApp.find({ approvalStatus: 'Pending' });
+    res.status(200).json(pendingItems);
+  } catch (error) {
+    console.error('Error fetching pending items:', error);
+    res.status(500).json({ message: 'Internal Server Error', error });
+  }
+});
+
+
+// Example route for handling PATCH requests to approve an item
+app.patch('/Lablist/:id/approve', async (req, res) => {
+  const itemId = req.params.id;
+  try {
+    // Your logic to find and update the item in the database
+    // Example using a mock database function
+    const updatedItem = await updateItemStatus(itemId, 'approved');
+
+    if (!updatedItem) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    res.status(200).json(updatedItem);
+  } catch (error) {
+    console.error('Error approving item:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// Mock function for demonstration
+async function updateItemStatus(id, status) {
+  // Replace this with actual database logic
+  return { id, status }; // Example response
+}
+
+
+
+app.patch('/Lablist/reject', async (req, res) => {
+  const { id } = req.params;
+  const { rejectionRemarks } = req.body; // Expect rejectionRemarks in request body
+
+  try {
+    const pendingItem = await PendingApp.findById(id);
+    if (!pendingItem) {
+      return res.status(404).json({ message: 'Pending item not found' });
+    }
+
+    // Update the approval status to 'Rejected'
+    pendingItem.approvalStatus = 'Rejected';
+    pendingItem.rejectionRemarks = rejectionRemarks || '';
+
+    // Save the updated item back to the pending collection
+    await pendingItem.save();
+
+    res.status(200).json({ message: 'Item rejected' });
+  } catch (error) {
+    console.error('Error rejecting item:', error);
+    res.status(500).json({ message: 'Internal Server Error', error });
+  }
+});
+
+
+
+

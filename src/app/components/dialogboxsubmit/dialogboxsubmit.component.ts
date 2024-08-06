@@ -128,7 +128,8 @@ applications: any[] = []; // Array to hold submitted applications
       "ACL Required": this.ACLradio,
       "No. of Green Ports": this.greenports,
       "No. of Yellow Ports": this.yellowports,
-      "No. of Red Ports": this.redports
+      "No. of Red Ports": this.redports,
+      approvalStatus: 'Pending' // Set approval status to 'Pending'
     };
 
     this.dataService.submitForm(formData).subscribe({
@@ -140,6 +141,7 @@ applications: any[] = []; // Array to hold submitted applications
         console.error('Error submitting form:', error);
         // Optionally, you can show an error message
       }
+
     });
 
     // this.http.post('http://localhost:3000/Lablist', formData).subscribe(
