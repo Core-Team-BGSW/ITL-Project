@@ -1,9 +1,10 @@
 
 <h2>New Lab Commission</h2>
 <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
-  <mat-tab label="Import File/Form Fill">
+  <mat-tab class="choosemethod-body" label="Import File/Form Fill">
     <mat-card>
-      <mat-card-content>
+      <div>
+      <mat-card-content >
         <p class="choosemethod">Choose Method<span class="required"> *</span></p>
         <p class="note-choosemethod">For multiple lab commission, "Import File" is recommended</p>
         <section class="choosemethod-container">
@@ -13,6 +14,7 @@
           </mat-radio-group>
         </section>
       </mat-card-content>
+    </div>
     </mat-card>
     <div  *ngIf="choosemethod === 'choosemethod-import'">
       <div class="heading-import">
@@ -352,6 +354,7 @@
             <mat-radio-group [(ngModel)]="sharedlabradio">
               <mat-radio-button class="sharedlab-margin" value="Yes">Yes</mat-radio-button>
               <mat-radio-button class="sharedlab-margin" value="No">No</mat-radio-button>
+              <p class = "cmdb-explain">If multiple Departments are working in same lab, please select "Yes"</p>
             </mat-radio-group>
           </section>
         </mat-card-content>
@@ -370,7 +373,7 @@
         </mat-card-content>
       </mat-card>
       <div class="portdetails" *ngIf="ACLradio === 'Yes'">
-        <p>Port Details</p>
+        <p>Port Requirement Details</p>
         <div class="dropdown-container">
         <div class="dropdown-item">
           <label for="greenPorts"

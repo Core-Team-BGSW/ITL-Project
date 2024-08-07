@@ -38,8 +38,14 @@ $Angular_app-theme: mat.define-theme((
 
 
 
-html, body { height: 100%; }
+html, body { height: 100%;
+  overflow: hidden; }
 body { margin: 0; font-family: 'Bosch Sans', sans-serif; }
+
+.mat-mdc-tab-body-content {
+  height: 100%;
+  overflow: hidden;
+}
 
 
 br{

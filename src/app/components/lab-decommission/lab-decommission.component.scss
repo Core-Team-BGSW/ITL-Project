@@ -67,6 +67,7 @@
   list-style-type: none; /* Remove default bullets */
   padding: 0; /* Remove default padding */
   margin: 0; /* Remove default margin */
+  z-index: 1;
 }
 
 /* List item styling */
@@ -79,16 +80,34 @@
   transition: background-color 0.3s;
   box-shadow: 0 0 8px 1px #A4ABB3;
   margin-right: 8px;
-
+  position: relative; /* To position the pseudo-element correctly */
 }
 
-
-
-.lab-item:hover{
-
+.lab-item::before {
+  content: ''; /* No content needed, just the line */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0; /* Initially set to 0 */
   background: -webkit-linear-gradient(left, #FFD9D9, #FFEFD1);
+  transition: width 0.2s; /* Smooth transition for the line width */
+  z-index: 0; /* Ensure it appears above other content */
+  border-top-left-radius: 12px; /* Radius for top-left corner */
+  border-bottom-left-radius: 12px; /* Radius for bottom-left corner */
 
 }
+
+.lab-item:hover::before {
+  width:1310px /* Width of the red line when hovering */
+}
+
+
+// .lab-item:hover{
+
+//   background: -webkit-linear-gradient(left, #FFD9D9, #FFEFD1);
+
+// }
 
 /* Styling for each detail */
 .lab-detail {
@@ -101,13 +120,14 @@
   margin-bottom: 10px; /* Space below header */
   margin-top: 10px;;
   align-items: flex-start; /* Align items to the start (left) */
-
+  z-index: 1;
 }
 
 .lab-header ul{
   list-style-type: none;
   padding: 0; /* Remove default padding */
   margin: 0;
+  z-index: 1;
 }
 
 
@@ -117,10 +137,15 @@
   font-weight: bold; /* Optional: Ensure it remains bold */
   color: #333; /* Optional: Adjust color if needed */
   list-style-type: none;
+  z-index: 1;
 }
+
+
+
 
 .lab-header .lab-subheader{
   font-size: 14px;
+  z-index: 1;
 }
 .lab-header .lab-number:hover {
   text-shadow: #D543CB;
@@ -150,6 +175,7 @@
   font-size: 14px; /* Font size */
   margin-top: 10px;
   margin-bottom: 10px; /* Space above button */
+  z-index: 1;
 }
 
 /* Remove button hover effect */
@@ -165,6 +191,7 @@
   margin-left: 2px;
   margin-top: 2px;
   margin-bottom: 2px;
+  z-index: 1;
 
 
 }
@@ -174,6 +201,7 @@
   align-items: flex-start;
   flex-grow: 1;
   justify-content: center;
+  z-index: 1;
 }
 
 .arrow {
@@ -194,6 +222,7 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-top: none;
+  z-index: 1;
 }
 
 .pagination-container {

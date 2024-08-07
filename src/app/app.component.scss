@@ -42,3 +42,25 @@ app-sidenav {
 }
 
 
+/* Style for the header */
+.o-header {
+  width: 100%; /* Full width of the viewport */
+  text-align: center; /* Center the image horizontally */
+  padding: 3px 0; /* Add padding above and below the image */
+  background-color: #f8f8f8; /* Light background color for the header */
+}
+
+/* Style for the image */
+.o-header img {
+  position: absolute;
+    left: 0;
+    top: 0px;
+    width: 100%;
+    height: 6px;
+    content: '';
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+
