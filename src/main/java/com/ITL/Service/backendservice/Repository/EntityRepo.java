@@ -16,4 +16,6 @@ public interface EntityRepo extends MongoRepository<Entity,String> {
     @Query("{'entityName':  ?0, 'country' :  ?1}")
     List<LabData> findLabDataByEntityNameAndCountry(String entityName, String country);
     Entity findByEntityName(String name);
+
+    Entity findByLocationCode(String locationCode);
 }
