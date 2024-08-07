@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -23,23 +22,26 @@ public class CsvToDatabaseService {
     public final SequenceGeneratorService sequenceGeneratorService;
     public String saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
-            Map<String, Entity> entityMap = new HashMap<>();
+            Map<AbstractMap.SimpleEntry<String,String>, Entity> entityMap = new HashMap<>();
             String[] nextRecord;
             csvReader.skip(1);
             nextRecord = csvReader.readNext();
+            //System.out.println(Arrays.toString(nextRecord));
             while((nextRecord != null))
             {
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;
                 LabData labData = getLabData(nextRecord);
                 labDataRepo.save(labData);
+                String locationCode = nextRecord[4];
                 String entityName = nextRecord[5];
-                Entity entity = entityMap.get(entityName);
+                Entity entity = entityMap.get(new AbstractMap.SimpleEntry<>(entityName,locationCode));
                 if(entity == null)
                 {
                     entity = getEntityData(nextRecord);
-                    entityMap.put(entityName,entity);
+                    entityMap.put(new AbstractMap.SimpleEntry<>(entityName,locationCode),entity);
                 }
                 entity.getLabDataList().add(labData);
+                System.out.println(entity.getLabDataList());
                 nextRecord = csvReader.readNext();
             }
             entityRepo.saveAll(entityMap.values());
@@ -82,12 +84,12 @@ public class CsvToDatabaseService {
         labData.setKind_of_lab(nextRecord[18]);
         labData.setPurpose_of_lab(nextRecord[19]);
         labData.setDescription(nextRecord[20]);
-        labData.setNew_equipment(nextRecord[21]);
-        labData.setShared_lab(nextRecord[22]);
-        labData.setAcl_req(nextRecord[23]);
-        labData.setGreen_ports(nextRecord[24]);
-        labData.setYellow_ports(nextRecord[25]);
-        labData.setRed_ports(nextRecord[26]);
+        labData.setAcl_req(nextRecord[21]);
+        labData.setGreen_ports(nextRecord[22]);
+        labData.setYellow_ports(nextRecord[23]);
+        labData.setRed_ports(nextRecord[24]);
+        labData.setNew_equipment(nextRecord[25]);
+        labData.setShared_lab(nextRecord[26]);
         return labData;
     }
 
