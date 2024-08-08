@@ -3,40 +3,47 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LabData } from '../models/lab-data';
 
-const baseUrl = 'http://localhost:8080/boschLabs/form/labs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TutorialService {
+export class LabDataService {
 
   constructor(private http: HttpClient) { }
 
+  private baseUrl = 'http://localhost:8080/boschLabs/form';
+
+
+
+  // Method to submit form data to the backend
+  submitForm(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/submit`, data);
+  }
   getAll(): Observable<LabData[]> {
-    return this.http.get<LabData[]>(baseUrl);
+    return this.http.get<LabData[]>(this.baseUrl);
   }
 
   get(id: any): Observable<LabData> {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(`${this.baseUrl}/${id}`);
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(baseUrl, data);
+    return this.http.post(this.baseUrl, data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+    return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
   deleteAll(): Observable<any> {
-    return this.http.delete(baseUrl);
+    return this.http.delete(this.baseUrl);
   }
 
   findByTitle(title: any): Observable<LabData[]> {
-    return this.http.get<LabData[]>(`${baseUrl}?title=${title}`);
+    return this.http.get<LabData[]>(`${this.baseUrl}?title=${title}`);
   }
 }
