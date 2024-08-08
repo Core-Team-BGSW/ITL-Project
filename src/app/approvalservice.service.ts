@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class ApprovalService {
 
   private apiUrl = 'http://localhost:3000/Lablist/pending'; // Adjust based on your server URL
+  private baseUrl = 'http://localhost:3000/Lablist/'
 
   constructor(private http: HttpClient) { }
 
@@ -16,8 +17,9 @@ export class ApprovalService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  approveItem(id: string): Observable<any> {
-    return this.http.patch<any>(`http://localhost:3000/Lablist/${id}/approve`, {});
+  approveItem(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, data);
+    //return this.http.patch<any>(`http://localhost:3000/Lablist/${id}/approve`, {});
   }
 
   rejectItem(id: string, rejectionRemarks: string): Observable<any> {

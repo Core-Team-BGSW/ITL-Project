@@ -16,3 +16,8 @@ this is to add new data
     <strong>KAM:</strong> {{ lab["KAM"] }} <br />
     <strong>Shared/Individual:</strong> {{ lab["Shared/Individual"] }} <br />
     {% endcomment %}
+
+
+
+
+azure added check
