@@ -172,6 +172,38 @@ app.post('/upload-excel', upload.single('file'), async (req, res) => {
 });
 
 
+
+
+// Route to get all pending applications
+app.get('/Lablist/pending', async (req, res) => {
+  try {
+    const pendingItems = await Item.find({ approvalStatus: 'Pending' });
+    res.status(200).json(pendingItems);
+  } catch (error) {
+    console.error('Error fetching pending applications:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Route to approve an application
+app.post('/Lablist/approve/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedItem = await Item.findByIdAndUpdate(id, { approvalStatus: 'Approved' }, { new: true });
+    if (updatedItem) {
+      res.status(200).json(updatedItem);
+    } else {
+      res.status(404).json({ message: 'Application not found' });
+    }
+  } catch (error) {
+    console.error('Error approving application:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
 // // Define the schema for pendingapp
 // const pendingAppSchema = new mongoose.Schema({
 //   Region: String,

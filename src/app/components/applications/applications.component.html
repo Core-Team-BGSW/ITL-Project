@@ -1,27 +1,30 @@
-<div class="pending-items">
-  <h2>Pending Items for Approval</h2>
+<h2>Pending Applications</h2>
+<div *ngIf="pendingApplications.length > 0">
   <table>
     <thead>
       <tr>
         <th>Region</th>
         <th>Country</th>
         <th>Location</th>
-        <!-- Add other headers based on your schema -->
-        <th>Approval Status</th>
-        <th>Actions</th>
+        <th>GB</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of pendingItems">
-        <td>{{ item.Region }}</td>
-        <td>{{ item.Country }}</td>
-        <td>{{ item.Location }}</td>
-        <!-- Add other columns based on your schema -->
-        <td>{{ item.approvalStatus }}</td>
+      <tr *ngFor="let app of pendingApplications">
+        <td>{{ app.Region }}</td>
+        <td>{{ app.Country }}</td>
+        <td>{{ app.Location }}</td>
+        <td>{{ app.GB }}</td>
         <td>
-          <button (click)="approveItem(item._id)">Approve</button>
+          <button (click)="approveApplication(app._id)">Approve</button>
+          <button (click)="openReviewDialog(app)">Review</button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="pendingApplications.length == 0">
+  <strong>No pending applications</strong>
 </div>

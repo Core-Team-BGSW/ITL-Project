@@ -108,3 +108,12 @@ mat-icon{
 .mat-mdc-button {
   justify-content: flex-start;
 }
+
+
+.mat-drawer-inner-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #101112;
+}
