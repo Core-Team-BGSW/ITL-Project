@@ -12,7 +12,11 @@ import { SelfCheckComponent } from './components/self-check/self-check.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
-import { HttpClientModule } from '@angular/common/http';
+
+import { HttpClient } from '@angular/common/http';
+import { DataService } from './data.service' ;
+import { NgModule } from '@angular/core';
+
 
 
 @Component({
@@ -22,8 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent,HttpClientModule
+      ApplicationsComponent
     ]
+
 })
 export class AppComponent {
   title = 'Angular_app';

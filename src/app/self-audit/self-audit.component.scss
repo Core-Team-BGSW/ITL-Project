@@ -8,7 +8,7 @@ input[type=text]
  background-color: white;
  border-radius: 8px;
  box-sizing: border-box;
- border: 1.7px solid rgb(102, 122, 204);
+ border: 1.2px solid rgb(107, 124, 194);
 }
 select
 {
@@ -20,7 +20,7 @@ select
  background-color: white;
  border-radius: 8px;
  box-sizing: border-box;
- border: 1.7px solid rgb(102, 122, 204);
+ border: 1.2px solid rgb(107, 124, 194);
 }
 .tooltip 
 {
@@ -71,30 +71,41 @@ select
    visibility: visible;
 
  }
- .button
- {
-  
-  background-color: rgb(101, 31, 54);
-  border-radius: 10px;
-  padding: 11px;
-  width: 120px;
-  color: white;
-  position: relative;
-    left: 35%;
-    
- }
+.button
+{
+ 
+  background: rgb(38, 124, 237);
+ border-radius: 10px;
+ padding: 11px;
+ width: 120px;
+ color: white;
+ position: relative;
+   left: 35%;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-size: medium;
+   font-weight: bold;
+   
+}
 .custom-card 
 {
-background-color: rgb(245, 241, 241); /* Custom background color */
+ /* Custom background color */
 border-radius: 0px; /* Rounded corners */
 padding: 5px;/* Padding inside the card */
-width: 800px;
+width: 1200px;
 box-sizing: border-box;
 box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+display: flex;
+justify-content: space-between;
+gap: 20px;
+background: white;
 
-
-
-
+box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+padding: 10px 20px;
+box-sizing: border-box;
+margin: 0 10%;
+margin-bottom: 20px;
+margin-left: 10px;
+margin-top: 10px;
 }
 
 .custom-input .mat-input-element  
@@ -199,8 +210,8 @@ h1
 }
 h2
 {
- background-color: #fcf9f9;
- color:#3f51b5;
+ background-color: #f3f1f1;
+ color: rgb(110, 61, 61);
  text-align: center;
 
 }
@@ -215,14 +226,16 @@ h2
 }
  .primary 
  {
-   background: rgb(101, 31, 54);
+   background: rgb(55, 133, 234);
    color: white;
-   border-radius: 10px;
- padding: 9px;
+   border-radius: 8px;
+ padding: 11px;
  width: 120px;
    position: relative;
    left: 35%; 
-   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-size: medium;
+   font-weight: bold;
    &:hover {
      background-color: #336fae;
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -231,16 +244,18 @@ h2
  .success_btn
  {
    width: 100px;
-   border-radius: 10px;
- padding: 9px;
+   border-radius: 8px;
+ padding: 11px;
  width: 120px;
-   background: #3c7e02;
+   background: #35a71e;
    color: white;
    position: relative;
-   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-size: medium;
+   font-weight: bold;
    left: 36%; 
    &:hover {
-     background-color: #0dcf37;
+     background-color: #0aa82d;
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
    }
  }
@@ -313,91 +328,13 @@ h2
  {
    background-color: white; /* Example color */
  }
- .custom-card1 
-{
-background-color: rgb(253, 249, 249); /* Custom background color */
-border-radius: 0px; /* Rounded corners */
-padding: 5px;/* Padding inside the card */
-width: 900px;
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-}
-.lab-detail{
-  color: rgb(80, 79, 79);
-}
-
-.custom-card2 
-{
-background-color: rgb(251, 249, 249); /* Custom background color */
-border-radius: 0px; /* Rounded corners */
-padding: 3px;/* Padding inside the card */
-width: 900px;
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-}
-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-.container {
-  display: flex;
-  justify-content: flex-end; /* Aligns content to the right */
-}
-strong{
-  
-  text-align: end;
-  font-family :'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-h4{
-  color: #3f51b5;
-  text-align: center;
-  background-color: #e8e2e2;
-}
-* {
-  box-sizing: border-box;
-}
-
-/* Style the search field */
-form.search_btn input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  width: 50%;
-  background: #f1f1f1;
-}
-
-/* Style the submit button */
-form.search_btn button {
-  
-  width: 5%;
-  padding: 10px;
-  background: #3298f1;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none; /* Prevent double borders */
-  cursor: pointer;
-}
-
-form.example button:hover {
-  background: #0b7dda;
-}
-
-/* Clear floats */
-form.example::after {
-  content: "";
-  clear: both;
-  display: table;
-}
  
+ h4{
+  color: #465bd3;
+  text-align: center;
+  background-color: #e9e9e9;
+}
+
    
 
  

@@ -1,31 +1,36 @@
-import { Injectable,Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-
+import { Injectable } from '@angular/core';
+import { HttpClient , HttpErrorResponse} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+ 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-
-
-
-  private apiUrl = 'http://localhost:3000/api'; // replace with your backend API URL
-
-  constructor(@Inject(HttpClient) private http: HttpClient) { }
-
-  getData() {
-    return this.http.get(`${this.apiUrl}/data`);
+ 
+  private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
+ 
+  constructor(private http: HttpClient) {}
+ 
+  getAllData(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl).pipe(
+      catchError(this.handleError)
+    );
   }
-
-  addData(data: any) {
-    return this.http.post(`${this.apiUrl}/data`, data);
+ 
+  removeLab(id: string): Observable<void> {
+    const url = `${this.baseUrl}/${id}`;
+    return this.http.delete<void>(url).pipe(
+      catchError(this.handleError)
+    );
   }
-
-  updateData(id: string, data: any) {
-    return this.http.put(`${this.apiUrl}/data/${id}`, data);
+  submitForm(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, data);
   }
-
-  deleteData(id: string) {
-    return this.http.delete(`${this.apiUrl}/data/${id}`);
+ 
+  private handleError(error: HttpErrorResponse) {
+    console.error('An error occurred:', error.message);
+    return throwError(() => new Error('Something went wrong; please try again later.'));
   }
+ 
 }

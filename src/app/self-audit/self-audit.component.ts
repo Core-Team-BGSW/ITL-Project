@@ -10,31 +10,20 @@ import { Router } from '@angular/router';
 import { MatDatepickerModule, matDatepickerAnimations } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
-import { DataService } from '../../data.service';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { MatMenuModule } from '@angular/material/menu';
 
-
-
-interface Question {
-  question: string;
-  answer: string;
-  showAnswer: boolean;
-}
 
 @Component({
-  selector: 'app-self-check',
+  selector: 'app-self-audit',
   standalone: true,
   imports: [ReactiveFormsModule,FormsModule, CommonModule,
     MatCardModule,
     MatRadioModule,
     MatButtonModule,MatInputModule,MatTabLabel,MatTabsModule,MatNativeDateModule,
-    MatDatepickerModule,RouterLink,CommonModule,RouterOutlet,FormsModule,MatMenuModule],
-  templateUrl: './self-check.component.html',
-  styleUrl: './self-check.component.scss'
+    MatDatepickerModule],
+  templateUrl: './self-audit.component.html',
+  styleUrl: './self-audit.component.scss'
 })
-export class SelfCheckComponent {
+export class SelfAuditComponent {
   labelPosition: string="";
   labelPosition1: string="";
   labelPosition2: string="";
@@ -152,85 +141,4 @@ notapplicableCount2: number = 0;
   console.log('Fulfilled Count:', this.notFulfilledCount2);
   console.log('Fulfilled Count:', this.notapplicableCount2);
 }
-dataList!: any[];
-  labList: any[] = [];
-  errorMessage: string | undefined;
-  searchQuery: string = '';
-  filteredLabList: any[] = [];
- 
-  constructor(private dataService: DataService) {}
- 
-  ngOnInit(): void {
-    this.loadLabList();
-  }
- 
-  loadLabList(): void {
-    this.dataService.getAllData()
-      .subscribe({
-        next: (data) => {
-          this.labList = data;
-          this.filteredLabList = data; // Initialize filtered list with all data
-        },
-        error: (err) => this.errorMessage = err
-      });
-  }
- 
- 
-  onSearch(): void {
-    const query = this.searchQuery.toLowerCase();
-    this.filteredLabList = this.labList.filter(lab =>
-      Object.values(lab).some(value =>
-        (value as string).toString().toLowerCase().includes(query)
-      )
-    );
-  }
- 
-  expandedLabId: string | null = null; // To track which lab is expanded
-  expandedaudit: string | null = null;
-  // Toggle the visibility of the details section
-  toggleDetails(labId: string): void {
-    if (this.expandedLabId === labId) {
-      this.expandedLabId = null; // Collapse if already expanded
-    } else {
-      this.expandedLabId = labId; // Expand the selected lab
-    }
-
-  }
-  
-  toggledetails1(audit:string):void{
-    if (this.expandedaudit==audit){
-      this.expandedaudit=null;
-    }
-    else{
-      this.expandedaudit=audit;
-    }
-  }
- 
-  // Check if a lab is expanded
-  isExpanded(labId: string): boolean {
-    return this.expandedLabId === labId;
-  }
-  isExpanded1(audit: string): boolean {
-    return this.expandedaudit === audit;
-  }
-  isCollapsed = true;  // Initial state of the collapsible content
-
-  toggleCollapse(): void {
-    this.isCollapsed = !this.isCollapsed;
-  }
-  formsVisible = false;  // Initial state of the forms
-
-  showForms(): void {
-    this.formsVisible = !this.formsVisible;
-  }
-  isFormExpanded = false;
-  toggleForm(): void {
-    this.isFormExpanded = !this.isFormExpanded;
-  
 }
-
-
-}
-
-
-
