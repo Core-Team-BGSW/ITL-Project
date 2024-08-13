@@ -12,6 +12,8 @@ import { AboutComponent } from './admin/about/about.component';
 import { SoftwareTrackingComponent } from './components/software-tracking/software-tracking.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
+import { AuditComponent } from './components/audit/audit.component';
+
 
 
 export const routes: Routes = [
@@ -29,7 +31,9 @@ export const routes: Routes = [
       {path:'about', component:AboutComponent},
       {path:'software-track',component:SoftwareTrackingComponent},
       {path:'applications', component: ApplicationsComponent},
-      {path:'labdecommission', component: LabDecommissionComponent}
+      {path:'labdecommission', component: LabDecommissionComponent},
+      {path:'audit', component: AuditComponent},
+
 
     ]
   },
