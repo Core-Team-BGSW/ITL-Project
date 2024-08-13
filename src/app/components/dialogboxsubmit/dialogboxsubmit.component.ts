@@ -102,6 +102,7 @@ applications: any[] = []; // Array to hold submitted applications
   // Function to submit form data and create new application instance
   onformsubmit(): void {
     if (confirm('Are you sure you want to submit this form?')) {
+
     const formData = {
       Region: this.region,
       Country: this.country,
@@ -149,15 +150,6 @@ applications: any[] = []; // Array to hold submitted applications
     console.log('Form submission cancelled by user.');
   }
 
-    // this.http.post('http://localhost:3000/Lablist', formData).subscribe(
-    //   response => {
-    //     console.log('Form data successfully submitted:', response);
-    //     this.dialogRef.close();
-    //   },
-    //   error => {
-    //     console.error('Error submitting form data:', error);
-    //   }
-    // );
 
   }
 
@@ -167,3 +159,9 @@ applications: any[] = []; // Array to hold submitted applications
 
 
 }
+
+
+
+
+
+

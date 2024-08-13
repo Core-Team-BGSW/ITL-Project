@@ -62,7 +62,7 @@
   margin: 20px 0;
 }
 
-/* List container */
+// /* List container */
 .lab-list {
   list-style-type: none; /* Remove default bullets */
   padding: 0; /* Remove default padding */
@@ -70,7 +70,7 @@
   z-index: 1;
 }
 
-/* List item styling */
+
 .lab-item {
   border: 1px solid #ddd; /* Light border around items */
   border-radius: 12px; /* Rounded corners */
@@ -81,25 +81,26 @@
   box-shadow: 0 0 8px 1px #A4ABB3;
   margin-right: 8px;
   position: relative; /* To position the pseudo-element correctly */
+  overflow: hidden; /* Ensure pseudo-element doesn't overflow */
+  z-index: 1;
+  margin-left: 0;
 }
 
 .lab-item::before {
-  content: ''; /* No content needed, just the line */
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 8%;
   width: 0; /* Initially set to 0 */
-  background: -webkit-linear-gradient(left, #FFD9D9, #FFEFD1);
+  background: -webkit-linear-gradient(left, #b6ede8, #79c5c0);
   transition: width 0.2s; /* Smooth transition for the line width */
-  z-index: 0; /* Ensure it appears above other content */
-  border-top-left-radius: 12px; /* Radius for top-left corner */
-  border-bottom-left-radius: 12px; /* Radius for bottom-left corner */
-
+  border-radius: 12px;
+  z-index: 0;
 }
 
 .lab-item:hover::before {
-  width:1310px /* Width of the red line when hovering */
+  width: 100%; /* Expand to full width on hover */
 }
 
 
@@ -112,6 +113,7 @@
 /* Styling for each detail */
 .lab-detail {
   margin-bottom: 10px; /* Space between details */
+  z-index: 1;
 }
 /* Header row styling */
 .lab-header {

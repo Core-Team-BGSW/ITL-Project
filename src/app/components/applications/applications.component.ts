@@ -2,58 +2,50 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatDialogContent } from '@angular/material/dialog';
+import { MatDialog, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { ApprovalService } from '../../approvalservice.service';
+import { AppReviewComponent } from './app-review/app-review.component';
 
 
 @Component({
   selector: 'app-applications',
   standalone: true,
-  imports: [RouterLink, FormsModule, MatDialogContent, CommonModule],
+  imports: [RouterLink, FormsModule, MatDialogContent, CommonModule, MatDialogModule],
   templateUrl: './applications.component.html',
   styleUrl: './applications.component.scss'
 })
 export class ApplicationsComponent implements OnInit {
 
-  pendingItems: any[] = [];
+  pendingApplications: any[] = [];
 
-  constructor(private approvalService: ApprovalService) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.loadPendingItems();
+    this.loadPendingApplications();
   }
 
-  loadPendingItems(): void {
-    this.approvalService.getPendingItems().subscribe(
-      (data) => {
-        this.pendingItems = data;
-      },
-      (error) => {
-        console.error('Error fetching pending items:', error);
-      }
-    );
+  loadPendingApplications(): void {
+    this.http.get<any[]>('http://localhost:3000/Lablist/pending')
+      .subscribe(
+        data => this.pendingApplications = data,
+        error => console.error('Error loading applications', error)
+      );
   }
 
-  approveItem(id: string): void {
-    this.approvalService.approveItem(id).subscribe(
-      () => {
-        this.loadPendingItems(); // Refresh the list
-      },
-      (error) => {
-        console.error('Error approving item:', error);
-      }
-    );
+  approveApplication(id: string): void {
+    this.http.post(`http://localhost:3000/Lablist/approve/${id}`, {})
+      .subscribe(
+        () => this.loadPendingApplications(),
+        error => console.error('Error approving application', error)
+      );
   }
 
-  rejectItem(id: string, rejectionRemarks: string): void {
-    this.approvalService.rejectItem(id, rejectionRemarks).subscribe(
-      () => {
-        this.loadPendingItems(); // Refresh the list
-      },
-      (error) => {
-        console.error('Error rejecting item:', error);
-      }
-    );
+  openReviewDialog(application: any): void {
+    this.dialog.open(AppReviewComponent, {
+      width: '500px',
+      data: application
+    });
   }
+
 }

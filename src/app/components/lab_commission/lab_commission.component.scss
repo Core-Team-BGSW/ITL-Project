@@ -239,6 +239,10 @@ select {
   transition: background 0.3s;
 }
 
+.selected {
+  background: #f0f0f0; /* Color when an option is selected */
+}
+
 option{
 
   width: 100%;

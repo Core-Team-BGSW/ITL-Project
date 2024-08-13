@@ -45,7 +45,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
-      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -60,6 +60,7 @@ export class LabCommissionComponent {
   excelData: any[] = []; // Array to store parsed Excel data
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
+  isSelected = false;
   selectedRegion: string = '';
   selectedCountry: string = '';
   selectedLocation: string = '';
@@ -297,9 +298,9 @@ export class LabCommissionComponent {
     if (selectedregion === 'APAC') {
       this.populateOptionsR(["Select Country","AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
     } else if (selectedregion === 'EMEA') {
-      this.populateOptionsR(["DE",'PL']);
+      this.populateOptionsR(["Select Country","DE",'PL']);
     } else if (selectedregion === 'AMERICA') {
-      this.populateOptionsR(['Pune']);
+      this.populateOptionsR(["Select Country","US", "BR"]);
 
     }
     this.selectedRegion = selectedregion;
@@ -329,7 +330,7 @@ export class LabCommissionComponent {
     if (selectedcountry === 'IN') {
       this.populateOptionsL(["Select location","Bangalore", "Hyderabad",'Pune', 'Coimbatore','Nagnathpura']);
     } else if (selectedcountry === 'CN') {
-      this.populateOptionsL(['Beijing']);
+      this.populateOptionsL(["Select location",'Beijing']);
     }
     this.selectedCountry = selectedcountry;
   }
@@ -464,11 +465,9 @@ export class LabCommissionComponent {
     this.selectedGB = (event.target as HTMLSelectElement).value;
     // Automatically fill Local-ITL based on selected entity
     if (this.selectedGB === 'PG') {
-      //this.DH = 'ada3kor';
       this.KAM ='grs2kor';
-    } else {
-      //this.DH = ''; // Clear localITL for other entities
-      this.KAM ='';
+    } else if(this.selectedGB === "2WP"){
+      this.KAM ='ask2kor';
     }
 
   }

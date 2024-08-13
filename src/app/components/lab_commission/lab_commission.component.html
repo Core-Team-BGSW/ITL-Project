@@ -109,6 +109,7 @@
               title="APAC: Asia and Pacific
               EMEA: Europe, the Middle East, and Africa
               AMER: North, Central, and South America"
+              [ngClass]="{'selected': isSelected}"
 
             >
               <option value="">Select a Region</option>
@@ -283,7 +284,8 @@
             <label for="primary"
               >Primary Lab Coordinator <span class="required"> *</span></label
             >
-            <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="primarylabco"/>
+            <input type="text" id="fieldfill" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
+            [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="primarylabco"/>
           </div>
           <div class="dropdown-item">
             <label for="secondary"
