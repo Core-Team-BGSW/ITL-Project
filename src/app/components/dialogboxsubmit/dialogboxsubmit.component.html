@@ -21,18 +21,20 @@
   <p><strong>Purpose of Lab:</strong> {{ purposeoflab }}</p>
 
   <p>
-    <strong>CMDB:</strong>
-    {{ cmdbradio === "cmdb-no" ? "NO" : "YES" }}
+    <strong
+      >Is lab going to procure new equipment for Engineering/Red Zone?
+    </strong>
+    {{ cmdbradio === "Yes" ? "YES" : "NO" }}
   </p>
   <p>
     <strong>Shared Lab:</strong>
-    {{ sharedlabradio === "sharedlab-no" ? "NO" : "YES" }}
+    {{ sharedlabradio === "Yes" ? "YES" : "NO" }}
   </p>
   <p>
     <strong>ACL Required:</strong>
-    {{ ACLradio === "ACL-yes" ? "YES" : "NO" }}
+    {{ ACLradio === "Yes" ? "YES" : "NO" }}
   </p>
-  <ng-container *ngIf="ACLradio === 'ACL-yes'">
+  <ng-container *ngIf="ACLradio === 'Yes'">
     <p><strong>No. of Green Ports:</strong> {{ greenports }}</p>
     <p><strong>No. of Yellow Ports:</strong> {{ yellowports }}</p>
     <p><strong>No. of Red Ports:</strong> {{ redports }}</p>
@@ -42,7 +44,7 @@
 </div>
 <div class="formfilldialogbuton">
   <div mat-dialog-actions>
-    <button mat-button>Submit</button>
+    <button mat-button (click)="onformsubmit()">Submit</button>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="closeDialog()">Back</button>

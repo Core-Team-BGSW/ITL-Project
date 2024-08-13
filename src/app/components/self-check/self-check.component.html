@@ -1,1 +1,129 @@
-<h1>self-check works!</h1>
+
+<h2 style="background-color:rgb(221, 224, 227)">Self Audit Form </h2>
+<p>(Select Lab for Audit)</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<form class="search_btn" action="action_page.php">
+  <input type="text" placeholder="Search.." name="search"
+  style="margin:auto;max-width:300px" >
+   
+<button class="search"><i class="fa fa-search"></i></button>
+</form>
+
+      <ul class="lab-list">
+        <li *ngFor="let lab of labList" class="lab-item">
+          <!-- Collapsible Section Header -->
+          <div class="collapsible-header">
+           
+            <span (click)="toggleDetails(lab._id)">
+              <mat-card class="custom-card2">
+                <mat-card-content>
+              <strong>
+                {{ lab.Entity }} - {{ lab.GB }} - {{ lab.Department }} -
+                {{ lab["Lab No"] }}</strong>
+               <div class="container">
+                <button 
+                (click)="showForms()"
+               >
+
+                Lab Details
+        
+                </button> 
+                <button routerLink="/self-audit"  >
+                  Self-Audit
+             </button> 
+              </div> 
+              </mat-card-content>
+            </mat-card>
+            </span>
+          
+           
+            
+            </div>
+            
+      <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
+        <p></p>
+        <mat-card class="custom-card1">
+          <mat-card-content>
+        <div class="lab-detail">
+          
+          <strong class="detail-label">Region : </strong>
+          <span class="detail-value">{{ lab.Region }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Country : </strong>
+          <span class="detail-value">{{ lab.Country }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Location : </strong>
+          <span class="detail-value">{{ lab.Location }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Location-Code :</strong>
+          <span class="detail-value">{{ lab["Location-Code"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Entity :</strong>
+          <span class="detail-value">{{ lab.Entity }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">GB : </strong>
+          <span class="detail-value">{{ lab.GB }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Local-ITL : </strong>
+          <span class="detail-value">{{ lab["Local-ITL"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Local-ITL Proxy : </strong>
+          <span class="detail-value">{{ lab["Local-ITL Proxy"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Department Head (DH) : </strong>
+          <span class="detail-value">{{ lab["Department Head (DH)"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Key Account Manager (KAM) : </strong>
+          <span class="detail-value">{{ lab["Key Account Manager (KAM)"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Department : </strong>
+          <span class="detail-value">{{ lab["Department"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Floor No : </strong>
+          <span class="detail-value">{{ lab["Floor"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Lab No : </strong>
+          <span class="detail-value">{{ lab["Lab No"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Primary Lab Coordinator : </strong>
+          <span class="detail-value">{{ lab["Primary Lab Coordinator"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Secondary Lab Coordinator : </strong>
+          <span class="detail-value">{{ lab["Secondary Lab Coordinator"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Cost Center : </strong>
+          <span class="detail-value">{{ lab["Cost Center"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Kind of Lab : </strong>
+          <span class="detail-value">{{ lab["Kind of Lab"] }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Shared Lab : </strong>
+          <span class="detail-value">{{ lab["Shared lab"] }}</span>
+       
+        </div>
+       <p></p>
+      
+        
+        
+    
+    
+      
+
+ 

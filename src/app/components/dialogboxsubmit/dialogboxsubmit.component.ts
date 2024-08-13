@@ -1,11 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Inject  } from '@angular/core';
+import { Component, Input, Inject, Output, EventEmitter  } from '@angular/core';
 import { LabCommissionComponent } from '../lab_commission/lab_commission.component';
 import { AppComponent } from '../../app.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
+import { v4 as uuidv4 } from 'uuid'; // Import UUID library for generating unique IDs
+import { DataService } from '../../data.service';
+import { error } from 'console';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -19,6 +23,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class DialogboxsubmitComponent {
   //@Input() data: any;
 
+  @Output() formDataSubmitted = new EventEmitter<any>();
 
   region: string;
   country:string;
@@ -54,7 +59,7 @@ export class DialogboxsubmitComponent {
 
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogboxsubmitComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogboxsubmitComponent>, private dataService : DataService, private http: HttpClient) {
     this.region = data.region;
     this.country=data.country
     this.location=data.location
@@ -84,14 +89,79 @@ export class DialogboxsubmitComponent {
     this.yellowports = data.yellowports
     this.redports = data.redports
 
+}
 
+
+applications: any[] = []; // Array to hold submitted applications
+  formData: any = {}; // Object to store form data
+  uniqueInstanceId: string = ''; // Unique instance ID for each application instance
+
+  // Function to generate unique instance ID
+
+
+  // Function to submit form data and create new application instance
+  onformsubmit(): void {
+    if (confirm('Are you sure you want to submit this form?')) {
+
+    const formData = {
+      Region: this.region,
+      Country: this.country,
+      Location: this.location,
+      "Location-Code": this.locationcode,
+      Entity: this.entity,
+      GB: this.GB,
+      "Local-ITL": this.localITL,
+      "Local-ITL Proxy": this.localITLproxy,
+      "Department Head (DH)": this.DH,
+      "Key Account Manager (KAM)": this.KAM,
+      Department: this.Dept,
+      Building: this.Building,
+      Floor: this.Floor,
+      "Lab No": this.labno,
+      "Primary Lab Coordinator": this.primarylabco,
+      "Secondary Lab Coordinator": this.secondarylabco,
+      "Cost Center": this.CC,
+      "Kind of Lab": this.kindoflab,
+      "Purpose of Lab in Brief": this.purposeoflab,
+      // "ACL Required": this.ACL,
+      otherLabType: this.otherLabType,
+      "Is lab going to procure new equipment for Engineering/Red Zone?": this.cmdbradio,
+      "Shared Lab": this.sharedlabradio,
+      "ACL Required": this.ACLradio,
+      "No. of Green Ports": this.greenports,
+      "No. of Yellow Ports": this.yellowports,
+      "No. of Red Ports": this.redports,
+      approvalStatus: 'Pending' // Set approval status to 'Pending'
+    };
+
+    this.dataService.submitForm(formData).subscribe({
+      next: (response) => {
+        console.log('Form submitted successfully:', response);
+        this.dialogRef.close(); // Close the dialog on success
+      },
+      error: (error) => {
+        console.error('Error submitting form:', error);
+        // Optionally, you can show an error message
+      }
+
+    });
+  } else {
+    // User clicked "Cancel", handle accordingly
+    console.log('Form submission cancelled by user.');
+  }
+
+
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close(); // Close the dialog
+  }
 
 
 }
 
 
 
-closeDialog(){
-  this.dialogRef.close();
-}
-}
+
+
+
