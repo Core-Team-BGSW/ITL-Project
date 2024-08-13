@@ -4,25 +4,26 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content">
-      <div class="toolbar">
+      <div class="toolbar custom-toolbar">
         <mat-toolbar>
           <mat-icon (click)="sidebar.toggle()">menu</mat-icon>
           <div class="box">
+            <button mat-button routerLink="/register" class="nav-button">
+              <span>Apply for role</span>
+            </button>
+            <button mat-button routerLink="/contact" class="nav-button">
+              <span> Contact</span>
+            </button>
+            <!-- <button mat-button class="nav-button">
+
+              <span>About</span>
+            </button> -->
             <mat-icon>notifications_none</mat-icon>
-            <button mat-button class="nav-button">
-
-              <span>Register</span>
-            </button>
-            <button mat-button class="nav-button">
-
-              <span> Contact us</span>
-            </button>
-
           </div>
         </mat-toolbar>
       </div>
       <div class="main">
-          <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
       </div>
     </div>
   </mat-sidenav-content>

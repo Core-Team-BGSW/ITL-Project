@@ -1,1 +1,30 @@
-<p>applications works!</p>
+<h2>Pending Applications</h2>
+<div *ngIf="pendingApplications.length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th>Region</th>
+        <th>Country</th>
+        <th>Location</th>
+        <th>GB</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let app of pendingApplications">
+        <td>{{ app.Region }}</td>
+        <td>{{ app.Country }}</td>
+        <td>{{ app.Location }}</td>
+        <td>{{ app.GB }}</td>
+        <td>
+          <button (click)="approveApplication(app._id)">Approve</button>
+          <button (click)="openReviewDialog(app)">Review</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="pendingApplications.length == 0">
+  <strong>No pending applications</strong>
+</div>

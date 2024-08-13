@@ -1,0 +1,143 @@
+<h2>Lab List</h2>
+<div class="subheading">
+  <p>*Select Lab for Decommission</p>
+</div>
+
+<!-- Search Bar -->
+<div class="search-bar">
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Search labs..." />
+  <button (click)="onSearch()">Search</button>
+</div>
+
+<ul class="lab-list">
+  <li *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
+    <!-- Collapsible Section Header -->
+    <div class="collapsible-header">
+      <span class="lab-header" (click)="toggleDetails(lab._id)">
+        <ul>
+          <li class="lab-number">{{ lab["Lab No"] }}</li>
+          <li class="lab-subheader">
+            {{ lab.Entity }} / {{ lab.GB }} / {{ lab.Department }}
+          </li>
+        </ul>
+      </span>
+
+      <button
+        *ngIf="!isExpanded(lab._id)"
+        (click)="removeLab(lab._id)"
+        class="remove-button"
+      >
+        Decommission
+      </button>
+    </div>
+
+    <!-- Collapsible Content -->
+    <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
+      <div class="lab-detail">
+        <strong class="detail-label">Region:</strong>
+        <span class="detail-value">{{ lab.Region }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Country:</strong>
+        <span class="detail-value">{{ lab.Country }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Location:</strong>
+        <span class="detail-value">{{ lab.Location }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Location-Code:</strong>
+        <span class="detail-value">{{ lab["Location-Code"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Entity:</strong>
+        <span class="detail-value">{{ lab.Entity }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">GB:</strong>
+        <span class="detail-value">{{ lab.GB }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Local-ITL:</strong>
+        <span class="detail-value">{{ lab["Local-ITL"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Local-ITL Proxy:</strong>
+        <span class="detail-value">{{ lab["Local-ITL Proxy"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Department Head (DH):</strong>
+        <span class="detail-value">{{ lab["Department Head (DH)"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Key Account Manager (KAM):</strong>
+        <span class="detail-value">{{ lab["Key Account Manager (KAM)"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Department:</strong>
+        <span class="detail-value">{{ lab["Department"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Floor No:</strong>
+        <span class="detail-value">{{ lab["Floor"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Lab No:</strong>
+        <span class="detail-value">{{ lab["Lab No"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Primary Lab Coordinator:</strong>
+        <span class="detail-value">{{ lab["Primary Lab Coordinator"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Secondary Lab Coordinator:</strong>
+        <span class="detail-value">{{ lab["Secondary Lab Coordinator"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Cost Center:</strong>
+        <span class="detail-value">{{ lab["Cost Center"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Kind of Lab:</strong>
+        <span class="detail-value">{{ lab["Kind of Lab"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Shared Lab:</strong>
+        <span class="detail-value">{{ lab["Shared Lab"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Purpose of Lab in Brief:</strong>
+        <span class="detail-value">{{ lab["Purpose of Lab in Brief"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">Description:</strong>
+        <span class="detail-value">{{ lab["Description"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">No. of Green Ports:</strong>
+        <span class="detail-value">{{ lab["No of Green Ports"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">No. of Red Ports:</strong>
+        <span class="detail-value">{{ lab["No of Red Ports"] }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label"
+          >Is lab going to procure new equipment for Engineering/Red
+          Zone?:</strong
+        >
+        <span class="detail-value">{{
+          lab["Is lab going to procure new equipment for Engineering/Red Zone?"]
+        }}</span>
+      </div>
+      <div class="lab-detail">
+        <strong class="detail-label">ACL Required:</strong>
+        <span class="detail-value">{{ lab["ACL Required"] }}</span>
+      </div>
+
+      <button (click)="removeLab(lab._id)" class="remove-button">
+        Decommission
+      </button>
+    </div>
+  </li>
+</ul>

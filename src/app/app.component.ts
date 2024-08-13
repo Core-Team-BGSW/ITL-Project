@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, InjectionToken } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
@@ -12,10 +12,19 @@ import { SelfCheckComponent } from './components/self-check/self-check.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
+import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { MsalModule, MsalRedirectComponent } from "@azure/msal-angular";
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MatListModule } from "@angular/material/list";
+import { DialogdecommissionComponent } from './lab-decommission/dialogdecommission/dialogdecommission.component';
 
-import { HttpClient } from '@angular/common/http';
-import { DataService } from './data.service' ;
-import { NgModule } from '@angular/core';
+
+
+
+
 
 
 
@@ -26,7 +35,7 @@ import { NgModule } from '@angular/core';
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent
+      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule,MatListModule,DialogdecommissionComponent
     ]
 
 })

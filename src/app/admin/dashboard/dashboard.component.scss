@@ -1,0 +1,158 @@
+// .example-card{
+//   max-width: 100px;
+// }
+
+// .example-header-image{
+
+  @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+  .content {
+    display: flex; /* Establish flex container */
+    justify-content: space-between; /* Distribute items along the main axis (horizontally in this case) */
+    background-color: rgb(113, 121, 235);
+    width: 100%;
+    margin: 0; /* Reset default margin */
+    padding: 20px; /* Add padding as needed */
+    box-sizing: border-box;
+    color: white;
+    height: 400px;
+  }
+
+  .row {
+    display: flex; /* Nested flex container for rows */
+
+  }
+
+  .col {
+    flex: 1; /* Each column takes equal space */
+    padding: 10px; /* Adjust padding as needed */
+    border: 0px solid #ccc; /* Example border for visualization */
+  }
+  .sub-heading {
+    font-size: 1.5rem; /* Adjust font size as needed */
+    font-weight: bold; /* Adjust font weight as needed */
+    margin-bottom: 2px; /* Adjust spacing between h4 and h2 */
+    margin-top: 70px;
+
+  }
+
+  .main-heading {
+    font-size: 2.5rem; /* Adjust font size as needed */
+    font-weight: bold; /* Adjust font weight as needed */
+    margin-top: 10px; /* Remove default margin */
+
+  }
+  .mid-content{
+    padding-top: 150px;
+  }
+  .mid-image{
+    padding-top: 80px;
+  }
+
+  .courgette-regular
+  .sub-heading2{
+    color: #7841ed;
+    font-weight: bold;
+  }
+  .menu-button{
+
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding-left: 4px;
+    margin-bottom: 10px;
+    text-align: left;
+    border-radius:20px;
+  }
+  .menu-button span{
+    margin-left: 20px;
+
+    text-align: left;
+
+
+  }
+  .menu-button:hover{
+    background-color: gray;
+
+  }
+  .menu-button:focus{
+    background-color: aliceblue;
+    color:black;
+  }
+  h3{
+    padding-top: 90px;
+  }
+
+.image-container{
+  text-align: right;
+  padding-top: 70px;
+  padding-left: 50px;
+  margin-left: 60px;
+  position: relative;
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+
+}
+
+.image-container img {
+  width: 100%; /* Ensures the image fills the circle */
+  height: 350px;
+}
+
+.text{
+  text-align: center;
+  .courgette-regular {
+    font-family: "Courgette", cursive;
+    font-weight: 400;
+    font-style: normal;
+    padding-top: 50px;
+  }
+
+}
+// variables for button colors
+$primary-color: #157df3;
+$hover-color: #5089cb;
+
+// Mixin for rounded button
+@mixin rounded-button($radius: 8px) {
+  border-radius: $radius;
+  padding: 10px 20px;
+  font-size: 16px;
+
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+// Style for the custom button
+.custom-button {
+  @include rounded-button;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+
+.container{
+  padding: 10px;
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.example-card {
+  max-width: 300px;
+  flex: 1 1 300px;
+  gap: 20px;
+
+}
+
+
