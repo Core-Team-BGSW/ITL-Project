@@ -70,13 +70,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of excelData.slice(1)">
+              <tr *ngFor="let row of excelData.slice(2)">
                 <td *ngFor="let cell of row">{{ cell }}</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <a class="sub">
+        <div class="sub">
           <button
             mat-button
             class="subbutton"
@@ -85,7 +85,7 @@
           >
             Submit
           </button>
-        </a>
+        </div>
       </div>
     </div>
     <!------------------------------------------------------------------------------------------------------------------------------------>
@@ -304,6 +304,7 @@
               id="buildingSelect"
               name="buildingSelect"
               [(ngModel)]="Building"
+              title="Fill Site Details "
             >
               <option value="">Select Building</option>
             </select>
