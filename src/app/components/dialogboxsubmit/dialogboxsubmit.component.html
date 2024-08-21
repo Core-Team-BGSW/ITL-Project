@@ -24,17 +24,17 @@
     <strong
       >Is lab going to procure new equipment for Engineering/Red Zone?
     </strong>
-    {{ cmdbradio === "cmdb-yes" ? "YES" : "NO" }}
+    {{ cmdbradio === "Yes" ? "YES" : "NO" }}
   </p>
   <p>
     <strong>Shared Lab:</strong>
-    {{ sharedlabradio === "sharedlab-yes" ? "YES" : "NO" }}
+    {{ sharedlabradio === "Yes" ? "YES" : "NO" }}
   </p>
   <p>
     <strong>ACL Required:</strong>
-    {{ ACLradio === "ACL-yes" ? "YES" : "NO" }}
+    {{ ACLradio === "Yes" ? "YES" : "NO" }}
   </p>
-  <ng-container *ngIf="ACLradio === 'ACL-yes'">
+  <ng-container *ngIf="ACLradio === 'Yes'">
     <p><strong>No. of Green Ports:</strong> {{ greenports }}</p>
     <p><strong>No. of Yellow Ports:</strong> {{ yellowports }}</p>
     <p><strong>No. of Red Ports:</strong> {{ redports }}</p>

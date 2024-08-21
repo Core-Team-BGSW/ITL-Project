@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   toggleProperty = true;
 
+
   constructor() { }
   ngOnInit(): void {
     // Initialization code here

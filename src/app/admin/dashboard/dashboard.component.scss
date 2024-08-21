@@ -8,7 +8,7 @@
   .content {
     display: flex; /* Establish flex container */
     justify-content: space-between; /* Distribute items along the main axis (horizontally in this case) */
-    background-color: #9DC9FF;
+    // background-color: #9DC9FF;
     width: 100%;
     margin: 0; /* Reset default margin */
     padding: 20px; /* Add padding as needed */
@@ -32,6 +32,7 @@
     font-weight: bold; /* Adjust font weight as needed */
     margin-bottom: 2px; /* Adjust spacing between h4 and h2 */
     margin-top: 70px;
+    color: black;
 
   }
 
@@ -39,6 +40,10 @@
     font-size: 2.5rem; /* Adjust font size as needed */
     font-weight: bold; /* Adjust font weight as needed */
     margin-top: 10px; /* Remove default margin */
+    color: black;
+  }
+  .description{
+    color: rgb(60, 59, 59);
 
   }
   .mid-content{
@@ -82,21 +87,39 @@
     padding-top: 90px;
   }
 
-.image-container{
+.image-container1{
   text-align: right;
   padding-top: 70px;
-  padding-left: 50px;
+  padding-left: 70px;
   margin-left: 60px;
   position: relative;
   width: 450px;
   height: 450px;
   overflow: hidden;
-  border-radius: 50%;
-  background-color: #f0f0f0;
+  // border-radius: 50%;
+  // background-color: #f0f0f0;
 
 }
 
-.image-container img {
+.image-container1 img {
+  width: 100%; /* Ensures the image fills the circle */
+  height: 350px;
+}
+.image-container2{
+  text-align: right;
+  padding-top: 70px;
+  padding-left: 05px;
+  margin-left: 60px;
+  position: relative;
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  // border-radius: 50%;
+  // background-color: #f0f0f0;
+
+}
+
+.image-container2 img {
   width: 100%; /* Ensures the image fills the circle */
   height: 350px;
 }

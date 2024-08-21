@@ -1,23 +1,26 @@
+
 <h2>New Lab Commission</h2>
 <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
-  <mat-tab label="Import File/Form Fill">
+  <mat-tab class="choosemethod-body" label="Import File/Form Fill">
     <mat-card>
-      <mat-card-content>
+      <div>
+      <mat-card-content >
         <p class="choosemethod">Choose Method<span class="required"> *</span></p>
         <p class="note-choosemethod">For multiple lab commission, "Import File" is recommended</p>
         <section class="choosemethod-container">
           <mat-radio-group [(ngModel)]="choosemethod">
-            <mat-radio-button class="ACL-margin" value="choosemethod-import">Import File</mat-radio-button>
-            <mat-radio-button class="ACL-margin" value="choosemethod-form">Application Form</mat-radio-button>
+            <mat-radio-button  value="choosemethod-import">Import File</mat-radio-button>
+            <mat-radio-button  value="choosemethod-form">Application Form</mat-radio-button>
           </mat-radio-group>
         </section>
       </mat-card-content>
+    </div>
     </mat-card>
     <div  *ngIf="choosemethod === 'choosemethod-import'">
       <div class="heading-import">
         <p>Import File</p>
       </div>
-      <!-- <p>Upload File</p> -->
+      <!-- <p>Upload File</p> -------->
     <div class="importfile">
       <div class="importbutton">
         <a>
@@ -34,6 +37,7 @@
         <div class="buttons2">
           <button
             class="previewbutton"
+            title ="Please choose file for upload"
             [disabled]="!fileSelected"
             (click)="onPreview()"
           >
@@ -56,6 +60,7 @@
           Submit
         </button>
       </a>
+      <div class="table-container">
       <table class="excel-table">
         <thead>
           <tr>
@@ -68,6 +73,7 @@
           </tr>
         </tbody>
       </table>
+    </div>
       <a class="sub">
         <button
           mat-button
@@ -81,7 +87,9 @@
     </div>
     </div>
     <!------------------------------------------------------------------------------------------------------------------------------------>
+
     <div class="portdetails" *ngIf="choosemethod === 'choosemethod-form'">
+
       <div class="heading-form">
         <ul>
         <li>Application Form</li>
@@ -101,6 +109,7 @@
               title="APAC: Asia and Pacific
               EMEA: Europe, the Middle East, and Africa
               AMER: North, Central, and South America"
+              [ngClass]="{'selected': isSelected}"
 
             >
               <option value="">Select a Region</option>
@@ -174,17 +183,22 @@
             <select id="GBSelect" name="GB" (change)="GBChange($event)">
             <option value="">Select GB</option>
             <option value="2WP">2WP</option>
-            <option value="BEG">BEG</option>
+            <option value="BEG">MS/ENG-BEG</option>
             <option value="CS">CS</option>
-            <option value="EM">EM</option>
-            <option value="EHM">EHM</option>
+            <option value="EM">SX/NE-EM</option>
+            <option value="EHM">MS/EHM</option>
             <option value="ES">ES</option>
             <option value="ESU">ESU</option>
-            <option value="PS">PS</option>
-            <option value="PG">PG</option>
-            <option value="SDS">SDS</option>
-            <option value="TE">TE</option>
-            <option value="VM">VM</option>
+            <option value="PS">MS/NE-PS</option>
+            <option value="PG">MS/NE-PG</option>
+            <option value="SDS">MS/ENG-SDS</option>
+            <option value="TE">BGSW/TE</option>
+            <option value="VM">MS/NE-VM</option>
+            <option value="ECE">MS/ECE</option>
+            <option value="BST">MS/EMS-BST</option>
+            <option value="ETH-PG">MS/ETH-PG</option>
+            <option value="ETAS">MS/NE-ETAS</option>
+            <option value="ETH-SX">MS/ETH-SX</option>
           </select>
         </div>
         </div>
@@ -242,7 +256,7 @@
             <label for="deptselect"
               >Department <span class="required"> *</span></label
             >
-            <input type="text" id="fieldfill" placeholder="Department" [(ngModel)]="Dept" />
+            <input type="text" id="fieldfill" placeholder="Department" [(ngModel)]="Dept" title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS"/>
           </div>
           <div class="dropdown-item">
             <label for="building">Building<span class="required"> *</span></label>
@@ -270,7 +284,8 @@
             <label for="primary"
               >Primary Lab Coordinator <span class="required"> *</span></label
             >
-            <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="primarylabco"/>
+            <input type="text" id="fieldfill" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
+            [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="primarylabco"/>
           </div>
           <div class="dropdown-item">
             <label for="secondary"
@@ -310,7 +325,7 @@
             <label for="pupose"
               >Purpose of Lab in Brief<span class="required"> *</span></label
             >
-            <input type="text" id="fieldfill" placeholder="Purpose" />
+            <input type="text" id="fieldfill" placeholder="Purpose" [(ngModel)]="purposeoflab" />
           </div>
           <div class="dropdown-item">
             <label for="Brief"
@@ -327,8 +342,8 @@
           <p class="ACL-p">Is lab going to procure new equipment for Engineering/Red Zone?<span class="required"> *</span></p>
           <section class="cmdb-container">
             <mat-radio-group [(ngModel)]="cmdbradio">
-              <mat-radio-button class="cmdb-margin" value="cmdb-yes">Yes</mat-radio-button>
-              <mat-radio-button class="cmdb-margin" value="cmdb-no">No</mat-radio-button>
+              <mat-radio-button class="cmdb-margin" value="Yes">Yes</mat-radio-button>
+              <mat-radio-button class="cmdb-margin" value="No">No</mat-radio-button>
               <p class = "cmdb-explain">If yes, as per MD-07151, all the Engineering/Red Zone devices should be updated in <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/CMDB" target="_blank">SMT-CMDB</a></p>
             </mat-radio-group>
           </section>
@@ -339,8 +354,9 @@
           <p class="ACL-p">Shared Lab<span class="required"> *</span></p>
           <section class="cmdb-container">
             <mat-radio-group [(ngModel)]="sharedlabradio">
-              <mat-radio-button class="sharedlab-margin" value="sharedlab-yes">Yes</mat-radio-button>
-              <mat-radio-button class="sharedlab-margin" value="sharedlab-no">No</mat-radio-button>
+              <mat-radio-button class="sharedlab-margin" value="Yes">Yes</mat-radio-button>
+              <mat-radio-button class="sharedlab-margin" value="No">No</mat-radio-button>
+              <p class = "cmdb-explain">If multiple Departments are working in same lab, please select "Yes"</p>
             </mat-radio-group>
           </section>
         </mat-card-content>
@@ -351,15 +367,15 @@
           <p class="ACL-p">ACL Required<span class="required"> *</span></p>
           <section class="ACL-container">
             <mat-radio-group [(ngModel)]="ACLradio">
-              <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
-              <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
-              <p class = "cmdb-explain" *ngIf="ACLradio === 'ACL-yes'"><strong>Note:</strong> ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/1.+ACL+Concept" target="_blank">Click Here</a></p>
+              <mat-radio-button class="ACL-margin" value="Yes">Yes</mat-radio-button>
+              <mat-radio-button class="ACL-margin" value="No">No</mat-radio-button>
+              <p class = "cmdb-explain" *ngIf="ACLradio === 'Yes'"><strong>Note:</strong> ACL setup will take mininmum 15 days. For setup <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/1.+ACL+Concept" target="_blank">Click Here</a></p>
             </mat-radio-group>
           </section>
         </mat-card-content>
       </mat-card>
-      <div class="portdetails" *ngIf="ACLradio === 'ACL-yes'">
-        <p>Port Details</p>
+      <div class="portdetails" *ngIf="ACLradio === 'Yes'">
+        <p>Port Requirement Details</p>
         <div class="dropdown-container">
         <div class="dropdown-item">
           <label for="greenPorts"

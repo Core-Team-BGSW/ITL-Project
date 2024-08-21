@@ -1,8 +1,7 @@
-
 import { HomeComponent } from "../../admin/home/home.component";
 import { SidebarComponent } from "../../admin/sidebar/sidebar.component";
 import * as ExcelJS from 'exceljs';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { CommonModule } from '@angular/common';
 import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
@@ -10,16 +9,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import {ChangeDetectionStrategy, Component, model, Inject, inject, Output, EventEmitter} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatDialog, MatDialogModule  } from '@angular/material/dialog';
 import { DialogModule } from "@angular/cdk/dialog";
 import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
-import { v4 as uuidv4 } from 'uuid';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ChangeDetectorRef } from "@angular/core";
+import axios from 'axios';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -43,7 +44,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
-      MatDialogModule,DialogModule,], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -58,6 +59,7 @@ export class LabCommissionComponent {
   excelData: any[] = []; // Array to store parsed Excel data
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
+  isSelected = false;
   selectedRegion: string = '';
   selectedCountry: string = '';
   selectedLocation: string = '';
@@ -71,7 +73,6 @@ export class LabCommissionComponent {
   greenport: string = '';
   redport: string = '';
   yellowport: string = '';
-
   localITL: string = '';
   localITLproxy: string = '';
   KAM: string = '';
@@ -97,6 +98,45 @@ export class LabCommissionComponent {
   otherLabType: string = '';
   applications: any[] = [];
 
+  labForm!: FormGroup;
+
+
+
+  ngOnInit(): void {
+    this.labForm = this.fb.group({
+      choosemethod: ['', Validators.required],
+      localITL: ['', [Validators.required, Validators.minLength(7)]],
+      localITLproxy: [''],
+      DH: ['', Validators.required],
+      KAM: ['', Validators.required],
+      Dept: ['', Validators.required],
+      Building: [''],
+      Floor: ['', Validators.required],
+      labno: ['', Validators.required],
+      primarylabco: [''],
+      secondarylabco: [''],
+      CC: ['', Validators.required],
+      selectedLabType: ['', Validators.required],
+      otherLabType: [''],
+      cmdbradio: ['', Validators.required],
+      sharedlabradio: ['', Validators.required],
+      ACLradio: ['', Validators.required],
+      greenports: [''],
+      yellowports: [''],
+      redports: [''],
+      // Additional fields
+    });
+  }
+
+  onSubmit() {
+    if (this.labForm.valid) {
+      // Handle form submission
+    } else {
+      // Mark all fields as touched to display validation messages
+      this.labForm.markAllAsTouched();
+    }
+  }
+
 
     // /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
 
@@ -116,6 +156,8 @@ export class LabCommissionComponent {
     }
   }
 
+
+
   private parseExcel(arrayBuffer: any) {
     const workbook = new ExcelJS.Workbook();
     workbook.xlsx.load(arrayBuffer)
@@ -129,9 +171,14 @@ export class LabCommissionComponent {
         });
         this.previewVisible = true;
 
+        // Manually trigger change detection
+      this.changeDetectorRef.detectChanges();
+
         // Optionally, you can navigate to a new route or display a preview component here
         // For simplicity, we will log the data to console
         console.log('Parsed Excel Data:', this.excelData);
+
+
       })
       .catch(error => {
         console.error('Error parsing Excel:', error);
@@ -140,11 +187,41 @@ export class LabCommissionComponent {
   }
 
 
+  private uploadDataToServer(data: any) {
+    axios.post('http://localhost:3000/upload-excel', data)
+      .then(response => {
+        console.log('Data uploaded successfully:', response.data);
+      })
+      .catch(error => {
+        console.error('Error uploading data:', error);
+      });
+  }
+
 // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
   onfileSubmit(){
-    // Open confirmation dialog
-    console.log('File submitted');
-    //this.openConfirmationDialog();
+    if (!this.selectedFile) {
+      console.log('No file selected');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    axios.post('http://localhost:3000/upload-excel', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(response => {
+      console.log('File uploaded successfully:', response.data);
+      // Optionally, you can clear the selected file and reset form state here
+      this.selectedFile = null;
+      this.excelData = [];
+      this.previewVisible = false;
+    })
+    .catch(error => {
+      console.error('Error uploading file:', error);
+    });
   }
 
 
@@ -161,8 +238,10 @@ export class LabCommissionComponent {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Template Sheet');
 
-    const headerRow = worksheet.addRow(['Sr.No','Region','Country','Location', 'Location-Code', 'Entity','GB','Local-ITL','Local-ITL Proxy','DH','KAM','Dept Name','Building','Floor','Lab No','Cost Center','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','ACL Implemented(Yes/NO)']);
-    const firstRow = worksheet.addRow(['example','APAC','IN','Bangalore', 'Bani-ADUGODI', 'BGSW','PG','ada3kor','muk3kor','DH-NTID','grs2kor','EEM','ADUGODI-602','5th','C-520','654D678','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','Yes']);
+    const headerRow = worksheet.addRow(['Sr.No','Region','Country','Location', 'Location-Code', 'Entity','GB','Local-ITL','Local-ITL Proxy','Department Head (DH)','Key Account Manager (KAM)','Department','Building','Floor','Lab No.','Primary Lab Coordinator','Secondary Lab Coordinator','Cost Center','Kind of Lab','Purpose of Lab in Brief','Description','ACL Required','No. of Green Ports','No. of Yellow Ports','No. of Red Ports','Is lab going to procure new equipment for Engineering/Red Zone?','Shared Lab']);
+    const firstRow = worksheet.addRow(['1','APAC','IN','Bangalore', 'Bani-ADUGODI', 'BGSW','PG','ada3kor','muk3kor','DH-NTID','KAM-NTID','EEM','ADUGODI-602','5','C-520','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','654D678','Reliability','nexon Car dashboard','Description','Yes','3','3','4','Yes','Yes']);
+    const secondRow = worksheet.addRow(['2','APAC','IN','Coimbatore', 'Cob-SEZ', 'BGSW','PS','ada3kor','muk3kor','DH-NTID','KAM-NTID','EXE','Cob-SEZ1','3','B-340','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','652H78','Test','ECU testing','Description','No','','','','Yes','No']);
+
 
     headerRow.font = { bold: true };
     headerRow.alignment = { vertical: 'middle', horizontal: 'center' };
@@ -171,6 +250,17 @@ export class LabCommissionComponent {
         type: 'pattern',
         pattern: 'solid',
         fgColor: { argb: 'FFFF' },
+      };
+    });
+
+    secondRow.font = { italic: true };
+    secondRow.alignment = { vertical: 'middle', horizontal: 'center' };
+    secondRow.eachCell((cell, number) => {
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFFFFF' }
+
       };
     });
 
@@ -207,9 +297,9 @@ export class LabCommissionComponent {
     if (selectedregion === 'APAC') {
       this.populateOptionsR(["Select Country","AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
     } else if (selectedregion === 'EMEA') {
-      this.populateOptionsR(["DE",'PL']);
+      this.populateOptionsR(["Select Country","DE",'PL']);
     } else if (selectedregion === 'AMERICA') {
-      this.populateOptionsR(['Pune']);
+      this.populateOptionsR(["Select Country","US", "BR"]);
 
     }
     this.selectedRegion = selectedregion;
@@ -239,7 +329,7 @@ export class LabCommissionComponent {
     if (selectedcountry === 'IN') {
       this.populateOptionsL(["Select location","Bangalore", "Hyderabad",'Pune', 'Coimbatore','Nagnathpura']);
     } else if (selectedcountry === 'CN') {
-      this.populateOptionsL(['Beijing']);
+      this.populateOptionsL(["Select location",'Beijing']);
     }
     this.selectedCountry = selectedcountry;
   }
@@ -374,11 +464,9 @@ export class LabCommissionComponent {
     this.selectedGB = (event.target as HTMLSelectElement).value;
     // Automatically fill Local-ITL based on selected entity
     if (this.selectedGB === 'PG') {
-      //this.DH = 'ada3kor';
       this.KAM ='grs2kor';
-    } else {
-      //this.DH = ''; // Clear localITL for other entities
-      this.KAM ='';
+    } else if(this.selectedGB === "2WP"){
+      this.KAM ='ask2kor';
     }
 
   }
@@ -404,7 +492,7 @@ nextUniqueId: number = 1; // Initial unique ID counter
 uniqueInstanceId: string = ''
 
 
-constructor(private dialog: MatDialog,) {}
+constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder) {}
 
 onPreviewform(): void {
   const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
@@ -480,7 +568,3 @@ submittedFormData: any = "";
   }
 
 }
-
-
-
-

@@ -7,12 +7,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
 import { v4 as uuidv4 } from 'uuid'; // Import UUID library for generating unique IDs
+//import { DataService } from '../../data.service';
+import { error } from 'console';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-dialogboxsubmit',
   standalone: true,
-  imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule],
+  imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule,],
   templateUrl: './dialogboxsubmit.component.html',
   styleUrl: './dialogboxsubmit.component.scss'
 })
@@ -49,6 +52,7 @@ export class DialogboxsubmitComponent {
   sharedlabradio:string;
   ACLradio:string;
   otherLabType:string;
+  description:string;
 
 
 
@@ -56,7 +60,7 @@ export class DialogboxsubmitComponent {
 
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogboxsubmitComponent>,) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogboxsubmitComponent>, private http: HttpClient) {
     this.region = data.region;
     this.country=data.country
     this.location=data.location
@@ -76,6 +80,7 @@ export class DialogboxsubmitComponent {
     this.CC=data.CC
     this.kindoflab=data.kindoflab
     this.purposeoflab=data.purposeoflab
+    this.description=data.description
     this.ACL=data.ACL
     //this.cmdb=data.cmdb
     this.otherLabType=data.otherLabType
@@ -97,80 +102,60 @@ applications: any[] = []; // Array to hold submitted applications
 
 
   // Function to submit form data and create new application instance
-  onformsubmit() {
+  onformsubmit(): void {
+    console.log('Submit button clicked');
+    confirm('are u sure?')
+    if (confirm('Are you sure you want to submit this form?')) {
 
-    const uniqueInstanceId = uuidv4();
-console.log('Generated unique instance ID:', uniqueInstanceId);
+    const formData = {
+      region: this.region,
+      country: this.country,
+      location: this.location,
+      locationCode: this.locationcode,
+      entityName: this.entity,
+      gb: this.GB,
+      local_itl: this.localITL,
+      local_itl_proxy: this.localITLproxy,
+      dh: this.DH,
+      kam: this.KAM,
+      dep_name: this.Dept,
+      building: this.Building,
+      floor: this.Floor,
+      labNo: this.labno,
+      primary_lab_cord: this.primarylabco,
+      secondary_lab_cord: this.secondarylabco,
+      cost_center: this.CC,
+      kind_of_lab: this.kindoflab,
+      purpose_of_lab: this.purposeoflab,
+      // "ACL Required": this.ACL,
+      //otherLabType: this.otherLabType,
+      new_equipment: this.cmdbradio,
+      description:this.description,
+      shared_lab: this.sharedlabradio,
+      acl_req: this.ACLradio,
+      green_ports: this.greenports,
+      yellow_ports: this.yellowports,
+      red_ports: this.redports,
+      //approvalStatus: 'Pending' // Set approval status to 'Pending'
+    };
 
-// Example: Submit form data with unique instance ID
-const formData = {
-  instanceId: uniqueInstanceId,
-  region: this.data.region,
-  country: this.data.country,
-  location:this.data.location
-  // Add other fields as needed
-};
+    this.http.post("http://localhost:8081/boschLabs/form/submit", formData, { responseType: 'text' })
+        .subscribe({
+          next: (resultData: any) => {
+            console.log('Form submitted successfully:', resultData);
+            this.dialogRef.close(); // Close the dialog on success
+          },
+          error: (error: any) => {
+            console.error('Error submitting form:', error);
 
-// Assuming you have a method to submit form data, you can call it here
-// Replace submitForm with your actual method name
-this.formDataSubmitted.emit(formData);
-this.submitForm(formData);
-this.dialogRef.close();
-
-// Function to convert object to CSV format
-function convertToCSV(objArray: any[]) {
-  const array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-  let str = '';
-
-  for (let i = 0; i < array.length; i++) {
-    let line = '';
-    for (let index in array[i]) {
-      if (line != '') line += ',';
-
-      line += array[i][index];
+          }
+        });
+    } else {
+      console.log('Form submission cancelled by user.');
     }
-    str += line + '\r\n';
   }
 
-  return str;
-}
-
-// Function to download CSV file
-function downloadCSV(data: any[]) {
-  const csv = convertToCSV(data);
-
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement('a');
-  if (link.download !== undefined) {
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'formData.csv');
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-}
-
-// Trigger CSV download when form is submitted
-downloadCSV([formData]); // Pass your form data array here if it's an array
-
-
-  }
-
-  submitForm(formData: any): void {
-    console.log('Submitting form with data:', formData);
-
-    // Implement your form submission logic here (e.g., HTTP post request)
-  }
-
-
-  closeDialog(){
+  closeDialog(): void {
     this.dialogRef.close();
   }
-
-
 }
-
-
-
