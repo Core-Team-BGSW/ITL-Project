@@ -65,7 +65,11 @@ export class LabDecommissionComponent  implements OnInit  {
           // Remove the item from the local list
           this.labList = this.labList.filter(lab => lab._id !== id);
           this.filteredLabList = this.filteredLabList.filter(lab => lab._id !== id);
-          this.dialog.open(DialogdecommissionComponent);
+          this.dialog.open(DialogdecommissionComponent, {
+            width: '40%',  /* Increase the width of the dialog */
+            height:'200px'  /* Increase the height of the dialog */
+
+          });
         console.log('Lab removed successfully');
         },
         error: (err) => this.errorMessage = err

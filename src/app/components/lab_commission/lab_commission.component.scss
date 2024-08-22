@@ -63,7 +63,7 @@
   border-bottom: 4px solid #b6ede8; /* Add a bottom border */
   width: 100%; /* Make sure it uses the full width of its parent */
   margin: 0; /* Remove any default margin */
-  background-color: #fff; /* Optional: set background color for visibility */
+  //background-color: #fff; /* Optional: set background color for visibility */
   list-style-type: none;
 }
 
@@ -146,7 +146,11 @@
   text-decoration: none;
   border-radius: 8px;
   margin-top: 20px;
-  margin-left: 20px
+  margin-left: 20px;
+  margin-bottom: 24px;
+
+
+
 
 }
 
@@ -154,6 +158,11 @@
 
 .subbutton:hover {
   background-color: #219557; /* green on hover */
+}
+
+.sub{
+  display: flex;
+  justify-content: center;
 }
 
 
@@ -384,7 +393,7 @@ margin-top: 3px;
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  background: white;
+  //background: white;
   border: 0 none;
   border-radius: 0px;
   //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);

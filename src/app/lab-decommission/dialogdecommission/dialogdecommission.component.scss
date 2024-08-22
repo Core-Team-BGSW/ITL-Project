@@ -1,49 +1,53 @@
-/* Ensure the dialog container uses flexbox layout */
+
+
+/* General dialog styling */
+.mat-dialog-container {
+  padding: 24px;
+  max-width: 500px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%;
+}
+
+/* Title styling */
+h2[mat-dialog-title] {
+  margin: 0;
+  font-size: 36px;
+  color: #3f51b5; /* Primary color */
+
+  margin-left: 20px ;
+  margin-top: 20px;
+}
+
+/* Content styling */
 .mat-dialog-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Ensure it takes up full height */
+  margin: 16px 0;
+  font-size: 16px;
+
+  margin-left: 20px ;
+  margin-top: 20px;
 }
 
-/* Position the button container at the bottom */
-.dialog-actions {
-  margin-top: auto; /* Pushes it to the bottom */
-  text-align: right; /* Aligns the button to the right */
-  padding: 16px; /* Optional padding */
-}
-
-/* Container should be a flex container */
+/* Button container styling */
 .container {
   display: flex;
-  flex-direction: column; /* Allows vertical stacking of children */
-  height: 100px; /* Adjust the height as needed */
-  position: relative; /* Make sure the container is positioned */
-}
-
-/* Button positioning */
-.positioned-button {
-  margin-top: auto; /* Pushes the button to the bottom */
-  align-self: flex-end; /* Aligns the button to the right */
-  margin: 16px; /* Optional: Adds some spacing from the edges */
-  padding: 12px;
-  background-color: #0096E8;
-  color: aliceblue;
-  font-size: medium;
-  border: none;
-  box-sizing: border-box;
-  font-family:Arial, Helvetica, sans-serif ;
-  border-radius: 3px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-
-
-h2 {
-  align-items: center;
+  justify-content: flex-end;
   margin-top: 20px;
-  font-size: 24px;
-  font-weight: bold;
-
-
 }
+
+/* Button styling */
+.positioned-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+

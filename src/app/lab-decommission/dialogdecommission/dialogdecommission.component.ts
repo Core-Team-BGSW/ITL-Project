@@ -9,17 +9,22 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { MatFormField } from '@angular/material/form-field';
+import { MatTabLabel } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-dialogdecommission',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, MatTabLabel, MatFormField],
   templateUrl: './dialogdecommission.component.html',
   styleUrl: './dialogdecommission.component.scss'
 })
 export class DialogdecommissionComponent {
 
   readonly dialogRef = inject(MatDialogRef<DialogdecommissionComponent>);
+
+
+
 
   closeDialog(){
 

@@ -14,11 +14,11 @@ import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogbox
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-
-import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { MatListModule } from "@angular/material/list";
 import { DialogdecommissionComponent } from './lab-decommission/dialogdecommission/dialogdecommission.component';
+import { AuditComponent } from './components/audit/audit.component';
+
 
 
 
@@ -34,7 +34,9 @@ import { DialogdecommissionComponent } from './lab-decommission/dialogdecommissi
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginator, ]
+      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule,MatListModule,DialogdecommissionComponent,
+      AuditComponent,
+    ]
 
 })
 export class AppComponent {

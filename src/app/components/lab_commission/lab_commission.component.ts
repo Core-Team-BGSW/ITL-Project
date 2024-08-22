@@ -205,6 +205,13 @@ export class LabCommissionComponent {
       return;
     }
 
+    const confirmUpload = window.confirm('Are you sure you want to upload this file?');
+
+    if (!confirmUpload) {
+        console.log('File upload cancelled by user');
+        return;
+    }
+
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
