@@ -10,12 +10,13 @@ import { v4 as uuidv4 } from 'uuid'; // Import UUID library for generating uniqu
 import { DataService } from '../../data.service';
 import { error } from 'console';
 import { HttpClient } from '@angular/common/http';
+import { ToastrModule, ToastrService } from "ngx-toastr";
 
 
 @Component({
   selector: 'app-dialogboxsubmit',
   standalone: true,
-  imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule,],
+  imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule, ],
   templateUrl: './dialogboxsubmit.component.html',
   styleUrl: './dialogboxsubmit.component.scss'
 })
@@ -44,6 +45,7 @@ export class DialogboxsubmitComponent {
   CC:string;
   kindoflab:string;
   purposeoflab:string;
+  description :string;
   ACL:string;
   greenports:string;
   yellowports:string;
@@ -59,7 +61,7 @@ export class DialogboxsubmitComponent {
 
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogboxsubmitComponent>, private dataService : DataService, private http: HttpClient) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,public dialogRef: MatDialogRef<DialogboxsubmitComponent>,private toastr: ToastrService,  private dataService : DataService, private http: HttpClient) {
     this.region = data.region;
     this.country=data.country
     this.location=data.location
@@ -79,6 +81,7 @@ export class DialogboxsubmitComponent {
     this.CC=data.CC
     this.kindoflab=data.kindoflab
     this.purposeoflab=data.purposeoflab
+    this.description = data.description
     this.ACL=data.ACL
     //this.cmdb=data.cmdb
     this.otherLabType=data.otherLabType
@@ -123,6 +126,7 @@ applications: any[] = []; // Array to hold submitted applications
       "Cost Center": this.CC,
       "Kind of Lab": this.kindoflab,
       "Purpose of Lab in Brief": this.purposeoflab,
+      "Description" : this.description,
       // "ACL Required": this.ACL,
       otherLabType: this.otherLabType,
       "Is lab going to procure new equipment for Engineering/Red Zone?": this.cmdbradio,
@@ -138,11 +142,14 @@ applications: any[] = []; // Array to hold submitted applications
       next: (response) => {
         console.log('Form submitted successfully:', response);
         this.dialogRef.close(); // Close the dialog on success
+        this.toastr.success('Process initiated', 'Waiting for approval')
       },
       error: (error) => {
         console.error('Error submitting form:', error);
         // Optionally, you can show an error message
       }
+
+
 
     });
   } else {

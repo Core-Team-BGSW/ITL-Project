@@ -8,22 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class ApprovalService {
 
-  private apiUrl = 'http://localhost:3000/Lablist/pending'; // Adjust based on your server URL
-  private baseUrl = 'http://localhost:3000/Lablist/'
+  private baseUrl = 'http://localhost:3000/Lablist';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getPendingItems(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getPendingApplications(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/pending`);
   }
 
-  approveItem(data: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, data);
-    //return this.http.patch<any>(`http://localhost:3000/Lablist/${id}/approve`, {});
+  approveApplication(id: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/approve/${id}`, {});
   }
 
-  rejectItem(id: string, rejectionRemarks: string): Observable<any> {
-    return this.http.patch<any>(`http://localhost:3000/Lablist/${id}/reject`, { rejectionRemarks });
+  rejectApplication(id: string, rejectionRemarks: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/reject/${id}`, { rejectionRemarks });
   }
 }
 

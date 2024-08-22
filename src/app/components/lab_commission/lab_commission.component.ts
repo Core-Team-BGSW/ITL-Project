@@ -87,6 +87,7 @@ export class LabCommissionComponent {
   CC:string='';
   kindoflab:string='';
   purposeoflab:string='';
+  description: string='';
   ACL:string='';
   greenports:string='';
   yellowports:string='';
@@ -508,7 +509,7 @@ onPreviewform(): void {
     data: { region: this.selectedRegion, country: this.selectedCountry, location: this.selectedLocation, locationcode: this.selectedCode,
       entity: this.selectedEntity,GB: this.selectedGB,localITL: this.localITL,localITLproxy: this.localITLproxy, DH: this.DH, KAM: this.KAM,Dept: this.Dept,
       Building : this.Building,Floor: this.Floor,labno: this.labno,primarylabco: this.primarylabco, secondarylabco:this.secondarylabco,CC: this.CC,
-      kindoflab: this.selectedLabType, purposeoflab:this.purposeoflab, ACL:this.ACL, greenports:this.greenports, yellowport:this.yellowport, redport:this.redport,
+      kindoflab: this.selectedLabType, purposeoflab:this.purposeoflab,description:this.description, ACL:this.ACL, greenports:this.greenports, yellowport:this.yellowport, redport:this.redport,
       cmdbradio: this.cmdbradio, otherLabType:this.otherLabType, sharedlabradio: this.sharedlabradio, ACLradio : this.ACLradio, greenport: this.greenports, yellowports: this.yellowports,redports : this.redports
        }
   });
