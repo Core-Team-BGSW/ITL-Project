@@ -6,9 +6,11 @@
     <i><strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong></i> 
      <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span>
      <p></p>
+
      <mat-card class="custom-card">
        
       <mat-card-content>
+        
         <strong>   No.of Internal Associates </strong> 
            <input type="text" placeholder=" Internal Associates"><p></p>
          <br> <strong>No.of External Associates </strong> 
@@ -23,9 +25,9 @@
       </div>
       <p></p>
       <mat-card class="custom-card">
-        <mat-card-content>
+        
          <input type="text" matInput placeholder="No.of devices">
-         </mat-card-content>
+         
       </mat-card>
       <p></p>
       <br> 3. Is the lab(s) (including IT systems) completely independent to network-dependent IT infrastructures into LAN?
@@ -35,7 +37,7 @@
       </div>
       <p></p>
       <mat-card class="custom-card" >
-        
+        <mat-card-content>
           <!-- Your form and radio buttons here -->
           <mat-radio-group [(ngModel)]="labelPosition">
             <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
@@ -45,32 +47,33 @@
         <mat-card-actions>
           <!-- Your action buttons here -->
         </mat-card-actions>
+        </mat-card-content>
       </mat-card>
       <br>
       <p></p>
       <div class="portdetails" *ngIf="labelPosition === 'ACL1-yes'">
-        <mat-card>
-          <mat-card-content>
+        <mat-card class="custom-card">
+          
         <div class="dropdown-container">
         <div class="dropdown-item">
           Answers<span class="required"> * </span> :
           <input type="text" placeholder="Answers ">
           </div>
           </div>
-          </mat-card-content>
+          
           </mat-card>
       </div>
       <p></p>
       <div class="portdetails" *ngIf="labelPosition === 'ACL1-no'">
-        <mat-card>
-          <mat-card-content>
+        <mat-card class="custom-card">
+          
         <div class="dropdown-container">
         <div class="dropdown-item">
           Explanation<span class="required"> * </span> :
           <input type="text" placeholder="Explanation ">
           </div>
           </div>
-          </mat-card-content>
+        
           </mat-card>
       </div>
       <p></p>
@@ -93,28 +96,27 @@
       <br>
       <p></p>
       <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-yes'">
-        <mat-card>
-          <mat-card-content>
+        <mat-card class="custom-card">
+         
         <div class="dropdown-container">
         <div class="dropdown-item">
           Acceptable downtime<span class="required"> * </span> :
           <input type="text" placeholder="Acceptable downtime">
           </div>
           </div>
-          </mat-card-content>
           </mat-card>
       </div>
       <p></p>
       <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-no'">
-        <mat-card>
-          <mat-card-content>
+        <mat-card class="custom-card">
+          
         <div class="dropdown-container">
         <div class="dropdown-item">
           Answers<span class="required"> * </span> :
           <input type="text" placeholder="Answers">
           </div>
           </div>
-          </mat-card-content>
+          
           </mat-card>
       </div>
       <p></p>
@@ -137,15 +139,15 @@
         <br>
         <p></p>
         <div class="portdetails" *ngIf="labelPosition2 === 'ACL2-yes'">
-          <mat-card>
-            <mat-card-content>
+          <mat-card class="custom-card">
+            
           <div class="dropdown-container">
           <div class="dropdown-item">
-             Name and Location of the Lab: <span class="required"> * </span>
+             Name and Location of the Lab <span class="required"> * </span> :
             <input type="text" placeholder="Answers">
             </div>
         </div>
-            </mat-card-content>
+            
             </mat-card>
         </div>
         <p></p>
@@ -154,11 +156,11 @@
           </div>
           <p></p>
           <mat-card class="custom-card">
-            <mat-card-content>
+            
              
                 <input  type="text" placeholder="Maximum acceptable downtime">
                
-            </mat-card-content>
+            
             </mat-card>
     <br> 7. Do run-time critical tests take place over a longer period of time (e.g. endurance tests)? <span class="required"> * </span>
     <div class="tooltip"><i class="icon-info-sign"></i>
@@ -167,7 +169,7 @@
       </div>
       <p></p>
       <mat-card class="custom-card">
-       
+       <mat-card-content>
           <!-- Your form and radio buttons here -->
           <mat-radio-group [(ngModel)]="labelPosition3">
             <mat-radio-button class="ACL-margin" value="ACL3-yes">Yes</mat-radio-button>
@@ -177,32 +179,30 @@
         <mat-card-actions>
           <!-- Your action buttons here -->
         </mat-card-actions>
+        </mat-card-content>
       </mat-card>
       <br>
       <p></p>
       <div class="portdetails" *ngIf="labelPosition3 === 'ACL3-yes'">
-        <mat-card>
-          <mat-card-content>
+        <mat-card class="custom-card">
+          
         <div class="dropdown-container">
         <div class="dropdown-item">
           Total Time Required<span class="required"> * </span> :
           <input type="text" placeholder="Time Required">
           </div>
           </div>
-          </mat-card-content>
           </mat-card>
       </div>
       <p></p>
       <div class="portdetails" *ngIf="labelPosition3 === 'ACL3-no'">
-        <mat-card>
-          <mat-card-content>
+        <mat-card class="custom-card">
         <div class="dropdown-container">
         <div class="dropdown-item">
           Answers<span class="required"> * </span> :
           <input type="text" placeholder="Answers">
           </div>
           </div>
-          </mat-card-content>
           </mat-card>
       </div>
       <p></p>
@@ -225,28 +225,25 @@
         </mat-card>
         <p></p>
         <div class="portdetails" *ngIf="labelPosition4 === 'ACL-no'">
-          <mat-card>
-            <mat-card-content>
+          <mat-card class="custom-card">
+            
           <div class="dropdown-container">
           <div class="dropdown-item">
             Answers<span class="required"> * </span> :
             <input type="text" placeholder="Answers">
             </div>
             </div>
-            </mat-card-content>
             </mat-card>
         </div>
         <p></p>
         <div class="portdetails" *ngIf="labelPosition4 === 'ACL-yes'">
-          <mat-card>
-            <mat-card-content>
+          <mat-card class="custom-card">
           <div class="dropdown-container">
           <div class="dropdown-item">
             Answers<span class="required"> * </span> :
             <input type="text" placeholder="Answers">
             </div>
             </div>
-            </mat-card-content>
             </mat-card>
         </div>
         <p></p>
@@ -270,28 +267,28 @@
         <br>
         <p></p>
         <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-yes'">
-          <mat-card>
-            <mat-card-content>
+          <mat-card class="custom-card">
+            
           <div class="dropdown-container">
           <div class="dropdown-item">
             Total Time Required<span class="required"> * </span> :
             <input type="text" placeholder="Time Required">
             </div>
             </div>
-            </mat-card-content>
+            
             </mat-card>
         </div>
         <p></p>
         <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-no'">
-          <mat-card>
-            <mat-card-content>
+          <mat-card class="custom-card">
+           
           <div class="dropdown-container">
           <div class="dropdown-item">
             Answers<span class="required"> * </span> :
             <input type="text" placeholder="Answers">
             </div>
             </div>
-            </mat-card-content>
+            
             </mat-card>
         </div>
         <p></p>
@@ -302,7 +299,7 @@
         </div>
         <p></p>
         <mat-card class="custom-card">
-          <mat-card-content>
+         
                          <select>
                           <option>Select an option</option>
                           <option>C-SC0</option>
@@ -310,7 +307,7 @@
                           <option>C-SC2</option>
                           <option>C-SC3</option>
                          </select>
-                      </mat-card-content>
+                      
           </mat-card>
           <p></p>
       <br>  <button class="primary">Save as Draft</button>
@@ -376,7 +373,9 @@
                 <tr>
                   <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                     <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                    <mat-datepicker #picker class="custom-datepicker">
+                      
+                    </mat-datepicker></td>
                 </tr>
                </table>
                                     </mat-card>
@@ -2752,6 +2751,7 @@ Explanation<span class="required"> * </span> :
   <td style="text-align: center;">{{notapplicableCount2}}</td>
 </tr>
 </table>
-<br>  <button class="button">Back</button>
+<br>  
         <button class="success_btn" >Submit</button> 
+        <p></p>
 </mat-tab>

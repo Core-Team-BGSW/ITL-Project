@@ -1,6 +1,6 @@
 input[type=text]
 {
- width: 340px;
+ width: 300px;
  padding: 10px 15px;
  margin: 8px 0;
  display: inline-block;
@@ -91,15 +91,15 @@ select
  /* Custom background color */
 border-radius: 0px; /* Rounded corners */
 padding: 5px;/* Padding inside the card */
-width: 1200px;
+width: 98%;
+position: relative;
 box-sizing: border-box;
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+box-shadow: 0 0 20px 1px rgba(74, 112, 129, 0.4);
 display: flex;
 justify-content: space-between;
 gap: 20px;
 background: white;
-
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+border-radius: 5px;
 padding: 10px 20px;
 box-sizing: border-box;
 margin: 0 10%;
@@ -175,11 +175,11 @@ visibility: hidden;
 
 padding: 10px 0;
  width: 500px;
-background-color: rgb(115, 207, 123);
+background-color: rgb(91, 197, 91);
 color:black;
 text-align: center;
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-border-radius: 0px;
+border-radius: 8px;
 
 border-color: #000;
 position: absolute;
@@ -287,7 +287,7 @@ h2
  }
  .custom-input 
  {
-   width: 340.5px;
+   width: 300px;
    padding: 10px 15px;
    margin: 6px 0;
    display: inline-block;
@@ -295,7 +295,7 @@ h2
    background-color: white;
    border-radius: 8px;
    box-sizing: border-box;
-   border: 1.7px solid rgb(102, 122, 204);
+   border: 1.2px solid rgb(102, 122, 204);
  }
  
  /* Custom label style */
@@ -309,7 +309,16 @@ h2
  .custom-datepicker-toggle .mat-datepicker-toggle-default-icon 
  {
    color: #3f51b5; /* Example color */
+   
  }
+ .custom-datepicker-toggle .mat-datepicker-toggle-default-icon {
+  font-size: 45px; /* Adjust size as needed */
+  height: 45px;
+  width: 45px;
+}
+
+
+
  
  /* Custom styles for mat-datepicker */
  .custom-datepicker .mat-datepicker-content 
@@ -330,10 +339,28 @@ h2
  }
  
  h4{
-  color: #465bd3;
+  background-color: #2bb4ef;
   text-align: center;
-  background-color: #e9e9e9;
+  color: white;
 }
+.custom-card1{
+  border-radius: 0px; /* Rounded corners */
+padding: 2px;/* Padding inside the card */
+width: 98%;
+position: relative;
+box-sizing: border-box;
+box-shadow: 0 0 15px 1px rgba(92, 121, 134, 0.4);
+display: flex;
+justify-content: space-between;
+gap: 20px;
+background: white;
+box-sizing: border-box;
+margin: 0 10%;
+margin-bottom: 20px;
+margin-left: 10px;
+margin-top: 10px;
+}
+
 
    
 

@@ -3,26 +3,30 @@
 <p>(Select Lab for Audit)</p>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <form class="search_btn" action="action_page.php">
-  <input type="text" placeholder="Search.." name="search"
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Search Lab ..." name="search"
   style="margin:auto;max-width:300px" >
    
-<button class="search"><i class="fa fa-search"></i></button>
+<button class="search" (click)="onSearch()"><i class="fa fa-search"></i></button>
 </form>
-
-      <ul class="lab-list">
-        <li *ngFor="let lab of labList" class="lab-item">
+<p></p>
+      <div class="lab-list">
+        <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
+        
           <!-- Collapsible Section Header -->
           <div class="collapsible-header">
            
             <span (click)="toggleDetails(lab._id)">
-              <mat-card class="custom-card2">
+              <mat-card class="custom-card">
+              
                 <mat-card-content>
-              <strong>
-                {{ lab.Entity }} - {{ lab.GB }} - {{ lab.Department }} -
-                {{ lab["Lab No"] }}</strong>
+             <b> {{ lab["Lab No"] }} -
+              
+               {{ lab.Entity }} - {{ lab.GB }} - {{ lab.Department }} </b>
+                
                <div class="container">
                 <button 
                 (click)="showForms()"
+                class="lab_btn"
                >
 
                 Lab Details
@@ -40,12 +44,13 @@
             
             </div>
             
+            
       <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
         <p></p>
-        <mat-card class="custom-card1">
+       
+        <mat-card class="custom-card">
           <mat-card-content>
         <div class="lab-detail">
-          
           <strong class="detail-label">Region : </strong>
           <span class="detail-value">{{ lab.Region }}</span>
         </div>
@@ -58,7 +63,7 @@
           <span class="detail-value">{{ lab.Location }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Location-Code :</strong>
+          <strong class="detail-label">Location-Code : </strong>
           <span class="detail-value">{{ lab["Location-Code"] }}</span>
         </div>
         <div class="lab-detail">
@@ -119,6 +124,11 @@
        
         </div>
        <p></p>
+       </mat-card-content>
+       </mat-card>
+       </div>
+       </div>
+       <div>
       
         
         

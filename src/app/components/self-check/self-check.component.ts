@@ -14,6 +14,7 @@ import { DataService } from '../../data.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { FilterPipe } from '../../filter.pipe';
 
 
 
@@ -30,7 +31,7 @@ interface Question {
     MatCardModule,
     MatRadioModule,
     MatButtonModule,MatInputModule,MatTabLabel,MatTabsModule,MatNativeDateModule,
-    MatDatepickerModule,RouterLink,CommonModule,RouterOutlet,FormsModule,MatMenuModule],
+    MatDatepickerModule,RouterLink,CommonModule,RouterOutlet,FormsModule,MatMenuModule,FilterPipe],
   templateUrl: './self-check.component.html',
   styleUrl: './self-check.component.scss'
 })
@@ -165,7 +166,7 @@ dataList!: any[];
   }
  
   loadLabList(): void {
-    this.dataService.getAllData()
+    this.dataService.getAllData() 
       .subscribe({
         next: (data) => {
           this.labList = data;
@@ -184,7 +185,6 @@ dataList!: any[];
       )
     );
   }
- 
   expandedLabId: string | null = null; // To track which lab is expanded
   expandedaudit: string | null = null;
   // Toggle the visibility of the details section

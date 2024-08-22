@@ -1,6 +1,6 @@
 input[type=text]
 {
- width: 340px;
+ width: 300px;
  padding: 10px 15px;
  margin: 8px 0;
  display: inline-block;
@@ -71,26 +71,18 @@ select
    visibility: visible;
 
  }
- .button
- {
-  
-  background-color: rgb(101, 31, 54);
-  border-radius: 10px;
-  padding: 11px;
-  width: 120px;
-  color: white;
-  position: relative;
-    left: 35%;
-    
- }
+ 
 .custom-card 
 {
-background-color: rgb(245, 241, 241); /* Custom background color */
+ /* Custom background color */
 border-radius: 0px; /* Rounded corners */
 padding: 5px;/* Padding inside the card */
-width: 800px;
+width: 95%;
 box-sizing: border-box;
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+margin-bottom: 16px;
+box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
+border-radius: 15px;
+
 
 
 
@@ -200,7 +192,7 @@ h1
 h2
 {
  background-color: #fcf9f9;
- color:#3f51b5;
+ color:#394cb9;
  text-align: center;
 
 }
@@ -342,10 +334,26 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin-top: -25px; 
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: bold; 
+  
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #6fb75d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #49a138; /* Darken background on hover */
+      transform: translateY(-2px); /* Slightly move the button up on hover */
+    
+  }
+  &:active {
+    background-color: #24c034; /* Even darker background when clicked */
+    transform: translateY(1px); /* Move button slightly down when clicked */
+  }
+
 }
 .container {
   display: flex;
@@ -371,7 +379,7 @@ form.search_btn input[type=text] {
   font-size: 17px;
   border: 1px solid grey;
   width: 50%;
-  background: #f1f1f1;
+  background: white;
 }
 
 /* Style the submit button */
@@ -397,7 +405,36 @@ form.example::after {
   clear: both;
   display: table;
 }
- 
+.lab_btn{
+  background-color: #3d8bda; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  padding: 12px 24px; /* Padding around the text */
+  font-size: 16px; /* Increase font size */
+  font-weight: bold; /* Bold text */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  margin-right: 16px;
+}
+
+.lab_btn:hover {
+  background-color: #467cae; /* Darken background on hover */
+  transform: translateY(-2px); /* Slightly move the button up on hover */
+}
+
+.lab_btn:active {
+  background-color: #273081; /* Even darker background when clicked */
+  transform: translateY(1px); /* Move button slightly down when clicked */
+}
+.detail-label{
+  color: #374e65;
+}
+.search{
+  border-radius: 8px;
+  
+}
    
 
  

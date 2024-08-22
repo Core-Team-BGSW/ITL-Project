@@ -23,7 +23,7 @@ import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecomm
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe, MatPaginator, NgxPaginationModule, MatButtonModule],
+  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe,  MatButtonModule],
   templateUrl: './lab-decommission.component.html',
   styleUrl: './lab-decommission.component.scss'
 })
