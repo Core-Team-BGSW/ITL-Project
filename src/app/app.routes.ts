@@ -13,16 +13,22 @@ import { SoftwareTrackingComponent } from './components/software-tracking/softwa
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
 import { AuditComponent } from './components/audit/audit.component';
+import { LoginComponent } from './admin/login/login.component';
 
 
 
 export const routes: Routes = [
+  {path:'', redirectTo:'login', pathMatch: 'full'},
   {
+
+
     path:'',
     component:HomeComponent,
     children:[
 
+
       {path:'', component:DashboardComponent},
+      {path:'login', component:LoginComponent},
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
 

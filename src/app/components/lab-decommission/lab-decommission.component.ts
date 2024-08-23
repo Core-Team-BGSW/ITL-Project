@@ -1,20 +1,13 @@
-import { Component , OnInit, ViewChild} from '@angular/core';
+import { Component , OnInit, } from '@angular/core';
 import { DataService } from '../../data.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../filter.pipe';
-import { MatPaginator } from '@angular/material/paginator';
-import {NgxPaginationModule} from 'ngx-pagination';
-import {ChangeDetectionStrategy, inject} from '@angular/core';
+import { inject} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {
   MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
 } from '@angular/material/dialog';
 import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
 
