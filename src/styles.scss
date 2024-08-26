@@ -55,6 +55,7 @@ br{
 
 :root {
   --mat-tab-header-label-text-size: 1.2rem; /* New font size value */
+  --mdc-dialog-supporting-text-color: #467eff;
 
 
 }
@@ -68,4 +69,14 @@ br{
   font-style: normal;
 }
 
+h2.mat-dialog-title {
+  //font-family: 'Arial', sans-serif;
+  font-size: 1.5rem; /* Adjust the size as needed */
+  color: #549bff;
+  margin: 0;
+  padding: 16px;
+  background-color: #f5f5f5; /* Light gray background for the header */
+  border-bottom: 2px solid #e0e0e0; /* Subtle border for separation */
+  text-align: center; /* Center-align the title text */
+}
 

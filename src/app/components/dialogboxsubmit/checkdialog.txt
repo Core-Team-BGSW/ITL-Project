@@ -1,5 +1,5 @@
-<h2>Application Form Preview</h2>
-<div mat-dialog-content class="dialog-content">
+<h2 mat-dialog-title>Application Form Preview</h2>
+<div mat-dialog-content>
   <p><strong>Region:</strong> {{ region }}</p>
   <p><strong>Country:</strong> {{ country }}</p>
   <p><strong>Location:</strong> {{ location }}</p>
@@ -23,8 +23,8 @@
 
   <p>
     <strong
-      >Is lab going to procure new equipment for Engineering/Red Zone?</strong
-    >
+      >Is lab going to procure new equipment for Engineering/Red Zone?
+    </strong>
     {{ cmdbradio === "Yes" ? "YES" : "NO" }}
   </p>
   <p>
@@ -40,8 +40,14 @@
     <p><strong>No. of Yellow Ports:</strong> {{ yellowports }}</p>
     <p><strong>No. of Red Ports:</strong> {{ redports }}</p>
   </ng-container>
+
+  <!-- Add more details or fields as needed -->
 </div>
-<div class="dialog-actions">
-  <button mat-button (click)="onformsubmit()">Submit</button>
-  <button mat-button (click)="closeDialog()">Back</button>
+<div class="formfilldialogbuton">
+  <div mat-dialog-actions>
+    <button mat-button (click)="onformsubmit()">Submit</button>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Back</button>
+  </div>
 </div>
