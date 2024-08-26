@@ -63,7 +63,7 @@ export class LabDecommissionComponent  implements OnInit  {
             height:'200px'  /* Increase the height of the dialog */
 
           });
-        console.log('Lab removed successfully');
+        console.log('Lab removed successfully',id);
         },
         error: (err) => this.errorMessage = err
       });
