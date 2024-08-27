@@ -3,62 +3,40 @@ import { DataService } from '../../data.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { DialogboxsubmitComponent } from '../dialogboxsubmit/dialogboxsubmit.component';
+
 
 
 
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule],
+  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule, DialogboxsubmitComponent],
   templateUrl: './lab-decommission.component.html',
   styleUrl: './lab-decommission.component.scss'
 })
-export class LabDecommissionComponent  implements OnInit  {
+export class LabDecommissionComponent{
+  formData: any;
 
-  dataList!: any[];
-  labList: any[] = [];
-  errorMessage: string | undefined;
-  searchQuery: string = '';
-  filteredLabList: any[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(private http: HttpClient )
+  {
+    this.getAllLabdata();
 
-  ngOnInit(): void {
-    this.loadLabList();
   }
 
-  loadLabList(): void {
-    this.dataService.getAllData()
-      .subscribe({
-        next: (data) => {
-          this.labList = data;
-          this.filteredLabList = data; // Initialize filtered list with all data
-        },
-        error: (err) => this.errorMessage = err
-      });
+  getAllLabdata()
+  {
+    this.http.get("http://localhost:8081/boschLabs/labData/NE1-XC?entityName=BGSW")
+
+    .subscribe((resultData: any)=>
+    {
+
+        console.log(resultData);
+        this.formData = resultData;
+    });
   }
 
-  removeLab(id: string): void {
-    if (confirm('Are you sure you want to remove this lab?')) {
-      this.dataService.removeLab(id).subscribe({
-        next: () => {
-          // Remove the item from the local list
-          this.labList = this.labList.filter(lab => lab._id !== id);
-          this.filteredLabList = this.filteredLabList.filter(lab => lab._id !== id);
-        console.log('Lab removed successfully');
-        },
-        error: (err) => this.errorMessage = err
-      });
-    }
-  }
-
-  onSearch(): void {
-    const query = this.searchQuery.toLowerCase();
-    this.filteredLabList = this.labList.filter(lab =>
-      Object.values(lab).some(value =>
-        (value as string).toString().toLowerCase().includes(query)
-      )
-    );
-  }
 
 }

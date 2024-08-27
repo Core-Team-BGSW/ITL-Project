@@ -1,8 +1,8 @@
-// .example-card{
-//   max-width: 100px;
-// }
 
-// .example-header-image{
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css");
+
+
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
   @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
   .content {
@@ -31,7 +31,8 @@
     font-size: 1.5rem; /* Adjust font size as needed */
     font-weight: bold; /* Adjust font weight as needed */
     margin-bottom: 2px; /* Adjust spacing between h4 and h2 */
-    margin-top: 70px;
+    margin-top: 30px;
+    padding-top: 10px;
     color: black;
 
   }
@@ -39,7 +40,8 @@
   .main-heading {
     font-size: 2.5rem; /* Adjust font size as needed */
     font-weight: bold; /* Adjust font weight as needed */
-    margin-top: 10px; /* Remove default margin */
+    margin-top: 30px; /* Remove default margin */
+    padding-top: 30px;
     color: black;
   }
   .description{
@@ -58,31 +60,7 @@
     color: #7841ed;
     font-weight: bold;
   }
-  .menu-button{
 
-    width: 100%;
-    position: relative;
-    display: flex;
-    padding-left: 4px;
-    margin-bottom: 10px;
-    text-align: left;
-    border-radius:20px;
-  }
-  .menu-button span{
-    margin-left: 20px;
-
-    text-align: left;
-
-
-  }
-  .menu-button:hover{
-    background-color: gray;
-
-  }
-  .menu-button:focus{
-    background-color: aliceblue;
-    color:black;
-  }
   h3{
     padding-top: 90px;
   }
@@ -105,77 +83,317 @@
   width: 100%; /* Ensures the image fills the circle */
   height: 350px;
 }
-.image-container2{
-  text-align: right;
-  padding-top: 70px;
-  padding-left: 05px;
-  margin-left: 60px;
-  position: relative;
-  width: 450px;
-  height: 450px;
-  overflow: hidden;
-  // border-radius: 50%;
-  // background-color: #f0f0f0;
+.feature-heading{
 
-}
-
-.image-container2 img {
-  width: 100%; /* Ensures the image fills the circle */
-  height: 350px;
-}
-
-.text{
   text-align: center;
-  .courgette-regular {
-    font-family: "Courgette", cursive;
-    font-weight: 400;
-    font-style: normal;
-    padding-top: 50px;
-  }
-
-}
-// variables for button colors
-$primary-color: #157df3;
-$hover-color: #5089cb;
-
-// Mixin for rounded button
-@mixin rounded-button($radius: 8px) {
-  border-radius: $radius;
-  padding: 10px 20px;
-  font-size: 16px;
-
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: $hover-color;
-  }
 }
 
-// Style for the custom button
-.custom-button {
-  @include rounded-button;
-  background-color: $primary-color;
-  color: white;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    background-color: darken($primary-color, 10%);
-  }
+/* styles.css */
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// .grid-section{
+//   padding-top: 5px;
+// }
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  background-color: #3b82f6;
+}
+.container h1{
+  text-align: center;
+}
+/* Header Section */
+.header {
+  background-color: #ffffff;
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.header .highlight {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.header p {
+  color: #666;
+  margin-top: 0.5rem;
 }
 
 
-.container{
-  padding: 10px;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.row {
   display: flex;
-  gap: 40px;
-  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.row h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 3.75em;
+  margin: 0.6em 0;
+  font-weight: 600;
+  color: #070024;
+}
+.column {
+  padding: 1em;
+}
+.card {
+  padding: 3.1em 1.25em;
+  text-align: center;
+  background: linear-gradient(0deg, #397ef6 10px, transparent 10px);
+  background-repeat: no-repeat;
+  background-position: 0 0.62em;
+  box-shadow: 0 0 2.5em rgba(0, 0, 0, 0.15);
+  border-radius: 0.5em;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.card .icon {
+  font-size: 2.5em;
+  height: 2em;
+  width: 2em;
+  margin: auto;
+  background-color: #397ef6;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffffff;
+}
+.icon:before {
+  position: absolute;
+  content: "";
+  height: 1.5em;
+  width: 1.5em;
+  border: 0.12em solid #397ef6;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+.card h3 {
+  font-size: 1.3em;
+  margin: 1em 0 1.4em 0;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: #070024;
+}
+.card p {
+  line-height: 2em;
+  color: #625a71;
+}
+.card:hover {
+  background-position: 0;
+}
+.card:hover .icon:before {
+  height: 2.25em;
+  width: 2.25em;
+}
+@media screen and (min-width: 768px) {
+  section {
+    padding: 1em 7em;
+  }
+}
+@media screen and (min-width: 992px) {
+  section {
+    padding: 1em;
+  }
+  .card {
+    padding: 5em 2em;
+  }
+  .column {
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
+    padding: 0 1em;
+  }
 }
 
-.example-card {
-  max-width: 300px;
-  flex: 1 1 300px;
-  gap: 20px;
-
+// Why Choose US section
+* {
+  margin: 0;
+  padding: 0;
 }
 
 
+
+.container {
+  margin: 50px auto;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  //background-image: url("https://i.ibb.co/jVL0zvC/section-img.jpg");
+  background-size: cover;
+  background-position: 43%;
+  opacity: .8;
+  position: relative;
+}
+
+.center-div {
+ position: absolute;
+ top: 45%;
+ margin-top: -30px;
+ width: 80%;
+ left: 50%;
+ transform: translate(-50%,-50%);
+}
+
+.center-div h2 {
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.center-div p {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ccc;
+  line-height: 1.8;
+
+}
+
+.choices {
+  display: flex;
+}
+
+.left-top,
+.right-top,
+.right-bottom,
+.left-bottom {
+  position: absolute;
+  display: flex;
+  transition: .6s;
+  cursor: pointer;
+  width: 100%;
+
+}
+
+.left-top:hover,
+.right-top:hover,
+.right-bottom:hover,
+.left-bottom:hover {
+  transform: scale(1.1);
+}
+
+.left-top {
+  left: -70%;
+  top:  3%;
+}
+
+.right-top {
+  left: 70%;
+  top: 3%;
+}
+
+.right-bottom {
+  left: 70%;
+  top: 80%;
+}
+
+.left-bottom {
+  left: -70%;
+  top: 80%;
+}
+
+.left-top-circle,
+.right-top-circle,
+.right-bottom-circle,
+.left-bottom-circle {
+  position: relative;
+  background-color: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+}
+
+.left-top-circle{
+  left: 81%;
+}
+
+
+.left-bottom-circle {
+  left: 81%;
+}
+
+.left-top-circle img,
+.right-top-circle img,
+.right-bottom-circle img,
+.left-bottom-circle img {
+  width: 70%;
+  display: block;
+  position: absolute;
+  top: 15%;
+  left: 12%;
+}
+
+.left-top-text,
+.right-top-text,
+.right-bottom-text,
+.left-bottom-text {
+  position: relative;
+  padding: 8px;
+  width: 80%;
+
+}
+
+.left-top-text {
+  left: -27%;
+}
+
+.right-top-text {
+  left: 7.5%;
+}
+
+.right-bottom-text {
+  left: 7.5%;
+  top: 80%;
+}
+
+.left-bottom-text {
+  left: -27%;
+}
+
+.left-top-text h3,
+.right-top-text h3,
+.right-bottom-text h3,
+.left-bottom-text h3 {
+  text-align: right;
+  color: #263c41;
+  opacity: .9;
+  font-size: 22px;
+}
+
+.right-top-text h3,
+.right-bottom-text h3{
+  text-align: left;
+}
+
+.left-top-text p,
+.right-top-text p,
+.right-bottom-text p,
+.left-bottom-text p {
+  margin-top: 30px;
+  color: #979dac;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: justify;
+  font-size: 16px;
+}

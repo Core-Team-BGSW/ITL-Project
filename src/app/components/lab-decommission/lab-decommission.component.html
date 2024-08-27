@@ -2,7 +2,7 @@
 <p>Select Lab for Decommission</p>
 
 <!-- Search Bar -->
-<div class="search-bar">
+<!-- <div class="search-bar">
   <input
     type="text"
     [(ngModel)]="searchQuery"
@@ -10,46 +10,46 @@
     placeholder="Search labs..."
   />
   <button (click)="onSearch()">Search</button>
-</div>
+</div> -->
 
 <ul class="lab-list">
-  <li *ngFor="let lab of labList" class="lab-item">
+  <li *ngFor="let lab of formData" class="lab-item">
     <div class="lab-detail">
       <strong class="detail-label">Location:</strong>
-      <span class="detail-value">{{ lab.Location }}</span>
+      <span class="detail-value">{{ lab.location }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">Building:</strong>
-      <span class="detail-value">{{ lab.Building }}</span>
+      <span class="detail-value">{{ lab.building }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">Floor No:</strong>
-      <span class="detail-value">{{ lab["Floor No"] }}</span>
+      <span class="detail-value">{{ lab.floor }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">Lab No:</strong>
-      <span class="detail-value">{{ lab["Lab No"] }}</span>
+      <span class="detail-value">{{ lab.labNo }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">Cost Center:</strong>
-      <span class="detail-value">{{ lab["Cost Center"] }}</span>
+      <span class="detail-value">{{ lab.cost_center }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">Lab Responsible Primary:</strong>
-      <span class="detail-value">{{ lab["Lab Responsible Primary"] }}</span>
+      <span class="detail-value">{{ lab.primary_lab_cord }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">Present DH:</strong>
-      <span class="detail-value">{{ lab["Present DH"] }}</span>
+      <span class="detail-value">{{ lab.dh }}</span>
     </div>
     <div class="lab-detail">
       <strong class="detail-label">KAM:</strong>
-      <span class="detail-value">{{ lab["KAM"] }}</span>
+      <span class="detail-value">{{ lab.kam }}</span>
     </div>
-    <div class="lab-detail">
+    <!-- <div class="lab-detail">
       <strong class="detail-label">Shared/Individual:</strong>
       <span class="detail-value">{{ lab["Shared/Individual"] }}</span>
-    </div>
-    <button (click)="removeLab(lab._id)" class="remove-button">Remove</button>
+    </div> -->
+    <!-- <button (click)="removeLab(lab._id)" class="remove-button">Remove</button> -->
   </li>
 </ul>

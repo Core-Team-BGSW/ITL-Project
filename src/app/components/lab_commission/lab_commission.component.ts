@@ -86,6 +86,7 @@ export class LabCommissionComponent {
   CC:string='';
   kindoflab:string='';
   purposeoflab:string='';
+  description:string='';
   ACL:string='';
   greenports:string='';
   yellowports:string='';
