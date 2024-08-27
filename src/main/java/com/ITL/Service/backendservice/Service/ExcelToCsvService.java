@@ -47,7 +47,6 @@ public class ExcelToCsvService {
             workbook.close();
             return ResponseEntity.ok("Converted Excel file to CSV and stored at: " + csvFile.getAbsolutePath());
         } catch (IOException e) {
-            // e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error converting Excel to CSV: " + e.getMessage());
         }
     }
@@ -56,14 +55,12 @@ public class ExcelToCsvService {
     {
         for (Row row : sheet) {
             int columnCount = row.getLastCellNum();
-            //System.out.println(columnCount);
             String[] csvData = new String[columnCount];
             for (int i = 0; i < columnCount; i++) {
                 Cell cell = row.getCell(i);
                 if(cell!=null) {
                     if(cell.getCellType() == CellType.BLANK)
                     {
-                        csvData[i] = "";
                     }
                     csvData[i] = getCellValueAsString(cell);
                 }
