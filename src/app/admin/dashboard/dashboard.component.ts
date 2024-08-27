@@ -5,11 +5,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { AboutComponent } from '../about/about.component';
+import { LabCommissionComponent } from '../../components/lab_commission/lab_commission.component';
+import { SelfCheckComponent } from '../../components/self-check/self-check.component';
+import { SoftwareTrackingComponent } from '../../components/software-tracking/software-tracking.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports:[CommonModule, MatButtonModule, MatCardModule, MatToolbar,RouterLink, AboutComponent],
+  imports:[CommonModule, MatButtonModule, MatCardModule, MatToolbar,RouterLink, AboutComponent, LabCommissionComponent, SelfCheckComponent, SoftwareTrackingComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 
