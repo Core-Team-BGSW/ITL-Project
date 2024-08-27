@@ -26,7 +26,6 @@ public class CsvToDatabaseService {
             String[] nextRecord;
             csvReader.skip(1);
             nextRecord = csvReader.readNext();
-            //System.out.println(Arrays.toString(nextRecord));
             while((nextRecord != null))
             {
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;
@@ -41,7 +40,6 @@ public class CsvToDatabaseService {
                     entityMap.put(new AbstractMap.SimpleEntry<>(entityName,locationCode),entity);
                 }
                 entity.getLabDataList().add(labData);
-                System.out.println(entity.getLabDataList());
                 nextRecord = csvReader.readNext();
             }
             entityRepo.saveAll(entityMap.values());
@@ -54,7 +52,6 @@ public class CsvToDatabaseService {
 
     private Entity getEntityData(String[] nextRecord) {
         Entity entity = new Entity();
-//        entity.setId(nextRecord[0]);
         entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
         entity.setRegion(nextRecord[1]);
         entity.setCountry(nextRecord[2]);
@@ -66,7 +63,6 @@ public class CsvToDatabaseService {
 
     private LabData getLabData(String[] nextRecord) {
         LabData labData = new LabData();
-        //labData.setId(nextRecord[0]);
         labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
         labData.setEntityName(nextRecord[5]);
         labData.setGb(nextRecord[6]);

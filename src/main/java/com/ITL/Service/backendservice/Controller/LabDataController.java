@@ -34,4 +34,10 @@ public class LabDataController {
         return labDataService.deleteLabDataByPrimaryLabCoordinator(primary_lab_cord);
     }
 
+    @GetMapping("/allLabs")
+    public List<LabData> getAllLabsData()
+    {
+        return labDataService.getAllLabsData();
+    }
+
 }
