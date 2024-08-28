@@ -139,7 +139,7 @@ applications: any[] = []; // Array to hold submitted applications
       //approvalStatus: 'Pending' // Set approval status to 'Pending'
     };
 
-    this.http.post("http://localhost:8081/boschLabs/form/submit", formData, { responseType: 'text' })
+    this.http.post("http://localhost:8080/boschLabs/form/submit", formData, { responseType: 'text' })
         .subscribe({
           next: (resultData: any) => {
             console.log('Form submitted successfully:', resultData);

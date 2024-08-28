@@ -19,6 +19,7 @@ export const routes: Routes = [
     path:'',
     component:HomeComponent,
     children:[
+      {path:'', component:DashboardComponent},
       {path:'dashboard', component:DashboardComponent},
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
@@ -26,9 +27,9 @@ export const routes: Routes = [
       {path:'register', component:RegisterComponent},
       {path:'contact', component:ContactComponent},
       {path:'about', component:AboutComponent},
-      {path:'software-track',component:SoftwareTrackingComponent},
+      {path:'software-tracking',component:SoftwareTrackingComponent},
       {path:'applications', component: ApplicationsComponent},
-      {path:'labdecommission', component: LabDecommissionComponent}
+      {path:'lab-decommission', component: LabDecommissionComponent}
 
     ]
   },

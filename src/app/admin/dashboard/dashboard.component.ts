@@ -8,11 +8,12 @@ import { AboutComponent } from '../about/about.component';
 import { LabCommissionComponent } from '../../components/lab_commission/lab_commission.component';
 import { SelfCheckComponent } from '../../components/self-check/self-check.component';
 import { SoftwareTrackingComponent } from '../../components/software-tracking/software-tracking.component';
+import { LabDecommissionComponent } from '../../components/lab-decommission/lab-decommission.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports:[CommonModule, MatButtonModule, MatCardModule, MatToolbar,RouterLink, AboutComponent, LabCommissionComponent, SelfCheckComponent, SoftwareTrackingComponent],
+  imports:[CommonModule, MatButtonModule, MatCardModule, MatToolbar,RouterLink, AboutComponent, LabCommissionComponent, SelfCheckComponent, SoftwareTrackingComponent, LabDecommissionComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 

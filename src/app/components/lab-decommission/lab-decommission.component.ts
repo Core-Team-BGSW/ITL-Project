@@ -28,12 +28,12 @@ export class LabDecommissionComponent{
 
   getAllLabdata()
   {
-    this.http.get("http://localhost:8081/boschLabs/labData/NE1-XC?entityName=BGSW")
+    this.http.get("http://localhost:8080/boschLabs/allLabs")
 
     .subscribe((resultData: any)=>
     {
 
-        console.log(resultData);
+        //console.log(resultData);
         this.formData = resultData;
     });
   }
