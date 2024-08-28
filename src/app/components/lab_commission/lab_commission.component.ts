@@ -204,11 +204,12 @@ export class LabCommissionComponent {
       console.log('No file selected');
       return;
     }
+    if (confirm('Are you sure you want to submit this form?')) {
 
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    axios.post('http://localhost:3000/upload-excel', formData, {
+    axios.post('http://localhost:8080/upload/convert-excel-to-csv', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -224,7 +225,7 @@ export class LabCommissionComponent {
       console.error('Error uploading file:', error);
     });
   }
-
+  }
 
 
 

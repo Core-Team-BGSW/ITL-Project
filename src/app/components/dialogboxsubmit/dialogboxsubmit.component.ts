@@ -104,7 +104,7 @@ applications: any[] = []; // Array to hold submitted applications
   // Function to submit form data and create new application instance
   onformsubmit(): void {
     console.log('Submit button clicked');
-    confirm('are u sure?')
+
     if (confirm('Are you sure you want to submit this form?')) {
 
     const formData = {
