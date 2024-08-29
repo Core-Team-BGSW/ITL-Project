@@ -20,7 +20,11 @@ public class FormDataService {
     @Transactional
     public void saveFormData(LabFormData labFormData) {
         LabData labData = getLabData(labFormData);
-        labData = labDataRepo.save(labData);
+        LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNo(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo());
+        if(temLabData == null)
+        {
+            labData = labDataRepo.save(labData);
+        }
         Entity entity;
         if(entityRepo.findByEntityName(labFormData.getEntityName()) instanceof org.w3c.dom.Entity)
         {
@@ -39,6 +43,7 @@ public class FormDataService {
         labData.setDh(labFormData.getDh());
         labData.setGb(labFormData.getGb());
         labData.setBuilding(labFormData.getBuilding());
+        labData.setLocationCode(labFormData.getLocationCode());
         labData.setAcl_req(labFormData.getAcl_req());
         labData.setFloor(labFormData.getFloor());
         labData.setKam(labFormData.getKam());
