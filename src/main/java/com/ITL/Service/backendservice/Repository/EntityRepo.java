@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @EnableMongoRepositories
@@ -16,6 +17,7 @@ public interface EntityRepo extends MongoRepository<Entity,String> {
     @Query("{'entityName':  ?0, 'country' :  ?1}")
     List<LabData> findLabDataByEntityNameAndCountry(String entityName, String country);
     Entity findByEntityName(String name);
+    Entity findByLocationCodeAndEntityName(String locationCode, String entityName);
 
     Entity findByLocationCode(String locationCode);
 }

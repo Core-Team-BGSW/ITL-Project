@@ -22,22 +22,32 @@ public class CsvToDatabaseService {
     public final SequenceGeneratorService sequenceGeneratorService;
     public String saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
-            Map<AbstractMap.SimpleEntry<String,String>, Entity> entityMap = new HashMap<>();
             String[] nextRecord;
             csvReader.skip(1);
             nextRecord = csvReader.readNext();
+            Map<AbstractMap.SimpleEntry<String,String>,Entity> entityMap = new HashMap<>();
             while((nextRecord != null))
             {
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;
                 LabData labData = getLabData(nextRecord);
-                labDataRepo.save(labData);
+                LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNo(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo());
+                if(temLabData == null) {
+                    labDataRepo.save(labData);
+                }
+                else labData = temLabData;
+
                 String locationCode = nextRecord[4];
                 String entityName = nextRecord[5];
-                Entity entity = entityMap.get(new AbstractMap.SimpleEntry<>(entityName,locationCode));
-                if(entity == null)
+                Entity entity1 = entityRepo.findByLocationCodeAndEntityName(locationCode, entityName);
+                Entity entity = entityMap.get(new AbstractMap.SimpleEntry<>(locationCode,entityName));
+                if(entity == null && entity1 == null)
                 {
                     entity = getEntityData(nextRecord);
-                    entityMap.put(new AbstractMap.SimpleEntry<>(entityName,locationCode),entity);
+                    entityMap.put(new AbstractMap.SimpleEntry<>(locationCode,entityName),entity);
+                }
+                if(entity == null)
+                {
+                    entity = entity1;
                 }
                 entity.getLabDataList().add(labData);
                 nextRecord = csvReader.readNext();
@@ -64,6 +74,7 @@ public class CsvToDatabaseService {
     private LabData getLabData(String[] nextRecord) {
         LabData labData = new LabData();
         labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
+        labData.setLocationCode(nextRecord[4]);
         labData.setEntityName(nextRecord[5]);
         labData.setGb(nextRecord[6]);
         labData.setLocal_itl(nextRecord[7]);

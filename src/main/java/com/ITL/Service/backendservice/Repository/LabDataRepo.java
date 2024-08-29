@@ -13,4 +13,5 @@ import java.util.List;
 public interface LabDataRepo extends MongoRepository<LabData,String>,CustomLabDataRepo {
     @Query("{'entityName' :  ?0, 'gb' :  ?1}")
     List<LabData> findLabDataByEntityNameAndGb(String entityName, String gb);
+    LabData findLabDataByLocationCodeAndEntityNameAndGbAndLabNo(String locationCode, String entityName, String gb, String labNo);
 }
