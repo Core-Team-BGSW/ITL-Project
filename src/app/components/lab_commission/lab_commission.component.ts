@@ -204,7 +204,7 @@ export class LabCommissionComponent {
       console.log('No file selected');
       return;
     }
-    if (confirm('Are you sure you want to submit this form?')) {
+    if (confirm('Are you sure you want to submit the file?')) {
 
     const formData = new FormData();
     formData.append('file', this.selectedFile);
