@@ -30,9 +30,10 @@ public class CsvToDatabaseService {
             {
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;
                 LabData labData = getLabData(nextRecord);
-                LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNo(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo());
+                LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cord(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord());
                 if(temLabData == null) {
                     labDataRepo.save(labData);
+                    labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
                 }
                 else labData = temLabData;
 
@@ -43,6 +44,7 @@ public class CsvToDatabaseService {
                 if(entity == null && entity1 == null)
                 {
                     entity = getEntityData(nextRecord);
+                    entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
                     entityMap.put(new AbstractMap.SimpleEntry<>(locationCode,entityName),entity);
                 }
                 if(entity == null)
@@ -62,7 +64,6 @@ public class CsvToDatabaseService {
 
     private Entity getEntityData(String[] nextRecord) {
         Entity entity = new Entity();
-        entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
         entity.setRegion(nextRecord[1]);
         entity.setCountry(nextRecord[2]);
         entity.setLocation(nextRecord[3]);
@@ -73,7 +74,6 @@ public class CsvToDatabaseService {
 
     private LabData getLabData(String[] nextRecord) {
         LabData labData = new LabData();
-        labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
         labData.setLocationCode(nextRecord[4]);
         labData.setEntityName(nextRecord[5]);
         labData.setGb(nextRecord[6]);

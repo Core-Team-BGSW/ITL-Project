@@ -20,11 +20,14 @@ public class FormDataService {
     @Transactional
     public void saveFormData(LabFormData labFormData) {
         LabData labData = getLabData(labFormData);
-        LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNo(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo());
+        LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cord(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord());
         if(temLabData == null)
         {
             labData = labDataRepo.save(labData);
+            labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
         }
+        else labData = temLabData;
+
         Entity entity;
         if(entityRepo.findByEntityName(labFormData.getEntityName()) instanceof org.w3c.dom.Entity)
         {
@@ -35,11 +38,11 @@ public class FormDataService {
         entity = getEntityData(labFormData);
         entity.getLabDataList().add(labData);
         entityRepo.save(entity);
+        entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
     }
     public LabData getLabData(LabFormData labFormData)
     {
         LabData labData = new LabData();
-        labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
         labData.setDh(labFormData.getDh());
         labData.setGb(labFormData.getGb());
         labData.setBuilding(labFormData.getBuilding());
@@ -68,7 +71,6 @@ public class FormDataService {
     public Entity getEntityData(LabFormData labFormData)
     {
         Entity entity = new Entity();
-        entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
         entity.setEntityName(labFormData.getEntityName());
         entity.setCountry(labFormData.getCountry());
         entity.setLocationCode(labFormData.getLocationCode());

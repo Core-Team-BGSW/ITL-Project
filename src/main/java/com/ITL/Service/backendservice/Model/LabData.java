@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @CompoundIndexes({
-        @CompoundIndex(name = "unique_key", def = "{'locationCode' : 1, 'entityName' : 1, 'gb' : 1, 'labNo' : 1}", unique = true)
+        @CompoundIndex(name = "unique_key", def = "{'locationCode' : 1, 'entityName' : 1, 'gb' : 1, 'labNo' : 1, 'primary_lab_cord' : 1}", unique = true)
 })
 public class LabData {
     @Id
