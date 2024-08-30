@@ -52,6 +52,7 @@ mat-icon{
       margin-bottom: 10px; /* Adjust spacing between buttons vertically */
       display: flex;
       align-items: center;
+      border-radius: 8px;
     }
   }
 }
@@ -74,14 +75,14 @@ mat-icon{
 
   }
   .menu-button span{
-    margin-left: 20px;
+    margin-left: 4px;
 
     text-align: left;
 
 
   }
   .menu-button:hover{
-    background-color: gray;
+    background-color: aliceblue;
 
   }
   .menu-button:focus{
@@ -107,4 +108,18 @@ mat-icon{
 
 .mat-mdc-button {
   justify-content: flex-start;
+}
+
+
+.mat-drawer-inner-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #101112;
+}
+
+
+.mat-mdc-button>.mat-icon{
+  margin-left: 8px;
 }

@@ -12,6 +12,8 @@ import { AboutComponent } from './admin/about/about.component';
 import { SoftwareTrackingComponent } from './components/software-tracking/software-tracking.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
+import { AuditComponent } from './components/audit/audit.component';
+
 
 
 export const routes: Routes = [
@@ -21,6 +23,8 @@ export const routes: Routes = [
     children:[
       {path:'', component:DashboardComponent},
       {path:'dashboard', component:DashboardComponent},
+
+      {path:'', component:DashboardComponent},
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
 
@@ -29,7 +33,9 @@ export const routes: Routes = [
       {path:'about', component:AboutComponent},
       {path:'software-tracking',component:SoftwareTrackingComponent},
       {path:'applications', component: ApplicationsComponent},
-      {path:'lab-decommission', component: LabDecommissionComponent}
+      {path:'lab-decommission', component: LabDecommissionComponent},
+      {path:'audit', component: AuditComponent},
+
 
     ]
   },

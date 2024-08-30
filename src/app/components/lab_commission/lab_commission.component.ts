@@ -204,12 +204,18 @@ export class LabCommissionComponent {
       console.log('No file selected');
       return;
     }
-    if (confirm('Are you sure you want to submit the file?')) {
+
+    const confirmUpload = window.confirm('Are you sure you want to upload this file?');
+
+    if (!confirmUpload) {
+        console.log('File upload cancelled by user');
+        return;
+    }
 
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    axios.post('http://localhost:8080/upload/convert-excel-to-csv', formData, {
+    axios.post('http://localhost:3000/upload-excel', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -225,7 +231,7 @@ export class LabCommissionComponent {
       console.error('Error uploading file:', error);
     });
   }
-  }
+
 
 
 
@@ -570,3 +576,9 @@ submittedFormData: any = "";
   }
 
 }
+
+
+
+
+
+

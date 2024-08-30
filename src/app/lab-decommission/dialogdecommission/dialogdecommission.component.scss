@@ -1,0 +1,53 @@
+
+
+/* General dialog styling */
+.mat-dialog-container {
+  padding: 24px;
+  max-width: 500px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 80%;
+}
+
+/* Title styling */
+h2[mat-dialog-title] {
+  margin: 0;
+  font-size: 36px;
+  color: #3f51b5; /* Primary color */
+
+  margin-left: 20px ;
+  margin-top: 20px;
+}
+
+/* Content styling */
+.mat-dialog-content {
+  margin: 16px 0;
+  font-size: 16px;
+
+  margin-left: 20px ;
+  margin-top: 20px;
+}
+
+/* Button container styling */
+.container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Button styling */
+.positioned-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+

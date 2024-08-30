@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-dialogboxsubmit',
   standalone: true,
   imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule,],
+  imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule,],
   templateUrl: './dialogboxsubmit.component.html',
   styleUrl: './dialogboxsubmit.component.scss'
 })

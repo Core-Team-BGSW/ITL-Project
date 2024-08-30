@@ -26,10 +26,23 @@ export class DataService {
       catchError(this.handleError)
     );
   }
+  submitForm(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl, data);
+  }
 
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error.message);
     return throwError(() => new Error('Something went wrong; please try again later.'));
+  }
+
+
+  getPendingApplications(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/pending`);
+  }
+
+  updateApplicationStatus(id: string, status: string, rejectionRemarks?: string): Observable<any> {
+    const body = { approvalStatus: status, rejectionRemarks };
+    return this.http.patch<any>(`${this.baseUrl}/${id}/approve-or-reject`, body);
   }
 
 }
