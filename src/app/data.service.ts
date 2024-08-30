@@ -12,6 +12,7 @@ export class DataService {
 
   private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
 
+
   constructor(private http: HttpClient) {}
 
   getAllData(): Observable<any[]> {
@@ -44,5 +45,8 @@ export class DataService {
     const body = { approvalStatus: status, rejectionRemarks };
     return this.http.patch<any>(`${this.baseUrl}/${id}/approve-or-reject`, body);
   }
+
+
+
 
 }

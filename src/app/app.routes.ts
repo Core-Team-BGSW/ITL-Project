@@ -14,6 +14,7 @@ import { ApplicationsComponent } from './components/applications/applications.co
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
 import { AuditComponent } from './components/audit/audit.component';
 import { LoginComponent } from './admin/login/login.component';
+import { SelfAuditComponent } from './self-audit/self-audit.component';
 
 
 
@@ -31,6 +32,7 @@ export const routes: Routes = [
       {path:'login', component:LoginComponent},
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
+      {path: 'self-audit', component: SelfAuditComponent},
 
       {path:'register', component:RegisterComponent},
       {path:'contact', component:ContactComponent},

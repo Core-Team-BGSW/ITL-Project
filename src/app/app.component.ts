@@ -20,6 +20,7 @@ import { DialogdecommissionComponent } from './lab-decommission/dialogdecommissi
 import { AuditComponent } from './components/audit/audit.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { LoginComponent } from './admin/login/login.component';
+import { SelfAuditComponent } from './self-audit/self-audit.component';
 
 
 
@@ -37,7 +38,7 @@ import { LoginComponent } from './admin/login/login.component';
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
       ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule,MatListModule,DialogdecommissionComponent,
-      AuditComponent,ToastrModule, LoginComponent
+      AuditComponent,ToastrModule, LoginComponent, SelfAuditComponent
     ]
 
 })
