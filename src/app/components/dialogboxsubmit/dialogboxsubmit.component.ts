@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-dialogboxsubmit',
   standalone: true,
-  imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule,],
+  imports: [CommonModule,LabCommissionComponent,AppComponent,MatDialogModule,MatInputModule, ],
   templateUrl: './dialogboxsubmit.component.html',
   styleUrl: './dialogboxsubmit.component.scss'
 })
@@ -44,6 +44,7 @@ export class DialogboxsubmitComponent {
   CC:string;
   kindoflab:string;
   purposeoflab:string;
+  description :string;
   ACL:string;
   greenports:string;
   yellowports:string;
@@ -80,6 +81,7 @@ export class DialogboxsubmitComponent {
     this.CC=data.CC
     this.kindoflab=data.kindoflab
     this.purposeoflab=data.purposeoflab
+    this.description = data.description
     this.description=data.description
     this.ACL=data.ACL
     //this.cmdb=data.cmdb
@@ -127,6 +129,26 @@ applications: any[] = []; // Array to hold submitted applications
       cost_center: this.CC,
       kind_of_lab: this.kindoflab,
       purpose_of_lab: this.purposeoflab,
+      Region: this.region,
+      Country: this.country,
+      Location: this.location,
+      "Location-Code": this.locationcode,
+      Entity: this.entity,
+      GB: this.GB,
+      "Local-ITL": this.localITL,
+      "Local-ITL Proxy": this.localITLproxy,
+      "Department Head (DH)": this.DH,
+      "Key Account Manager (KAM)": this.KAM,
+      Department: this.Dept,
+      Building: this.Building,
+      Floor: this.Floor,
+      "Lab No": this.labno,
+      "Primary Lab Coordinator": this.primarylabco,
+      "Secondary Lab Coordinator": this.secondarylabco,
+      "Cost Center": this.CC,
+      "Kind of Lab": this.kindoflab,
+      "Purpose of Lab in Brief": this.purposeoflab,
+      "Description" : this.description,
       // "ACL Required": this.ACL,
       //otherLabType: this.otherLabType,
       new_equipment: this.cmdbradio,

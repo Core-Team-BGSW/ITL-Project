@@ -18,6 +18,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { MatListModule } from "@angular/material/list";
 import { DialogdecommissionComponent } from './lab-decommission/dialogdecommission/dialogdecommission.component';
 import { AuditComponent } from './components/audit/audit.component';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { LoginComponent } from './admin/login/login.component';
 
 
 
@@ -35,7 +37,7 @@ import { AuditComponent } from './components/audit/audit.component';
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
       ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule,MatListModule,DialogdecommissionComponent,
-      AuditComponent,
+      AuditComponent,ToastrModule, LoginComponent
     ]
 
 })

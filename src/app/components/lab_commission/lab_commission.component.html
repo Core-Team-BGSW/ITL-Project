@@ -408,16 +408,26 @@
               </div>
             </div>
             <div class="dropdown-item">
-              <label for="pupose"
+              <label for="purpose"
                 >Purpose of Lab in Brief<span class="required"> *</span></label
               >
-              <input type="text" id="fieldfill" placeholder="Purpose" />
+              <input
+                type="text"
+                id="fieldfill"
+                placeholder="Purpose"
+                [(ngModel)]="purposeoflab"
+              />
             </div>
             <div class="dropdown-item">
-              <label for="Brief"
+              <label for="description"
                 >Description<span class="required"> *</span>
               </label>
-              <input type="text" id="fieldfill" placeholder="Description" />
+              <input
+                type="text"
+                id="fieldfill"
+                placeholder="Description"
+                [(ngModel)]="description"
+              />
             </div>
           </div>
         </div>

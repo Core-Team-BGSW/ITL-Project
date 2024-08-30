@@ -1,4 +1,4 @@
-import { Component , OnInit} from '@angular/core';
+
 import { DataService } from '../../data.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DialogboxsubmitComponent } from '../dialogboxsubmit/dialogboxsubmit.component';
 
+import { FilterPipe } from '../../filter.pipe';
+import { Component, inject} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {
+  MatDialog,
+} from '@angular/material/dialog';
+import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
 
 
 
