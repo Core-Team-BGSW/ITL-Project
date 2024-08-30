@@ -5,18 +5,18 @@
       <div>
         <mat-card-content>
           <p class="choosemethod">
-            Choose Method<span class="required"> *</span>
+            Choose Option<span class="required"> *</span>
           </p>
           <p class="note-choosemethod">
             For multiple lab commission, "Import File" is recommended
           </p>
           <section class="choosemethod-container">
             <mat-radio-group [(ngModel)]="choosemethod">
-              <mat-radio-button value="choosemethod-import"
-                >Import File</mat-radio-button
-              >
-              <mat-radio-button value="choosemethod-form"
+              <mat-radio-button class="radiotext" value="choosemethod-form"
                 >Application Form</mat-radio-button
+              >
+              <mat-radio-button class="radiotext" value="choosemethod-import"
+                >Import File</mat-radio-button
               >
             </mat-radio-group>
           </section>

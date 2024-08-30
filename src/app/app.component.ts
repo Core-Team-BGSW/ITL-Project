@@ -13,8 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import {NgxPaginationModule} from 'ngx-pagination';
 import { MatListModule } from "@angular/material/list";
 import { DialogdecommissionComponent } from './lab-decommission/dialogdecommission/dialogdecommission.component';
 import { AuditComponent } from './components/audit/audit.component';
@@ -37,7 +35,7 @@ import { SelfAuditComponent } from './self-audit/self-audit.component';
     styleUrl: './app.component.scss',
     imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
       SidebarComponent, HomeComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatPaginatorModule,MatPaginator, NgxPaginationModule,MatListModule,DialogdecommissionComponent,
+      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatListModule,DialogdecommissionComponent,
       AuditComponent,ToastrModule, LoginComponent, SelfAuditComponent
     ]
 
