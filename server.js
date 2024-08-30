@@ -1,6 +1,3 @@
-
-
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -8,9 +5,10 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const ExcelJS = require('exceljs');
 //const upload = multer({ storage: multer.memoryStorage() });
-
+// const User = require('./models/User');
 const app = express();
 const port = process.env.PORT || 3000;
+
 
 // Middleware
 app.use(cors());
@@ -320,6 +318,37 @@ app.post('/Lablist/approve/:id', async (req, res) => {
 //   }
 // });
 
+
+app.post('/registernew', async (req, res) => {
+  try {
+    const { username, password, email } = req.body;
+
+    // Validate input
+    if (!username || !password || !email) {
+      return res.status(400).json({ error: 'Username, password, and email are required' });
+    }
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Username already taken' });
+    }
+
+    // Create a new user
+    const user = new User({ username, password, email });
+    await user.save();
+
+    // Respond with the created user (excluding password)
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email
+    });
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 
 
