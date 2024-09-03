@@ -128,7 +128,10 @@ color: #fd0303;
 }
 p
 {
-text-align: center;
+text-align: left;
+color: #fd0303;
+font-size: larger;
+font-weight: bold;
 }
 u
 {
@@ -175,12 +178,6 @@ color: #fff;
 {
    visibility: visible;
  }
-
-p
-{
- text-align: left;
- font-size: medium;
-}
 h1
 {
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -191,9 +188,11 @@ h1
 }
 h2
 {
- background-color: #fcf9f9;
- color:#394cb9;
- text-align: center;
+ color:#0e1126;
+ text-align: left;
+ font-weight: 400;
+ text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Shadow */
+ 
 
 }
  .btn 
@@ -254,13 +253,6 @@ h2
  td
  {
    height: 30px;
- }
- p
- {
-   text-align: center;
-   color: grey;
-   font-size: large;
-   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
  }
  .custom-input 
  {
@@ -377,7 +369,7 @@ h4{
 form.search_btn input[type=text] {
   padding: 10px;
   font-size: 17px;
-  border: 1px solid grey;
+  border: 1px solid rgb(211, 210, 210);
   width: 50%;
   background: white;
 }
@@ -393,6 +385,8 @@ form.search_btn button {
   border: 1px solid grey;
   border-left: none; /* Prevent double borders */
   cursor: pointer;
+  margin-left: 10px;
+  
 }
 
 form.example button:hover {
@@ -435,7 +429,10 @@ form.example::after {
   border-radius: 8px;
   
 }
-   
+.btn_upload_doc{
+  background-color: rgb(227, 186, 111);
+  margin-right: 10px;
+}
 
  
 

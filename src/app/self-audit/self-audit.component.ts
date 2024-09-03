@@ -9,6 +9,8 @@ import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { MatDatepickerModule, matDatepickerAnimations } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 
 
@@ -141,4 +143,162 @@ notapplicableCount2: number = 0;
   console.log('Fulfilled Count:', this.notFulfilledCount2);
   console.log('Fulfilled Count:', this.notapplicableCount2);
 }
+linkForm: FormGroup;
+ 
+  constructor(private fb: FormBuilder) {
+    this.linkForm = this.fb.group({
+      website: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      website1: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      website2: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      website3: ['', [Validators.required, Validators.pattern('https?://.+')]]
+    });
+  }
+ 
+  onSubmit() {
+    if (this.linkForm.valid) {
+      console.log('Form Submitted!', this.linkForm.value);
+    }
+  }
+  selectedFile: File | null = null;
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+      console.log('Selected file:', this.selectedFile);
+    }
+  }
+ 
+
+  
+  selectedFile1: File | null = null;
+  selectedFile2: File | null = null;
+  selectedFile3: File | null = null;
+  selectedFile4: File | null = null;
+  selectedFile5: File | null = null;
+  selectedFile6: File | null = null;
+  selectedFile7: File | null = null;
+
+  onFileSelected1(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile1 = input.files[0];
+      console.log('Selected file:', this.selectedFile1);
+    }
+  }
+  onFileSelected2(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile2 = input.files[0];
+      console.log('Selected file:', this.selectedFile2);
+    }
+  }
+  onFileSelected3(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile3 = input.files[0];
+      console.log('Selected file:', this.selectedFile3);
+    }
+  }
+  onFileSelected4(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile4 = input.files[0];
+      console.log('Selected file:', this.selectedFile4);
+    }
+  }
+  onFileSelected5(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile5 = input.files[0];
+      console.log('Selected file:', this.selectedFile5);
+    }
+  }
+  onFileSelected6(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile6 = input.files[0];
+      console.log('Selected file:', this.selectedFile6);
+    }
+  }
+  onFileSelected7(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile7 = input.files[0];
+      console.log('Selected file:', this.selectedFile7);
+    }
+  }
+  onUpload(): void {
+    if (this.selectedFile) {
+      // Implement your upload logic here
+      console.log('Uploading file:', this.selectedFile);
+          }
+    if (this.selectedFile1){
+            console.log('Uploading file:', this.selectedFile1);
+          }
+    if (this.selectedFile2){
+       console.log('Uploading file:', this.selectedFile2);
+          }
+     if (this.selectedFile3){
+        console.log('Uploading file:', this.selectedFile3);
+           }
+  if (this.selectedFile4){
+    console.log('Uploading file:', this.selectedFile4);
+       }
+if (this.selectedFile5){
+        console.log('Uploading file:', this.selectedFile5);
+           }
+ if (this.selectedFile6){
+     console.log('Uploading file:', this.selectedFile6);
+          }
+  if (this.selectedFile7){
+      console.log('Uploading file:', this.selectedFile7);
+           }
 }
+data: any[] = [
+];
+
+generateExcelFile(): void {
+  const heading = [['Engineering Lab Asset Inventory - Client Hardware - IT Devices']];
+  const columnHeadings = [['Computer name', 'Common account', 'User access list']]; 
+  const worksheetData = [
+    { Name: 'Name', Age: 'Age', Address: 'Address' },
+    ...this.data
+  ];
+
+  // Step 4: Convert JSON to worksheet
+  const worksheet = XLSX.utils.json_to_sheet(worksheetData, { skipHeader: true });
+
+  // Step 5: Add the custom heading at the top
+  XLSX.utils.sheet_add_aoa(worksheet, heading, { origin: 'A1' });
+
+  // Step 6: Add the additional rows below the custom heading
+
+  XLSX.utils.sheet_add_aoa(worksheet, columnHeadings, { origin: -1 });
+
+  // Step 7: Merge the first row across the three columns (A1:C1)
+  worksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 2 } }];
+  
+  // Step 8: Create a workbook and add the worksheet
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+  worksheet['!cols'] = [{ wpx: 200 }, { wpx: 200 }, { wpx: 200 }]; // Set column widths
+ 
+ 
+  
+  
+  // Step 9: Generate buffer
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+  // Step 10: Convert buffer to blob
+  const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+
+  // Step 11: Save the file
+  saveAs(blob, 'Copy of remote access list.xlsx');
+}
+    
+}
+
+
+ 
+
