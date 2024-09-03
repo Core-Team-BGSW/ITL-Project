@@ -228,7 +228,11 @@ dataList!: any[];
     this.isFormExpanded = !this.isFormExpanded;
   
 }
+isDropdownVisible = false;
 
+toggleDropdown() {
+  this.isDropdownVisible = !this.isDropdownVisible;
+}
 
 }
 

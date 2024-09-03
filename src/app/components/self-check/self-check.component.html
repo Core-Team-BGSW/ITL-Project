@@ -1,6 +1,6 @@
 
-<h2 style="background-color:rgb(221, 224, 227)">Self Audit Form </h2>
-<p>(Select Lab for Audit)</p>
+<h2 >Self Audit Form :</h2>
+<i><p style="color:red"> (Select Lab for Audit)</p></i>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <form class="search_btn" action="action_page.php">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search Lab ..." name="search"
@@ -19,9 +19,9 @@
               <mat-card class="custom-card">
               
                 <mat-card-content>
-             <b> {{ lab["Lab No"] }} -
+             <b> {{ lab["Lab No"] }} ->
               
-               {{ lab.Entity }} - {{ lab.GB }} - {{ lab.Department }} </b>
+               {{ lab.Entity }}  ->  {{ lab.GB }}  ->  {{ lab.Department }}  </b> 
                 
                <div class="container">
                 <button 
@@ -31,20 +31,17 @@
 
                 Lab Details
         
-                </button> 
+                </button>
+                
                 <button routerLink="/self-audit"  >
                   Self-Audit
              </button> 
+            
               </div> 
               </mat-card-content>
             </mat-card>
             </span>
-          
-           
-            
-            </div>
-            
-            
+            </div>    
       <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
         <p></p>
        
@@ -121,8 +118,7 @@
         <div class="lab-detail">
           <strong class="detail-label">Shared Lab : </strong>
           <span class="detail-value">{{ lab["Shared lab"] }}</span>
-       
-        </div>
+            </div>
        <p></p>
        </mat-card-content>
        </mat-card>
