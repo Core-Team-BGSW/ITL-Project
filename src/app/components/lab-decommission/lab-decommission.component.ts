@@ -7,7 +7,6 @@ import { FilterPipe } from '../../filter.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
-// import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-lab-decommission',
@@ -26,34 +25,36 @@ export class LabDecommissionComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   private http = inject(HttpClient);
 
-  // API URL for the Spring Boot backend
-  private apiUrl = `http://localhost:8080/boschLabs/allLabs`;
+
+  private apiurl = 'http://localhost:8080/boschLabsByEntity/allEntity';
 
   constructor() {}
 
   ngOnInit(): void {
     this.loadLabList();
+    //this.fetchEntityData();
   }
 
   loadLabList(): void {
-    this.http.get<any[]>(`${this.apiUrl}`)
+    this.http.get<any[]>(`${this.apiurl}`)
       .subscribe({
         next: (data) => {
-          this.labList = data;
-          this.filteredLabList = data; // Initialize filtered list with all data
+          this.labList = data.flatMap(item => item.labDataList.map((lab: any) => ({ ...lab, ...item })));
+          this.filteredLabList = this.labList; // Initialize filtered list with all data
         },
         error: (err) => this.errorMessage = err
       });
   }
 
+
+
   removeLab(id: string): void {
     if (confirm('Are you sure you want to remove this lab?')) {
-      this.http.delete<void>(`${this.apiUrl}/delete/${id}`)
+      this.http.delete<void>(`${this.apiurl}/delete/${id}`)
         .subscribe({
           next: () => {
-            // Remove the item from the local list
-            this.labList = this.labList.filter(lab => lab._id !== id);
-            this.filteredLabList = this.filteredLabList.filter(lab => lab._id !== id);
+            this.labList = this.labList.filter(lab => lab.id !== id);
+            this.filteredLabList = this.filteredLabList.filter(lab => lab.id !== id);
             this.dialog.open(DialogdecommissionComponent, {
               width: '40%',
               height: '200px'
