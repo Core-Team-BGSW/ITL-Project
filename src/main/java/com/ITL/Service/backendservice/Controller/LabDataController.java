@@ -1,5 +1,6 @@
 package com.ITL.Service.backendservice.Controller;
 
+import com.ITL.Service.backendservice.DTO.LabDataWithEntityDTO;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.LabDataService;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,11 @@ public class LabDataController {
     public List<LabData> getAllLabsData()
     {
         return labDataService.getAllLabsData();
+    }
+
+    @GetMapping("/allLabsWithEntity")
+    public List<LabDataWithEntityDTO> getAllLabDataWithEntities() {
+        return labDataService.getAllLabDataWithEntities();
     }
 
 }
