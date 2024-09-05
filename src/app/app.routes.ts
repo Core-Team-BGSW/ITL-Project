@@ -18,7 +18,7 @@ import { LoginComponent } from './admin/login/login.component';
 
 
 export const routes: Routes = [
-  {path:'', redirectTo:'login', pathMatch: 'full'},
+
   {
 
 
