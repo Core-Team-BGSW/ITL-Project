@@ -30,7 +30,7 @@ public class CsvToDatabaseService {
             {
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;
                 LabData labData = getLabData(nextRecord);
-                LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cord(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord());
+                LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cordAndDep_name(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord(), labData.getDep_name());
                 if(temLabData == null) {
                     labDataRepo.save(labData);
                     labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));

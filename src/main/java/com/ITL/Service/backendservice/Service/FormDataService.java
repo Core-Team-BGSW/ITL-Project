@@ -20,7 +20,7 @@ public class FormDataService {
     @Transactional
     public void saveFormData(LabFormData labFormData) {
         LabData labData = getLabData(labFormData);
-        LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cord(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord());
+        LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cordAndDep_name(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord(), labData.getDep_name());
         if(temLabData == null)
         {
             labData = labDataRepo.save(labData);

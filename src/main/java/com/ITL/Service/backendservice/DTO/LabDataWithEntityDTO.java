@@ -1,22 +1,13 @@
-package com.ITL.Service.backendservice.Model;
+package com.ITL.Service.backendservice.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "lab_data")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@CompoundIndexes({
-        @CompoundIndex(name = "unique_key", def = "{'locationCode' : 1, 'entityName' : 1, 'gb' : 1, 'labNo' : 1, 'primary_lab_cord' : 1, 'dep_name' : 1}", unique = true)
-})
-public class LabData {
-    @Id
+public class LabDataWithEntityDTO {
     private String id;
     private long seqId;
     private String gb;
@@ -42,5 +33,7 @@ public class LabData {
     private String green_ports;
     private String yellow_ports;
     private String red_ports;
+    private String region;
+    private String country;
+    private String location;
 }
-
