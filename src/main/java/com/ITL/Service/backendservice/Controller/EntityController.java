@@ -1,5 +1,6 @@
 package com.ITL.Service.backendservice.Controller;
 
+import com.ITL.Service.backendservice.Model.Entity;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.EntityService;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class EntityController {
     public List<LabData> getLabDataByEntityNameAndCountry(@RequestParam String entityName, @RequestParam String country)
     {
         return entityService.getLabDataByEntityNameAndCountry(entityName,country);
+    }
+    @GetMapping("/allEntity")
+    public List<Entity> getAllEntityData()
+    {
+        return entityService.getAllEntityData();
     }
 }
