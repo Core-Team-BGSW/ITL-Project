@@ -45,5 +45,4 @@ public class LabDataController {
     public List<LabDataWithEntityDTO> getAllLabDataWithEntities() {
         return labDataService.getAllLabDataWithEntities();
     }
-
 }
