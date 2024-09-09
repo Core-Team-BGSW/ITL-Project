@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LabDataWithEntityDTO {
     private String id;
-    private long seqId;
     private String gb;
     private String local_itl;
     private String entityName;
