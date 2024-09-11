@@ -21,6 +21,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ChangeDetectorRef } from "@angular/core";
 import axios from 'axios';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 
 
@@ -44,7 +46,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
-      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -54,6 +56,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class LabCommissionComponent {
 
+
   fileSelected = false;
   selectedFile: File | null = null; // Initialize selectedFile to null
   excelData: any[] = []; // Array to store parsed Excel data
@@ -61,16 +64,22 @@ export class LabCommissionComponent {
   tabIndex = 0; // Index of the active tabY
   isSelected = false;
   selectedRegion: string = '';
+  region:string='';
   selectedCountry: string = '';
+  country: string='';
   selectedLocation: string = '';
+  location: string='';
   selectedCode: string = '';
   selectedEntity: string = '';
+  entity: string='';
   selectedGB: string = '';
+  GB: string='';
   selectedLocal: string = '';
   cmdbradio: string = ''; // Initialize cmdbradio
   sharedlabradio: string = '';
   ACLradio: string = '';
   greenport: string = '';
+  locationcode: string='';
   redport: string = '';
   yellowport: string = '';
   localITL: string = '';
@@ -79,6 +88,7 @@ export class LabCommissionComponent {
   DH:string='';
   Dept:string='';
   Building:string='';
+
   Floor:string='';
   labno:string='';
   primarylabco:string='';
@@ -100,6 +110,7 @@ export class LabCommissionComponent {
   applications: any[] = [];
 
   labForm!: FormGroup;
+
 
 
 
@@ -199,38 +210,43 @@ export class LabCommissionComponent {
   }
 
 // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
-  onfileSubmit(){
-    if (!this.selectedFile) {
-      console.log('No file selected');
-      return;
-    }
-
-    const confirmUpload = window.confirm('Are you sure you want to upload this file?');
-
-    if (!confirmUpload) {
-        console.log('File upload cancelled by user');
-        return;
-    }
-
-    const formData = new FormData();
-    formData.append('file', this.selectedFile);
-
-    axios.post('http://localhost:3000/upload-excel', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(response => {
-      console.log('File uploaded successfully:', response.data);
-      // Optionally, you can clear the selected file and reset form state here
-      this.selectedFile = null;
-      this.excelData = [];
-      this.previewVisible = false;
-    })
-    .catch(error => {
-      console.error('Error uploading file:', error);
-    });
+onfileSubmit(): void {
+  if (!this.selectedFile) {
+    console.log('No file selected');
+    return;
   }
+
+  const confirmUpload = window.confirm('Are you sure you want to upload this file?');
+
+  if (!confirmUpload) {
+    console.log('File upload cancelled by user');
+    return;
+  }
+
+  // Create FormData object
+  const formData = new FormData();
+  formData.append('file', this.selectedFile);
+
+  // Define headers if needed
+  const headers = new HttpHeaders({
+    'Content-Type': 'multipart/form-data'
+  });
+
+  // Use HttpClient to post the file
+  this.http.post('http://localhost:8080/upload/convert-excel-to-csv', formData, { headers })
+    .subscribe({
+      next: (response: any) => {
+        console.log('File uploaded successfully:', response);
+        // Optionally, you can clear the selected file and reset form state here
+        this.selectedFile = null;
+        this.excelData = [];
+        this.previewVisible = false;
+      },
+      error: (error: any) => {
+        console.error('Error uploading file:', error);
+      }
+    });
+}
 
 
 
@@ -500,7 +516,7 @@ nextUniqueId: number = 1; // Initial unique ID counter
 uniqueInstanceId: string = ''
 
 
-constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder) {}
+constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private http: HttpClient) {}
 
 onPreviewform(): void {
   const dialogRef = this.dialog.open(DialogboxsubmitComponent, {

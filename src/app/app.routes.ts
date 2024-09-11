@@ -8,7 +8,7 @@ import { RegisterComponent } from './admin/register/register.component';
 import { ContactComponent } from './admin/contact/contact.component';
 import { AboutComponent } from './admin/about/about.component';
 
-
+import { SelfAuditComponent } from './self-audit/self-audit.component';
 import { SoftwareTrackingComponent } from './components/software-tracking/software-tracking.component';
 import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
@@ -33,7 +33,7 @@ export const routes: Routes = [
       {path:'login', component:LoginComponent},
       {path:'lab_commission', component:LabCommissionComponent},
       {path:'self-check', component: SelfCheckComponent},
-
+      {path:'self-audit', component: SelfAuditComponent},
       {path:'register', component:RegisterComponent},
       {path:'contact', component:ContactComponent},
       {path:'about', component:AboutComponent},

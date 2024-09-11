@@ -9,7 +9,7 @@ import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { MatDatepickerModule, matDatepickerAnimations } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../data.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -74,7 +74,7 @@ export class SelfCheckComponent {
   selectedOption28: string = '';
   selectedOption29: string = '';
   selectedOption30: string = '';
- 
+
   showOptions = false;
 
   toggleOptions() {
@@ -99,9 +99,9 @@ onFulfilledChange(event: any) {
   else if (selectedValue === 'not-fulfilled') {
     this.notapplicableCount++;
   }
-    console.log('Fulfilled Count:', this.fulfilledCount); 
-    console.log('Fulfilled Count:', this.partiallyFulfilledCount); 
-    console.log('Fulfilled Count:', this.notFulfilledCount); 
+    console.log('Fulfilled Count:', this.fulfilledCount);
+    console.log('Fulfilled Count:', this.partiallyFulfilledCount);
+    console.log('Fulfilled Count:', this.notFulfilledCount);
     console.log('Fulfilled Count:', this.notapplicableCount);
 }
 fulfilledCount1: number = 0;
@@ -124,7 +124,7 @@ notapplicableCount1: number = 0;
     else if (selectedValue === 'not-fulfilled') {
       this.notapplicableCount1++;
     }
-    
+
     console.log('Fulfilled Count:', this.fulfilledCount1);
     console.log('Fulfilled Count:', this.partiallyFulfilledCount1);
     console.log('Fulfilled Count:', this.notFulfilledCount1);
@@ -158,25 +158,29 @@ dataList!: any[];
   errorMessage: string | undefined;
   searchQuery: string = '';
   filteredLabList: any[] = [];
- 
-  constructor(private dataService: DataService) {}
- 
+
+  constructor(private http:HttpClient) {}
+
   ngOnInit(): void {
     this.loadLabList();
   }
- 
+
+
+
+  private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
+
   loadLabList(): void {
-    this.dataService.getAllData() 
+    this.http.get<any[]>(`${this.apiurl}`)
       .subscribe({
         next: (data) => {
           this.labList = data;
-          this.filteredLabList = data; // Initialize filtered list with all data
+        this.filteredLabList = this.labList;
         },
         error: (err) => this.errorMessage = err
       });
   }
- 
- 
+
+
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredLabList = this.labList.filter(lab =>
@@ -196,7 +200,7 @@ dataList!: any[];
     }
 
   }
-  
+
   toggledetails1(audit:string):void{
     if (this.expandedaudit==audit){
       this.expandedaudit=null;
@@ -205,7 +209,7 @@ dataList!: any[];
       this.expandedaudit=audit;
     }
   }
- 
+
   // Check if a lab is expanded
   isExpanded(labId: string): boolean {
     return this.expandedLabId === labId;
@@ -226,7 +230,7 @@ dataList!: any[];
   isFormExpanded = false;
   toggleForm(): void {
     this.isFormExpanded = !this.isFormExpanded;
-  
+
 }
 
 

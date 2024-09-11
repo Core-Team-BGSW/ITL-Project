@@ -26,7 +26,7 @@ export class LabDecommissionComponent implements OnInit {
   private http = inject(HttpClient);
 
 
-  private apiurl = 'http://localhost:8080/boschLabsByEntity/allEntity';
+  private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
 
   constructor() {}
 
@@ -39,8 +39,8 @@ export class LabDecommissionComponent implements OnInit {
     this.http.get<any[]>(`${this.apiurl}`)
       .subscribe({
         next: (data) => {
-          this.labList = data.flatMap(item => item.labDataList.map((lab: any) => ({ ...lab, ...item })));
-          this.filteredLabList = this.labList; // Initialize filtered list with all data
+          this.labList = data;
+        this.filteredLabList = this.labList;
         },
         error: (err) => this.errorMessage = err
       });

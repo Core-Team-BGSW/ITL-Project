@@ -5,123 +5,149 @@
 <form class="search_btn" action="action_page.php">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search Lab ..." name="search"
   style="margin:auto;max-width:300px" >
-   
+
 <button class="search" (click)="onSearch()"><i class="fa fa-search"></i></button>
 </form>
 <p></p>
       <div class="lab-list">
         <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
-        
+
           <!-- Collapsible Section Header -->
           <div class="collapsible-header">
-           
+
             <span (click)="toggleDetails(lab._id)">
               <mat-card class="custom-card">
-              
+
                 <mat-card-content>
              <b> {{ lab["Lab No"] }} -
-              
-               {{ lab.Entity }} - {{ lab.GB }} - {{ lab.Department }} </b>
-                
+
+              {{ lab.entityName }} / {{ lab.gb }} / {{ lab.dep_name }}</b>
+
                <div class="container">
-                <button 
+                <button
                 (click)="showForms()"
                 class="lab_btn"
                >
 
                 Lab Details
-        
-                </button> 
-                <button routerLink="/self-audit"  >
+
+                </button>
+                <button routerLink="/self-audit">
                   Self-Audit
-             </button> 
-              </div> 
+             </button>
+              </div>
               </mat-card-content>
             </mat-card>
             </span>
-          
-           
-            
+
+
+
             </div>
-            
-            
+
+
       <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
         <p></p>
-       
+
         <mat-card class="custom-card">
           <mat-card-content>
         <div class="lab-detail">
-          <strong class="detail-label">Region : </strong>
-          <span class="detail-value">{{ lab.Region }}</span>
+          <strong class="detail-label">Region:</strong>
+          <span class="detail-value">{{ lab.region }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Country : </strong>
-          <span class="detail-value">{{ lab.Country }}</span>
+          <strong class="detail-label">Country:</strong>
+          <span class="detail-value">{{ lab.country }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Location : </strong>
-          <span class="detail-value">{{ lab.Location }}</span>
+          <strong class="detail-label">Location:</strong>
+          <span class="detail-value">{{ lab.location }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Location-Code : </strong>
-          <span class="detail-value">{{ lab["Location-Code"] }}</span>
+          <strong class="detail-label">Location-Code:</strong>
+          <span class="detail-value">{{ lab.locationCode }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Entity :</strong>
-          <span class="detail-value">{{ lab.Entity }}</span>
+          <strong class="detail-label">Entity:</strong>
+          <span class="detail-value">{{ lab.entityName }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">GB : </strong>
-          <span class="detail-value">{{ lab.GB }}</span>
+          <strong class="detail-label">GB:</strong>
+          <span class="detail-value">{{ lab.gb }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Local-ITL : </strong>
-          <span class="detail-value">{{ lab["Local-ITL"] }}</span>
+          <strong class="detail-label">Local-ITL:</strong>
+          <span class="detail-value">{{ lab.local_itl}}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Local-ITL Proxy : </strong>
-          <span class="detail-value">{{ lab["Local-ITL Proxy"] }}</span>
+          <strong class="detail-label">Local-ITL Proxy:</strong>
+          <span class="detail-value">{{ lab.local_itl_proxy }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Department Head (DH) : </strong>
-          <span class="detail-value">{{ lab["Department Head (DH)"] }}</span>
+          <strong class="detail-label">Department Head (DH):</strong>
+          <span class="detail-value">{{ lab.dh }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Key Account Manager (KAM) : </strong>
-          <span class="detail-value">{{ lab["Key Account Manager (KAM)"] }}</span>
+          <strong class="detail-label">Key Account Manager (KAM):</strong>
+          <span class="detail-value">{{ lab.kam }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Department : </strong>
-          <span class="detail-value">{{ lab["Department"] }}</span>
+          <strong class="detail-label">Department:</strong>
+          <span class="detail-value">{{ lab.dep_name }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Floor No : </strong>
-          <span class="detail-value">{{ lab["Floor"] }}</span>
+          <strong class="detail-label">Floor No:</strong>
+          <span class="detail-value">{{ lab.floor}}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Lab No : </strong>
-          <span class="detail-value">{{ lab["Lab No"] }}</span>
+          <strong class="detail-label">Lab No:</strong>
+          <span class="detail-value">{{ lab.labNo }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Primary Lab Coordinator : </strong>
-          <span class="detail-value">{{ lab["Primary Lab Coordinator"] }}</span>
+          <strong class="detail-label">Primary Lab Coordinator:</strong>
+          <span class="detail-value">{{ lab.primary_lab_cord }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Secondary Lab Coordinator : </strong>
-          <span class="detail-value">{{ lab["Secondary Lab Coordinator"] }}</span>
+          <strong class="detail-label">Secondary Lab Coordinator:</strong>
+          <span class="detail-value">{{ lab.secondary_lab_cord }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Cost Center : </strong>
-          <span class="detail-value">{{ lab["Cost Center"] }}</span>
+          <strong class="detail-label">Cost Center:</strong>
+          <span class="detail-value">{{ lab.cost_center}}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Kind of Lab : </strong>
-          <span class="detail-value">{{ lab["Kind of Lab"] }}</span>
+          <strong class="detail-label">Kind of Lab:</strong>
+          <span class="detail-value">{{ lab.kind_of_lab }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Shared Lab : </strong>
-          <span class="detail-value">{{ lab["Shared lab"] }}</span>
-       
+          <strong class="detail-label">Shared Lab:</strong>
+          <span class="detail-value">{{ lab.shared_lab }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Purpose of Lab in Brief:</strong>
+          <span class="detail-value">{{ lab.purpose_of_lab }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">Description:</strong>
+          <span class="detail-value">{{ lab.description }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">No. of Green Ports:</strong>
+          <span class="detail-value">{{ lab.green_ports }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">No. of Red Ports:</strong>
+          <span class="detail-value">{{ lab.red_ports }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label"
+            >Is lab going to procure new equipment for Engineering/Red
+            Zone?:</strong
+          >
+          <span class="detail-value">{{ lab.new_equipment }}</span>
+        </div>
+        <div class="lab-detail">
+          <strong class="detail-label">ACL Required:</strong>
+          <span class="detail-value">{{ lab.acl_req }}</span>
         </div>
        <p></p>
        </mat-card-content>
@@ -129,11 +155,10 @@
        </div>
        </div>
        <div>
-      
-        
-        
-    
-    
-      
 
- 
+
+
+
+
+
+

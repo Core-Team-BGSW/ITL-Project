@@ -108,6 +108,7 @@
             <select
               id="regionSelect"
               name="region"
+              [(ngModel)]="region"
               (change)="regionchange($event)"
               title="APAC: Asia and Pacific
               EMEA: Europe, the Middle East, and Africa
@@ -129,6 +130,7 @@
             <select
               id="countrySelect"
               name="country"
+              [(ngModel)]="country"
               (change)="countrychange($event)"
             >
               <option value="">Select Country</option>
@@ -143,6 +145,7 @@
             <select
               id="locationselect"
               name="location"
+              [(ngModel)]="location"
               (change)="locationchangeha($event)"
             >
               <option value="">Select Location</option>
@@ -155,7 +158,8 @@
             >
             <select
               id="codeSelect"
-              name="codeSelect"
+              name="locationcode"
+              [(ngModel)]="locationcode"
               (change)="codechange($event)"
             >
               <option value="">Select Location-Code</option>
@@ -174,6 +178,7 @@
             <select
               id="entitySelect"
               name="entity"
+              [(ngModel)]="entity"
               (change)="entityChange($event)"
             >
               <option value="">Select Entity</option>
@@ -189,7 +194,7 @@
           </div>
           <div class="dropdown-item">
             <label for="GBselect">GB <span class="required"> *</span></label>
-            <select id="GBSelect" name="GB" (change)="GBChange($event)">
+            <select id="GBSelect" name="GB" [(ngModel)]="GB" (change)="GBChange($event)">
               <option value="">Select GB</option>
               <option value="2WP">2WP</option>
               <option value="BEG">MS/ENG-BEG</option>
@@ -386,7 +391,7 @@
               <select
                 id="kindoflabselect"
                 name="kindoflab"
-                [(ngModel)]="selectedLabType"
+                [(ngModel)]="kindoflab"
                 (change)="onLabTypeChange()"
               >
                 <option value="">Select</option>
