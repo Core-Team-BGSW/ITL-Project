@@ -3,6 +3,49 @@
 
  <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
   <mat-tab class="" label="Quiz">
+    <div>
+      <h2>Welcome to ITERL</h2>
+      <p class="instruction">To proceed with your application, please watch the following video in its entirety. Once you have finished watching the video, you will be able to take the quiz.</p>
+      <video #videoPlayer width="600" controls>
+        <source src="assets/images/test.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <P></P>
+      <button mat-raised-button color="primary" (click)="proceedToQuiz()">Proceed to Quiz</button>
+      <div *ngIf="showQuizSection" class="quiz-section">
+        <h2>Quiz Instructions</h2>
+        <p>Now that you have watched the video, it's time to take a short quiz to test your understanding. You need to score at least 80% to proceed to the application form. Answer all the questions to the best of your ability. Good luck!</p>
+
+        <form>
+          <p>I have taken a picture of the system with my mobile phone and need to transfer the image to the OT end device. I will do it via USB cable... What could happen?<span class="required"> *</span></p>
+                <div class="checkbox-container">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
+                    <label for="primary_lab_cord">You can transfer data only up to 2 GB.</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
+                    <label for="secondary_lab_cord">With a connection between the smartphone and the OT end device malware can be transmitted!</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="local_itl" name="roles" value="local_itl">
+                    <label for="local_itl">We should not connect smartphone to OT end device.</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
+                    <label for="local_itl_proxy">You can transfer document files not images.</label>
+                  </div>
+                </div>
+            <p>Select roles you want to apply<span class="required"> *</span></p>
+
+
+
+          <button mat-raised-button color="primary" type="submit">Submit Quiz</button>
+        </form>
+        <p *ngIf="quizScore < 80" class="error-message">You need at least 80% to proceed.</p>
+      </div>
+    </div>
+
   </mat-tab>
   <mat-tab class="" label="Apply for role">
     <p class="first">NT-ID of User<span class="required"> *</span></p>

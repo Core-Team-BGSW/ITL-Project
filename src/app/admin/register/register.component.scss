@@ -9,6 +9,19 @@
   font-family: 'Poppins', sans-serif;
 
 }
+//content styling
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+
+}
+
+.instruction {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: #3f3e3e;
+}
 .first{
   padding-top: 30px;
 }
@@ -25,6 +38,46 @@ label {
   font-size: 18px;
 
 }
+//Quiz Styling
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column; /* Stack checkboxes vertically */
+  gap: 10px;
+  background: white;
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #4d90fe; /* Sets the color of the checkbox checkmark */
+}
+
+.checkbox-item label {
+  font-size: 16px;
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.checkbox-item input[type="checkbox"]:disabled + label {
+  color: #999;
+  cursor: not-allowed;
+}
+
+//Role Form Styling
 .dropdown-container {
   display: flex;
   justify-content: space-between;
