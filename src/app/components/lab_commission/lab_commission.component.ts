@@ -22,6 +22,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ChangeDetectorRef } from "@angular/core";
 import axios from 'axios';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -44,7 +47,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
       ])
     ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
-      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
+      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatIconModule,MatCardModule,MatCheckboxModule,MatRadioModule,MatDatepicker,MatDatepickerModule,MatNativeDateModule,
       MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -96,6 +99,7 @@ export class LabCommissionComponent {
   labelPosition: string="";
   choosemethod: string="";
   selectedLabType: string = '';
+  selfauditdate: string ='';
   showOtherField: boolean = false;
   otherLabType: string = '';
   applications: any[] = [];
@@ -510,7 +514,8 @@ onPreviewform(): void {
       entity: this.selectedEntity,GB: this.selectedGB,localITL: this.localITL,localITLproxy: this.localITLproxy, DH: this.DH, KAM: this.KAM,Dept: this.Dept,
       Building : this.Building,Floor: this.Floor,labno: this.labno,primarylabco: this.primarylabco, secondarylabco:this.secondarylabco,CC: this.CC,
       kindoflab: this.selectedLabType, purposeoflab:this.purposeoflab,description:this.description, ACL:this.ACL, greenports:this.greenports, yellowport:this.yellowport, redport:this.redport,
-      cmdbradio: this.cmdbradio, otherLabType:this.otherLabType, sharedlabradio: this.sharedlabradio, ACLradio : this.ACLradio, greenport: this.greenports, yellowports: this.yellowports,redports : this.redports
+      cmdbradio: this.cmdbradio, otherLabType:this.otherLabType, sharedlabradio: this.sharedlabradio, ACLradio : this.ACLradio, greenport: this.greenports, yellowports: this.yellowports,redports : this.redports,
+      selfauditdate: this.selfauditdate
        }
   });
 

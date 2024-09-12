@@ -29,15 +29,17 @@
       <p><strong>Description:</strong> {{ description }}</p>
 
       <p>
-        <strong
-          >Is lab going to procure new equipment for Engineering/Red
-          Zone?</strong
-        >
+        <strong>Is lab going to procure new equipment for Engineering/Red
+          Zone?</strong>
         {{ cmdbradio === "Yes" ? "YES" : "NO" }}
       </p>
       <p>
         <strong>Shared Lab:</strong>
         {{ sharedlabradio === "Yes" ? "YES" : "NO" }}
+      </p>
+      <p>
+        <strong>Self Audit Date:</strong>
+        {{ selfauditdate }}
       </p>
       <p>
         <strong>ACL Required:</strong>

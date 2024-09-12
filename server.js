@@ -97,6 +97,7 @@ const itemSchema = new mongoose.Schema({
   "Is lab going to procure new equipment for Engineering/Red Zone?": String,
   "Shared Lab": String,
   "ACL Required": String,
+  "Self Audit Date": String,
   otherLabType: String,
   approvalStatus: {
     type: String,

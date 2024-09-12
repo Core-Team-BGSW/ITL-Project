@@ -477,6 +477,24 @@
             </section>
           </mat-card-content>
         </mat-card>
+        <mat-card>
+          <mat-card-content>
+            <p class="ACL-p">Self Check Date<span class="required"> *</span></p>
+            <section class="cmdb-container">
+              <mat-form-field class="example-full-width">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" />
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon
+                    >keyboard_arrow_down</mat-icon
+                  >
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </section>
+          </mat-card-content>
+        </mat-card>
       </div>
       <mat-card>
         <mat-card-content>
