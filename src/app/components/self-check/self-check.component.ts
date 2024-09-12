@@ -233,6 +233,14 @@ isDropdownVisible = false;
 toggleDropdown() {
   this.isDropdownVisible = !this.isDropdownVisible;
 }
+message: string | null = null;
+redirectToExternal() {
+
+  
+window.location.href = 'https://apxbgswapexp.webapp.inside.bosch.cloud/apxbgswapexp/r/cibteapex_prod/itl-prd/self-claim-report?session=5134802335988';
+  // The external website URL
+  this.message = 'Button clicked! This is your message.';
+}
 
 }
 

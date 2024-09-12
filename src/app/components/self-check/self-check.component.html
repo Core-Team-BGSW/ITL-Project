@@ -1,21 +1,18 @@
-
 <h2 >Self Audit Form :</h2>
 <i><p style="color:red"> (Select Lab for Audit)</p></i>
+<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <form class="search_btn" action="action_page.php">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search Lab ..." name="search"
   style="margin:auto;max-width:300px" >
-   
-<button class="search" (click)="onSearch()"><i class="fa fa-search"></i></button>
-</form>
+<button class="search" (click)="onSearch()"><i class="fa fa-search"></i></button></form>
 <p></p>
       <div class="lab-list">
         <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
-        
-          <!-- Collapsible Section Header -->
+           <!-- Collapsible Section Header -->
           <div class="collapsible-header">
            
-            <span (click)="toggleDetails(lab._id)">
+            
               <mat-card class="custom-card">
               
                 <mat-card-content>
@@ -25,7 +22,7 @@
                 
                <div class="container">
                 <button 
-                (click)="showForms()"
+                (click)="toggleDetails(lab._id)"
                 class="lab_btn"
                >
 
@@ -36,16 +33,23 @@
                 <button routerLink="/self-audit"  >
                   Self-Audit
              </button> 
-            
+             <button (click)="redirectToExternal()">Proceed with self-audit 
+              <div class="tooltip"><i class="icon-info-sign"></i>
+                <span class="tooltiptext">This page will redirected to ITL Self-audit tool,
+                  before Self-audit,Please contact ITL Consultancy team(bd_toa-ets1_itl_consultancy_team &#64;bcn.bosch.com)
+                </span>
+                </div>
+              
+             </button>
+
               </div> 
-              </mat-card-content>
+            </mat-card-content>
             </mat-card>
-            </span>
             </div>    
       <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
         <p></p>
        
-        <mat-card class="custom-card">
+        <mat-card class="custom-card1">
           <mat-card-content>
         <div class="lab-detail">
           <strong class="detail-label">Region : </strong>

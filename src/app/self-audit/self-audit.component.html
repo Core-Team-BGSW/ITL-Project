@@ -53,6 +53,7 @@
     </tbody>
   </table>
   <h5 style="color:rgb(101, 109, 206);">Documents</h5>
+  <strong style="color:brown"><i>(Please Upload the following documents in the sharepoint)</i></strong>
   <table class="document_table">
     <thead>
       <tr>
@@ -64,7 +65,7 @@
       <tr>
         <td>IT Engineering and Research Laboratory Documentation</td>
         <td>
-          <form [formGroup]="linkForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
             <input id="website" type="url" formControlName="website" placeholder="https://example.com" />
             <div class="url_design"*ngIf="linkForm.get('website')?.invalid && linkForm.get('website')?.touched">
               <small *ngIf="linkForm.get('website')?.errors?.['required']">URL is required.</small>
@@ -78,7 +79,7 @@
     <tbody>
       <tr>
          <td>Local-ITL and Local-ITL proxy nomination letters </td>
-         <td> <form [formGroup]="linkForm" (ngSubmit)="onSubmit()">
+         <td> <form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
           <input id="website" type="url" formControlName="website1" placeholder="https://example.com" />
           <div class="url_design"*ngIf="linkForm.get('website1')?.invalid && linkForm.get('website1')?.touched">
             <small *ngIf="linkForm.get('website1')?.errors?.['required']">URL is required.</small>
@@ -90,7 +91,7 @@
     <tbody>
       <tr>
         <td>Self audits and Audits</td>
-        <td><form [formGroup]="linkForm" (ngSubmit)="onSubmit()">
+        <td><form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
           <input id="website" type="url" formControlName="website2" placeholder="https://example.com" />
           <div class="url_design" *ngIf="linkForm.get('website2')?.invalid && linkForm.get('website2')?.touched">
             <small *ngIf="linkForm.get('website2')?.errors?.['required']">URL is required.</small>
@@ -102,7 +103,7 @@
     <tbody>
       <tr>
         <td>Emergency plan </td>
-        <td><form [formGroup]="linkForm" (ngSubmit)="onSubmit()">
+        <td><form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
           <input id="website3" type="url" formControlName="website3" placeholder="https://example.com" />
           <div class="url_design"*ngIf="linkForm.get('website3')?.invalid && linkForm.get('website3')?.touched">
             <small *ngIf="linkForm.get('website3')?.errors?.['required']">URL is required.</small>
@@ -200,7 +201,7 @@
      <p></p> <br> Is the nomination document signed by the responsible laboratory management available? (MD 07151 Annex 4)</span>
      </div>
  
-      <p></p>     <br> Evaluation<span class="required"> * </span>
+      <p></p>     <br>Evaluation<span class="required"> * </span>
        
         
      <div class="tooltip1">
@@ -226,7 +227,7 @@
                 </div>
            </mat-card>
            </div>
-                 <div class="dropdown" *ngIf="selectedOption === 'partially-fulfilled'">
+            <div class="dropdown" *ngIf="selectedOption === 'partially-fulfilled'">
              <p></p>
         <mat-card class="custom-card">        
 <table>
@@ -383,14 +384,8 @@
       Explanation<span class="required"> * </span> :
       <input type="text" placeholder="Explanation ">
       </div>
-      <a>
-    Attach the Mail Proof  <span class="required"> * </span> :
-    <input type="file" id="fileInput" (change)="onFileSelected($event)" hidden />
-<label for="fileInput" class="custom-file-upload">
-  Browse
-</label>
-<span *ngIf="selectedFile" class="file-name">{{ selectedFile.name }}</span>
-     </a>
+      <strong style="color:brown"><i><span> * </span>Please Upload the Required Mail Proof in the Sharepoint</i></strong>
+    
      
 </mat-card>
 </div>
@@ -701,14 +696,7 @@ Were these information <br> exchange documented? <span class="required"> * </spa
    Explanation<span class="required"> * </span> :
    <input type="text" placeholder="Explanation ">
    </div>
-   <a>
-    Attach the Mail Proof  <span class="required"> * </span> :
-    <input type="file" id="fileInput"  (change)="onFileSelected1($event)" hidden />
-<label for="fileInput" class="custom-file-upload">
-  Browse
-</label>
-<span *ngIf="selectedFile1" class="file-name">{{ selectedFile1.name }}</span>
-     </a>
+   <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
 </mat-card>
 </div>
     <div class="dropdown" *ngIf="selectedOption6 === 'partially-fulfilled'">
@@ -1015,14 +1003,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
    Explanation<span class="required"> * </span> :
    <input type="text" placeholder="Explanation ">
    </div>
-   <a>
-    Attach the Required Supporting Documents  <span class="required"> * </span> :
-    <input type="file" id="fileInput"  (change)="onFileSelected2($event)" hidden />
-<label for="fileInput" class="custom-file-upload">
-  Browse
-</label>
-<span *ngIf="selectedFile2" class="file-name">{{ selectedFile2.name }}</span>
-     </a>
+   <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
 </mat-card>
 </div>
     <div class="dropdown" *ngIf="selectedOption10 === 'partially-fulfilled'">
@@ -1098,14 +1079,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
    Explanation<span class="required"> * </span> :
    <input type="text" placeholder="Explanation ">
    </div>
-   <a>
-    Attach the Required Supporting Documents  <span class="required"> * </span> :
-    <input type="file" id="fileInput"  (change)="onFileSelected3($event)" hidden />
-<label for="fileInput" class="custom-file-upload">
-  Browse
-</label>
-<span *ngIf="selectedFile3" class="file-name">{{ selectedFile3.name }}</span>
-     </a>
+   <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
 </mat-card>
 </div>
     <div class="dropdown" *ngIf="selectedOption11 === 'partially-fulfilled'">
@@ -1410,14 +1384,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                        Explanation<span class="required"> * </span> :
                        <input type="text" placeholder="Explanation ">
                        </div>
-                       <a>
-                     <br>Attach the Required Supporting Documents  <span class="required"> * </span> :
-                        <input type="file" id="fileInput" (change)="onFileSelected4($event)" hidden />
-                    <label for="fileInput" class="custom-file-upload">
-                      Browse
-                    </label>
-                    <span *ngIf="selectedFile4" class="file-name">{{ selectedFile4.name }}</span>
-                         </a>
+                       <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
                       
                       </mat-card>
                       </div>
@@ -1574,14 +1541,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
            Explanation<span class="required"> * </span> :
            <input type="text" placeholder="Explanation ">
            </div>
-           <a>
-            Attach the Required Supporting Documents  <span class="required"> * </span> :
-            <input type="file" id="fileInput" (change)="onFileSelected5($event)" hidden />
-           <label for="fileInput" class="custom-file-upload">
-           Browse
-         </label>
-          <span *ngIf="selectedFile5" class="file-name">{{ selectedFile5.name }}</span>
-          </a>
+           <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
           </mat-card>
           </div>
             <div class="dropdown" *ngIf="selectedOption17 === 'partially-fulfilled'">
@@ -1745,14 +1705,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                            Explanation<span class="required"> * </span> :
                            <input type="text" placeholder="Explanation ">
                            </div>
-                           <a>
-    Attach the Required Supporting Documents  <span class="required"> * </span> :
-          <input type="file" id="fileInput" (change)="onFileSelected6($event)" hidden />
-          <label for="fileInput" class="custom-file-upload">
-         Browse
-        </label>
-        <span *ngIf="selectedFile6" class="file-name">{{ selectedFile6.name }}</span>
-         </a>
+                           <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
        </mat-card>
         </div>
                             <div class="dropdown" *ngIf="selectedOption19 === 'partially-fulfilled'">
@@ -2129,13 +2082,7 @@ Explanation<span class="required"> * </span> :
             </div>
             <div class="btn_container">
             <button class="excel_btn"(click)="generateExcelFile()">Download Template</button>
-            <a>
-              <input type="file" id="fileInput" (change)="onFileSelected7($event)" hidden />
-              <label for="fileInput" class="excel_file_upld_btn">
-                Browse
-                  </label>
-                  <span *ngIf="selectedFile7" class="file-name">{{ selectedFile7.name }}</span>
-                 </a> 
+            <strong style="color:brown"><i><span> * </span>Please fill the Template and Upload it in the Sharepoint</i></strong>
                  </div>
             </mat-card>
             </div>
@@ -2640,7 +2587,8 @@ Explanation<span class="required"> * </span> :
 </div>
 <p></p>
 <button class="primary">Save as draft</button>
-<button class="success_btn">Submit</button>
+<button class="success_btn">Save</button>
+<p></p>
 </mat-tab>
 <mat-tab label="Lab Questions">
   <p></p>
@@ -2955,6 +2903,5 @@ Explanation<span class="required"> * </span> :
          </mat-card>
          <p></p>
      <br>  <button class="primary">Save as Draft</button>
-       <button class="success_btn" >Submit</button>     
- 
-</mat-tab>
+       <button class="success_btn" >Save</button>     
+ </mat-tab>
