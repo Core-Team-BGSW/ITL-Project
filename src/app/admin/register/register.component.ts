@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
+import { ContactComponent } from '../contact/contact.component';
+import { RoleComponent } from '../role/role.component';
 
 interface Answers {
   [key: string]: Set<string>;
@@ -14,7 +16,7 @@ interface Answers {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink,MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabLabel, MatTabsModule, MatRadioModule, CommonModule],
+  imports: [RouterLink,MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabLabel, MatTabsModule, MatRadioModule, CommonModule, RoleComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -25,6 +27,7 @@ export class RegisterComponent {
   showQuizSection = false;
   score: number | null = null;
   passedQuiz = false;
+  constructor(private router: Router) {}
 
   proceedToQuiz() {
     if (this.videoPlayer.nativeElement.currentTime >= this.videoPlayer.nativeElement.duration) {
@@ -117,7 +120,7 @@ export class RegisterComponent {
 
     if (score > 80) {
       // User has passed the quiz, show the form
-      this.passedQuiz = true;
+      this.router.navigate(['/role']);
     } else {
       alert('You did not score more than 80%. Please try again.');
       this.passedQuiz = false;

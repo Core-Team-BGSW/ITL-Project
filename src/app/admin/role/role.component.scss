@@ -1,0 +1,132 @@
+//Role Form Styling
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+
+}
+//content styling
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+
+}
+p{
+  font-size: 15px;
+  padding-top: 4px;
+  //color: black;
+  font-weight: 400;
+}
+.dropdown-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+}
+
+.dropdown-item {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+
+
+}
+.dropdown-item input[type="text"] {
+  /* Style for the input field */
+  width: 100%; /* Adjust width as needed */
+  //border-bottom: 1px solid #000000; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+  color: #000000;
+  padding: 1em;
+  //border-bottom: 1px solid #990404;
+  border-radius: 0.5em;
+  border-color:#e0e2e5; /* Ensures padding is included in width */
+  font-size: 16px;
+  background: #ffffff;
+  transition: background 0.3s;
+}
+
+.dropdown-item input[type="text"]:focus {
+  /* Style when input field is focused */
+  outline: none; /* Remove default outline */
+  border-color: #4d90fe; /* Example: Change border color on focus */
+  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5); /* Example: Add a box shadow */
+}
+
+.dropdown-item input:disabled {
+  background-color: #f2f2f2; /* Light gray background */
+  color: #999; /* Light gray text color */
+  cursor: not-allowed; /* Show a "not-allowed" cursor */
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 1em; /* Padding to maintain consistency */
+  /* You can add more styles as needed */
+}
+select {
+  width: 100%;
+  padding: 1em;
+  //border-bottom: 1px solid #990404;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  border-color:#e0e2e5; /* Ensures padding is included in width */
+  font-size: 16px;
+  background: #ffffff;
+  transition: background 0.3s;
+}
+
+.selected {
+  background: #f0f0f0; /* Color when an option is selected */
+}
+
+option{
+
+  width: 100%;
+  padding: 1em;
+  //border-bottom: 1px solid #990404;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  border-color:#e0e2e5; /* Ensures padding is included in width */
+  font-size: 16px;
+  background: #ffffff;
+
+}
+
+
+select:hover{
+  border-color: #54b5ff;
+  border-width: 2px;
+  background: #e8f1ff;
+}
+
+.required{
+  color: red;
+}
+
+.success_btn
+ {
+   width: 100px;
+   border-radius: 8px;
+ padding: 11px;
+ width: 120px;
+   background: #35a71e;
+   color: white;
+   position: relative;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-size: medium;
+   font-weight: bold;
+   left: 36%;
+   &:hover {
+     background-color: #0d4516;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   }
+ }
