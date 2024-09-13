@@ -20,24 +20,25 @@ h2 {
   font-size: 1rem;
   margin-bottom: 20px;
   line-height: 1.5;
-  color: #3f3e3e;
+  color: rgb(39, 21, 236);
+  font-weight: 500;
 }
 .first{
   padding-top: 30px;
 }
 p{
-  font-size: 18px;
+  font-size: 15px;
   padding-top: 4px;
-  color: black;
-  font-weight: 600;
+  //color: black;
+  font-weight: 400;
 }
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight:600;
-  font-size: 18px;
+// label {
+//   display: block;
+//   margin-bottom: 5px;
+//   font-weight:400;
+//   font-size: 10px;
 
-}
+// }
 //Quiz Styling
 
 .checkbox-container {
@@ -68,7 +69,7 @@ label {
 }
 
 .checkbox-item label {
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer; /* Change cursor to pointer on hover */
 }
 

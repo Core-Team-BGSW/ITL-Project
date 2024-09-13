@@ -21,18 +21,7 @@ export class RegisterComponent {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 
   showQuizSection = false;
-  quizAnswers = {
-    answer1: '',
-    answer2: ''
-  };
-  quizScore = 0;
-  formData = {
-    ntid: '',
-    entityName: '',
-    gbName: '',
-    role: '',
-    labNames: ''
-  };
+
 
   proceedToQuiz() {
     if (this.videoPlayer.nativeElement.currentTime >= this.videoPlayer.nativeElement.duration) {
@@ -42,4 +31,72 @@ export class RegisterComponent {
       alert('Please watch the entire video before proceeding.');
     }
   }
+  // Define the correct answers for each question
+  question1CorrectAnswers: Set<string> = new Set(['secondary_lab_cord', 'local_itl']);
+  question2CorrectAnswers: Set<string> = new Set(['secondary_lab_cord', 'local_itl']);
+
+  // User's selected answers
+  userSelectionsQ1: Set<string> = new Set();
+  userSelectionsQ2: Set<string> = new Set();
+
+  // Method to handle checkbox change for question 1
+  onSelectionChangeQ1(option: string, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.checked) {
+      this.userSelectionsQ1.add(option);
+    } else {
+      this.userSelectionsQ1.delete(option);
+    }
+  }
+
+  // Method to handle checkbox change for question 2
+  onSelectionChangeQ2(option: string, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.checked) {
+      this.userSelectionsQ2.add(option);
+    } else {
+      this.userSelectionsQ2.delete(option);
+    }
+  }
+
+  // Method to calculate the score for question 1
+  calculateScoreQ1(): number {
+    const totalCorrectOptions = this.question1CorrectAnswers.size;
+    const userCorrectSelections = Array.from(this.userSelectionsQ1).filter(option => this.question1CorrectAnswers.has(option)).length;
+
+    // If there are incorrect selections, score is 0
+    if (userCorrectSelections !== totalCorrectOptions || Array.from(this.userSelectionsQ1).some(option => !this.question1CorrectAnswers.has(option))) {
+      return 0;
+    }
+
+    // Calculate score as a percentage
+    const score = (userCorrectSelections / totalCorrectOptions) * 100;
+    return score;
+  }
+
+  // Method to calculate the score for question 2
+  calculateScoreQ2(): number {
+    const totalCorrectOptions = this.question2CorrectAnswers.size;
+    const userCorrectSelections = Array.from(this.userSelectionsQ2).filter(option => this.question2CorrectAnswers.has(option)).length;
+
+    // If there are incorrect selections, score is 0
+    if (userCorrectSelections !== totalCorrectOptions || Array.from(this.userSelectionsQ2).some(option => !this.question2CorrectAnswers.has(option))) {
+      return 0;
+    }
+
+    // Calculate score as a percentage
+    const score = (userCorrectSelections / totalCorrectOptions) * 100;
+    return score;
+  }
+
+  // Method to calculate total score across all questions
+  calculateTotalScore(): number {
+    const scoreQ1 = this.calculateScoreQ1();
+    const scoreQ2 = this.calculateScoreQ2();
+
+    // Assuming each question has equal weightage
+    const totalScore = (scoreQ1 + scoreQ2) / 2;
+    return totalScore;
+  }
 }
+
