@@ -1,19 +1,16 @@
 
 
-
- <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
-  <mat-tab class="" label="Quiz">
     <div>
       <h2>Welcome to ITERL</h2>
       <p class="instruction">To proceed with your application, please watch the following video in its entirety. Once you have finished watching the video, you will be able to take the quiz.</p>
-      <!-- <video #videoPlayer width="600" controls>
+      <video #videoPlayer width="600" controls>
         <source src="assets/images/test.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
       <P></P>
       <button mat-raised-button color="primary" (click)="proceedToQuiz()">Proceed to Quiz</button>
-      <div *ngIf="showQuizSection" class="quiz-section"> -->
-        <!-- <h2 class="instruction">Quiz Instructions</h2> -->
+      <div *ngIf="showQuizSection" class="quiz-section">
+        <h2 class="instruction">Quiz Instructions</h2>
         <p class="instruction">Now that you have watched the video, it's time to take a short quiz to test your understanding. You need to score at least 80% to proceed to the application form. Answer all the questions to the best of your ability. Good luck!</p>
         <!--------------------Multiple Select Questions -------------------------------->
 
@@ -23,259 +20,255 @@
           <p>I have taken a picture of the system with my mobile phone and need to transfer the image to the OT end device. I will do it via USB cable... What could happen?<span class="required"> *</span></p>
                 <div class="checkbox-container">
                   <div class="checkbox-item">
-                    <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord" (change)="onSelectionChangeQ1('primary_lab_cord', $event)">
-                    <label for="primary_lab_cord">You can transfer data only up to 2 GB.</label>
+                    <input type="checkbox" id="option1_q1" (change)="onSelectionChange('question1', 'option1_q1', $event)">
+                    <label for="option1_q1">You can transfer data only up to 2 GB.</label>
                   </div>
                   <div class="checkbox-item">
-                    <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-                    <label for="secondary_lab_cord">With a connection between the smartphone and the OT end device malware can be transmitted!</label>
+                    <input type="checkbox" id="option2_q1" (change)="onSelectionChange('question1', 'option2_q1', $event)">
+                    <label for="option2_q1">With a connection between the smartphone and the OT end device malware can be transmitted!</label>
                   </div>
                   <div class="checkbox-item">
-                    <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-                    <label for="local_itl">We should not connect smartphone to OT end device.</label>
+                    <input type="checkbox" id="option3_q1" (change)="onSelectionChange('question1', 'option3_q1', $event)">
+                    <label for="option3_q1">We should not connect smartphone to OT end device.</label>
                   </div>
                   <div class="checkbox-item">
-                    <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-                    <label for="local_itl_proxy">You can transfer document files not images.</label>
+                    <input type="checkbox" id="option4_q1" (change)="onSelectionChange('question1', 'option4_q1', $event)">
+                    <label for="option4_q1">You can transfer document files not images.</label>
                   </div>
                 </div>
             <p>Difficulties in Operational Technology area...<span class="required"> *</span></p>
             <div class="checkbox-container">
               <div class="checkbox-item">
-                <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-                <label for="primary_lab_cord">Longer Lifetime</label>
+                <input type="checkbox" id="option1_q2" (change)="onSelectionChange('question2', 'option1_q2', $event)">
+                <label for="option1_q2">Longer Lifetime</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-                <label for="secondary_lab_cord">Missing standards- HW and SW
+                <input type="checkbox" id="option2_q2" (change)="onSelectionChange('question2', 'option2_q2', $event)">
+                <label for="option2_q2">Missing standards- HW and SW
                 </label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-                <label for="local_itl">Extensive planning in case of emergency</label>
+                <input type="checkbox" id="option3_q2" (change)="onSelectionChange('question2', 'option3_q2', $event)">
+                <label for="option3_q2">Extensive planning in case of emergency</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-                <label for="local_itl_proxy">Longer data management</label>
+                <input type="checkbox" id="option4_q2" (change)="onSelectionChange('question2', 'option4_q2', $event)">
+                <label for="option4_q2">Longer data management</label>
               </div>
               <div class="checkbox-item">
-                <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-                <label for="local_itl_proxy">Longer data management</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-                <label for="local_itl_proxy">only a few specialists for old technology</label>
+                <input type="checkbox" id="option5_q2" (change)="onSelectionChange('question2', 'option5_q2', $event)">
+                <label for="option5_q2">only a few specialists for old technology</label>
               </div>
           </div>
           <p>In case of lab emergency (ITL Topic) please contact<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
+              <input type="checkbox" id="option1_q3" (change)="onSelectionChange('question3', 'option1_q3', $event)">
               <label for="primary_lab_cord">Lab Coordinator</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">Local ITL/Proxy</label>
+              <input type="checkbox" id="option2_q3" (change)="onSelectionChange('question3', 'option2_q3', $event)">
+              <label for="option2_q3">Local ITL/Proxy</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">Dept DSP</label>
+              <input type="checkbox" id="option3_q3" (change)="onSelectionChange('question3', 'option3_q3', $event)">
+              <label for="option3_q3">Dept DSP</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">FCM</label>
+              <input type="checkbox" id="option4_q3" (change)="onSelectionChange('question3', 'option4_q3', $event)">
+              <label for="option4_q3">FCM</label>
             </div>
           </div>
           <p>What are the network zones in Bosch<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Green (BCN)</label>
+              <input type="checkbox" id="option1_q4" (change)="onSelectionChange('question4', 'option1_q4', $event)">
+              <label for="option1_q4">Green (BCN)</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">Red (Engineering)</label>
+              <input type="checkbox" id="option2_q4" (change)="onSelectionChange('question4', 'option2_q4', $event)">
+              <label for="option2_q4">Red (Engineering)</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">Yellow (Service)</label>
+              <input type="checkbox" id="option3_q4" (change)="onSelectionChange('question4', 'option3_q4', $event)">
+              <label for="option3_q4">Yellow (Service)</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">Blue (Unrestricted)</label>
+              <input type="checkbox" id="option4_q4" (change)="onSelectionChange('question4', 'option4_q4', $event)">
+              <label for="option4_q4">Blue (Unrestricted)</label>
             </div>
           </div>
           <p>Data transfer should happen...<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">From Red to Green Via Yellow zone</label>
+              <input type="checkbox" id="option1_q5" (change)="onSelectionChange('question5', 'option1_q5', $event)">
+              <label for="option1_q5">From Red to Green Via Yellow zone</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">From Red to Green Directly</label>
+              <input type="checkbox" id="option2_q5" (change)="onSelectionChange('question5', 'option2_q5', $event)">
+              <label for="option2_q5">From Red to Green Directly</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">From Red to Yellow directly</label>
+              <input type="checkbox" id="option3_q5" (change)="onSelectionChange('question5', 'option3_q5', $event)">
+              <label for="option3_q5">From Red to Yellow directly</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">From yellow to Green or Vice versa</label>
+              <input type="checkbox" id="option4_q5" (change)="onSelectionChange('question5', 'option4_q5', $event)">
+              <label for="option4_q5">From yellow to Green or Vice versa</label>
             </div>
           </div>
           <p>Features of Red zone devices<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Non SCCM PC</label>
+              <input type="checkbox" id="option1_q6" (change)="onSelectionChange('question6', 'option1_q6', $event)">
+              <label for="option1_q6">Non SCCM PC</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">Outside Network</label>
+              <input type="checkbox" id="option2_q6" (change)="onSelectionChange('question6', 'option2_q6', $event)">
+              <label for="option2_q6">Outside Network</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">No Virus Protection  </label>
+              <input type="checkbox" id="option3_q6" (change)="onSelectionChange('question6', 'option3_q6', $event)">
+              <label for="option3_q6">No Virus Protection  </label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">USB enabled</label>
+              <input type="checkbox" id="option4_q6" (change)="onSelectionChange('question6', 'option4_q6', $event)">
+              <label for="option4_q6">USB enabled</label>
             </div>
           </div>
           <p>Green zone device have..<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Static IP address</label>
+              <input type="checkbox" id="option1_q7" (change)="onSelectionChange('question7', 'option1_q7', $event)">
+              <label for="option1_q7">Static IP address</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">DHCP</label>
+              <input type="checkbox" id="option2_q7" (change)="onSelectionChange('question7', 'option2_q7', $event)">
+              <label for="option2_q7">DHCP</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">SCCM system</label>
+              <input type="checkbox" id="option3_q7" (change)="onSelectionChange('question7', 'option3_q7', $event)">
+              <label for="option3_q7">SCCM system</label>
             </div>
           </div>
           <p>What documents should be pasted on board inside lab?<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Lab Layout</label>
+              <input type="checkbox" id="option1_q8" (change)="onSelectionChange('question8', 'option1_q8', $event)">
+              <label for="option1_q8">Lab Layout</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">Emergency Contact Document</label>
+              <input type="checkbox" id="option2_q8" (change)="onSelectionChange('question8', 'option2_q8', $event)">
+              <label for="option2_q8">Emergency Contact Document</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">Remote Access</label>
+              <input type="checkbox" id="option3_q8" (change)="onSelectionChange('question8', 'option3_q8', $event)">
+              <label for="option3_q8">Remote Access</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">Deviation Document</label>
+              <input type="checkbox" id="option4_q8" (change)="onSelectionChange('question8', 'option4_q8', $event)">
+              <label for="option4_q8">Deviation Document</label>
             </div>
           </div>
           <p>It’s a shame, my holiday is over again. Fortunately, I took a lot of pictures that I can show to my colleagues. Damn it! The USB stick does not work at my workplace.
             What behaviors or actions should I avoid?<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">I will try it on a test bench or machine.</label>
+              <input type="checkbox" id="option1_q9" (change)="onSelectionChange('question9', 'option1_q9', $event)">
+              <label for="option1_q9">I will try it on a test bench or machine.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">I will try it on my personal phone.</label>
+              <input type="checkbox" id="option2_q9" (change)="onSelectionChange('question9', 'option2_q9', $event)">
+              <label for="option2_q9">I will try it on my personal phone.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">I will try it on other members testbench</label>
+              <input type="checkbox" id="option3_q9" (change)="onSelectionChange('question9', 'option3_q9', $event)">
+              <label for="option3_q9">I will try it on other members testbench</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">I should do it on my personal laptop</label>
+              <input type="checkbox" id="option4_q9" (change)="onSelectionChange('question9', 'option4_q9', $event)">
+              <label for="option4_q9">I should do it on my personal laptop</label>
             </div>
           </div>
 
           <p>What activities should we ensure inside lab?<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Raise a request for an Access Control List (ACL) if network segregation is needed to separate Engineering and BCN zone devices.</label>
+              <input type="checkbox" id="option1_q10" (change)="onSelectionChange('question10', 'option1_q10', $event)">
+              <label for="option1_q10">Raise a request for an Access Control List (ACL) if network segregation is needed to separate Engineering and BCN zone devices.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">Perform virus pre-checks on IT devices before connecting them to the network</label>
+              <input type="checkbox" id="option2_q10" (change)="onSelectionChange('question10', 'option2_q10', $event)">
+              <label for="option2_q10">Perform virus pre-checks on IT devices before connecting them to the network</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">Use color code for ‘yellow’ and ‘red’ for port in Network sockets</label>
+              <input type="checkbox" id="option3_q10" (change)="onSelectionChange('question10', 'option3_q10', $event)">
+              <label for="option3_q10">Use color code for ‘yellow’ and ‘red’ for port in Network sockets</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">Analyze ACL logs annually and release any unused IP addresses</label>
+              <input type="checkbox" id="option4_q10" (change)="onSelectionChange('question10', 'option4_q10', $event)">
+              <label for="option4_q10">Analyze ACL logs annually and release any unused IP addresses</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">Document any deviations or special cases and get them acknowledged by management. </label>
+              <input type="checkbox" id="option5_q10" (change)="onSelectionChange('question10', 'option5_q10', $event)">
+              <label for="option5_q10">Document any deviations or special cases and get them acknowledged by management. </label>
             </div>
           </div>
           <p>What activities should we avoid performing inside lab?<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">connecting SCCM or BCN laptops to BTIA routers</label>
+              <input type="checkbox" id="option1_q11" (change)="onSelectionChange('question11', 'option1_q11', $event)">
+              <label for="option1_q11">connecting SCCM or BCN laptops to BTIA routers</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
+              <input type="checkbox" id="option2_q11" (change)="onSelectionChange('question11', 'option2_q11', $event)">
               <label for="secondary_lab_cord">use USB data carriers for data transfer</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">using hard disks for data backups</label>
+              <input type="checkbox" id="option3_q11" (change)="onSelectionChange('question11', 'option3_q11', $event)">
+              <label for="option3_q11">using hard disks for data backups</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">use Wi-Fi services from external vendors</label>
+              <input type="checkbox" id="option4_q11" (change)="onSelectionChange('question11', 'option4_q11', $event)">
+              <label for="option4_q11">use Wi-Fi services from external vendors</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">using mobile hotspots to connect Red Zone devices to the internet</label>
+              <input type="checkbox" id="option5_q11" (change)="onSelectionChange('question11', 'option5_q11', $event)">
+              <label for="option5_q11">using mobile hotspots to connect Red Zone devices to the internet</label>
             </div>
           </div>
           <p>The requirements to the IT-Security should be adhered to during the procurement of IT-Systems, especially..<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">components (e.g., USB port locker) for intrinsic safety for a system hardening</label>
+              <input type="checkbox" id="option1_q12" (change)="onSelectionChange('question12', 'option1_q12', $event)">
+              <label for="option1_q12">components (e.g., USB port locker) for intrinsic safety for a system hardening</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">backup and recovery</label>
+              <input type="checkbox" id="option2_q12" (change)="onSelectionChange('question12', 'option2_q12', $event)">
+              <label for="option2_q12">backup and recovery</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">protection from malware (virus protection)</label>
+              <input type="checkbox" id="option3_q12" (change)="onSelectionChange('question12', 'option3_q12', $event)">
+              <label for="option3_q12">protection from malware (virus protection)</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">patch management</label>
+              <input type="checkbox" id="option4_q11" (change)="onSelectionChange('question12', 'option4_q12', $event)">
+              <label for="option4_q12">patch management</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">remote access</label>
+              <input type="checkbox" id="option5_q11" (change)="onSelectionChange('question12', 'option5_q12', $event)">
+              <label for="option5_q12">remote access</label>
             </div>
           </div>
           <p>Remote access on an IT end device is only permissible if the following characteristics are met:<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">The remote access to the target has to have a timely limit. No remote access to the target should be possible outside the defined period.</label>
+              <input type="checkbox" id="option1_q13" (change)="onSelectionChange('question13', 'option1_q13', $event)">
+              <label for="option1_q13">The remote access to the target has to have a timely limit. No remote access to the target should be possible outside the defined period.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">The parameterization of the communication connection helps ensure that only the released target is directly accessible. Only a 1:1 access is permitted (one source to one target).</label>
+              <input type="checkbox" id="option2_q13" (change)="onSelectionChange('question13', 'option2_q13', $event)">
+              <label for="option2_q13">The parameterization of the communication connection helps ensure that only the released target is directly accessible. Only a 1:1 access is permitted (one source to one target).</label>
             </div>
           </div>
 
@@ -286,110 +279,116 @@
           <p>In the case of reorganizations (relocation of laboratory areas or restructuring of networks), a self- audit for the new areas must be carried out within<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">3 months</label>
+              <input type="checkbox" id="option1_q14" (change)="onSelectionChange('question14', 'option1_q14', $event)">
+              <label for="option1_q14">3 months</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">6 months</label>
+              <input type="checkbox" id="option3_q14" (change)="onSelectionChange('question14', 'option3_q14', $event)">
+              <label for="option2_q14">6 months</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">1 year</label>
+              <input type="checkbox" id="option3_q14" (change)="onSelectionChange('question14', 'option3_q14', $event)">
+              <label for="option3_q14">1 year</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl_proxy" name="roles" value="local_itl_proxy">
-              <label for="local_itl_proxy">5 months</label>
+              <input type="checkbox" id="option4_q14" (change)="onSelectionChange('question14', 'option4_q14', $event)">
+              <label for="option4_q14">5 months</label>
             </div>
           </div>
           <p>The service engineer has not installed any virus protection on his notebook. Do you allow him to proceed?<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Yes</label>
+              <input type="checkbox" id="option1_q15" (change)="onSelectionChange('question15', 'option1_q15', $event)">
+              <label for="option1_q15">Yes</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">No</label>
+              <input type="checkbox" id="option2_q15" (change)="onSelectionChange('question15', 'option2_q15', $event)">
+              <label for="option2_q15">No</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">May be</label>
+              <input type="checkbox" id="option3_q15" (change)="onSelectionChange('question15', 'option3_q15', $event)">
+              <label for="option3_q15">May be</label>
             </div>
           </div>
           <p>Do we need to include The Local-ITL / Proxy in the ordering process of MAE (Machinery and equipment) device?<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Yes</label>
+              <input type="checkbox" id="option1_q16" (change)="onSelectionChange('question16', 'option1_q16', $event)">
+              <label for="option1_q16">Yes</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">No</label>
+              <input type="checkbox" id="option2_q16" (change)="onSelectionChange('question16', 'option2_q16', $event)">
+              <label for="option2_q16">No</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">May be</label>
+              <input type="checkbox" id="option3_q16" (change)="onSelectionChange('question16', 'option3_q16', $event)">
+              <label for="option3_q16">May be</label>
             </div>
           </div>
           <p>Access control lists are required to...<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">prevent unauthorized activities from restricted users.</label>
+              <input type="checkbox" id="option1_q17" (change)="onSelectionChange('question17', 'option1_q17', $event)">
+              <label for="option1_q17">prevent unauthorized activities from restricted users.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">prevent unauthorized activities from unrestricted users.</label>
+              <input type="checkbox" id="option2_q17" (change)="onSelectionChange('question17', 'option2_q17', $event)">
+              <label for="option2_q17">prevent unauthorized activities from unrestricted users.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">prevent authorized activities from unrestricted users.</label>
+              <input type="checkbox" id="option3_q17" (change)="onSelectionChange('question17', 'option3_q17', $event)">
+              <label for="option3_q17">prevent authorized activities from unrestricted users.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">prevent authorized activities from restricted users.</label>
+              <input type="checkbox" id="option4_q17" (change)="onSelectionChange('question17', 'option4_q17', $event)">
+              <label for="option4_q17">prevent authorized activities from restricted users.</label>
             </div>
           </div>
           <p>For software without Bosch CERT safety instructions, security patches have to be installed in<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">a predefined, regular patch cycle (at least four times a year) according to the publishing cycle and recommendations of the software manufacturer.</label>
+              <input type="checkbox" id="option1_q18" (change)="onSelectionChange('question18', 'option1_q18', $event)">
+              <label for="option1_q18">a predefined, regular patch cycle (at least four times a year) according to the publishing cycle and recommendations of the software manufacturer.</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">at least two times a year according to the publishing cycle and recommendations of the software manufacturer.</label>
+              <input type="checkbox" id="option2_q18" (change)="onSelectionChange('question18', 'option2_q18', $event)">
+              <label for="option2_q18">at least two times a year according to the publishing cycle and recommendations of the software manufacturer.</label>
             </div>
           </div>
           <p>Self-Audit takes place ............ a year.<span class="required"> *</span></p>
           <div class="checkbox-container">
             <div class="checkbox-item">
-              <input type="checkbox" id="primary_lab_cord" name="roles" value="primary_lab_cord">
-              <label for="primary_lab_cord">Once</label>
+              <input type="checkbox" id="option1_q19" (change)="onSelectionChange('question19', 'option1_q19', $event)">
+              <label for="option1_q19">Once</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="secondary_lab_cord" name="roles" value="secondary_lab_cord">
-              <label for="secondary_lab_cord">Twice</label>
+              <input type="checkbox" id="option2_q19" (change)="onSelectionChange('question19', 'option2_q19', $event)">
+              <label for="option2_q19">Twice</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">Thrice</label>
+              <input type="checkbox" id="option3_q19" (change)="onSelectionChange('question19', 'option3_q19', $event)">
+              <label for="option3_q19">Thrice</label>
             </div>
             <div class="checkbox-item">
-              <input type="checkbox" id="local_itl" name="roles" value="local_itl">
-              <label for="local_itl">None of the above</label>
+              <input type="checkbox" id="option4_q19" (change)="onSelectionChange('question19', 'option4_q19', $event)">
+              <label for="option4_q19">None of the above</label>
             </div>
           </div>
 
-          <button mat-raised-button color="primary" type="submit">Submit Quiz</button>
+          <button type="button" (click)="submitAnswers()">Submit</button>
         </form>
         <p class="error-message">You need at least 80% to proceed.</p>
       </div>
-    <!-- </div> -->
+     </div>
 
-  </mat-tab>
-  <mat-tab class="" label="Apply for role">
+
+
+
+  <!-- Role Form -->
+  <div class="" label="Apply for role" *ngIf="passedQuiz">
+    <h3>Congratulations!</h3>
+    <p>Your score: {{ score }}%</p>
+
     <p class="first">NT-ID of User<span class="required"> *</span></p>
     <div class="dropdown-container">
       <div class="dropdown-item">
@@ -465,5 +464,5 @@
         </div>
       </div>
       <button class="success_btn" >Submit</button>
-  </mat-tab>
-</mat-tab-group>
+  </div>
+

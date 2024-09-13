@@ -8,7 +8,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
 
-
+interface Answers {
+  [key: string]: Set<string>;
+}
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -21,7 +23,8 @@ export class RegisterComponent {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 
   showQuizSection = false;
-
+  score: number | null = null;
+  passedQuiz = false;
 
   proceedToQuiz() {
     if (this.videoPlayer.nativeElement.currentTime >= this.videoPlayer.nativeElement.duration) {
@@ -31,72 +34,99 @@ export class RegisterComponent {
       alert('Please watch the entire video before proceeding.');
     }
   }
-  // Define the correct answers for each question
-  question1CorrectAnswers: Set<string> = new Set(['secondary_lab_cord', 'local_itl']);
-  question2CorrectAnswers: Set<string> = new Set(['secondary_lab_cord', 'local_itl']);
+
+  // Define correct answers for each question
+  correctAnswers: Answers = {
+    question1: new Set(['option2_q1', 'option3_q1']),
+    question2: new Set(['option1_q2', 'option2_q2', 'option3_q2','option4_q2','option5_q2']),
+    question3: new Set(['option1_q3', 'option2_q3','option3_q3','option4_q3']),
+    question4: new Set(['option1_q4', 'option2_q4','option3_q4']),
+    question5: new Set(['option1_q5', 'option3_q5', 'option4_q5']),
+    question6: new Set(['option1_q6','option2_q6' ,'option3_q6', 'option4_q6']),
+    question7: new Set(['option1_q7', 'option2_q7','option3_q7']),
+    question8: new Set(['option1_q8', 'option2_q8']),
+    question9: new Set(['option1_q9', 'option3_q9']),
+    question10: new Set(['option1_q10', 'option2_q10','option3_q10','option4_q10','option5_q10']),
+    question11: new Set(['option1_q11', 'option2_q11','option3_q11','option4_q11','option5_q11']),
+    question12: new Set(['option1_q12', 'option2_q12','option3_q12','option4_q12','option5_q12']),
+    question13: new Set(['option1_q13', 'option2_q13']),
+    question14: new Set(['option2_q14']),
+    question15: new Set(['option1_q15']),
+    question16: new Set(['option1_q16']),
+    question17: new Set(['option1_q17']),
+    question18: new Set(['option1_q18']),
+    question19: new Set(['option1_q19']),
+    question20: new Set(['option1_q20'])
+
+
+
+    // Add other questions as needed
+  };
 
   // User's selected answers
-  userSelectionsQ1: Set<string> = new Set();
-  userSelectionsQ2: Set<string> = new Set();
+  userSelections: Answers = {
+    question1: new Set<string>(),
+  question2: new Set<string>(),
+  question3: new Set<string>(),
+  question4: new Set<string>(),
+  question5: new Set<string>(),
+  question6: new Set<string>(),
+  question7: new Set<string>(),
+  question8: new Set<string>(),
+  question9: new Set<string>(),
+  question10: new Set<string>(),
+  question11: new Set<string>(),
+  question12: new Set<string>(),
+  question13: new Set<string>(),
+  question14: new Set<string>(),
+  question15: new Set<string>(),
+  question16: new Set<string>(),
+  question17: new Set<string>(),
+  question18: new Set<string>(),
+  question19: new Set<string>(),
+  question20: new Set<string>(),
+  };
 
-  // Method to handle checkbox change for question 1
-  onSelectionChangeQ1(option: string, event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.checked) {
-      this.userSelectionsQ1.add(option);
+
+
+  // Handle checkbox changes
+  onSelectionChange(question: string, value: string, event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      this.userSelections[question].add(value);
     } else {
-      this.userSelectionsQ1.delete(option);
+      this.userSelections[question].delete(value);
     }
   }
 
-  // Method to handle checkbox change for question 2
-  onSelectionChangeQ2(option: string, event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.checked) {
-      this.userSelectionsQ2.add(option);
+  // Calculate score and show form if necessary
+  submitAnswers() {
+    let totalQuestions = 20; // Number of questions
+    let correctAnswersCount = 0;
+
+    for (const [question, correctSet] of Object.entries(this.correctAnswers)) {
+      const userSet = this.userSelections[question];
+      const isCorrect = this.isCorrectAnswer(userSet, correctSet);
+      if (isCorrect) {
+        correctAnswersCount++;
+      }
+    }
+
+    // Calculate percentage
+    const score = (correctAnswersCount / totalQuestions) * 100;
+
+    if (score > 80) {
+      // User has passed the quiz, show the form
+      this.passedQuiz = true;
     } else {
-      this.userSelectionsQ2.delete(option);
+      alert('You did not score more than 80%. Please try again.');
+      this.passedQuiz = false;
     }
   }
 
-  // Method to calculate the score for question 1
-  calculateScoreQ1(): number {
-    const totalCorrectOptions = this.question1CorrectAnswers.size;
-    const userCorrectSelections = Array.from(this.userSelectionsQ1).filter(option => this.question1CorrectAnswers.has(option)).length;
-
-    // If there are incorrect selections, score is 0
-    if (userCorrectSelections !== totalCorrectOptions || Array.from(this.userSelectionsQ1).some(option => !this.question1CorrectAnswers.has(option))) {
-      return 0;
-    }
-
-    // Calculate score as a percentage
-    const score = (userCorrectSelections / totalCorrectOptions) * 100;
-    return score;
-  }
-
-  // Method to calculate the score for question 2
-  calculateScoreQ2(): number {
-    const totalCorrectOptions = this.question2CorrectAnswers.size;
-    const userCorrectSelections = Array.from(this.userSelectionsQ2).filter(option => this.question2CorrectAnswers.has(option)).length;
-
-    // If there are incorrect selections, score is 0
-    if (userCorrectSelections !== totalCorrectOptions || Array.from(this.userSelectionsQ2).some(option => !this.question2CorrectAnswers.has(option))) {
-      return 0;
-    }
-
-    // Calculate score as a percentage
-    const score = (userCorrectSelections / totalCorrectOptions) * 100;
-    return score;
-  }
-
-  // Method to calculate total score across all questions
-  calculateTotalScore(): number {
-    const scoreQ1 = this.calculateScoreQ1();
-    const scoreQ2 = this.calculateScoreQ2();
-
-    // Assuming each question has equal weightage
-    const totalScore = (scoreQ1 + scoreQ2) / 2;
-    return totalScore;
+  // Check if the user's answers match the correct answers
+  private isCorrectAnswer(userSet: Set<string>, correctSet: Set<string>): boolean {
+    return userSet.size === correctSet.size && [...userSet].every(value => correctSet.has(value));
   }
 }
 
