@@ -10,7 +10,7 @@
       <P></P>
       <button mat-raised-button color="primary" (click)="proceedToQuiz()">Proceed to Quiz</button>
       <div *ngIf="showQuizSection" class="quiz-section">
-        <h2 class="instruction">Quiz Instructions</h2>
+        <!-- <h2 class="instruction">Quiz Instructions</h2> -->
         <p class="instruction">Now that you have watched the video, it's time to take a short quiz to test your understanding. You need to score at least 80% to proceed to the application form. Answer all the questions to the best of your ability. Good luck!</p>
         <!--------------------Multiple Select Questions -------------------------------->
 
@@ -375,7 +375,7 @@
             </div>
           </div>
 
-          <button type="button" (click)="submitAnswers()">Submit</button>
+          <button class="submit-btn" type="button" (click)="submitAnswers()">Submit</button>
         </form>
         <p class="error-message">You need at least 80% to proceed.</p>
       </div>

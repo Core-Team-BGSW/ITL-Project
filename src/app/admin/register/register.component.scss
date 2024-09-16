@@ -10,10 +10,36 @@
 
 }
 //content styling
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+// h2 {
+//   font-size: 1.5rem;
+//   margin-bottom: 10px;
 
+// }
+h2 {
+  color: black;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+// Paragraph Styles
+.instruction {
+  color: black;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+// Video Styles
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
 }
 
 .instruction {
@@ -40,6 +66,58 @@ p{
 
 // }
 //Quiz Styling
+.quiz-button{
+  background-color: #373fde; /* Green */
+    border: none;
+    color: white;
+    padding: 20px 32px;
+    padding-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: -25px;
+    box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: #6fb75d;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #3510eb; /* Darken background on hover */
+        transform: translateY(-2px); /* Slightly move the button up on hover */
+
+    }
+    &:active {
+      background-color: #24c034; /* Even darker background when clicked */
+      transform: translateY(1px); /* Move button slightly down when clicked */
+    }
+
+}
+.quiz-section {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+
+
+  margin-top: 2rem;
+  max-width: 100%;
+  width: 100%;
+
+  h2 {
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+}
 
 .checkbox-container {
   display: flex;
@@ -79,4 +157,34 @@ p{
   color: #999;
   cursor: not-allowed;
 }
+.submit-btn{
 
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: -25px;
+    box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: #6fb75d;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #49a138; /* Darken background on hover */
+        transform: translateY(-2px); /* Slightly move the button up on hover */
+
+    }
+    &:active {
+      background-color: #24c034; /* Even darker background when clicked */
+      transform: translateY(1px); /* Move button slightly down when clicked */
+    }
+
+  }

@@ -32,7 +32,7 @@ export class RegisterComponent {
   proceedToQuiz() {
     if (this.videoPlayer.nativeElement.currentTime >= this.videoPlayer.nativeElement.duration) {
       this.showQuizSection = true;
-      // Optionally, you may scroll to the quiz section or display it in some way
+
     } else {
       alert('Please watch the entire video before proceeding.');
     }
@@ -62,8 +62,6 @@ export class RegisterComponent {
     question20: new Set(['option1_q20'])
 
 
-
-    // Add other questions as needed
   };
 
   // User's selected answers
@@ -104,7 +102,8 @@ export class RegisterComponent {
 
   // Calculate score and show form if necessary
   submitAnswers() {
-    let totalQuestions = 20; // Number of questions
+    console.log("submitAnswers function called");
+    let totalQuestions = 20;
     let correctAnswersCount = 0;
 
     for (const [question, correctSet] of Object.entries(this.correctAnswers)) {
@@ -117,10 +116,13 @@ export class RegisterComponent {
 
     // Calculate percentage
     const score = (correctAnswersCount / totalQuestions) * 100;
+    console.log(`Correct Answers Count: ${correctAnswersCount}, Score: ${score}`);
 
     if (score > 80) {
       // User has passed the quiz, show the form
+      alert("Congratulations! You have passed the quiz. Now you can apply for role")
       this.router.navigate(['/role']);
+
     } else {
       alert('You did not score more than 80%. Please try again.');
       this.passedQuiz = false;
