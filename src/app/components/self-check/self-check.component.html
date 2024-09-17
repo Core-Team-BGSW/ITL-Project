@@ -30,18 +30,9 @@
         
                 </button>
                 
-                <button routerLink="/self-audit"  >
-                  Self-Audit
-             </button> 
-             <button (click)="redirectToExternal()">Proceed with self-audit 
-              <div class="tooltip"><i class="icon-info-sign"></i>
-                <span class="tooltiptext">This page will redirected to ITL Self-audit tool,
-                  before Self-audit,Please contact ITL Consultancy team(bd_toa-ets1_itl_consultancy_team &#64;bcn.bosch.com)
-                </span>
-                </div>
-              
-             </button>
-
+                
+             <button (click)="openForm(lab.Entity)">Self-Audit</button>
+           
               </div> 
             </mat-card-content>
             </mat-card>
