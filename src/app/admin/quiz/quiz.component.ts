@@ -14,13 +14,13 @@ interface Answers {
   [key: string]: Set<string>;
 }
 @Component({
-  selector: 'app-register',
+  selector: 'app-quiz',
   standalone: true,
   imports: [RouterLink,MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTabLabel, MatTabsModule, MatRadioModule, CommonModule, RoleComponent],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  templateUrl: './quiz.component.html',
+  styleUrl: './quiz.component.scss'
 })
-export class RegisterComponent {
+export class QuizComponent {
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 

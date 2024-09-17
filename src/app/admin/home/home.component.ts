@@ -6,6 +6,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { RouterOutlet, RouterLink} from '@angular/router';
 import { ContactComponent } from "../contact/contact.component";
+import { RoleComponent } from '../role/role.component';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
@@ -17,7 +18,7 @@ import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     imports: [MatButtonModule, MatIconModule, MatSidenavModule,
-      MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule,
+      MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent
 
 
     ]

@@ -589,3 +589,98 @@ border-radius: 30px;
     max-width: 33.3333%;
   }
 }
+
+//Video Styling
+
+.headline-section {
+  text-align: center;
+  margin-bottom: 20px; // Space between the headline and the container
+}
+
+.headline {
+  font-size: 1.8rem;
+  color:white;
+  margin: 0; // Remove default margin to avoid extra space
+}
+
+.container3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 60px;
+  background-color: #7ebdff; // Background color for the entire container, if needed
+}
+
+.video-section {
+  max-width: 800px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff; // Background color for the video section
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video {
+  width: 100%; // This makes sure the video fills the width of its container
+  max-width: 100%; // Ensure it doesn't overflow its container
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #495057;
+  margin-bottom: 20px;
+}
+.info-section {
+  text-align: center;
+  margin: 30px 0; // Space above and below the informative text
+}
+
+.info-text {
+  font-size: 1.2rem;
+  color: #343a40;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cta-section {
+
+  display: flex;              // Use flexbox to center content
+  justify-content: center;    // Center horizontally
+  margin-top: 30px;
+}
+ mat-icon {
+    font-size: 1.2rem;        // Icon size, adjust if needed
+    margin-right: 8px;        // Space between icon and text
+  }
+.cta-button {
+  display: flex;              // Use flexbox to align items
+  align-items: center;
+  text-align: center;       // Vertically align items
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #0056b3;
+  }
+}

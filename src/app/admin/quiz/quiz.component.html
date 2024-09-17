@@ -1,22 +1,12 @@
 
 
-    <div>
-      <h2>Welcome to ITERL</h2>
-      <p class="instruction">To proceed with your application, please watch the following video in its entirety. Once you have finished watching the video, you will be able to take the quiz.</p>
-      <video #videoPlayer width="600" controls>
-        <source src="assets/images/test.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <P></P>
-      <button mat-raised-button color="primary" (click)="proceedToQuiz()">Proceed to Quiz</button>
-      <div *ngIf="showQuizSection" class="quiz-section">
-        <!-- <h2 class="instruction">Quiz Instructions</h2> -->
-        <p class="instruction">Now that you have watched the video, it's time to take a short quiz to test your understanding. You need to score at least 80% to proceed to the application form. Answer all the questions to the best of your ability. Good luck!</p>
-        <!--------------------Multiple Select Questions -------------------------------->
+
 
         <h2>Multiple Select Questions</h2>
         <p>Please Select only 1 correct option.</p>
-        <form>
+
+        <div id="target-section">
+
           <p>I have taken a picture of the system with my mobile phone and need to transfer the image to the OT end device. I will do it via USB cable... What could happen?<span class="required"> *</span></p>
                 <div class="checkbox-container">
                   <div class="checkbox-item">
@@ -376,10 +366,10 @@
           </div>
 
           <button class="submit-btn" type="button" (click)="submitAnswers()">Submit</button>
-        </form>
+
         <p class="error-message">You need at least 80% to proceed.</p>
+
       </div>
-     </div>
 
 
 
