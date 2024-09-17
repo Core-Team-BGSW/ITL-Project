@@ -602,6 +602,14 @@ border-radius: 30px;
   color:white;
   margin: 0; // Remove default margin to avoid extra space
 }
+#video-section {
+  margin-top: 20px; // Adjust as necessary
+  padding: 20px;    // Adjust as necessary
+}
+
+.container3 {
+  padding: 0 20px;  // Ensure padding is not affecting scroll
+}
 
 .container3 {
   display: flex;
