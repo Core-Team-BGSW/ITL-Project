@@ -483,7 +483,11 @@
             <section class="cmdb-container">
               <mat-form-field class="example-full-width">
                 <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker" />
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  (dateChange)="onDateSelected($event.value)"
+                />
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker">
                   <mat-icon matDatepickerToggleIcon

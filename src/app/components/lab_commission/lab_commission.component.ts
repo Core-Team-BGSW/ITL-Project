@@ -99,12 +99,12 @@ export class LabCommissionComponent {
   labelPosition: string="";
   choosemethod: string="";
   selectedLabType: string = '';
-  selfauditdate: string ='';
+  //selfauditdate: string ='';
   showOtherField: boolean = false;
   otherLabType: string = '';
   applications: any[] = [];
-
   labForm!: FormGroup;
+  selfauditdate: Date | null = null;
 
 
 
@@ -528,6 +528,9 @@ onPreviewform(): void {
 
 }
 
+onDateSelected(date: Date): void {
+  this.selfauditdate = date;
+}
 
 
 
