@@ -54,12 +54,11 @@ export class QuizComponent {
     question12: new Set(['option1_q12', 'option2_q12','option3_q12','option4_q12','option5_q12']),
     question13: new Set(['option1_q13', 'option2_q13']),
     question14: new Set(['option2_q14']),
-    question15: new Set(['option1_q15']),
+    question15: new Set(['option2_q15']),
     question16: new Set(['option1_q16']),
     question17: new Set(['option1_q17']),
     question18: new Set(['option1_q18']),
-    question19: new Set(['option1_q19']),
-    question20: new Set(['option1_q20'])
+    question19: new Set(['option1_q19'])
 
 
   };
@@ -85,7 +84,7 @@ export class QuizComponent {
   question17: new Set<string>(),
   question18: new Set<string>(),
   question19: new Set<string>(),
-  question20: new Set<string>(),
+
   };
 
 
@@ -103,7 +102,7 @@ export class QuizComponent {
   // Calculate score and show form if necessary
   submitAnswers() {
     console.log("submitAnswers function called");
-    let totalQuestions = 20;
+    let totalQuestions = 19;
     let correctAnswersCount = 0;
 
     // Calculate correct answers
@@ -123,7 +122,7 @@ export class QuizComponent {
     this.showScorePopup(score);
 
     // Check if the user passed
-    if (score >= 80) {
+    if (correctAnswersCount >= 15) {
       // User has passed the quiz, show the form
       this.router.navigate(['/role']);
     } else {
