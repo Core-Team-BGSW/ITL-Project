@@ -106,6 +106,7 @@ export class QuizComponent {
     let totalQuestions = 20;
     let correctAnswersCount = 0;
 
+    // Calculate correct answers
     for (const [question, correctSet] of Object.entries(this.correctAnswers)) {
       const userSet = this.userSelections[question];
       const isCorrect = this.isCorrectAnswer(userSet, correctSet);
@@ -116,17 +117,24 @@ export class QuizComponent {
 
     // Calculate percentage
     const score = (correctAnswersCount / totalQuestions) * 100;
-    console.log(`Correct Answers Count: ${correctAnswersCount}, Score: ${score}`);
 
-    if (score > 80) {
+
+    // Show the pop-up with the score
+    this.showScorePopup(score);
+
+    // Check if the user passed
+    if (score >= 80) {
       // User has passed the quiz, show the form
-      alert("Congratulations! You have passed the quiz. Now you can apply for role")
       this.router.navigate(['/role']);
-
     } else {
       alert('You did not score more than 80%. Please try again.');
       this.passedQuiz = false;
     }
+  }
+
+  // Function to show score pop-up
+  private showScorePopup(score: number) {
+    alert(`Your Score: ${score.toFixed(2)}%\nCongratulations! You have passed the quiz. Now you can apply for the role.`);
   }
 
   // Check if the user's answers match the correct answers

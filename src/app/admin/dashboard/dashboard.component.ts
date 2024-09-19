@@ -41,7 +41,7 @@ export class DashboardComponent implements AfterViewInit {
 
   navigateToQuiz() {
     if (this.videoPlayer.nativeElement.currentTime >= this.videoPlayer.nativeElement.duration) {
-      this.router.navigate(['/register']);
+      this.router.navigate(['/quiz']);
 
     } else {
       alert('Please watch the entire video before proceeding.');

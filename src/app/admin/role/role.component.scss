@@ -19,6 +19,25 @@ p{
   //color: black;
   font-weight: 400;
 }
+.quiz-btn
+ {
+   width: 200px;
+   border-radius: 8px;
+   padding: 11px;
+
+   background: #35a71e;
+   color: white;
+   position: relative;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-size: medium;
+   font-weight: bold;
+   left: 36%;
+   &:hover {
+     background-color: #0d4516;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   }
+ }
+
 .dropdown-container {
   display: flex;
   justify-content: space-between;
