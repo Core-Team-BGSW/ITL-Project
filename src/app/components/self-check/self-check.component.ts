@@ -239,21 +239,21 @@ toggleDropdown() {
 }
 openForm(labEntity: string) {
    // condition if the enitity is "BGSW"
-    if (labEntity === 'bgsw') {
+    if (labEntity === 'BGSW') {
       const confirmed = confirm('This page will redirect to ITL Self-audit tool,before self-audit please contact ITL Consulatncy team (bd_toa-ets1_itl_consultancy_team@bcn.bosch.com)');
       if(confirmed){
-        window.open( 'https://apxbgswapexp.webapp.inside.bosch.cloud/apxbgswapexp/r/cibteapex_prod/itl-prd/self-claim-report?session=5134802335988');
+          window.open( 'https://apxbgswapexp.webapp.inside.bosch.cloud/apxbgswapexp/r/cibteapex_prod/itl-prd/self-claim-report?session=5134802335988');
       }
    
   } 
-  else if(labEntity=='BGSW'){
+  else if(labEntity=='bgsw'){
     const confirmed = confirm('This page will redirect to ITL Self-audit tool,before self-audit please contact ITL Consulatncy team (bd_toa-ets1_itl_consultancy_team@bcn.bosch.com)');
       if(confirmed){
         window.open( 'https://apxbgswapexp.webapp.inside.bosch.cloud/apxbgswapexp/r/cibteapex_prod/itl-prd/self-claim-report?session=5134802335988');
       }
   }
   else {
-    this.router.navigate(['/self-audit']);
+       window.open('/self-audit');
   }
 }
 }
