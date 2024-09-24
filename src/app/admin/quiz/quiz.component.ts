@@ -28,6 +28,7 @@ export class QuizComponent {
   score: number | null = null;
   passedQuiz = false;
   constructor(private router: Router) {}
+  showRoleSection = false;
 
   proceedToQuiz() {
     if (this.videoPlayer.nativeElement.currentTime >= this.videoPlayer.nativeElement.duration) {
@@ -117,14 +118,14 @@ export class QuizComponent {
     // Calculate percentage
     const score = (correctAnswersCount / totalQuestions) * 100;
 
-
-    // Show the pop-up with the score
     this.showScorePopup(score);
 
+
     // Check if the user passed
-    if (correctAnswersCount >= 15) {
+    if (score >= 80) {
       // User has passed the quiz, show the form
       this.router.navigate(['/role']);
+
     } else {
       alert('You did not score more than 80%. Please try again.');
       this.passedQuiz = false;

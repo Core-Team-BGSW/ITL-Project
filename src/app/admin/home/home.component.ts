@@ -10,6 +10,7 @@ import { RoleComponent } from '../role/role.component';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 
 @Component({
@@ -18,10 +19,7 @@ import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     imports: [MatButtonModule, MatIconModule, MatSidenavModule,
-      MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent
-
-
-    ]
+    MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent, NavbarComponent]
 })
 export class HomeComponent {
 // showModal: any;

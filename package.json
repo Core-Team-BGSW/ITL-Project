@@ -39,6 +39,7 @@
     "express-session": "^1.18.0",
     "file-saver": "^2.0.5",
     "filter": "^0.1.1",
+    "font-awesome": "^4.7.0",
     "for": "^0.0.1-dev.0",
     "json-server": "^1.0.0-beta.2",
     "mongoose": "^8.5.1",

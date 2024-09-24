@@ -10,6 +10,9 @@
 
   }
 }
+.sidebar {
+  margin-top: calc(var(--underline-height) + 2em); /* Adjust based on navbar height */
+}
 
 mat-sidenav{
   background-color: #0f1720;

@@ -6,19 +6,26 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatFormField, MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [MatSidenavModule, SidebarComponent, MatButtonModule, MatIconModule, MatToolbarModule, RouterLink,MatMenuModule,MatFormFieldModule],
+  imports: [MatSidenavModule, SidebarComponent, MatButtonModule, MatIconModule, MatToolbarModule, RouterLink,MatMenuModule,MatFormFieldModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  isOpen = false;
+
+  toggleMenu() {
+    this.isOpen = !this.isOpen;
+  }
+
   menuItemClicked(item: string) {
     console.log(`Clicked on ${item}`);
-    // Implement your logic here
   }
+
 
 }
