@@ -21,7 +21,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ChangeDetectorRef } from "@angular/core";
 import axios from 'axios';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 
 
@@ -88,7 +89,6 @@ export class LabCommissionComponent {
   DH:string='';
   Dept:string='';
   Building:string='';
-
   Floor:string='';
   labno:string='';
   primarylabco:string='';
@@ -210,6 +210,7 @@ export class LabCommissionComponent {
   }
 
 // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
+private http = inject(HttpClient);
 onfileSubmit(): void {
   if (!this.selectedFile) {
     console.log('No file selected');
@@ -233,19 +234,20 @@ onfileSubmit(): void {
   });
 
   // Use HttpClient to post the file
-  this.http.post('http://localhost:8080/upload/convert-excel-to-csv', formData, { headers })
-    .subscribe({
-      next: (response: any) => {
-        console.log('File uploaded successfully:', response);
-        // Optionally, you can clear the selected file and reset form state here
-        this.selectedFile = null;
-        this.excelData = [];
-        this.previewVisible = false;
-      },
-      error: (error: any) => {
-        console.error('Error uploading file:', error);
-      }
-    });
+  this.http.post('http://localhost:8080/upload/convert-excel-to-csv', formData)
+  .subscribe({
+    next: response => {
+      console.log('File uploaded successfully:', response);
+      // Optionally, clear the selected file and reset form state here
+      this.selectedFile = null;
+      this.excelData = [];
+      this.previewVisible = false;
+    },
+    error: error => {
+      console.error('Error uploading file:', error);
+
+    }
+  });
 }
 
 
@@ -516,7 +518,7 @@ nextUniqueId: number = 1; // Initial unique ID counter
 uniqueInstanceId: string = ''
 
 
-constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private http: HttpClient) {}
+constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder,) {}
 
 onPreviewform(): void {
   const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
