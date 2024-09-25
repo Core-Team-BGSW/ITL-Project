@@ -1,6 +1,0 @@
-Sr.No,Region,Country,Location,Location-Code,Entity,GB,Local-ITL,Local-ITL Proxy,Department Head (DH),Key Account Manager (KAM),Department ,Building ,Floor ,Lab No.,Primary Lab Coordinator,Secondary Lab Coordinator,Cost Center,Kind of Lab,Purpose of Lab in Brief ,Description,Is lab going to procure new equipment for Engineering/Red Zone?,Shared Lab,ACL Required ,No. of Green Ports,No. of Yellow Ports,No. of Red Ports
-1.0,APAC,IN,Bangalore,Bani-ADUGODI,BGSW,PG,ada3kor,muk3kor,MKR3COB,grs2kor,EED,ADUGODI-602,8th,828.0,KOL4KOR,ARQ3KOR,652A98,Devlopement,Infotainment,car dashboard infortainment,Yes,Yes,YES,3.0,4.0,4.0
-2.0,APAC,IN,Coimbatore,Cob-SEZ,BGSW,PS,ada3kor,muk3kor,scp2kor,gmk1kor,EHV,Cob-SEZ2,Ground,NG-11,sas6cob,BRF1COB,652S26,test,AC test,Car indoor ac testing,No,Yes,No,NA,NA,NA
-3.0,APAC,IN,Coimbatore,Cob5-GTP,BGSW,VM,ada3kor,muk3kor,rav1kor,sre7kor,ESY,COB-GTP,1st,C-116,SOS4COB,NMN6COB,652AMY,test,ECU test,car engine control unit testing for different environmental condition,No,Yes,Yes,4.0,6.0,8.0
-4.0,APAC,IN,Bangalore,Ban-RBIN,RBIN,PS,pbn3na,pra2ban,MRH2BAN,ATV2BAN,ENI,RBIN-B106,Ground,DI-NHA Lab,NA,NA,903988.0,test,pump test benches,pumping endurance test,Yes,No,Yes,4.0,8.0,8.0
-null,null,null,null,null,null,null,null,
