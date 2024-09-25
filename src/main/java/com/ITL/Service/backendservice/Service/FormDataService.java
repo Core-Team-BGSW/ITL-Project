@@ -23,8 +23,8 @@ public class FormDataService {
         LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cordAndDep_name(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord(), labData.getDep_name());
         if(temLabData == null)
         {
-            labData = labDataRepo.save(labData);
             labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
+            labData = labDataRepo.save(labData);
         }
         else labData = temLabData;
 
