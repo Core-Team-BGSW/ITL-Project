@@ -418,7 +418,7 @@ margin-top: 3px;
 
 .cmdb-container{
 
-  display: flex;
+  display: block;
   justify-content: space-between;
   gap: 20px;
   background: white;
@@ -427,11 +427,14 @@ margin-top: 3px;
   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
-  width:100%;
-  margin: 0 10%;
+  width:96%;
+  //margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 6px;
   margin-top: 10px;
+}
+.date-picker-container {
+  margin-bottom: 8px; /* Optional: Add spacing below date picker */
 }
 
 .mat-mdc-card-content {

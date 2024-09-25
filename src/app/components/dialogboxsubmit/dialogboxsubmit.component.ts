@@ -55,6 +55,7 @@ export class DialogboxsubmitComponent {
   ACLradio:string;
   otherLabType:string;
   selfauditdate:string;
+  selectedDate : string;
 
 
 
@@ -93,6 +94,7 @@ export class DialogboxsubmitComponent {
     this.yellowports = data.yellowports
     this.redports = data.redports
     this.selfauditdate = data.selfauditdate
+    this.selectedDate = data.selectedDate
 
 }
 
@@ -136,7 +138,7 @@ applications: any[] = []; // Array to hold submitted applications
       "ACL Required": this.ACLradio,
       "No. of Green Ports": this.greenports,
       "No. of Yellow Ports": this.yellowports,
-      "Self Audit Date": this.selfauditdate,
+      "Self Audit Date": this.selectedDate,
       "No. of Red Ports": this.redports,
       approvalStatus: 'Pending' // Set approval status to 'Pending'
     };

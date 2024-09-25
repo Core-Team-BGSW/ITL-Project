@@ -25,6 +25,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
+import { DateAdapter } from '@angular/material/core';
+import { ToastrModule, ToastrService } from "ngx-toastr";
 
 
 
@@ -48,7 +50,7 @@ import {MatIconModule} from '@angular/material/icon';
     ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatIconModule,MatCardModule,MatCheckboxModule,MatRadioModule,MatDatepicker,MatDatepickerModule,MatNativeDateModule,
-      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatDialogModule,DialogModule, FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -105,7 +107,8 @@ export class LabCommissionComponent {
   applications: any[] = [];
   labForm!: FormGroup;
   selfauditdate: Date | null = null;
-
+  selectedDate!: Date;
+  isDatePickerDisabled: boolean = false; // Control the disabled stat
 
 
   ngOnInit(): void {
@@ -132,6 +135,11 @@ export class LabCommissionComponent {
       redports: [''],
       // Additional fields
     });
+    const today = new Date();
+    // Add 6 months to the current date
+    const sixMonthsFromNow = new Date(today.setMonth(today.getMonth() + 6));
+    this.selectedDate = sixMonthsFromNow;
+    this.isDatePickerDisabled = true;
   }
 
   onSubmit() {
@@ -505,32 +513,71 @@ nextUniqueId: number = 1; // Initial unique ID counter
 uniqueInstanceId: string = ''
 
 
-constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder) {}
+constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private dateAdapter: DateAdapter<Date>,private toastr: ToastrService) {}
 
 onPreviewform(): void {
-  const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
-    width: '600px',
-    data: { region: this.selectedRegion, country: this.selectedCountry, location: this.selectedLocation, locationcode: this.selectedCode,
-      entity: this.selectedEntity,GB: this.selectedGB,localITL: this.localITL,localITLproxy: this.localITLproxy, DH: this.DH, KAM: this.KAM,Dept: this.Dept,
-      Building : this.Building,Floor: this.Floor,labno: this.labno,primarylabco: this.primarylabco, secondarylabco:this.secondarylabco,CC: this.CC,
-      kindoflab: this.selectedLabType, purposeoflab:this.purposeoflab,description:this.description, ACL:this.ACL, greenports:this.greenports, yellowport:this.yellowport, redport:this.redport,
-      cmdbradio: this.cmdbradio, otherLabType:this.otherLabType, sharedlabradio: this.sharedlabradio, ACLradio : this.ACLradio, greenport: this.greenports, yellowports: this.yellowports,redports : this.redports,
-      selfauditdate: this.selfauditdate
-       }
-  });
+  if (this.localITL && this.localITL.length >= 7 && this.localITLproxy) {
+    const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
+      width: '600px',
+       data :  { region: this.selectedRegion, country: this.selectedCountry, location: this.selectedLocation, locationcode: this.selectedCode,
+        entity: this.selectedEntity,GB: this.selectedGB,localITL: this.localITL,localITLproxy: this.localITLproxy, DH: this.DH, KAM: this.KAM,Dept: this.Dept,
+        Building : this.Building,Floor: this.Floor,labno: this.labno,primarylabco: this.primarylabco, secondarylabco:this.secondarylabco,CC: this.CC,
+        kindoflab: this.selectedLabType, purposeoflab:this.purposeoflab,description:this.description, ACL:this.ACL, greenports:this.greenports, yellowport:this.yellowport, redport:this.redport,
+        cmdbradio: this.cmdbradio, otherLabType:this.otherLabType, sharedlabradio: this.sharedlabradio, ACLradio : this.ACLradio, greenport: this.greenports, yellowports: this.yellowports,redports : this.redports,
+        selfauditdate: this.selfauditdate, selectedDate: this.selectedDate,
+         }
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialog closed');
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed');
+    });
 
+    const data = {
+      region: this.selectedRegion,
+      country: this.selectedCountry,
+      location: this.selectedLocation,
+      locationcode: this.selectedCode,
+      entity: this.selectedEntity,
+      GB: this.selectedGB,
+      localITL: this.localITL,
+      localITLproxy: this.localITLproxy,
+      DH: this.DH,
+      KAM: this.KAM,
+      Dept: this.Dept,
+      Building: this.Building,
+      Floor: this.Floor,
+      labno: this.labno,
+      primarylabco: this.primarylabco,
+      secondarylabco: this.secondarylabco,
+      CC: this.CC,
+      kindoflab: this.selectedLabType,
+      purposeoflab: this.purposeoflab,
+      description: this.description,
+      ACL: this.ACL,
+      greenports: this.greenports,
+      yellowport: this.yellowport,
+      redport: this.redport,
+      cmdbradio: this.cmdbradio,
+      otherLabType: this.otherLabType,
+      sharedlabradio: this.sharedlabradio,
+      ACLradio: this.ACLradio,
+      greenport: this.greenports,
+      yellowports: this.yellowports,
+      redports: this.redports,
+      selfauditdate: this.selfauditdate,
+      selectedDate: this.selectedDate,
+    };
+    // Perform submission logic
+    console.log('Form previewed with:', { data });
+  } else {
+    this.toastr.error('Please fill required fields')
+    console.error('Fill all the Required Fields');
+  }
 
-    // Handle any actions after dialog is closed
-  });
 
 }
 
-onDateSelected(date: Date): void {
-  this.selfauditdate = date;
-}
+
 
 
 
@@ -584,7 +631,20 @@ submittedFormData: any = "";
     this.showOtherSection = !this.showOtherSection;
   }
 
+
+
+
+  onDateSelected(date: Date) {
+    // Handle the selected date
+    console.log('Selected date:', date);
+  }
+
+
+
 }
+
+
+
 
 
 
