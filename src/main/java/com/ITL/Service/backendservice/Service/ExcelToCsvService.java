@@ -1,5 +1,7 @@
 package com.ITL.Service.backendservice.Service;
 
+import com.ITL.Service.backendservice.Controller.CsvToDatabaseController;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -15,14 +17,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class ExcelToCsvService {
     @Value("${csv.file.directory}")
     private String csvFileDirectory;
+    private final CsvToDatabaseController csvToDatabaseController;
 
     public ResponseEntity<String> excelToCsvConverter(MultipartFile file) {
+        Path path = Paths.get(csvFileDirectory);
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("uploaded file is empty");
         }
@@ -45,6 +52,7 @@ public class ExcelToCsvService {
             PrintWriter csvWriter = new PrintWriter(new FileWriter(csvFile));
             getCSV(sheet,csvWriter);
             workbook.close();
+            csvToDatabaseController.uploadCsvToDatabase(path + "\\" + csvFileName);
             return ResponseEntity.ok("Converted Excel file to CSV and stored at: " + csvFile.getAbsolutePath());
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error converting Excel to CSV: " + e.getMessage());
