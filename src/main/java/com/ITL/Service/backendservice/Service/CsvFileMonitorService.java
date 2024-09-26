@@ -44,7 +44,7 @@ public class CsvFileMonitorService {
                         Path filename = ev.context();
                         if(filename.toString().endsWith(".csv"))
                         {
-                            String response = csvToDatabaseController.uploadCsvToDatabase(path + "/file.csv");
+                            String response = csvToDatabaseController.uploadCsvToDatabase(path + "\\" + filename);
                             System.out.println(response);
                         }
                     }

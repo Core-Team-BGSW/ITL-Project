@@ -54,6 +54,7 @@ public class ExcelToCsvService {
     private void getCSV(Sheet sheet, PrintWriter csvWriter)
     {
         for (Row row : sheet) {
+            if(isRowEmpty(row)) continue;
             int columnCount = row.getLastCellNum();
             String[] csvData = new String[columnCount];
             for (int i = 0; i < columnCount; i++) {
@@ -61,15 +62,30 @@ public class ExcelToCsvService {
                 if(cell!=null) {
                     if(cell.getCellType() == CellType.BLANK)
                     {
+                       continue;
                     }
                     csvData[i] = getCellValueAsString(cell);
                 }
             }
-            String joinedCsvData = String.join(",", csvData);
-            csvWriter.print(joinedCsvData);
-            csvWriter.println();
+            String joinedCsvData = "";
+            if(csvData.length!=0) {
+                 joinedCsvData = String.join(",", csvData);
+            }
+            if(!joinedCsvData.isEmpty()) {
+                csvWriter.print(joinedCsvData);
+                csvWriter.println();
+            }
         }
         csvWriter.close();
+    }
+
+    private static boolean isRowEmpty(Row row) {
+        for (Cell cell : row) {
+            if (cell.getCellType() != CellType.BLANK) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private String getCellValueAsString(Cell cell) {
