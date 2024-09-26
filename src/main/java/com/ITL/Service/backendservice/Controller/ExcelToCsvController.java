@@ -17,7 +17,7 @@ public class ExcelToCsvController {
 
     @PostMapping("/convert-excel-to-csv")
     public ResponseEntity<String> convert(@RequestParam("file") MultipartFile file) {
-        System.out.println("HI..");
+
         return excelToCsvService.excelToCsvConverter(file);
     }
 }
