@@ -5,12 +5,19 @@ import { HttpClient , HttpErrorResponse} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+interface Location {
+  Region : string;
+  Country: string;
+  LocationCode:string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
   private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
+  private locationUrl = 'http://localhost:3000/api/locations';
 
 
   constructor(private http: HttpClient) {}
@@ -46,6 +53,9 @@ export class DataService {
     return this.http.patch<any>(`${this.baseUrl}/${id}/approve-or-reject`, body);
   }
 
+  getLocations(): Observable<Location[]> {
+    return this.http.get<Location[]>(this.locationUrl);
+  }
 
 
 

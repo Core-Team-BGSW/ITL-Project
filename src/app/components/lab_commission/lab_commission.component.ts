@@ -27,8 +27,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
 import { DateAdapter } from '@angular/material/core';
 import { ToastrModule, ToastrService } from "ngx-toastr";
+import { DataService } from '../../data.service';
 
 
+interface Location {
+  Region: string;
+  Country: string;
+  LocationCode: string;
+}
 
 
 
@@ -50,7 +56,7 @@ import { ToastrModule, ToastrService } from "ngx-toastr";
     ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatIconModule,MatCardModule,MatCheckboxModule,MatRadioModule,MatDatepicker,MatDatepickerModule,MatNativeDateModule,
-      MatDialogModule,DialogModule, FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -109,6 +115,12 @@ export class LabCommissionComponent {
   selfauditdate: Date | null = null;
   selectedDate!: Date;
   isDatePickerDisabled: boolean = false; // Control the disabled stat
+  countries: string[] = [];
+  regions: string[] = [];
+  locationCodes: string[] = [];
+  filteredCountries: string[] = [];
+  filteredSites: string[] = [];
+  locations: Location[] = [];;
 
 
   ngOnInit(): void {
@@ -136,10 +148,18 @@ export class LabCommissionComponent {
       // Additional fields
     });
     const today = new Date();
+
     // Add 6 months to the current date
     const sixMonthsFromNow = new Date(today.setMonth(today.getMonth() + 6));
     this.selectedDate = sixMonthsFromNow;
     this.isDatePickerDisabled = true;
+
+    this.dataService.getLocations().subscribe((data) => {
+      this.locations = data;
+      this.regions = [...new Set(this.locations.map(loc => loc.Region))];
+      this.filteredCountries = [...new Set(data.map(loc => loc.Country))];
+  });
+
   }
 
   onSubmit() {
@@ -307,154 +327,168 @@ export class LabCommissionComponent {
 // //////////////////////////////////////////////////////////////////////onregionchange//////////////////////////////////////////////////////////////////////////////////////
 
 
-  regionchange(event: Event) {
-    const selectedregion = (event.target as HTMLSelectElement).value;
-    const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
+  // regionchange(event: Event) {
+  //   const selectedregion = (event.target as HTMLSelectElement).value;
+  //   const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
 
 
-    // Clear previous options
-    countrySelect.innerHTML = '';
+  //   // Clear previous options
+  //   countrySelect.innerHTML = '';
 
-    if (selectedregion === 'APAC') {
-      this.populateOptionsR(["Select Country","AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
-    } else if (selectedregion === 'EMEA') {
-      this.populateOptionsR(["Select Country","DE",'PL']);
-    } else if (selectedregion === 'AMERICA') {
-      this.populateOptionsR(["Select Country","US", "BR"]);
+  //   if (selectedregion === 'APAC') {
+  //     this.populateOptionsR(["Select Country","AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
+  //   } else if (selectedregion === 'EMEA') {
+  //     this.populateOptionsR(["Select Country","DE",'PL']);
+  //   } else if (selectedregion === 'AMERICA') {
+  //     this.populateOptionsR(["Select Country","US", "BR"]);
 
-    }
-    this.selectedRegion = selectedregion;
-  }
+  //   }
+  //   this.selectedRegion = selectedregion;
+  // }
 
-  populateOptionsR(options: string[]) {
-    const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
+  // populateOptionsR(options: string[]) {
+  //   const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
 
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      countrySelect.appendChild(optionElem);
-    });
-  }
+  //   options.forEach(option => {
+  //     const optionElem = document.createElement('option');
+  //     optionElem.value = option;
+  //     optionElem.textContent = option;
+  //     countrySelect.appendChild(optionElem);
+  //   });
+  // }
+
+  onRegionChange(): void {
+    this.countries = [...new Set(this.locations
+        .filter(loc => loc.Region === this.selectedRegion)
+        .map(loc => loc.Country))];
+    this.selectedCountry = '';
+    //this.locationCodes = [];
+}
 
 
   // //////////////////////////////////////////////////////////////////////oncountrychange//////////////////////////////////////////////////////////////////////////////////////
 
-  countrychange(event: Event) {
-    const selectedcountry = (event.target as HTMLSelectElement).value;
-    const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
+  // countrychange(event: Event) {
+  //   const selectedcountry = (event.target as HTMLSelectElement).value;
+  //   const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
 
-    // Clear previous options
-    locationselect.innerHTML = '';
+  //   // Clear previous options
+  //   locationselect.innerHTML = '';
 
-    if (selectedcountry === 'IN') {
-      this.populateOptionsL(["Select location","Bangalore", "Hyderabad",'Pune', 'Coimbatore','Nagnathpura']);
-    } else if (selectedcountry === 'CN') {
-      this.populateOptionsL(["Select location",'Beijing']);
-    }
-    this.selectedCountry = selectedcountry;
-  }
+  //   if (selectedcountry === 'IN') {
+  //     this.populateOptionsL(["Select location","Bangalore", "Hyderabad",'Pune', 'Coimbatore','Nagnathpura']);
+  //   } else if (selectedcountry === 'CN') {
+  //     this.populateOptionsL(["Select location",'Beijing']);
+  //   }
+  //   this.selectedCountry = selectedcountry;
+  // }
 
-  populateOptionsL(options: string[]) {
-    const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
+  // populateOptionsL(options: string[]) {
+  //   const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
 
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      locationselect.appendChild(optionElem);
-    });
-  }
+  //   options.forEach(option => {
+  //     const optionElem = document.createElement('option');
+  //     optionElem.value = option;
+  //     optionElem.textContent = option;
+  //     locationselect.appendChild(optionElem);
+  //   });
+  // }
+
+  onCountryChange(): void {
+    this.locationCodes = [...new Set(this.locations
+        .filter(loc => loc.Country === this.selectedCountry)
+        .map(loc => loc.LocationCode))];
+}
 
 
 
   // //////////////////////////////////////////////////////////////////////onlocationchange//////////////////////////////////////////////////////////////////////////////////////
 
-  locationchangeha(event: Event) {
-    const selectedlocation = (event.target as HTMLSelectElement).value;
-    const codeSelect = document.getElementById('codeSelect') as HTMLSelectElement;
+  // locationchangeha(event: Event) {
+  //   const selectedlocation = (event.target as HTMLSelectElement).value;
+  //   const codeSelect = document.getElementById('codeSelect') as HTMLSelectElement;
 
-    // Clear previous options
-    codeSelect.innerHTML = ' ';
+  //   // Clear previous options
+  //   codeSelect.innerHTML = ' ';
 
-    if (selectedlocation === 'Bangalore') {
-      this.populateOptionsCo(["Select Location-Code","Bani-ADUGODI",'Ban-RBIN','BanM-BANGTP','BanO-OMTP','Kor-Kormangala']);
-    } else if (selectedlocation === 'Hyderabad') {
-      this.populateOptionsCo(["Select Location-Code",'HYD-Hyderabad']);
-    }else if (selectedlocation === 'Pune') {
-      this.populateOptionsCo(["Select Location-Code",'PUA']);
-    }else if (selectedlocation === 'Coimbatore') {
-      this.populateOptionsCo(["Select Location-Code",'Cob-SEZ','Cob2-ILKG','Cob5-GTP']);
-    }else if (selectedlocation === 'Nagnathpura') {
-      this.populateOptionsCo(["Select Location-Code",'NH3-Nagnathpura']);
-    }
-    this.selectedLocation = selectedlocation;
-  }
+  //   if (selectedlocation === 'Bangalore') {
+  //     this.populateOptionsCo(["Select Location-Code","Bani-ADUGODI",'Ban-RBIN','BanM-BANGTP','BanO-OMTP','Kor-Kormangala']);
+  //   } else if (selectedlocation === 'Hyderabad') {
+  //     this.populateOptionsCo(["Select Location-Code",'HYD-Hyderabad']);
+  //   }else if (selectedlocation === 'Pune') {
+  //     this.populateOptionsCo(["Select Location-Code",'PUA']);
+  //   }else if (selectedlocation === 'Coimbatore') {
+  //     this.populateOptionsCo(["Select Location-Code",'Cob-SEZ','Cob2-ILKG','Cob5-GTP']);
+  //   }else if (selectedlocation === 'Nagnathpura') {
+  //     this.populateOptionsCo(["Select Location-Code",'NH3-Nagnathpura']);
+  //   }
+  //   this.selectedLocation = selectedlocation;
+  // }
 
-  populateOptionsCo(options: string[]) {
-    const codeSelect = document.getElementById('codeSelect') as HTMLSelectElement;
+  // populateOptionsCo(options: string[]) {
+  //   const codeSelect = document.getElementById('codeSelect') as HTMLSelectElement;
 
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      codeSelect.appendChild(optionElem);
-    });
-  }
+  //   options.forEach(option => {
+  //     const optionElem = document.createElement('option');
+  //     optionElem.value = option;
+  //     optionElem.textContent = option;
+  //     codeSelect.appendChild(optionElem);
+  //   });
+  // }
 // //////////////////////////////////////////////////////////////////////oncodechange//////////////////////////////////////////////////////////////////////////////////////
 
-  codechange(event: Event) {
-    const selectedCode = (event.target as HTMLSelectElement).value;
-    const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
+  // codechange(event: Event) {
+  //   const selectedCode = (event.target as HTMLSelectElement).value;
+  //   const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
 
-    // Clear previous options
-    buildingSelect.innerHTML = ' ';
+  //   // Clear previous options
+  //   buildingSelect.innerHTML = ' ';
 
-    if (selectedCode === 'Bani-ADUGODI') {
-      this.populateOptionsB(["Select Building","ADUGODI-601","ADUGODI-602","ADUGODI-603","ADUGODI-605"]);
-    } else if (selectedCode === 'HYD-Hyderabad') {
-      this.populateOptionsB(["Select Building",'HYD-Hyderabad']);
-    }else if (selectedCode === 'HYD2-Hyderabad') {
-      this.populateOptionsB(["Select Building",'HYD2-Hyderabad']);
-    }else if (selectedCode === 'PUA') {
-      this.populateOptionsB(["Select Building",'PUA']);
-    }
-    else if (selectedCode === 'Cob-SEZ') {
-      this.populateOptionsB(["Select Building",'Cob-SEZ1','Cob-SEZ2']);
-    }
-    else if (selectedCode === 'Cob2-ILKG') {
-      this.populateOptionsB(["Select Building",'Cob2-ILKG']);
-    }else if (selectedCode === 'Cob5-GTP') {
-      this.populateOptionsB(["Select Building",'Cob5-GTP']);
-    }else if (selectedCode === 'NH3-Nagnathpura') {
-      this.populateOptionsB(["Select Building",'NH3-Nagnathpura']);
-    }
-    else if (selectedCode === 'Ban-RBIN') {
-      this.populateOptionsB(["Select Building",'RBIN-103','RBIN-105']);
-    }
-    else if (selectedCode === 'BanM-BANGTP') {
-      this.populateOptionsB(["Select Building",'BanM-BANGTP']);
-    }
-    else if (selectedCode === 'BanO-OMTP') {
-      this.populateOptionsB(["Select Building",'BanO-OMTP']);
-    }
-    else if (selectedCode === 'Kor-Kormangala') {
-      this.populateOptionsB(["Select Building",'Kor-901','Kor-903','Kor-905']);
-    }
+  //   if (selectedCode === 'Bani-ADUGODI') {
+  //     this.populateOptionsB(["Select Building","ADUGODI-601","ADUGODI-602","ADUGODI-603","ADUGODI-605"]);
+  //   } else if (selectedCode === 'HYD-Hyderabad') {
+  //     this.populateOptionsB(["Select Building",'HYD-Hyderabad']);
+  //   }else if (selectedCode === 'HYD2-Hyderabad') {
+  //     this.populateOptionsB(["Select Building",'HYD2-Hyderabad']);
+  //   }else if (selectedCode === 'PUA') {
+  //     this.populateOptionsB(["Select Building",'PUA']);
+  //   }
+  //   else if (selectedCode === 'Cob-SEZ') {
+  //     this.populateOptionsB(["Select Building",'Cob-SEZ1','Cob-SEZ2']);
+  //   }
+  //   else if (selectedCode === 'Cob2-ILKG') {
+  //     this.populateOptionsB(["Select Building",'Cob2-ILKG']);
+  //   }else if (selectedCode === 'Cob5-GTP') {
+  //     this.populateOptionsB(["Select Building",'Cob5-GTP']);
+  //   }else if (selectedCode === 'NH3-Nagnathpura') {
+  //     this.populateOptionsB(["Select Building",'NH3-Nagnathpura']);
+  //   }
+  //   else if (selectedCode === 'Ban-RBIN') {
+  //     this.populateOptionsB(["Select Building",'RBIN-103','RBIN-105']);
+  //   }
+  //   else if (selectedCode === 'BanM-BANGTP') {
+  //     this.populateOptionsB(["Select Building",'BanM-BANGTP']);
+  //   }
+  //   else if (selectedCode === 'BanO-OMTP') {
+  //     this.populateOptionsB(["Select Building",'BanO-OMTP']);
+  //   }
+  //   else if (selectedCode === 'Kor-Kormangala') {
+  //     this.populateOptionsB(["Select Building",'Kor-901','Kor-903','Kor-905']);
+  //   }
 
-    this.selectedCode = selectedCode;
-  }
+  //   this.selectedCode = selectedCode;
+  // }
 
-  populateOptionsB(options: string[]) {
-    const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
+  // populateOptionsB(options: string[]) {
+  //   const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
 
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      buildingSelect.appendChild(optionElem);
-    });
-  }
+  //   options.forEach(option => {
+  //     const optionElem = document.createElement('option');
+  //     optionElem.value = option;
+  //     optionElem.textContent = option;
+  //     buildingSelect.appendChild(optionElem);
+  //   });
+  // }
 
 
 
@@ -513,7 +547,7 @@ nextUniqueId: number = 1; // Initial unique ID counter
 uniqueInstanceId: string = ''
 
 
-constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private dateAdapter: DateAdapter<Date>,private toastr: ToastrService) {}
+constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private dateAdapter: DateAdapter<Date>,private toastr: ToastrService, private dataService : DataService) {}
 
 onPreviewform(): void {
   if (this.localITL && this.localITL.length >= 7 && this.localITLproxy) {
@@ -576,35 +610,6 @@ onPreviewform(): void {
 
 
 }
-
-
-
-
-
-
-
-
-
-getMissingFields(): string[] {
-  const missingFields: string[] = [];
-  if (!this.localITL) {
-    missingFields.push('Local-ITL');
-  }
-  if (!this.localITLproxy) {
-    missingFields.push('Local-ITL Proxy');
-  }
-  if (!this.selectedEntity) {
-    missingFields.push('Entity');
-  }
-  if (!this.selectedGB) {
-    missingFields.push('GB');
-  }
-  // Add more fields as needed
-  return missingFields;
-}
-
-
-
 
 onLabTypeChange() {
   if (this.selectedLabType === 'Other') {

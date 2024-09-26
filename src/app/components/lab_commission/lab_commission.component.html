@@ -104,19 +104,14 @@
               >Region <span class="required"> *</span></label
             >
             <select
-              id="regionSelect"
-              name="region"
-              (change)="regionchange($event)"
-              title="APAC: Asia and Pacific
-              EMEA: Europe, the Middle East, and Africa
-              AMER: North, Central, and South America"
-              [ngClass]="{ selected: isSelected }"
+              id="region"
+              [(ngModel)]="selectedRegion"
+              (change)="onRegionChange()"
             >
-              <option value="">Select a Region</option>
-              <option value="APAC">APAC</option>
-              <option value="EMEA">EMEA</option>
-              <option value="AMERICA">AMERICA</option>
-              <!-- Add more regions as needed -->
+              <option value="">Select Region</option>
+              <option *ngFor="let region of regions" [value]="region">
+                {{ region }}
+              </option>
             </select>
           </div>
 
@@ -125,26 +120,16 @@
               >Country<span class="required"> *</span></label
             >
             <select
-              id="countrySelect"
-              name="country"
-              (change)="countrychange($event)"
+              id="country"
+              [(ngModel)]="selectedCountry"
+              (change)="onCountryChange()"
+              [disabled]="!selectedRegion"
+              title="Please select Region"
             >
-              <option value="">Select Country</option>
-              <!-- Options will be dynamically populated based on selection -->
-            </select>
-          </div>
-
-          <div class="dropdown-item">
-            <label for="locationselect"
-              >Location <span class="required"> *</span></label
-            >
-            <select
-              id="locationselect"
-              name="location"
-              (change)="locationchangeha($event)"
-            >
-              <option value="">Select Location</option>
-              <!-- Options will be dynamically populated based on selection -->
+              <option value="" disabled selected>Select Country</option>
+              <option *ngFor="let country of countries" [value]="country">
+                {{ country }}
+              </option>
             </select>
           </div>
           <div class="dropdown-item">
@@ -152,11 +137,14 @@
               >Location-Code<span class="required"> *</span></label
             >
             <select
-              id="codeSelect"
-              name="codeSelect"
-              (change)="codechange($event)"
+              id="locationCode"
+              [(ngModel)]="selectedCode"
+              [disabled]="!selectedCountry"
             >
-              <option value="">Select Location-Code</option>
+              <option value="">Select Location Code</option>
+              <option *ngFor="let code of locationCodes" [value]="code">
+                {{ code }}
+              </option>
             </select>
           </div>
         </div>

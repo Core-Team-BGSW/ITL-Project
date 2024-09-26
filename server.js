@@ -108,7 +108,6 @@ const itemSchema = new mongoose.Schema({
 });
 
 const Item = mongoose.model('Item', itemSchema);
-
 module.exports = Item;
 
 
@@ -211,6 +210,24 @@ app.post('/register/newuser', async (req, res) => {
   } catch (error) {
     console.error('Error registering user:', error); // Log the error
     res.status(500).json({ error: 'Failed to register user' });
+  }
+});
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const locationSchema = new mongoose.Schema({
+  Region: String,
+  Country: String,
+  LocationCode: String,
+});
+const Location = mongoose.model('Location', locationSchema);
+
+app.get('/api/locations', async (req, res) => {
+  try {
+      const locations = await Location.find({});
+      res.json(locations);
+  } catch (error) {
+      console.error('Error fetching locations:', error);
+      res.status(500).send('Internal Server Error');
   }
 });
 
