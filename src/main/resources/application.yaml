@@ -1,0 +1,24 @@
+csv:
+  file:
+    directory: C:/Users/OBV3KOR/Desktop/ITL-Project/src/main/resources/static
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+server:
+  port: 8080
+spring:
+  application:
+    name: backendservice
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/UserData
