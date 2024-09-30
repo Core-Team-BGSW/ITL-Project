@@ -56,19 +56,13 @@ public class LabDataService {
 //        return res.getMappedResults();
         List<LabData> labDataList = labDataRepo.findAll();
         List<LabDataWithEntityDTO> labDataWithEntityDTOList = new ArrayList<>();
-        for(LabData labData : labDataList) {
+        for(LabData labData : labDataList)
+        {
             LabDataWithEntityDTO labDataWithEntityDTO = convertToLabDataWithEntityDTO(labData);
             Entity entity = entityRepo.findByLabDataId(labData.getId());
-            if (entity != null) {
-                labDataWithEntityDTO.setRegion(entity.getRegion());
-                labDataWithEntityDTO.setLocation(entity.getLocation());
-                labDataWithEntityDTO.setCountry(entity.getCountry());
-                labDataWithEntityDTOList.add(labDataWithEntityDTO);
-            } else {
-                labDataWithEntityDTO.setRegion("Unknown");  // or whatever default makes sense
-                labDataWithEntityDTO.setLocation("Unknown");
-                labDataWithEntityDTO.setCountry("Unknown");
-            }
+            labDataWithEntityDTO.setRegion(entity.getRegion());
+            labDataWithEntityDTO.setLocation(entity.getLocation());
+            labDataWithEntityDTO.setCountry(entity.getCountry());
             labDataWithEntityDTOList.add(labDataWithEntityDTO);
         }
         return labDataWithEntityDTOList;
