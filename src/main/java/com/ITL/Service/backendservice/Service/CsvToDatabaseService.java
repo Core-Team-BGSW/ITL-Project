@@ -26,7 +26,6 @@ public class CsvToDatabaseService {
             csvReader.skip(1);
             nextRecord = csvReader.readNext();
             Map<AbstractMap.SimpleEntry<String,String>,Entity> entityMap = new HashMap<>();
-            int count = 0;
             while((nextRecord != null))
             {
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;

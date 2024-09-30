@@ -93,6 +93,7 @@ public class LabDataService {
         labDataWithEntityDTO.setBuilding(labData.getBuilding());
         labDataWithEntityDTO.setLocationCode(labData.getLocationCode());
         labDataWithEntityDTO.setCost_center(labData.getCost_center());
+        labDataWithEntityDTO.setEntityName(labData.getEntityName());
         return labDataWithEntityDTO;
     }
 }
