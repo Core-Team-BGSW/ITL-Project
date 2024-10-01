@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver';
 
 
 
+
 @Component({
   selector: 'app-self-audit',
   standalone: true,
@@ -168,93 +169,6 @@ linkForm: FormGroup;
       console.log('Selected file:', this.selectedFile);
     }
   }
- 
-
-  
-  selectedFile1: File | null = null;
-  selectedFile2: File | null = null;
-  selectedFile3: File | null = null;
-  selectedFile4: File | null = null;
-  selectedFile5: File | null = null;
-  selectedFile6: File | null = null;
-  selectedFile7: File | null = null;
-
-  onFileSelected1(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile1 = input.files[0];
-      console.log('Selected file:', this.selectedFile1);
-    }
-  }
-  onFileSelected2(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile2 = input.files[0];
-      console.log('Selected file:', this.selectedFile2);
-    }
-  }
-  onFileSelected3(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile3 = input.files[0];
-      console.log('Selected file:', this.selectedFile3);
-    }
-  }
-  onFileSelected4(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile4 = input.files[0];
-      console.log('Selected file:', this.selectedFile4);
-    }
-  }
-  onFileSelected5(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile5 = input.files[0];
-      console.log('Selected file:', this.selectedFile5);
-    }
-  }
-  onFileSelected6(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile6 = input.files[0];
-      console.log('Selected file:', this.selectedFile6);
-    }
-  }
-  onFileSelected7(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile7 = input.files[0];
-      console.log('Selected file:', this.selectedFile7);
-    }
-  }
-  onUpload(): void {
-    if (this.selectedFile) {
-      // Implement your upload logic here
-      console.log('Uploading file:', this.selectedFile);
-          }
-    if (this.selectedFile1){
-            console.log('Uploading file:', this.selectedFile1);
-          }
-    if (this.selectedFile2){
-       console.log('Uploading file:', this.selectedFile2);
-          }
-     if (this.selectedFile3){
-        console.log('Uploading file:', this.selectedFile3);
-           }
-  if (this.selectedFile4){
-    console.log('Uploading file:', this.selectedFile4);
-       }
-if (this.selectedFile5){
-        console.log('Uploading file:', this.selectedFile5);
-           }
- if (this.selectedFile6){
-     console.log('Uploading file:', this.selectedFile6);
-          }
-  if (this.selectedFile7){
-      console.log('Uploading file:', this.selectedFile7);
-           }
-}
 data: any[] = [
 ];
 

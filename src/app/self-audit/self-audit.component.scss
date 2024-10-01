@@ -13,7 +13,7 @@ input[type=text]
 
 select
 {
- width: 400px;
+ width: 350px;
  padding: 10px 15px;
  margin: 8px 0;
  display: inline-block;
@@ -227,39 +227,46 @@ h2
 }
  .primary 
  {
-   background: rgb(55, 133, 234);
-   color: white;
-   border-radius: 8px;
- padding: 11px;
- width: 120px;
+   background: rgb(240, 202, 96);
+   color: rgb(68, 66, 66);
    position: relative;
-   left: 35%; 
-   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   font-size: medium;
-   font-weight: bold;
-   &:hover {
-     background-color: #336fae;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   }
+   border: none; /* Remove default border */
+  padding: 12px 24px; /* Padding around the text */
+  font-size: 16px; /* Increase font size */
+  font-weight: bold; /* Bold text */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+  left:40%;
+ }
+ .primary:hover{
+  transform: translateY(-2px);
  }
  .success_btn
  {
    width: 100px;
-   border-radius: 8px;
- padding: 11px;
  width: 120px;
-   background: #35a71e;
-   color: white;
+   background: #55be40;
+   color: rgb(46, 46, 46);
    position: relative;
-   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   font-size: medium;
-   font-weight: bold;
-   left: 36%; 
-   &:hover {
-     background-color: #0aa82d;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   }
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   left: 41%; 
+  border: none; /* Remove default border */
+  padding: 12px 24px; /* Padding around the text */
+  font-size: 16px; /* Increase font size */
+  font-weight: bold; /* Bold text */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+ 
  }
+ .success_btn:hover{
+  transform: translateY(-2px); 
+ }
+ 
+ 
 
  .styled-table 
  {
@@ -478,6 +485,10 @@ h3{
   transition: background-color 0.3s ease;
   width: 150px;
   font-weight: bold;
+  
+}
+.excel_btn:hover{
+  transform: translateY(-2px);
 }
 .excel_file_upld_btn{
   display: inline-block;
@@ -492,13 +503,30 @@ h3{
   border: none;
   transition: background-color 0.3s ease;
   width: 100px;
-  font-weight: bold;
+}
+.excel_file_upld_btn.hover{
+  background-color: #0658bd00;
+  transform: translateY(-2px);
 }
 .btn_container{
   display: flex;
   gap: 10px; 
+  transform: translateY(-2px);
 }
 
+
+/* Lift up effect on focus */
+.form-control:focus,
+.form-control:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+/* Additional styling */
+.form-control:focus {
+  border-color: #007bff;
+}
 
 
 
