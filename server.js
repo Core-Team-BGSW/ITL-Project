@@ -117,7 +117,63 @@ module.exports = Item;
 const upload = multer({ storage: multer.memoryStorage() });
 
 
+// app.post('/upload-excel', upload.single('file'), async (req, res) => {
+//   if (!req.file) {
+//     return res.status(400).json({ error: 'No file uploaded' });
+//   }
+
+//   try {
+//     const workbook = new ExcelJS.Workbook();
+//     await workbook.xlsx.load(req.file.buffer);
+//     const worksheet = workbook.getWorksheet(1);
+
+//     if (!worksheet) {
+//       return res.status(400).json({ error: 'Worksheet not found' });
+//     }
+
+//     // Get the first row to use as headers
+//     const headerRow = worksheet.getRow(1);
+
+//     // Ensure headerRow.values is an array and has elements
+//     const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
+
+//     if (headers.length === 0) {
+//       return res.status(400).json({ error: 'No headers found' });
+//     }
+
+//     const items = [];
+
+//     worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
+//       const rowData = {};
+//       headers.forEach((header, index) => {
+//         if (header) {
+//           rowData[header] = row.values[index + 1] || null;  // `index + 1` because `row.values` is 1-based index
+//         }
+//       });
+
+//       // Skip if all values are header names
+//       if (Object.values(rowData).every(value => headers.includes(value))) {
+//         return;  // Skip this row
+//       }
+
+//       items.push(rowData);
+//       rowData.approvalStatus = 'Pending'; // Set initial approval status
+//     });
+
+//     console.log('Data to insert:', items); // Log data to check before insertion
+
+//     // Insert all items into the database
+//     await Item.insertMany(items);
+//     res.status(201).json({ message: 'Data successfully uploaded and saved to MongoDB' });
+//   } catch (error) {
+//     console.error('Error processing file:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
+
+
 app.post('/upload-excel', upload.single('file'), async (req, res) => {
+  // Check if a file is uploaded
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
@@ -125,40 +181,61 @@ app.post('/upload-excel', upload.single('file'), async (req, res) => {
   try {
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.load(req.file.buffer);
-    const worksheet = workbook.getWorksheet(1);
+    const worksheet = workbook.getWorksheet(1); // Get the first worksheet
 
+    // Check if the worksheet exists
     if (!worksheet) {
       return res.status(400).json({ error: 'Worksheet not found' });
     }
 
-    // Get the first row to use as headers
+    // Get headers from the first row
     const headerRow = worksheet.getRow(1);
-
-    // Ensure headerRow.values is an array and has elements
     const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
 
+    // Validate headers
     if (headers.length === 0) {
       return res.status(400).json({ error: 'No headers found' });
     }
 
+    // Required headers to check
+    const requiredHeaders = ['local-ITL', 'Region', 'Country', 'Location-Code', 'GB'];
+
+    // Check for the required headers
+    const missingHeaders = requiredHeaders.filter(header => !headers.includes(header));
+
+    if (missingHeaders.length > 0) {
+      return res.status(400).json({ error: `Required headers missing: ${missingHeaders.join(', ')}` });
+    }
+
     const items = [];
 
+    // Read each row and map to item objects
     worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
       const rowData = {};
       headers.forEach((header, index) => {
         if (header) {
-          rowData[header] = row.values[index + 1] || null;  // `index + 1` because `row.values` is 1-based index
+          rowData[header] = row.values[index + 1] || null; // Use `index + 1` for 1-based index
         }
       });
 
-      // Skip if all values are header names
+      // Skip rows where all values are equal to their headers
       if (Object.values(rowData).every(value => headers.includes(value))) {
-        return;  // Skip this row
+        return; // Skip this row
       }
 
-      items.push(rowData);
+      // Add additional validation if needed
+      if (!rowData['RequiredField']) {
+        console.warn(`Skipping row ${row.number} due to missing RequiredField`);
+        return; // Skip this row
+      }
+
       rowData.approvalStatus = 'Pending'; // Set initial approval status
+      items.push(rowData);
     });
+
+    if (items.length === 0) {
+      return res.status(400).json({ error: 'No valid data rows found' });
+    }
 
     console.log('Data to insert:', items); // Log data to check before insertion
 
@@ -170,6 +247,7 @@ app.post('/upload-excel', upload.single('file'), async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 

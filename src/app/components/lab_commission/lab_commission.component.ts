@@ -123,6 +123,9 @@ export class LabCommissionComponent {
   showValidationMessage: boolean = false;
 
 
+
+
+
   ngOnInit(): void {
     const today = new Date();
     // Add 6 months to the current date
@@ -154,10 +157,43 @@ export class LabCommissionComponent {
   //     fileReader.readAsArrayBuffer(this.selectedFile);
   //   }
   // }
+  // onPreview() {
+  //   if (this.selectedFile) {
+  //     // Validate the file type (e.g., .xls or .xlsx)
+  //     const validFileTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+  //     const fileType = this.selectedFile.type;
+
+  //     if (!validFileTypes.includes(fileType)) {
+  //       alert('Invalid file type. Please upload an Excel file (.xls or .xlsx).');
+  //       return;
+  //     }
+
+  //     // Validate the file size (e.g., limit to 5MB)
+  //     const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+  //     if (this.selectedFile.size > maxSizeInBytes) {
+  //       alert('File size exceeds the limit of 5MB. Please upload a smaller file.');
+  //       return;
+  //     }
+
+  //     // If validation passes, proceed to read the file
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = (e: any) => {
+  //       const arrayBuffer = e.target.result;
+  //       this.parseExcel(arrayBuffer);
+  //     };
+  //     fileReader.readAsArrayBuffer(this.selectedFile);
+  //   } else {
+  //     alert('No file selected. Please upload an Excel file.');
+  //   }
+  // }
+
   onPreview() {
     if (this.selectedFile) {
       // Validate the file type (e.g., .xls or .xlsx)
-      const validFileTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+      const validFileTypes = [
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/vnd.ms-excel'
+      ];
       const fileType = this.selectedFile.type;
 
       if (!validFileTypes.includes(fileType)) {
@@ -172,6 +208,28 @@ export class LabCommissionComponent {
         return;
       }
 
+      // Check for mandatory headers
+      const mandatoryHeaders = {
+        Region: '',
+        Country: '',
+        'Location-Code': '',
+        Entity: '',
+        GB: '',
+        'Local-ITL': '',
+        'Local-ITL Proxy': '',
+      };
+
+      // Check for missing mandatory headers
+      const missingHeaders = Object.keys(mandatoryHeaders).filter(
+        (header) => !mandatoryHeaders[header as keyof typeof mandatoryHeaders]
+      );
+
+      if (missingHeaders.length > 0) {
+        console.error(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+        alert(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+        return;
+      }
+
       // If validation passes, proceed to read the file
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
@@ -183,6 +241,7 @@ export class LabCommissionComponent {
       alert('No file selected. Please upload an Excel file.');
     }
   }
+
 
   private parseExcel(arrayBuffer: any) {
     const workbook = new ExcelJS.Workbook();
@@ -209,6 +268,7 @@ export class LabCommissionComponent {
         // Handle error
       });
     }
+
 
 // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
   onfileSubmit(){
@@ -243,6 +303,64 @@ export class LabCommissionComponent {
       console.error('Error uploading file:', error);
     });
   }
+
+
+  // onfileSubmit() {
+  //   if (!this.selectedFile) {
+  //     console.log('No file selected');
+  //     return;
+  //   }
+
+  //   const confirmUpload = window.confirm('Are you sure you want to upload this file?');
+
+  //   if (!confirmUpload) {
+  //     console.log('File upload cancelled by user');
+  //     return;
+  //   }
+
+  //   // Define mandatory headers
+  //   const mandatoryHeaders = {
+  //     Region: '',
+  //     Country: '',
+  //     'Location-Code': '',
+  //     Entity: '',
+  //     GB: '',
+  //     'Local-ITL': '',
+  //     'Local-ITL Proxy': '',
+  //   };
+
+  //   // Check for missing mandatory headers using type assertion
+  //   const missingHeaders = Object.keys(mandatoryHeaders).filter(
+  //     (header) => !mandatoryHeaders[header as keyof typeof mandatoryHeaders]
+  //   );
+
+  //   if (missingHeaders.length > 0) {
+  //     console.error(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+  //     alert(`Missing mandatory headers: ${missingHeaders.join(', ')}`); // Alert shows only missing headers
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append('file', this.selectedFile);
+
+  //   axios.post('http://localhost:3000/upload-excel', formData, {
+  //     headers: {
+  //       'Content-Type': 'multipart/form-data',
+  //       // Add other headers if needed, but they will be empty for this check
+  //     },
+  //   })
+  //   .then(response => {
+  //     console.log('File uploaded successfully:', response.data);
+  //     // Clear the selected file and reset form state here
+  //     this.selectedFile = null;
+  //     this.excelData = [];
+  //     this.previewVisible = false;
+  //   })
+  //   .catch(error => {
+  //     console.error('Error uploading file:', error);
+  //     alert('Error uploading the file. Please try again.');
+  //   });
+  // }
 
 
 
