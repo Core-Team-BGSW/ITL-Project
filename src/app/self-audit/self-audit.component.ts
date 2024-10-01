@@ -169,10 +169,6 @@ linkForm: FormGroup;
       console.log('Selected file:', this.selectedFile);
     }
   }
- 
-
-  
-  
 data: any[] = [
 ];
 
