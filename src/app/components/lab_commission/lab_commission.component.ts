@@ -3,7 +3,6 @@ import { HomeComponent } from "../../admin/home/home.component";
 import { SidebarComponent } from "../../admin/sidebar/sidebar.component";
 import * as ExcelJS from 'exceljs';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { saveAs } from 'file-saver';
 import { CommonModule } from '@angular/common';
 import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,7 +25,7 @@ import { MatDatepicker, MatDatepickerModule } from "@angular/material/datepicker
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
 import { DateAdapter } from '@angular/material/core';
-import { ToastrModule, ToastrService } from "ngx-toastr";
+import { ToastrService } from "ngx-toastr";
 import { DataService } from '../../data.service';
 
 
@@ -121,34 +120,11 @@ export class LabCommissionComponent {
   filteredCountries: string[] = [];
   filteredSites: string[] = [];
   locations: Location[] = [];;
+  showValidationMessage: boolean = false;
 
 
   ngOnInit(): void {
-    this.labForm = this.fb.group({
-      choosemethod: ['', Validators.required],
-      localITL: ['', [Validators.required, Validators.minLength(7)]],
-      localITLproxy: [''],
-      DH: ['', Validators.required],
-      KAM: ['', Validators.required],
-      Dept: ['', Validators.required],
-      Building: [''],
-      Floor: ['', Validators.required],
-      labno: ['', Validators.required],
-      primarylabco: [''],
-      secondarylabco: [''],
-      CC: ['', Validators.required],
-      selectedLabType: ['', Validators.required],
-      otherLabType: [''],
-      cmdbradio: ['', Validators.required],
-      sharedlabradio: ['', Validators.required],
-      ACLradio: ['', Validators.required],
-      greenports: [''],
-      yellowports: [''],
-      redports: [''],
-      // Additional fields
-    });
     const today = new Date();
-
     // Add 6 months to the current date
     const sixMonthsFromNow = new Date(today.setMonth(today.getMonth() + 6));
     this.selectedDate = sixMonthsFromNow;
@@ -158,19 +134,8 @@ export class LabCommissionComponent {
       this.locations = data;
       this.regions = [...new Set(this.locations.map(loc => loc.Region))];
       this.filteredCountries = [...new Set(data.map(loc => loc.Country))];
-  });
-
+    });
   }
-
-  onSubmit() {
-    if (this.labForm.valid) {
-      // Handle form submission
-    } else {
-      // Mark all fields as touched to display validation messages
-      this.labForm.markAllAsTouched();
-    }
-  }
-
 
     // /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
 
@@ -179,18 +144,45 @@ export class LabCommissionComponent {
     this.fileSelected = true; // Enable preview button
   }
 
+  // onPreview() {
+  //   if (this.selectedFile) {
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = (e: any) => {
+  //       const arrayBuffer = e.target.result;
+  //       this.parseExcel(arrayBuffer);
+  //     };
+  //     fileReader.readAsArrayBuffer(this.selectedFile);
+  //   }
+  // }
   onPreview() {
     if (this.selectedFile) {
+      // Validate the file type (e.g., .xls or .xlsx)
+      const validFileTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
+      const fileType = this.selectedFile.type;
+
+      if (!validFileTypes.includes(fileType)) {
+        alert('Invalid file type. Please upload an Excel file (.xls or .xlsx).');
+        return;
+      }
+
+      // Validate the file size (e.g., limit to 5MB)
+      const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+      if (this.selectedFile.size > maxSizeInBytes) {
+        alert('File size exceeds the limit of 5MB. Please upload a smaller file.');
+        return;
+      }
+
+      // If validation passes, proceed to read the file
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
         const arrayBuffer = e.target.result;
         this.parseExcel(arrayBuffer);
       };
       fileReader.readAsArrayBuffer(this.selectedFile);
+    } else {
+      alert('No file selected. Please upload an Excel file.');
     }
   }
-
-
 
   private parseExcel(arrayBuffer: any) {
     const workbook = new ExcelJS.Workbook();
@@ -211,25 +203,12 @@ export class LabCommissionComponent {
         // Optionally, you can navigate to a new route or display a preview component here
         // For simplicity, we will log the data to console
         console.log('Parsed Excel Data:', this.excelData);
-
-
       })
       .catch(error => {
         console.error('Error parsing Excel:', error);
         // Handle error
       });
-  }
-
-
-  private uploadDataToServer(data: any) {
-    axios.post('http://localhost:3000/upload-excel', data)
-      .then(response => {
-        console.log('Data uploaded successfully:', response.data);
-      })
-      .catch(error => {
-        console.error('Error uploading data:', error);
-      });
-  }
+    }
 
 // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
   onfileSubmit(){
@@ -267,60 +246,11 @@ export class LabCommissionComponent {
 
 
 
-
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-  onDownloadTemplate(){
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Template Sheet');
-
-    const headerRow = worksheet.addRow(['Sr.No','Region','Country','Location', 'Location-Code', 'Entity','GB','Local-ITL','Local-ITL Proxy','Department Head (DH)','Key Account Manager (KAM)','Department','Building','Floor','Lab No.','Primary Lab Coordinator','Secondary Lab Coordinator','Cost Center','Kind of Lab','Purpose of Lab in Brief','Description','ACL Required','No. of Green Ports','No. of Yellow Ports','No. of Red Ports','Is lab going to procure new equipment for Engineering/Red Zone?','Shared Lab']);
-    const firstRow = worksheet.addRow(['1','APAC','IN','Bangalore', 'Bani-ADUGODI', 'BGSW','PG','ada3kor','muk3kor','DH-NTID','KAM-NTID','EEM','ADUGODI-602','5','C-520','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','654D678','Reliability','nexon Car dashboard','Description','Yes','3','3','4','Yes','Yes']);
-    const secondRow = worksheet.addRow(['2','APAC','IN','Coimbatore', 'Cob-SEZ', 'BGSW','PS','ada3kor','muk3kor','DH-NTID','KAM-NTID','EXE','Cob-SEZ1','3','B-340','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','652H78','Test','ECU testing','Description','No','','','','Yes','No']);
-
-
-    headerRow.font = { bold: true };
-    headerRow.alignment = { vertical: 'middle', horizontal: 'center' };
-    headerRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFF' },
-      };
-    });
-
-    secondRow.font = { italic: true };
-    secondRow.alignment = { vertical: 'middle', horizontal: 'center' };
-    secondRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFFFF' }
-
-      };
-    });
-
-    firstRow.font = { italic: true };
-    firstRow.alignment = { vertical: 'middle', horizontal: 'center' };
-    firstRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFFFF' }
-
-      };
-    });
-
-    workbook?.xlsx.writeBuffer().then((buffer: ArrayBuffer) => {
-      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      saveAs(blob, 'NewLabCommission_Template.xlsx');
-    });
-
+  onDownloadTemplate() {
+    const downloadUrl = 'https://bosch.sharepoint.com/sites/ITLConsultancyService-IN-ITLCoreTeam2/_layouts/15/download.aspx?SourceUrl=https://bosch.sharepoint.com/sites/ITLConsultancyService-IN-ITLCoreTeam2/Shared%20Documents/Lab%20Portal%20Project/New_Lab-Commision_template.xlsx?d=wfcd5f25bb2dd450388d27699a78641f0';
+    window.open(downloadUrl, '_blank');
   }
 
 
@@ -362,7 +292,6 @@ export class LabCommissionComponent {
         .filter(loc => loc.Region === this.selectedRegion)
         .map(loc => loc.Country))];
     this.selectedCountry = '';
-    //this.locationCodes = [];
 }
 
 
@@ -399,8 +328,6 @@ export class LabCommissionComponent {
         .filter(loc => loc.Country === this.selectedCountry)
         .map(loc => loc.LocationCode))];
 }
-
-
 
   // //////////////////////////////////////////////////////////////////////onlocationchange//////////////////////////////////////////////////////////////////////////////////////
 
@@ -500,8 +427,8 @@ export class LabCommissionComponent {
     this.selectedEntity = (event.target as HTMLSelectElement).value;
     // Automatically fill Local-ITL based on selected entity
     if (this.selectedEntity === 'BGSW') {
-      this.localITL = 'ada2kor';
-      this.localITLproxy ='MNU1KOR';
+      this.localITL = 'MNU1KOR';
+      this.localITLproxy ='ada2kor';
     } else {
       this.localITL = ''; // Clear localITL for other entities
       this.localITLproxy ='';
@@ -518,7 +445,7 @@ export class LabCommissionComponent {
   GBChange(event: Event) {
     this.selectedGB = (event.target as HTMLSelectElement).value;
     // Automatically fill Local-ITL based on selected entity
-    if (this.selectedGB === 'PG') {
+    if (this.selectedGB === 'MS/NE-PG') {
       this.KAM ='grs2kor';
     } else if(this.selectedGB === "2WP"){
       this.KAM ='ask2kor';
@@ -526,27 +453,16 @@ export class LabCommissionComponent {
 
   }
 
-  //readonly cmdbradio = model<'before' | 'after'>('after');
-  //readonly sharedlabradio = model<'before' | 'after'>('after');
-
-
-  // /////////////////////////////////////////////////////////////////////onReset - formfill////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////onReset-formfill////////////////////////////////////////////////////////////////////////////
 
   onReset() {
     // Reload the page
     window.location.reload();
   }
-// /////////////////////////////////////////////////////////////////////onSubmit - formfill////////////////////////////////////////////////////////////////////////////
-
-
-
-
+// /////////////////////////////////////////////////////////////////////onSubmit-formfill////////////////////////////////////////////////////////////////////////////
 
 nextUniqueId: number = 1; // Initial unique ID counter
 uniqueInstanceId: string = ''
-
-
 constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private dateAdapter: DateAdapter<Date>,private toastr: ToastrService, private dataService : DataService) {}
 
 onPreviewform(): void {
@@ -607,8 +523,8 @@ onPreviewform(): void {
     this.toastr.error('Please fill required fields')
     console.error('Fill all the Required Fields');
   }
-
-
+  this.showValidationMessage = true;
+  console.log('Preview clicked. Show validation message:', this.showValidationMessage);
 }
 
 onLabTypeChange() {
@@ -619,18 +535,14 @@ onLabTypeChange() {
   }
 }
 
-
-
 submittedFormData: any = "";
-
   updateSubmittedFormData(formData: any): void {
     this.submittedFormData = formData;
     console.log('Updated submitted form data:', this.submittedFormData);
   }
 
-
-  showOtherSection: boolean = false;
-  otherField: string = '';
+showOtherSection: boolean = false;
+otherField: string = '';
 
   toggleOtherSection() {
     this.showOtherSection = !this.showOtherSection;
@@ -640,11 +552,8 @@ submittedFormData: any = "";
 
 
   onDateSelected(date: Date) {
-    // Handle the selected date
-    console.log('Selected date:', date);
+  console.log('Selected date:', date);
   }
-
-
 
 }
 

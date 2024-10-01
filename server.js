@@ -8,6 +8,8 @@ const ExcelJS = require('exceljs');
 const User = require('./models/User');
 const app = express();
 const port = process.env.PORT || 3000;
+const events = require('events');
+events.EventEmitter.defaultMaxListeners = 20;
 
 
 // Middleware
@@ -230,7 +232,5 @@ app.get('/api/locations', async (req, res) => {
       res.status(500).send('Internal Server Error');
   }
 });
-
-
 
 
