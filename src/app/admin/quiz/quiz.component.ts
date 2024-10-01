@@ -123,7 +123,10 @@ export class QuizComponent {
 
     // Check if the user passed
     if (score >= 80) {
-      // User has passed the quiz, show the form
+    const confirmApply = window.confirm('Congratulations! You have passed the quiz. Do you want to apply for a role?');
+
+    if (confirmApply) {
+
       this.router.navigate(['/role']);
 
     } else {
@@ -131,10 +134,11 @@ export class QuizComponent {
       this.passedQuiz = false;
     }
   }
+}
 
   // Function to show score pop-up
   private showScorePopup(score: number) {
-    alert(`Your Score: ${score.toFixed(2)}%\nCongratulations! You have passed the quiz. Now you can apply for the role.`);
+    alert(`Your Score: ${score.toFixed(2)}`);
   }
 
   // Check if the user's answers match the correct answers

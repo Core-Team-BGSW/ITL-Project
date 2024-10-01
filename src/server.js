@@ -143,7 +143,7 @@ app.post('/upload-excel', upload.single('file'), async (req, res) => {
 
     const items = [];
 
-    worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
+    worksheet.eachRow({ includeEmpty: false, from: 1 }, (row) => {
       const rowData = {};
       headers.forEach((header, index) => {
         if (header) {
@@ -170,7 +170,6 @@ app.post('/upload-excel', upload.single('file'), async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 // // Define the schema for pendingapp
 // const pendingAppSchema = new mongoose.Schema({

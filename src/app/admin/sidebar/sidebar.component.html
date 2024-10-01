@@ -1,4 +1,4 @@
-
+<!--
   <div class="user">
     <img
       src="https://cdn3.iconfinder.com/data/icons/avatars-collection/256/22-512.png"
@@ -65,4 +65,104 @@
         <span>Applications</span>
       </button>
     </div>
+  </div> -->
+
+<!-- New Design -->
+<div class="sidebar">
+  <div class="logo-details">
+    <i class='fab fa-creative-commons icon'></i>
+    <div class="logo_name">ITERL</div>
+    <i class='fas fa-bars' id="btn"></i>
   </div>
+  <ul class="nav-list">
+    <li>
+      <i class='fas fa-search'></i>
+      <input type="text" placeholder="Search...">
+      <span class="tooltip">Search</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='fas fa-tachometer-alt'></i>
+        <span class="links_name">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='fas fa-user'></i>
+        <span class="links_name">lab Commission</span>
+      </a>
+      <span class="tooltip">User</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='fas fa-comments'></i>
+        <span class="links_name">lab Operations</span>
+      </a>
+      <span class="tooltip">Messages</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='fas fa-chart-pie'></i>
+        <span class="links_name">Lab Decommission</span>
+      </a>
+      <span class="tooltip">Analytics</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='fas fa-folder'></i>
+        <span class="links_name">File Manager</span>
+      </a>
+      <span class="tooltip">Files</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='fas fa-shopping-cart'></i>
+        <span class="links_name">Order</span>
+      </a>
+      <span class="tooltip">Order</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class='fas fa-heart'></i>
+        <span class="links_name">Saved</span>
+      </a>
+      <span class="tooltip">Saved</span>
+    </li>
+
+    <li class="profile">
+      <div class="profile-details">
+        <img src="proficon.jpg" alt="profileImg">
+        <div class="name_job">
+          <div class="name">Kranti S.</div>
+          <div class="job">Local ITL</div>
+        </div>
+      </div>
+      <i class='fas fa-sign-out-alt' id="log_out"></i>
+    </li>
+  </ul>
+</div>
+<section class="home-section">
+  <div class="text">Dashboard</div>
+</section>
+
+<script>
+let sidebar = document.querySelector(".sidebar");
+let closeBtn = document.querySelector("#btn");
+let searchBtn = document.querySelector(".fas.fa-search");
+closeBtn.addEventListener("click", ()=> {
+  sidebar.classList.toggle("open");
+  menuBtnChange();
+});
+searchBtn.addEventListener("click", ()=> {
+  sidebar.classList.toggle("open");
+  menuBtnChange();
+});
+function menuBtnChange() {
+  if (sidebar.classList.contains("open")) {
+    closeBtn.classList.replace("fas fa-bars", "fas fa-times");
+  } else {
+    closeBtn.classList.replace("fas fa-times", "fas fa-bars");
+  }
+}
+</script>

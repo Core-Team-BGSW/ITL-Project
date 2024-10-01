@@ -23,6 +23,7 @@ import axios from 'axios';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { inject } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { NgZone } from '@angular/core';
 
 
 
@@ -47,7 +48,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
     ],
     imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
-      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule], changeDetection: ChangeDetectionStrategy.OnPush,
+      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 
@@ -211,6 +212,7 @@ export class LabCommissionComponent {
 
 // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
 private http = inject(HttpClient);
+private ngZone = inject(NgZone);
 onfileSubmit(): void {
   if (!this.selectedFile) {
     console.log('No file selected');
@@ -228,20 +230,20 @@ onfileSubmit(): void {
   const formData = new FormData();
   formData.append('file', this.selectedFile);
 
-  // Define headers if needed
-  const headers = new HttpHeaders({
-    'Content-Type': 'multipart/form-data'
-  });
 
   // Use HttpClient to post the file
   this.http.post('http://localhost:8080/upload/convert-excel-to-csv', formData)
   .subscribe({
     next: response => {
       console.log('File uploaded successfully:', response);
-      // Optionally, clear the selected file and reset form state here
+      this.ngZone.run(() => {
+        alert('File uploaded successfully!');
+      });
+
       this.selectedFile = null;
       this.excelData = [];
       this.previewVisible = false;
+
     },
     error: error => {
       console.error('Error uploading file:', error);

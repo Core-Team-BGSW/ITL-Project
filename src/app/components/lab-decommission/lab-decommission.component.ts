@@ -23,16 +23,16 @@ export class LabDecommissionComponent implements OnInit {
   filteredLabList: any[] = [];
   expandedLabId: string | null = null;
   readonly dialog = inject(MatDialog);
+
+  //To fetch lab details
   private http = inject(HttpClient);
-
-
   private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
 
   constructor() {}
 
   ngOnInit(): void {
     this.loadLabList();
-    //this.fetchEntityData();
+
   }
 
   loadLabList(): void {

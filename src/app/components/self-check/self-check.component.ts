@@ -159,6 +159,8 @@ dataList!: any[];
   searchQuery: string = '';
   filteredLabList: any[] = [];
 
+  //To fetch lab details
+
   constructor(private http:HttpClient) {}
 
   ngOnInit(): void {
