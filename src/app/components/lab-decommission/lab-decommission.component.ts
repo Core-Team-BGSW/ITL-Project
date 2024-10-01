@@ -39,7 +39,7 @@ export class LabDecommissionComponent  implements OnInit  {
     this.loadLabList();
 
   }
-
+ 
   loadLabList(): void {
     this.dataService.getAllData()
       .subscribe({
@@ -50,7 +50,7 @@ export class LabDecommissionComponent  implements OnInit  {
         error: (err) => this.errorMessage = err
       });
   }
-
+  
   removeLab(id: string): void {
     if (confirm('Are you sure you want to remove this lab?')) {
       this.dataService.removeLab(id).subscribe({

@@ -77,16 +77,17 @@ select
  /* Custom background color */
 border-radius: 0px; /* Rounded corners */
 padding: 5px;/* Padding inside the card */
-width: 95%;
+width: 97%;
 box-sizing: border-box;
 margin-bottom: 16px;
 box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
 border-radius: 15px;
-
-
-
-
-
+transition: all 0.3s ease;
+}
+.custom-card:hover{
+  transform: scale(1.01);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: #e6e8ea;
 }
 
 .custom-input .mat-input-element  
@@ -125,13 +126,6 @@ text-align: left
 .required
 {
 color: #fd0303;
-}
-p
-{
-text-align: left;
-color: #fd0303;
-font-size: larger;
-font-weight: bold;
 }
 u
 {
@@ -297,13 +291,15 @@ h2
  {
    background-color: white; /* Example color */
  }
- .custom-card1 
+ .custom-card1
 {
-background-color: rgb(253, 249, 249); /* Custom background color */
-border-radius: 0px; /* Rounded corners */
-padding: 5px;/* Padding inside the card */
-width: 900px;
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  border-radius: 0px; /* Rounded corners */
+  padding: 5px;/* Padding inside the card */
+  width: 97%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
+  border-radius: 15px;
 }
 .lab-detail{
   color: rgb(80, 79, 79);
@@ -372,8 +368,8 @@ form.search_btn input[type=text] {
   border: 1px solid rgb(211, 210, 210);
   width: 50%;
   background: white;
-}
 
+}
 /* Style the submit button */
 form.search_btn button {
   
@@ -433,8 +429,13 @@ form.example::after {
   background-color: rgb(227, 186, 111);
   margin-right: 10px;
 }
+.form-control:focus,
+.form-control:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
 
- 
 
 
 
