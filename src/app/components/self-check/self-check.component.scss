@@ -435,6 +435,23 @@ form.example::after {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   
 }
+.lab_details_table{
+  width: 100%;
+  border:1px black;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
+  margin-top: 0;
+  box-shadow: 0 0 25px rgba(88, 88, 88, 0.15);
+}
+.lab_details_table th{
+  text-align: center;
+}
+.lab_details_table td{
+  text-align: center;
+  color:#283747
+}
+
 
 
 
