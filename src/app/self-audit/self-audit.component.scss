@@ -10,9 +10,10 @@ input[type=text]
  box-sizing: border-box;
  border: 1.2px solid rgb(107, 124, 194);
 }
+
 select
 {
- width: 400px;
+ width: 350px;
  padding: 10px 15px;
  margin: 8px 0;
  display: inline-block;
@@ -226,39 +227,46 @@ h2
 }
  .primary 
  {
-   background: rgb(55, 133, 234);
-   color: white;
-   border-radius: 8px;
- padding: 11px;
- width: 120px;
+   background: rgb(240, 202, 96);
+   color: rgb(68, 66, 66);
    position: relative;
-   left: 35%; 
-   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   font-size: medium;
-   font-weight: bold;
-   &:hover {
-     background-color: #336fae;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   }
+   border: none; /* Remove default border */
+  padding: 12px 24px; /* Padding around the text */
+  font-size: 16px; /* Increase font size */
+  font-weight: bold; /* Bold text */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+  left:40%;
+ }
+ .primary:hover{
+  transform: translateY(-2px);
  }
  .success_btn
  {
    width: 100px;
-   border-radius: 8px;
- padding: 11px;
  width: 120px;
-   background: #35a71e;
-   color: white;
+   background: #55be40;
+   color: rgb(46, 46, 46);
    position: relative;
-   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-   font-size: medium;
-   font-weight: bold;
-   left: 36%; 
-   &:hover {
-     background-color: #0aa82d;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   }
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   left: 41%; 
+  border: none; /* Remove default border */
+  padding: 12px 24px; /* Padding around the text */
+  font-size: 16px; /* Increase font size */
+  font-weight: bold; /* Bold text */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+ 
  }
+ .success_btn:hover{
+  transform: translateY(-2px); 
+ }
+ 
+ 
 
  .styled-table 
  {
@@ -360,13 +368,165 @@ margin-bottom: 20px;
 margin-left: 10px;
 margin-top: 10px;
 }
-
-
+.checklist_table{
+  width: 100%;
+  border:1px black;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
+  margin-top: 0;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  
+}
+.checklist_table th,
+.checklist_table td{
    
+  text-align: center;
+}
+.checklist_table1{
+  width: 100%;
+  border:1px black;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
+  margin-top: 0;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  
+}
+.checklist_table1 th{
+  text-align: center;
+}
+.checklist_table1 td{
+  
+  text-align: center;
+}
+.document_table{
+  width: 100%;
+  border:1px black;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+}
+.document_table th{
+  text-align: center;
+}
+.document_table td{
+  text-align: left;
+}
+input[type=url]{
+  width: 550px;
+ padding: 10px 15px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 2px solid #f7f0f0;
+ background-color: white;
+ border-radius: 8px;
+ box-sizing: border-box;
+ border: 1.2px solid rgb(107, 124, 194);
+}
+h5{
+  font-weight: 500;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}   
+h3{
+  color:#121b61;
+ text-align: left;
+ font-weight: 400;
+ text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Shadow */
+ text-align: center;
+ background-color: #c6f1ff;
+ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.custom-file-upload {
+  display: inline-block;
+  padding: 8px 10px;
+  cursor: pointer;
+  background-color: #3d8bda; /* Primary color */
+  color: white; /* Text color */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  text-align: center;
+  border: none;
+  transition: background-color 0.3s ease;
+  width: 90px;
+  font-weight: bold;
+}
+.file-name {
+  color: rgb(159, 59, 59); /* Change this to your desired color */
+  font-weight: bold; /* Make the text bold (optional) */
+  font-size: 14px; /* Adjust the font size if needed */
+  margin-left: 10px; /* Add some space between the button and file name */
+}
 
- 
+.custom-file-upload:hover {
+  background-color: #0056b3;
+   /* Darker shade on hover */
+   transform: translateY(-2px);
+}
+
+.custom-file-upload:active {
+  background-color: #004494; /* Even darker shade on click */
+}
+.url_design{
+  color: red;
+} 
+.excel_btn{
+  display: inline-block;
+  
+  padding: 10px 10px;
+  cursor: pointer;
+  background-color: #3dda7e; /* Primary color */
+  color: white; /* Text color */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 13.5px; /* Font size */
+  text-align: center;
+  border: none;
+  transition: background-color 0.3s ease;
+  width: 150px;
+  font-weight: bold;
+  
+}
+.excel_btn:hover{
+  transform: translateY(-2px);
+}
+.excel_file_upld_btn{
+  display: inline-block;
+
+  padding: 10px 10px;
+  cursor: pointer;
+  background-color: #4d7ada; /* Primary color */
+  color: white; /* Text color */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 13.5px; /* Font size */
+  text-align: center;
+  border: none;
+  transition: background-color 0.3s ease;
+  width: 100px;
+}
+.excel_file_upld_btn.hover{
+  background-color: #0658bd00;
+  transform: translateY(-2px);
+}
+.btn_container{
+  display: flex;
+  gap: 10px; 
+  transform: translateY(-2px);
+}
 
 
+/* Lift up effect on focus */
+.form-control:focus,
+.form-control:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+/* Additional styling */
+.form-control:focus {
+  border-color: #007bff;
+}
 
 
 

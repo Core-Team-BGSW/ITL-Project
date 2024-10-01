@@ -77,16 +77,17 @@ select
  /* Custom background color */
 border-radius: 0px; /* Rounded corners */
 padding: 5px;/* Padding inside the card */
-width: 95%;
+width: 97%;
 box-sizing: border-box;
 margin-bottom: 16px;
 box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
 border-radius: 15px;
-
-
-
-
-
+transition: all 0.3s ease;
+}
+.custom-card:hover{
+  transform: scale(1.01);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: #e6e8ea;
 }
 
 .custom-input .mat-input-element  
@@ -125,10 +126,6 @@ text-align: left
 .required
 {
 color: #fd0303;
-}
-p
-{
-text-align: center;
 }
 u
 {
@@ -175,12 +172,6 @@ color: #fff;
 {
    visibility: visible;
  }
-
-p
-{
- text-align: left;
- font-size: medium;
-}
 h1
 {
  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -191,9 +182,11 @@ h1
 }
 h2
 {
- background-color: #fcf9f9;
- color:#394cb9;
- text-align: center;
+ color:#0e1126;
+ text-align: left;
+ font-weight: 400;
+ text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Shadow */
+ 
 
 }
  .btn 
@@ -255,13 +248,6 @@ h2
  {
    height: 30px;
  }
- p
- {
-   text-align: center;
-   color: grey;
-   font-size: large;
-   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
- }
  .custom-input 
  {
    width: 340.5px;
@@ -305,13 +291,15 @@ h2
  {
    background-color: white; /* Example color */
  }
- .custom-card1 
+ .custom-card1
 {
-background-color: rgb(253, 249, 249); /* Custom background color */
-border-radius: 0px; /* Rounded corners */
-padding: 5px;/* Padding inside the card */
-width: 900px;
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  border-radius: 0px; /* Rounded corners */
+  padding: 5px;/* Padding inside the card */
+  width: 97%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
+  border-radius: 15px;
 }
 .lab-detail{
   color: rgb(80, 79, 79);
@@ -377,11 +365,11 @@ h4{
 form.search_btn input[type=text] {
   padding: 10px;
   font-size: 17px;
-  border: 1px solid grey;
+  border: 1px solid rgb(211, 210, 210);
   width: 50%;
   background: white;
-}
 
+}
 /* Style the submit button */
 form.search_btn button {
   
@@ -393,6 +381,8 @@ form.search_btn button {
   border: 1px solid grey;
   border-left: none; /* Prevent double borders */
   cursor: pointer;
+  margin-left: 10px;
+  
 }
 
 form.example button:hover {
@@ -435,9 +425,17 @@ form.example::after {
   border-radius: 8px;
   
 }
-   
+.btn_upload_doc{
+  background-color: rgb(227, 186, 111);
+  margin-right: 10px;
+}
+.form-control:focus,
+.form-control:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
 
- 
 
 
 

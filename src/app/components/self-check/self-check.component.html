@@ -1,54 +1,41 @@
-
-<h2 style="background-color:rgb(221, 224, 227)">Self Audit Form </h2>
-<p>(Select Lab for Audit)</p>
+<h2 >Self Audit Form :</h2>
+<i><b><p style="color:red"> (Select Lab for Audit)</p></b></i>
+<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <form class="search_btn" action="action_page.php">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search Lab ..." name="search"
   style="margin:auto;max-width:300px" >
-
-<button class="search" (click)="onSearch()"><i class="fa fa-search"></i></button>
-</form>
+<button class="search" (click)="onSearch()"><i class="fa fa-search"></i></button></form>
 <p></p>
       <div class="lab-list">
         <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
-
-          <!-- Collapsible Section Header -->
+           <!-- Collapsible Section Header -->
           <div class="collapsible-header">
-
-            <span (click)="toggleDetails(lab._id)">
               <mat-card class="custom-card">
 
                 <mat-card-content>
-             <b> {{ lab["Lab No"] }} -
+                 <p style="color: grey;" >  Lab No -> Entity -> GB ->  Department </p>
 
-              {{ lab.entityName }} / {{ lab.gb }} / {{ lab.dep_name }}</b>
+             <b> {{ lab["Lab No"] }} ->
+
+               {{ lab.Entity }}  ->  {{ lab.GB }}  ->  {{ lab.Department }}  </b>
 
                <div class="container">
                 <button
-                (click)="showForms()"
+                (click)="toggleDetails(lab._id)"
                 class="lab_btn"
                >
-
-                Lab Details
-
-                </button>
-                <button routerLink="/self-audit">
-                  Self-Audit
-             </button>
-              </div>
-              </mat-card-content>
-            </mat-card>
-            </span>
-
-
-
+             Lab Details
+                 </button>
+  <button (click)="openForm(lab.Entity)">Self-Audit</button>
             </div>
-
-
+            </mat-card-content>
+            </mat-card>
+            </div>
       <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
         <p></p>
 
-        <mat-card class="custom-card">
+        <mat-card class="custom-card1">
           <mat-card-content>
         <div class="lab-detail">
           <strong class="detail-label">Region:</strong>
@@ -119,36 +106,9 @@
           <span class="detail-value">{{ lab.kind_of_lab }}</span>
         </div>
         <div class="lab-detail">
-          <strong class="detail-label">Shared Lab:</strong>
-          <span class="detail-value">{{ lab.shared_lab }}</span>
-        </div>
-        <div class="lab-detail">
-          <strong class="detail-label">Purpose of Lab in Brief:</strong>
-          <span class="detail-value">{{ lab.purpose_of_lab }}</span>
-        </div>
-        <div class="lab-detail">
-          <strong class="detail-label">Description:</strong>
-          <span class="detail-value">{{ lab.description }}</span>
-        </div>
-        <div class="lab-detail">
-          <strong class="detail-label">No. of Green Ports:</strong>
-          <span class="detail-value">{{ lab.green_ports }}</span>
-        </div>
-        <div class="lab-detail">
-          <strong class="detail-label">No. of Red Ports:</strong>
-          <span class="detail-value">{{ lab.red_ports }}</span>
-        </div>
-        <div class="lab-detail">
-          <strong class="detail-label"
-            >Is lab going to procure new equipment for Engineering/Red
-            Zone?:</strong
-          >
-          <span class="detail-value">{{ lab.new_equipment }}</span>
-        </div>
-        <div class="lab-detail">
-          <strong class="detail-label">ACL Required:</strong>
-          <span class="detail-value">{{ lab.acl_req }}</span>
-        </div>
+          <strong class="detail-label">Shared Lab : </strong>
+          <span class="detail-value">{{ lab["Shared lab"] }}</span>
+            </div>
        <p></p>
        </mat-card-content>
        </mat-card>

@@ -46,8 +46,6 @@ export class LabDecommissionComponent implements OnInit {
       });
   }
 
-
-
   removeLab(id: string): void {
     if (confirm('Are you sure you want to remove this lab?')) {
       this.http.delete<void>(`${this.apiurl}/delete/${id}`)

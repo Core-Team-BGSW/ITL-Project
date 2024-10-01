@@ -1,324 +1,197 @@
-<mat-tab-group>
-  <mat-tab label="Lab Questions">
-   <p></p>
-    <h4>Lab Questions</h4>
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <i><strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong></i> 
-     <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span>
-     <p></p>
 
-     <mat-card class="custom-card">
-       
-      <mat-card-content>
-        
-        <strong>   No.of Internal Associates </strong> 
-           <input type="text" placeholder=" Internal Associates"><p></p>
-         <br> <strong>No.of External Associates </strong> 
-           
-           <input type="text" placeholder=" External Associates">
-         </mat-card-content>
-                  
-     </mat-card>
+<mat-tab-group>
+  <mat-tab label="Self Audit Report">
     <p></p>
-    <br> 2. How many IT end devices does the laboratory area have? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
-      <span class="tooltiptext">Used for estimating damage, failure, or action with respect to laboratory size.</span>
-      </div>
-      <p></p>
-      <mat-card class="custom-card">
-        
-         <input type="text" matInput placeholder="No.of devices">
-         
-      </mat-card>
-      <p></p>
-      <br> 3. Is the lab(s) (including IT systems) completely independent to network-dependent IT infrastructures into LAN?
-      <span class="required"> * </span>
-      <div class="tooltip"><i class="icon-info-sign"></i>
-          <span class="tooltiptext">Do components exist that can affect multiple labs if they fail?</span>
-      </div>
-      <p></p>
-      <mat-card class="custom-card" >
-        <mat-card-content>
-          <!-- Your form and radio buttons here -->
-          <mat-radio-group [(ngModel)]="labelPosition">
-            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
-            <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
-          </mat-radio-group>
-        
-        <mat-card-actions>
-          <!-- Your action buttons here -->
-        </mat-card-actions>
-        </mat-card-content>
-      </mat-card>
-      <br>
-      <p></p>
-      <div class="portdetails" *ngIf="labelPosition === 'ACL1-yes'">
-        <mat-card class="custom-card">
-          
-        <div class="dropdown-container">
-        <div class="dropdown-item">
-          Answers<span class="required"> * </span> :
-          <input type="text" placeholder="Answers ">
-          </div>
-          </div>
-          
-          </mat-card>
-      </div>
-      <p></p>
-      <div class="portdetails" *ngIf="labelPosition === 'ACL1-no'">
-        <mat-card class="custom-card">
-          
-        <div class="dropdown-container">
-        <div class="dropdown-item">
-          Explanation<span class="required"> * </span> :
-          <input type="text" placeholder="Explanation ">
-          </div>
-          </div>
-        
-          </mat-card>
-      </div>
-      <p></p>
-     <br> 4. Can the lab tests be performed without a WAN connection or for how long? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
-      <span class="tooltiptext">What is the acceptable downtime for the WAN infrastructure?</span>
-      </div>
-      <p></p>
-      <mat-card class="custom-card">
-        <mat-card-content>
-          <!-- Your form and radio buttons here -->
-          <mat-radio-group [(ngModel)]="labelPosition1">
-            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
-            <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
-          </mat-radio-group>
-        </mat-card-content>
-        <mat-card-actions>
-          <!-- Your action buttons here -->
-        </mat-card-actions>
-      </mat-card>
-      <br>
-      <p></p>
-      <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-yes'">
-        <mat-card class="custom-card">
-         
-        <div class="dropdown-container">
-        <div class="dropdown-item">
-          Acceptable downtime<span class="required"> * </span> :
-          <input type="text" placeholder="Acceptable downtime">
-          </div>
-          </div>
-          </mat-card>
-      </div>
-      <p></p>
-      <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-no'">
-        <mat-card class="custom-card">
-          
-        <div class="dropdown-container">
-        <div class="dropdown-item">
-          Answers<span class="required"> * </span> :
-          <input type="text" placeholder="Answers">
-          </div>
-          </div>
-          
-          </mat-card>
-      </div>
-      <p></p>
-      <br> 5. Can other laboratories at Bosch perform the same tests?<span class="required"> * </span> <div class="tooltip"><i class="icon-info-sign"></i> 
-          <span class="tooltiptext">Reference to external redundancy. Could experiments be taken over by another RB lab in case of failures? What is the name of the laboratory and where is it located?</span>
-        </div>
-        <p></p>
-        <mat-card class="custom-card">
-          <mat-card-content>
-            <!-- Your form and radio buttons here -->
-            <mat-radio-group [(ngModel)]="labelPosition2">
-              <mat-radio-button class="ACL-margin" value="ACL2-yes">Yes</mat-radio-button>
-              <mat-radio-button class="ACL-margin" value="ACL2-no">No</mat-radio-button>
-            </mat-radio-group>
-          </mat-card-content>
-          <mat-card-actions>
-            <!-- Your action buttons here -->
-          </mat-card-actions>
-        </mat-card>
-        <br>
-        <p></p>
-        <div class="portdetails" *ngIf="labelPosition2 === 'ACL2-yes'">
-          <mat-card class="custom-card">
-            
-          <div class="dropdown-container">
-          <div class="dropdown-item">
-             Name and Location of the Lab <span class="required"> * </span> :
-            <input type="text" placeholder="Answers">
-            </div>
-        </div>
-            
-            </mat-card>
-        </div>
-        <p></p>
-      <br> 6. What is the maximum time the lab may be down? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
-          <span class="tooltiptext">What is the maximum acceptable downtime (e. g. 1 hour, 1 day, 1 week) of the IT infrastructure or individual components?</span>
-          </div>
-          <p></p>
-          <mat-card class="custom-card">
-            
-             
-                <input  type="text" placeholder="Maximum acceptable downtime">
-               
-            
-            </mat-card>
-    <br> 7. Do run-time critical tests take place over a longer period of time (e.g. endurance tests)? <span class="required"> * </span>
-    <div class="tooltip"><i class="icon-info-sign"></i>
-        <span class="tooltiptext">Reference to possible compensation through redundancies 
-          (e. g. further local test stands or at other locations).</span>
-      </div>
-      <p></p>
-      <mat-card class="custom-card">
-       <mat-card-content>
-          <!-- Your form and radio buttons here -->
-          <mat-radio-group [(ngModel)]="labelPosition3">
-            <mat-radio-button class="ACL-margin" value="ACL3-yes">Yes</mat-radio-button>
-            <mat-radio-button class="ACL-margin" value="ACL3-no">No</mat-radio-button>
-          </mat-radio-group>
-        
-        <mat-card-actions>
-          <!-- Your action buttons here -->
-        </mat-card-actions>
-        </mat-card-content>
-      </mat-card>
-      <br>
-      <p></p>
-      <div class="portdetails" *ngIf="labelPosition3 === 'ACL3-yes'">
-        <mat-card class="custom-card">
-          
-        <div class="dropdown-container">
-        <div class="dropdown-item">
-          Total Time Required<span class="required"> * </span> :
-          <input type="text" placeholder="Time Required">
-          </div>
-          </div>
-          </mat-card>
-      </div>
-      <p></p>
-      <div class="portdetails" *ngIf="labelPosition3 === 'ACL3-no'">
-        <mat-card class="custom-card">
-        <div class="dropdown-container">
-        <div class="dropdown-item">
-          Answers<span class="required"> * </span> :
-          <input type="text" placeholder="Answers">
-          </div>
-          </div>
-          </mat-card>
-      </div>
-      <p></p>
-    <br>8. Are other RB sites involved in the trials? Are other GBs affected by a failure?
-    <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
-        <span class="tooltiptext">Damage extension in the event of failures.</span>
-        </div>
-        <p></p>
-        <mat-card class="custom-card">
-          <mat-card-content>
-            <!-- Your form and radio buttons here -->
-            <mat-radio-group [(ngModel)]="labelPosition4">
-              <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
-              <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
-            </mat-radio-group>
-          </mat-card-content>
-          <mat-card-actions>
-            <!-- Your action buttons here -->
-          </mat-card-actions>
-        </mat-card>
-        <p></p>
-        <div class="portdetails" *ngIf="labelPosition4 === 'ACL-no'">
-          <mat-card class="custom-card">
-            
-          <div class="dropdown-container">
-          <div class="dropdown-item">
-            Answers<span class="required"> * </span> :
-            <input type="text" placeholder="Answers">
-            </div>
-            </div>
-            </mat-card>
-        </div>
-        <p></p>
-        <div class="portdetails" *ngIf="labelPosition4 === 'ACL-yes'">
-          <mat-card class="custom-card">
-          <div class="dropdown-container">
-          <div class="dropdown-item">
-            Answers<span class="required"> * </span> :
-            <input type="text" placeholder="Answers">
-            </div>
-            </div>
-            </mat-card>
-        </div>
-        <p></p>
-    <br>9. Can the laboratory tests be performed on a test bench without LAN connection or for how long?<span class="required"> * </span>
-    <div class="tooltip"><i class="icon-info-sign"></i> 
-        <span class="tooltiptext">Is the network structure of the laboratories (network zones, network transitions, redundant star structure, ...) implemented appropriately?</span>
-        </div>
-        <p></p>
-        <mat-card class="custom-card">
-          <mat-card-content>
-            <!-- Your form and radio buttons here -->
-            <mat-radio-group [(ngModel)]="labelPosition5">
-              <mat-radio-button class="ACL-margin1" value="ACL4-yes">Yes</mat-radio-button>
-              <mat-radio-button class="ACL-margin1" value="ACL4-no">No</mat-radio-button>
-            </mat-radio-group>
-          </mat-card-content>
-          <mat-card-actions>
-            <!-- Your action buttons here -->
-          </mat-card-actions>
-        </mat-card>
-        <br>
-        <p></p>
-        <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-yes'">
-          <mat-card class="custom-card">
-            
-          <div class="dropdown-container">
-          <div class="dropdown-item">
-            Total Time Required<span class="required"> * </span> :
-            <input type="text" placeholder="Time Required">
-            </div>
+    <h3>ITL Audit/Self-audit</h3>
+  <h5 style="color:rgb(101, 109, 206);">Checklist Form</h5>
+  <table class="checklist_table">
+    <thead>
+      <tr>
+        <th style="background-color:rgb(221, 242, 248)" >Checklist Id</th>
+        <th style="background-color:rgb(221, 242, 248)">Location </th>
+        <th style="background-color:rgb(221, 242, 248)">GB/Unit</th>
+        <th style="background-color:rgb(221, 242, 248)">Country</th>
+        <th style="background-color:rgb(221, 242, 248)">Plant</th>
+        <th style="background-color:rgb(221, 242, 248)">Lab Room</th>
+        <th style="background-color:rgb(221, 242, 248)">Resp Mgmt</th>
+        <th style="background-color:rgb(221, 242, 248)">Local ITL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>India_Test_123_ADU_JUL_24</td>
+        <td>Bangalore</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="checklist_table1">
+    <thead>
+      <tr>
+        <th style="background-color:rgb(221, 242, 248)">Local ITL Proxy</th>
+        <th style="background-color:rgb(221, 242, 248)">Date</th>
+        <th style="background-color:rgb(221, 242, 248)">Lab Co-ordinator</th>
+        <th style="background-color:rgb(221, 242, 248)">ACL Implemented</th>
+        <th style="background-color:rgb(221, 242, 248)">DSO Audited</th>
+        <th style="background-color:rgb(221, 242, 248)">Criticality</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 style="color:rgb(101, 109, 206);">Documents</h5>
+  <strong style="color:brown"><i>(Please Upload the following documents in the sharepoint)</i></strong>
+  <table class="document_table">
+    <thead>
+      <tr>
+        <th style="background-color:rgb(127, 221, 255)">Documents</th>
+        <th style="background-color:rgb(127, 221, 255)">Link <span class="required"> * </span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>IT Engineering and Research Laboratory Documentation</td>
+        <td>
+          <form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
+            <input id="website" type="url" formControlName="website" placeholder="https://example.com" />
+            <div class="url_design"*ngIf="linkForm.get('website')?.invalid && linkForm.get('website')?.touched">
+              <small *ngIf="linkForm.get('website')?.errors?.['required']">URL is required.</small>
+              <small *ngIf="linkForm.get('website')?.errors?.['pattern']">Please enter a valid URL.</small>
             </div>
             
-            </mat-card>
-        </div>
-        <p></p>
-        <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-no'">
-          <mat-card class="custom-card">
-           
-          <div class="dropdown-container">
-          <div class="dropdown-item">
-            Answers<span class="required"> * </span> :
-            <input type="text" placeholder="Answers">
-            </div>
-            </div>
-            
-            </mat-card>
-        </div>
-        <p></p>
-    <br> 10.What is the confidentiality of the data processed in the laboratory?<span class="required"> * </span>
-    <div class="tooltip"><i class="icon-info-sign"></i> 
-        <span class="tooltiptext">Please indicate the highest confidentiality class 
-            (C-SC0 to C-SC3) of the data that will be processed</span>
-        </div>
-        <p></p>
-        <mat-card class="custom-card">
-         
-                         <select>
-                          <option>Select an option</option>
-                          <option>C-SC0</option>
-                          <option>C-SC1</option>
-                          <option>C-SC2</option>
-                          <option>C-SC3</option>
-                         </select>
-                      
-          </mat-card>
-          <p></p>
-      <br>  <button class="primary">Save as Draft</button>
-        <button class="success_btn" >Submit</button>     
+          </form>
+        </td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+         <td>Local-ITL and Local-ITL proxy nomination letters </td>
+         <td> <form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
+          <input id="website" type="url" formControlName="website1" placeholder="https://example.com" />
+          <div class="url_design"*ngIf="linkForm.get('website1')?.invalid && linkForm.get('website1')?.touched">
+            <small *ngIf="linkForm.get('website1')?.errors?.['required']">URL is required.</small>
+            <small *ngIf="linkForm.get('website1')?.errors?.['pattern']">Please enter a valid URL.</small>
+          </div>
+          </form></td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <td>Self audits and Audits</td>
+        <td><form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
+          <input id="website" type="url" formControlName="website2" placeholder="https://example.com" />
+          <div class="url_design" *ngIf="linkForm.get('website2')?.invalid && linkForm.get('website2')?.touched">
+            <small *ngIf="linkForm.get('website2')?.errors?.['required']">URL is required.</small>
+            <small *ngIf="linkForm.get('website2')?.errors?.['pattern']">Please enter a valid URL.</small>
+          </div>
+          </form></td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <td>Emergency plan </td>
+        <td><form [formGroup]="linkForm" (ngSubmit)="onSubmit()" class="form-control">
+          <input id="website3" type="url" formControlName="website3" placeholder="https://example.com" />
+          <div class="url_design"*ngIf="linkForm.get('website3')?.invalid && linkForm.get('website3')?.touched">
+            <small *ngIf="linkForm.get('website3')?.errors?.['required']">URL is required.</small>
+            <small *ngIf="linkForm.get('website3')?.errors?.['pattern']">Please enter a valid URL.</small>
+          </div>
+          </form></td>
+      </tr>
+    </tbody>
+  </table>
+    <p> (Summary) </p>
+  <h5 style="color:rgb(101, 109, 206);"> Organization </h5>
+  <table class="styled-table">
+ <thead>
+  <tr>
+  <th>Question </th>
+  <th style="background-color: rgb(35, 205, 23)  ;">Completely Fulfilled</th>
+  <th style="background-color: rgb(230, 154, 41) ;">Partially Fulfilled</th>
+  <th>Not Fulfilled</th>
+  <th>Not Applicable</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+    <td style="text-align: center;">12</td>
+  <td style="text-align: center;">{{ fulfilledCount }}</td>
+  <td style="text-align: center;">{{ partiallyFulfilledCount }}</td>
+  <td style="text-align: center;">{{ notFulfilledCount }}</td>
+  <td style="text-align: center;">{{notapplicableCount}}</td>
+
+  </tr>
+ </tbody>
+  </table>
+  <h5 style="color:rgb(101, 109, 206);">Technology </h5>
+  <table class="styled-table">
+  <thead>
+    <tr>
+    <th>Questions</th>
+    <th style="background-color: rgb(35, 205, 23)  ;">Completely Fulfilled</th>
+    <th style="background-color: rgb(230, 154, 41) ;">Partially Fulfilled</th>
+    <th>Not Fulfilled</th>
+    <th>Not Applicable</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align: center;">16</td>
+    <td style="text-align: center;">{{ fulfilledCount1 }}</td>
+    <td style="text-align: center;">{{partiallyFulfilledCount1}}</td>
+    <td style="text-align: center;">{{notFulfilledCount1}}</td>
+    <td style="text-align: center;">{{notapplicableCount1}}</td>
+  </tr>
+  </tbody>
+  </table>
+  <h5 style="color:rgb(101, 109, 206);">Emergency plan</h5>
+<table class="styled-table">
+  <thead>
+    <tr>
+  <th>Questions</th>
+  <th style="background-color: rgb(35, 205, 23) ;">Completely Fulfilled</th>
+  <th style="background-color: rgb(230, 154, 41) ;">Partially Fulfilled</th>
+  <th>Not Fulfilled</th>
+  <th>Not Applicable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align: center;">3</td>
+  <td style="text-align: center;">{{ fulfilledCount2 }}</td>
+  <td style="text-align: center;">{{partiallyFulfilledCount2}}</td>
+  <td style="text-align: center;">{{notFulfilledCount2}}</td>
+  <td style="text-align: center;">{{notapplicableCount2}}</td>
+</tr>
+</tbody>
+</table>
+
+<br>  
+<button class="success_btn" >Submit</button> 
+<p></p>
   
- </mat-tab>
+  </mat-tab>
+  
 <mat-tab label="Check List">
   <div class="tab-content">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
       <p></p> 
-    <h4>Organization </h4>
+    <h3>Organization </h3>
+
+
  <b>1. Chapter MD 07151 Annex 2 (4.2.1.1 )</b>  : Is a local ITL nominated for the laboratory?
  <span class="required"> * </span> 
    <div class="tooltip"><i class="icon-info-sign"></i>
@@ -328,7 +201,7 @@
      <p></p> <br> Is the nomination document signed by the responsible laboratory management available? (MD 07151 Annex 4)</span>
      </div>
  
-      <p></p>     <br> Evaluation<span class="required"> * </span>
+      <p></p>     <br>Evaluation<span class="required"> * </span>
        
         
      <div class="tooltip1">
@@ -354,28 +227,42 @@
                 </div>
            </mat-card>
            </div>
-                 <div class="dropdown" *ngIf="selectedOption === 'partially-fulfilled'">
+            <div class="dropdown" *ngIf="selectedOption === 'partially-fulfilled'">
              <p></p>
         <mat-card class="custom-card">        
 <table>
                  <td>Explanation <span class="required"> *</span> :</td>
                  <td>Measures <span class="required"> *</span> : </td>
                  <td>Responsible<span class="required"> *</span> :</td>
+                 <td>Due Date :<span class=required> * </span></td>
  
                  <tr>
                    <td><input type="text" size="30" placeholder="Explanation"></td>
                    <td><input type="text" size="30" placeholder="Measures"></td>
                    <td><input type="text" size="30" placeholder="Responsible"></td>
-                 </tr>
-               </table>
-               <table>
-                <td>Due Date :<span class=required> * </span></td>
-                <tr>
-                  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                   <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                     <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                     <mat-datepicker #picker class="custom-datepicker">
                       
                     </mat-datepicker></td>
+                  
+                 </tr>
+               </table>
+               <table>
+                  <td>Status :<span class=required> * </span></td>
+                
+                <tr>
+                  <td>
+                    <select>
+                      <option>Select an option</option>
+                      <option>Open</option>
+                      <option>In work</option>
+                      <option>Done</option>
+                    </select>
+                  </td>
+                    
+                   
+                    <td></td>
                 </tr>
                </table>
                                     </mat-card>
@@ -387,18 +274,28 @@
                  <td>Explanation <span class="required"> *</span> :</td> 
                  <td>Measures <span class="required"> *</span> : </td>
                  <td>Responsible<span class="required"> *</span> :</td>
+                 <td>Due Date :<span class=required> * </span></td>
                                   <tr>
                    <td><input type="text" size="30" placeholder="Explanation"></td>
                    <td><input type="text" size="30" placeholder="Measures"></td>
                    <td><input type="text" size="30" placeholder="Responsible"></td>
+                   <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                  </tr>
                </table>
                <table>
-                <td>Due Date :<span class=required> * </span></td>
+                
+                <td>Status :<span class=required> * </span></td>
                 <tr>
-                  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                  <td>
+                    <select>
+                      <option>Select an option</option>
+                      <option>Open</option>
+                      <option>In work</option>
+                      <option>Done</option>
+                    </select>
+                  </td>
                 </tr>
                </table>
          </mat-card>
@@ -444,18 +341,32 @@
                   <td>Explanation <span class="required"> *</span> :</td>
                   <td>Measures <span class="required"> *</span> : </td>
                   <td>Responsible<span class="required"> *</span> :</td>
+                  <td>Due Date :<span class=required> * </span></td>
                                  <tr>
                     <td><input type="text" size="30" placeholder="Explanation"></td>
                     <td><input type="text" size="30" placeholder="Measures"></td>
-                    <td><input type="text" size="30" placeholder="Responsible"></td>
-                                      </tr>
+              <td><input type="text" size="30" placeholder="Responsible"></td>
+              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+              </tr>
                 </table>
                 <table>
-                  <td>Due Date :<span class=required> * </span></td>
+                  
                   <tr>
-                    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                    <td>Status :<span class=required> * </span></td>
+                  </tr>
+                  <tr>
+                    <td>
+
+                      <select>
+                        <option>Select an option</option>
+                        <option>Open</option>
+                        <option>In work</option>
+                        <option>Done</option>
+                        </select>
+  
+                    </td>
                   </tr>
                  </table>
                             </mat-card>
@@ -467,18 +378,29 @@
                   <td>Explanation <span class="required"> *</span> :</td> 
                   <td>Measures <span class="required"> *</span> : </td>
                   <td>Responsible<span class="required"> *</span> :</td>
+                  <td>Due Date<span class="required"> *</span> :</td>
+
                   <tr>
                     <td><input type="text" size="30" placeholder="Explanation"></td>
                     <td><input type="text" size="30" placeholder="Measures"></td>
                     <td><input type="text" size="30" placeholder="Responsible"></td>
-                  </tr>
-                </table>
-                <table>
-                  <td>Due Date :<span class=required> * </span></td>
-                  <tr>
                     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                  </tr>
+                </table>
+                <table>
+                  <td>Status :<span class=required> * </span></td>
+                  <tr>
+                    <td>
+
+                      <select>
+                          <option>Select an option</option>
+                          <option>Open</option>
+                          <option>In work</option>
+                          <option>Done</option>
+                        </select>
+                      </td>
                   </tr>
                  </table>
                       </mat-card>
@@ -511,6 +433,9 @@
       Explanation<span class="required"> * </span> :
       <input type="text" placeholder="Explanation ">
       </div>
+      <strong style="color:brown"><i><span> * </span>Please Upload the Required Mail Proof in the Sharepoint</i></strong>
+    
+     
 </mat-card>
 </div>
 <div class="dropdown" *ngIf="selectedOption2 === 'partially-fulfilled'">
@@ -520,18 +445,27 @@
       <td>Explanation <span class="required"> *</span> :</td>
       <td>Measures <span class="required"> *</span> : </td>
       <td>Responsible<span class="required"> *</span> :</td>
+      <td>Due Date<span class="required"> *</span> :</td>
             <tr>
         <td><input type="text" size="30" placeholder="Explanation"></td>
         <td><input type="text" size="30" placeholder="Measures"></td>
         <td><input type="text" size="30" placeholder="Responsible"></td>
-             </tr>
-    </table>
-    <table>
-      <td>Due Date :<span class=required> * </span></td>
-      <tr>
         <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
           <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
           <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+             </tr>
+    </table>
+    <table>
+      <td>Status :<span class=required> * </span></td>
+      <tr>
+        <td>
+          <select>
+            <option>Select an option</option>
+            <option>Open</option>
+            <option>In work</option>
+            <option>Done</option>
+          </select>
+        </td>
       </tr>
      </table>
           </mat-card>
@@ -543,18 +477,28 @@
       <td>Explanation <span class="required"> *</span> :</td> 
       <td>Measures <span class="required"> *</span> : </td>
       <td>Responsible<span class="required"> *</span> :</td>
+      <td>Due Date<span class="required"> *</span> :</td>
             <tr>
         <td><input type="text" size="30" placeholder="Explanation"></td>
         <td><input type="text" size="30" placeholder="Measures"></td>
         <td><input type="text" size="30" placeholder="Responsible"></td>
-            </tr>
-    </table>
-    <table>
-      <td>Due Date :<span class=required> * </span></td>
-      <tr>
         <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
           <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
           <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+            </tr>
+    </table>
+    <table>
+      <td>Status :<span class=required> * </span></td>
+      <tr>
+        <td>
+
+          <select>
+            <option>Select an option</option>
+            <option>Open</option>
+            <option>In work</option>
+            <option>Done</option>
+          </select>
+        </td>
       </tr>
      </table>
    </mat-card>
@@ -596,20 +540,29 @@
         <td>Explanation <span class="required"> *</span> :</td>
         <td>Measures <span class="required"> *</span> : </td>
         <td>Responsible<span class="required"> *</span> :</td>
+        <td>Due Date<span class="required"> *</span> :</td>
       
         <tr>
           <td><input type="text" size="30" placeholder="Explanation"></td>
           <td><input type="text" size="30" placeholder="Measures"></td>
           <td><input type="text" size="30" placeholder="Responsible"></td>
-        
-        </tr>
-      </table>
-      <table>
-        <td>Due Date :<span class=required> * </span></td>
-        <tr>
           <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
             <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+        </tr>
+      </table>
+      <table>
+        <td>Status :<span class=required> * </span></td>
+        <tr>
+          <td>
+
+            <select>
+              <option>Select an option</option>
+              <option>Open</option>
+              <option>In work</option>
+              <option>Done</option>
+            </select>
+          </td>
         </tr>
        </table>
             </mat-card>
@@ -621,18 +574,28 @@
         <td>Explanation <span class="required"> *</span> :</td> 
         <td>Measures <span class="required"> *</span> : </td>
         <td>Responsible<span class="required"> *</span> :</td>
+        <td>Due Date<span class="required"> *</span> :</td>
                <tr>
           <td><input type="text" size="30" placeholder="Explanation"></td>
           <td><input type="text" size="30" placeholder="Measures"></td>
           <td><input type="text" size="30" placeholder="Responsible"></td>
+          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                 </tr>
       </table>
       <table>
         <td>Due Date :<span class=required> * </span></td>
         <tr>
-          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+          <td>
+
+            <select>
+              <option>Select an option</option>
+              <option>Open</option>
+              <option>In work</option>
+              <option>Done</option>
+            </select>
+          </td>
         </tr>
        </table>
      </mat-card>
@@ -677,18 +640,29 @@
            <td>Explanation <span class="required"> *</span> :</td>
            <td>Measures <span class="required"> *</span> : </td>
            <td>Responsible<span class="required"> *</span> :</td>
+           <td>Due Date<span class="required"> *</span> :</td>
                       <tr>
              <td><input type="text" size="30" placeholder="Explanation"></td>
              <td><input type="text" size="30" placeholder="Measures"></td>
              <td><input type="text" size="30" placeholder="Responsible"></td>
+             <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+              <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                         </tr>
          </table>
          <table>
-          <td>Due Date :<span class=required> * </span></td>
+          <td>Status :<span class=required> * </span></td>
           <tr>
-            <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-              <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+            <td>
+
+              <select>
+                <option>Select an option</option>
+                <option>Open</option>
+                <option>In work</option>
+                <option>Done</option>
+              </select>
+
+            </td>
           </tr>
          </table>
                </mat-card>
@@ -700,18 +674,27 @@
            <td>Explanation <span class="required"> *</span> :</td> 
            <td>Measures <span class="required"> *</span> : </td>
            <td>Responsible<span class="required"> *</span> :</td>
+           <td>Due Date<span class="required"> *</span> :</td>
                       <tr>
              <td><input type="text" size="30" placeholder="Explanation"></td>
              <td><input type="text" size="30" placeholder="Measures"></td>
              <td><input type="text" size="30" placeholder="Responsible"></td>
+             <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+              <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                         </tr>
          </table>
          <table>
-          <td>Due Date :<span class=required> * </span></td>
+          <td>Status :<span class=required> * </span></td>
           <tr>
-            <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-              <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+            <td>
+              <select>
+                <option>Select an option</option>
+                <option>Open</option>
+                <option>In work</option>
+                <option>Done</option>
+              </select>
+            </td>
           </tr>
          </table>
    </mat-card>
@@ -753,18 +736,29 @@
     <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
       <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-         </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
+         </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -776,18 +770,28 @@
     <td>Explanation <span class="required"> *</span> :</td> 
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
     <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-        </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+        </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
 </mat-card>
@@ -820,6 +824,7 @@ Were these information <br> exchange documented? <span class="required"> * </spa
    Explanation<span class="required"> * </span> :
    <input type="text" placeholder="Explanation ">
    </div>
+   <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
 </mat-card>
 </div>
     <div class="dropdown" *ngIf="selectedOption6 === 'partially-fulfilled'">
@@ -829,19 +834,28 @@ Were these information <br> exchange documented? <span class="required"> * </spa
     <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
     <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
+      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
       
     </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -853,18 +867,29 @@ Were these information <br> exchange documented? <span class="required"> * </spa
     <td>Explanation <span class="required"> *</span> :</td> 
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
     <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-        </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
+        </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
 </mat-card>
@@ -872,9 +897,12 @@ Were these information <br> exchange documented? <span class="required"> * </spa
 <p></p>
 <b>8. Chapter MD 07151 Annex 2 (4.2.3-4.4.6)</b>  :Are the purchasing guidelines adhered to when procuring laboratory equipment that includes IT?
 Were these information exchange <br> documented?<span class="required"> * </span>
+
+
  <div class="tooltip"><i class="icon-info-sign"></i>
   <span class="tooltiptext">Is a corresponding process described in the ITL documentation?  </span>
   </div>
+  <a href="https://rb-normen.bosch.com/NormMaster/Welcome.do?_HDIV_STATE_=8-0-043EABE1C494F0492DD5C5732265E9E6" target="_blank" rel="noopener noreferrer">Norm Master</a>
    <p></p>
    <br>  Evaluation <span class="required"> * </span> <div class="tooltip1">
     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.86 122.88"><title>comment</title><path d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"/></svg>
@@ -906,18 +934,28 @@ Were these information exchange <br> documented?<span class="required"> * </span
     <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
         <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-        </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+        </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -929,18 +967,28 @@ Were these information exchange <br> documented?<span class="required"> * </span
     <td>Explanation <span class="required"> *</span> :</td> 
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
        <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-         </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+         </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
 </mat-card>
@@ -983,18 +1031,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
                   <td>Explanation <span class="required"> *</span> :</td>
                   <td>Measures <span class="required"> *</span> : </td>
                   <td>Responsible<span class="required"> *</span> :</td>
+                  <td>Due Date<span class="required"> *</span> :</td>
                   <tr>
                     <td><input type="text" size="30" placeholder="Explanation"></td>
                     <td><input type="text" size="30" placeholder="Measures"></td>
                     <td><input type="text" size="30" placeholder="Responsible"></td>
-                    </tr>
-                </table>
-                <table>
-                  <td>Due Date :<span class=required> * </span></td>
-                  <tr>
                     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                    </tr>
+                </table>
+                <table>
+                  <td>Status :<span class=required> * </span></td>
+                  <tr>
+                    <td>
+
+                      <select>
+           <option>Select an option</option>
+            <option>Open</option>
+              <option>In work</option>
+                 <option>Done</option>
+                 </select>
+                      </td>
                   </tr>
                  </table>
                       </mat-card>
@@ -1006,18 +1064,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
                   <td>Explanation <span class="required"> *</span> :</td> 
                   <td>Measures <span class="required"> *</span> : </td>
                   <td>Responsible<span class="required"> *</span> :</td>
+                  <td>Due Date<span class="required"> *</span> :</td>
                    <tr>
                     <td><input type="text" size="30" placeholder="Explanation"></td>
                     <td><input type="text" size="30" placeholder="Measures"></td>
                     <td><input type="text" size="30" placeholder="Responsible"></td>
-                    </tr>
-                </table>
-                <table>
-                  <td>Due Date :<span class=required> * </span></td>
-                  <tr>
                     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                    </tr>
+                </table>
+                <table>
+                  <td>Status :<span class=required> * </span></td>
+                  <tr>
+                    <td>
+
+                      <select>
+                          <option>Select an option</option>
+                          <option>Open</option>
+                          <option>In work</option>
+                          <option>Done</option>
+                        </select>
+                      </td>
                   </tr>
                  </table>
               </mat-card>
@@ -1056,18 +1124,28 @@ Were these information exchange<br> documented?<span class="required"> * </span>
     <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
         <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-          </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+          </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -1079,18 +1157,28 @@ Were these information exchange<br> documented?<span class="required"> * </span>
     <td>Explanation <span class="required"> *</span> :</td> 
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
         <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-          </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+          </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
 </mat-card>
@@ -1123,6 +1211,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
    Explanation<span class="required"> * </span> :
    <input type="text" placeholder="Explanation ">
    </div>
+   <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
 </mat-card>
 </div>
     <div class="dropdown" *ngIf="selectedOption10 === 'partially-fulfilled'">
@@ -1132,18 +1221,29 @@ Were these information exchange documented?<span class="required"> * </span> <di
     <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
      <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-      </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
+      </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -1155,18 +1255,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
     <td>Explanation <span class="required"> *</span> :</td> 
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
      <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-         </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
+         </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
 </mat-card>
@@ -1198,6 +1308,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
    Explanation<span class="required"> * </span> :
    <input type="text" placeholder="Explanation ">
    </div>
+   <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
 </mat-card>
 </div>
     <div class="dropdown" *ngIf="selectedOption11 === 'partially-fulfilled'">
@@ -1207,18 +1318,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
     <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
       <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-      </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -1230,24 +1350,34 @@ Were these information exchange documented?<span class="required"> * </span> <di
     <td>Explanation <span class="required"> *</span> :</td> 
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
         <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-       </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
+       </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
 </mat-card>
   </div>
   <p></p>
-<h4>Technology </h4>
+<h3>Technology </h3>
 <p></p>
 <b>1. Chapter MD 07151 Annex 2 (4.5)</b>  :Is the inventory of all assets with the required attributes available?<span class="required"> * </span> <div class="tooltip">
   <i class="icon-info-sign"></i>
@@ -1284,20 +1414,29 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Explanation <span class="required"> *</span> :</td>
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
+                        <td>Due Date<span class="required"> *</span> :</td>
                                          
                         <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
                           <td><input type="text" size="30" placeholder="Responsible"></td>
+                          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                                              
                         </tr>
                       </table>
                       <table>
-                        <td>Due Date :<span class=required> * </span></td>
+                        <td>Status :<span class=required> * </span></td>
                         <tr>
-                          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                          <td>
+                            <select>
+                              <option>Select an option</option>
+                               <option>Open</option>
+                              <option>In work</option>
+                             <option>Done</option>
+                               </select>
+                           </td>
                         </tr>
                        </table>
                     </mat-card>
@@ -1309,18 +1448,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Explanation <span class="required"> *</span> :</td> 
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
+                        <td>Due Date<span class="required"> *</span> :</td>
                        <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
                           <td><input type="text" size="30" placeholder="Responsible"></td>
-                        </tr>
-                      </table>
-                      <table>
-                        <td>Due Date :<span class=required> * </span></td>
-                        <tr>
                           <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                             <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
+                        </tr>
+                      </table>
+                      <table>
+                        <td>Status :<span class=required> * </span></td>
+                        <tr>
+                          <td>
+                            <select>
+                             <option>Select an option</option>
+                               <option>Open</option>
+                                 <option>In work</option>
+                                <option>Done</option>
+                            </select>
+                           </td>
                         </tr>
                        </table>
                                       </mat-card>
@@ -1361,20 +1510,31 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Explanation <span class="required"> *</span> :</td>
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
+                        <td>Due Date<span class="required"> *</span> :</td>
                                           
                         <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
                           <td><input type="text" size="30" placeholder="Responsible"></td>
+                          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
                                             
                         </tr>
                       </table>
                       <table>
-                        <td>Due Date :<span class=required> * </span></td>
+                        <td>Status :<span class=required> * </span></td>
                         <tr>
-                          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                          <td>
+                            <select>
+                                     <option>Select an option</option>
+                                      <option>Open</option>
+                                      <option>In work</option>
+                                      <option>Done</option>
+                                    </select>
+        
+                          </td>
                         </tr>
                        </table>
                                                  </mat-card>
@@ -1386,18 +1546,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Explanation <span class="required"> *</span> :</td> 
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
+                        <td>Due Date<span class="required"> *</span> :</td>
                                                 <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
                           <td><input type="text" size="30" placeholder="Responsible"></td>
-                                                 </tr>
-                      </table>
-                      <table>
-                        <td>Due Date :<span class=required> * </span></td>
-                        <tr>
                           <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                             <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                                                 </tr>
+                      </table>
+                      <table>
+                        <td>Status :<span class=required> * </span></td>
+                        <tr>
+                          <td>
+
+                            <select>
+                                      <option>Select an option</option>
+                                      <option>Open</option>
+                                      <option>In work</option>
+                                      <option>Done</option>
+                                    </select>
+                                  </td>
                         </tr>
                        </table>
                                         </mat-card>
@@ -1436,18 +1606,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-  </tr>
-</table>
-<table>
-  <td>Due Date :<span class=required> * </span></td>
-  <tr>
     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+  </tr>
+</table>
+<table>
+  <td>Status :<span class=required> * </span></td>
+  <tr>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
       </mat-card>
@@ -1459,18 +1638,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
     <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-     </tr>
-</table>
-<table>
-  <td>Due Date :<span class=required> * </span></td>
-  <tr>
     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+     </tr>
+</table>
+<table>
+  <td>Status :<span class=required> * </span></td>
+  <tr>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
 </mat-card>
@@ -1502,6 +1690,8 @@ Were these information exchange documented?<span class="required"> * </span> <di
                        Explanation<span class="required"> * </span> :
                        <input type="text" placeholder="Explanation ">
                        </div>
+                       <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
+                      
                       </mat-card>
                       </div>
                         <div class="dropdown" *ngIf="selectedOption15 === 'partially-fulfilled'">
@@ -1511,20 +1701,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Explanation <span class="required"> *</span> :</td>
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
+                        <td>Due Date<span class="required"> *</span> :</td>
                                              
                         <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
                           <td><input type="text" size="30" placeholder="Responsible"></td>
-                                             
+                          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>                     
                         </tr>
                       </table>
                       <table>
-                        <td>Due Date :<span class=required> * </span></td>
+                        <td>Status :<span class=required> * </span></td>
                         <tr>
-                          <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                            <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                          <td>
+                            <select>     
+                              <option>Select an option</option>
+                                    <option>Open</option>
+                                 <option>In work</option>
+                                    <option>Done</option>
+                                  </select>
+                                  </td>
                         </tr>
                        </table>
                                                   </mat-card>
@@ -1536,18 +1734,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Explanation <span class="required"> *</span> :</td> 
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
+                        <td>Due Date<span class="required"> *</span> :</td>
                                              <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
                           <td><input type="text" size="30" placeholder="Responsible"></td>
-                                                </tr>
-                      </table>
-                      <table>
-                        <td>Due Date :<span class=required> * </span></td>
-                        <tr>
                           <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                             <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                                                </tr>
+                      </table>
+                      <table>
+                        <td>Status :<span class=required> * </span></td>
+                        <tr>
+                          <td>
+                            <select>
+                                      <option>Select an option</option>
+                                      <option>Open</option>
+                                      <option>In work</option>
+                                      <option>Done</option>
+                                    </select>
+                                  </td>
                         </tr>
                        </table>
                                            </mat-card>
@@ -1589,20 +1796,29 @@ Were these information exchange documented?<span class="required"> * </span> <di
     <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
     
     <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-      
-    </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
           </mat-card>
@@ -1614,18 +1830,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
     <td>Explanation <span class="required"> *</span> :</td> 
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
+    <td>Due Date<span class="required"> *</span> :</td>
        <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
       <td><input type="text" size="30" placeholder="Responsible"></td>
-        </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+        </tr>
+  </table>
+  <table>
+    <td>Status :<span class=required> * </span></td>
+    <tr>
+      <td>
+
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
     </mat-card>
@@ -1657,6 +1883,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
            Explanation<span class="required"> * </span> :
            <input type="text" placeholder="Explanation ">
            </div>
+           <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
           </mat-card>
           </div>
             <div class="dropdown" *ngIf="selectedOption17 === 'partially-fulfilled'">
@@ -1666,20 +1893,29 @@ Were these information exchange documented?<span class="required"> * </span> <di
             <td>Explanation <span class="required"> *</span> :</td>
             <td>Measures <span class="required"> *</span> : </td>
             <td>Responsible<span class="required"> *</span> :</td>
+            <td>Due Date<span class="required"> *</span> :</td>
                      
             <tr>
               <td><input type="text" size="30" placeholder="Explanation"></td>
               <td><input type="text" size="30" placeholder="Measures"></td>
               <td><input type="text" size="30" placeholder="Responsible"></td>
+              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                        
             </tr>
           </table>
           <table>
-            <td>Due Date :<span class=required> * </span></td>
+            <td>Status :<span class=required> * </span></td>
             <tr>
-              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+              <td>
+                <select>
+                  <option>Select an option</option>
+                  <option>Open</option>
+                  <option>In work</option>
+                  <option>Done</option>
+                </select>
+              </td>  
             </tr>
            </table>
                           </mat-card>
@@ -1693,18 +1929,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
             <td>Explanation <span class="required"> *</span> :</td> 
             <td>Measures <span class="required"> *</span> : </td>
             <td>Responsible<span class="required"> *</span> :</td>
+            <td>Due Date<span class="required"> *</span> :</td>
                       <tr>
               <td><input type="text" size="30" placeholder="Explanation"></td>
               <td><input type="text" size="30" placeholder="Measures"></td>
               <td><input type="text" size="30" placeholder="Responsible"></td>
-                         </tr>
-          </table>
-          <table>
-            <td>Due Date :<span class=required> * </span></td>
-            <tr>
               <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                 <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                 <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                         </tr>
+          </table>
+          <table>
+            <td>Status :<span class=required> * </span></td>
+            <tr>
+              <td>
+
+                <select>
+                  <option>Select an option</option>
+                  <option>Open</option>
+                  <option>In work</option>
+                  <option>Done</option>
+                </select>
+              </td>
             </tr>
            </table>
                    </mat-card>
@@ -1747,20 +1993,30 @@ Were these information exchange documented?<span class="required"> * </span> <di
                             <td>Explanation <span class="required"> *</span> :</td>
                             <td>Measures <span class="required"> *</span> : </td>
                             <td>Responsible<span class="required"> *</span> :</td>
+                            <td>Due Date<span class="required"> *</span> :</td>
                                                   
                             <tr>
                               <td><input type="text" size="30" placeholder="Explanation"></td>
                               <td><input type="text" size="30" placeholder="Measures"></td>
                               <td><input type="text" size="30" placeholder="Responsible"></td>
+                              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                                                        
                             </tr>
                           </table>
                           <table>
-                            <td>Due Date :<span class=required> * </span></td>
+                            <td>Status :<span class=required> * </span></td>
                             <tr>
-                              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                              <td>
+
+                                <select>
+                                              <option>Select an option</option>
+                                              <option>Open</option>
+                                              <option>In work</option>
+                                              <option>Done</option>
+                                            </select>
+                                          </td>
                             </tr>
                            </table>
                                                          </mat-card>
@@ -1774,18 +2030,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
                             <td>Explanation <span class="required"> *</span> :</td> 
                             <td>Measures <span class="required"> *</span> : </td>
                             <td>Responsible<span class="required"> *</span> :</td>
+                            <td>Due Date<span class="required"> *</span> :</td>
                                                         <tr>
                               <td><input type="text" size="30" placeholder="Explanation"></td>
                               <td><input type="text" size="30" placeholder="Measures"></td>
                               <td><input type="text" size="30" placeholder="Responsible"></td>
-                                                       </tr>
-                          </table>
-                          <table>
-                            <td>Due Date :<span class=required> * </span></td>
-                            <tr>
                               <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                                 <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                                 <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                                                       </tr>
+                          </table>
+                          <table>
+                            <td>Status :<span class=required> * </span></td>
+                            <tr>
+                              <td>
+                                <select>
+                                              <option>Select an option</option>
+                                            <option>Open</option>
+                                              <option>In work</option>
+                                              <option>Done</option>
+                                            </select>
+                                          </td>
                             </tr>
                            </table>
                                                     </mat-card>
@@ -1820,8 +2085,9 @@ Were these information exchange documented?<span class="required"> * </span> <di
                            Explanation<span class="required"> * </span> :
                            <input type="text" placeholder="Explanation ">
                            </div>
-                          </mat-card>
-                          </div>
+                           <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
+       </mat-card>
+        </div>
                             <div class="dropdown" *ngIf="selectedOption19 === 'partially-fulfilled'">
                           <p></p>
                           <mat-card class="custom-card">
@@ -1829,19 +2095,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
                             <td>Explanation <span class="required"> *</span> :</td>
                             <td>Measures <span class="required"> *</span> : </td>
                             <td>Responsible<span class="required"> *</span> :</td>
+                            <td>Due Date<span class="required"> *</span> :</td>
                                                    <tr>
                               <td><input type="text" size="30" placeholder="Explanation"></td>
                               <td><input type="text" size="30" placeholder="Measures"></td>
                               <td><input type="text" size="30" placeholder="Responsible"></td>
-                                                       
+                              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>                         
                             </tr>
                           </table>
                           <table>
-                            <td>Due Date :<span class=required> * </span></td>
+                            <td>Status :<span class=required> * </span></td>
                             <tr>
-                              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                              <td>
+                                <select>
+                                              <option>Select an option</option>
+                                              <option>Open</option>
+                                              <option>In work</option>
+                                              <option>Done</option>
+                                            </select>
+                                          </td>
                             </tr>
                            </table>
                                                           </mat-card>
@@ -1855,18 +2129,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
                             <td>Explanation <span class="required"> *</span> :</td> 
                             <td>Measures <span class="required"> *</span> : </td>
                             <td>Responsible<span class="required"> *</span> :</td>
+                            <td>Due Date<span class="required"> *</span> :</td>
                                                         <tr>
                               <td><input type="text" size="30" placeholder="Explanation"></td>
                               <td><input type="text" size="30" placeholder="Measures"></td>
                               <td><input type="text" size="30" placeholder="Responsible"></td>
-                                                         </tr>
-                          </table>
-                          <table>
-                            <td>Due Date :<span class=required> * </span></td>
-                            <tr>
                               <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                                 <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                                 <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
+                                                         </tr>
+                          </table>
+                          <table>
+                            <td>Status :<span class=required> * </span></td>
+                            <tr>
+                              <td>
+                                <select>
+                                              <option>Select an option</option>
+                                              <option>Open</option>
+                                              <option>In work</option>
+                                              <option>Done</option>
+                                            </select>
+                                          </td>
                             </tr>
                            </table>
                                                    </mat-card>
@@ -1908,19 +2192,28 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
  
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-     </tr>
-</table>
-<table>
-  <td>Due Date :<span class=required> * </span></td>
-  <tr>
     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+     </tr>
+</table>
+<table>
+  <td>Status :<span class=required> * </span></td>
+  <tr>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
       </mat-card>
@@ -1932,18 +2225,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-    </tr>
-</table>
-<table>
-  <td>Due Date :<span class=required> * </span></td>
-  <tr>
     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    </tr>
+</table>
+<table>
+  <td>Status :<span class=required> * </span></td>
+  <tr>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
 </mat-card>
@@ -1984,18 +2286,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-      </tr>
-</table>
-<table>
-  <td>Due Date :<span class=required> * </span></td>
-  <tr>
     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      </tr>
+</table>
+<table>
+  <td>Status :<span class=required> * </span></td>
+  <tr>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
       </mat-card>
@@ -2007,18 +2318,27 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-     </tr>
-</table>
-<table>
-  <td>Due Date :<span class=required> * </span></td>
-  <tr>
     <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
       <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
       <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+     </tr>
+</table>
+<table>
+  <td>Status :<span class=required> * </span></td>
+  <tr>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
 </mat-card>
@@ -2058,18 +2378,27 @@ Explanation<span class="required"> * </span> :
 <td>Explanation <span class="required"> *</span> :</td>
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
+<td>Due Date<span class="required"> *</span> :</td>
 <tr>
   <td><input type="text" size="30" placeholder="Explanation"></td>
   <td><input type="text" size="30" placeholder="Measures"></td>
   <td><input type="text" size="30" placeholder="Responsible"></td>
+  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
  </tr>
 </table>
 <table>
-  <td>Due Date :<span class=required> * </span></td>
+  <td>Status :<span class=required> * </span></td>
   <tr>
-    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
     </mat-card>
@@ -2081,18 +2410,28 @@ Explanation<span class="required"> * </span> :
 <td>Explanation <span class="required"> *</span> :</td> 
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
+<td>Due Date<span class="required"> *</span> :</td>
 <tr>
   <td><input type="text" size="30" placeholder="Explanation"></td>
   <td><input type="text" size="30" placeholder="Measures"></td>
   <td><input type="text" size="30" placeholder="Responsible"></td>
+  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
  </tr>
 </table>
 <table>
-  <td>Due Date :<span class=required> * </span></td>
+  <td>Status :<span class=required> * </span></td>
   <tr>
-    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
 </mat-card>
@@ -2130,18 +2469,27 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
      </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
        </mat-card>
@@ -2155,18 +2503,28 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
    <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
   </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
   </mat-card>
@@ -2194,6 +2552,10 @@ Explanation<span class="required"> * </span> :
             Explanation<span class="required"> * </span> :
             <input type="text" placeholder="Explanation ">
             </div>
+            <div class="btn_container">
+            <button class="excel_btn"(click)="generateExcelFile()">Download Template</button>
+            <strong style="color:brown"><i><span> * </span>Please fill the Template and Upload it in the Sharepoint</i></strong>
+                 </div>
             </mat-card>
             </div>
             <div class="dropdown" *ngIf="selectedOption24 === 'partially-fulfilled'">
@@ -2203,18 +2565,27 @@ Explanation<span class="required"> * </span> :
             <td>Explanation <span class="required"> *</span> :</td>
             <td>Measures <span class="required"> *</span> : </td>
             <td>Responsible<span class="required"> *</span> :</td>
+            <td>Due Date<span class="required"> *</span> :</td>
                       <tr>
               <td><input type="text" size="30" placeholder="Explanation"></td>
               <td><input type="text" size="30" placeholder="Measures"></td>
-              <td><input type="text" size="30" placeholder="Responsible"></td>  
+              <td><input type="text" size="30" placeholder="Responsible"></td>
+              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>  
             </tr>
             </table>
             <table>
-              <td>Due Date :<span class=required> * </span></td>
+              <td>Status :<span class=required> * </span></td>
               <tr>
-                <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                  <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                  <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                <td>
+                  <select>
+                    <option>Select an option</option>
+                    <option>Open</option>
+                    <option>In work</option>
+                    <option>Done</option>
+                  </select>
+                </td>
               </tr>
              </table>
                           </mat-card>
@@ -2228,18 +2599,27 @@ Explanation<span class="required"> * </span> :
             <td>Explanation <span class="required"> *</span> :</td> 
             <td>Measures <span class="required"> *</span> : </td>
             <td>Responsible<span class="required"> *</span> :</td>
+            <td>Due Date<span class="required"> *</span> :</td>
                         <tr>
               <td><input type="text" size="30" placeholder="Explanation"></td>
               <td><input type="text" size="30" placeholder="Measures"></td>
               <td><input type="text" size="30" placeholder="Responsible"></td>
+              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                       </tr>
             </table>
             <table>
-              <td>Due Date :<span class=required> * </span></td>
+              <td>Status :<span class=required> * </span></td>
               <tr>
-                <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                  <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                  <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+                <td>
+                  <select>
+                    <option>Select an option</option>
+                    <option>Open</option>
+                    <option>In work</option>
+                    <option>Done</option>
+                  </select>
+                </td>
               </tr>
              </table>
              </mat-card>
@@ -2277,18 +2657,28 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
     <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
       </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
       </mat-card>
@@ -2302,18 +2692,28 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
   </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
     </mat-card>
@@ -2353,18 +2753,28 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
       </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
        </mat-card>
@@ -2378,18 +2788,28 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
     </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
     </mat-card>
@@ -2429,19 +2849,28 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
  
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
       </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -2453,24 +2882,34 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
    <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
     </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
     </mat-card>
   </div>
   <p></p>
-  <h4 >Emergency Plan </h4> 
+  <h3 >Emergency Plan </h3> 
  <p></p> <b>1. Chapter MD 07151 Annex 2 (4.2.4 )</b>  : Are contact persons and measures for possible IT security incidents at laboratory level documented in the emergency <br> plan?
   <span class="required"> * </span>
  <div class="tooltip"><i class="icon-info-sign"></i>
@@ -2506,18 +2945,30 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
     <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-    </tr>
-  </table>
-  <table>
-    <td>Due Date :<span class=required> * </span></td>
-    <tr>
+    
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+  
+  </table>
+  <table>
+    <tr>
+    <td>Status :<span class=required> * </span></td>
+        </tr>
+    <tr>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
         </mat-card>
@@ -2529,18 +2980,27 @@ Explanation<span class="required"> * </span> :
   <td>Explanation <span class="required"> *</span> :</td> 
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
+  <td>Due Date<span class="required"> *</span> :</td>
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
+    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
      </tr>
   </table>
   <table>
-    <td>Due Date :<span class=required> * </span></td>
+    <td>Status :<span class=required> * </span></td>
     <tr>
-      <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-        <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-        <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+      <td>
+        <select>
+          <option>Select an option</option>
+          <option>Open</option>
+          <option>In work</option>
+          <option>Done</option>
+        </select>
+      </td>
     </tr>
    </table>
     </mat-card>
@@ -2581,18 +3041,28 @@ Explanation<span class="required"> * </span> :
 <td>Explanation <span class="required"> *</span> :</td>
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
+<td>Due Date<span class="required"> *</span> :</td>
 <tr>
   <td><input type="text" size="30" placeholder="Explanation"></td>
   <td><input type="text" size="30" placeholder="Measures"></td>
   <td><input type="text" size="30" placeholder="Responsible"></td>
+  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
   </tr>
 </table>
 <table>
-  <td>Due Date :<span class=required> * </span></td>
+  <td>Status :<span class=required> * </span></td>
   <tr>
-    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
     </mat-card>
@@ -2604,18 +3074,28 @@ Explanation<span class="required"> * </span> :
 <td>Explanation <span class="required"> *</span> :</td> 
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
+<td>Due Date<span class="required"> *</span> :</td>
 <tr>
   <td><input type="text" size="30" placeholder="Explanation"></td>
   <td><input type="text" size="30" placeholder="Measures"></td>
   <td><input type="text" size="30" placeholder="Responsible"></td>
+  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
 </tr>
 </table>
 <table>
-  <td>Due Date :<span class=required> * </span></td>
+  <td>Status :<span class=required> * </span></td>
   <tr>
-    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
 </mat-card>
@@ -2656,18 +3136,29 @@ Explanation<span class="required"> * </span> :
 <td>Explanation <span class="required"> *</span> :</td>
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
+<td>Due Date<span class="required"> *</span> :</td>
 <tr>
   <td><input type="text" size="30" placeholder="Explanation"></td>
   <td><input type="text" size="30" placeholder="Measures"></td>
   <td><input type="text" size="30" placeholder="Responsible"></td>
+  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
 </tr>
 </table>
 <table>
-  <td>Due Date :<span class=required> * </span></td>
+  <td>Status :<span class=required> * </span></td>
   <tr>
-    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    <td>
+
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
  </mat-card>
@@ -2679,79 +3170,349 @@ Explanation<span class="required"> * </span> :
 <td>Explanation <span class="required"> *</span> :</td> 
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
+<td>Due Date<span class="required"> *</span> :</td>
 <tr>
   <td><input type="text" size="30" placeholder="Explanation"></td>
   <td><input type="text" size="30" placeholder="Measures"></td>
   <td><input type="text" size="30" placeholder="Responsible"></td>
+  <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+
 </tr>
 </table>
 <table>
-  <td>Due Date :<span class=required> * </span></td>
+  <td>Status :<span class=required> * </span></td>
   <tr>
-    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+    <td>
+      <select>
+        <option>Select an option</option>
+        <option>Open</option>
+        <option>In work</option>
+        <option>Done</option>
+      </select>
+    </td>
   </tr>
  </table>
 </mat-card>
 </div>
 <p></p>
 <button class="primary">Save as draft</button>
-<button class="success_btn">Submit</button>
+<button class="success_btn">Save</button>
+<p></p>
 </mat-tab>
-<mat-tab label="Self Audit Report">
+<mat-tab label="Lab Questions">
   <p></p>
-  <h4>ITL Audit/Self-audit</h4>
-  <p> (Summary) </p>
-<h5 style="color:rgb(101, 109, 206);"> Organization </h5>
-<table class="styled-table">
-  <th>Questions</th>
-  <th style="background-color: rgb(35, 205, 23)  ;">Completely Fulfilled</th>
-  <th style="background-color: rgb(230, 154, 41) ;">Partially Fulfilled</th>
-  <th>Not Fulfilled</th>
-  <th>Not Applicable</th>
-<tr>
-  <td style="text-align: center;">12</td>
-  <td style="text-align: center;">{{ fulfilledCount }}</td>
-  <td style="text-align: center;">{{ partiallyFulfilledCount }}</td>
-  <td style="text-align: center;">{{ notFulfilledCount }}</td>
-  <td style="text-align: center;">{{notapplicableCount}}</td>
-</tr>
-</table>
-<h5 style="color:rgb(101, 109, 206);">Technology </h5>
-<table class="styled-table">
-  
-  <th>Questions</th>
-  <th style="background-color: rgb(35, 205, 23)  ;">Completely Fulfilled</th>
-  <th style="background-color: rgb(230, 154, 41) ;">Partially Fulfilled</th>
-  <th>Not Fulfilled</th>
-  <th>Not Applicable</th>
-
-<tr>
-  <td style="text-align: center;">16</td>
-  <td style="text-align: center;">{{ fulfilledCount1 }}</td>
-  <td style="text-align: center;">{{partiallyFulfilledCount1}}</td>
-  <td style="text-align: center;">{{notFulfilledCount1}}</td>
-  <td style="text-align: center;">{{notapplicableCount1}}</td>
-</tr>
-</table>
-<h5 style="color:rgb(101, 109, 206);">Emergency plan</h5>
-<table class="styled-table">
-  <th>Questions</th>
-  <th style="background-color: rgb(35, 205, 23) ;">Completely Fulfilled</th>
-  <th style="background-color: rgb(230, 154, 41) ;">Partially Fulfilled</th>
-  <th>Not Fulfilled</th>
-  <th>Not Applicable</th>
-
-<tr>
-  <td style="text-align: center;">3</td>
-  <td style="text-align: center;">{{ fulfilledCount2 }}</td>
-  <td style="text-align: center;">{{partiallyFulfilledCount2}}</td>
-  <td style="text-align: center;">{{notFulfilledCount2}}</td>
-  <td style="text-align: center;">{{notapplicableCount2}}</td>
-</tr>
-</table>
-<br>  
-        <button class="success_btn" >Submit</button> 
-        <p></p>
-</mat-tab>
+   <h3>Lab Questions</h3>
+   <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+   <i><strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong></i> 
+   
+   
+   <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span>
+    <p></p>
+    
+    <mat-card class="custom-card">
+     <mat-card-content>
+       
+       <strong>   No.of Internal Associates </strong> 
+          <input type="text" placeholder=" Internal Associates"><p></p>
+        <br> <strong>No.of External Associates </strong> 
+          
+          <input type="text" placeholder=" External Associates">
+        </mat-card-content>
+                 
+    </mat-card>
+   <p></p>
+   <br> 2. How many IT end devices does the laboratory area have? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
+     <span class="tooltiptext">Used for estimating damage, failure, or action with respect to laboratory size.</span>
+     </div>
+     <p></p>
+     <mat-card class="custom-card">
+       
+        <input type="text" matInput placeholder="No.of devices">
+        
+     </mat-card>
+     <p></p>
+     <br> 3. Is the lab(s) (including IT systems) completely independent to network-dependent IT infrastructures into LAN?
+     <span class="required"> * </span>
+     <div class="tooltip"><i class="icon-info-sign"></i>
+         <span class="tooltiptext">Do components exist that can affect multiple labs if they fail?</span>
+     </div>
+     <p></p>
+     <mat-card class="custom-card" >
+       <mat-card-content>
+         <!-- Your form and radio buttons here -->
+         <mat-radio-group [(ngModel)]="labelPosition">
+           <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
+           <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
+         </mat-radio-group>
+       
+       <mat-card-actions>
+         <!-- Your action buttons here -->
+       </mat-card-actions>
+       </mat-card-content>
+     </mat-card>
+     <br>
+     <p></p>
+     <div class="portdetails" *ngIf="labelPosition === 'ACL1-yes'">
+       <mat-card class="custom-card">
+         
+       <div class="dropdown-container">
+       <div class="dropdown-item">
+         Answers<span class="required"> * </span> :
+         <input type="text" placeholder="Answers ">
+         </div>
+         </div>
+         
+         </mat-card>
+     </div>
+     <p></p>
+     <div class="portdetails" *ngIf="labelPosition === 'ACL1-no'">
+       <mat-card class="custom-card">
+         
+       <div class="dropdown-container">
+       <div class="dropdown-item">
+         Explanation<span class="required"> * </span> :
+         <input type="text" placeholder="Explanation ">
+         </div>
+         </div>
+       
+         </mat-card>
+     </div>
+     <p></p>
+    <br> 4. Can the lab tests be performed without a WAN connection or for how long? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
+     <span class="tooltiptext">What is the acceptable downtime for the WAN infrastructure?</span>
+     </div>
+     <p></p>
+     <mat-card class="custom-card">
+       <mat-card-content>
+         <!-- Your form and radio buttons here -->
+         <mat-radio-group [(ngModel)]="labelPosition1">
+           <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
+           <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
+         </mat-radio-group>
+       </mat-card-content>
+       <mat-card-actions>
+         <!-- Your action buttons here -->
+       </mat-card-actions>
+     </mat-card>
+     <br>
+     <p></p>
+     <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-yes'">
+       <mat-card class="custom-card">
+        
+       <div class="dropdown-container">
+       <div class="dropdown-item">
+         Acceptable downtime<span class="required"> * </span> :
+         <input type="text" placeholder="Acceptable downtime">
+         </div>
+         </div>
+         </mat-card>
+     </div>
+     <p></p>
+     <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-no'">
+       <mat-card class="custom-card">
+         
+       <div class="dropdown-container">
+       <div class="dropdown-item">
+         Answers<span class="required"> * </span> :
+         <input type="text" placeholder="Answers">
+         </div>
+         </div>
+         
+         </mat-card>
+     </div>
+     <p></p>
+     <br> 5. Can other laboratories at Bosch perform the same tests?<span class="required"> * </span> <div class="tooltip"><i class="icon-info-sign"></i> 
+         <span class="tooltiptext">Reference to external redundancy. Could experiments be taken over by another RB lab in case of failures? What is the name of the laboratory and where is it located?</span>
+       </div>
+       <p></p>
+       <mat-card class="custom-card">
+         <mat-card-content>
+           <!-- Your form and radio buttons here -->
+           <mat-radio-group [(ngModel)]="labelPosition2">
+             <mat-radio-button class="ACL-margin" value="ACL2-yes">Yes</mat-radio-button>
+             <mat-radio-button class="ACL-margin" value="ACL2-no">No</mat-radio-button>
+           </mat-radio-group>
+         </mat-card-content>
+         <mat-card-actions>
+           <!-- Your action buttons here -->
+         </mat-card-actions>
+       </mat-card>
+       <br>
+       <p></p>
+       <div class="portdetails" *ngIf="labelPosition2 === 'ACL2-yes'">
+         <mat-card class="custom-card">
+           
+         <div class="dropdown-container">
+         <div class="dropdown-item">
+            Name and Location of the Lab <span class="required"> * </span> :
+           <input type="text" placeholder="Answers">
+           </div>
+       </div>
+           
+           </mat-card>
+       </div>
+       <p></p>
+     <br> 6. What is the maximum time the lab may be down? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
+         <span class="tooltiptext">What is the maximum acceptable downtime (e. g. 1 hour, 1 day, 1 week) of the IT infrastructure or individual components?</span>
+         </div>
+         <p></p>
+         <mat-card class="custom-card">
+           
+            
+               <input  type="text" placeholder="Maximum acceptable downtime">
+              
+           
+           </mat-card>
+   <br> 7. Do run-time critical tests take place over a longer period of time (e.g. endurance tests)? <span class="required"> * </span>
+   <div class="tooltip"><i class="icon-info-sign"></i>
+       <span class="tooltiptext">Reference to possible compensation through redundancies 
+         (e. g. further local test stands or at other locations).</span>
+     </div>
+     <p></p>
+     <mat-card class="custom-card">
+      <mat-card-content>
+         <!-- Your form and radio buttons here -->
+         <mat-radio-group [(ngModel)]="labelPosition3">
+           <mat-radio-button class="ACL-margin" value="ACL3-yes">Yes</mat-radio-button>
+           <mat-radio-button class="ACL-margin" value="ACL3-no">No</mat-radio-button>
+         </mat-radio-group>
+       
+       <mat-card-actions>
+         <!-- Your action buttons here -->
+       </mat-card-actions>
+       </mat-card-content>
+     </mat-card>
+     <br>
+     <p></p>
+     <div class="portdetails" *ngIf="labelPosition3 === 'ACL3-yes'">
+       <mat-card class="custom-card">
+         
+       <div class="dropdown-container">
+       <div class="dropdown-item">
+         Total Time Required<span class="required"> * </span> :
+         <input type="text" placeholder="Time Required">
+         </div>
+         </div>
+         </mat-card>
+     </div>
+     <p></p>
+     <div class="portdetails" *ngIf="labelPosition3 === 'ACL3-no'">
+       <mat-card class="custom-card">
+       <div class="dropdown-container">
+       <div class="dropdown-item">
+         Answers<span class="required"> * </span> :
+         <input type="text" placeholder="Answers">
+         </div>
+         </div>
+         </mat-card>
+     </div>
+     <p></p>
+   <br>8. Are other RB sites involved in the trials? Are other GBs affected by a failure?
+   <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
+       <span class="tooltiptext">Damage extension in the event of failures.</span>
+       </div>
+       <p></p>
+       <mat-card class="custom-card">
+         <mat-card-content>
+           <!-- Your form and radio buttons here -->
+           <mat-radio-group [(ngModel)]="labelPosition4">
+             <mat-radio-button class="ACL-margin" value="ACL-yes">Yes</mat-radio-button>
+             <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
+           </mat-radio-group>
+         </mat-card-content>
+         <mat-card-actions>
+           <!-- Your action buttons here -->
+         </mat-card-actions>
+       </mat-card>
+       <p></p>
+       <div class="portdetails" *ngIf="labelPosition4 === 'ACL-no'">
+         <mat-card class="custom-card">
+           
+         <div class="dropdown-container">
+         <div class="dropdown-item">
+           Answers<span class="required"> * </span> :
+           <input type="text" placeholder="Answers">
+           </div>
+           </div>
+           </mat-card>
+       </div>
+       <p></p>
+       <div class="portdetails" *ngIf="labelPosition4 === 'ACL-yes'">
+         <mat-card class="custom-card">
+         <div class="dropdown-container">
+         <div class="dropdown-item">
+           Answers<span class="required"> * </span> :
+           <input type="text" placeholder="Answers">
+           </div>
+           </div>
+           </mat-card>
+       </div>
+       <p></p>
+   <br>9. Can the laboratory tests be performed on a test bench without LAN connection or for how long?<span class="required"> * </span>
+   <div class="tooltip"><i class="icon-info-sign"></i> 
+       <span class="tooltiptext">Is the network structure of the laboratories (network zones, network transitions, redundant star structure, ...) implemented appropriately?</span>
+       </div>
+       <p></p>
+       <mat-card class="custom-card">
+         <mat-card-content>
+           <!-- Your form and radio buttons here -->
+           <mat-radio-group [(ngModel)]="labelPosition5">
+             <mat-radio-button class="ACL-margin1" value="ACL4-yes">Yes</mat-radio-button>
+             <mat-radio-button class="ACL-margin1" value="ACL4-no">No</mat-radio-button>
+           </mat-radio-group>
+         </mat-card-content>
+         <mat-card-actions>
+           <!-- Your action buttons here -->
+         </mat-card-actions>
+       </mat-card>
+       <br>
+       <p></p>
+       <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-yes'">
+         <mat-card class="custom-card">
+           
+         <div class="dropdown-container">
+         <div class="dropdown-item">
+           Total Time Required<span class="required"> * </span> :
+           <input type="text" placeholder="Time Required">
+           </div>
+           </div>
+           
+           </mat-card>
+       </div>
+       <p></p>
+       <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-no'">
+         <mat-card class="custom-card">
+          
+         <div class="dropdown-container">
+         <div class="dropdown-item">
+           Answers<span class="required"> * </span> :
+           <input type="text" placeholder="Answers">
+           </div>
+           </div>
+           
+           </mat-card>
+       </div>
+       <p></p>
+   <br> 10.What is the confidentiality of the data processed in the laboratory?<span class="required"> * </span>
+   <div class="tooltip"><i class="icon-info-sign"></i> 
+       <span class="tooltiptext">Please indicate the highest confidentiality class 
+           (C-SC0 to C-SC3) of the data that will be processed</span>
+       </div>
+       <p></p>
+       <mat-card class="custom-card">
+        
+                        <select>
+                         <option>Select an option</option>
+                         <option>C-SC0</option>
+                         <option>C-SC1</option>
+                         <option>C-SC2</option>
+                         <option>C-SC3</option>
+                        </select>
+                     
+         </mat-card>
+         <p></p>
+     <br>  <button class="primary">Save as Draft</button>
+       <button class="success_btn" >Save</button>     
+ </mat-tab>
