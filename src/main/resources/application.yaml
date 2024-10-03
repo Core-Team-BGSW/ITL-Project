@@ -1,0 +1,25 @@
+csv:
+  file:
+    directory: C:\Users\KKQ3KOR\Documents\ITL-Project\src\main\resources\static
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+server:
+  port: 8080
+spring:
+  application:
+    name: backendservice
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  data:
+    mongodb:
+      database: UserData
+      uri: mongodb+srv://ITERLUser:BDITLconsultancy%40123@iterl-mongodb-cluster.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000
