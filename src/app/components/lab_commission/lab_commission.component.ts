@@ -123,6 +123,9 @@ export class LabCommissionComponent {
   showValidationMessage: boolean = false;
 
 
+
+
+
   ngOnInit(): void {
     const today = new Date();
     // Add 6 months to the current date
@@ -134,7 +137,10 @@ export class LabCommissionComponent {
       this.locations = data;
       this.regions = [...new Set(this.locations.map(loc => loc.Region))];
       this.filteredCountries = [...new Set(data.map(loc => loc.Country))];
+
     });
+    this.loadGBOptions();
+
   }
 
     // /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
@@ -184,6 +190,62 @@ export class LabCommissionComponent {
     }
   }
 
+  // onPreview() {
+  //   if (this.selectedFile) {
+  //     // Validate the file type (e.g., .xls or .xlsx)
+  //     const validFileTypes = [
+  //       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  //       'application/vnd.ms-excel'
+  //     ];
+  //     const fileType = this.selectedFile.type;
+
+  //     if (!validFileTypes.includes(fileType)) {
+  //       alert('Invalid file type. Please upload an Excel file (.xls or .xlsx).');
+  //       return;
+  //     }
+
+  //     // Validate the file size (e.g., limit to 5MB)
+  //     const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+  //     if (this.selectedFile.size > maxSizeInBytes) {
+  //       alert('File size exceeds the limit of 5MB. Please upload a smaller file.');
+  //       return;
+  //     }
+
+  //     // Check for mandatory headers
+  //     const mandatoryHeaders = {
+  //       Region: '',
+  //       Country: '',
+  //       'Location-Code': '',
+  //       Entity: '',
+  //       GB: '',
+  //       'Local-ITL': '',
+  //       'Local-ITL Proxy': '',
+  //     };
+
+  //     // Check for missing mandatory headers
+  //     const missingHeaders = Object.keys(mandatoryHeaders).filter(
+  //       (header) => !mandatoryHeaders[header as keyof typeof mandatoryHeaders]
+  //     );
+
+  //     if (missingHeaders.length > 0) {
+  //       console.error(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+  //       alert(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+  //       return;
+  //     }
+
+  //     // If validation passes, proceed to read the file
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = (e: any) => {
+  //       const arrayBuffer = e.target.result;
+  //       this.parseExcel(arrayBuffer);
+  //     };
+  //     fileReader.readAsArrayBuffer(this.selectedFile);
+  //   } else {
+  //     alert('No file selected. Please upload an Excel file.');
+  //   }
+  // }
+
+
   private parseExcel(arrayBuffer: any) {
     const workbook = new ExcelJS.Workbook();
     workbook.xlsx.load(arrayBuffer)
@@ -209,6 +271,7 @@ export class LabCommissionComponent {
         // Handle error
       });
     }
+
 
 // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
   onfileSubmit(){
@@ -239,10 +302,112 @@ export class LabCommissionComponent {
       this.excelData = [];
       this.previewVisible = false;
     })
-    .catch(error => {
-      console.error('Error uploading file:', error);
-    });
+    // .catch(error => {
+    //   this.toastr.error('Check Headers')
+    //   console.error('Error uploading file:', error);
+    // });
+  //   .catch(error => {
+  //     if (error.response && error.response.data) {
+  //         console.error('Error Response Data:', error.response.data);
+  //         if (error.response.data.validationErrors) {
+  //             const errorMessages = error.response.data.validationErrors.map((e: any) =>
+  //                 `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+  //             ).join('\n');
+  //             alert('Validation Errors:\n' + errorMessages);
+  //         } else {
+  //             alert('Error: ' + error.response.data.error);
+  //         }
+  //     } else {
+  //         console.error('Error:', error);
+  //         alert('An unknown error occurred.');
+  //     }
+  // });
+
+  .catch(error => {
+    if (error.response && error.response.data) {
+        console.error('Error Response Data:', error.response.data);
+
+        // Handle missing headers
+        if (error.response.data.error === 'Missing headers') {
+            const missingHeaders = error.response.data.missingHeaders.join(', ');
+            alert('Missing Headers:\n' + missingHeaders);
+        }
+
+        // Handle validation errors for fields
+        if (error.response.data.validationErrors) {
+            const errorMessages = error.response.data.validationErrors.map((e: any) =>
+                `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+            ).join('\n');
+            alert('Validation Errors:\n' + errorMessages);
+        } else {
+            alert('Error: ' + error.response.data.error);
+        }
+    } else {
+        console.error('Error:', error);
+        alert('An unknown error occurred.');
+    }
+});
+
+
   }
+
+
+  // onfileSubmit() {
+  //   if (!this.selectedFile) {
+  //     console.log('No file selected');
+  //     return;
+  //   }
+
+  //   const confirmUpload = window.confirm('Are you sure you want to upload this file?');
+
+  //   if (!confirmUpload) {
+  //     console.log('File upload cancelled by user');
+  //     return;
+  //   }
+
+  //   // Define mandatory headers
+  //   const mandatoryHeaders = {
+  //     Region: '',
+  //     Country: '',
+  //     'Location-Code': '',
+  //     Entity: '',
+  //     GB: '',
+  //     'Local-ITL': '',
+  //     'Local-ITL Proxy': '',
+  //   };
+
+  //   // Check for missing mandatory headers using type assertion
+  //   const missingHeaders = Object.keys(mandatoryHeaders).filter(
+  //     (header) => !mandatoryHeaders[header as keyof typeof mandatoryHeaders]
+  //   );
+
+  //   if (missingHeaders.length > 0) {
+  //     console.error(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+  //     alert(`Missing mandatory headers: ${missingHeaders.join(', ')}`); // Alert shows only missing headers
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append('file', this.selectedFile);
+
+  //   axios.post('http://localhost:3000/upload-excel', formData, {
+  //     headers: {
+  //       'Content-Type': 'multipart/form-data',
+  //       // Add other headers if needed, but they will be empty for this check
+  //     },
+  //   })
+  //   .then(response => {
+  //     console.log('File uploaded successfully:', response.data);
+  //     // Clear the selected file and reset form state here
+  //     this.selectedFile = null;
+  //     this.excelData = [];
+  //     this.previewVisible = false;
+  //   })
+  //   .catch(error => {
+  //     console.error('Error uploading file:', error);
+  //     alert('Error uploading the file. Please try again.');
+  //   });
+  // }
 
 
 
@@ -442,16 +607,16 @@ export class LabCommissionComponent {
 
 // //////////////////////////////////////////////////////////////////////onGBchange//////////////////////////////////////////////////////////////////////////////////////
 
-  GBChange(event: Event) {
-    this.selectedGB = (event.target as HTMLSelectElement).value;
-    // Automatically fill Local-ITL based on selected entity
-    if (this.selectedGB === 'MS/NE-PG') {
-      this.KAM ='grs2kor';
-    } else if(this.selectedGB === "2WP"){
-      this.KAM ='ask2kor';
-    }
+  // GBChange(event: Event) {
+  //   this.selectedGB = (event.target as HTMLSelectElement).value;
+  //   // Automatically fill Local-ITL based on selected entity
+  //   if (this.selectedGB === 'MS/NE-PG') {
+  //     this.KAM ='grs2kor';
+  //   } else if(this.selectedGB === "2WP"){
+  //     this.KAM ='ask2kor';
+  //   }
 
-  }
+  // }
 
   /////////////////////////////////////////////////////////////////////onReset-formfill////////////////////////////////////////////////////////////////////////////
 
@@ -466,7 +631,9 @@ uniqueInstanceId: string = ''
 constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private dateAdapter: DateAdapter<Date>,private toastr: ToastrService, private dataService : DataService) {}
 
 onPreviewform(): void {
-  if (this.localITL && this.localITL.length >= 7 && this.localITLproxy) {
+  if (this.localITL && this.localITL.length == 7 && this.localITLproxy && this.selectedCountry && this.selectedRegion && this.selectedCode && this.selectedEntity && this.selectedGB
+    && this.labno && this.Building && this.DH && this.KAM && this.Floor && this.CC && this.selectedLabType && this.purposeoflab && this.description
+   ) {
     const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
       width: '600px',
        data :  { region: this.selectedRegion, country: this.selectedCountry, location: this.selectedLocation, locationcode: this.selectedCode,
@@ -517,6 +684,8 @@ onPreviewform(): void {
       selfauditdate: this.selfauditdate,
       selectedDate: this.selectedDate,
     };
+
+
     // Perform submission logic
     console.log('Form previewed with:', { data });
   } else {
@@ -554,6 +723,126 @@ otherField: string = '';
   onDateSelected(date: Date) {
   console.log('Selected date:', date);
   }
+
+
+
+
+  gbOptions: string[] = [];
+  kamSuggestions: string[] = []; // All available KAM suggestions
+  departmentSuggestions: string[] = [];
+  dhSuggestions: string[] = []; // All available DH suggestions
+  filteredDepartmentSuggestions: string[] = [];
+  filteredDHSuggestions: string[] = []; // Filtered DH suggestions
+  filteredKAMSuggestions: string[] = []; // Filtered suggestions based on user input
+
+
+  GBChange(event: any) {
+    this.selectedGB = event.target.value;
+    if (this.selectedGB) {
+      this.dataService.getKAMSuggestions(this.selectedGB).subscribe(suggestions => {
+        this.kamSuggestions = suggestions;
+        this.filteredKAMSuggestions = [];
+        this.KAM = '';
+      });
+      this.dataService.getDepartmentSuggestions(this.selectedGB).subscribe(suggestions => {
+        this.departmentSuggestions = suggestions;
+        this.filteredDepartmentSuggestions = [];
+        this.Dept = '';
+      });
+    } else {
+      this.resetFields();
+    }
+  }
+  resetFields() {
+    this.kamSuggestions = [];
+    this.filteredKAMSuggestions = [];
+    this.KAM = '';
+    this.departmentSuggestions = [];
+    this.filteredDepartmentSuggestions = [];
+    this.Dept = '';
+    this.dhSuggestions = [];
+    this.filteredDHSuggestions = [];
+    this.DH = ''; // Clear DH input
+  }
+
+  loadGBOptions() {
+    this.dataService.getGBOptions().subscribe(options => {
+      this.gbOptions = options;
+    });
+  }
+
+  showKAMSuggestions() {
+    if (this.selectedGB) {
+      this.filteredKAMSuggestions = this.kamSuggestions; // Show all suggestions
+    }
+  }
+  // Method to fetch and display Department suggestions when Department input is focused
+  showDepartmentSuggestions() {
+    if (this.selectedGB) {
+      this.filteredDepartmentSuggestions = this.departmentSuggestions;
+    }
+  }
+
+  // Method to fetch and display DH suggestions when DH input is focused
+  showDHSuggestions() {
+    if (this.Dept) {
+      this.filteredDHSuggestions = this.dhSuggestions; // Show all DH suggestions if a department is selected
+    }
+  }
+
+
+  filterKAMSuggestions() {
+    const searchTerm = this.KAM.toLowerCase();
+    this.filteredKAMSuggestions = this.kamSuggestions.filter(kam =>
+      kam.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  filterDepartmentSuggestions() {
+    if (!this.selectedGB) return;
+
+    const searchTerm = this.Dept.toLowerCase();
+    this.filteredDepartmentSuggestions = this.departmentSuggestions.filter(dep =>
+      dep.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  onDepartmentChange() {
+    if (this.Dept) {
+      this.dataService.getDHSuggestions(this.Dept).subscribe(suggestions => {
+        this.dhSuggestions = suggestions;
+        this.filteredDHSuggestions = []; // Clear previous filtered suggestions
+      });
+    } else {
+      this.filteredDHSuggestions = []; // Clear if no department is selected
+    }
+  }
+
+  filterDHSuggestions() {
+    if (!this.Dept) return;
+
+    const searchTerm = this.DH.toLowerCase();
+    this.filteredDHSuggestions = this.dhSuggestions.filter(dh =>
+      dh.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  selectKAM(kam: string) {
+    this.KAM = kam; // Set the KAM input value
+    this.filteredKAMSuggestions = []; // Clear suggestions after selection
+  }
+
+  selectDepartment(dep: string) {
+    this.Dept = dep; // Set the department input value
+    this.filteredDepartmentSuggestions = []; // Clear suggestions after selection
+    this.onDepartmentChange(); // Fetch DH suggestions
+  }
+
+  selectDH(dh: string) {
+    this.DH = dh; // Set the DH input value
+    this.filteredDHSuggestions = []; // Clear suggestions after selection
+  }
+
 
 }
 

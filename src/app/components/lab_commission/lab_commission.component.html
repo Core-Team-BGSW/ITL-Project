@@ -129,7 +129,8 @@
             <select
               id="locationCode"
               [(ngModel)]="selectedCode"
-              [disabled]="!selectedCountry">
+              [disabled]="!selectedCountry"
+              title="Please Select Country">
               <option value>Select Location Code</option>
               <option *ngFor="let code of locationCodes" [value]="code">
                 {{ code }}
@@ -160,7 +161,7 @@
               <option value="RBJP">RBJP</option>
             </select>
           </div>
-          <div class="dropdown-item">
+          <!-- <div class="dropdown-item">
             <label for="GBselect">GB <span class="required"> *</span></label>
             <select id="GBSelect" name="GB" (change)="GBChange($event)">
               <option value>Select GB</option>
@@ -181,6 +182,14 @@
               <option value="MS/ETH-PG">MS/ETH-PG</option>
               <option value="MS/NE-ETAS">MS/NE-ETAS</option>
               <option value="MS/ETH-SX">MS/ETH-SX</option>
+            </select>
+          </div> -->
+          <div class="dropdown-item">
+            <label for="GBselect">GB <span class="required"> *</span></label>
+            <select id="GBSelect" name="GB" (change)="GBChange($event)">
+              <option value>Select GB</option>
+              <option *ngFor="let gb of gbOptions" [value]="gb">{{ gb
+                }}</option>
             </select>
           </div>
         </div>
@@ -244,66 +253,6 @@
         </div>
       </div>
 
-      <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
-      <div class="DH-KAM">
-        <p>DH & KAM</p>
-        <div class="dropdown-container">
-          <div class="dropdown-item">
-            <label for="DH">
-              Department Head (DH) <span class="required"> *</span>
-            </label>
-            <input
-              type="text"
-              id="DH"
-              name="DH"
-              [(ngModel)]="DH"
-              placeholder="NTID"
-              required
-              minlength="7"
-              #dhProxyInput="ngModel" />
-            <div
-              *ngIf="
-                dhProxyInput.invalid &&
-                (dhProxyInput.dirty || dhProxyInput.touched)
-              ">
-              <div *ngIf="dhProxyInput.errors?.['required']" style="color: red">
-                Department Head (DH) is required.
-              </div>
-              <div *ngIf="dhProxyInput.errors?.['minlength']">
-                Department Head (DH) must be at least 7 characters long.
-              </div>
-            </div>
-          </div>
-
-          <div class="dropdown-item">
-            <label for="KAM">
-              Key Account Manager (KAM) <span class="required"> *</span>
-            </label>
-            <input
-              type="text"
-              id="KAM"
-              name="KAM"
-              [(ngModel)]="KAM"
-              placeholder="NTID"
-              required
-              minlength="7"
-              #kamProxyInput="ngModel" />
-            <div
-              *ngIf="
-                  kamProxyInput.invalid &&
-                (kamProxyInput.dirty || kamProxyInput.touched)
-              ">
-              <div *ngIf="kamProxyInput.errors?.['required']"
-                style="color: red">
-                Key Account Manager (KAM) is required.
-              </div>
-              <div *ngIf="kamProxyInput.errors?.['minlength']">
-                Key Account Manager (KAM) must be at least 7 characters long.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-------------------------------------------Location Details--------------------------------------------------------------------------------->
       <div class="locationdetails">
         <p>Location Details</p>
@@ -318,7 +267,10 @@
               placeholder="Department"
               [(ngModel)]="Dept"
               title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS"
-              #locationdept="ngModel" />
+              #locationdept="ngModel"
+              (focus)="showDepartmentSuggestions()"
+              (input)="filterDepartmentSuggestions()"
+              (change)="onDepartmentChange()" />
             <div
               *ngIf="
                 locationdept.invalid && showValidationMessage &&
@@ -328,6 +280,11 @@
                 Department is required.
               </div>
             </div>
+            <ul *ngIf="filteredDepartmentSuggestions.length > 0"
+              class="suggestions-list">
+              <li *ngFor="let dep of filteredDepartmentSuggestions"
+                (click)="selectDepartment(dep)">{{ dep }}</li>
+            </ul>
           </div>
           <div class="dropdown-item">
             <label for="building">Building <span class="required">
@@ -395,110 +352,187 @@
             </div>
           </div>
         </div>
-        <div class="labcoordinatordetails">
-          <p>Lab Coordinator</p>
-          <div class="dropdown-container">
-            <div class="dropdown-item">
-              <label for="primary">Primary Lab Coordinator <span
-                  class="required"> *</span></label>
-              <input
-                type="text"
-                id="fieldfill"
-                placeholder="NTID"
-                pattern="[A-Za-z0-9]*"
-                #primaryLabCoord="ngModel"
-                [disabled]="!isBGSWOrBGSV()"
-                title="Select BGSW or BGSV entity to enable this field"
-                [(ngModel)]="primarylabco" />
-              <div
-                *ngIf="
-                  primaryLabCoord.invalid &&
-                  (primaryLabCoord.dirty || primaryLabCoord.touched)
-                ">
-                <div *ngIf="primaryLabCoord.errors?.['required']"
-                  style="color: red">
-                  Primary Lab Coordinator is required.
-                </div>
-              </div>
-            </div>
-            <div class="dropdown-item">
-              <label for="secondary">Secondary Lab Coordinator </label>
-              <input
-                type="text"
-                id="fieldfill"
-                placeholder="NTID"
-                [disabled]="!isBGSWOrBGSV()"
-                #secondLabCoord="ngModel"
-                title="Select BGSW or BGSV entity to enable this field"
-                [(ngModel)]="secondarylabco" />
-              <div
-                *ngIf="
-                  secondLabCoord.invalid &&
-                  (secondLabCoord.dirty || secondLabCoord.touched)
-                "></div>
-            </div>
-            <div class="dropdown-item">
-              <label for="CC">Cost Center<span class="required"> *</span>
-              </label>
-              <input
-                type="text"
-                id="fieldfill"
-                placeholder="Cost Center"
-                [(ngModel)]="CC" />
-            </div>
-          </div>
-        </div>
+      </div>
 
-        <div class="labworkdetails">
-          <p>Lab work details</p>
-          <div class="dropdown-container">
-            <div class="dropdown-item">
-              <label for="kindoflab">Kind of Lab <span class="required">
-                  *</span></label>
-              <select
-                id="kindoflabselect"
-                name="kindoflab"
-                [(ngModel)]="selectedLabType"
-                (change)="onLabTypeChange()">
-                <option value>Select</option>
-                <option value="EMV">EMV</option>
-                <option value="Reliability">Reliability</option>
-                <option value="Devlopment">Devlopment</option>
-                <option value="Validation">Validation</option>
-                <option value="Other">Other</option>
-              </select>
-              <div *ngIf="showOtherField">
-                <label for="otherLab">Other Lab Type:</label>
-                <input
-                  type="text"
-                  id="otherLab"
-                  name="otherLab"
-                  [(ngModel)]="otherLabType"
-                  placeholder="other" />
+      <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+      <div class="DH-KAM">
+        <p>DH & KAM</p>
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="DH">
+              Department Head (DH) <span class="required"> *</span>
+            </label>
+            <input
+              type="text"
+              id="DH"
+              name="DH"
+              [(ngModel)]="DH"
+              placeholder="NTID"
+              required
+              minlength="7"
+              (focus)="showDHSuggestions()"
+              (input)="filterDHSuggestions()"
+              #dhProxyInput="ngModel" />
+            <div
+              *ngIf="
+                dhProxyInput.invalid &&
+                (dhProxyInput.dirty || dhProxyInput.touched)
+              ">
+              <div *ngIf="dhProxyInput.errors?.['required']" style="color: red">
+                Department Head (DH) is required.
+              </div>
+              <div *ngIf="dhProxyInput.errors?.['minlength']">
+                Department Head (DH) must be at least 7 characters long.
               </div>
             </div>
-            <div class="dropdown-item">
-              <label for="purpose">Purpose of Lab in Brief<span
-                  class="required"> *</span></label>
-              <input
-                type="text"
-                id="fieldfill"
-                placeholder="Purpose"
-                [(ngModel)]="purposeoflab" />
+            <ul *ngIf="filteredDHSuggestions.length > 0"
+              class="suggestions-list">
+              <li *ngFor="let dh of filteredDHSuggestions"
+                (click)="selectDH(dh)">{{ dh }}</li>
+            </ul>
+          </div>
+
+          <div class="dropdown-item">
+            <label for="KAM">
+              Key Account Manager (KAM) <span class="required"> *</span>
+            </label>
+            <input
+              type="text"
+              id="KAM"
+              name="KAM"
+              [(ngModel)]="KAM"
+              placeholder="NTID"
+              required
+              minlength="7"
+              #kamProxyInput="ngModel"
+              (input)="filterKAMSuggestions()"
+              (focus)="showKAMSuggestions()" />
+            <div
+              *ngIf="
+                  kamProxyInput.invalid &&
+                (kamProxyInput.dirty || kamProxyInput.touched)
+              ">
+              <div *ngIf="kamProxyInput.errors?.['required']"
+                style="color: red">
+                Key Account Manager (KAM) is required.
+              </div>
+              <div *ngIf="kamProxyInput.errors?.['minlength']">
+                Key Account Manager (KAM) must be at least 7 characters long.
+              </div>
             </div>
-            <div class="dropdown-item">
-              <label for="description">Description<span class="required">
-                  *</span>
-              </label>
-              <input
-                type="text"
-                id="fieldfill"
-                placeholder="Description"
-                [(ngModel)]="description" />
-            </div>
+            <ul *ngIf="filteredKAMSuggestions.length > 0"
+              class="suggestions-list">
+              <li *ngFor="let kam of filteredKAMSuggestions"
+                (click)="selectKAM(kam)">{{ kam }}</li>
+            </ul>
           </div>
         </div>
       </div>
+
+      <div class="labcoordinatordetails">
+        <p>Lab Coordinator</p>
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="primary">Primary Lab Coordinator <span
+                class="required"> *</span></label>
+            <input
+              type="text"
+              id="fieldfill"
+              placeholder="NTID"
+              pattern="[A-Za-z0-9]*"
+              #primaryLabCoord="ngModel"
+              [disabled]="!isBGSWOrBGSV()"
+              title="Select BGSW or BGSV entity to enable this field"
+              [(ngModel)]="primarylabco" />
+            <div
+              *ngIf="
+                  primaryLabCoord.invalid &&
+                  (primaryLabCoord.dirty || primaryLabCoord.touched)
+                ">
+              <div *ngIf="primaryLabCoord.errors?.['required']"
+                style="color: red">
+                Primary Lab Coordinator is required.
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-item">
+            <label for="secondary">Secondary Lab Coordinator </label>
+            <input
+              type="text"
+              id="fieldfill"
+              placeholder="NTID"
+              [disabled]="!isBGSWOrBGSV()"
+              #secondLabCoord="ngModel"
+              title="Select BGSW or BGSV entity to enable this field"
+              [(ngModel)]="secondarylabco" />
+            <div
+              *ngIf="
+                  secondLabCoord.invalid &&
+                  (secondLabCoord.dirty || secondLabCoord.touched)
+                "></div>
+          </div>
+          <div class="dropdown-item">
+            <label for="CC">Cost Center<span class="required"> *</span>
+            </label>
+            <input
+              type="text"
+              id="fieldfill"
+              placeholder="Cost Center"
+              [(ngModel)]="CC" />
+          </div>
+        </div>
+      </div>
+
+      <div class="labworkdetails">
+        <p>Lab work details</p>
+        <div class="dropdown-container">
+          <div class="dropdown-item">
+            <label for="kindoflab">Kind of Lab <span class="required">
+                *</span></label>
+            <select
+              id="kindoflabselect"
+              name="kindoflab"
+              [(ngModel)]="selectedLabType"
+              (change)="onLabTypeChange()">
+              <option value>Select</option>
+              <option value="EMV">EMV</option>
+              <option value="Reliability">Reliability</option>
+              <option value="Devlopment">Devlopment</option>
+              <option value="Validation">Validation</option>
+              <option value="Other">Other</option>
+            </select>
+            <div *ngIf="showOtherField">
+              <label for="otherLab">Other Lab Type:</label>
+              <input
+                type="text"
+                id="otherLab"
+                name="otherLab"
+                [(ngModel)]="otherLabType"
+                placeholder="other" />
+            </div>
+          </div>
+          <div class="dropdown-item">
+            <label for="purpose">Purpose of Lab in Brief<span
+                class="required"> *</span></label>
+            <input
+              type="text"
+              id="fieldfill"
+              placeholder="Purpose"
+              [(ngModel)]="purposeoflab" />
+          </div>
+          <div class="dropdown-item">
+            <label for="description">Description<span class="required">
+                *</span>
+            </label>
+            <input
+              type="text"
+              id="fieldfill"
+              placeholder="Description"
+              [(ngModel)]="description" />
+          </div>
+        </div>
+      </div>
+
       <div class="cmdb-sharedlabflex">
         <mat-card>
           <mat-card-content>
@@ -585,8 +619,7 @@
                 </mat-form-field>
               </div>
               <p class="cmdb-explain" style="color: red">
-                Due date for self check audit is 180 days from the moment
-                lab is
+                Due date for self check audit is 180 days from the moment lab is
                 commissioned.
               </p>
             </section>

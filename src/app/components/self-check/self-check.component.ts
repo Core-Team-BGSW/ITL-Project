@@ -74,7 +74,7 @@ export class SelfCheckComponent {
   selectedOption28: string = '';
   selectedOption29: string = '';
   selectedOption30: string = '';
- 
+
   showOptions = false;
 
   toggleOptions() {
@@ -99,9 +99,9 @@ onFulfilledChange(event: any) {
   else if (selectedValue === 'not-fulfilled') {
     this.notapplicableCount++;
   }
-    console.log('Fulfilled Count:', this.fulfilledCount); 
-    console.log('Fulfilled Count:', this.partiallyFulfilledCount); 
-    console.log('Fulfilled Count:', this.notFulfilledCount); 
+    console.log('Fulfilled Count:', this.fulfilledCount);
+    console.log('Fulfilled Count:', this.partiallyFulfilledCount);
+    console.log('Fulfilled Count:', this.notFulfilledCount);
     console.log('Fulfilled Count:', this.notapplicableCount);
 }
 fulfilledCount1: number = 0;
@@ -124,7 +124,7 @@ notapplicableCount1: number = 0;
     else if (selectedValue === 'not-fulfilled') {
       this.notapplicableCount1++;
     }
-    
+
     console.log('Fulfilled Count:', this.fulfilledCount1);
     console.log('Fulfilled Count:', this.partiallyFulfilledCount1);
     console.log('Fulfilled Count:', this.notFulfilledCount1);
@@ -158,17 +158,17 @@ dataList!: any[];
   errorMessage: string | undefined;
   searchQuery: string = '';
   filteredLabList: any[] = [];
-  
- 
+
+
   constructor(private dataService: DataService,private router: Router) {}
- 
+
   ngOnInit(): void {
     this.loadLabList();
-    
+
   }
- 
+
   loadLabList(): void {
-    this.dataService.getAllData() 
+    this.dataService.getAllData()
       .subscribe({
         next: (data) => {
           this.labList = data;
@@ -177,8 +177,8 @@ dataList!: any[];
         error: (err) => this.errorMessage = err
       });
   }
- 
- 
+
+
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredLabList = this.labList.filter(lab =>
@@ -198,9 +198,9 @@ dataList!: any[];
     }
 
   }
-  
-  
-  
+
+
+
   toggledetails1(audit:string):void{
     if (this.expandedaudit==audit){
       this.expandedaudit=null;
@@ -209,7 +209,7 @@ dataList!: any[];
       this.expandedaudit=audit;
     }
   }
- 
+
   // Check if a lab is expanded
   isExpanded(labId: string): boolean {
     return this.expandedLabId === labId;
@@ -230,7 +230,7 @@ dataList!: any[];
   isFormExpanded = false;
   toggleForm(): void {
     this.isFormExpanded = !this.isFormExpanded;
-  
+
 }
 isDropdownVisible = false;
 
@@ -244,8 +244,8 @@ openForm(labEntity: string) {
       if(confirmed){
           window.open( 'https://apxbgswapexp.webapp.inside.bosch.cloud/apxbgswapexp/r/cibteapex_prod/itl-prd/self-claim-report?session=5134802335988');
       }
-   
-  } 
+
+  }
   else if(labEntity=='rbin'){
     const confirmed = confirm('This page will redirect to ITL Self-audit tool,before self-audit please contact ITL Consulatncy team (bd_toa-ets1_itl_consultancy_team@bcn.bosch.com)');
       if(confirmed){

@@ -18,6 +18,7 @@ export class DataService {
 
   private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
   private locationUrl = 'http://localhost:3000/api/locations';
+  private apiURL = 'http://localhost:3000/api';
 
 
   constructor(private http: HttpClient) {}
@@ -55,6 +56,24 @@ export class DataService {
 
   getLocations(): Observable<Location[]> {
     return this.http.get<Location[]>(this.locationUrl);
+  }
+
+  getGBOptions(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiURL}/gb-options`); // Adjust endpoint as needed
+  }
+
+  getKAMSuggestions(gb: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiURL}/kam-suggestions?gb=${gb}`);
+  }
+
+  // Method to get Department suggestions based on selected GB
+  getDepartmentSuggestions(gb: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiURL}/department-suggestions?gb=${gb}`);
+  }
+
+  // Method to get DH suggestions based on selected Department
+  getDHSuggestions(department: string): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiURL}/dh-suggestions?department=${department}`);
   }
 
 
