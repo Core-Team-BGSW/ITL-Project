@@ -9,6 +9,7 @@ const User = require('./models/User');
 const app = express();
 const port = process.env.PORT || 3000;
 const events = require('events');
+const { log } = require('console');
 events.EventEmitter.defaultMaxListeners = 20;
 
 
@@ -115,139 +116,79 @@ module.exports = Item;
 
 // Configure Multer for file upload
 const upload = multer({ storage: multer.memoryStorage() });
+const REQUIRED_HEADERS = ['Region', 'Country', 'Location-Code','Entity','GB','Local-ITL','Local-ITL Proxy','Department Head (DH)','Department','Building','Floor','Lab No','Cost Center','Kind of Lab','Purpose of Lab in Brief',
+  'Description', 'ACL Required', 'Is lab going to procure new equipment for Engineering/Red Zone?','Shared Lab',
+];
 
 
-// app.post('/upload-excel', upload.single('file'), async (req, res) => {
-//   if (!req.file) {
-//     return res.status(400).json({ error: 'No file uploaded' });
-//   }
-
-//   try {
-//     const workbook = new ExcelJS.Workbook();
-//     await workbook.xlsx.load(req.file.buffer);
-//     const worksheet = workbook.getWorksheet(1);
-
-//     if (!worksheet) {
-//       return res.status(400).json({ error: 'Worksheet not found' });
-//     }
-
-//     // Get the first row to use as headers
-//     const headerRow = worksheet.getRow(1);
-
-//     // Ensure headerRow.values is an array and has elements
-//     const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
-
-//     if (headers.length === 0) {
-//       return res.status(400).json({ error: 'No headers found' });
-//     }
-
-//     const items = [];
-
-//     worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
-//       const rowData = {};
-//       headers.forEach((header, index) => {
-//         if (header) {
-//           rowData[header] = row.values[index + 1] || null;  // `index + 1` because `row.values` is 1-based index
-//         }
-//       });
-
-//       // Skip if all values are header names
-//       if (Object.values(rowData).every(value => headers.includes(value))) {
-//         return;  // Skip this row
-//       }
-
-//       items.push(rowData);
-//       rowData.approvalStatus = 'Pending'; // Set initial approval status
-//     });
-
-//     console.log('Data to insert:', items); // Log data to check before insertion
-
-//     // Insert all items into the database
-//     await Item.insertMany(items);
-//     res.status(201).json({ message: 'Data successfully uploaded and saved to MongoDB' });
-//   } catch (error) {
-//     console.error('Error processing file:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
-
+const REQUIRED_FIELDS = [
+  'Region', 'Country','Location-Code', 'Entity','GB','Local-ITL','Local-ITL Proxy','Department Head (DH)','Department','Building','Floor','Lab No','Cost Center','Kind of Lab','Purpose of Lab in Brief',
+  'Description', 'ACL Required', 'Is lab going to procure new equipment for Engineering/Red Zone?','Shared Lab'// Add fields that must not be empty
+];
 
 app.post('/upload-excel', upload.single('file'), async (req, res) => {
-  // Check if a file is uploaded
   if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({ error: 'No file uploaded' });
   }
 
   try {
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(req.file.buffer);
-    const worksheet = workbook.getWorksheet(1); // Get the first worksheet
+      const workbook = new ExcelJS.Workbook();
+      await workbook.xlsx.load(req.file.buffer);
+      const worksheet = workbook.getWorksheet(1); // Get the first worksheet
 
-    // Check if the worksheet exists
-    if (!worksheet) {
-      return res.status(400).json({ error: 'Worksheet not found' });
-    }
+      if (!worksheet) {
+          return res.status(400).json({ error: 'Worksheet not found' });
+      }
 
-    // Get headers from the first row
-    const headerRow = worksheet.getRow(1);
-    const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
+      // Get the first row to use as headers
+      const headerRow = worksheet.getRow(1);
+      const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
 
-    // Validate headers
-    if (headers.length === 0) {
-      return res.status(400).json({ error: 'No headers found' });
-    }
+      if (headers.length === 0) {
+          return res.status(400).json({ error: 'No headers found' });
+      }
 
-    // Required headers to check
-    const requiredHeaders = ['local-ITL', 'Region', 'Country', 'Location-Code', 'GB'];
+      // Check for missing required headers
+      const missingHeaders = REQUIRED_HEADERS.filter(header => !headers.includes(header));
+      if (missingHeaders.length > 0) {
+          return res.status(400).json({ error: 'Missing headers', missingHeaders });
+      }
 
-    // Check for the required headers
-    const missingHeaders = requiredHeaders.filter(header => !headers.includes(header));
+      const items = [];
+      const validationErrors = [];
 
-    if (missingHeaders.length > 0) {
-      return res.status(400).json({ error: `Required headers missing: ${missingHeaders.join(', ')}` });
-    }
+      worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
+          const rowData = {};
+          headers.forEach((header, index) => {
+              if (header) {
+                  rowData[header] = row.values[index + 1] || null; // `index + 1` because `row.values` is 1-based index
+              }
+          });
 
-    const items = [];
-
-    // Read each row and map to item objects
-    worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
-      const rowData = {};
-      headers.forEach((header, index) => {
-        if (header) {
-          rowData[header] = row.values[index + 1] || null; // Use `index + 1` for 1-based index
-        }
+          // Check for required fields
+          const missingFields = REQUIRED_FIELDS.filter(field => !rowData[field]);
+          if (missingFields.length > 0) {
+              validationErrors.push({ row: row.number, missingFields });
+          } else {
+              items.push({ ...rowData, approvalStatus: 'Pending' }); // Set initial approval status
+          }
       });
 
-      // Skip rows where all values are equal to their headers
-      if (Object.values(rowData).every(value => headers.includes(value))) {
-        return; // Skip this row
+      // If there are validation errors, respond with them
+      if (validationErrors.length > 0) {
+          return res.status(400).json({ error: 'Validation errors', validationErrors });
       }
 
-      // Add additional validation if needed
-      if (!rowData['RequiredField']) {
-        console.warn(`Skipping row ${row.number} due to missing RequiredField`);
-        return; // Skip this row
-      }
+      console.log('Data to insert:', items); // Log data to check before insertion
 
-      rowData.approvalStatus = 'Pending'; // Set initial approval status
-      items.push(rowData);
-    });
-
-    if (items.length === 0) {
-      return res.status(400).json({ error: 'No valid data rows found' });
-    }
-
-    console.log('Data to insert:', items); // Log data to check before insertion
-
-    // Insert all items into the database
-    await Item.insertMany(items);
-    res.status(201).json({ message: 'Data successfully uploaded and saved to MongoDB' });
+      // Insert all items into the database
+      await Item.insertMany(items);
+      res.status(201).json({ message: 'Data successfully uploaded and saved to MongoDB' });
   } catch (error) {
-    console.error('Error processing file:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error processing file:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 
 
@@ -298,6 +239,7 @@ const locationSchema = new mongoose.Schema({
   Region: String,
   Country: String,
   LocationCode: String,
+
 });
 const Location = mongoose.model('Location', locationSchema);
 
@@ -312,3 +254,14 @@ app.get('/api/locations', async (req, res) => {
 });
 
 
+app.get('/DepartmentHeads/:department', async (req, res) => {
+  const department = req.params.department;
+  try {
+    const items = await Item.find({ Department: department });
+    // Extract unique DHs from the items
+    const departmentHeads = [...new Set(items.map(item => item['Department Head (DH)']))];
+    res.json(departmentHeads);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching department heads', error });
+  }
+});

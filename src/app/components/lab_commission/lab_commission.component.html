@@ -129,7 +129,8 @@
             <select
               id="locationCode"
               [(ngModel)]="selectedCode"
-              [disabled]="!selectedCountry">
+              [disabled]="!selectedCountry"
+              title="Please Select Country">
               <option value>Select Location Code</option>
               <option *ngFor="let code of locationCodes" [value]="code">
                 {{ code }}
@@ -585,7 +586,8 @@
                 </mat-form-field>
               </div>
               <p class="cmdb-explain" style="color: red">
-                Due date for self check audit is 180 days from the moment lab is commissioned.
+                Due date for self check audit is 180 days from the moment lab is
+                commissioned.
               </p>
             </section>
           </mat-card-content>

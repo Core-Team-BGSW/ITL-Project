@@ -157,43 +157,10 @@ export class LabCommissionComponent {
   //     fileReader.readAsArrayBuffer(this.selectedFile);
   //   }
   // }
-  // onPreview() {
-  //   if (this.selectedFile) {
-  //     // Validate the file type (e.g., .xls or .xlsx)
-  //     const validFileTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
-  //     const fileType = this.selectedFile.type;
-
-  //     if (!validFileTypes.includes(fileType)) {
-  //       alert('Invalid file type. Please upload an Excel file (.xls or .xlsx).');
-  //       return;
-  //     }
-
-  //     // Validate the file size (e.g., limit to 5MB)
-  //     const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
-  //     if (this.selectedFile.size > maxSizeInBytes) {
-  //       alert('File size exceeds the limit of 5MB. Please upload a smaller file.');
-  //       return;
-  //     }
-
-  //     // If validation passes, proceed to read the file
-  //     const fileReader = new FileReader();
-  //     fileReader.onload = (e: any) => {
-  //       const arrayBuffer = e.target.result;
-  //       this.parseExcel(arrayBuffer);
-  //     };
-  //     fileReader.readAsArrayBuffer(this.selectedFile);
-  //   } else {
-  //     alert('No file selected. Please upload an Excel file.');
-  //   }
-  // }
-
   onPreview() {
     if (this.selectedFile) {
       // Validate the file type (e.g., .xls or .xlsx)
-      const validFileTypes = [
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'application/vnd.ms-excel'
-      ];
+      const validFileTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'];
       const fileType = this.selectedFile.type;
 
       if (!validFileTypes.includes(fileType)) {
@@ -208,28 +175,6 @@ export class LabCommissionComponent {
         return;
       }
 
-      // Check for mandatory headers
-      const mandatoryHeaders = {
-        Region: '',
-        Country: '',
-        'Location-Code': '',
-        Entity: '',
-        GB: '',
-        'Local-ITL': '',
-        'Local-ITL Proxy': '',
-      };
-
-      // Check for missing mandatory headers
-      const missingHeaders = Object.keys(mandatoryHeaders).filter(
-        (header) => !mandatoryHeaders[header as keyof typeof mandatoryHeaders]
-      );
-
-      if (missingHeaders.length > 0) {
-        console.error(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
-        alert(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
-        return;
-      }
-
       // If validation passes, proceed to read the file
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
@@ -241,6 +186,61 @@ export class LabCommissionComponent {
       alert('No file selected. Please upload an Excel file.');
     }
   }
+
+  // onPreview() {
+  //   if (this.selectedFile) {
+  //     // Validate the file type (e.g., .xls or .xlsx)
+  //     const validFileTypes = [
+  //       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  //       'application/vnd.ms-excel'
+  //     ];
+  //     const fileType = this.selectedFile.type;
+
+  //     if (!validFileTypes.includes(fileType)) {
+  //       alert('Invalid file type. Please upload an Excel file (.xls or .xlsx).');
+  //       return;
+  //     }
+
+  //     // Validate the file size (e.g., limit to 5MB)
+  //     const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+  //     if (this.selectedFile.size > maxSizeInBytes) {
+  //       alert('File size exceeds the limit of 5MB. Please upload a smaller file.');
+  //       return;
+  //     }
+
+  //     // Check for mandatory headers
+  //     const mandatoryHeaders = {
+  //       Region: '',
+  //       Country: '',
+  //       'Location-Code': '',
+  //       Entity: '',
+  //       GB: '',
+  //       'Local-ITL': '',
+  //       'Local-ITL Proxy': '',
+  //     };
+
+  //     // Check for missing mandatory headers
+  //     const missingHeaders = Object.keys(mandatoryHeaders).filter(
+  //       (header) => !mandatoryHeaders[header as keyof typeof mandatoryHeaders]
+  //     );
+
+  //     if (missingHeaders.length > 0) {
+  //       console.error(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+  //       alert(`Missing mandatory headers: ${missingHeaders.join(', ')}`);
+  //       return;
+  //     }
+
+  //     // If validation passes, proceed to read the file
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = (e: any) => {
+  //       const arrayBuffer = e.target.result;
+  //       this.parseExcel(arrayBuffer);
+  //     };
+  //     fileReader.readAsArrayBuffer(this.selectedFile);
+  //   } else {
+  //     alert('No file selected. Please upload an Excel file.');
+  //   }
+  // }
 
 
   private parseExcel(arrayBuffer: any) {
@@ -299,9 +299,53 @@ export class LabCommissionComponent {
       this.excelData = [];
       this.previewVisible = false;
     })
-    .catch(error => {
-      console.error('Error uploading file:', error);
-    });
+    // .catch(error => {
+    //   this.toastr.error('Check Headers')
+    //   console.error('Error uploading file:', error);
+    // });
+  //   .catch(error => {
+  //     if (error.response && error.response.data) {
+  //         console.error('Error Response Data:', error.response.data);
+  //         if (error.response.data.validationErrors) {
+  //             const errorMessages = error.response.data.validationErrors.map((e: any) =>
+  //                 `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+  //             ).join('\n');
+  //             alert('Validation Errors:\n' + errorMessages);
+  //         } else {
+  //             alert('Error: ' + error.response.data.error);
+  //         }
+  //     } else {
+  //         console.error('Error:', error);
+  //         alert('An unknown error occurred.');
+  //     }
+  // });
+
+  .catch(error => {
+    if (error.response && error.response.data) {
+        console.error('Error Response Data:', error.response.data);
+
+        // Handle missing headers
+        if (error.response.data.error === 'Missing headers') {
+            const missingHeaders = error.response.data.missingHeaders.join(', ');
+            alert('Missing Headers:\n' + missingHeaders);
+        }
+
+        // Handle validation errors for fields
+        if (error.response.data.validationErrors) {
+            const errorMessages = error.response.data.validationErrors.map((e: any) =>
+                `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+            ).join('\n');
+            alert('Validation Errors:\n' + errorMessages);
+        } else {
+            alert('Error: ' + error.response.data.error);
+        }
+    } else {
+        console.error('Error:', error);
+        alert('An unknown error occurred.');
+    }
+});
+
+
   }
 
 
@@ -584,7 +628,9 @@ uniqueInstanceId: string = ''
 constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder, private dateAdapter: DateAdapter<Date>,private toastr: ToastrService, private dataService : DataService) {}
 
 onPreviewform(): void {
-  if (this.localITL && this.localITL.length >= 7 && this.localITLproxy) {
+  if (this.localITL && this.localITL.length == 7 && this.localITLproxy && this.selectedCountry && this.selectedRegion && this.selectedCode && this.selectedEntity && this.selectedGB
+    && this.labno && this.Building && this.DH && this.KAM && this.Floor && this.CC && this.selectedLabType && this.purposeoflab && this.description
+   ) {
     const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
       width: '600px',
        data :  { region: this.selectedRegion, country: this.selectedCountry, location: this.selectedLocation, locationcode: this.selectedCode,
@@ -635,6 +681,8 @@ onPreviewform(): void {
       selfauditdate: this.selfauditdate,
       selectedDate: this.selectedDate,
     };
+
+
     // Perform submission logic
     console.log('Form previewed with:', { data });
   } else {
