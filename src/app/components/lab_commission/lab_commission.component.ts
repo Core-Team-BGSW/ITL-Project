@@ -137,7 +137,10 @@ export class LabCommissionComponent {
       this.locations = data;
       this.regions = [...new Set(this.locations.map(loc => loc.Region))];
       this.filteredCountries = [...new Set(data.map(loc => loc.Country))];
+
     });
+    this.loadGBOptions();
+
   }
 
     // /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
@@ -604,16 +607,16 @@ export class LabCommissionComponent {
 
 // //////////////////////////////////////////////////////////////////////onGBchange//////////////////////////////////////////////////////////////////////////////////////
 
-  GBChange(event: Event) {
-    this.selectedGB = (event.target as HTMLSelectElement).value;
-    // Automatically fill Local-ITL based on selected entity
-    if (this.selectedGB === 'MS/NE-PG') {
-      this.KAM ='grs2kor';
-    } else if(this.selectedGB === "2WP"){
-      this.KAM ='ask2kor';
-    }
+  // GBChange(event: Event) {
+  //   this.selectedGB = (event.target as HTMLSelectElement).value;
+  //   // Automatically fill Local-ITL based on selected entity
+  //   if (this.selectedGB === 'MS/NE-PG') {
+  //     this.KAM ='grs2kor';
+  //   } else if(this.selectedGB === "2WP"){
+  //     this.KAM ='ask2kor';
+  //   }
 
-  }
+  // }
 
   /////////////////////////////////////////////////////////////////////onReset-formfill////////////////////////////////////////////////////////////////////////////
 
@@ -720,6 +723,126 @@ otherField: string = '';
   onDateSelected(date: Date) {
   console.log('Selected date:', date);
   }
+
+
+
+
+  gbOptions: string[] = [];
+  kamSuggestions: string[] = []; // All available KAM suggestions
+  departmentSuggestions: string[] = [];
+  dhSuggestions: string[] = []; // All available DH suggestions
+  filteredDepartmentSuggestions: string[] = [];
+  filteredDHSuggestions: string[] = []; // Filtered DH suggestions
+  filteredKAMSuggestions: string[] = []; // Filtered suggestions based on user input
+
+
+  GBChange(event: any) {
+    this.selectedGB = event.target.value;
+    if (this.selectedGB) {
+      this.dataService.getKAMSuggestions(this.selectedGB).subscribe(suggestions => {
+        this.kamSuggestions = suggestions;
+        this.filteredKAMSuggestions = [];
+        this.KAM = '';
+      });
+      this.dataService.getDepartmentSuggestions(this.selectedGB).subscribe(suggestions => {
+        this.departmentSuggestions = suggestions;
+        this.filteredDepartmentSuggestions = [];
+        this.Dept = '';
+      });
+    } else {
+      this.resetFields();
+    }
+  }
+  resetFields() {
+    this.kamSuggestions = [];
+    this.filteredKAMSuggestions = [];
+    this.KAM = '';
+    this.departmentSuggestions = [];
+    this.filteredDepartmentSuggestions = [];
+    this.Dept = '';
+    this.dhSuggestions = [];
+    this.filteredDHSuggestions = [];
+    this.DH = ''; // Clear DH input
+  }
+
+  loadGBOptions() {
+    this.dataService.getGBOptions().subscribe(options => {
+      this.gbOptions = options;
+    });
+  }
+
+  showKAMSuggestions() {
+    if (this.selectedGB) {
+      this.filteredKAMSuggestions = this.kamSuggestions; // Show all suggestions
+    }
+  }
+  // Method to fetch and display Department suggestions when Department input is focused
+  showDepartmentSuggestions() {
+    if (this.selectedGB) {
+      this.filteredDepartmentSuggestions = this.departmentSuggestions;
+    }
+  }
+
+  // Method to fetch and display DH suggestions when DH input is focused
+  showDHSuggestions() {
+    if (this.Dept) {
+      this.filteredDHSuggestions = this.dhSuggestions; // Show all DH suggestions if a department is selected
+    }
+  }
+
+
+  filterKAMSuggestions() {
+    const searchTerm = this.KAM.toLowerCase();
+    this.filteredKAMSuggestions = this.kamSuggestions.filter(kam =>
+      kam.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  filterDepartmentSuggestions() {
+    if (!this.selectedGB) return;
+
+    const searchTerm = this.Dept.toLowerCase();
+    this.filteredDepartmentSuggestions = this.departmentSuggestions.filter(dep =>
+      dep.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  onDepartmentChange() {
+    if (this.Dept) {
+      this.dataService.getDHSuggestions(this.Dept).subscribe(suggestions => {
+        this.dhSuggestions = suggestions;
+        this.filteredDHSuggestions = []; // Clear previous filtered suggestions
+      });
+    } else {
+      this.filteredDHSuggestions = []; // Clear if no department is selected
+    }
+  }
+
+  filterDHSuggestions() {
+    if (!this.Dept) return;
+
+    const searchTerm = this.DH.toLowerCase();
+    this.filteredDHSuggestions = this.dhSuggestions.filter(dh =>
+      dh.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  selectKAM(kam: string) {
+    this.KAM = kam; // Set the KAM input value
+    this.filteredKAMSuggestions = []; // Clear suggestions after selection
+  }
+
+  selectDepartment(dep: string) {
+    this.Dept = dep; // Set the department input value
+    this.filteredDepartmentSuggestions = []; // Clear suggestions after selection
+    this.onDepartmentChange(); // Fetch DH suggestions
+  }
+
+  selectDH(dh: string) {
+    this.DH = dh; // Set the DH input value
+    this.filteredDHSuggestions = []; // Clear suggestions after selection
+  }
+
 
 }
 

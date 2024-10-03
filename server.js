@@ -220,19 +220,6 @@ app.post('/Lablist/approve/:id', async (req, res) => {
   }
 });
 
-
-app.post('/register/newuser', async (req, res) => {
-  const { id, password } = req.body;
-
-  try {
-    const newUser = new User({ id, password });
-    await newUser.save();
-    res.status(201).json({ message: 'User registered successfully' });
-  } catch (error) {
-    console.error('Error registering user:', error); // Log the error
-    res.status(500).json({ error: 'Failed to register user' });
-  }
-});
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const locationSchema = new mongoose.Schema({
@@ -254,14 +241,55 @@ app.get('/api/locations', async (req, res) => {
 });
 
 
-app.get('/DepartmentHeads/:department', async (req, res) => {
-  const department = req.params.department;
+// Endpoint to get GB options
+app.get('/api/gb-options', async (req, res) => {
   try {
-    const items = await Item.find({ Department: department });
-    // Extract unique DHs from the items
-    const departmentHeads = [...new Set(items.map(item => item['Department Head (DH)']))];
-    res.json(departmentHeads);
+    const gbOptions = await Item.distinct('GB'); // Fetch unique GB values
+    res.json(gbOptions);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching department heads', error });
+    console.error(error);
+    res.status(500).send('Error fetching GB options');
   }
 });
+
+// Endpoint to get KAM suggestions based on selected GB
+app.get('/api/kam-suggestions', async (req, res) => {
+  const gbValue = req.query.gb;
+
+  try {
+    const items = await Item.find({ GB: gbValue }, { "Key Account Manager (KAM)": 1, _id: 0 });
+    const kamSuggestions = [...new Set(items.map(item => item["Key Account Manager (KAM)"]))]; // Unique KAM values
+    res.json(kamSuggestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching KAM suggestions');
+  }
+});
+
+app.get('/api/department-suggestions', async (req, res) => {
+  const gbValue = req.query.gb;
+
+  try {
+    const items = await Item.find({ GB: gbValue }, { Department: 1, _id: 0 });
+    const departmentSuggestions = [...new Set(items.map(item => item.Department))]; // Unique department values
+    res.json(departmentSuggestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching department suggestions');
+  }
+});
+
+// Endpoint to get Department Head suggestions based on selected Department
+app.get('/api/dh-suggestions', async (req, res) => {
+  const departmentValue = req.query.department;
+
+  try {
+    const items = await Item.find({ Department: departmentValue }, { "Department Head (DH)": 1, _id: 0 });
+    const dhSuggestions = [...new Set(items.map(item => item["Department Head (DH)"]))]; // Unique DH values
+    res.json(dhSuggestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching DH suggestions');
+  }
+});
+
