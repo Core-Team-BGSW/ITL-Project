@@ -552,5 +552,27 @@ hr {
 
 }
 
+/* your-style.css */
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px; /* Limit height */
+  overflow-y: auto; /* Enable scrolling */
+  background: white;
+  position: absolute; /* Positioning to avoid overlap */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.suggestions-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}
 
 
