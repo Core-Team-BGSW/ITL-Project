@@ -2,7 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from './app/admin/home/home.component';
+import { LayoutComponent } from './app/admin/layout/layout.component';
 import { provideRouter } from '@angular/router';
 
 

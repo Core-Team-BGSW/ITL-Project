@@ -81,53 +81,50 @@
       <span class="tooltip">Search</span>
     </li>
     <li>
-      <a href="#">
+      <a routerLink="/dashboard">
         <i class='fas fa-tachometer-alt'></i>
         <span class="links_name">Dashboard</span>
       </a>
       <span class="tooltip">Dashboard</span>
     </li>
     <li>
-      <a href="#">
-        <i class='fas fa-user'></i>
-        <span class="links_name">lab Commission</span>
+      <a routerLink="/lab_commission">
+        <i class="fa-solid fa-plus"></i>
+        <span class="links_name">Lab Commission</span>
       </a>
-      <span class="tooltip">User</span>
+      <span class="tooltip">Lab Commission</span>
     </li>
     <li>
-      <a href="#">
-        <i class='fas fa-comments'></i>
-        <span class="links_name">lab Operations</span>
+      <a href="javascript:void(0);" class="dropdown-toggle">
+        <i class="fa-solid fa-vial"></i>
+        <span class="links_name">Lab Operations</span>
+        <i class="fas fa-chevron-down"></i>
       </a>
-      <span class="tooltip">Messages</span>
+      <ul class="dropdown-list">
+        <li>
+          <a routerLink="/operation1">
+            <span class="links_name">Operation 1</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/operation2">
+            <span class="links_name">Operation 2</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/operation3">
+            <span class="links_name">Operation 3</span>
+          </a>
+        </li>
+      </ul>
+      <span class="tooltip">Lab Operations</span>
     </li>
     <li>
-      <a href="#">
-        <i class='fas fa-chart-pie'></i>
+      <a routerLink="/lab-decommission">
+        <i class="fa-solid fa-trash"></i>
         <span class="links_name">Lab Decommission</span>
       </a>
-      <span class="tooltip">Analytics</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='fas fa-folder'></i>
-        <span class="links_name">File Manager</span>
-      </a>
-      <span class="tooltip">Files</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='fas fa-shopping-cart'></i>
-        <span class="links_name">Order</span>
-      </a>
-      <span class="tooltip">Order</span>
-    </li>
-    <li>
-      <a href="#">
-        <i class='fas fa-heart'></i>
-        <span class="links_name">Saved</span>
-      </a>
-      <span class="tooltip">Saved</span>
+      <span class="tooltip">Lab Decommission</span>
     </li>
 
     <li class="profile">
@@ -142,22 +139,22 @@
     </li>
   </ul>
 </div>
-<section class="home-section">
-  <div class="text">Dashboard</div>
-</section>
 
 <script>
 let sidebar = document.querySelector(".sidebar");
 let closeBtn = document.querySelector("#btn");
 let searchBtn = document.querySelector(".fas.fa-search");
-closeBtn.addEventListener("click", ()=> {
+
+closeBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
   menuBtnChange();
 });
-searchBtn.addEventListener("click", ()=> {
+
+searchBtn.addEventListener("click", () => {
   sidebar.classList.toggle("open");
   menuBtnChange();
 });
+
 function menuBtnChange() {
   if (sidebar.classList.contains("open")) {
     closeBtn.classList.replace("fas fa-bars", "fas fa-times");
@@ -165,4 +162,21 @@ function menuBtnChange() {
     closeBtn.classList.replace("fas fa-times", "fas fa-bars");
   }
 }
+
+// Toggle dropdown items
+let dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+
+dropdownToggles.forEach(toggle => {
+  toggle.addEventListener("click", function() {
+    this.classList.toggle("active"); // Add/remove active class
+    let dropdownList = this.nextElementSibling; // Get the dropdown list
+    if (dropdownList.style.display === "block") {
+      dropdownList.style.display = "none"; // Hide the dropdown
+    } else {
+      dropdownList.style.display = "block"; // Show the dropdown
+    }
+  });
+});
+
+
 </script>

@@ -1,4 +1,4 @@
-import { HomeComponent } from "../../admin/home/home.component";
+
 import { SidebarComponent } from "../../admin/sidebar/sidebar.component";
 import * as ExcelJS from 'exceljs';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -24,6 +24,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { inject } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { NgZone } from '@angular/core';
+import { LayoutComponent } from "../../admin/layout/layout.component";
 
 
 
@@ -46,7 +47,7 @@ import { NgZone } from '@angular/core';
         transition('collapsed <=> expanded', animate('0.3s ease'))
       ])
     ],
-    imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
+    imports: [LayoutComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
       MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
       MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
 })

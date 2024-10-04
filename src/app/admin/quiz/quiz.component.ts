@@ -7,7 +7,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioButton, MatRadioModule } from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
-import { ContactComponent } from '../contact/contact.component';
 import { RoleComponent } from '../role/role.component';
 
 interface Answers {

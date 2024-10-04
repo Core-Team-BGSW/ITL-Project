@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+/* styles.css or home.component.css */
+
+.container {
+  display: flex;
+  flex-direction: column; /* Stack navbar and main content vertically */
+  height: 100vh; /* Full viewport height */
+  //overflow: hidden; /* Prevent overflow on the main container */
+}
+
+.main-content {
+  display: flex; /* Align sidebar and content side by side */
+  flex: 1; /* Take up remaining space */
+}
+
+app-sidebar {
+  width: 250px; /* Adjust the width of your sidebar */
+  height: calc(100vh - 64px); /* Full height minus navbar height (adjust if navbar height changes) */
+
+}
+
+.content {
+  flex: 1; /* Take the remaining space */
+  padding: 20px; /* Some padding */
+  overflow-y: auto; /* Enable scrolling for content */
+  height: calc(100vh - 64px); /* Full height minus navbar height */
+}

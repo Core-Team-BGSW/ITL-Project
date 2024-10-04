@@ -12,23 +12,14 @@ import { MatCardModule } from '@angular/material/card';
 import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { NavbarComponent } from "../navbar/navbar.component";
 
-
 @Component({
-    selector: 'app-home',
-    standalone: true,
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.scss',
-    imports: [MatButtonModule, MatIconModule, MatSidenavModule,
-    MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent, NavbarComponent]
+  selector: 'app-layout',
+  standalone: true,
+  imports: [MatButtonModule, MatIconModule, MatSidenavModule,
+    MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent, NavbarComponent],
+  templateUrl: './layout.component.html',
+  styleUrl: './layout.component.scss'
 })
-export class HomeComponent {
-// showModal: any;
-// toggleModal() {
-// throw new Error('Method not implemented.');
-// }
-toggleProperty = true;
-toggle() {
-  this.toggleProperty = !this.toggleProperty;
-}
+export class LayoutComponent {
 
 }

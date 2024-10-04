@@ -19,6 +19,11 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent {
   isOpen = false;
 
+  toggleSidebar() {
+    this.isOpen = !this.isOpen;
+  }
+
+
   toggleMenu() {
     this.isOpen = !this.isOpen;
   }
