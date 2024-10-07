@@ -19,7 +19,18 @@
   font-style: italic;
 }
 
-
+.mat-mdc-card-content {
+  display: contents;
+  padding: 0px;
+  border-radius: 0%;
+}
+.mat-mdc-card{
+  display: block;
+  border: 0px;
+  border-radius: 0%;
+  box-shadow: none;
+  margin-top: 16px;
+}
 
 
 .methodheading p{
