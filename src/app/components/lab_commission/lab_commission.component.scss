@@ -1,14 +1,3 @@
-
-.button{
-  text-decoration: none;
-  margin-left: 0%;
-  display: flex;
-  list-style-type: none;
-  display: inline-table;
-  padding: 4px;
-
-}
-
 .importfile{
   gap: 20px;
   background: white;
@@ -31,44 +20,9 @@
 }
 
 
-.heading-form p{
-  color: #000000;
-  align-items: center;
-  text-align: center;
-  font-size: 38px;
-  background-color: #71c4ff;
-
-  padding: 14px;
-}
-
-.heading-form {
-  padding: 0; /* Remove default padding if any */
-  margin: 0;  /* Remove default margin if any */
-  text-align: left; /* Ensure text alignment in the container is left */
-}
-
-.heading-form ul {
-  padding: 0; /* Remove default padding from the ul element */
-  margin: 0;  /* Remove default margin from the ul element */
-  list-style-type: none; /* Remove default list styling */
-}
-
-.heading-form ul li {
-  font-size: 36px;
-  font-weight: bold;
-  padding: 16px;
-  text-align: left;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border-bottom: 4px solid #b6ede8; /* Add a bottom border */
-  width: 100%; /* Make sure it uses the full width of its parent */
-  margin: 0; /* Remove any default margin */
-  //background-color: #fff; /* Optional: set background color for visibility */
-  list-style-type: none;
-}
 
 
-.heading-import p{
+.methodheading p{
   color: #000000;
   //align-items: center;
   font-size: 36px;
@@ -85,15 +39,8 @@
   max-width: 100%;
   height: 600px; /* Ensures the container does not exceed the viewport width */
   overflow-x: auto; /* Adds horizontal scrolling if needed */
-
   margin-top: 20px; /* Adjust spacing if necessary */
 }
-
-
-.choosemethod-body{
-  overflow: hidden;
-}
-
 
 .excel-table {
   border-collapse: collapse;
@@ -122,18 +69,9 @@
 
 
 .importbutton{
-  margin-top: 20px;
-}
-.importbutton a{
-  font-weight: bold;
-}
-
-
-.importbutton input[type='file'] {
-  // position: absolute;
-  font-size: 16px;
-  right:auto;
-  top: auto;
+  margin-top: 16px;
+  display: flex;
+  gap: 20px;
 }
 
 .subbutton {
@@ -202,6 +140,7 @@
   text-decoration: none;
   border-radius: 8px;
   margin-top: 20px;
+  font-size: 16px;
 
 
 }
@@ -210,10 +149,7 @@
 }
 
 
-.buttons{
-  display: flex;
-  gap: 20px;
-}
+
 
 
 
@@ -223,11 +159,9 @@
 
 .previewtextheading h4{
 
-
   margin-top: 30px;
   justify-content: left;
   display: flex;
-
   color: rgb(252, 251, 249);
   padding: 10px;
   border-radius: 8px;
@@ -235,6 +169,12 @@
   border-bottom: 4px solid #18837E;
 }
 
+p{
+  font-size: 18px;
+  padding-top: 4px;
+  color: #2e72ee;
+  font-weight: 600;
+}
 
 select {
   width: 100%;
@@ -253,7 +193,6 @@ select {
 }
 
 option{
-
   width: 100%;
   padding: 1em;
   //border-bottom: 1px solid #990404;
@@ -262,7 +201,6 @@ option{
   border-color:#e0e2e5; /* Ensures padding is included in width */
   font-size: 16px;
   background: #ffffff;
-
 }
 
 
@@ -280,7 +218,7 @@ select:hover{
 
 
 
-.dropdown-container {
+.userinput-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -296,7 +234,7 @@ select:hover{
   margin-top: 10px;
 }
 
-.dropdown-item {
+.userinput-item {
   flex: 1;
   margin-right: 10px; /* Adjust margin as needed */
 
@@ -319,17 +257,13 @@ p{
   font-weight: 600;
 }
 
-.sitedetails{
-  margin-top: 20px;
-
-}
 
 .required{
   color: red;
 }
 
 
-.dropdown-item input[type="text"] {
+.userinput-item input[type="text"] {
   /* Style for the input field */
   width: 100%; /* Adjust width as needed */
   //border-bottom: 1px solid #000000; /* Border style */
@@ -345,14 +279,14 @@ p{
   transition: background 0.3s;
 }
 
-.dropdown-item input[type="text"]:focus {
+.userinput-item input[type="text"]:focus {
   /* Style when input field is focused */
   outline: none; /* Remove default outline */
   border-color: #4d90fe; /* Example: Change border color on focus */
   box-shadow: 0 0 5px rgba(77, 144, 254, 0.5); /* Example: Add a box shadow */
 }
 
-.dropdown-item input:disabled {
+.userinput-item input:disabled {
   background-color: #f2f2f2; /* Light gray background */
   color: #999; /* Light gray text color */
   cursor: not-allowed; /* Show a "not-allowed" cursor */
@@ -370,24 +304,24 @@ p{
 margin-top: 3px;
 }
 
-.ACL-container{
+// .ACL-container{
 
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  background: white;
-  border: 0 none;
-  border-radius: 0px;
-  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-  padding: 10px 20px;
-  box-sizing: border-box;
-  width:fit-content;
-  margin: 0 10%;
-  margin-bottom: 20px;
-  margin-left: 6px;
-  margin-top: 10px;
+//   display: flex;
+//   justify-content: space-between;
+//   gap: 20px;
+//   background: white;
+//   border: 0 none;
+//   border-radius: 0px;
+//   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+//   padding: 10px 20px;
+//   box-sizing: border-box;
+//   width:fit-content;
+//   margin: 0 10%;
+//   margin-bottom: 20px;
+//   margin-left: 6px;
+//   margin-top: 10px;
 
-}
+// }
 
 .choosemethod-container{
   display: flex;
@@ -416,7 +350,7 @@ margin-top: 3px;
 
 
 
-.cmdb-container{
+.radiocontainer{
 
   display: block;
   justify-content: space-between;
@@ -437,24 +371,9 @@ margin-top: 3px;
   margin-bottom: 8px; /* Optional: Add spacing below date picker */
 }
 
-.mat-mdc-card-content {
-  display: contents;
-  padding: 0px;
-  border-radius: 0%;
-}
-.mat-mdc-card{
-  display: block;
-  border: 0px;
-  border-radius: 0%;
-  box-shadow: none;
-  margin-top: 16px;
-}
-
-
 .form-button-container{
   display: flex;
   justify-content:center;
-
 }
 
 .form-button-sub{
@@ -492,13 +411,13 @@ margin-top: 3px;
   color: #2a0845;
 }
 
-.cmdb-sharedlabflex{
+.radioflex{
   display: flex;
   gap: 40px;
 
 }
 
-.cmdb-explain {
+.radio-explain {
   color: #000000;
   font-size: small;
 }
