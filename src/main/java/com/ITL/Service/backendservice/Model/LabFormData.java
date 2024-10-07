@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LabFormData {
     private String region;
     private String country;
-    private String location;
     private String locationCode;
     private String gb;
     private String local_itl;
@@ -34,4 +35,5 @@ public class LabFormData {
     private String green_ports;
     private String yellow_ports;
     private String red_ports;
+    private String self_audit_date;
 }

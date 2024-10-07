@@ -52,7 +52,7 @@ public class ExcelToCsvService {
             String csvFileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()).replace(".xlsx", ".csv"));
             String fileUniqueId = UUID.randomUUID().toString();
             csvFileName+=fileUniqueId;
-            System.out.println(csvFileName);
+            //System.out.println(csvFileName);
             File csvFile = new File(csvFileDirectory + File.separator + csvFileName);
             PrintWriter csvWriter = new PrintWriter(new FileWriter(csvFile));
             getCSV(sheet,csvWriter);

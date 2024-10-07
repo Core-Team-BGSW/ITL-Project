@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,7 +35,7 @@ public class LabDataWithEntityDTO {
     private String green_ports;
     private String yellow_ports;
     private String red_ports;
+    private String self_audit_date;
     private String region;
     private String country;
-    private String location;
 }

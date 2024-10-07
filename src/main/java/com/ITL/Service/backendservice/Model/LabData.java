@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "lab_data")
 @Data
 @NoArgsConstructor
@@ -42,5 +44,6 @@ public class LabData {
     private String green_ports;
     private String yellow_ports;
     private String red_ports;
+    private String self_audit_date;
 }
 
