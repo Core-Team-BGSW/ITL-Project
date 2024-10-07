@@ -1,6 +1,5 @@
 <h2 >Self Audit Form :</h2>
 <i><b><p style="color:red"> (Select Lab for Audit)</p></b></i>
-<link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <form class="search_btn" action="action_page.php">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search Lab ..." name="search"
@@ -9,7 +8,6 @@
 <p></p>
       <div class="lab-list">
         <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
-           <!-- Collapsible Section Header -->
           <div class="collapsible-header">
               <mat-card class="custom-card">
               
@@ -42,7 +40,6 @@
               <tr>
                 <th style="background-color:rgb(212, 244, 252)">Region</th>
                 <th style="background-color:rgb(212, 244, 252)">Country</th>
-                <th style="background-color:rgb(212, 244, 252)">Location</th>
                 <th style="background-color:rgb(212, 244, 252)">Location-Code</th>
                 <th style="background-color:rgb(212, 244, 252)">Entity</th>
                 <th style="background-color:rgb(212, 244, 252)">GB</th>
@@ -52,7 +49,6 @@
                 <tr>
                   <td>{{ lab.Region }} </td>
                   <td>{{ lab.Country }}</td>
-                  <td>{{ lab.Location }}</td>
                   <td>{{ lab["Location-Code"] }}</td>
                   <td>{{ lab.Entity }}</td>
                   <td>{{ lab.GB }}</td>
@@ -62,7 +58,6 @@
              <table class="lab_details_table">
               <thead>
                 <tr>
-                
                 <th style="background-color:rgb(212, 244, 252)">Department Head (DH)</th>
                 <th style="background-color:rgb(212, 244, 252)">Local-ITL </th>
                 <th style="background-color:rgb(212, 244, 252)">Local-ITL Proxy</th>
@@ -70,7 +65,6 @@
                 </tr>
               </thead>
               <tr>
-                
                 <td >{{ lab["Department Head (DH)"] }}</td>
                 <td>{{ lab["Local-ITL"] }}</td>
                 <td>{{ lab["Local-ITL Proxy"] }}</td>
@@ -80,8 +74,6 @@
              <table class="lab_details_table">
               <thead>
                 <tr>
-                  
-                 
                   <th style="background-color:rgb(212, 244, 252)">Department</th>
                   <th style="background-color:rgb(212, 244, 252)">Floor No</th>
                   <th style="background-color:rgb(212, 244, 252)">Lab No</th>
@@ -90,15 +82,12 @@
                 </tr>
               </thead>
               <tbody >
-                <tr>
-                 
-                  
+                <tr> 
                   <td>{{ lab["Department"] }}</td>
                   <td>{{ lab["Floor"] }}</td>
                   <td>{{ lab["Lab No"] }}</td>
                   <td>{{ lab["Kind of Lab"] }}</td>
                   <td>{{ lab["Shared lab"] }}</td>
-
                 </tr>
               </tbody>
              </table>
@@ -109,8 +98,6 @@
                   <th style="background-color:rgb(212, 244, 252)">Secondary Lab Coordinator</th>
                   <th style="background-color:rgb(212, 244, 252)">Cost Center</th>
                   <th style="background-color:rgb(212, 244, 252)">ACL Required</th>
-                  
-                  
                 </tr>
               </thead>
               <tbody>
@@ -119,8 +106,6 @@
                   <td>{{ lab["Secondary Lab Coordinator"] }}</td>
                   <td>{{ lab["Cost Center"] }}</td>
                   <td>{{lab["ACL Required"]}}</td>
-                  
-                  
                 </tr>
               </tbody>
              </table>
@@ -129,7 +114,6 @@
                 <tr>
                   <th style="background-color:rgb(212, 244, 252)">Purpose of Lab in Brief </th>
                   <th style="background-color:rgb(212, 244, 252)">Description </th>
-                  
                   <th style="background-color:rgb(212, 244, 252)">Is lab going to procure new equipment for Engineering/Red Zone?</th>
                 </tr>
               </thead>
@@ -137,7 +121,6 @@
                 <tr>
                   <td>{{lab["Purpose of Lab in Brief"]}}</td>
                   <td>{{lab["Description"]}}</td>
-                 
                   <td>{{lab["Is lab going to procure new equipment for Engineering/Red Zone?"]}}</td>
                 </tr>
               </tbody>
