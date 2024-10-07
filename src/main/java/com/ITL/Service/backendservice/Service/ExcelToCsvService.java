@@ -31,7 +31,7 @@ public class ExcelToCsvService {
     private final FileService fileService;
 
     public ResponseEntity<String> excelToCsvConverter(MultipartFile file) {
-        Path path = Paths.get(csvFileDirectory);
+        Path path = Paths.get("/home/site/wwwroot/uploads");
         if (file.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("uploaded file is empty");
         }

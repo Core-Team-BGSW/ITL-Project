@@ -22,4 +22,4 @@ spring:
   data:
     mongodb:
       database: UserData
-      uri: mongodb+srv://ITERLUser:BDITLconsultancy%40123@iterl-mongodb-cluster.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000
+      uri: mongodb+srv://ITERLUser:BDITLconsultancy123@iterl-mongodb-cluster.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000
