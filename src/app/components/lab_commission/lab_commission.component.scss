@@ -82,16 +82,20 @@
   color: white; /* Text color */
 }
 
-
-
-
-
-
-
 .importbutton{
   margin-top: 16px;
   display: flex;
   gap: 20px;
+}
+
+input[type="text"] {
+  width: 60%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
 }
 
 .subbutton {
@@ -106,10 +110,6 @@
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 24px;
-
-
-
-
 }
 
 
@@ -168,10 +168,16 @@
   background-color: rgb(29, 112, 236);
 }
 
+.filter-container {
+  display: flex;
+  align-items: center; /* Aligns items vertically in the center */
+}
 
-
-
-
+.filter-container select,
+.filter-container input {
+  margin-right: 10px; /* Space between elements */
+  width: 50%;
+}
 
 .button2{
   margin-right: 20px;
@@ -315,33 +321,9 @@ p{
   /* You can add more styles as needed */
 }
 
-
-.fieldfill{
-  color: black;
-}
-
 .labsizelwh{
 margin-top: 3px;
 }
-
-// .ACL-container{
-
-//   display: flex;
-//   justify-content: space-between;
-//   gap: 20px;
-//   background: white;
-//   border: 0 none;
-//   border-radius: 0px;
-//   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-//   padding: 10px 20px;
-//   box-sizing: border-box;
-//   width:fit-content;
-//   margin: 0 10%;
-//   margin-bottom: 20px;
-//   margin-left: 6px;
-//   margin-top: 10px;
-
-// }
 
 .choosemethod-container{
   display: flex;
@@ -364,11 +346,6 @@ margin-top: 3px;
 .choosemethod-container.radiotext{
   font-size: 24px;
 }
-
-
-
-
-
 
 .radiocontainer{
 

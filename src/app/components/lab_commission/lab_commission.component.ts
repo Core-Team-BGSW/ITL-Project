@@ -82,6 +82,8 @@ export class LabCommissionComponent {
   selectedFile: File | null = null; // Initialize selectedFile to null
   selectedFileName: string = '';
   excelData: any[] = []; // Array to store parsed Excel data
+  filteredData: any[] = [];
+  filterValue: string = '';
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
   isSelected = false;
@@ -136,6 +138,7 @@ export class LabCommissionComponent {
   showValidationMessage: boolean = false;
   nextUniqueId: number = 1; // Initial unique ID counter
   uniqueInstanceId: string = '';
+  selectedHeader: string = '';
 
   constructor(
     private dialog: MatDialog,
@@ -176,6 +179,113 @@ export class LabCommissionComponent {
   }
 
   /////////////////////////////////////////////////////////////////////onPreview////////////////////////////////////////////////////////////////////////////
+
+  // onPreview() {
+  //   if (this.selectedFile) {
+  //     // Validate the file type (e.g., .xls or .xlsx)
+  //     const validFileTypes = [
+  //       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  //       'application/vnd.ms-excel',
+  //     ];
+  //     const fileType = this.selectedFile.type;
+
+  //     if (!validFileTypes.includes(fileType)) {
+  //       alert(
+  //         'Invalid file type. Please upload an Excel file (.xls or .xlsx).'
+  //       );
+  //       return;
+  //     }
+
+  //     // Validate the file size (e.g., limit to 5MB)
+  //     const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+  //     if (this.selectedFile.size > maxSizeInBytes) {
+  //       alert(
+  //         'File size exceeds the limit of 5MB. Please upload a smaller file.'
+  //       );
+  //       return;
+  //     }
+
+  //     // If validation passes, proceed to read the file
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = (e: any) => {
+  //       const arrayBuffer = e.target.result;
+  //       this.parseExcel(arrayBuffer);
+  //     };
+  //     fileReader.readAsArrayBuffer(this.selectedFile);
+  //   } else {
+  //     alert('No file selected. Please upload an Excel file.');
+  //   }
+  // }
+
+  // private parseExcel(arrayBuffer: ArrayBuffer) {
+  //   const workbook = new ExcelJS.Workbook();
+  //   workbook.xlsx
+  //     .load(arrayBuffer)
+  //     .then(() => {
+  //       const worksheet = workbook.getWorksheet(1);
+
+  //       // Check if worksheet is null or undefined
+  //       if (!worksheet) {
+  //         alert('Worksheet not found. Please check the Excel file.');
+  //         return;
+  //       }
+
+  //       this.excelData = [];
+
+  //       // Extract the first row safely
+  //       const firstRow = worksheet.getRow(1);
+  //       if (!firstRow) {
+  //         alert('First row not found. Please check the Excel file.');
+  //         return;
+  //       }
+
+  //       // Check if firstRow.values is defined
+  //       const values = firstRow.values;
+  //       if (
+  //         !values ||
+  //         (typeof values === 'object' && Object.keys(values).length < 1)
+  //       ) {
+  //         alert(
+  //           'First row is empty or does not contain headers. Please check the Excel file.'
+  //         );
+  //         return;
+  //       }
+
+  //       // Safely slice values from the first row
+  //       const headers = Array.isArray(values) ? values.slice(1) : []; // Cast to string[]
+
+  //       headers.forEach((header) => {
+  //         if (typeof header === 'string') {
+  //           this.excelData.push({
+  //             header,
+  //             rows: [],
+  //             isMissing: false,
+  //           });
+  //         }
+  //       });
+
+  //       worksheet.eachRow({ includeEmpty: false }, (row) => {
+  //         const rowData: { [key: string]: any } = {}; // Use a generic object for dynamic keys
+  //         headers.forEach((header, index) => {
+  //           const cell = row.getCell(index + 1);
+  //           // Only assign value if header is valid
+  //           rowData[
+  //             typeof header === 'string' ? header : `Column${index + 1}`
+  //           ] = cell ? cell.value : null;
+  //         });
+  //         this.excelData.forEach((item) => {
+  //           item.rows.push(rowData); // Add the row data
+  //         });
+  //       });
+
+  //       this.previewVisible = true;
+  //       this.changeDetectorRef.detectChanges();
+  //       console.log('Parsed Excel Data:', this.excelData);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error parsing Excel:', error);
+  //     });
+  // }
 
   onPreview() {
     if (this.selectedFile) {
@@ -228,6 +338,7 @@ export class LabCommissionComponent {
         }
 
         this.excelData = [];
+        this.filteredData = []; // Initialize filtered data
 
         // Extract the first row safely
         const firstRow = worksheet.getRow(1);
@@ -236,7 +347,6 @@ export class LabCommissionComponent {
           return;
         }
 
-        // Check if firstRow.values is defined
         const values = firstRow.values;
         if (
           !values ||
@@ -248,8 +358,7 @@ export class LabCommissionComponent {
           return;
         }
 
-        // Safely slice values from the first row
-        const headers = Array.isArray(values) ? values.slice(1) : []; // Cast to string[]
+        const headers = Array.isArray(values) ? values.slice(1) : [];
 
         headers.forEach((header) => {
           if (typeof header === 'string') {
@@ -261,20 +370,24 @@ export class LabCommissionComponent {
           }
         });
 
-        worksheet.eachRow({ includeEmpty: false }, (row) => {
-          const rowData: { [key: string]: any } = {}; // Use a generic object for dynamic keys
+        // Start from the second row (row index 2)
+        worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+          // Skip the first row
+          if (rowNumber === 1) return;
+
+          const rowData: { [key: string]: any } = {};
           headers.forEach((header, index) => {
             const cell = row.getCell(index + 1);
-            // Only assign value if header is valid
             rowData[
               typeof header === 'string' ? header : `Column${index + 1}`
             ] = cell ? cell.value : null;
           });
           this.excelData.forEach((item) => {
-            item.rows.push(rowData); // Add the row data
+            item.rows.push(rowData);
           });
         });
 
+        this.filteredData = this.excelData; // Initialize with all data
         this.previewVisible = true;
         this.changeDetectorRef.detectChanges();
         console.log('Parsed Excel Data:', this.excelData);
@@ -284,6 +397,112 @@ export class LabCommissionComponent {
       });
   }
 
+  filterExcelData(header: string, value: any) {
+    if (!header || value === undefined || value === null) {
+      // If no header or value is provided, reset to the original data
+      this.filteredData = this.excelData;
+      return;
+    }
+
+    this.filteredData = this.excelData.map((item) => {
+      return {
+        ...item,
+        rows: item.rows.filter((row: { [key: string]: any }) => {
+          return (
+            row[header] && row[header].toString().includes(value.toString())
+          );
+        }),
+      };
+    });
+  }
+
+  // Call this method when the filter input changes
+  onFilterChange(header: string, value: string) {
+    this.filterExcelData(header, value);
+  }
+
+  // onfileSubmit() {
+  //   if (!this.selectedFile) {
+  //     console.log('No file selected');
+  //     return;
+  //   }
+
+  //   const confirmUpload = window.confirm(
+  //     'Are you sure you want to upload this file?'
+  //   );
+
+  //   if (!confirmUpload) {
+  //     console.log('File upload cancelled by user');
+  //     return;
+  //   }
+
+  //   const formData = new FormData();
+  //   formData.append('file', this.selectedFile);
+
+  //   axios
+  //     .post('http://localhost:3000/upload-excel', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log('File uploaded successfully:', response.data);
+
+  //       // Clear selected file and reset form state
+  //       this.selectedFile = null;
+  //       this.excelData = [];
+  //       this.previewVisible = false;
+  //     })
+  //     .catch((error) => {
+  //       if (error.response && error.response.data) {
+  //         console.error('Error Response Data:', error.response.data);
+
+  //         // Handle missing headers
+  //         if (error.response.data.error === 'Missing headers') {
+  //           const missingHeaders = error.response.data.missingHeaders;
+  //           missingHeaders.forEach((missingHeader: string) => {
+  //             const headerIndex = this.excelData.findIndex(
+  //               (h) => h.header === missingHeader
+  //             );
+  //             if (headerIndex !== -1) {
+  //               this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //             }
+  //           });
+  //         }
+
+  //         // Handle validation errors for fields
+  //         if (error.response.data.validationErrors) {
+  //           const errorMessages = error.response.data.validationErrors
+  //             .map(
+  //               (e: any) =>
+  //                 `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+  //             )
+  //             .join('\n');
+
+  //           error.response.data.validationErrors.forEach((e: any) => {
+  //             e.missingFields.forEach((missingField: string) => {
+  //               const headerIndex = this.excelData.findIndex(
+  //                 (h) => h.header === missingField
+  //               );
+  //               if (headerIndex !== -1) {
+  //                 this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //               }
+  //             });
+  //           });
+
+  //           alert('Validation Errors:\n' + errorMessages);
+  //         } else {
+  //           alert('Error: ' + error.response.data.error);
+  //         }
+  //       } else {
+  //         console.error('Error:', error);
+  //         alert('An unknown error occurred.');
+  //       }
+
+  //       // Trigger change detection to update UI
+  //       this.changeDetectorRef.detectChanges();
+  //     });
+  // }
   onfileSubmit() {
     if (!this.selectedFile) {
       console.log('No file selected');
@@ -297,6 +516,11 @@ export class LabCommissionComponent {
     if (!confirmUpload) {
       console.log('File upload cancelled by user');
       return;
+    }
+
+    // Remove the first row from excelData if it exists
+    if (this.excelData.length > 0) {
+      this.excelData.shift(); // Removes the first row
     }
 
     const formData = new FormData();
