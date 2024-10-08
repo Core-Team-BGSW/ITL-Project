@@ -31,6 +31,15 @@ interface Location {
   Country: string;
   LocationCode: string;
 }
+interface ExcelRow {
+  [key: string]: any; // Dynamic key-value pairs for cell values
+}
+
+interface ExcelHeader {
+  header: string;
+  rows: ExcelRow[];
+  isMissing: boolean;
+}
 @Component({
   selector: 'app-lab_commission',
   standalone: true,
@@ -71,6 +80,7 @@ interface Location {
 export class LabCommissionComponent {
   fileSelected = false;
   selectedFile: File | null = null; // Initialize selectedFile to null
+  selectedFileName: string = '';
   excelData: any[] = []; // Array to store parsed Excel data
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
@@ -153,11 +163,20 @@ export class LabCommissionComponent {
 
   /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
   onFileChanged(event: any) {
-    this.selectedFile = event.target.files[0];
-    this.fileSelected = true; // Enable preview button
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0]; // Store the file object
+      this.fileSelected = true; // Enable preview button
+      this.selectedFileName = this.selectedFile.name; // Store the file name for display
+    } else {
+      this.selectedFile = null; // Reset if no file is selected
+      this.fileSelected = false; // Disable preview button
+      this.selectedFileName = ''; // Clear the file name
+    }
   }
 
   /////////////////////////////////////////////////////////////////////onPreview////////////////////////////////////////////////////////////////////////////
+
   onPreview() {
     if (this.selectedFile) {
       // Validate the file type (e.g., .xls or .xlsx)
@@ -195,34 +214,76 @@ export class LabCommissionComponent {
     }
   }
 
-  private parseExcel(arrayBuffer: any) {
+  private parseExcel(arrayBuffer: ArrayBuffer) {
     const workbook = new ExcelJS.Workbook();
     workbook.xlsx
       .load(arrayBuffer)
       .then(() => {
         const worksheet = workbook.getWorksheet(1);
+
+        // Check if worksheet is null or undefined
+        if (!worksheet) {
+          alert('Worksheet not found. Please check the Excel file.');
+          return;
+        }
+
         this.excelData = [];
 
-        worksheet?.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-          // Assuming row.values is an array of cell values
-          this.excelData.push(row.values);
+        // Extract the first row safely
+        const firstRow = worksheet.getRow(1);
+        if (!firstRow) {
+          alert('First row not found. Please check the Excel file.');
+          return;
+        }
+
+        // Check if firstRow.values is defined
+        const values = firstRow.values;
+        if (
+          !values ||
+          (typeof values === 'object' && Object.keys(values).length < 1)
+        ) {
+          alert(
+            'First row is empty or does not contain headers. Please check the Excel file.'
+          );
+          return;
+        }
+
+        // Safely slice values from the first row
+        const headers = Array.isArray(values) ? values.slice(1) : []; // Cast to string[]
+
+        headers.forEach((header) => {
+          if (typeof header === 'string') {
+            this.excelData.push({
+              header,
+              rows: [],
+              isMissing: false,
+            });
+          }
         });
+
+        worksheet.eachRow({ includeEmpty: false }, (row) => {
+          const rowData: { [key: string]: any } = {}; // Use a generic object for dynamic keys
+          headers.forEach((header, index) => {
+            const cell = row.getCell(index + 1);
+            // Only assign value if header is valid
+            rowData[
+              typeof header === 'string' ? header : `Column${index + 1}`
+            ] = cell ? cell.value : null;
+          });
+          this.excelData.forEach((item) => {
+            item.rows.push(rowData); // Add the row data
+          });
+        });
+
         this.previewVisible = true;
-
-        // Manually trigger change detection
         this.changeDetectorRef.detectChanges();
-
-        // Optionally, you can navigate to a new route or display a preview component here
-        // For simplicity, we will log the data to console
         console.log('Parsed Excel Data:', this.excelData);
       })
       .catch((error) => {
         console.error('Error parsing Excel:', error);
-        // Handle error
       });
   }
 
-  // //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
   onfileSubmit() {
     if (!this.selectedFile) {
       console.log('No file selected');
@@ -249,7 +310,8 @@ export class LabCommissionComponent {
       })
       .then((response) => {
         console.log('File uploaded successfully:', response.data);
-        // Optionally, you can clear the selected file and reset form state here
+
+        // Clear selected file and reset form state
         this.selectedFile = null;
         this.excelData = [];
         this.previewVisible = false;
@@ -260,9 +322,15 @@ export class LabCommissionComponent {
 
           // Handle missing headers
           if (error.response.data.error === 'Missing headers') {
-            const missingHeaders =
-              error.response.data.missingHeaders.join(', ');
-            alert('Missing Headers:\n' + missingHeaders);
+            const missingHeaders = error.response.data.missingHeaders;
+            missingHeaders.forEach((missingHeader: string) => {
+              const headerIndex = this.excelData.findIndex(
+                (h) => h.header === missingHeader
+              );
+              if (headerIndex !== -1) {
+                this.excelData[headerIndex].isMissing = true; // Mark header as missing
+              }
+            });
           }
 
           // Handle validation errors for fields
@@ -273,6 +341,18 @@ export class LabCommissionComponent {
                   `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
               )
               .join('\n');
+
+            error.response.data.validationErrors.forEach((e: any) => {
+              e.missingFields.forEach((missingField: string) => {
+                const headerIndex = this.excelData.findIndex(
+                  (h) => h.header === missingField
+                );
+                if (headerIndex !== -1) {
+                  this.excelData[headerIndex].isMissing = true; // Mark header as missing
+                }
+              });
+            });
+
             alert('Validation Errors:\n' + errorMessages);
           } else {
             alert('Error: ' + error.response.data.error);
@@ -281,8 +361,12 @@ export class LabCommissionComponent {
           console.error('Error:', error);
           alert('An unknown error occurred.');
         }
+
+        // Trigger change detection to update UI
+        this.changeDetectorRef.detectChanges();
       });
   }
+
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 
   onDownloadTemplate() {

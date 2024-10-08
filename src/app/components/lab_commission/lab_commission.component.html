@@ -34,6 +34,7 @@
             <input type="file" (change)="onFileChanged($event)" placeholder="Choose file" hidden />
             <span class="templatebutton">Choose File</span>
           </label>
+          <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
         </div>
 
         <div class="importbutton">
@@ -54,14 +55,18 @@
 
         <div class="table-container">
           <table class="excel-table">
-            <thead>
+            <!-- <thead>
               <tr>
-                <th *ngFor="let header of excelData[0]">{{ header }}</th>
+                <th *ngFor="let header of excelData" [ngClass]="{'missing': header.isMissing}">
+                  {{ header.header }}
+                </th>
               </tr>
-            </thead>
+            </thead> -->
             <tbody>
-              <tr *ngFor="let row of excelData.slice(2)">
-                <td *ngFor="let cell of row">{{ cell }}</td>
+              <tr *ngFor="let row of excelData[0]?.rows">
+                <td *ngFor="let header of excelData" [ngClass]="{'missing': header.isMissing && !row[header.header]}">
+                  {{ row[header.header] }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -120,34 +125,33 @@
         </div>
       </div>
       <!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
-      <div>
-        <p>Entity and GB</p>
-        <div class="userinput-container">
-          <div class="userinput-item">
-            <label for="entityselect">Entity <span class="required">
-                *</span></label>
-            <select id="entitySelect" name="entity" (change)="entityChange($event)">
-              <option value>Select Entity</option>
-              <option value="BGSW">BGSW</option>
-              <option value="BGSV">BGSV</option>
-              <option value="DCIN">DCIN</option>
-              <option value="RBIN">RBIN</option>
-              <option value="RBDI">RBDI</option>
-              <option value="RBIN">RBIC</option>
-              <option value="RBIN">RBCN</option>
-              <option value="RBJP">RBJP</option>
-            </select>
-          </div>
-          <div class="userinput-item">
-            <label for="GBselect">GB <span class="required"> *</span></label>
-            <select id="GBSelect" name="GB" (change)="GBChange($event)">
-              <option value>Select GB</option>
-              <option *ngFor="let gb of gbOptions" [value]="gb">{{ gb
-                }}</option>
-            </select>
-          </div>
+      <p>Entity and GB</p>
+      <div class="userinput-container">
+        <div class="userinput-item">
+          <label for="entityselect">Entity <span class="required">
+              *</span></label>
+          <select id="entitySelect" name="entity" (change)="entityChange($event)">
+            <option value>Select Entity</option>
+            <option value="BGSW">BGSW</option>
+            <option value="BGSV">BGSV</option>
+            <option value="DCIN">DCIN</option>
+            <option value="RBIN">RBIN</option>
+            <option value="RBDI">RBDI</option>
+            <option value="RBIN">RBIC</option>
+            <option value="RBIN">RBCN</option>
+            <option value="RBJP">RBJP</option>
+          </select>
+        </div>
+        <div class="userinput-item">
+          <label for="GBselect">GB <span class="required"> *</span></label>
+          <select id="GBSelect" name="GB" (change)="GBChange($event)">
+            <option value>Select GB</option>
+            <option *ngFor="let gb of gbOptions" [value]="gb">{{ gb
+              }}</option>
+          </select>
         </div>
       </div>
+
       <!-------------------------------------------ITL Details--------------------------------------------------------------------------------->
       <p>ITL's</p>
       <div class="userinput-container">
