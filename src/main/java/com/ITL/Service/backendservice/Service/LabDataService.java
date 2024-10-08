@@ -61,7 +61,6 @@ public class LabDataService {
             LabDataWithEntityDTO labDataWithEntityDTO = convertToLabDataWithEntityDTO(labData);
             Entity entity = entityRepo.findByLabDataId(labData.getId());
             labDataWithEntityDTO.setRegion(entity.getRegion());
-            labDataWithEntityDTO.setLocation(entity.getLocation());
             labDataWithEntityDTO.setCountry(entity.getCountry());
             labDataWithEntityDTOList.add(labDataWithEntityDTO);
         }
@@ -94,6 +93,7 @@ public class LabDataService {
         labDataWithEntityDTO.setLocationCode(labData.getLocationCode());
         labDataWithEntityDTO.setCost_center(labData.getCost_center());
         labDataWithEntityDTO.setEntityName(labData.getEntityName());
+        labDataWithEntityDTO.setSelf_audit_date(labData.getSelf_audit_date());
         return labDataWithEntityDTO;
     }
 }

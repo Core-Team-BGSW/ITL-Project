@@ -67,6 +67,7 @@ public class FormDataService {
         labData.setShared_lab(labFormData.getShared_lab());
         labData.setSecondary_lab_cord(labFormData.getSecondary_lab_cord());
         labData.setPrimary_lab_cord(labData.getPrimary_lab_cord());
+        labData.setSelf_audit_date(labData.getSelf_audit_date());
         return labData;
     }
     public Entity getEntityData(LabFormData labFormData)
@@ -76,7 +77,6 @@ public class FormDataService {
         entity.setCountry(labFormData.getCountry());
         entity.setLocationCode(labFormData.getLocationCode());
         entity.setRegion(labFormData.getRegion());
-        entity.setLocation(labFormData.getLocation());
         return entity;
     }
 }

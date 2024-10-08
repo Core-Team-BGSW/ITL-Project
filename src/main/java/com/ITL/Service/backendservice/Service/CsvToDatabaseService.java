@@ -23,7 +23,7 @@ public class CsvToDatabaseService {
     public String saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
             String[] nextRecord;
-            csvReader.skip(1);
+            csvReader.skip(2);
             nextRecord = csvReader.readNext();
             Map<AbstractMap.SimpleEntry<String,String>,Entity> entityMap = new HashMap<>();
             while((nextRecord != null))
@@ -37,8 +37,8 @@ public class CsvToDatabaseService {
                 }
                 else labData = temLabData;
 
-                String locationCode = nextRecord[4];
-                String entityName = nextRecord[5];
+                String locationCode = nextRecord[3];
+                String entityName = nextRecord[4];
                 Entity entity1 = entityRepo.findByLocationCodeAndEntityName(locationCode, entityName);
                 Entity entity = entityMap.get(new AbstractMap.SimpleEntry<>(locationCode,entityName));
                 if(entity == null && entity1 == null)
@@ -66,37 +66,37 @@ public class CsvToDatabaseService {
         Entity entity = new Entity();
         entity.setRegion(nextRecord[1]);
         entity.setCountry(nextRecord[2]);
-        entity.setLocation(nextRecord[3]);
-        entity.setLocationCode(nextRecord[4]);
-        entity.setEntityName(nextRecord[5]);
+        entity.setLocationCode(nextRecord[3]);
+        entity.setEntityName(nextRecord[4]);
         return entity;
     }
 
     private LabData getLabData(String[] nextRecord) {
         LabData labData = new LabData();
-        labData.setLocationCode(nextRecord[4]);
-        labData.setEntityName(nextRecord[5]);
-        labData.setGb(nextRecord[6]);
-        labData.setLocal_itl(nextRecord[7]);
-        labData.setLocal_itl_proxy(nextRecord[8]);
-        labData.setDh(nextRecord[9]);
-        labData.setKam(nextRecord[10]);
-        labData.setDep_name(nextRecord[11]);
-        labData.setBuilding(nextRecord[12]);
-        labData.setFloor(nextRecord[13]);
-        labData.setLabNo(nextRecord[14]);
-        labData.setPrimary_lab_cord(nextRecord[15]);
-        labData.setSecondary_lab_cord(nextRecord[16]);
-        labData.setCost_center(nextRecord[17]);
-        labData.setKind_of_lab(nextRecord[18]);
-        labData.setPurpose_of_lab(nextRecord[19]);
-        labData.setDescription(nextRecord[20]);
-        labData.setAcl_req(nextRecord[21]);
-        labData.setGreen_ports(nextRecord[22]);
-        labData.setYellow_ports(nextRecord[23]);
-        labData.setRed_ports(nextRecord[24]);
-        labData.setNew_equipment(nextRecord[25]);
-        labData.setShared_lab(nextRecord[26]);
+        labData.setLocationCode(nextRecord[3]);
+        labData.setEntityName(nextRecord[4]);
+        labData.setGb(nextRecord[5]);
+        labData.setLocal_itl(nextRecord[6]);
+        labData.setLocal_itl_proxy(nextRecord[7]);
+        labData.setDh(nextRecord[8]);
+        labData.setKam(nextRecord[9]);
+        labData.setDep_name(nextRecord[10]);
+        labData.setBuilding(nextRecord[11]);
+        labData.setFloor(nextRecord[12]);
+        labData.setLabNo(nextRecord[13]);
+        labData.setPrimary_lab_cord(nextRecord[14]);
+        labData.setSecondary_lab_cord(nextRecord[15]);
+        labData.setCost_center(nextRecord[16]);
+        labData.setKind_of_lab(nextRecord[17]);
+        labData.setPurpose_of_lab(nextRecord[18]);
+        labData.setDescription(nextRecord[19]);
+        labData.setAcl_req(nextRecord[20]);
+        labData.setGreen_ports(nextRecord[21]);
+        labData.setYellow_ports(nextRecord[22]);
+        labData.setRed_ports(nextRecord[23]);
+        labData.setNew_equipment(nextRecord[24]);
+        labData.setShared_lab(nextRecord[25]);
+        labData.setSelf_audit_date(nextRecord[26]);
         return labData;
     }
 
