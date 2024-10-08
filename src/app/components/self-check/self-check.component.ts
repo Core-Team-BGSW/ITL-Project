@@ -198,9 +198,6 @@ dataList!: any[];
     }
 
   }
-
-
-
   toggledetails1(audit:string):void{
     if (this.expandedaudit==audit){
       this.expandedaudit=null;
