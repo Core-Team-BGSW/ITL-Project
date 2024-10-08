@@ -34,6 +34,7 @@
             <input type="file" (change)="onFileChanged($event)" placeholder="Choose file" hidden />
             <span class="templatebutton">Choose File</span>
           </label>
+          <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
         </div>
 
         <div class="importbutton">
@@ -54,14 +55,18 @@
 
         <div class="table-container">
           <table class="excel-table">
-            <thead>
+            <!-- <thead>
               <tr>
-                <th *ngFor="let header of excelData[0]">{{ header }}</th>
+                <th *ngFor="let header of excelData" [ngClass]="{'missing': header.isMissing}">
+                  {{ header.header }}
+                </th>
               </tr>
-            </thead>
+            </thead> -->
             <tbody>
-              <tr *ngFor="let row of excelData.slice(2)">
-                <td *ngFor="let cell of row">{{ cell }}</td>
+              <tr *ngFor="let row of excelData[0]?.rows">
+                <td *ngFor="let header of excelData" [ngClass]="{'missing': header.isMissing && !row[header.header]}">
+                  {{ row[header.header] }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -120,34 +125,33 @@
         </div>
       </div>
       <!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
-      <div>
-        <p>Entity and GB</p>
-        <div class="userinput-container">
-          <div class="userinput-item">
-            <label for="entityselect">Entity <span class="required">
-                *</span></label>
-            <select id="entitySelect" name="entity" (change)="entityChange($event)">
-              <option value>Select Entity</option>
-              <option value="BGSW">BGSW</option>
-              <option value="BGSV">BGSV</option>
-              <option value="DCIN">DCIN</option>
-              <option value="RBIN">RBIN</option>
-              <option value="RBDI">RBDI</option>
-              <option value="RBIN">RBIC</option>
-              <option value="RBIN">RBCN</option>
-              <option value="RBJP">RBJP</option>
-            </select>
-          </div>
-          <div class="userinput-item">
-            <label for="GBselect">GB <span class="required"> *</span></label>
-            <select id="GBSelect" name="GB" (change)="GBChange($event)">
-              <option value>Select GB</option>
-              <option *ngFor="let gb of gbOptions" [value]="gb">{{ gb
-                }}</option>
-            </select>
-          </div>
+      <p>Entity and GB</p>
+      <div class="userinput-container">
+        <div class="userinput-item">
+          <label for="entityselect">Entity <span class="required">
+              *</span></label>
+          <select id="entitySelect" name="entity" (change)="entityChange($event)">
+            <option value>Select Entity</option>
+            <option value="BGSW">BGSW</option>
+            <option value="BGSV">BGSV</option>
+            <option value="DCIN">DCIN</option>
+            <option value="RBIN">RBIN</option>
+            <option value="RBDI">RBDI</option>
+            <option value="RBIN">RBIC</option>
+            <option value="RBIN">RBCN</option>
+            <option value="RBJP">RBJP</option>
+          </select>
+        </div>
+        <div class="userinput-item">
+          <label for="GBselect">GB <span class="required"> *</span></label>
+          <select id="GBSelect" name="GB" (change)="GBChange($event)">
+            <option value>Select GB</option>
+            <option *ngFor="let gb of gbOptions" [value]="gb">{{ gb
+              }}</option>
+          </select>
         </div>
       </div>
+
       <!-------------------------------------------ITL Details--------------------------------------------------------------------------------->
       <p>ITL's</p>
       <div class="userinput-container">
@@ -195,9 +199,9 @@
         <div class="userinput-item">
           <label for="deptselect">Department <span class="required">
               *</span></label>
-          <input type="text" id="fieldfill" required placeholder="Department" [(ngModel)]="Dept"
-            title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS" #locationdept="ngModel" (focus)="showDepartmentSuggestions()"
-            (input)="filterDepartmentSuggestions()" (change)="onDepartmentChange()" />
+          <input type="text" required placeholder="Department" [(ngModel)]="Dept" title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS"
+            #locationdept="ngModel" (focus)="showDepartmentSuggestions()" (input)="filterDepartmentSuggestions()"
+            (change)="onDepartmentChange()" />
           <div *ngIf="
                 locationdept.invalid && showValidationMessage &&
                 (locationdept.dirty || locationdept.touched)
@@ -213,8 +217,7 @@
         <div class="userinput-item">
           <label for="building">Building <span class="required">
               *</span></label>
-          <input type="text" id="fieldfill" required placeholder="Building" [(ngModel)]="Building"
-            #locationbuilding="ngModel" />
+          <input type="text" required placeholder="Building" [(ngModel)]="Building" #locationbuilding="ngModel" />
           <div *ngIf="
                 locationbuilding.invalid &&
                 (locationbuilding.dirty || locationbuilding.touched)
@@ -228,7 +231,7 @@
         <div class="userinput-item">
           <label for="floorselect">Floor <span class="required">
               *</span></label>
-          <input type="text" id="fieldfill" required placeholder="Floor" [(ngModel)]="Floor" #locationfloor="ngModel" />
+          <input type="text" required placeholder="Floor" [(ngModel)]="Floor" #locationfloor="ngModel" />
           <div *ngIf="
                 locationfloor.invalid &&
                 (locationfloor.dirty || locationfloor.touched)
@@ -242,8 +245,7 @@
         <div class="userinput-item">
           <label for="labselect">Lab No. <span class="required">
               *</span></label>
-          <input type="text" id="fieldfill" required placeholder="Lab No." [(ngModel)]="labno"
-            #locationlabno="ngModel" />
+          <input type="text" required placeholder="Lab No." [(ngModel)]="labno" #locationlabno="ngModel" />
           <div *ngIf="
                 locationlabno.invalid &&
                 (locationlabno.dirty || locationlabno.touched)
@@ -308,7 +310,7 @@
       <div class="userinput-container">
         <div class="userinput-item">
           <label for="primary">Primary Lab Coordinator <span class="required"> *</span></label>
-          <input type="text" id="fieldfill" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
+          <input type="text" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
             [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"
             [(ngModel)]="primarylabco" />
           <div *ngIf="
@@ -322,14 +324,14 @@
         </div>
         <div class="userinput-item">
           <label for="secondary">Secondary Lab Coordinator </label>
-          <input type="text" id="fieldfill" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" #secondLabCoord="ngModel"
+          <input type="text" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" #secondLabCoord="ngModel"
             title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="secondarylabco" />
         </div>
 
         <div class="userinput-item">
           <label for="CC">Cost Center<span class="required"> *</span>
           </label>
-          <input type="text" id="fieldfill" placeholder="Cost Center" [(ngModel)]="CC" />
+          <input type="text" placeholder="Cost Center" [(ngModel)]="CC" />
         </div>
       </div>
 
@@ -353,13 +355,13 @@
         </div>
         <div class="userinput-item">
           <label for="purpose">Purpose of Lab in Brief<span class="required"> *</span></label>
-          <input type="text" id="fieldfill" placeholder="Purpose" [(ngModel)]="purposeoflab" />
+          <input type="text" placeholder="Purpose" [(ngModel)]="purposeoflab" />
         </div>
         <div class="userinput-item">
           <label for="description">Description<span class="required">
               *</span>
           </label>
-          <input type="text" id="fieldfill" placeholder="Description" [(ngModel)]="description" />
+          <input type="text" placeholder="Description" [(ngModel)]="description" />
         </div>
       </div>
 
@@ -447,7 +449,7 @@
               <mat-radio-button value="Yes">Yes</mat-radio-button>
               <mat-radio-button value="No">No</mat-radio-button>
               <p class="radio-explain" *ngIf="ACLradio === 'Yes'">
-                <strong>Note:</strong> ACL setup will take mininmum 15 days.
+                <strong>Note:</strong> ACL setup will take minimum 15 days.
                 For
                 setup
                 <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/1.+ACL+Concept"
@@ -463,18 +465,18 @@
           <div class="userinput-item">
             <label for="greenPorts">No. of Green Ports<span class="required">
                 *</span></label>
-            <input type="text" id="fieldfill" placeholder="Green Ports" [(ngModel)]="greenports" />
+            <input type="text" placeholder="Green Ports" [(ngModel)]="greenports" />
           </div>
           <div class="userinput-item">
             <label for="yellowPort">No. of Yellow Ports<span class="required">
                 *</span></label>
-            <input type="text" id="fieldfill" placeholder="Yellow Ports" [(ngModel)]="yellowports" />
+            <input type="text" placeholder="Yellow Ports" [(ngModel)]="yellowports" />
           </div>
           <div class="userinput-item">
             <label for="redPorts">No. of Red Ports<span class="required">
                 *</span>
             </label>
-            <input type="text" id="fieldfill" placeholder="Red Ports" [(ngModel)]="redports" />
+            <input type="text" placeholder="Red Ports" [(ngModel)]="redports" />
           </div>
         </div>
       </div>
@@ -501,15 +503,15 @@
 
             <div class="userinput-item">
               <label for="size">Size (in ft)</label>
-              <input type="text" id="fieldfillsize" class="labsizelwh" placeholder="Length" />
-              <input type="text" id="fieldfillsize" class="labsizelwh" placeholder="Width" />
-              <input type="text" id="fieldfillsize" class="labsizelwh" placeholder="Height" />
+              <input type="text" class="labsizelwh" placeholder="Length" />
+              <input type="text" class="labsizelwh" placeholder="Width" />
+              <input type="text" class="labsizelwh" placeholder="Height" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
 
             <div class="userinput-item">
               <label for="count">Count of racks/tables</label>
-              <input type="text" id="fieldfill" placeholder="Count" />
+              <input type="text" placeholder="Count" />
               <!-- [(ngModel)]="countselect" -->
             </div>
           </div>
@@ -517,17 +519,17 @@
           <div class="userinput-container">
             <div class="userinput-item">
               <label for="seatingfacility">Seating Facility</label>
-              <input type="text" id="fieldfill" placeholder="Seating Facility" />
+              <input type="text" placeholder="Seating Facility" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
             <div class="userinput-item">
               <label for="powerloadbox">Power Load box</label>
-              <input type="text" id="fieldfill" placeholder="Power Load box" />
+              <input type="text" placeholder="Power Load box" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
             <div class="userinput-item">
               <label for="solderingstation">Soldering station</label>
-              <input type="text" id="fieldfill" placeholder="Soldering station" />
+              <input type="text" placeholder="Soldering station" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
           </div>
@@ -535,12 +537,12 @@
           <div class="userinput-container">
             <div class="userinput-item">
               <label for="totallabspace ">Total Lab space</label>
-              <input type="text" id="fieldfill" placeholder="Total Lab space " />
+              <input type="text" placeholder="Total Lab space " />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
             <div class="userinput-item">
               <label for="freelabspace">Free Lab Space</label>
-              <input type="text" id="fieldfill" placeholder="Free Lab Space" />
+              <input type="text" placeholder="Free Lab Space" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
           </div>
@@ -549,12 +551,12 @@
           <div class="userinput-container">
             <div class="userinput-item">
               <label for="ACinfo">PAC</label>
-              <input type="text" id="fieldfill" placeholder="No. of PAC" />
+              <input type="text" placeholder="No. of PAC" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
             <div class="userinput-item">
               <label for="ACinfo">Office AC</label>
-              <input type="text" id="fieldfill" placeholder="No. of office AC" />
+              <input type="text" placeholder="No. of office AC" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
           </div>
@@ -563,12 +565,12 @@
           <div class="userinput-container">
             <div class="userinput-item">
               <label for="powersupplyinfo">Voltage(V)</label>
-              <input type="text" id="fieldfill" placeholder="voltage" />
+              <input type="text" placeholder="voltage" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
             <div class="userinput-item">
               <label for="powersupplyinfo">Plug point near the table</label>
-              <input type="text" id="fieldfill" placeholder="Count" />
+              <input type="text" placeholder="Count" />
               <!-- [(ngModel)]="sizeselect" -->
             </div>
           </div>
