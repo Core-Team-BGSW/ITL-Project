@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="text">
+    Apply for role
+  </div>
+  <form action="#">
+    <div class="form-row">
+      <div class="input-data">
+        <input type="text" required>
+        <div class="underline"></div>
+        <label for>NT ID</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="input-data">
+        <label for>Role</label><br>
+        <select required>
+          <option value></option>
+          <option value="LabCoordinator">Lab Coordinator</option>
+          <option value="LocalITL">Local ITL</option>
+          <option value="LocalITLProxy">Local ITL Proxy</option>
+          <option value="KAM">KAM</option>
+          <option value="DH">DH</option>
+          <!-- Add more options as needed -->
+          <div class="underline"></div>
+        </select>
+
+      </div>
+    </div>
+
+    <br />
+    <div class="form-row submit-btn">
+      <div class="input-data">
+        <div class="inner"></div>
+        <input type="submit" value="Apply">
+      </div>
+    </div>
