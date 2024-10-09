@@ -3,28 +3,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
 /* styles.css or home.component.css */
-
 .container {
   display: flex;
-  flex-direction: column; /* Stack navbar and main content vertically */
-  height: 100vh; /* Full viewport height */
-  //overflow: hidden; /* Prevent overflow on the main container */
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  margin-left: 40px; /* Margin when sidebar is collapsed */
+  width: calc(100% - 25px);
 }
 
 .main-content {
-  display: flex; /* Align sidebar and content side by side */
-  flex: 1; /* Take up remaining space */
+  display: flex;
+  flex: 1;
 }
 
 app-sidebar {
-  width: 250px; /* Adjust the width of your sidebar */
-  height: calc(100vh - 64px); /* Full height minus navbar height (adjust if navbar height changes) */
-
+  transition: width 0.5s ease;
+  height: calc(100vh - 64px);
+  width: 25px; /* Default width when collapsed */
 }
 
+/* Content styles */
 .content {
   flex: 1; /* Take the remaining space */
   padding: 20px; /* Some padding */
   overflow-y: auto; /* Enable scrolling for content */
   height: calc(100vh - 64px); /* Full height minus navbar height */
+  position: relative;
+  transition: margin-left 0.5s ease, width 0.5s ease; /* Smooth transition for margin and width */
+}
+
+/* Default margin and width when sidebar is collapsed */
+.content {
+  margin-left: 40px; /* Margin when sidebar is collapsed */
+  width: calc(100% - 25px); /* Width when sidebar is collapsed */
+}
+
+/* Expanded sidebar styles */
+app-sidebar.open {
+  width: 250px; /* Width when expanded */
+}
+
+/* Adjust content styles when sidebar is expanded */
+app-sidebar.open ~ .container
+app-sidebar.open ~ .content {
+  margin-left: 250px; /* Margin when sidebar is expanded */
+  width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
 }

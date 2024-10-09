@@ -159,16 +159,15 @@ dataList!: any[];
   searchQuery: string = '';
   filteredLabList: any[] = [];
 
-  //To fetch lab details
+//Kranti
+//To fetch lab details
 
   constructor(private http:HttpClient) {}
 
   ngOnInit(): void {
     this.loadLabList();
   }
-
-
-
+//Endpoint added to fetch lab list
   private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
 
   loadLabList(): void {
