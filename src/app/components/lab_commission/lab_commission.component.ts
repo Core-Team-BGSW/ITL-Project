@@ -1,3 +1,5 @@
+// Edited by Jay Jambhale
+
 import { HomeComponent } from '../../admin/home/home.component';
 import { SidebarComponent } from '../../admin/sidebar/sidebar.component';
 import { AngularModule } from '../../angularmodule/angularmodule.module';
@@ -30,15 +32,6 @@ interface Location {
   Region: string;
   Country: string;
   LocationCode: string;
-}
-interface ExcelRow {
-  [key: string]: any; // Dynamic key-value pairs for cell values
-}
-
-interface ExcelHeader {
-  header: string;
-  rows: ExcelRow[];
-  isMissing: boolean;
 }
 @Component({
   selector: 'app-lab_commission',
@@ -139,12 +132,17 @@ export class LabCommissionComponent {
   nextUniqueId: number = 1; // Initial unique ID counter
   uniqueInstanceId: string = '';
   selectedHeader: string = '';
+  gbOptions: string[] = [];
+  kamSuggestions: string[] = []; // All available KAM suggestions
+  departmentSuggestions: string[] = [];
+  dhSuggestions: string[] = []; // All available DH suggestions
+  filteredDepartmentSuggestions: string[] = [];
+  filteredDHSuggestions: string[] = []; // Filtered DH suggestions
+  filteredKAMSuggestions: string[] = []; // Filtered suggestions based on user input
 
   constructor(
     private dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
-    private fb: FormBuilder,
-    private dateAdapter: DateAdapter<Date>,
     private toastr: ToastrService,
     private dataService: DataService
   ) {}
@@ -533,8 +531,8 @@ export class LabCommissionComponent {
         },
       })
       .then((response) => {
+        this.toastr.success('Process initiated', 'Waiting for approval');
         console.log('File uploaded successfully:', response.data);
-
         // Clear selected file and reset form state
         this.selectedFile = null;
         this.excelData = [];
@@ -585,7 +583,6 @@ export class LabCommissionComponent {
           console.error('Error:', error);
           alert('An unknown error occurred.');
         }
-
         // Trigger change detection to update UI
         this.changeDetectorRef.detectChanges();
       });
@@ -749,15 +746,6 @@ export class LabCommissionComponent {
   onDateSelected(date: Date) {
     console.log('Selected date:', date);
   }
-
-  gbOptions: string[] = [];
-  kamSuggestions: string[] = []; // All available KAM suggestions
-  departmentSuggestions: string[] = [];
-  dhSuggestions: string[] = []; // All available DH suggestions
-  filteredDepartmentSuggestions: string[] = [];
-  filteredDHSuggestions: string[] = []; // Filtered DH suggestions
-  filteredKAMSuggestions: string[] = []; // Filtered suggestions based on user input
-
   GBChange(event: any) {
     this.selectedGB = event.target.value;
     if (this.selectedGB) {
