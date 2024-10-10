@@ -28,8 +28,10 @@
       <p><strong>Description:</strong> {{ description }}</p>
 
       <p>
-        <strong>Is lab going to procure new equipment for Engineering/Red
-          Zone?</strong>
+        <strong
+          >Is lab going to procure new equipment for Engineering/Red
+          Zone?</strong
+        >
         {{ cmdbradio === "Yes" ? "YES" : "NO" }}
       </p>
       <p>
@@ -38,7 +40,7 @@
       </p>
       <p>
         <strong>Self Audit Due Date:</strong>
-        {{ selectedDate | date:'MM/dd/yyyy'}}
+        {{ selectedDate | date : "MM/dd/yyyy" }}
       </p>
       <p>
         <strong>ACL Required:</strong>
@@ -53,6 +55,6 @@
   </div>
 </div>
 <div class="dialog-actions">
-  <button mat-button (click)="onformsubmit()">Submit</button>
+  <button mat-button (click)="onFormSubmit()">Submit</button>
   <button mat-button (click)="closeDialog()">Back</button>
 </div>
