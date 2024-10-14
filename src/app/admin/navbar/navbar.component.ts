@@ -19,7 +19,7 @@ export class NavbarComponent {
   onApplyForRoleClick(event: MouseEvent): void {
     event.preventDefault(); // Prevent the default anchor behavior
 
-    const confirmMessage = "Please watch the video and take the quiz before applying for the role.";
+    const confirmMessage = "You'll have to watch the video and take the quiz before applying for the role. Please, click on 'OK' to proceed";
     if (confirm(confirmMessage)) {
       // User clicked "OK"
       // Redirect to a specific section of the homepage, e.g., #video

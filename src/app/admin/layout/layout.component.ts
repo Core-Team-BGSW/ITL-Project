@@ -16,7 +16,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
   selector: 'app-layout',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatSidenavModule,
-    MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent, NavbarComponent],
+  MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent, NavbarComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })

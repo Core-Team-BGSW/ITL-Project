@@ -145,7 +145,6 @@
   z-index: 99;
   transition: all 0.5s ease;
 }
-
 .sidebar.open{
   width: 250px;
 }
@@ -285,6 +284,7 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.4s;
+
 }
 .sidebar.open li a .links_name{
   opacity: 1;
@@ -353,15 +353,24 @@
   width: 50px;
   background: none;
 }
-.dropdown-list {
-  display: none; /* Initially hide nested items */
-  padding-left: 20px; /* Indent nested items */
+
+
+/* Rotate the arrow when the dropdown is active */
+.dropdown-toggle.active .dropdown-arrow {
+  transform: rotate(180deg);
 }
 
-.dropdown-toggle.active + .dropdown-list {
-  display: block; /* Show nested items when parent is active */
+.sidebar .dropdown-list {
+  display: none; /* Initially hide dropdown list */
 }
 
+.sidebar .dropdown-toggle.active + .dropdown-list {
+  display: block; /* Show dropdown list when toggle is active */
+}
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+  margin-left: auto; /* Push the arrow to the right */
+}
 .dropdown-toggle {
   cursor: pointer; /* Change cursor to pointer for dropdown toggle */
 }

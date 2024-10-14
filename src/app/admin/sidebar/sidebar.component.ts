@@ -18,18 +18,11 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarComponent {
   isOpen = false;
+  isDropdownOpen = false;
 
-  toggleSidebar() {
-    this.isOpen = !this.isOpen;
-  }
-
-
-  toggleMenu() {
-    this.isOpen = !this.isOpen;
-  }
-
-  menuItemClicked(item: string) {
-    console.log(`Clicked on ${item}`);
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+    console.log('Dropdown is now', this.isDropdownOpen ? 'open' : 'closed');
   }
 
 

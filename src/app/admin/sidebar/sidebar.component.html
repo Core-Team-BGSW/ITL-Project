@@ -94,31 +94,17 @@
       </a>
       <span class="tooltip">Lab Commission</span>
     </li>
+
     <li>
-      <a href="javascript:void(0);" class="dropdown-toggle">
-        <i class="fa-solid fa-tag"></i>
-        <span class="links_name">Lab Operations</span>
-        <!-- <i class="fas fa-chevron-down"></i> -->
+      <a routerLink="/self-check">
+        <i class="fa-solid fa-list-check"></i>
+        <span class="links_name">Self check</span>
       </a>
-      <ul class="dropdown-list">
-        <li>
-          <a routerLink="/operation1">
-            <span class="links_name">Operation 1</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/operation2">
-            <span class="links_name">Operation 2</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/operation3">
-            <span class="links_name">Operation 3</span>
-          </a>
-        </li>
-      </ul>
-      <span class="tooltip">Lab Operations</span>
+      <span class="tooltip">Self-check</span>
     </li>
+
+
+
     <li>
       <a routerLink="/lab-decommission">
         <i class="fa-solid fa-file-zipper"></i>
@@ -140,43 +126,3 @@
   </ul>
 </div>
 
-<script>
-let sidebar = document.querySelector(".sidebar");
-let closeBtn = document.querySelector("#btn");
-let searchBtn = document.querySelector(".fas.fa-search");
-
-closeBtn.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
-  menuBtnChange();
-});
-
-searchBtn.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
-  menuBtnChange();
-});
-
-function menuBtnChange() {
-  if (sidebar.classList.contains("open")) {
-    closeBtn.classList.replace("fas fa-bars", "fas fa-times");
-  } else {
-    closeBtn.classList.replace("fas fa-times", "fas fa-bars");
-  }
-}
-
-// Toggle dropdown items
-let dropdownToggles = document.querySelectorAll(".dropdown-toggle");
-
-dropdownToggles.forEach(toggle => {
-  toggle.addEventListener("click", function() {
-    this.classList.toggle("active"); // Add/remove active class
-    let dropdownList = this.nextElementSibling; // Get the dropdown list
-    if (dropdownList.style.display === "block") {
-      dropdownList.style.display = "none"; // Hide the dropdown
-    } else {
-      dropdownList.style.display = "block"; // Show the dropdown
-    }
-  });
-});
-
-
-</script>

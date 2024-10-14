@@ -1,15 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
-
-/* styles.css or home.component.css */
 .container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  margin-left: 40px; /* Margin when sidebar is collapsed */
-  width: calc(100% - 25px);
+  width: calc(100% - 25px); /* Adjusted width */
 }
 
 .main-content {
@@ -28,14 +22,10 @@ app-sidebar {
   flex: 1; /* Take the remaining space */
   padding: 20px; /* Some padding */
   overflow-y: auto; /* Enable scrolling for content */
-  height: calc(100vh - 64px); /* Full height minus navbar height */
+  height: calc(100vh - 80px); /* Full height minus navbar height */
   position: relative;
   transition: margin-left 0.5s ease, width 0.5s ease; /* Smooth transition for margin and width */
-}
-
-/* Default margin and width when sidebar is collapsed */
-.content {
-  margin-left: 40px; /* Margin when sidebar is collapsed */
+  margin-left: 40px; /* Initial margin when sidebar is collapsed */
   width: calc(100% - 25px); /* Width when sidebar is collapsed */
 }
 
@@ -44,9 +34,12 @@ app-sidebar.open {
   width: 250px; /* Width when expanded */
 }
 
-/* Adjust content styles when sidebar is expanded */
-app-sidebar.open ~ .container
-app-sidebar.open ~ .content {
-  margin-left: 250px; /* Margin when sidebar is expanded */
+/* Adjust content when sidebar is open */
+// .main-content app-sidebar.open + .content {
+//   margin-left: 250px; /* Adjust margin when sidebar is expanded */
+//   width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
+// }
+.main-content .open + .content {
+  margin-left: 250px; /* Adjust margin when sidebar is expanded */
   width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
 }
