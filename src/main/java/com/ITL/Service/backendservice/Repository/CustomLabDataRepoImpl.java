@@ -41,7 +41,7 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
         operations.add(Aggregation.match(Criteria.where("entityName").is(parameters.get("entityName"))));
         operations.add(Aggregation.lookup("entity", "entityName", "entityName", "entityDetails"));
         operations.add(Aggregation.unwind("entityDetails"));
-
+        
 
         if(parameters.containsKey("locationCode"))
         {
@@ -107,6 +107,7 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
         return res.getMappedResults();
     }
 
+    // labName,departement,secondary lab coord.
     public ResponseEntity<String> deleteByPrimaryLabCoordinator(String primaryLabCord) {
         Query query = new Query();
         query.addCriteria(Criteria.where("primary_lab_cord").is(primaryLabCord));
