@@ -1,16 +1,15 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
-
-.button{
-  text-decoration: none;
-  margin-left: 0%;
-  display: flex;
-  list-style-type: none;
-  display: inline-table;
-  padding: 4px;
-
+.note-choosemethod {
+  color: brown;
+  font-size: medium;
+  font-style: italic;
 }
 
-.importfile{
+p.choosemethod {
+  color: #2a0845;
+  font-size: 22px;
+}
+
+.importfile {
   gap: 20px;
   background: white;
   border: 0 none;
@@ -25,123 +24,107 @@
   width: 95%;
 }
 
-.note-choosemethod{
-  color:brown;
-  font-size: medium;
-  font-style: italic;
+.mat-mdc-card-content {
+  display: contents;
+  padding: 0px;
+  border-radius: 0%;
 }
 
+.mat-mdc-card {
+  display: block;
+  border: 0px;
+  border-radius: 0%;
+  box-shadow: none;
+  margin-top: 16px;
+}
 
-.heading-form p{
+.methodheading p {
   color: #000000;
-  align-items: center;
-  text-align: center;
-  font-size: 38px;
-  background-color: #71c4ff;
-
-  padding: 14px;
-}
-
-.heading-form {
-  padding: 0; /* Remove default padding if any */
-  margin: 0;  /* Remove default margin if any */
-  text-align: left; /* Ensure text alignment in the container is left */
-}
-
-.heading-form ul {
-  padding: 0; /* Remove default padding from the ul element */
-  margin: 0;  /* Remove default margin from the ul element */
-  list-style-type: none; /* Remove default list styling */
-}
-
-.heading-form ul li {
   font-size: 36px;
   font-weight: bold;
   padding: 16px;
   text-align: left;
   box-sizing: border-box;
   border-radius: 4px;
-  border-bottom: 4px solid #b6ede8; /* Add a bottom border */
-  width: 100%; /* Make sure it uses the full width of its parent */
-  margin: 0; /* Remove any default margin */
-  //background-color: #fff; /* Optional: set background color for visibility */
-  list-style-type: none;
-}
-
-
-.heading-import p{
-  color: #000000;
-  //align-items: center;
-  font-size: 36px;
-  font-weight: bold;
-  padding: 16px;
-  text-align: left;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border-bottom: 4px solid #b6ede8; /* Add a bottom border */
+  border-bottom: 4px solid #b6ede8;
+  /* Add a bottom border */
   width: 96%;
+}
+
+.file-name {
+  margin-left: 10px;
+  /* Add some space between the button and file name */
+  font-weight: bold;
+  /* Make the file name bold */
 }
 
 .table-container {
   max-width: 100%;
-  height: 600px; /* Ensures the container does not exceed the viewport width */
-  overflow-x: auto; /* Adds horizontal scrolling if needed */
-
-  margin-top: 20px; /* Adjust spacing if necessary */
+  height: 600px;
+  /* Ensures the container does not exceed the viewport width */
+  overflow-x: auto;
+  /* Adds horizontal scrolling if needed */
+  margin-top: 20px;
+  /* Adjust spacing if necessary */
 }
-
-
-.choosemethod-body{
-  overflow: hidden;
-}
-
 
 .excel-table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 20px; /* Optional: Adjust spacing */
-}
-
-.excel-table th, .excel-table td {
-  border: 1px solid #ddd; /* Border style */
-  padding: 8px; /* Cell padding */
-  text-align: center; /* Optional: Align text */
+  margin-top: 20px;
+  /* Optional: Adjust spacing */
 }
 
 .excel-table th {
-  background-color: #219557; /* Optional: Header background color */
+  border: 2px solid darkgray;
+  /* Set border color for header */
+  padding: 10px;
+  /* Add some padding */
+  text-align: left;
+  /* Align text to the left */
+  background-color: #f2f2f2;
+  /* Optional: light background for headers */
+}
+
+.excel-table td {
+  border: 2px solid darkgray;
+  /* Set border color for cells */
+  padding: 10px;
+  /* Add some padding */
+  text-align: left;
+  /* Align text to the left */
+}
+
+.missing {
+  background-color: red;
+  /* Highlight color */
   color: white;
-  text-decoration: none;
-  font-weight: lighter;
-  box-sizing: content-box;
+  /* Text color */
 }
 
-
-
-
-
-
-
-.importbutton{
-  margin-top: 20px;
-}
-.importbutton a{
-  font-weight: bold;
+.importbutton {
+  margin-top: 16px;
+  display: flex;
+  gap: 20px;
 }
 
-
-.importbutton input[type='file'] {
-  // position: absolute;
+input[type="text"] {
+  width: 60%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 16px;
-  right:auto;
-  top: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
 }
 
 .subbutton {
-  background-color: #37A264; /* darkgreen background color */
-  color: #fff; /* White text color */
+  background-color: #37A264;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -149,86 +132,78 @@
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 24px;
-
-
-
-
 }
-
-
 
 .subbutton:hover {
-  background-color: #219557; /* green on hover */
+  background-color: #219557;
+  /* green on hover */
 }
 
-.sub{
+.sub {
   display: flex;
   justify-content: center;
 }
 
-
-
-.previewbutton{
-  background-color: #C535BC; /* darkgreen background color */
-  color: #fff; /* White text color */
+.previewbutton {
+  background-color: #C535BC;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
   margin-top: 20px;
-
-
 }
-.previewbutton:hover{
+
+.previewbutton:hover {
   background-color: #9E2896;
 }
 
 .previewbutton:disabled {
-  background-color: #ccc; /* Light gray background when disabled */
-  color: #666; /* Darker text color when disabled */
-  cursor: not-allowed; /* Disable cursor */
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
-
-
-.templatebutton{
-  background-color: #56B0FF; /* darkgreen background color */
-  color: #fff; /* White text color */
+.templatebutton {
+  background-color: #56B0FF;
+  color: #fff;
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
   margin-top: 20px;
-
-
+  font-size: 16px;
 }
-.templatebutton:hover{
+
+.templatebutton:hover {
   background-color: rgb(29, 112, 236);
 }
 
-
-.buttons{
+.filter-container {
   display: flex;
-  gap: 20px;
+  align-items: center;
 }
 
+.filter-container select,
+.filter-container input {
+  margin-right: 10px;
+  width: 50%;
+}
 
-
-.button2{
+.button2 {
   margin-right: 20px;
 }
 
-.previewtextheading h4{
-
-
+.previewtextheading h4 {
   margin-top: 30px;
   justify-content: left;
   display: flex;
-
   color: rgb(252, 251, 249);
   padding: 10px;
   border-radius: 8px;
@@ -236,57 +211,49 @@
   border-bottom: 4px solid #18837E;
 }
 
+p {
+  font-size: 18px;
+  padding-top: 4px;
+  color: #2e72ee;
+  font-weight: 600;
+}
 
 select {
   width: 100%;
   padding: 1em;
-  //border-bottom: 1px solid #990404;
   border-radius: 0.5em;
   box-sizing: border-box;
-  border-color:#e0e2e5; /* Ensures padding is included in width */
+  border-color: #e0e2e5;
   font-size: 16px;
   background: #ffffff;
   transition: background 0.3s;
 }
 
 .selected {
-  background: #f0f0f0; /* Color when an option is selected */
+  background: #f0f0f0;
 }
 
-option{
-
+option {
   width: 100%;
   padding: 1em;
-  //border-bottom: 1px solid #990404;
   border-radius: 0.5em;
   box-sizing: border-box;
-  border-color:#e0e2e5; /* Ensures padding is included in width */
+  border-color: #e0e2e5;
   font-size: 16px;
   background: #ffffff;
-
 }
 
-
-select:hover{
+select:hover {
   border-color: #54b5ff;
   border-width: 2px;
   background: #e8f1ff;
 }
 
-#entitySelect option {
-  background-color: #fff; /* Default background color */
-  color: #333; /* Default text color */
-  gap: 20px;
-}
-
-
-
-.dropdown-container {
+.userinput-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   background: white;
-
   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
@@ -297,100 +264,75 @@ select:hover{
   margin-top: 10px;
 }
 
-.dropdown-item {
+.userinput-item {
   flex: 1;
-  margin-right: 10px; /* Adjust margin as needed */
-
-
+  margin-right: 10px;
 }
 
-/* Optional: Style for labels and select elements */
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight:600;
+  font-weight: 600;
   font-size: 18px;
-
 }
 
-p{
+p {
   font-size: 18px;
   padding-top: 4px;
   color: #2e72ee;
   font-weight: 600;
 }
 
-.sitedetails{
-  margin-top: 20px;
-
-}
-
-.required{
+.required {
   color: red;
 }
 
-
-.dropdown-item input[type="text"] {
+.userinput-item input[type="text"] {
   /* Style for the input field */
-  width: 100%; /* Adjust width as needed */
-  //border-bottom: 1px solid #000000; /* Border style */
-  border-radius: 4px; /* Rounded corners */
-  box-sizing: border-box; /* Ensure padding and border are included in width */
+  width: 100%;
+  /* Adjust width as needed */
+  border-radius: 4px;
+  /* Rounded corners */
+  box-sizing: border-box;
+  /* Ensure padding and border are included in width */
   color: #000000;
   padding: 1em;
-  //border-bottom: 1px solid #990404;
   border-radius: 0.5em;
-  border-color:#e0e2e5; /* Ensures padding is included in width */
+  border-color: #e0e2e5;
+  /* Ensures padding is included in width */
   font-size: 16px;
   background: #ffffff;
   transition: background 0.3s;
 }
 
-.dropdown-item input[type="text"]:focus {
+.userinput-item input[type="text"]:focus {
   /* Style when input field is focused */
-  outline: none; /* Remove default outline */
-  border-color: #4d90fe; /* Example: Change border color on focus */
-  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5); /* Example: Add a box shadow */
+  outline: none;
+  /* Remove default outline */
+  border-color: #4d90fe;
+  /* Example: Change border color on focus */
+  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
+  /* Add a box shadow */
 }
 
-.dropdown-item input:disabled {
-  background-color: #f2f2f2; /* Light gray background */
-  color: #999; /* Light gray text color */
-  cursor: not-allowed; /* Show a "not-allowed" cursor */
-  border: 1px solid #ccc; /* Light gray border */
-  padding: 1em; /* Padding to maintain consistency */
-  /* You can add more styles as needed */
+.userinput-item input:disabled {
+  background-color: #f2f2f2;
+  /* Light gray background */
+  color: #999;
+  /* Light gray text color */
+  cursor: not-allowed;
+  /* Show a "not-allowed" cursor */
+  border: 1px solid #ccc;
+  /* Light gray border */
+  padding: 1em;
+  /* Padding to maintain consistency */
 }
 
-
-.fieldfill{
-  color: black;
+.labsizelwh {
+  margin-top: 3px;
 }
 
-.labsizelwh{
-margin-top: 3px;
-}
-
-.ACL-container{
-
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  background: white;
-  border: 0 none;
-  border-radius: 0px;
-  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-  padding: 10px 20px;
-  box-sizing: border-box;
-  width:fit-content;
-  margin: 0 10%;
-  margin-bottom: 20px;
-  margin-left: 6px;
-  margin-top: 10px;
-
-}
-
-.choosemethod-container{
+.choosemethod-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -400,7 +342,7 @@ margin-top: 3px;
   //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 8px 20px;
   box-sizing: border-box;
-  width:90%;
+  width: 90%;
   margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 6px;
@@ -408,14 +350,13 @@ margin-top: 3px;
 
 }
 
+.choosemethod-container.radiotext {
+  font-size: 24px;
+}
 
+.radiocontainer {
 
-
-
-
-.cmdb-container{
-
-  display: flex;
+  display: block;
   justify-content: space-between;
   gap: 20px;
   background: white;
@@ -424,38 +365,30 @@ margin-top: 3px;
   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
-  width:100%;
-  margin: 0 10%;
+  width: 96%;
+  //margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 6px;
   margin-top: 10px;
 }
 
-.mat-mdc-card-content {
-  display: contents;
-  padding: 0px;
-  border-radius: 0%;
-}
-.mat-mdc-card{
-  display: block;
-  border: 0px;
-  border-radius: 0%;
-  box-shadow: none;
-  margin-top: 16px;
+.date-picker-container {
+  margin-bottom: 8px;
+  /* Optional: Add spacing below date picker */
 }
 
-
-.form-button-container{
+.form-button-container {
   display: flex;
-  justify-content:center;
-
+  justify-content: center;
 }
 
-.form-button-sub{
-  background-color: #22bf49; /* darkgreen background color */
-  color: #fff; /* White text color */
+.form-button-sub {
+  background-color: #22bf49;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -464,9 +397,11 @@ margin-top: 3px;
   margin-left: 20px
 }
 
-.form-button-res{
-  background-color: #0daeff; /* darkgreen background color */
-  color: #fff; /* White text color */
+.form-button-res {
+  background-color: #0daeff;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -476,23 +411,18 @@ margin-top: 3px;
   margin-left: 20px
 }
 
-.portdetails{
+.portdetails {
   margin-bottom: 16px;
   margin-top: 16px;
 }
 
-
-.choosemethod{
-  color: #2a0845;
-}
-
-.cmdb-sharedlabflex{
+.radioflex {
   display: flex;
   gap: 40px;
 
 }
 
-.cmdb-explain {
+.radio-explain {
   color: #000000;
   font-size: small;
 }
@@ -507,9 +437,12 @@ margin-top: 3px;
 }
 
 .arrow {
-  font-size: 28px; /* Adjust size as needed */
-  margin-left: 5px; /* Add spacing between "Other" and arrow */
-  transition: transform 0.3s ease; /* Smooth transition for rotation */
+  font-size: 28px;
+  /* Adjust size as needed */
+  margin-left: 5px;
+  /* Add spacing between "Other" and arrow */
+  transition: transform 0.3s ease;
+  /* Smooth transition for rotation */
 }
 
 
@@ -518,18 +451,22 @@ margin-top: 3px;
   from {
     transform: rotate(0);
   }
+
   to {
     transform: rotate(180deg);
   }
 }
 
 .expanded {
-  animation: rotate180 0.3s forwards; /* Play the animation forwards */
+  animation: rotate180 0.3s forwards;
+  /* Play the animation forwards */
 }
 
 .collapsed {
-  animation: rotate180 0.3s reverse; /* Reverse the animation */
+  animation: rotate180 0.3s reverse;
+  /* Reverse the animation */
 }
+
 .other-section {
   margin-top: 10px;
   padding: 10px;
@@ -540,8 +477,33 @@ margin-top: 3px;
 
 hr {
   border: none;
-  border-top: 1px solid #ccc; /* Adjust color and thickness as needed */
+  border-top: 1px solid #ccc;
+  /* Adjust color and thickness as needed */
   margin-top: 12px;
   margin-bottom: 12px;
 
+}
+
+/* your-style.css */
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  position: absolute;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.suggestions-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
 }

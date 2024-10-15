@@ -192,6 +192,15 @@
   color: black !important; /* Add !important to override other styles if necessary */
 }
 
+.main-heading {
+font-size: 2.5rem; /* Adjust font size as needed */
+font-weight: bold; /* Adjust font weight as needed */
+margin-top: 30px; /* Remove default margin */
+padding-top: 30px;
+color: black;
+}
+.description{
+color: rgb(60, 59, 59);
 
 .left-top,
 .right-top,
@@ -696,4 +705,5 @@ border-radius: 30px;
   &:hover {
     background-color: #0056b3;
   }
+}
 }

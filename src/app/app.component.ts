@@ -1,12 +1,7 @@
 import { Component, InjectionToken } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import { SidebarComponent } from "./admin/sidebar/sidebar.component";
 import { LabCommissionComponent } from "./components/lab_commission/lab_commission.component";
-import {MatTabsModule} from '@angular/material/tabs';
 import { SelfCheckComponent } from './components/self-check/self-check.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
@@ -18,6 +13,8 @@ import { AuditComponent } from './components/audit/audit.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { LoginComponent } from './admin/login/login.component';
 import { LayoutComponent } from './admin/layout/layout.component';
+import { SelfAuditComponent } from './self-audit/self-audit.component';
+import { AngularModule } from './angularmodule/angularmodule.module';
 
 
 
@@ -32,11 +29,10 @@ import { LayoutComponent } from './admin/layout/layout.component';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterOutlet, MatSidenavModule, MatIconModule, MatButtonModule, MatToolbarModule,
-      SidebarComponent, LayoutComponent, RouterLink, LabCommissionComponent,MatTabsModule,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
+    imports: [RouterOutlet,
+      SidebarComponent, LayoutComponent, RouterLink, LabCommissionComponent,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
       ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatListModule,DialogdecommissionComponent,
-      AuditComponent,ToastrModule, LoginComponent
-    ]
+      AuditComponent,ToastrModule, LoginComponent, SelfAuditComponent, AngularModule]
 
 })
 export class AppComponent {

@@ -7,6 +7,8 @@ import { FilterPipe } from '../../filter.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
+import { DataService } from '../../data.service';
+
 
 @Component({
   selector: 'app-lab-decommission',
@@ -23,14 +25,15 @@ export class LabDecommissionComponent implements OnInit {
   filteredLabList: any[] = [];
   expandedLabId: string | null = null;
   readonly dialog = inject(MatDialog);
-  
+
+
   //Kranti Sonawane
   //To fetch lab details
   private http = inject(HttpClient);
   //Integrated endpoint to fetch lab data
   private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
 
-  constructor() {}
+  constructor(private dataService : DataService) {}
 
   ngOnInit(): void {
     this.loadLabList();
@@ -50,19 +53,20 @@ export class LabDecommissionComponent implements OnInit {
 
   removeLab(id: string): void {
     if (confirm('Are you sure you want to remove this lab?')) {
-      this.http.delete<void>(`${this.apiurl}/delete/${id}`)
-        .subscribe({
-          next: () => {
-            this.labList = this.labList.filter(lab => lab.id !== id);
-            this.filteredLabList = this.filteredLabList.filter(lab => lab.id !== id);
-            this.dialog.open(DialogdecommissionComponent, {
-              width: '40%',
-              height: '200px'
-            });
-            console.log('Lab removed successfully');
-          },
-          error: (err) => this.errorMessage = err
-        });
+      this.dataService.removeLab(id).subscribe({
+        next: () => {
+          // Remove the item from the local list
+          this.labList = this.labList.filter(lab => lab._id !== id);
+          this.filteredLabList = this.filteredLabList.filter(lab => lab._id !== id);
+          this.dialog.open(DialogdecommissionComponent, {
+            width: '40%',  /* Increase the width of the dialog */
+            height:'200px'  /* Increase the height of the dialog */
+
+          });
+        console.log('Lab removed successfully',id);
+        },
+        error: (err) => this.errorMessage = err
+      });
     }
   }
 
