@@ -7,14 +7,14 @@
           Choose Option<span class="required">*</span>
         </p>
         <p class="note-choosemethod">
-          For multiple lab commissions, "Import File" is recommended.
+          For multiple lab commissions, "Import File" method is recommended.
         </p>
         <section class="choosemethod-container">
           <mat-radio-group [(ngModel)]="choosemethod">
-            <mat-radio-button class="radiotext" value="method-formfill">
+            <mat-radio-button class="radiotext methodtext" value="method-formfill">
               Application Form
             </mat-radio-button>
-            <mat-radio-button class="radiotext" value="method-importfile">
+            <mat-radio-button class="radiotext methodtext" value="method-importfile">
               Import File
             </mat-radio-button>
           </mat-radio-group>
@@ -51,22 +51,35 @@
       <div *ngIf="previewVisible">
         <div class="previewtextheading">
           <h4>Preview of Excel Data</h4>
+          <p>Filter By <i class="fas fa-filter"></i></p>
+          <div class="filter-container">
+            <select [(ngModel)]="selectedHeader">
+              <option value="" disabled selected>Select a header</option>
+              <option *ngFor="let header of excelData" [value]="header.header">{{ header.header }}</option>
+            </select>
+
+            <input type="text" [(ngModel)]="filterValue" (input)="onFilterChange(selectedHeader, filterValue)"
+              placeholder="Filter by value" />
+          </div>
         </div>
 
         <div class="table-container">
           <table class="excel-table">
-            <!-- <thead>
+            <thead>
               <tr>
                 <th *ngFor="let header of excelData" [ngClass]="{'missing': header.isMissing}">
                   {{ header.header }}
                 </th>
               </tr>
-            </thead> -->
+            </thead>
             <tbody>
-              <tr *ngFor="let row of excelData[0]?.rows">
+              <tr *ngFor="let row of filteredData[0]?.rows">
                 <td *ngFor="let header of excelData" [ngClass]="{'missing': header.isMissing && !row[header.header]}">
                   {{ row[header.header] }}
                 </td>
+              </tr>
+              <tr *ngIf="filteredData[0]?.rows.length === 0">
+                <td [attr.colspan]="excelData.length">No matching data found.</td>
               </tr>
             </tbody>
           </table>
@@ -94,8 +107,8 @@
                 *</span></label>
             <select id="region" [(ngModel)]="selectedRegion" (change)="onRegionChange()">
               <option value>Select Region</option>
-              <option *ngFor="let region of regions" [value]="region">
-                {{ region }}
+              <option *ngFor="let region of uniqueRegions">
+                {{ region.region }}
               </option>
             </select>
           </div>
@@ -103,21 +116,21 @@
           <div class="userinput-item">
             <label for="countrySelect">Country<span class="required">
                 *</span></label>
-            <select id="country" [(ngModel)]="selectedCountry" (change)="onCountryChange()" [disabled]="!selectedRegion"
-              title="Please select Region">
+            <select id="countries" [(ngModel)]="selectedCountry" (change)="onCountryChange()"
+              [disabled]="!selectedRegion">
               <option value disabled selected>Select Country</option>
-              <option *ngFor="let country of countries" [value]="country">
+              <option *ngFor="let country of filteredCountries" [value]="country">
                 {{ country }}
               </option>
             </select>
           </div>
+
           <div class="userinput-item">
             <label for="code">Location-Code<span class="required">
                 *</span></label>
-            <select id="locationCode" [(ngModel)]="selectedCode" [disabled]="!selectedCountry"
-              title="Please Select Country">
-              <option value>Select Location Code</option>
-              <option *ngFor="let code of locationCodes" [value]="code">
+            <select id="locationSelect" [(ngModel)]="selectedCode" [disabled]="!selectedCountry">
+              <option value disableed selected>Select Location Code</option>
+              <option *ngFor="let code of filteredLocationCode" [value]="code">
                 {{ code }}
               </option>
             </select>
@@ -130,7 +143,7 @@
         <div class="userinput-item">
           <label for="entityselect">Entity <span class="required">
               *</span></label>
-          <select id="entitySelect" name="entity" (change)="entityChange($event)">
+          <select id="entitySelect" name="entity" [(ngModel)]="selectedEntity" (change)="entityChange($event)">
             <option value>Select Entity</option>
             <option value="BGSW">BGSW</option>
             <option value="BGSV">BGSV</option>
@@ -144,8 +157,9 @@
         </div>
         <div class="userinput-item">
           <label for="GBselect">GB <span class="required"> *</span></label>
-          <select id="GBSelect" name="GB" (change)="GBChange($event)">
+          <select id="GBSelect" name="GB" [(ngModel)]="selectedGB">
             <option value>Select GB</option>
+            <option value="DCIN">DCIN</option>
             <option *ngFor="let gb of gbOptions" [value]="gb">{{ gb
               }}</option>
           </select>
@@ -200,8 +214,7 @@
           <label for="deptselect">Department <span class="required">
               *</span></label>
           <input type="text" required placeholder="Department" [(ngModel)]="Dept" title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS"
-            #locationdept="ngModel" (focus)="showDepartmentSuggestions()" (input)="filterDepartmentSuggestions()"
-            (change)="onDepartmentChange()" />
+            #locationdept="ngModel" />
           <div *ngIf="
                 locationdept.invalid && showValidationMessage &&
                 (locationdept.dirty || locationdept.touched)
@@ -211,7 +224,7 @@
             </div>
           </div>
           <ul *ngIf="filteredDepartmentSuggestions.length > 0" class="suggestions-list">
-            <li *ngFor="let dep of filteredDepartmentSuggestions" (click)="selectDepartment(dep)">{{ dep }}</li>
+            <li *ngFor="let dep of filteredDepartmentSuggestions">{{ dep }}</li>
           </ul>
         </div>
         <div class="userinput-item">
@@ -266,7 +279,7 @@
             Department Head (DH) <span class="required"> *</span>
           </label>
           <input type="text" id="DH" name="DH" [(ngModel)]="DH" placeholder="NTID" required minlength="7"
-            (focus)="showDHSuggestions()" (input)="filterDHSuggestions()" #dhProxyInput="ngModel" />
+            #dhProxyInput="ngModel" />
           <div *ngIf="
                 dhProxyInput.invalid &&
                 (dhProxyInput.dirty || dhProxyInput.touched)
@@ -279,7 +292,7 @@
             </div>
           </div>
           <ul *ngIf="filteredDHSuggestions.length > 0" class="suggestions-list">
-            <li *ngFor="let dh of filteredDHSuggestions" (click)="selectDH(dh)">{{ dh }}</li>
+            <li *ngFor="let dh of filteredDHSuggestions">{{ dh }}</li>
           </ul>
         </div>
 
@@ -288,7 +301,7 @@
             Key Account Manager (KAM) <span class="required"> *</span>
           </label>
           <input type="text" id="KAM" name="KAM" [(ngModel)]="KAM" placeholder="NTID" required minlength="7"
-            #kamProxyInput="ngModel" (input)="filterKAMSuggestions()" (focus)="showKAMSuggestions()" />
+            #kamProxyInput="ngModel" />
           <div *ngIf="
                   kamProxyInput.invalid &&
                 (kamProxyInput.dirty || kamProxyInput.touched)
@@ -301,7 +314,7 @@
             </div>
           </div>
           <ul *ngIf="filteredKAMSuggestions.length > 0" class="suggestions-list">
-            <li *ngFor="let kam of filteredKAMSuggestions" (click)="selectKAM(kam)">{{ kam }}</li>
+            <li *ngFor="let kam of filteredKAMSuggestions">{{ kam }}</li>
           </ul>
         </div>
       </div>

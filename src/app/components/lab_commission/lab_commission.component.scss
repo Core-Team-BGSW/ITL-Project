@@ -1,4 +1,15 @@
-.importfile{
+.note-choosemethod {
+  color: brown;
+  font-size: medium;
+  font-style: italic;
+}
+
+p.choosemethod {
+  color: #2a0845;
+  font-size: 22px;
+}
+
+.importfile {
   gap: 20px;
   background: white;
   border: 0 none;
@@ -13,18 +24,13 @@
   width: 95%;
 }
 
-.note-choosemethod{
-  color:brown;
-  font-size: medium;
-  font-style: italic;
-}
-
 .mat-mdc-card-content {
   display: contents;
   padding: 0px;
   border-radius: 0%;
 }
-.mat-mdc-card{
+
+.mat-mdc-card {
   display: block;
   border: 0px;
   border-radius: 0%;
@@ -32,73 +38,93 @@
   margin-top: 16px;
 }
 
-.methodheading p{
+.methodheading p {
   color: #000000;
-  //align-items: center;
   font-size: 36px;
   font-weight: bold;
   padding: 16px;
   text-align: left;
   box-sizing: border-box;
   border-radius: 4px;
-  border-bottom: 4px solid #b6ede8; /* Add a bottom border */
+  border-bottom: 4px solid #b6ede8;
+  /* Add a bottom border */
   width: 96%;
 }
 
-.file-name{
-  margin-left: 10px; /* Add some space between the button and file name */
-  font-weight: bold; /* Make the file name bold */
+.file-name {
+  margin-left: 10px;
+  /* Add some space between the button and file name */
+  font-weight: bold;
+  /* Make the file name bold */
 }
 
 .table-container {
   max-width: 100%;
-  height: 600px; /* Ensures the container does not exceed the viewport width */
-  overflow-x: auto; /* Adds horizontal scrolling if needed */
-  margin-top: 20px; /* Adjust spacing if necessary */
+  height: 600px;
+  /* Ensures the container does not exceed the viewport width */
+  overflow-x: auto;
+  /* Adds horizontal scrolling if needed */
+  margin-top: 20px;
+  /* Adjust spacing if necessary */
 }
 
 .excel-table {
   border-collapse: collapse;
   width: 100%;
-  margin-top: 20px; /* Optional: Adjust spacing */
+  margin-top: 20px;
+  /* Optional: Adjust spacing */
 }
 
-
 .excel-table th {
-  border: 2px solid darkgray; /* Set border color for header */
-  padding: 10px; /* Add some padding */
-  text-align: left; /* Align text to the left */
-  background-color: #f2f2f2; /* Optional: light background for headers */
+  border: 2px solid darkgray;
+  /* Set border color for header */
+  padding: 10px;
+  /* Add some padding */
+  text-align: left;
+  /* Align text to the left */
+  background-color: #f2f2f2;
+  /* Optional: light background for headers */
 }
 
 .excel-table td {
-  border: 2px solid darkgray; /* Set border color for cells */
-  padding: 10px; /* Add some padding */
-  text-align: left; /* Align text to the left */
+  border: 2px solid darkgray;
+  /* Set border color for cells */
+  padding: 10px;
+  /* Add some padding */
+  text-align: left;
+  /* Align text to the left */
 }
 
 .missing {
-  background-color: red; /* Highlight color */
-  color: white; /* Text color */
+  background-color: red;
+  /* Highlight color */
+  color: white;
+  /* Text color */
 }
 
-
-
-
-
-
-
-.importbutton{
+.importbutton {
   margin-top: 16px;
   display: flex;
   gap: 20px;
 }
 
+input[type="text"] {
+  width: 60%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease;
+}
+
 .subbutton {
-  background-color: #37A264; /* darkgreen background color */
-  color: #fff; /* White text color */
+  background-color: #37A264;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -106,79 +132,75 @@
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 24px;
-
-
-
-
 }
-
-
 
 .subbutton:hover {
-  background-color: #219557; /* green on hover */
+  background-color: #219557;
+  /* green on hover */
 }
 
-.sub{
+.sub {
   display: flex;
   justify-content: center;
 }
 
-
-
-.previewbutton{
-  background-color: #C535BC; /* darkgreen background color */
-  color: #fff; /* White text color */
+.previewbutton {
+  background-color: #C535BC;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
   margin-top: 20px;
-
-
 }
-.previewbutton:hover{
+
+.previewbutton:hover {
   background-color: #9E2896;
 }
 
 .previewbutton:disabled {
-  background-color: #ccc; /* Light gray background when disabled */
-  color: #666; /* Darker text color when disabled */
-  cursor: not-allowed; /* Disable cursor */
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
-
-
-.templatebutton{
-  background-color: #56B0FF; /* darkgreen background color */
-  color: #fff; /* White text color */
+.templatebutton {
+  background-color: #56B0FF;
+  color: #fff;
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
   margin-top: 20px;
   font-size: 16px;
-
-
 }
-.templatebutton:hover{
+
+.templatebutton:hover {
   background-color: rgb(29, 112, 236);
 }
 
+.filter-container {
+  display: flex;
+  align-items: center;
+}
 
+.filter-container select,
+.filter-container input {
+  margin-right: 10px;
+  width: 50%;
+}
 
-
-
-
-.button2{
+.button2 {
   margin-right: 20px;
 }
 
-.previewtextheading h4{
-
+.previewtextheading h4 {
   margin-top: 30px;
   justify-content: left;
   display: flex;
@@ -189,7 +211,7 @@
   border-bottom: 4px solid #18837E;
 }
 
-p{
+p {
   font-size: 18px;
   padding-top: 4px;
   color: #2e72ee;
@@ -199,51 +221,39 @@ p{
 select {
   width: 100%;
   padding: 1em;
-  //border-bottom: 1px solid #990404;
   border-radius: 0.5em;
   box-sizing: border-box;
-  border-color:#e0e2e5; /* Ensures padding is included in width */
+  border-color: #e0e2e5;
   font-size: 16px;
   background: #ffffff;
   transition: background 0.3s;
 }
 
 .selected {
-  background: #f0f0f0; /* Color when an option is selected */
+  background: #f0f0f0;
 }
 
-option{
+option {
   width: 100%;
   padding: 1em;
-  //border-bottom: 1px solid #990404;
   border-radius: 0.5em;
   box-sizing: border-box;
-  border-color:#e0e2e5; /* Ensures padding is included in width */
+  border-color: #e0e2e5;
   font-size: 16px;
   background: #ffffff;
 }
 
-
-select:hover{
+select:hover {
   border-color: #54b5ff;
   border-width: 2px;
   background: #e8f1ff;
 }
-
-#entitySelect option {
-  background-color: #fff; /* Default background color */
-  color: #333; /* Default text color */
-  gap: 20px;
-}
-
-
 
 .userinput-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   background: white;
-
   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
@@ -256,44 +266,40 @@ select:hover{
 
 .userinput-item {
   flex: 1;
-  margin-right: 10px; /* Adjust margin as needed */
-
-
+  margin-right: 10px;
 }
 
-/* Optional: Style for labels and select elements */
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight:600;
+  font-weight: 600;
   font-size: 18px;
-
 }
 
-p{
+p {
   font-size: 18px;
   padding-top: 4px;
   color: #2e72ee;
   font-weight: 600;
 }
 
-
-.required{
+.required {
   color: red;
 }
 
-
 .userinput-item input[type="text"] {
   /* Style for the input field */
-  width: 100%; /* Adjust width as needed */
-  //border-bottom: 1px solid #000000; /* Border style */
-  border-radius: 4px; /* Rounded corners */
-  box-sizing: border-box; /* Ensure padding and border are included in width */
+  width: 100%;
+  /* Adjust width as needed */
+  border-radius: 4px;
+  /* Rounded corners */
+  box-sizing: border-box;
+  /* Ensure padding and border are included in width */
   color: #000000;
   padding: 1em;
-  //border-bottom: 1px solid #990404;
   border-radius: 0.5em;
-  border-color:#e0e2e5; /* Ensures padding is included in width */
+  border-color: #e0e2e5;
+  /* Ensures padding is included in width */
   font-size: 16px;
   background: #ffffff;
   transition: background 0.3s;
@@ -301,49 +307,32 @@ p{
 
 .userinput-item input[type="text"]:focus {
   /* Style when input field is focused */
-  outline: none; /* Remove default outline */
-  border-color: #4d90fe; /* Example: Change border color on focus */
-  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5); /* Example: Add a box shadow */
+  outline: none;
+  /* Remove default outline */
+  border-color: #4d90fe;
+  /* Example: Change border color on focus */
+  box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
+  /* Add a box shadow */
 }
 
 .userinput-item input:disabled {
-  background-color: #f2f2f2; /* Light gray background */
-  color: #999; /* Light gray text color */
-  cursor: not-allowed; /* Show a "not-allowed" cursor */
-  border: 1px solid #ccc; /* Light gray border */
-  padding: 1em; /* Padding to maintain consistency */
-  /* You can add more styles as needed */
+  background-color: #f2f2f2;
+  /* Light gray background */
+  color: #999;
+  /* Light gray text color */
+  cursor: not-allowed;
+  /* Show a "not-allowed" cursor */
+  border: 1px solid #ccc;
+  /* Light gray border */
+  padding: 1em;
+  /* Padding to maintain consistency */
 }
 
-
-.fieldfill{
-  color: black;
+.labsizelwh {
+  margin-top: 3px;
 }
 
-.labsizelwh{
-margin-top: 3px;
-}
-
-// .ACL-container{
-
-//   display: flex;
-//   justify-content: space-between;
-//   gap: 20px;
-//   background: white;
-//   border: 0 none;
-//   border-radius: 0px;
-//   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-//   padding: 10px 20px;
-//   box-sizing: border-box;
-//   width:fit-content;
-//   margin: 0 10%;
-//   margin-bottom: 20px;
-//   margin-left: 6px;
-//   margin-top: 10px;
-
-// }
-
-.choosemethod-container{
+.choosemethod-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -353,7 +342,7 @@ margin-top: 3px;
   //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 8px 20px;
   box-sizing: border-box;
-  width:90%;
+  width: 90%;
   margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 6px;
@@ -361,16 +350,11 @@ margin-top: 3px;
 
 }
 
-.choosemethod-container.radiotext{
+.choosemethod-container.radiotext {
   font-size: 24px;
 }
 
-
-
-
-
-
-.radiocontainer{
+.radiocontainer {
 
   display: block;
   justify-content: space-between;
@@ -381,26 +365,30 @@ margin-top: 3px;
   box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
-  width:96%;
+  width: 96%;
   //margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 6px;
   margin-top: 10px;
 }
+
 .date-picker-container {
-  margin-bottom: 8px; /* Optional: Add spacing below date picker */
+  margin-bottom: 8px;
+  /* Optional: Add spacing below date picker */
 }
 
-.form-button-container{
+.form-button-container {
   display: flex;
-  justify-content:center;
+  justify-content: center;
 }
 
-.form-button-sub{
-  background-color: #22bf49; /* darkgreen background color */
-  color: #fff; /* White text color */
+.form-button-sub {
+  background-color: #22bf49;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
-  border:#2e72ee;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -409,9 +397,11 @@ margin-top: 3px;
   margin-left: 20px
 }
 
-.form-button-res{
-  background-color: #0daeff; /* darkgreen background color */
-  color: #fff; /* White text color */
+.form-button-res {
+  background-color: #0daeff;
+  /* darkgreen background color */
+  color: #fff;
+  /* White text color */
   padding: 10px 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -421,17 +411,12 @@ margin-top: 3px;
   margin-left: 20px
 }
 
-.portdetails{
+.portdetails {
   margin-bottom: 16px;
   margin-top: 16px;
 }
 
-
-.choosemethod{
-  color: #2a0845;
-}
-
-.radioflex{
+.radioflex {
   display: flex;
   gap: 40px;
 
@@ -452,9 +437,12 @@ margin-top: 3px;
 }
 
 .arrow {
-  font-size: 28px; /* Adjust size as needed */
-  margin-left: 5px; /* Add spacing between "Other" and arrow */
-  transition: transform 0.3s ease; /* Smooth transition for rotation */
+  font-size: 28px;
+  /* Adjust size as needed */
+  margin-left: 5px;
+  /* Add spacing between "Other" and arrow */
+  transition: transform 0.3s ease;
+  /* Smooth transition for rotation */
 }
 
 
@@ -463,18 +451,22 @@ margin-top: 3px;
   from {
     transform: rotate(0);
   }
+
   to {
     transform: rotate(180deg);
   }
 }
 
 .expanded {
-  animation: rotate180 0.3s forwards; /* Play the animation forwards */
+  animation: rotate180 0.3s forwards;
+  /* Play the animation forwards */
 }
 
 .collapsed {
-  animation: rotate180 0.3s reverse; /* Reverse the animation */
+  animation: rotate180 0.3s reverse;
+  /* Reverse the animation */
 }
+
 .other-section {
   margin-top: 10px;
   padding: 10px;
@@ -485,7 +477,8 @@ margin-top: 3px;
 
 hr {
   border: none;
-  border-top: 1px solid #ccc; /* Adjust color and thickness as needed */
+  border-top: 1px solid #ccc;
+  /* Adjust color and thickness as needed */
   margin-top: 12px;
   margin-bottom: 12px;
 
@@ -498,11 +491,12 @@ hr {
   margin: 5px 0 0 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-  max-height: 200px; /* Limit height */
-  overflow-y: auto; /* Enable scrolling */
+  max-height: 200px;
+  overflow-y: auto;
   background: white;
-  position: absolute; /* Positioning to avoid overlap */
-  z-index: 1000; /* Ensure it appears above other elements */
+  position: absolute;
+  z-index: 1000;
+  font-weight: bold;
 }
 
 .suggestions-list li {
@@ -511,7 +505,5 @@ hr {
 }
 
 .suggestions-list li:hover {
-  background-color: #f0f0f0; /* Highlight on hover */
+  background-color: #f0f0f0;
 }
-
-
