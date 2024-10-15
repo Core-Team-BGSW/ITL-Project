@@ -59,29 +59,29 @@ export class DataService {
     );
   }
 
-  getLocations(): Observable<Location[]> {
-    return this.http.get<Location[]>(this.locationUrl);
+  getLocations(): Observable<any> {
+    return this.http.get<any>(this.locationspringurl);
   }
 
-  getGBOptions(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiURL}/gb-options`); // Adjust endpoint as needed
-  }
+  // getGBOptions(): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiURL}/gb-options`); // Adjust endpoint as needed
+  // }
 
-  getKAMSuggestions(gb: string): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiURL}/kam-suggestions?gb=${gb}`);
-  }
+  // getKAMSuggestions(gb: string): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiURL}/kam-suggestions?gb=${gb}`);
+  // }
 
-  // Method to get Department suggestions based on selected GB
-  getDepartmentSuggestions(gb: string): Observable<string[]> {
-    return this.http.get<string[]>(
-      `${this.apiURL}/department-suggestions?gb=${gb}`
-    );
-  }
+  // // Method to get Department suggestions based on selected GB
+  // getDepartmentSuggestions(gb: string): Observable<string[]> {
+  //   return this.http.get<string[]>(
+  //     `${this.apiURL}/department-suggestions?gb=${gb}`
+  //   );
+  // }
 
-  // Method to get DH suggestions based on selected Department
-  getDHSuggestions(department: string): Observable<string[]> {
-    return this.http.get<string[]>(
-      `${this.apiURL}/dh-suggestions?department=${department}`
-    );
-  }
+  // // Method to get DH suggestions based on selected Department
+  // getDHSuggestions(department: string): Observable<string[]> {
+  //   return this.http.get<string[]>(
+  //     `${this.apiURL}/dh-suggestions?department=${department}`
+  //   );
+  // }
 }
