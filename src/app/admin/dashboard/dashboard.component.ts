@@ -27,7 +27,6 @@ import { LabDecommissionComponent } from '../../components/lab-decommission/lab-
     MatToolbar,
     RouterLink,
     AboutComponent,
-    LabCommissionComponent,
     SelfCheckComponent,
     SoftwareTrackingComponent,
     LabDecommissionComponent,

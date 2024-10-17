@@ -4,6 +4,14 @@
         "greenport",
         "onfile",
         "redport",
-        "sharedlabradio"
+        "sharedlabradio",
+        "apiurl",
+        "cmdbradio",
+        "dialogboxsubmit",
+        "Dialogdecommission",
+        "onformsubmit",
+        "purposeoflab",
+        "sharedlabradio",
+        "yellowports"
     ]
 }
