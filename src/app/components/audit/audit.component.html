@@ -1,15 +1,12 @@
-
 <h2>Lab List</h2>
 <div class="subheading">
   <p>*Initiate lab for Audit</p>
 </div>
-
 <!-- Search Bar -->
 <div class="search-bar">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search labs..." />
   <button (click)="onSearch()">Search</button>
 </div>
-
 <ul class="lab-list">
   <li *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
     <!-- Collapsible Section Header -->
@@ -22,13 +19,10 @@
           </li>
         </ul>
       </span>
-
-      <button
-        *ngIf="!isExpanded(lab._id)" class="Check-In-button">
+      <button *ngIf="!isExpanded(lab._id)" class="Check-In-button">
         Check-In
       </button>
     </div>
-
     <!-- Collapsible Content -->
     <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
       <div class="lab-detail">
@@ -132,19 +126,13 @@
         <strong class="detail-label">ACL Required:</strong>
         <span class="detail-value">{{ lab["ACL Required"] }}</span>
       </div>
-
       <button (click)="showPopup = true" class="Check-In-button">
         Check-In
       </button>
     </div>
   </li>
 </ul>
-
-
-
 <!-- app.component.html or your existing component template -->
-
-
 <!-- Popup form -->
 <div *ngIf="showPopup" class="popup-overlay" (click)="closePopup()">
   <div class="popup-content" (click)="$event.stopPropagation()">
@@ -154,10 +142,8 @@
       <!-- Your form fields go here -->
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" [(ngModel)]="name" required />
-
       <label for="date">Date:</label>
       <input type="date" id="date" name="date" [(ngModel)]="date" required />
-
       <button type="submit">Submit</button>
     </form>
     <button (click)="closePopup()">Close</button>
