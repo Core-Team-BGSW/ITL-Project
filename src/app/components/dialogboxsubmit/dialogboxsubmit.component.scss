@@ -1,44 +1,12 @@
-// .mat-mdc-dialog-content.mdc-dialog__content{
-//   color: rgb(0, 0, 0);
-//   font-size: medium;
-//   width: 600px;
-// }
-
-
-// button{
-//   padding: 12px;
-//   background-color: rgb(255, 149, 0);
-//   color: aliceblue;
-//   font-size: medium;
-//   border: none;
-//   box-sizing: border-box;
-//   font-family:Arial, Helvetica, sans-serif ;
-//   border-radius: 3px;
-//   font-weight: bold;
-//   cursor: pointer;
-// }
-
-// .button:hover{
-//   background-color: blueviolet;
-
-
-// }
-// .formfilldialogbuton{
-//   display: flex;
-//   justify-content: center;
-// }
-
-
 /* Ensure these styles are included in your global styles.css or component-specific styles */
-
-.heading-dialogbox{
+.heading-dialogbox {
   justify-content: center;
 }
 
-h2{
+h2 {
   color: #d543cb;
   margin-top: 0.5rem;
-  margin-bottom:0.5rem;
+  margin-bottom: 0.5rem;
   margin-left: 1rem;
   margin-right: 1rem;
   font-size: 32px;
@@ -62,7 +30,7 @@ h2{
 }
 
 .dialog-content p:last-child {
-  border-bottom:#ebcae8;
+  border-bottom: #ebcae8;
 }
 
 .dialog-content strong {
@@ -87,7 +55,7 @@ h2{
 
 .dialog-actions button:first-child {
   background: #4ab073;
-  background-color:#37a264;
+  background-color: #37a264;
   color: white;
   padding: 10px 16px;
   cursor: pointer;
@@ -99,15 +67,17 @@ h2{
   background-color: #ff2124;
   color: white;
   padding: 10px 16px;
-  cursor:pointer;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns of equal width */
-  gap: 20px; /* Space between columns */
+  grid-template-columns: 1fr 1fr;
+  /* Two columns of equal width */
+  gap: 20px;
+  /* Space between columns */
 }
 
 .column {
