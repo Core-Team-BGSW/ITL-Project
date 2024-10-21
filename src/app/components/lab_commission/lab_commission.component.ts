@@ -379,94 +379,7 @@ export class LabCommissionComponent {
   private http = inject(HttpClient);
   private ngZone = inject(NgZone);
 
-  // onfileSubmit() {
-  //   if (!this.selectedFile) {
-  //     console.log('No file selected');
-  //     return;
-  //   }
-
-  //   const confirmUpload = window.confirm(
-  //     'Are you sure you want to upload this file?'
-  //   );
-
-  //   if (!confirmUpload) {
-  //     console.log('File upload cancelled by user');
-  //     return;
-  //   }
-
-  //   // Remove the first row from excelData if it exists
-  //   if (this.excelData.length > 0) {
-  //     this.excelData.shift(); // Removes the first row
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append('file', this.selectedFile);
-
-  //   axios
-  //     .post('http://localhost:3000/upload-excel', formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     })
-  //     .then((response) => {
-  //       this.toastr.success('Process initiated', 'Waiting for approval');
-  //       console.log('File uploaded successfully:', response.data);
-  //       // Clear selected file and reset form state
-  //       this.selectedFile = null;
-  //       this.excelData = [];
-  //       this.previewVisible = false;
-  //     })
-  //     .catch((error) => {
-  //       if (error.response && error.response.data) {
-  //         console.error('Error Response Data:', error.response.data);
-
-  //         // Handle missing headers
-  //         if (error.response.data.error === 'Missing headers') {
-  //           const missingHeaders = error.response.data.missingHeaders;
-  //           missingHeaders.forEach((missingHeader: string) => {
-  //             const headerIndex = this.excelData.findIndex(
-  //               (h) => h.header === missingHeader
-  //             );
-  //             if (headerIndex !== -1) {
-  //               this.excelData[headerIndex].isMissing = true; // Mark header as missing
-  //             }
-  //           });
-  //         }
-
-  //         // Handle validation errors for fields
-  //         if (error.response.data.validationErrors) {
-  //           const errorMessages = error.response.data.validationErrors
-  //             .map(
-  //               (e: any) =>
-  //                 `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
-  //             )
-  //             .join('\n');
-
-  //           error.response.data.validationErrors.forEach((e: any) => {
-  //             e.missingFields.forEach((missingField: string) => {
-  //               const headerIndex = this.excelData.findIndex(
-  //                 (h) => h.header === missingField
-  //               );
-  //               if (headerIndex !== -1) {
-  //                 this.excelData[headerIndex].isMissing = true; // Mark header as missing
-  //               }
-  //             });
-  //           });
-
-  //           alert('Validation Errors:\n' + errorMessages);
-  //         } else {
-  //           alert('Error: ' + error.response.data.error);
-  //         }
-  //       } else {
-  //         console.error('Error:', error);
-  //         alert('An unknown error occurred.');
-  //       }
-  //       // Trigger change detection to update UI
-  //       this.changeDetectorRef.detectChanges();
-  //     });
-  // }
-
-  onfileSubmit(): void {
+  onfileSubmit() {
     if (!this.selectedFile) {
       console.log('No file selected');
       return;
@@ -481,77 +394,164 @@ export class LabCommissionComponent {
       return;
     }
 
-    // Create FormData object
+    // Remove the first row from excelData if it exists
+    if (this.excelData.length > 0) {
+      this.excelData.shift(); // Removes the first row
+    }
+
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    // Use HttpClient to post the file
-    this.http
-      .post('http://localhost:8080/upload/convert-excel-to-csv', formData)
-      .subscribe({
-        next: (response) => {
-          console.log('File uploaded successfully:', response);
-          this.ngZone.run(() => {
-            alert('File uploaded successfully!');
-          });
-
-          this.selectedFile = null;
-          this.excelData = [];
-          this.previewVisible = false;
+    axios
+      .post('http://localhost:8080/upload/convert-excel-to-csv', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-        error: (error) => {
-          // console.error('Error uploading file:', error);
-          if (error.response && error.response.data) {
-            console.error('Error Response Data:', error.response.data);
+      })
+      .then((response) => {
+        this.toastr.success('Process initiated', 'Waiting for approval');
+        console.log('File uploaded successfully:', response.data);
+        // Clear selected file and reset form state
+        this.selectedFile = null;
+        this.excelData = [];
+        this.previewVisible = false;
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+          console.error('Error Response Data:', error.response.data);
 
-            // Handle missing headers
-            if (error.response.data.error === 'Missing headers') {
-              const missingHeaders = error.response.data.missingHeaders;
-              missingHeaders.forEach((missingHeader: string) => {
+          // Handle missing headers
+          if (error.response.data.error === 'Missing headers') {
+            const missingHeaders = error.response.data.missingHeaders;
+            missingHeaders.forEach((missingHeader: string) => {
+              const headerIndex = this.excelData.findIndex(
+                (h) => h.header === missingHeader
+              );
+              if (headerIndex !== -1) {
+                this.excelData[headerIndex].isMissing = true; // Mark header as missing
+              }
+            });
+          }
+
+          // Handle validation errors for fields
+          if (error.response.data.validationErrors) {
+            const errorMessages = error.response.data.validationErrors
+              .map(
+                (e: any) =>
+                  `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+              )
+              .join('\n');
+
+            error.response.data.validationErrors.forEach((e: any) => {
+              e.missingFields.forEach((missingField: string) => {
                 const headerIndex = this.excelData.findIndex(
-                  (h) => h.header === missingHeader
+                  (h) => h.header === missingField
                 );
                 if (headerIndex !== -1) {
                   this.excelData[headerIndex].isMissing = true; // Mark header as missing
                 }
               });
-            }
+            });
 
-            // Handle validation errors for fields
-            if (error.response.data.validationErrors) {
-              const errorMessages = error.response.data.validationErrors
-                .map(
-                  (e: any) =>
-                    `Row ${e.row}: Missing fields: ${e.missingFields.join(
-                      ', '
-                    )}`
-                )
-                .join('\n');
-
-              error.response.data.validationErrors.forEach((e: any) => {
-                e.missingFields.forEach((missingField: string) => {
-                  const headerIndex = this.excelData.findIndex(
-                    (h) => h.header === missingField
-                  );
-                  if (headerIndex !== -1) {
-                    this.excelData[headerIndex].isMissing = true; // Mark header as missing
-                  }
-                });
-              });
-
-              alert('Validation Errors:\n' + errorMessages);
-            } else {
-              alert('Error: ' + error.response.data.error);
-            }
+            alert('Validation Errors:\n' + errorMessages);
           } else {
-            console.error('Error:', error);
-            alert('An unknown error occurred.');
+            alert('Error: ' + error.response.data.error);
           }
-          // Trigger change detection to update UI
-          this.changeDetectorRef.detectChanges();
-        },
+        } else {
+          console.error('Error:', error);
+          alert('An unknown error occurred.');
+        }
+        // Trigger change detection to update UI
+        this.changeDetectorRef.detectChanges();
       });
   }
+
+  // onfileSubmit(): void {
+  //   if (!this.selectedFile) {
+  //     console.log('No file selected');
+  //     return;
+  //   }
+
+  //   const confirmUpload = window.confirm(
+  //     'Are you sure you want to upload this file?'
+  //   );
+
+  //   if (!confirmUpload) {
+  //     console.log('File upload cancelled by user');
+  //     return;
+  //   }
+
+  //   // Create FormData object
+  //   const formData = new FormData();
+  //   formData.append('file', this.selectedFile);
+
+  //   // Use HttpClient to post the file
+  //   this.http
+  //     .post('http://localhost:8080/upload/convert-excel-to-csv', formData)
+  //     .subscribe({
+  //       next: (response) => {
+  //         console.log('File uploaded successfully:', response);
+  //         this.ngZone.run(() => {
+  //           alert('File uploaded successfully!');
+  //         });
+
+  //         this.selectedFile = null;
+  //         this.excelData = [];
+  //         this.previewVisible = false;
+  //       },
+  //       error: (error) => {
+  //         // console.error('Error uploading file:', error);
+  //         if (error.response && error.response.data) {
+  //           console.error('Error Response Data:', error.response.data);
+
+  //           // Handle missing headers
+  //           if (error.response.data.error === 'Missing headers') {
+  //             const missingHeaders = error.response.data.missingHeaders;
+  //             missingHeaders.forEach((missingHeader: string) => {
+  //               const headerIndex = this.excelData.findIndex(
+  //                 (h) => h.header === missingHeader
+  //               );
+  //               if (headerIndex !== -1) {
+  //                 this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //               }
+  //             });
+  //           }
+
+  //           // Handle validation errors for fields
+  //           if (error.response.data.validationErrors) {
+  //             const errorMessages = error.response.data.validationErrors
+  //               .map(
+  //                 (e: any) =>
+  //                   `Row ${e.row}: Missing fields: ${e.missingFields.join(
+  //                     ', '
+  //                   )}`
+  //               )
+  //               .join('\n');
+
+  //             error.response.data.validationErrors.forEach((e: any) => {
+  //               e.missingFields.forEach((missingField: string) => {
+  //                 const headerIndex = this.excelData.findIndex(
+  //                   (h) => h.header === missingField
+  //                 );
+  //                 if (headerIndex !== -1) {
+  //                   this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //                 }
+  //               });
+  //             });
+
+  //             alert('Validation Errors:\n' + errorMessages);
+  //           } else {
+  //             alert('Error: ' + error.response.data.error);
+  //           }
+  //         } else {
+  //           console.error('Error:', error);
+  //           alert('An unknown error occurred.');
+  //         }
+  //         // Trigger change detection to update UI
+  //         this.changeDetectorRef.detectChanges();
+  //       },
+  //     });
+  // }
 
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 
