@@ -3,6 +3,10 @@
   ><b><p style="color: red">(Select Lab for Audit)</p></b></i
 >
 <link
+  href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+  rel="stylesheet"
+/>
+<link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
@@ -21,10 +25,12 @@
 <p></p>
 <div class="lab-list">
   <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
+    <!-- Collapsible Section Header -->
     <div class="collapsible-header">
       <mat-card class="custom-card">
         <mat-card-content>
           <p style="color: grey">Lab No -> Entity -> GB -> Department</p>
+
           <b>
             {{ lab["Lab No"] }} ->
 
@@ -50,6 +56,7 @@
               <tr>
                 <th style="background-color: rgb(212, 244, 252)">Region</th>
                 <th style="background-color: rgb(212, 244, 252)">Country</th>
+                <th style="background-color: rgb(212, 244, 252)">Location</th>
                 <th style="background-color: rgb(212, 244, 252)">
                   Location-Code
                 </th>
@@ -61,6 +68,7 @@
               <tr>
                 <td>{{ lab.Region }}</td>
                 <td>{{ lab.Country }}</td>
+                <td>{{ lab.Location }}</td>
                 <td>{{ lab["Location-Code"] }}</td>
                 <td>{{ lab.Entity }}</td>
                 <td>{{ lab.GB }}</td>

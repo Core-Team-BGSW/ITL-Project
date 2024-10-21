@@ -1,8 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AboutComponent } from '../about/about.component';
@@ -13,23 +19,31 @@ import { LabDecommissionComponent } from '../../components/lab-decommission/lab-
 
 @Component({
   selector: 'app-dashboard',
-  standalone:true,
-  imports:[CommonModule, MatButtonModule, MatCardModule, MatToolbar,RouterLink, AboutComponent, LabCommissionComponent, SelfCheckComponent, SoftwareTrackingComponent, LabDecommissionComponent, MatIconModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbar,
+    RouterLink,
+    AboutComponent,
+    SelfCheckComponent,
+    SoftwareTrackingComponent,
+    LabDecommissionComponent,
+    MatIconModule,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-
-
 })
 export class DashboardComponent implements AfterViewInit {
-
   toggleProperty = true;
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngAfterViewInit(): void {
     // Use ActivatedRoute to access fragments
-    this.route.fragment.subscribe(fragment => {
+    this.route.fragment.subscribe((fragment) => {
       if (fragment) {
         const element = document.getElementById(fragment);
         if (element) {
@@ -40,9 +54,11 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   navigateToQuiz() {
-    if (this.videoPlayer.nativeElement.currentTime >= this.videoPlayer.nativeElement.duration) {
+    if (
+      this.videoPlayer.nativeElement.currentTime >=
+      this.videoPlayer.nativeElement.duration
+    ) {
       this.router.navigate(['/quiz']);
-
     } else {
       alert('Please watch the entire video before proceeding.');
     }
@@ -54,8 +70,4 @@ export class DashboardComponent implements AfterViewInit {
   toggle() {
     this.toggleProperty = !this.toggleProperty;
   }
-
-
 }
-
-

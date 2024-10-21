@@ -1,6 +1,4 @@
 // Edited by Jay Jambhale
-
-
 import { SidebarComponent } from '../../admin/sidebar/sidebar.component';
 import { AngularModule } from '../../angularmodule/angularmodule.module';
 import * as ExcelJS from 'exceljs';
@@ -25,11 +23,11 @@ import {
   transition,
 } from '@angular/animations';
 import axios from 'axios';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DateAdapter } from '@angular/material/core';
+import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LayoutComponent } from '../../admin/layout/layout.component';
 
 export interface Location {
   region: string;
@@ -79,7 +77,8 @@ export interface countriesWithcode {
     AngularModule,
     DialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -94,26 +93,26 @@ export class LabCommissionComponent {
   tabIndex = 0; // Index of the active tabY
   isSelected = false;
   selectedRegion: string = '';
-  region:string='';
+  region: string = '';
   selectedCountry: string = '';
-  country: string='';
+  country: string = '';
   selectedLocation: string = '';
-  location: string='';
+  location: string = '';
   selectedCode: string = '';
+  entity: string = '';
+  GB: string = '';
+  localITLproxy: string = '';
+  locationcode: string = '';
   selectedEntity: string = '';
-  entity: string='';
   selectedGB: string = '';
-  GB: string='';
   selectedLocal: string = '';
   cmdbradio: string = ''; // Initialize cmdbradio
   sharedlabradio: string = '';
   ACLradio: string = '';
   greenport: string = '';
-  locationcode: string='';
   redport: string = '';
   yellowport: string = '';
   localITL: string = '';
-  localITLproxy: string = '';
   KAM: string = '';
   DH: string = '';
   Dept: string = '';
@@ -387,37 +386,9 @@ export class LabCommissionComponent {
       return;
     }
 
-    const confirmUpload = window.confirm('Are you sure you want to upload this file?');
-
-  if (!confirmUpload) {
-    console.log('File upload cancelled by user');
-    return;
-  }
-
-  // Create FormData object
-  const formData = new FormData();
-  formData.append('file', this.selectedFile);
-
-
-  // Use HttpClient to post the file
-  this.http.post('http://localhost:8080/upload/convert-excel-to-csv', formData)
-  .subscribe({
-    next: response => {
-      console.log('File uploaded successfully:', response);
-      this.ngZone.run(() => {
-        alert('File uploaded successfully!');
-      });
-
-      this.selectedFile = null;
-      this.excelData = [];
-      this.previewVisible = false;
-
-    },
-    error: error => {
-      console.error('Error uploading file:', error);
-
-    }
-  });
+    const confirmUpload = window.confirm(
+      'Are you sure you want to upload this file?'
+    );
 
     if (!confirmUpload) {
       console.log('File upload cancelled by user');
@@ -429,12 +400,11 @@ export class LabCommissionComponent {
       this.excelData.shift(); // Removes the first row
     }
 
-  // Create FormData object
-  // const formData = new FormData();
-  formData.append('file', this.selectedFile);
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
 
     axios
-      .post('http://localhost:3000/upload-excel', formData, {
+      .post('http://localhost:8080/upload/convert-excel-to-csv', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -497,6 +467,92 @@ export class LabCommissionComponent {
       });
   }
 
+  // onfileSubmit(): void {
+  //   if (!this.selectedFile) {
+  //     console.log('No file selected');
+  //     return;
+  //   }
+
+  //   const confirmUpload = window.confirm(
+  //     'Are you sure you want to upload this file?'
+  //   );
+
+  //   if (!confirmUpload) {
+  //     console.log('File upload cancelled by user');
+  //     return;
+  //   }
+
+  //   // Create FormData object
+  //   const formData = new FormData();
+  //   formData.append('file', this.selectedFile);
+
+  //   // Use HttpClient to post the file
+  //   this.http
+  //     .post('http://localhost:8080/upload/convert-excel-to-csv', formData)
+  //     .subscribe({
+  //       next: (response) => {
+  //         console.log('File uploaded successfully:', response);
+  //         this.ngZone.run(() => {
+  //           alert('File uploaded successfully!');
+  //         });
+
+  //         this.selectedFile = null;
+  //         this.excelData = [];
+  //         this.previewVisible = false;
+  //       },
+  //       error: (error) => {
+  //         // console.error('Error uploading file:', error);
+  //         if (error.response && error.response.data) {
+  //           console.error('Error Response Data:', error.response.data);
+
+  //           // Handle missing headers
+  //           if (error.response.data.error === 'Missing headers') {
+  //             const missingHeaders = error.response.data.missingHeaders;
+  //             missingHeaders.forEach((missingHeader: string) => {
+  //               const headerIndex = this.excelData.findIndex(
+  //                 (h) => h.header === missingHeader
+  //               );
+  //               if (headerIndex !== -1) {
+  //                 this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //               }
+  //             });
+  //           }
+
+  //           // Handle validation errors for fields
+  //           if (error.response.data.validationErrors) {
+  //             const errorMessages = error.response.data.validationErrors
+  //               .map(
+  //                 (e: any) =>
+  //                   `Row ${e.row}: Missing fields: ${e.missingFields.join(
+  //                     ', '
+  //                   )}`
+  //               )
+  //               .join('\n');
+
+  //             error.response.data.validationErrors.forEach((e: any) => {
+  //               e.missingFields.forEach((missingField: string) => {
+  //                 const headerIndex = this.excelData.findIndex(
+  //                   (h) => h.header === missingField
+  //                 );
+  //                 if (headerIndex !== -1) {
+  //                   this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //                 }
+  //               });
+  //             });
+
+  //             alert('Validation Errors:\n' + errorMessages);
+  //           } else {
+  //             alert('Error: ' + error.response.data.error);
+  //           }
+  //         } else {
+  //           console.error('Error:', error);
+  //           alert('An unknown error occurred.');
+  //         }
+  //         // Trigger change detection to update UI
+  //         this.changeDetectorRef.detectChanges();
+  //       },
+  //     });
+  // }
 
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 

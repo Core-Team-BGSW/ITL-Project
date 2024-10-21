@@ -16,9 +16,7 @@ interface Location {
 })
 export class DataService {
   private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
-  private locationUrl = 'http://localhost:3000/api/locations';
-  private apiURL = 'http://localhost:3000/api';
-  private locationspringurl = 'http://localhost:8080/api/locations';
+  private locationUrl = 'http://localhost:8080/boschLabsLocation/location/api';
 
   constructor(private http: HttpClient) {}
 
@@ -60,7 +58,7 @@ export class DataService {
   }
 
   getLocations(): Observable<any> {
-    return this.http.get<any>(this.locationspringurl);
+    return this.http.get<any>(this.locationUrl);
   }
 
   // getGBOptions(): Observable<string[]> {

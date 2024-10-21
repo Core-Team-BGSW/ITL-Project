@@ -3,17 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from '@angular/material/dialog';
-import { v4 as uuidv4 } from 'uuid'; // Import UUID library for generating unique IDs
-//import { DataService } from '../../data.service';
-import { error } from 'console';
-import { HttpClient} from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-
 import { DataService } from '../../data.service';
 import { ToastrService } from 'ngx-toastr';
 import { LabCommissionComponent } from '../lab_commission/lab_commission.component';
 import { AppComponent } from '../../app.component';
 import { AngularModule } from '../../angularmodule/angularmodule.module';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dialogboxsubmit',
@@ -25,34 +20,35 @@ import { AngularModule } from '../../angularmodule/angularmodule.module';
 export class DialogboxsubmitComponent {
   @Output() formDataSubmitted = new EventEmitter<any>();
 
-  region: string='';
-  country:string='';
-  location:string='';
-  locationcode:string='';
-  entity:string='';
-  GB:string='';
-  localITL:string='';
-  localITLproxy:string='';
-  DH:string='';
-  KAM:string='';
-  Dept:string='';
-  Building:string='';
-  Floor:string='';
-  labno:string='';
-  primarylabco:string='';
-  secondarylabco:string='';
-  CC:string='';
-  kindoflab:string='';
-  purposeoflab:string='';
-  ACL:string='';
-  greenports:string='';
-  yellowports:string='';
-  redports:string='';
-  cmdbradio:string='';
-  sharedlabradio:string='';
-  ACLradio:string='';
-  otherLabType:string='';
-  description:string='';
+  region: string = '';
+  country: string = '';
+  location: string = '';
+  locationcode: string = '';
+  entity: string = '';
+  GB: string = '';
+  localITL: string = '';
+  localITLproxy: string = '';
+  DH: string = '';
+  KAM: string = '';
+  Dept: string = '';
+  Building: string = '';
+  Floor: string = '';
+  labno: string = '';
+  primarylabco: string = '';
+  secondarylabco: string = '';
+  CC: string = '';
+  kindoflab: string = '';
+  purposeoflab: string = '';
+  description: string = '';
+  ACL: string = '';
+  otherLabType: string = '';
+  cmdbradio: string = '';
+  sharedlabradio: string = '';
+  ACLradio: string = '';
+  greenports: string = '';
+  yellowports: string = '';
+  redports: string = '';
+  selfauditdate: string = '';
   selectedDate: string = '';
   approvalStatus: string = 'Pending';
 

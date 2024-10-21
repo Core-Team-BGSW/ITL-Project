@@ -15,7 +15,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <!-- Features Section -->
 <div class="feat bg-gray pt-5 pb-5">
@@ -33,13 +32,20 @@
         </a>
         </div>
       </div>
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="item">
-          <a routerLink="/self-check" class="item-link">
-          <span class="icon feature_box_col_two"><i class="fa fa-anchor"></i></span>
-          <h6>Streamlined Self-check</h6>
-          <p>Automate annual self-audits and documentation, minimizing manual effort and follow-ups.</p>
-        </a>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a routerLink="/lab-decommission" class="item-link">
+              <span class="icon feature_box_col_four"
+                ><i class="fa fa-database"></i
+              ></span>
+              <h6>Lab Decommission</h6>
+              <p>
+                Manage the decommissioning process and archive lab artifacts
+                securely.
+              </p>
+            </a>
+          </div>
         </div>
       </div>
       <div class="col-lg-4 col-sm-6 mb-4">
@@ -96,13 +102,17 @@
 
       <section class="info-section">
         <p class="info-text">
-          Great job on watching the video! Now that you have a better understanding of ITL, it’s time to test your knowledge. Click the button below to start the quiz and see how much you’ve learned.
+          Great job on watching the video! Now that you have a better
+          understanding of ITL, it’s time to test your knowledge. Click the
+          button below to start the quiz and see how much you’ve learned.
         </p>
       </section>
       <section class="cta-section">
 
         <button class="cta-button" (click)="navigateToQuiz()"><i class="fa-solid fa-circle-question"></i>&nbsp;Take the Quiz</button>
       </section>
+    </div>
+  </div>
 </div>
 
 

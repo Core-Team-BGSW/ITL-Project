@@ -13,19 +13,24 @@ import { DataService } from '../../data.service';
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-  imports: [RouterLink, CommonModule, RouterOutlet, FormsModule, FilterPipe, MatButtonModule],
+  imports: [
+    RouterLink,
+    CommonModule,
+    RouterOutlet,
+    FormsModule,
+    FilterPipe,
+    MatButtonModule,
+  ],
   templateUrl: './lab-decommission.component.html',
-  styleUrls: ['./lab-decommission.component.scss']
+  styleUrls: ['./lab-decommission.component.scss'],
 })
 export class LabDecommissionComponent implements OnInit {
-
   labList: any[] = [];
   errorMessage: string | undefined;
   searchQuery: string = '';
   filteredLabList: any[] = [];
   expandedLabId: string | null = null;
   readonly dialog = inject(MatDialog);
-
 
   //Kranti Sonawane
   //To fetch lab details
@@ -37,43 +42,41 @@ export class LabDecommissionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadLabList();
-
   }
   //function  for loading lab list
   loadLabList(): void {
-    this.http.get<any[]>(`${this.apiurl}`)
-      .subscribe({
-        next: (data) => {
-          this.labList = data;
+    this.http.get<any[]>(`${this.apiurl}`).subscribe({
+      next: (data) => {
+        this.labList = data;
         this.filteredLabList = this.labList;
-        },
-        error: (err) => this.errorMessage = err
-      });
+      },
+      error: (err) => (this.errorMessage = err),
+    });
   }
 
   removeLab(id: string): void {
     if (confirm('Are you sure you want to remove this lab?')) {
-      this.dataService.removeLab(id).subscribe({
+      this.http.delete<void>(`${this.apiurl}/delete/${id}`).subscribe({
         next: () => {
-          // Remove the item from the local list
-          this.labList = this.labList.filter(lab => lab._id !== id);
-          this.filteredLabList = this.filteredLabList.filter(lab => lab._id !== id);
+          this.labList = this.labList.filter((lab) => lab.id !== id);
+          this.filteredLabList = this.filteredLabList.filter(
+            (lab) => lab.id !== id
+          );
           this.dialog.open(DialogdecommissionComponent, {
-            width: '40%',  /* Increase the width of the dialog */
-            height:'200px'  /* Increase the height of the dialog */
-
+            width: '40%',
+            height: '200px',
           });
-        console.log('Lab removed successfully',id);
+          console.log('Lab removed successfully');
         },
-        error: (err) => this.errorMessage = err
+        error: (err) => (this.errorMessage = err),
       });
     }
   }
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
-    this.filteredLabList = this.labList.filter(lab =>
-      Object.values(lab).some(value =>
+    this.filteredLabList = this.labList.filter((lab) =>
+      Object.values(lab).some((value) =>
         (value as string).toString().toLowerCase().includes(query)
       )
     );
@@ -87,7 +90,10 @@ export class LabDecommissionComponent implements OnInit {
     return this.expandedLabId === labId;
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
     this.dialog.open(DialogdecommissionComponent, {
       width: '250px',
       enterAnimationDuration,
