@@ -1,4 +1,6 @@
-
+csv:
+  file:
+    directory: C:\Users\BFM3KOR\IdeaProjects\ITL-Project2\src\main\resources\static
 logging:
   level:
     org:
@@ -7,14 +9,6 @@ logging:
           mongodb:
             core:
               MongoTemplate: DEBUG
-
-azure:
-  storage:
-    connection-string: DefaultEndpointsProtocol=https;AccountName=iterlstorage;AccountKey=C76kQZZEW56fRk4tN6ZhF0LLIoUnXexarOIve9m0BYJM0oT6swZL927ZKM7tVaIGbV4aKoIh6KmO+AStA680ig==;EndpointSuffix=core.windows.net
-    container-name: iterlcontainer
-    base-url: https://iterlstorage.blob.core.windows.net/iterlcontainer
-    csv-file-directory: iterl-csv
-
 server:
   port: 8080
 spring:
@@ -27,5 +21,8 @@ spring:
       enabled: false
   data:
     mongodb:
-      database: UserData
-      uri: mongodb+srv://ITERLUser:BDITLconsultancy123@_mongodb._tcp.iterl-mongodb-cluster.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000
+      uri: mongodb://localhost:27017/UserData
+
+api:
+    url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
+    url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/

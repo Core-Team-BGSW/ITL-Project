@@ -30,7 +30,7 @@ public class FormDataService {
 
 
         Entity entity;
-        if(entityRepo.findByEntityName(labFormData.getEntityName()) instanceof org.w3c.dom.Entity)
+        if(entityRepo.findByEntityName(labFormData.getEntityName())!=null)
         {
             entity = entityRepo.findByEntityName(labFormData.getEntityName());
             entity.getLabDataList().add(labData);
@@ -66,8 +66,8 @@ public class FormDataService {
         labData.setPurpose_of_lab(labFormData.getPurpose_of_lab());
         labData.setShared_lab(labFormData.getShared_lab());
         labData.setSecondary_lab_cord(labFormData.getSecondary_lab_cord());
-        labData.setPrimary_lab_cord(labData.getPrimary_lab_cord());
-        labData.setSelf_audit_date(labData.getSelf_audit_date());
+        labData.setPrimary_lab_cord(labFormData.getPrimary_lab_cord());
+        labData.setSelf_audit_date(labFormData.getSelf_audit_date());
         return labData;
     }
     public Entity getEntityData(LabFormData labFormData)
