@@ -30,7 +30,7 @@ public class FormDataService {
 
 
         Entity entity;
-        if(entityRepo.findByEntityName(labFormData.getEntityName()) instanceof org.w3c.dom.Entity)
+        if(entityRepo.findByEntityName(labFormData.getEntityName())!=null)
         {
             entity = entityRepo.findByEntityName(labFormData.getEntityName());
             entity.getLabDataList().add(labData);

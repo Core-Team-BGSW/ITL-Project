@@ -22,3 +22,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/UserData
+
+api:
+    url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
+    url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/
