@@ -4,50 +4,122 @@
 
 // Kranti Sonawane
 
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-  margin-left: 2px; /* Margin when sidebar is collapsed */
-  width: calc(100% - 25px);
-}
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100vh;
+//   overflow: hidden;
+//   margin-left: 2px; /* Margin when sidebar is collapsed */
+//   width: calc(100% - 25px);
+// }
 
-.main-content {
-  display: flex;
-  flex: 1;
-}
+// .main-content {
+//   display: flex;
+//   flex: 1;
+// }
 
-app-sidebar {
-  transition: width 0.5s ease;
-  height: calc(100vh - 64px);
-  width: 25px; /* Default width when collapsed */
-}
+// app-sidebar {
+//   transition: width 0.5s ease;
+//   height: calc(100vh - 64px);
+//   width: 25px; /* Default width when collapsed */
+// }
 
-/* Content styles */
-.content {
-  flex: 1; /* Take the remaining space */
-  padding: 20px; /* Some padding */
-  overflow-y: auto;
-  height: calc(100vh - 64px);
-  position: relative;
-  transition: margin-left 0.5s ease, width 0.5s ease;
-}
+// /* Content styles */
+// .content {
+//   flex: 1; /* Take the remaining space */
+//   padding: 20px; /* Some padding */
+//   overflow-y: auto;
+//   height: calc(100vh - 64px);
+//   position: relative;
+//   transition: margin-left 0.5s ease, width 0.5s ease;
+// }
 
 
-.content {
-  margin-left: 40px; /* Margin when sidebar is collapsed */
-  width: calc(100% - 25px); /* Width when sidebar is collapsed */
-}
+// // .content {
+// //   margin-left: 300px; /* Margin when sidebar is collapsed */
+// //   width: calc(100% - 2500px); /* Width when sidebar is collapsed */
+// // }
 
-/* Expanded sidebar styles */
+// /* Expanded sidebar styles */
 // app-sidebar.open {
 //   width: 250px; /* Width when expanded */
 // }
 
 
-//app-sidebar.open ~ .container
+
+// app-sidebar.open ~ .content {
+
+//   width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
+//   margin-left: 250px; /* Margin when sidebar is expanded */
+// }
+
+// app-sidebar ~ .content {
+//   margin-left: 40px; /* Margin when sidebar is collapsed */
+//   width: calc(100% - 40px); /* Adjust width for collapsed state */
+// }
+// // mat-sidenav-container {
+// //   height: 100%;
+
+// //   mat-sidenav {
+// //     mat-nav-list {
+// //       .menu-item {
+// //         margin-left: 8px;
+// //       }
+
+// //       .chevron-button {
+// //         transition: 300ms ease-in-out;
+// //         transform: rotate(0deg);
+// //       }
+
+// //       .chevron-button.rotated {
+// //         transform: rotate(180deg);
+// //       }
+// //     }
+// //   }
+// // }
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.navbar {
+  height: 64px; /* Adjust according to your navbar height */
+  background: #fff; /* Navbar background */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 15px; /* Padding for navbar */
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  margin-top: 0; /* Reset margin since there's no top margin needed */
+}
+
+app-sidebar {
+  transition: width 0.5s ease, margin-left 0.5s ease;
+  height: calc(100vh - 64px); /* Adjust for navbar height */
+  width: 25px; /* Default width when collapsed */
+}
+
+.content {
+  flex: 1; /* Take the remaining space */
+  padding: 20px; /* Some padding */
+  overflow-y: auto;
+  height: calc(100vh - 64px); /* Adjust for navbar height */
+  position: relative;
+  transition: margin-left 0.5s ease, width 0.5s ease;
+}
+
 app-sidebar.open ~ .content {
-  margin-left: 25px; /* Margin when sidebar is expanded */
-  width: calc(100% - 25px); /* Adjust width when sidebar is expanded */
+  width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
+  margin-left: 250px; /* Margin when sidebar is expanded */
+}
+
+app-sidebar ~ .content {
+  margin-left: 40px; /* Margin when sidebar is collapsed */
+  width: calc(100% - 40px); /* Adjust width for collapsed state */
 }

@@ -15,6 +15,7 @@ import { LoginComponent } from './admin/login/login.component';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { SelfAuditComponent } from './self-audit/self-audit.component';
 import { AngularModule } from './angularmodule/angularmodule.module';
+import { NavbarComponent } from "./admin/navbar/navbar.component";
 
 
 
@@ -30,9 +31,9 @@ import { AngularModule } from './angularmodule/angularmodule.module';
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
     imports: [RouterOutlet,
-      SidebarComponent, LayoutComponent, RouterLink, LabCommissionComponent,SelfCheckComponent,ReactiveFormsModule,FormsModule,DialogboxsubmitComponent,
-      ApplicationsComponent, LabDecommissionComponent,ReactiveFormsModule,MatListModule,DialogdecommissionComponent,
-      AuditComponent,ToastrModule, LoginComponent, SelfAuditComponent, AngularModule]
+    SidebarComponent, LayoutComponent, RouterLink, LabCommissionComponent, SelfCheckComponent, ReactiveFormsModule, FormsModule, DialogboxsubmitComponent,
+    ApplicationsComponent, LabDecommissionComponent, ReactiveFormsModule, MatListModule, DialogdecommissionComponent,
+    AuditComponent, ToastrModule, LoginComponent, SelfAuditComponent, AngularModule, NavbarComponent]
 
 })
 export class AppComponent {

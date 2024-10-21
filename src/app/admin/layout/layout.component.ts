@@ -11,15 +11,24 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { OAuthModule, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatSidenavModule,
-  MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent, NavbarComponent],
+  MatToolbarModule, SidebarComponent, RouterOutlet, RouterLink, ContactComponent, CommonModule, MatCardModule, RoleComponent, NavbarComponent, MatListModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
 
+  isExpanded: boolean = false;
+  isOpen = false;
+
+  toggleSidebar() {
+    this.isOpen = !this.isOpen;
+  }
+
+  constructor() {}
 }

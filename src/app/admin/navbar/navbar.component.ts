@@ -14,7 +14,16 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
   constructor(private router: Router) {}
+  isOpen = false;
+  isDropdownOpen = false;
+
+
+
+  toggleSidebar() {
+    this.isOpen = !this.isOpen;
+  }
 
   onApplyForRoleClick(event: MouseEvent): void {
     event.preventDefault(); // Prevent the default anchor behavior

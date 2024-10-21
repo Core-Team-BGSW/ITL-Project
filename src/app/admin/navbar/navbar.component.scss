@@ -1,3 +1,6 @@
+//
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -8,40 +11,54 @@
 }
 
 body {
-  height: 100vh;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #c1f7f5;
 }
 
-.nav-links {
+.navbar {
   display: flex;
-  position: fixed;
-  z-index: 2;
-  top: 0; // Fixes the navbar at the top
-  right: 0; // Aligns it to the right
-  left: 0; // Ensures it stretches full width
-  justify-content: flex-end; // Aligns items to the right
   align-items: center;
+  justify-content: space-between; /* Space between elements */
   background: #fff;
   padding: 20px 15px;
-  border-radius: 0; // No rounding for full-width navbar
+  height: 60px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  position: fixed; /* Fixed position for the navbar */
+  width: 100%; /* Full width */
+  z-index: 2; /* Ensure it's above other elements */
+}
+
+.logo-details {
+  display: flex;
+  align-items: center;
+}
+
+#btn {
+  font-size: 22px; /* Icon size */
+  cursor: pointer; /* Pointer cursor */
+  margin-right: 15px; /* Space between button and logo */
+}
+
+.nav-links {
+  display: flex; /* Flexbox for horizontal alignment */
 }
 
 .nav-links li {
   list-style: none;
-  margin: 0 12px;
+  margin: 0 12px; /* Space between nav items */
 }
 
 .nav-links li a {
   position: relative;
-  color: #333;
+  color: #333; /* Link color */
   font-size: 18px;
   font-weight: 500;
   padding: 6px 0;
-  text-decoration: none;
+  text-decoration: none; /* No underline */
+  transition: color 0.3s; /* Smooth color transition */
 }
 
 .nav-links li a:before {
@@ -53,11 +70,11 @@ body {
   width: 0%;
   background: #56b0ff;
   border-radius: 12px;
-  transition: all 0.4s ease;
+  transition: all 0.4s ease; /* Transition effect */
 }
 
 .nav-links li a:hover:before {
-  width: 100%;
+  width: 100%; /* Full width on hover */
 }
 
 .nav-links li.center a:before {

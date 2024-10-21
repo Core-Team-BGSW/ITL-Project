@@ -1,6 +1,6 @@
 // Edited by Jay Jambhale
 
-import { HomeComponent } from '../../admin/home/home.component';
+
 import { SidebarComponent } from '../../admin/sidebar/sidebar.component';
 import { AngularModule } from '../../angularmodule/angularmodule.module';
 import * as ExcelJS from 'exceljs';
@@ -10,6 +10,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ChangeDetectorRef,
+  NgZone,
+  inject,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,6 +29,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data.service';
+import { HttpClient } from '@angular/common/http';
 
 export interface Location {
   region: string;
@@ -67,7 +70,6 @@ export interface countriesWithcode {
     ]),
   ],
   imports: [
-    HomeComponent,
     SidebarComponent,
     RouterLink,
     RouterOutlet,
@@ -77,7 +79,7 @@ export interface countriesWithcode {
     AngularModule,
     DialogModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -374,16 +376,48 @@ export class LabCommissionComponent {
   onFilterChange(header: string, value: string) {
     this.filterExcelData(header, value);
   }
-
+  //Endpoint added
+  // On file submit
+  private http = inject(HttpClient);
+  private ngZone = inject(NgZone);
   onfileSubmit() {
+
     if (!this.selectedFile) {
       console.log('No file selected');
       return;
     }
 
-    const confirmUpload = window.confirm(
-      'Are you sure you want to upload this file?'
-    );
+    const confirmUpload = window.confirm('Are you sure you want to upload this file?');
+
+  if (!confirmUpload) {
+    console.log('File upload cancelled by user');
+    return;
+  }
+
+  // Create FormData object
+  const formData = new FormData();
+  formData.append('file', this.selectedFile);
+
+
+  // Use HttpClient to post the file
+  this.http.post('http://localhost:8080/upload/convert-excel-to-csv', formData)
+  .subscribe({
+    next: response => {
+      console.log('File uploaded successfully:', response);
+      this.ngZone.run(() => {
+        alert('File uploaded successfully!');
+      });
+
+      this.selectedFile = null;
+      this.excelData = [];
+      this.previewVisible = false;
+
+    },
+    error: error => {
+      console.error('Error uploading file:', error);
+
+    }
+  });
 
     if (!confirmUpload) {
       console.log('File upload cancelled by user');
@@ -396,7 +430,7 @@ export class LabCommissionComponent {
     }
 
   // Create FormData object
-  const formData = new FormData();
+  // const formData = new FormData();
   formData.append('file', this.selectedFile);
 
     axios
@@ -462,6 +496,7 @@ export class LabCommissionComponent {
         this.changeDetectorRef.detectChanges();
       });
   }
+
 
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 

@@ -17,8 +17,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  isOpen = false;
+  // isOpen = false;
   isDropdownOpen = false;
+
+
+
+  // toggleSidebar() {
+  //   this.isOpen = !this.isOpen;
+  // }
 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;

@@ -1,7 +1,31 @@
 
-<ul class="nav-links">
-  <li><a routerLink="/dashboard">Dashboard</a></li>
-  <li class="center"><a (click)="onApplyForRoleClick($event)">Apply for role</a></li>
-  <li class="upward"><a routerLink="/contact">Contact</a></li>
-  <li class="forward"><a routerLink="/">Feedback</a></li>
-</ul>
+<!-- <div class="sidebar" [class.open]="isOpen">
+  <ul class="nav-links">
+    <li class="logo-details">
+      <i class='fas fa-bars' id="btn" (click)="toggleSidebar()"></i>
+
+      <i class='fab fa-creative-commons icon'></i>
+      <div class="logo_name">ITERL</div>
+    </li>
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li class="center"><a (click)="onApplyForRoleClick($event)">Apply for role</a></li>
+    <li class="upward"><a routerLink="/contact">Contact</a></li>
+    <li class="forward"><a routerLink="/">Feedback</a></li>
+  </ul>
+</div> -->
+
+
+
+<div class="navbar">
+  <i class='fas fa-bars' id="btn" (click)="toggleSidebar()"></i>
+  <div class="logo-details">
+    <i class='fab fa-creative-commons icon'></i>
+    <div class="logo_name">ITERL</div>
+  </div>
+  <ul class="nav-links">
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li class="center"><a (click)="onApplyForRoleClick($event)">Apply for role</a></li>
+    <li class="upward"><a routerLink="/contact">Contact</a></li>
+    <li class="forward"><a routerLink="/">Feedback</a></li>
+  </ul>
+</div>
