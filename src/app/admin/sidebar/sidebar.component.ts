@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,11 +31,27 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent{
   isOpen = false;
-  isDropdownOpen = false;
 
 
+  dropdownOpen: boolean = false;
+  dropdownItems = [
+    { name: 'Annual Self Check', link: '/self-check', icon:'fas fa-tachometer-alt'},
+    { name: 'Software Tracking', link: '/software-track', icon:'fas fa-tachometer-alt' },
+    { name: 'ACL IP Management', link: '/acl-ip-management', icon:'fas fa-tachometer-alt' },
+    { name: 'Audit', link: '/audit', icon:'fas fa-tachometer-alt' },
+    { name: 'Lab Movement', link: '/lab-movement', icon:'fas fa-tachometer-alt' },
+  ];
+  menuItemClicked(item: string) {
+    console.log(`Clicked on ${item}`);
+    // Implement your logic here
+    // Optionally close the dropdown after clicking an item
+    this.dropdownOpen = false; // Close the dropdown
+  }
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
   toggleSidebar() {
     this.isOpen = !this.isOpen;
@@ -45,7 +61,6 @@ searchTerm: string = ''; // Ensure this line exists
 navItems = [
   { name: 'Dashboard', link: '/dashboard', icon:'fas fa-tachometer-alt' },
   { name: 'Lab Commission', link: '/lab_commission', icon:'fa-solid fa-plus' },
-  { name: 'Self Check', link: '/self-check', icon:'fa-solid fa-list-check' },
   { name: 'Lab Decommission', link: '/lab-decommission', icon:'fa-solid fa-file-zipper' },
 ];
 

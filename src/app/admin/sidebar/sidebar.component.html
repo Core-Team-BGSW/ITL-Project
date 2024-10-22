@@ -55,7 +55,7 @@
   </ul>
 </div> -->
 
-<div class="sidebar">
+<!-- <div class="sidebar">
   <ul class="nav-list">
     <li>
       <i class="fas fa-search"></i>
@@ -76,5 +76,45 @@
       </li>
     </ng-container>
   </ul>
-</div>
+</div> -->
 
+<div class="sidebar">
+  <ul class="nav-list">
+    <li>
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" />
+      <span class="tooltip">Search</span>
+    </li>
+    <ng-container *ngFor="let item of filteredNavItems">
+      <li>
+        <a [routerLink]="item.link">
+          <i [ngClass]="item.icon"></i>
+          <span class="small-name">{{ item.name }}</span> <!-- Small name for collapsed state -->
+          <span class="links_name">{{ item.name }}</span>
+        </a>
+        <span class="tooltip">{{ item.name }}</span>
+      </li>
+    </ng-container>
+
+    <li class="dropdown-toggle" (click)="dropdownOpen = !dropdownOpen">
+      <a href="javascript:void(0)">
+        <i class="fas fa-cogs"></i>
+        <span class="links_name">Lab Operations</span>
+        <i class="dropdown-arrow fas fa-chevron-down" [ngClass]="{'rotate': dropdownOpen}"></i>
+      </a>
+    </li>
+
+    <ul *ngIf="dropdownOpen">
+      <ng-container *ngFor="let dropdownItem of dropdownItems">
+        <li>
+          <a [routerLink]="dropdownItem.link" (click)="menuItemClicked(dropdownItem.name)">
+            <i [ngClass]="dropdownItem.icon"></i>
+            <span class="small-name">{{ dropdownItem.name }}</span> <!-- Small name for dropdown items -->
+            <span class="links_name">{{ dropdownItem.name }}</span>
+          </a>
+          <span class="tooltip">{{ dropdownItem.name }}</span>
+        </li>
+      </ng-container>
+    </ul>
+  </ul>
+</div>

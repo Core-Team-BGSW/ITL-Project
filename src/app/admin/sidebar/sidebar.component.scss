@@ -128,7 +128,7 @@
 
 .sidebar input {
   font-size: 15px;
-  color: #b2b9c0;
+  color: black;
   font-weight: 400;
   outline: none;
   height: 50px;
@@ -169,7 +169,7 @@
   display: flex;
   height: 100%;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
@@ -178,6 +178,7 @@
 
 .sidebar li a:hover {
   background: #FFF;
+  color: black;
 }
 
 .sidebar li a .links_name {
@@ -271,56 +272,38 @@
 }
 
 
-/* Rotate the arrow when the dropdown is active */
-.dropdown-toggle.active .dropdown-arrow {
-  transform: rotate(180deg);
-}
-
-.sidebar .dropdown-list {
-  display: none;
-  /* Initially hide dropdown list */
-}
-
-.sidebar .dropdown-toggle.active+.dropdown-list {
-  display: block;
-  /* Show dropdown list when toggle is active */
-}
-
 .dropdown-arrow {
-  transition: transform 0.3s ease;
-  margin-left: auto;
-  /* Push the arrow to the right */
+  transition: transform 0.3s ease; /* Smooth transition */
 }
 
-.dropdown-toggle {
-  cursor: pointer;
-  /* Change cursor to pointer for dropdown toggle */
+.dropdown-arrow.rotate {
+
+  transform: rotate(180deg); /* Rotate the arrow */
+}
+.small-name {
+  font-size: 10px; /* Adjust size as needed */
+  color: #aaa; /* Optional: lighter color for collapsed state */
+  display: none; /* Hide by default */
 }
 
-// .home-section{
-//   position: relative;
-//   background: #E4E9F7;
-//   min-height: 100vh;
-//   top: 0;
-//   left: 0;
-//   width: calc(100% - 78px);
-//   transition: all 0.5s ease, width 0.5s ease;
-//   z-index: 2;
-// }
-// .sidebar.open ~ .home-section{
-//   left: 250px;
-//   width: calc(100% - 250px);
-// }
-// .sidebar:not(.open) ~ .home-section {
-//   left: 0; /* No space when sidebar is collapsed */
-//   width: calc(100%); /* Full width when sidebar is collapsed */
-// }
-.home-section .text {
-  display: inline-block;
-  color: #11101d;
-  font-size: 25px;
-  font-weight: 500;
-  margin: 18px
+.sidebar.open .small-name {
+  display: none; /* Hide when the sidebar is expanded */
+}
+
+.sidebar li:hover .small-name {
+  display: inline; /* Show on hover */
+}
+
+.sidebar.open li:hover .small-name {
+  display: none; /* Hide when sidebar is open and hovered */
+}
+.small-name {
+  font-size: 12px; /* Adjust as needed */
+  display: block; /* Always show small names */
+}
+
+.sidebar.expanded .small-name {
+  display: block; /* Ensure small names remain visible */
 }
 
 @media (max-width: 420px) {
