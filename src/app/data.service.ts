@@ -15,7 +15,7 @@ interface Location {
   providedIn: 'root',
 })
 export class DataService {
-  private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
+  private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URLgit
   private locationUrl = 'http://localhost:8080/boschLabsLocation/location/api';
 
   constructor(private http: HttpClient) {}

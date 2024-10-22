@@ -99,11 +99,11 @@ p.choosemethod {
   /* Align text to the left */
 }
 
-.missing {
+.error {
   background-color: red;
-  /* Highlight color */
+  /* Highlight cells with errors */
   color: white;
-  /* Text color */
+  /* Optional for better contrast */
 }
 
 .importbutton {

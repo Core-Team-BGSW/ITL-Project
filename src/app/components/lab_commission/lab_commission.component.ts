@@ -24,9 +24,6 @@ import axios from 'axios';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data.service';
-import { inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NgZone } from '@angular/core';
 import { LayoutComponent } from '../../admin/layout/layout.component';
 
 export interface Location {
@@ -197,20 +194,6 @@ export class LabCommissionComponent {
         })
       );
 
-      // this.locations.forEach((location) => {
-      //   if (!countryCodeMap.has(location.country)) {
-      //     countryCodeMap.set(location.country, new Set());
-      //   }
-      //   countryCodeMap.get(location.country)?.add(location.locationCode);
-      // });
-
-      // // Convert the map to an array of objects for easier use in the template
-      // this.uniqueCountriesWithCodes = Array.from(countryCodeMap.entries()).map(
-      //   ([country, locationCodes]) => ({
-      //     countries: country, // Match the interface
-      //     locationCode: Array.from(locationCodes), // Match the interface
-      //   })
-      // );
       this.locations.forEach((location) => {
         if (!countryCodeMap.has(location.country)) {
           countryCodeMap.set(location.country, new Set());
@@ -295,14 +278,10 @@ export class LabCommissionComponent {
         this.excelData = [];
         this.filteredData = []; // Initialize filtered data
 
-        // Extract the first row safely
+        // Extract the first row safely (headers)
         const firstRow = worksheet.getRow(1);
-        if (!firstRow) {
-          alert('First row not found. Please check the Excel file.');
-          return;
-        }
-
         const values = firstRow.values;
+
         if (
           !values ||
           (typeof values === 'object' && Object.keys(values).length < 1)
@@ -325,9 +304,10 @@ export class LabCommissionComponent {
           }
         });
 
-        // Start from the second row (row index 2)
+        // Start processing from the second row (row index 2)
         worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-          // Skip the first row
+          console.log(`Processing row ${rowNumber}:`, row.values);
+          // Skip the first row (headers)
           if (rowNumber === 1) return;
 
           const rowData: { [key: string]: any } = {};
@@ -337,6 +317,8 @@ export class LabCommissionComponent {
               typeof header === 'string' ? header : `Column${index + 1}`
             ] = cell ? cell.value : null;
           });
+
+          // Add the row data to the corresponding header
           this.excelData.forEach((item) => {
             item.rows.push(rowData);
           });
@@ -376,10 +358,15 @@ export class LabCommissionComponent {
     this.filterExcelData(header, value);
   }
 
-  private http = inject(HttpClient);
-  private ngZone = inject(NgZone);
+  private ignoredHeaders: string[] = [
+    'Key Account Manager (KAM)',
+    'Secondary Lab Coordinator',
+    'No of Green Ports',
+    'No of Yellow Ports',
+    'No of Red Ports',
+  ];
 
-  onfileSubmit() {
+  onFileSubmit() {
     if (!this.selectedFile) {
       console.log('No file selected');
       return;
@@ -394,9 +381,12 @@ export class LabCommissionComponent {
       return;
     }
 
-    // Remove the first row from excelData if it exists
-    if (this.excelData.length > 0) {
-      this.excelData.shift(); // Removes the first row
+    // Validate excelData before uploading
+    const validationErrors = this.validateExcelData();
+    if (validationErrors.length > 0) {
+      const errorMessages = validationErrors.join('\n');
+      alert('Validation Errors:\n' + errorMessages);
+      return; // Stop the upload process if validation fails
     }
 
     const formData = new FormData();
@@ -417,141 +407,87 @@ export class LabCommissionComponent {
         this.previewVisible = false;
       })
       .catch((error) => {
-        if (error.response && error.response.data) {
-          console.error('Error Response Data:', error.response.data);
-
-          // Handle missing headers
-          if (error.response.data.error === 'Missing headers') {
-            const missingHeaders = error.response.data.missingHeaders;
-            missingHeaders.forEach((missingHeader: string) => {
-              const headerIndex = this.excelData.findIndex(
-                (h) => h.header === missingHeader
-              );
-              if (headerIndex !== -1) {
-                this.excelData[headerIndex].isMissing = true; // Mark header as missing
-              }
-            });
-          }
-
-          // Handle validation errors for fields
-          if (error.response.data.validationErrors) {
-            const errorMessages = error.response.data.validationErrors
-              .map(
-                (e: any) =>
-                  `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
-              )
-              .join('\n');
-
-            error.response.data.validationErrors.forEach((e: any) => {
-              e.missingFields.forEach((missingField: string) => {
-                const headerIndex = this.excelData.findIndex(
-                  (h) => h.header === missingField
-                );
-                if (headerIndex !== -1) {
-                  this.excelData[headerIndex].isMissing = true; // Mark header as missing
-                }
-              });
-            });
-
-            alert('Validation Errors:\n' + errorMessages);
-          } else {
-            alert('Error: ' + error.response.data.error);
-          }
-        } else {
-          console.error('Error:', error);
-          alert('An unknown error occurred.');
-        }
-        // Trigger change detection to update UI
-        this.changeDetectorRef.detectChanges();
+        this.handleUploadError(error);
       });
   }
 
-  // onfileSubmit(): void {
-  //   if (!this.selectedFile) {
-  //     console.log('No file selected');
-  //     return;
-  //   }
+  private validateExcelData(): string[] {
+    const errors: string[] = [];
 
-  //   const confirmUpload = window.confirm(
-  //     'Are you sure you want to upload this file?'
-  //   );
+    // Check for missing headers, ignoring specified headers
+    this.excelData.forEach((header) => {
+      if (header.isMissing && !this.ignoredHeaders.includes(header.header)) {
+        errors.push(`Missing header: ${header.header}`);
+      }
+    });
 
-  //   if (!confirmUpload) {
-  //     console.log('File upload cancelled by user');
-  //     return;
-  //   }
+    // Validate required fields in each row, ignoring specified headers
+    this.excelData.forEach((header) => {
+      if (!this.ignoredHeaders.includes(header.header)) {
+        header.rows.forEach((row: { [key: string]: any }, index: number) => {
+          if (!row[header.header]) {
+            errors.push(
+              `Row ${index + 2} is missing the field: ${header.header}`
+            );
+            row[header.header + '_error'] = true; // Mark cell as having an error
+          } else {
+            row[header.header + '_error'] = false; // Clear any previous error
+          }
+        });
+      }
+    });
 
-  //   // Create FormData object
-  //   const formData = new FormData();
-  //   formData.append('file', this.selectedFile);
+    return errors;
+  }
 
-  //   // Use HttpClient to post the file
-  //   this.http
-  //     .post('http://localhost:8080/upload/convert-excel-to-csv', formData)
-  //     .subscribe({
-  //       next: (response) => {
-  //         console.log('File uploaded successfully:', response);
-  //         this.ngZone.run(() => {
-  //           alert('File uploaded successfully!');
-  //         });
+  private handleUploadError(error: any) {
+    if (error.response && error.response.data) {
+      console.error('Error Response Data:', error.response.data);
 
-  //         this.selectedFile = null;
-  //         this.excelData = [];
-  //         this.previewVisible = false;
-  //       },
-  //       error: (error) => {
-  //         // console.error('Error uploading file:', error);
-  //         if (error.response && error.response.data) {
-  //           console.error('Error Response Data:', error.response.data);
+      // Handle missing headers
+      if (error.response.data.error === 'Missing headers') {
+        const missingHeaders = error.response.data.missingHeaders;
+        missingHeaders.forEach((missingHeader: string) => {
+          const headerIndex = this.excelData.findIndex(
+            (h) => h.header === missingHeader
+          );
+          if (headerIndex !== -1) {
+            this.excelData[headerIndex].isMissing = true; // Mark header as missing
+          }
+        });
+      }
 
-  //           // Handle missing headers
-  //           if (error.response.data.error === 'Missing headers') {
-  //             const missingHeaders = error.response.data.missingHeaders;
-  //             missingHeaders.forEach((missingHeader: string) => {
-  //               const headerIndex = this.excelData.findIndex(
-  //                 (h) => h.header === missingHeader
-  //               );
-  //               if (headerIndex !== -1) {
-  //                 this.excelData[headerIndex].isMissing = true; // Mark header as missing
-  //               }
-  //             });
-  //           }
+      // Handle validation errors for fields
+      if (error.response.data.validationErrors) {
+        const errorMessages = error.response.data.validationErrors
+          .map(
+            (e: any) =>
+              `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+          )
+          .join('\n');
 
-  //           // Handle validation errors for fields
-  //           if (error.response.data.validationErrors) {
-  //             const errorMessages = error.response.data.validationErrors
-  //               .map(
-  //                 (e: any) =>
-  //                   `Row ${e.row}: Missing fields: ${e.missingFields.join(
-  //                     ', '
-  //                   )}`
-  //               )
-  //               .join('\n');
+        error.response.data.validationErrors.forEach((e: any) => {
+          e.missingFields.forEach((missingField: string) => {
+            const headerIndex = this.excelData.findIndex(
+              (h) => h.header === missingField
+            );
+            if (headerIndex !== -1) {
+              this.excelData[headerIndex].isMissing = true; // Mark header as missing
+            }
+          });
+        });
 
-  //             error.response.data.validationErrors.forEach((e: any) => {
-  //               e.missingFields.forEach((missingField: string) => {
-  //                 const headerIndex = this.excelData.findIndex(
-  //                   (h) => h.header === missingField
-  //                 );
-  //                 if (headerIndex !== -1) {
-  //                   this.excelData[headerIndex].isMissing = true; // Mark header as missing
-  //                 }
-  //               });
-  //             });
-
-  //             alert('Validation Errors:\n' + errorMessages);
-  //           } else {
-  //             alert('Error: ' + error.response.data.error);
-  //           }
-  //         } else {
-  //           console.error('Error:', error);
-  //           alert('An unknown error occurred.');
-  //         }
-  //         // Trigger change detection to update UI
-  //         this.changeDetectorRef.detectChanges();
-  //       },
-  //     });
-  // }
+        alert('Validation Errors:\n' + errorMessages);
+      } else {
+        alert('Error: ' + error.response.data.error);
+      }
+    } else {
+      console.error('Error:', error);
+      alert('An unknown error occurred.');
+    }
+    // Trigger change detection to update UI
+    this.changeDetectorRef.detectChanges();
+  }
 
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 
@@ -571,17 +507,6 @@ export class LabCommissionComponent {
   }
 
   // // //////////////////////////////////////////////////////////////////////oncountrychange//////////////////////////////////////////////////////////////////////////////////////
-
-  // onCountryChange(): void {
-  //   const filteredLocationCode = this.locations.find(
-  //     (location) =>
-  //       location.country === this.selectedCountry &&
-  //       location.region === this.selectedRegion
-  //   );
-  //   this.selectedCode = filteredLocationCode
-  //     ? filteredLocationCode.locationCode
-  //     : '';
-  // }
   onCountryChange() {
     // Reset the selected location
     this.selectedLocation = '';
