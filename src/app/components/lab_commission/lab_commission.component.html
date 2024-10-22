@@ -47,116 +47,7 @@
           </button>
         </div>
       </div>
-
       <!-- <div *ngIf="previewVisible">
-        <div class="previewtextheading">
-          <h4>Preview of Excel Data</h4>
-          <p>Filter By <i class="fas fa-filter"></i></p>
-          <div class="filter-container">
-            <select [(ngModel)]="selectedHeader">
-              <option value="" disabled selected>Select a header</option>
-              <option *ngFor="let header of excelData" [value]="header.header">
-                {{ header.header }}
-              </option>
-            </select>
-
-            <input
-              type="text"
-              [(ngModel)]="filterValue"
-              (input)="onFilterChange(selectedHeader, filterValue)"
-              placeholder="Filter by value"
-            />
-          </div>
-        </div>
-
-        <div class="table-container">
-          <table class="excel-table">
-            <thead>
-              <tr>
-                <th
-                  *ngFor="let header of excelData"
-                  [ngClass]="{ missing: header.isMissing }"
-                >
-                  {{ header.header }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of filteredData[0]?.rows">
-                <td
-                  *ngFor="let header of excelData"
-                  [ngClass]="{
-                    missing: header.isMissing && !row[header.header]
-                  }"
-                >
-                  {{ row[header.header] }}
-                </td>
-              </tr>
-              <tr *ngIf="filteredData[0]?.rows.length === 0">
-                <td [attr.colspan]="excelData.length">
-                  No matching data found.
-                </td>
-              </tr>
-
-              <tr *ngFor="let row of excelData.slice(1)">
-                <td *ngFor="let cell of row">{{ cell }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>  -->
-      <!-- <div *ngIf="previewVisible">
-        <div class="previewtextheading">
-          <h4>Preview of Excel Data</h4>
-          <p>Filter By <i class="fas fa-filter"></i></p>
-          <div class="filter-container">
-            <select [(ngModel)]="selectedHeader">
-              <option value="" disabled selected>Select a header</option>
-              <option *ngFor="let header of excelData" [value]="header.header">
-                {{ header.header }}
-              </option>
-            </select>
-
-            <input type="text" [(ngModel)]="filterValue" (input)="onFilterChange(selectedHeader, filterValue)"
-              placeholder="Filter by value" />
-          </div>
-        </div>
-
-        <div class="table-container">
-          <table class="excel-table">
-            <thead>
-              <tr>
-                <th *ngFor="let header of excelData" [ngClass]="{ missing: header.isMissing }">
-                  {{ header.header }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of filteredData[0]?.rows">
-                <td *ngFor="let header of excelData" [ngClass]="{
-                      missing: header.isMissing && !row[header.header]
-                    }">
-                  {{ row[header.header] }}
-                </td>
-              </tr>
-              <tr *ngIf="filteredData[0]?.rows.length === 0">
-                <td [attr.colspan]="excelData.length">
-                  No matching data found.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-
-
-        <div class="sub">
-          <button mat-button class="subbutton" [disabled]="!fileSelected" (click)="onfileSubmit()">
-            Submit
-          </button>
-        </div>
-      </div>
-    </div> -->
-      <div *ngIf="previewVisible">
         <div class="previewtextheading">
           <h4>Preview of Excel Data</h4>
           <p>Filter By <i class="fas fa-filter"></i></p>
@@ -188,6 +79,56 @@
                   missing: header.isMissing && !row[header.header],
                   error: row[header.header + '_error']
                 }">
+                  {{ row[header.header] }}
+                </td>
+              </tr>
+              <tr *ngIf="filteredData[0]?.rows.length === 0">
+                <td [attr.colspan]="excelData.length">
+                  No matching data found.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub">
+          <button mat-button class="subbutton" [disabled]="!selectedFile" (click)="onFileSubmit()">
+            Submit
+          </button>
+        </div>
+      </div> -->
+      <div *ngIf="previewVisible">
+        <div class="previewtextheading">
+          <h4>Preview of Excel Data</h4>
+          <p>Filter By <i class="fas fa-filter"></i></p>
+          <div class="filter-container">
+            <select [(ngModel)]="selectedHeader">
+              <option value="" disabled selected>Select a header</option>
+              <option *ngFor="let header of excelData" [value]="header.header">
+                {{ header.header }}
+              </option>
+            </select>
+
+            <input type="text" [(ngModel)]="filterValue" (input)="onFilterChange(selectedHeader, filterValue)"
+              placeholder="Filter by value" />
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="excel-table">
+            <thead>
+              <tr>
+                <th *ngFor="let header of excelData" [ngClass]="{ missing: header.isMissing }">
+                  {{ header.header }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of filteredData[0]?.rows">
+                <td *ngFor="let header of excelData" [ngClass]="{
+                    missing: header.isMissing && !row[header.header],
+                    error: row[header.header + '_error']
+                  }">
                   {{ row[header.header] }}
                 </td>
               </tr>

@@ -278,14 +278,10 @@ export class LabCommissionComponent {
         this.excelData = [];
         this.filteredData = []; // Initialize filtered data
 
-        // Extract the first row safely
+        // Extract the first row safely (headers)
         const firstRow = worksheet.getRow(1);
-        if (!firstRow) {
-          alert('First row not found. Please check the Excel file.');
-          return;
-        }
-
         const values = firstRow.values;
+
         if (
           !values ||
           (typeof values === 'object' && Object.keys(values).length < 1)
@@ -308,9 +304,10 @@ export class LabCommissionComponent {
           }
         });
 
-        // Start from the second row (row index 2)
+        // Start processing from the second row (row index 2)
         worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-          // Skip the first row
+          console.log(`Processing row ${rowNumber}:`, row.values);
+          // Skip the first row (headers)
           if (rowNumber === 1) return;
 
           const rowData: { [key: string]: any } = {};
@@ -320,6 +317,8 @@ export class LabCommissionComponent {
               typeof header === 'string' ? header : `Column${index + 1}`
             ] = cell ? cell.value : null;
           });
+
+          // Add the row data to the corresponding header
           this.excelData.forEach((item) => {
             item.rows.push(rowData);
           });
@@ -359,6 +358,14 @@ export class LabCommissionComponent {
     this.filterExcelData(header, value);
   }
 
+  private ignoredHeaders: string[] = [
+    'Key Account Manager (KAM)',
+    'Secondary Lab Coordinator',
+    'No of Green Ports',
+    'No of Yellow Ports',
+    'No of Red Ports',
+  ];
+
   onFileSubmit() {
     if (!this.selectedFile) {
       console.log('No file selected');
@@ -380,11 +387,6 @@ export class LabCommissionComponent {
       const errorMessages = validationErrors.join('\n');
       alert('Validation Errors:\n' + errorMessages);
       return; // Stop the upload process if validation fails
-    }
-
-    // Clear the first row from excelData if it exists
-    if (this.excelData.length > 0) {
-      this.excelData.shift(); // Removes the first row
     }
 
     const formData = new FormData();
@@ -412,25 +414,27 @@ export class LabCommissionComponent {
   private validateExcelData(): string[] {
     const errors: string[] = [];
 
-    // Check for missing headers
+    // Check for missing headers, ignoring specified headers
     this.excelData.forEach((header) => {
-      if (header.isMissing) {
+      if (header.isMissing && !this.ignoredHeaders.includes(header.header)) {
         errors.push(`Missing header: ${header.header}`);
       }
     });
 
-    // Validate required fields in each row
+    // Validate required fields in each row, ignoring specified headers
     this.excelData.forEach((header) => {
-      header.rows.forEach((row: { [key: string]: any }, index: number) => {
-        if (!row[header.header]) {
-          errors.push(
-            `Row ${index + 2} is missing the field: ${header.header}`
-          );
-          row[header.header + '_error'] = true; // Mark cell as having an error
-        } else {
-          row[header.header + '_error'] = false; // Clear any previous error
-        }
-      });
+      if (!this.ignoredHeaders.includes(header.header)) {
+        header.rows.forEach((row: { [key: string]: any }, index: number) => {
+          if (!row[header.header]) {
+            errors.push(
+              `Row ${index + 2} is missing the field: ${header.header}`
+            );
+            row[header.header + '_error'] = true; // Mark cell as having an error
+          } else {
+            row[header.header + '_error'] = false; // Clear any previous error
+          }
+        });
+      }
     });
 
     return errors;
