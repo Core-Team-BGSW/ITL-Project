@@ -13,18 +13,24 @@
 .sidebar {
   position: fixed;
   left: 0;
-  top: 0;
+  //top: 50px; /* Adjust this value based on navbar height and margin */
   height: 100%;
   width: 78px;
-  background: #002742;
+  background: #e0e2e5;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
-  margin-top: 62px;
+  padding-top: 60px;
+
 }
 
 .sidebar.open {
   width: 250px;
+}
+#toggle-btn {
+  font-size: 22px; /* Icon size */
+  cursor: pointer; /* Pointer cursor */
+  margin-right: 15px; /* Space between button and logo */
 }
 
 .sidebar .logo-details {
@@ -40,7 +46,7 @@
 }
 
 .sidebar .logo-details .logo_name {
-  color: #fff;
+  color: black;
   font-size: 20px;
   font-weight: 600;
   opacity: 0;
@@ -122,7 +128,7 @@
 
 .sidebar input {
   font-size: 15px;
-  color: #FFF;
+  color: #b2b9c0;
   font-weight: 400;
   outline: none;
   height: 50px;
@@ -131,7 +137,7 @@
   border: none;
   border-radius: 12px;
   transition: all 0.5s ease;
-  background: #1d1b31;
+  background: #b2b9c0;
 }
 
 .sidebar.open input {
@@ -145,8 +151,8 @@
   left: 0;
   transform: translateY(-50%);
   font-size: 22px;
-  background: #1d1b31;
-  color: #FFF;
+  background:#b2b9c0;
+  color: black;
 }
 
 .sidebar.open .fas.fa-search:hover {
@@ -167,7 +173,7 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #11101D;
+  background:#b2b9c0;
 }
 
 .sidebar li a:hover {
@@ -175,9 +181,9 @@
 }
 
 .sidebar li a .links_name {
-  color: #fff;
+  color: black;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 800;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -193,7 +199,7 @@
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
   transition: all 0.5s ease;
-  color: #11101D;
+  color: #d0d4d8;
 }
 
 .sidebar li i {
@@ -201,6 +207,7 @@
   line-height: 50px;
   font-size: 18px;
   border-radius: 12px;
+  color: black;
 }
 
 .sidebar li.profile {
@@ -319,5 +326,10 @@
 @media (max-width: 420px) {
   .sidebar li .tooltip {
     display: none;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar {
+    top: calc(50px + 5px); /* Adjust for smaller screens if necessary */
   }
 }

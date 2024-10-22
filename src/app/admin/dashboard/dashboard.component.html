@@ -1,35 +1,78 @@
 <!-- Existing Content -->
- <div class="main-container">
-<div class="content">
-  <div class="row home-image">
-    <div class="col">
-      <h4 class="main-heading">Welcome to the Future of Lab Management!</h4>
-      <h2 class="sub-heading text-animation">Streamline, Optimize, and Innovate!</h2>
-      <p class="description">
-        Welcome to the cutting-edge solution for Engineering and Research Lab Lifecycle Management. Our platform is designed to revolutionize the way labs operate, ensuring efficiency, compliance, and streamlined processes across all stages of the lab lifecycle.
-      </p>
-    </div>
-    <div class="col">
-      <div class="image-container1">
-        <img src="assets/images/HOME_IMG3.png" alt="Kranti">
+<div class="main-container">
+  <div class="content">
+    <div class="row home-image">
+      <div class="col">
+        <h4 class="main-heading">Welcome to the Future of Lab Management!</h4>
+        <h2 class="sub-heading text-animation">
+          Streamline, Optimize, and Innovate!
+        </h2>
+        <p class="description">
+          Welcome to the cutting-edge solution for Engineering and Research Lab
+          Lifecycle Management. Our platform is designed to revolutionize the
+          way labs operate, ensuring efficiency, compliance, and streamlined
+          processes across all stages of the lab lifecycle.
+        </p>
+      </div>
+      <div class="col">
+        <div class="image-container1">
+          <img src="assets/images/HOME_IMG3.png" alt="Kranti" />
+        </div>
       </div>
     </div>
   </div>
 
-<!-- Features Section -->
-<div class="feat bg-gray pt-5 pb-5">
-    <div class="section-head col-sm-12">
-      <h4><span>Explore our features</span></h4>
-      <p>After exploring our features, you'll unlock unparalleled efficiency in lab operations and compliance. Dive into the future of lab management and discover how our solutions streamline processes, enhance security, and drive innovation.</p>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="item">
-          <a [routerLink]="['/lab_commission']" class="item-link">
-          <span class="icon feature_box_col_lab"><i class="fa fa-flask"></i></span>
-          <h6>Comprehensive Lab Inception</h6>
-          <p>Import and approve new lab data effortlessly using our intuitive forms and templates.</p>
-        </a>
+  <!-- Features Section -->
+  <div class="feat bg-gray pt-5 pb-5">
+    <div class="container">
+      <div class="section-head col-sm-12">
+        <h4><span>Explore our features</span></h4>
+        <p>
+          After exploring our features, you'll unlock unparalleled efficiency in
+          lab operations and compliance. Dive into the future of lab management
+          and discover how our solutions streamline processes, enhance security,
+          and drive innovation.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a [routerLink]="['/lab_commission']" class="item-link">
+              <span class="icon feature_box_col_lab"
+                ><i class="fa fa-flask"></i
+              ></span>
+              <h6>Comprehensive Lab Inception</h6>
+              <p>
+                Import and approve new lab data effortlessly using our intuitive
+                forms and templates.
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a routerLink="/self-check" class="item-link">
+              <span class="icon feature_box_col_two"
+                ><i class="fa fa-anchor"></i
+              ></span>
+              <h6>Streamlined Self-check</h6>
+              <p>
+                Automate annual self-audits and documentation, minimizing manual
+                effort and follow-ups.
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a routerLink="/software-tracking" class="item-link">
+              <span class="icon feature_box_col_monitoring"
+                ><i class="fa fa-chart-line"></i
+              ></span>
+              <h6>Software Monitoring</h6>
+              <p>Track the installed softwares in red zone PC's</p>
+            </a>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -47,57 +90,47 @@
             </a>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="item">
-          <a routerLink="/software-tracking" class="item-link">
-          <span class="icon feature_box_col_monitoring"><i class="fa fa-chart-line"></i></span>
-          <h6>Software Monitoring</h6>
-          <p>Track the installed softwares in red zone PC's</p>
-        </a>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <span class="icon feature_box_col_five"
+              ><i class="fa fa-upload"></i
+            ></span>
+            <h6>Lab Movement</h6>
+            <p>Raise and track lab movement requests with ease.</p>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="item">
-          <a routerLink="/lab-decommission" class="item-link">
-          <span class="icon feature_box_col_four"><i class="fa fa-database"></i></span>
-          <h6>Lab Decommission</h6>
-          <p>Manage the decommissioning process and archive lab artifacts securely.
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <span class="icon feature_box_col_ip"
+              ><i class="fa fa-network-wired"></i
+            ></span>
+            <h6>ACL IP Management</h6>
+            <p>
+              Manage the data of IP addresses of all the Engineering devices.
             </p>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="item">
-          <span class="icon feature_box_col_five"><i class="fa fa-upload"></i></span>
-          <h6>Lab Movement</h6>
-          <p>Raise and track lab movement requests with ease.
-          </p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 mb-4">
-        <div class="item">
-          <span class="icon feature_box_col_ip"><i class="fa fa-network-wired"></i></span>
-          <h6>ACL IP Management</h6>
-          <p>Manage the data of IP addresses of all the Engineering devices.</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <div class="container3">
-    <section class="headline-section">
-      <h1 class="headline"> Discover more about ITL by watching the video below. After watching, check your knowledge by proceeding to the quiz.</h1>
-    </section>
-      <div id="video-section" class="video-section" id="target-section" >
-      <video  #videoPlayer class="video" controls>
-        <source src="assets/images/test.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <p class="description">You'll need to watch this video before proceeding to quiz</p>
+  <div>
+    <!-- Video Section -->
+
+    <div class="container3">
+      <section class="headline-section">
+        <h1 class="headline">
+          Discover more about ITL by watching the video below. After watching,
+          check your knowledge by proceeding to the quiz.
+        </h1>
+      </section>
+      <div id="video-section" class="video-section" id="target-section">
+        <video #videoPlayer class="video" controls>
+          <source src="assets/images/test.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <p class="description">
+          You'll need to watch this video before proceeding to quiz
+        </p>
       </div>
 
       <section class="info-section">
@@ -108,11 +141,74 @@
         </p>
       </section>
       <section class="cta-section">
-
-        <button class="cta-button" (click)="navigateToQuiz()"><i class="fa-solid fa-circle-question"></i>&nbsp;Take the Quiz</button>
+        <button class="cta-button" (click)="navigateToQuiz()">
+          <mat-icon>quiz</mat-icon>Take the Quiz
+        </button>
       </section>
     </div>
+
+    <!-- Why choose us section -->
+    <!-- <section class="container2">
+    <div class="center-div">
+       <h2>Why choose Us ?</h2>
+      <p>In a world where lab operations are becoming increasingly complex, staying ahead requires more than just traditional management practices. Our platform is designed to transform how you manage your lab's lifecycle, offering a suite of advanced features tailored to meet the demands of Stakeholders </p>
+    </div>
+      <div class="choices">
+        <div class="left-top">
+            <div class="left-top-circle">
+                <img src="https://i.ibb.co/VJmZKFj/high-quality.png" alt="highquality"/>
+            </div>
+
+            <div class="left-top-text">
+                <h3>Enhance Security</h3>
+                <p>Gain insights into installed software and OS details to prevent unauthorized installations and security breaches..
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="right-top">
+            <div class="right-top-circle">
+                <img src="https://i.ibb.co/qgKNr59/backup.png"alt="backup"/>
+            </div>
+
+            <div class="right-top-text">
+                <h3>Optimize Data Management</h3>
+                <p>Centralize and streamline data storage, retrieval, and analysis for improved collaboration and decision-making.
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="right-bottom">
+            <div class="right-bottom-circle">
+                <img src="https://i.ibb.co/Kbd0xbp/smart.png" alt="smart"/>
+            </div>
+
+            <div class="right-bottom-text">
+                <h3>Empower Stakeholders</h3>
+                <p> Provide users with tailored roles and access rights to enhance operational efficiency and security.
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="left-bottom">
+            <div class="left-bottom-circle">
+                <img src="https://i.ibb.co/G53sbGK/customer.png" alt="customer"/>
+            </div>
+
+            <div class="left-bottom-text">
+                <h3>Reduce Human Efforts</h3>
+                <p>Digitize and automate traditional lab management methods to improve accuracy and efficiency.
+                </p>
+            </div>
+        </div>
+    </div>
+
+  </section> -->
   </div>
 </div>
-
-

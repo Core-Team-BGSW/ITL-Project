@@ -1,12 +1,11 @@
-
 <!-- New Design -->
-<div class="sidebar">
+<!-- <div class="sidebar"> -->
   <!-- <div class="logo-details">
     <i class='fab fa-creative-commons icon'></i>
     <div class="logo_name">ITERL</div>
     <i class='fas fa-bars' id="btn" (click)="toggleSidebar()"></i>
   </div> -->
-  <ul class="nav-list">
+  <!-- <ul class="nav-list">
     <li>
       <i class="fas fa-search"></i>
       <input type="text" placeholder="Search..." />
@@ -54,4 +53,28 @@
       <i class="fas fa-sign-out-alt" id="log_out"></i>
     </li>
   </ul>
+</div> -->
+
+<div class="sidebar">
+  <ul class="nav-list">
+    <li>
+      <i class="fas fa-search"></i>
+      <input
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="searchTerm"
+      />
+      <span class="tooltip">Search</span>
+    </li>
+    <ng-container *ngFor="let item of filteredNavItems">
+      <li>
+        <a [routerLink]="item.link">
+          <i [ngClass]="item.icon"></i>
+          <span class="links_name">{{ item.name }}</span>
+        </a>
+        <span class="tooltip">{{ item.name }}</span>
+      </li>
+    </ng-container>
+  </ul>
 </div>
+

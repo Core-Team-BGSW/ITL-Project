@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,11 +23,12 @@ import { MatListModule } from '@angular/material/list';
 })
 export class LayoutComponent {
 
-  isExpanded: boolean = false;
+  @Output() sidebarToggle = new EventEmitter<void>();
   isOpen = false;
 
   toggleSidebar() {
     this.isOpen = !this.isOpen;
+    this.sidebarToggle.emit();
   }
 
   constructor() {}

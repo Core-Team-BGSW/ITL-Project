@@ -1,5 +1,5 @@
 let sidebar = document.querySelector(".sidebar");
-let closeBtn = document.querySelector("#btn");
+let closeBtn = document.querySelector("#toggle-btn");
 let searchBtn = document.querySelector(".bx-search");
 
 closeBtn.addEventListener("click", () => {

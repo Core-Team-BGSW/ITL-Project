@@ -4,79 +4,6 @@
 
 // Kranti Sonawane
 
-// .container {
-//   display: flex;
-//   flex-direction: column;
-//   height: 100vh;
-//   overflow: hidden;
-//   margin-left: 2px; /* Margin when sidebar is collapsed */
-//   width: calc(100% - 25px);
-// }
-
-// .main-content {
-//   display: flex;
-//   flex: 1;
-// }
-
-// app-sidebar {
-//   transition: width 0.5s ease;
-//   height: calc(100vh - 64px);
-//   width: 25px; /* Default width when collapsed */
-// }
-
-// /* Content styles */
-// .content {
-//   flex: 1; /* Take the remaining space */
-//   padding: 20px; /* Some padding */
-//   overflow-y: auto;
-//   height: calc(100vh - 64px);
-//   position: relative;
-//   transition: margin-left 0.5s ease, width 0.5s ease;
-// }
-
-
-// // .content {
-// //   margin-left: 300px; /* Margin when sidebar is collapsed */
-// //   width: calc(100% - 2500px); /* Width when sidebar is collapsed */
-// // }
-
-// /* Expanded sidebar styles */
-// app-sidebar.open {
-//   width: 250px; /* Width when expanded */
-// }
-
-
-
-// app-sidebar.open ~ .content {
-
-//   width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
-//   margin-left: 250px; /* Margin when sidebar is expanded */
-// }
-
-// app-sidebar ~ .content {
-//   margin-left: 40px; /* Margin when sidebar is collapsed */
-//   width: calc(100% - 40px); /* Adjust width for collapsed state */
-// }
-// // mat-sidenav-container {
-// //   height: 100%;
-
-// //   mat-sidenav {
-// //     mat-nav-list {
-// //       .menu-item {
-// //         margin-left: 8px;
-// //       }
-
-// //       .chevron-button {
-// //         transition: 300ms ease-in-out;
-// //         transform: rotate(0deg);
-// //       }
-
-// //       .chevron-button.rotated {
-// //         transform: rotate(180deg);
-// //       }
-// //     }
-// //   }
-// // }
 .container {
   display: flex;
   flex-direction: column;
@@ -91,8 +18,12 @@
   display: flex;
   align-items: center;
   padding: 0 15px; /* Padding for navbar */
+  transition: margin-left 0.5s ease; /* Add transition for sliding */
 }
 
+.navbar.open {
+  margin-left: 250px; /* Shift when sidebar is expanded */
+}
 .main-content {
   display: flex;
   flex: 1;
@@ -102,24 +33,37 @@
 app-sidebar {
   transition: width 0.5s ease, margin-left 0.5s ease;
   height: calc(100vh - 64px); /* Adjust for navbar height */
-  width: 25px; /* Default width when collapsed */
+  width: 78px; /* Default width when collapsed */
 }
 
 .content {
   flex: 1; /* Take the remaining space */
-  padding: 20px; /* Some padding */
+  padding: 30px; /* Some padding */
   overflow-y: auto;
   height: calc(100vh - 64px); /* Adjust for navbar height */
-  position: relative;
+  margin-top: 0; /* No top margin needed */
   transition: margin-left 0.5s ease, width 0.5s ease;
+  padding-top: 70px;
 }
 
+/* Adjust the navbar's margin when the sidebar is open */
 app-sidebar.open ~ .content {
   width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
-  margin-left: 250px; /* Margin when sidebar is expanded */
+  margin-left: 180px; /* Margin when sidebar is expanded */
 }
 
+app-sidebar.open ~ .navbar {
+  width: calc(100% - 250px);
+  margin-left: 180px; /* Navbar slides with the sidebar */
+}
+
+/* Adjust when sidebar is closed */
 app-sidebar ~ .content {
-  margin-left: 40px; /* Margin when sidebar is collapsed */
+  margin-left: 4px; /* Margin when sidebar is collapsed */
   width: calc(100% - 40px); /* Adjust width for collapsed state */
+}
+
+app-sidebar ~ .navbar {
+  margin-left: 40px; /* Navbar when sidebar is collapsed */
+  width: calc(100% - 40px);
 }
