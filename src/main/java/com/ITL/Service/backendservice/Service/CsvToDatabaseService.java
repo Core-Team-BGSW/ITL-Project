@@ -7,6 +7,7 @@ import com.ITL.Service.backendservice.Repository.LabDataRepo;
 import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -104,7 +105,7 @@ public class CsvToDatabaseService {
         return labData;
     }
 
-    private boolean allElementsEmpty(String[] nextRecord) {
+    private boolean allElementsEmpty(@NotNull String[] nextRecord) {
         for(String elm : nextRecord)
         {
             if(elm !=null && !elm.trim().isEmpty()) return false;
