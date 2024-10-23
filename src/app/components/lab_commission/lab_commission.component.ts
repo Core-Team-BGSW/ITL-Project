@@ -1,70 +1,108 @@
-
-import { HomeComponent } from "../../admin/home/home.component";
-import { SidebarComponent } from "../../admin/sidebar/sidebar.component";
+// Edited by Jay Jambhale
+import { SidebarComponent } from '../../admin/sidebar/sidebar.component';
+import { AngularModule } from '../../angularmodule/angularmodule.module';
 import * as ExcelJS from 'exceljs';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { saveAs } from 'file-saver';
 import { CommonModule } from '@angular/common';
-import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';
-import { MatDialog, MatDialogModule  } from '@angular/material/dialog';
-import { DialogModule } from "@angular/cdk/dialog";
-import { DialogboxsubmitComponent } from "../dialogboxsubmit/dialogboxsubmit.component";
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { ChangeDetectorRef } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogModule } from '@angular/cdk/dialog';
+import { DialogboxsubmitComponent } from '../dialogboxsubmit/dialogboxsubmit.component';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 import axios from 'axios';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NgZone } from '@angular/core';
+import { LayoutComponent } from '../../admin/layout/layout.component';
 
+export interface Location {
+  region: string;
+  country: string;
+  locationCode: string;
+}
 
+export interface RegionWithCountries {
+  countries: string[];
+  region: string;
+}
 
-
+export interface countriesWithcode {
+  countries: string[];
+  locationCodes: string[];
+}
 
 @Component({
-    selector: 'app-lab_commission',
-    standalone: true,
-    templateUrl: './lab_commission.component.html',
-    styleUrl: './lab_commission.component.scss',
-    animations: [
-      trigger('rotateArrow', [
-        state('collapsed', style({
-          transform: 'rotate(0)'
-        })),
-        state('expanded', style({
-          transform: 'rotate(180deg)'
-        })),
-        transition('collapsed <=> expanded', animate('0.3s ease'))
-      ])
-    ],
-    imports: [HomeComponent, SidebarComponent, RouterLink, RouterOutlet, LabCommissionComponent,CommonModule,
-      MatTabsModule,MatButtonModule,MatTabLabel,MatInputModule,MatFormFieldModule,MatSelectModule,FormsModule,MatCardModule,MatCheckboxModule,MatRadioModule,
-      MatDialogModule,DialogModule,FormsModule,ReactiveFormsModule, ], changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-lab_commission',
+  standalone: true,
+  templateUrl: './lab_commission.component.html',
+  styleUrl: './lab_commission.component.scss',
+  animations: [
+    trigger('rotateArrow', [
+      state(
+        'collapsed',
+        style({
+          transform: 'rotate(0)',
+        })
+      ),
+      state(
+        'expanded',
+        style({
+          transform: 'rotate(180deg)',
+        })
+      ),
+      transition('collapsed <=> expanded', animate('0.3s ease')),
+    ]),
+  ],
+  imports: [
+    SidebarComponent,
+    RouterLink,
+    RouterOutlet,
+    LabCommissionComponent,
+    CommonModule,
+    FormsModule,
+    AngularModule,
+    DialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LayoutComponent,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-
-
-
-
-
 export class LabCommissionComponent {
-
   fileSelected = false;
   selectedFile: File | null = null; // Initialize selectedFile to null
+  selectedFileName: string = '';
   excelData: any[] = []; // Array to store parsed Excel data
+  filteredData: any[] = [];
+  filterValue: string = '';
   previewVisible = false; // Flag to control preview visibility
   tabIndex = 0; // Index of the active tabY
   isSelected = false;
   selectedRegion: string = '';
+  region: string = '';
   selectedCountry: string = '';
+  country: string = '';
   selectedLocation: string = '';
+  location: string = '';
   selectedCode: string = '';
+  entity: string = '';
+  GB: string = '';
+  localITLproxy: string = '';
+  locationcode: string = '';
   selectedEntity: string = '';
   selectedGB: string = '';
   selectedLocal: string = '';
@@ -75,491 +113,616 @@ export class LabCommissionComponent {
   redport: string = '';
   yellowport: string = '';
   localITL: string = '';
-  localITLproxy: string = '';
   KAM: string = '';
-  DH:string='';
-  Dept:string='';
-  Building:string='';
-  Floor:string='';
-  labno:string='';
-  primarylabco:string='';
-  secondarylabco:string='';
-  CC:string='';
-  kindoflab:string='';
-  purposeoflab:string='';
-  ACL:string='';
-  greenports:string='';
-  yellowports:string='';
-  redports:string='';
-  cmdb:string='';
-  labelPosition: string="";
-  choosemethod: string="";
+  DH: string = '';
+  Dept: string = '';
+  Building: string = '';
+  Floor: string = '';
+  labno: string = '';
+  primarylabco: string = '';
+  secondarylabco: string = '';
+  CC: string = '';
+  kindoflab: string = '';
+  purposeoflab: string = '';
+  description: string = '';
+  ACL: string = '';
+  greenports: string = '';
+  yellowports: string = '';
+  redports: string = '';
+  cmdb: string = '';
+  labelPosition: string = '';
+  choosemethod: string = '';
   selectedLabType: string = '';
   showOtherField: boolean = false;
   otherLabType: string = '';
   applications: any[] = [];
-
   labForm!: FormGroup;
+  selfauditdate: Date | null = null;
+  selectedDate!: Date;
+  isDatePickerDisabled: boolean = false; // Control the disabled stat
+  countries: string[] = [];
+  regions: string[] = [];
+  locationCodes: string[] = [];
+  filteredCountries: string[] = [];
+  filteredSites: string[] = [];
+  locations: Location[] = [];
+  showValidationMessage: boolean = false;
+  nextUniqueId: number = 1; // Initial unique ID counter
+  uniqueInstanceId: string = '';
+  selectedHeader: string = '';
+  gbOptions: string[] = [];
+  kamSuggestions: string[] = []; // All available KAM suggestions
+  departmentSuggestions: string[] = [];
+  dhSuggestions: string[] = []; // All available DH suggestions
+  filteredDepartmentSuggestions: string[] = [];
+  filteredDHSuggestions: string[] = []; // Filtered DH suggestions
+  filteredKAMSuggestions: string[] = []; // Filtered suggestions based on user input
+  uniqueRegions: RegionWithCountries[] = [];
+  uniqueCountriesWithCodes: countriesWithcode[] = [];
+  filteredLocationCode: String[] = [];
 
-
+  constructor(
+    private dialog: MatDialog,
+    private changeDetectorRef: ChangeDetectorRef,
+    private toastr: ToastrService,
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
-    this.labForm = this.fb.group({
-      choosemethod: ['', Validators.required],
-      localITL: ['', [Validators.required, Validators.minLength(7)]],
-      localITLproxy: [''],
-      DH: ['', Validators.required],
-      KAM: ['', Validators.required],
-      Dept: ['', Validators.required],
-      Building: [''],
-      Floor: ['', Validators.required],
-      labno: ['', Validators.required],
-      primarylabco: [''],
-      secondarylabco: [''],
-      CC: ['', Validators.required],
-      selectedLabType: ['', Validators.required],
-      otherLabType: [''],
-      cmdbradio: ['', Validators.required],
-      sharedlabradio: ['', Validators.required],
-      ACLradio: ['', Validators.required],
-      greenports: [''],
-      yellowports: [''],
-      redports: [''],
-      // Additional fields
+    const today = new Date();
+    // Add 6 months to the current date
+    const sixMonthsFromNow = new Date(today.setMonth(today.getMonth() + 6));
+    this.selectedDate = sixMonthsFromNow;
+    this.isDatePickerDisabled = true;
+    this.dataService.getLocations().subscribe((data) => {
+      this.locations = data; // Convert Set back to Array
+
+      // Create a map to hold regions and their corresponding countries
+      const regionCountryMap = new Map<string, Set<string>>();
+      const countryCodeMap = new Map<string, Set<string>>();
+
+      // Populate the map
+      this.locations.forEach((location) => {
+        if (!regionCountryMap.has(location.region)) {
+          regionCountryMap.set(location.region, new Set());
+        }
+        regionCountryMap.get(location.region)?.add(location.country);
+      });
+
+      // Convert the map to an array of objects for easier use in the template
+      this.uniqueRegions = Array.from(regionCountryMap.entries()).map(
+        ([region, countries]) => ({
+          region,
+          countries: Array.from(countries), // Convert Set back to Array
+        })
+      );
+
+      // this.locations.forEach((location) => {
+      //   if (!countryCodeMap.has(location.country)) {
+      //     countryCodeMap.set(location.country, new Set());
+      //   }
+      //   countryCodeMap.get(location.country)?.add(location.locationCode);
+      // });
+
+      // // Convert the map to an array of objects for easier use in the template
+      // this.uniqueCountriesWithCodes = Array.from(countryCodeMap.entries()).map(
+      //   ([country, locationCodes]) => ({
+      //     countries: country, // Match the interface
+      //     locationCode: Array.from(locationCodes), // Match the interface
+      //   })
+      // );
+      this.locations.forEach((location) => {
+        if (!countryCodeMap.has(location.country)) {
+          countryCodeMap.set(location.country, new Set());
+        }
+        countryCodeMap.get(location.country)?.add(location.locationCode);
+      });
+
+      this.uniqueCountriesWithCodes = Array.from(countryCodeMap.entries()).map(
+        ([country, locationCodes]) => ({
+          countries: [country], // Wrap country in an array
+          locationCodes: Array.from(locationCodes), // Convert Set back to Array
+        })
+      ) as countriesWithcode[];
     });
   }
 
-  onSubmit() {
-    if (this.labForm.valid) {
-      // Handle form submission
+  /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
+  onFileChanged(event: any) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0]; // Store the file object
+      this.fileSelected = true; // Enable preview button
+      this.selectedFileName = this.selectedFile.name; // Store the file name for display
     } else {
-      // Mark all fields as touched to display validation messages
-      this.labForm.markAllAsTouched();
+      this.selectedFile = null; // Reset if no file is selected
+      this.fileSelected = false; // Disable preview button
+      this.selectedFileName = ''; // Clear the file name
     }
   }
 
-
-    // /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
-
-  onFileChanged(event: any) {
-    this.selectedFile = event.target.files[0];
-    this.fileSelected = true; // Enable preview button
-  }
-
+  /////////////////////////////////////////////////////////////////////onPreview////////////////////////////////////////////////////////////////////////////
   onPreview() {
     if (this.selectedFile) {
+      // Validate the file type (e.g., .xls or .xlsx)
+      const validFileTypes = [
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/vnd.ms-excel',
+      ];
+      const fileType = this.selectedFile.type;
+
+      if (!validFileTypes.includes(fileType)) {
+        alert(
+          'Invalid file type. Please upload an Excel file (.xls or .xlsx).'
+        );
+        return;
+      }
+
+      // Validate the file size (e.g., limit to 5MB)
+      const maxSizeInBytes = 5 * 1024 * 1024; // 5 MB
+      if (this.selectedFile.size > maxSizeInBytes) {
+        alert(
+          'File size exceeds the limit of 5MB. Please upload a smaller file.'
+        );
+        return;
+      }
+
+      // If validation passes, proceed to read the file
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
         const arrayBuffer = e.target.result;
         this.parseExcel(arrayBuffer);
       };
       fileReader.readAsArrayBuffer(this.selectedFile);
+    } else {
+      alert('No file selected. Please upload an Excel file.');
     }
   }
 
-
-
-  private parseExcel(arrayBuffer: any) {
+  private parseExcel(arrayBuffer: ArrayBuffer) {
     const workbook = new ExcelJS.Workbook();
-    workbook.xlsx.load(arrayBuffer)
+    workbook.xlsx
+      .load(arrayBuffer)
       .then(() => {
         const worksheet = workbook.getWorksheet(1);
+
+        // Check if worksheet is null or undefined
+        if (!worksheet) {
+          alert('Worksheet not found. Please check the Excel file.');
+          return;
+        }
+
         this.excelData = [];
+        this.filteredData = []; // Initialize filtered data
 
-        worksheet?.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-          // Assuming row.values is an array of cell values
-          this.excelData.push(row.values);
+        // Extract the first row safely
+        const firstRow = worksheet.getRow(1);
+        if (!firstRow) {
+          alert('First row not found. Please check the Excel file.');
+          return;
+        }
+
+        const values = firstRow.values;
+        if (
+          !values ||
+          (typeof values === 'object' && Object.keys(values).length < 1)
+        ) {
+          alert(
+            'First row is empty or does not contain headers. Please check the Excel file.'
+          );
+          return;
+        }
+
+        const headers = Array.isArray(values) ? values.slice(1) : [];
+
+        headers.forEach((header) => {
+          if (typeof header === 'string') {
+            this.excelData.push({
+              header,
+              rows: [],
+              isMissing: false,
+            });
+          }
         });
+
+        // Start from the second row (row index 2)
+        worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
+          // Skip the first row
+          if (rowNumber === 1) return;
+
+          const rowData: { [key: string]: any } = {};
+          headers.forEach((header, index) => {
+            const cell = row.getCell(index + 1);
+            rowData[
+              typeof header === 'string' ? header : `Column${index + 1}`
+            ] = cell ? cell.value : null;
+          });
+          this.excelData.forEach((item) => {
+            item.rows.push(rowData);
+          });
+        });
+
+        this.filteredData = this.excelData; // Initialize with all data
         this.previewVisible = true;
-
-        // Manually trigger change detection
-      this.changeDetectorRef.detectChanges();
-
-        // Optionally, you can navigate to a new route or display a preview component here
-        // For simplicity, we will log the data to console
+        this.changeDetectorRef.detectChanges();
         console.log('Parsed Excel Data:', this.excelData);
-
-
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error parsing Excel:', error);
-        // Handle error
       });
   }
 
+  filterExcelData(header: string, value: any) {
+    if (!header || value === undefined || value === null) {
+      // If no header or value is provided, reset to the original data
+      this.filteredData = this.excelData;
+      return;
+    }
 
-  private uploadDataToServer(data: any) {
-    axios.post('http://localhost:3000/upload-excel', data)
-      .then(response => {
-        console.log('Data uploaded successfully:', response.data);
-      })
-      .catch(error => {
-        console.error('Error uploading data:', error);
-      });
+    this.filteredData = this.excelData.map((item) => {
+      return {
+        ...item,
+        rows: item.rows.filter((row: { [key: string]: any }) => {
+          return (
+            row[header] && row[header].toString().includes(value.toString())
+          );
+        }),
+      };
+    });
   }
 
-// //////////////////////////////////////////////////////////////////////onfileSubmit//////////////////////////////////////////////////////////////////////////////////////
-  onfileSubmit(){
+  // Call this method when the filter input changes
+  onFilterChange(header: string, value: string) {
+    this.filterExcelData(header, value);
+  }
+
+  private http = inject(HttpClient);
+  private ngZone = inject(NgZone);
+
+  onfileSubmit() {
     if (!this.selectedFile) {
       console.log('No file selected');
       return;
     }
 
+    const confirmUpload = window.confirm(
+      'Are you sure you want to upload this file?'
+    );
+
+    if (!confirmUpload) {
+      console.log('File upload cancelled by user');
+      return;
+    }
+
+    // Remove the first row from excelData if it exists
+    if (this.excelData.length > 0) {
+      this.excelData.shift(); // Removes the first row
+    }
+
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    axios.post('http://localhost:3000/upload-excel', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then(response => {
-      console.log('File uploaded successfully:', response.data);
-      // Optionally, you can clear the selected file and reset form state here
-      this.selectedFile = null;
-      this.excelData = [];
-      this.previewVisible = false;
-    })
-    .catch(error => {
-      console.error('Error uploading file:', error);
-    });
+    axios
+      .post('http://localhost:8080/upload/convert-excel-to-csv', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        this.toastr.success('Process initiated', 'Waiting for approval');
+        console.log('File uploaded successfully:', response.data);
+        // Clear selected file and reset form state
+        this.selectedFile = null;
+        this.excelData = [];
+        this.previewVisible = false;
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+          console.error('Error Response Data:', error.response.data);
+
+          // Handle missing headers
+          if (error.response.data.error === 'Missing headers') {
+            const missingHeaders = error.response.data.missingHeaders;
+            missingHeaders.forEach((missingHeader: string) => {
+              const headerIndex = this.excelData.findIndex(
+                (h) => h.header === missingHeader
+              );
+              if (headerIndex !== -1) {
+                this.excelData[headerIndex].isMissing = true; // Mark header as missing
+              }
+            });
+          }
+
+          // Handle validation errors for fields
+          if (error.response.data.validationErrors) {
+            const errorMessages = error.response.data.validationErrors
+              .map(
+                (e: any) =>
+                  `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+              )
+              .join('\n');
+
+            error.response.data.validationErrors.forEach((e: any) => {
+              e.missingFields.forEach((missingField: string) => {
+                const headerIndex = this.excelData.findIndex(
+                  (h) => h.header === missingField
+                );
+                if (headerIndex !== -1) {
+                  this.excelData[headerIndex].isMissing = true; // Mark header as missing
+                }
+              });
+            });
+
+            alert('Validation Errors:\n' + errorMessages);
+          } else {
+            alert('Error: ' + error.response.data.error);
+          }
+        } else {
+          console.error('Error:', error);
+          alert('An unknown error occurred.');
+        }
+        // Trigger change detection to update UI
+        this.changeDetectorRef.detectChanges();
+      });
   }
 
+  // onfileSubmit(): void {
+  //   if (!this.selectedFile) {
+  //     console.log('No file selected');
+  //     return;
+  //   }
 
+  //   const confirmUpload = window.confirm(
+  //     'Are you sure you want to upload this file?'
+  //   );
 
+  //   if (!confirmUpload) {
+  //     console.log('File upload cancelled by user');
+  //     return;
+  //   }
+
+  //   // Create FormData object
+  //   const formData = new FormData();
+  //   formData.append('file', this.selectedFile);
+
+  //   // Use HttpClient to post the file
+  //   this.http
+  //     .post('http://localhost:8080/upload/convert-excel-to-csv', formData)
+  //     .subscribe({
+  //       next: (response) => {
+  //         console.log('File uploaded successfully:', response);
+  //         this.ngZone.run(() => {
+  //           alert('File uploaded successfully!');
+  //         });
+
+  //         this.selectedFile = null;
+  //         this.excelData = [];
+  //         this.previewVisible = false;
+  //       },
+  //       error: (error) => {
+  //         // console.error('Error uploading file:', error);
+  //         if (error.response && error.response.data) {
+  //           console.error('Error Response Data:', error.response.data);
+
+  //           // Handle missing headers
+  //           if (error.response.data.error === 'Missing headers') {
+  //             const missingHeaders = error.response.data.missingHeaders;
+  //             missingHeaders.forEach((missingHeader: string) => {
+  //               const headerIndex = this.excelData.findIndex(
+  //                 (h) => h.header === missingHeader
+  //               );
+  //               if (headerIndex !== -1) {
+  //                 this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //               }
+  //             });
+  //           }
+
+  //           // Handle validation errors for fields
+  //           if (error.response.data.validationErrors) {
+  //             const errorMessages = error.response.data.validationErrors
+  //               .map(
+  //                 (e: any) =>
+  //                   `Row ${e.row}: Missing fields: ${e.missingFields.join(
+  //                     ', '
+  //                   )}`
+  //               )
+  //               .join('\n');
+
+  //             error.response.data.validationErrors.forEach((e: any) => {
+  //               e.missingFields.forEach((missingField: string) => {
+  //                 const headerIndex = this.excelData.findIndex(
+  //                   (h) => h.header === missingField
+  //                 );
+  //                 if (headerIndex !== -1) {
+  //                   this.excelData[headerIndex].isMissing = true; // Mark header as missing
+  //                 }
+  //               });
+  //             });
+
+  //             alert('Validation Errors:\n' + errorMessages);
+  //           } else {
+  //             alert('Error: ' + error.response.data.error);
+  //           }
+  //         } else {
+  //           console.error('Error:', error);
+  //           alert('An unknown error occurred.');
+  //         }
+  //         // Trigger change detection to update UI
+  //         this.changeDetectorRef.detectChanges();
+  //       },
+  //     });
+  // }
 
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-  onDownloadTemplate(){
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Template Sheet');
-
-    const headerRow = worksheet.addRow(['Sr.No','Region','Country','Location', 'Location-Code', 'Entity','GB','Local-ITL','Local-ITL Proxy','Department Head (DH)','Key Account Manager (KAM)','Department','Building','Floor','Lab No.','Primary Lab Coordinator','Secondary Lab Coordinator','Cost Center','Kind of Lab','Purpose of Lab in Brief','Description','ACL Required','No. of Green Ports','No. of Yellow Ports','No. of Red Ports','Is lab going to procure new equipment for Engineering/Red Zone?','Shared Lab']);
-    const firstRow = worksheet.addRow(['1','APAC','IN','Bangalore', 'Bani-ADUGODI', 'BGSW','PG','ada3kor','muk3kor','DH-NTID','KAM-NTID','EEM','ADUGODI-602','5','C-520','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','654D678','Reliability','nexon Car dashboard','Description','Yes','3','3','4','Yes','Yes']);
-    const secondRow = worksheet.addRow(['2','APAC','IN','Coimbatore', 'Cob-SEZ', 'BGSW','PS','ada3kor','muk3kor','DH-NTID','KAM-NTID','EXE','Cob-SEZ1','3','B-340','Lab Responsible NTID (Primary)','Lab Responsible NTID (Secondary)','652H78','Test','ECU testing','Description','No','','','','Yes','No']);
-
-
-    headerRow.font = { bold: true };
-    headerRow.alignment = { vertical: 'middle', horizontal: 'center' };
-    headerRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFF' },
-      };
-    });
-
-    secondRow.font = { italic: true };
-    secondRow.alignment = { vertical: 'middle', horizontal: 'center' };
-    secondRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFFFF' }
-
-      };
-    });
-
-    firstRow.font = { italic: true };
-    firstRow.alignment = { vertical: 'middle', horizontal: 'center' };
-    firstRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFFFF' }
-
-      };
-    });
-
-    workbook?.xlsx.writeBuffer().then((buffer: ArrayBuffer) => {
-      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      saveAs(blob, 'NewLabCommission_Template.xlsx');
-    });
-
+  onDownloadTemplate() {
+    const downloadUrl =
+      'https://bosch.sharepoint.com/sites/ITLConsultancyService-IN-ITLCoreTeam2/_layouts/15/download.aspx?SourceUrl=https://bosch.sharepoint.com/:x:/r/sites/ITLConsultancyService-IN-ITLCoreTeam2/Shared%20Documents/Lab%20Portal%20Project/NewLabCommission-templete.xlsx?d=wcc4bbffc32e04181bbce1816188a750f&csf=1&web=1&e=CjTsli';
+    window.open(downloadUrl, '_blank');
   }
 
-
-// //////////////////////////////////////////////////////////////////////onregionchange//////////////////////////////////////////////////////////////////////////////////////
-
-
-  regionchange(event: Event) {
-    const selectedregion = (event.target as HTMLSelectElement).value;
-    const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
-
-
-    // Clear previous options
-    countrySelect.innerHTML = '';
-
-    if (selectedregion === 'APAC') {
-      this.populateOptionsR(["Select Country","AU","BD","CN","HK","ID","IN","JP","KH","KR","LA","LK","MM","MY","NZ","PH","PK","SG","TH","TW","VN"]);
-    } else if (selectedregion === 'EMEA') {
-      this.populateOptionsR(["Select Country","DE",'PL']);
-    } else if (selectedregion === 'AMERICA') {
-      this.populateOptionsR(["Select Country","US", "BR"]);
-
-    }
-    this.selectedRegion = selectedregion;
+  // //////////////////////////////////////////////////////////////////////onregionchange//////////////////////////////////////////////////////////////////////////////////////
+  onRegionChange(): void {
+    const selected = this.uniqueRegions.find(
+      (item) => item.region === this.selectedRegion
+    );
+    this.filteredCountries = selected ? selected.countries : [];
+    this.selectedCountry = ''; // Reset selected country when region changes
   }
 
-  populateOptionsR(options: string[]) {
-    const countrySelect = document.getElementById('countrySelect') as HTMLSelectElement;
+  // // //////////////////////////////////////////////////////////////////////oncountrychange//////////////////////////////////////////////////////////////////////////////////////
 
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      countrySelect.appendChild(optionElem);
-    });
+  // onCountryChange(): void {
+  //   const filteredLocationCode = this.locations.find(
+  //     (location) =>
+  //       location.country === this.selectedCountry &&
+  //       location.region === this.selectedRegion
+  //   );
+  //   this.selectedCode = filteredLocationCode
+  //     ? filteredLocationCode.locationCode
+  //     : '';
+  // }
+  onCountryChange() {
+    // Reset the selected location
+    this.selectedLocation = '';
+
+    // Filter location codes based on the selected country
+    const selectedCountryData = this.uniqueCountriesWithCodes.find(
+      (c) => c.countries.includes(this.selectedCountry) // Check if the selected country is in the countries array
+    );
+
+    // Update filtered location codes based on the selected country data
+    this.filteredLocationCode = selectedCountryData
+      ? selectedCountryData.locationCodes // Ensure this is the correct property name
+      : [];
   }
 
-
-  // //////////////////////////////////////////////////////////////////////oncountrychange//////////////////////////////////////////////////////////////////////////////////////
-
-  countrychange(event: Event) {
-    const selectedcountry = (event.target as HTMLSelectElement).value;
-    const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
-
-    // Clear previous options
-    locationselect.innerHTML = '';
-
-    if (selectedcountry === 'IN') {
-      this.populateOptionsL(["Select location","Bangalore", "Hyderabad",'Pune', 'Coimbatore','Nagnathpura']);
-    } else if (selectedcountry === 'CN') {
-      this.populateOptionsL(["Select location",'Beijing']);
-    }
-    this.selectedCountry = selectedcountry;
-  }
-
-  populateOptionsL(options: string[]) {
-    const locationselect = document.getElementById('locationselect') as HTMLSelectElement;
-
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      locationselect.appendChild(optionElem);
-    });
-  }
-
-
-
-  // //////////////////////////////////////////////////////////////////////onlocationchange//////////////////////////////////////////////////////////////////////////////////////
-
-  locationchangeha(event: Event) {
-    const selectedlocation = (event.target as HTMLSelectElement).value;
-    const codeSelect = document.getElementById('codeSelect') as HTMLSelectElement;
-
-    // Clear previous options
-    codeSelect.innerHTML = ' ';
-
-    if (selectedlocation === 'Bangalore') {
-      this.populateOptionsCo(["Select Location-Code","Bani-ADUGODI",'Ban-RBIN','BanM-BANGTP','BanO-OMTP','Kor-Kormangala']);
-    } else if (selectedlocation === 'Hyderabad') {
-      this.populateOptionsCo(["Select Location-Code",'HYD-Hyderabad']);
-    }else if (selectedlocation === 'Pune') {
-      this.populateOptionsCo(["Select Location-Code",'PUA']);
-    }else if (selectedlocation === 'Coimbatore') {
-      this.populateOptionsCo(["Select Location-Code",'Cob-SEZ','Cob2-ILKG','Cob5-GTP']);
-    }else if (selectedlocation === 'Nagnathpura') {
-      this.populateOptionsCo(["Select Location-Code",'NH3-Nagnathpura']);
-    }
-    this.selectedLocation = selectedlocation;
-  }
-
-  populateOptionsCo(options: string[]) {
-    const codeSelect = document.getElementById('codeSelect') as HTMLSelectElement;
-
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      codeSelect.appendChild(optionElem);
-    });
-  }
-// //////////////////////////////////////////////////////////////////////oncodechange//////////////////////////////////////////////////////////////////////////////////////
-
-  codechange(event: Event) {
-    const selectedCode = (event.target as HTMLSelectElement).value;
-    const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
-
-    // Clear previous options
-    buildingSelect.innerHTML = ' ';
-
-    if (selectedCode === 'Bani-ADUGODI') {
-      this.populateOptionsB(["Select Building","ADUGODI-601","ADUGODI-602","ADUGODI-603","ADUGODI-605"]);
-    } else if (selectedCode === 'HYD-Hyderabad') {
-      this.populateOptionsB(["Select Building",'HYD-Hyderabad']);
-    }else if (selectedCode === 'HYD2-Hyderabad') {
-      this.populateOptionsB(["Select Building",'HYD2-Hyderabad']);
-    }else if (selectedCode === 'PUA') {
-      this.populateOptionsB(["Select Building",'PUA']);
-    }
-    else if (selectedCode === 'Cob-SEZ') {
-      this.populateOptionsB(["Select Building",'Cob-SEZ1','Cob-SEZ2']);
-    }
-    else if (selectedCode === 'Cob2-ILKG') {
-      this.populateOptionsB(["Select Building",'Cob2-ILKG']);
-    }else if (selectedCode === 'Cob5-GTP') {
-      this.populateOptionsB(["Select Building",'Cob5-GTP']);
-    }else if (selectedCode === 'NH3-Nagnathpura') {
-      this.populateOptionsB(["Select Building",'NH3-Nagnathpura']);
-    }
-    else if (selectedCode === 'Ban-RBIN') {
-      this.populateOptionsB(["Select Building",'RBIN-103','RBIN-105']);
-    }
-    else if (selectedCode === 'BanM-BANGTP') {
-      this.populateOptionsB(["Select Building",'BanM-BANGTP']);
-    }
-    else if (selectedCode === 'BanO-OMTP') {
-      this.populateOptionsB(["Select Building",'BanO-OMTP']);
-    }
-    else if (selectedCode === 'Kor-Kormangala') {
-      this.populateOptionsB(["Select Building",'Kor-901','Kor-903','Kor-905']);
-    }
-
-    this.selectedCode = selectedCode;
-  }
-
-  populateOptionsB(options: string[]) {
-    const buildingSelect = document.getElementById('buildingSelect') as HTMLSelectElement;
-
-    options.forEach(option => {
-      const optionElem = document.createElement('option');
-      optionElem.value = option;
-      optionElem.textContent = option;
-      buildingSelect.appendChild(optionElem);
-    });
-  }
-
-
-
-
-
-// //////////////////////////////////////////////////////////////////////onentityChange//////////////////////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////onentityChange//////////////////////////////////////////////////////////////////////////////////////
 
   entityChange(event: Event) {
     this.selectedEntity = (event.target as HTMLSelectElement).value;
     // Automatically fill Local-ITL based on selected entity
     if (this.selectedEntity === 'BGSW') {
-      this.localITL = 'ada2kor';
-      this.localITLproxy ='MNU1KOR';
+      this.localITL = 'MNU1KOR';
+      this.localITLproxy = 'ada2kor';
     } else {
       this.localITL = ''; // Clear localITL for other entities
-      this.localITLproxy ='';
+      this.localITLproxy = '';
     }
-
-
   }
+
   isBGSWOrBGSV(): boolean {
     return this.selectedEntity === 'BGSW' || this.selectedEntity === 'BGSV';
   }
-
-// //////////////////////////////////////////////////////////////////////onGBchange//////////////////////////////////////////////////////////////////////////////////////
-
-  GBChange(event: Event) {
-    this.selectedGB = (event.target as HTMLSelectElement).value;
-    // Automatically fill Local-ITL based on selected entity
-    if (this.selectedGB === 'PG') {
-      this.KAM ='grs2kor';
-    } else if(this.selectedGB === "2WP"){
-      this.KAM ='ask2kor';
-    }
-
-  }
-
-  //readonly cmdbradio = model<'before' | 'after'>('after');
-  //readonly sharedlabradio = model<'before' | 'after'>('after');
-
-
-  // /////////////////////////////////////////////////////////////////////onReset - formfill////////////////////////////////////////////////////////////////////////////
-
+  /////////////////////////////////////////////////////////////////////onReset-formfill////////////////////////////////////////////////////////////////////////////
 
   onReset() {
     // Reload the page
     window.location.reload();
   }
-// /////////////////////////////////////////////////////////////////////onSubmit - formfill////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////onSubmit-formfill////////////////////////////////////////////////////////////////////////////
 
+  onPreviewform(): void {
+    // Validate fields and get the list of missing fields
+    const missingFields = this.validateFields();
 
+    if (missingFields.length > 0) {
+      this.toastr.error(
+        `Please fill the following required fields: ${missingFields.join(', ')}`
+      );
+      return; // Prevent further execution if validation fails
+    }
 
+    // Prepare data for submission
+    const data = {
+      region: this.selectedRegion,
+      country: this.selectedCountry,
+      locationcode: this.selectedCode,
+      entity: this.selectedEntity,
+      GB: this.selectedGB,
+      localITL: this.localITL,
+      localITLproxy: this.localITLproxy,
+      DH: this.DH,
+      KAM: this.KAM,
+      Dept: this.Dept,
+      Building: this.Building,
+      Floor: this.Floor,
+      labno: this.labno,
+      primarylabco: this.primarylabco,
+      secondarylabco: this.secondarylabco,
+      CC: this.CC,
+      kindoflab: this.selectedLabType,
+      purposeoflab: this.purposeoflab,
+      description: this.description,
+      ACL: this.ACL,
+      greenports: this.greenports,
+      yellowport: this.yellowport,
+      redport: this.redport,
+      cmdbradio: this.cmdbradio,
+      otherLabType: this.otherLabType,
+      sharedlabradio: this.sharedlabradio,
+      ACLradio: this.ACLradio,
+      greenport: this.greenports,
+      yellowports: this.yellowports,
+      redports: this.redports,
+      selfauditdate: this.selfauditdate,
+      selectedDate: this.selectedDate,
+    };
 
+    const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
+      width: '600px',
+      data: { ...data },
+    });
 
-nextUniqueId: number = 1; // Initial unique ID counter
-uniqueInstanceId: string = ''
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('Dialog closed');
+    });
 
-
-constructor(private dialog: MatDialog,private changeDetectorRef: ChangeDetectorRef, private fb: FormBuilder) {}
-
-onPreviewform(): void {
-  const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
-    width: '600px',
-    data: { region: this.selectedRegion, country: this.selectedCountry, location: this.selectedLocation, locationcode: this.selectedCode,
-      entity: this.selectedEntity,GB: this.selectedGB,localITL: this.localITL,localITLproxy: this.localITLproxy, DH: this.DH, KAM: this.KAM,Dept: this.Dept,
-      Building : this.Building,Floor: this.Floor,labno: this.labno,primarylabco: this.primarylabco, secondarylabco:this.secondarylabco,CC: this.CC,
-      kindoflab: this.selectedLabType, purposeoflab:this.purposeoflab, ACL:this.ACL, greenports:this.greenports, yellowport:this.yellowport, redport:this.redport,
-      cmdbradio: this.cmdbradio, otherLabType:this.otherLabType, sharedlabradio: this.sharedlabradio, ACLradio : this.ACLradio, greenport: this.greenports, yellowports: this.yellowports,redports : this.redports
-       }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialog closed');
-
-
-    // Handle any actions after dialog is closed
-  });
-
-}
-
-
-
-
-
-
-
-
-getMissingFields(): string[] {
-  const missingFields: string[] = [];
-  if (!this.localITL) {
-    missingFields.push('Local-ITL');
+    // Perform submission logic
+    console.log('Form previewed with:', { data });
   }
-  if (!this.localITLproxy) {
-    missingFields.push('Local-ITL Proxy');
+
+  // Method to validate fields and return missing ones
+  private validateFields(): string[] {
+    const missingFields: string[] = [];
+
+    if (!this.localITL || this.localITL.length !== 7) {
+      missingFields.push('Local ITL (must be 7 characters)');
+    }
+    if (!this.localITLproxy) missingFields.push('Local ITL Proxy');
+    if (!this.selectedCountry) missingFields.push('Country');
+    if (!this.selectedRegion) missingFields.push('Region');
+    if (!this.selectedCode) missingFields.push('Code');
+    if (!this.selectedEntity) missingFields.push('Entity');
+    if (!this.selectedGB) missingFields.push('GB');
+    if (!this.labno) missingFields.push('Lab Number');
+    if (!this.Building) missingFields.push('Building');
+    if (!this.DH) missingFields.push('DH');
+    if (!this.KAM) missingFields.push('KAM');
+    if (!this.Floor) missingFields.push('Floor');
+    if (!this.CC) missingFields.push('CC');
+    if (!this.selectedLabType) missingFields.push('Lab Type');
+    if (!this.purposeoflab) missingFields.push('Purpose of Lab');
+    if (!this.description) missingFields.push('Description');
+
+    // Add other fields as needed...
+
+    return missingFields;
   }
-  if (!this.selectedEntity) {
-    missingFields.push('Entity');
+
+  onLabTypeChange() {
+    if (this.selectedLabType === 'Other') {
+      this.showOtherField = true;
+    } else {
+      this.showOtherField = false;
+    }
   }
-  if (!this.selectedGB) {
-    missingFields.push('GB');
-  }
-  // Add more fields as needed
-  return missingFields;
-}
 
-
-
-
-onLabTypeChange() {
-  if (this.selectedLabType === 'Other') {
-    this.showOtherField = true;
-  } else {
-    this.showOtherField = false;
-  }
-}
-
-
-
-submittedFormData: any = "";
-
+  submittedFormData: any = '';
   updateSubmittedFormData(formData: any): void {
     this.submittedFormData = formData;
     console.log('Updated submitted form data:', this.submittedFormData);
   }
-
 
   showOtherSection: boolean = false;
   otherField: string = '';
@@ -568,10 +731,116 @@ submittedFormData: any = "";
     this.showOtherSection = !this.showOtherSection;
   }
 
+  onDateSelected(date: Date) {
+    console.log('Selected date:', date);
+  }
+  // GBChange(event: any) {
+  //   this.selectedGB = event.target.value;
+  //   if (this.selectedGB) {
+  //     this.dataService
+  //       .getKAMSuggestions(this.selectedGB)
+  //       .subscribe((suggestions) => {
+  //         this.kamSuggestions = suggestions;
+  //         this.filteredKAMSuggestions = [];
+  //         this.KAM = '';
+  //       });
+  //     this.dataService
+  //       .getDepartmentSuggestions(this.selectedGB)
+  //       .subscribe((suggestions) => {
+  //         this.departmentSuggestions = suggestions;
+  //         this.filteredDepartmentSuggestions = [];
+  //         this.Dept = '';
+  //       });
+  //   } else {
+  //     this.resetFields();
+  //   }
+  // }
+  // resetFields() {
+  //   this.kamSuggestions = [];
+  //   this.filteredKAMSuggestions = [];
+  //   this.KAM = '';
+  //   this.departmentSuggestions = [];
+  //   this.filteredDepartmentSuggestions = [];
+  //   this.Dept = '';
+  //   this.dhSuggestions = [];
+  //   this.filteredDHSuggestions = [];
+  //   this.DH = ''; // Clear DH input
+  // }
+
+  // loadGBOptions() {
+  //   this.dataService.getGBOptions().subscribe((options) => {
+  //     this.gbOptions = options;
+  //   });
+  // }
+
+  // showKAMSuggestions() {
+  //   if (this.selectedGB) {
+  //     this.filteredKAMSuggestions = this.kamSuggestions; // Show all suggestions
+  //   }
+  // }
+  // // Method to fetch and display Department suggestions when Department input is focused
+  // showDepartmentSuggestions() {
+  //   if (this.selectedGB) {
+  //     this.filteredDepartmentSuggestions = this.departmentSuggestions;
+  //   }
+  // }
+
+  // // Method to fetch and display DH suggestions when DH input is focused
+  // showDHSuggestions() {
+  //   if (this.Dept) {
+  //     this.filteredDHSuggestions = this.dhSuggestions; // Show all DH suggestions if a department is selected
+  //   }
+  // }
+
+  // filterKAMSuggestions() {
+  //   const searchTerm = this.KAM.toLowerCase();
+  //   this.filteredKAMSuggestions = this.kamSuggestions.filter((kam) =>
+  //     kam.toLowerCase().includes(searchTerm)
+  //   );
+  // }
+
+  // filterDepartmentSuggestions() {
+  //   if (!this.selectedGB) return;
+
+  //   const searchTerm = this.Dept.toLowerCase();
+  //   this.filteredDepartmentSuggestions = this.departmentSuggestions.filter(
+  //     (dep) => dep.toLowerCase().includes(searchTerm)
+  //   );
+  // }
+
+  // onDepartmentChange() {
+  //   if (this.Dept) {
+  //     this.dataService.getDHSuggestions(this.Dept).subscribe((suggestions) => {
+  //       this.dhSuggestions = suggestions;
+  //       this.filteredDHSuggestions = []; // Clear previous filtered suggestions
+  //     });
+  //   } else {
+  //     this.filteredDHSuggestions = []; // Clear if no department is selected
+  //   }
+  // }
+
+  // filterDHSuggestions() {
+  //   if (!this.Dept) return;
+
+  //   const searchTerm = this.DH.toLowerCase();
+  //   this.filteredDHSuggestions = this.dhSuggestions.filter((dh) =>
+  //     dh.toLowerCase().includes(searchTerm)
+  //   );
+  // }
+
+  // selectKAM(kam: string) {
+  //   this.KAM = kam; // Set the KAM input value
+  //   this.filteredKAMSuggestions = []; // Clear suggestions after selection
+  // }
+
+  // selectDepartment(dep: string) {
+  //   this.Dept = dep; // Set the department input value
+  //   this.filteredDepartmentSuggestions = []; // Clear suggestions after selection
+  //   this.onDepartmentChange(); // Fetch DH suggestions
+  // }
+
+  // selectDH(dh: string) {
+  //   this.DH = dh; // Set the DH input value
+  //   this.filteredDHSuggestions = []; // Clear suggestions after selection
+  // }
 }
-
-
-
-
-
-

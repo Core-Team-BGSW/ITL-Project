@@ -1,65 +1,56 @@
-<div class="navbar">
-  <div class="user">
-    <img
-      src="https://cdn3.iconfinder.com/data/icons/avatars-collection/256/22-512.png"
-      alt=""
-    />
-    <h4 class="name">Admin</h4>
-    <p class="mail">NTID</p>
+<!-- New Design -->
+<div class="sidebar">
+  <div class="logo-details">
+    <i class="fab fa-creative-commons icon"></i>
+    <div class="logo_name">ITERL</div>
+    <i class="fas fa-bars" id="btn"></i>
   </div>
-  <div class="menu">
-    <div class="menu-head">
-      <span>Dashboard</span>
-    </div>
-    <div class="menu-item">
-      <button mat-button routerLink="/" class="menu-button">
-        <mat-icon class="symbol">dashboard</mat-icon>
-        <span>Home</span>
-      </button>
-      <button mat-button routerLink="/lab_commission" class="menu-button">
-        <mat-icon>message</mat-icon>
-        <span>Lab Commission</span>
-      </button>
-      <button mat-button class="menu-button" [matMenuTriggerFor]="menu">
-        <mat-icon>dashboard</mat-icon>
-        <span>Lab Operations</span>
-      </button>
+  <ul class="nav-list">
+    <li>
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search..." />
+      <span class="tooltip">Search</span>
+    </li>
+    <li>
+      <a routerLink="/dashboard">
+        <i class="fas fa-tachometer-alt"></i>
+        <span class="links_name">Dashboard</span>
+      </a>
+      <span class="tooltip">Dashboard</span>
+    </li>
+    <li>
+      <a routerLink="/lab_commission">
+        <i class="fa-solid fa-plus"></i>
+        <span class="links_name">Lab Commission</span>
+      </a>
+      <span class="tooltip">Lab Commission</span>
+    </li>
 
-      <mat-menu #menu="matMenu">
-        <div class="dropdown">
-          <button
-            routerLink="self-check"
-            mat-menu-item
-            (click)="menuItemClicked('Item 1')"
-          >
-            Annual Self Check Audit
-          </button>
-          <button
-            mat-menu-item
-            routerLink="/software-track"
-            (click)="menuItemClicked('Item 2')"
-          >
-            Software Tracking
-          </button>
-          <button mat-menu-item (click)="menuItemClicked('Item 3')">
-            ACL IP Management
-          </button>
-          <button mat-menu-item (click)="menuItemClicked('Item 4')">
-            Audit
-          </button>
-          <button mat-menu-item (click)="menuItemClicked('Item 4')">
-            Lab Movement
-          </button>
+    <li>
+      <a routerLink="/self-check">
+        <i class="fa-solid fa-list-check"></i>
+        <span class="links_name">Self check</span>
+      </a>
+      <span class="tooltip">Self-check</span>
+    </li>
+
+    <li>
+      <a routerLink="/lab-decommission">
+        <i class="fa-solid fa-file-zipper"></i>
+        <span class="links_name">Lab Decommission</span>
+      </a>
+      <span class="tooltip">Lab Decommission</span>
+    </li>
+
+    <li class="profile">
+      <div class="profile-details">
+        <img src="proficon.jpg" alt="profileImg" />
+        <div class="name_job">
+          <div class="name">Kranti S.</div>
+          <div class="job">Local ITL</div>
         </div>
-      </mat-menu>
-      <button mat-button routerLink="/labdecommission" class="menu-button">
-        <mat-icon>dashboard</mat-icon>
-        <span>Lab Decommission</span>
-      </button>
-      <button mat-button routerLink="/applications" class="menu-button">
-        <mat-icon>dashboard</mat-icon>
-        <span>Applications</span>
-      </button>
-    </div>
-  </div>
+      </div>
+      <i class="fas fa-sign-out-alt" id="log_out"></i>
+    </li>
+  </ul>
 </div>

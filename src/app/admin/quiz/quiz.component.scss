@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
+
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+// Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+
+}
+.title{
+  text-align: center;
+  padding-top: 70px;
+}
+.title2{
+  text-align: center;
+
+}
+.message{
+  color: #eb1047;
+
+}
+
+// Paragraph Styles
+.instruction {
+  color: black;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+
+}
+
+//Quiz Styling
+.quiz-button{
+  background-color: #373fde; /* Green */
+    border: none;
+    color: white;
+    padding: 20px 32px;
+    padding-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: -25px;
+    box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: #6fb75d;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #3510eb; /* Darken background on hover */
+        transform: translateY(-2px); /* Slightly move the button up on hover */
+
+    }
+    &:active {
+      background-color: #24c034; /* Even darker background when clicked */
+      transform: translateY(1px); /* Move button slightly down when clicked */
+    }
+
+}
+.quiz-section {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+
+
+  margin-top: 2rem;
+  max-width: 100%;
+  width: 100%;
+
+  h2 {
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column; /* Stack checkboxes vertically */
+  gap: 10px;
+  background: white;
+  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 10%;
+  margin-bottom: 20px;
+  margin-left: 6px;
+  margin-top: 10px;
+}
+.required{
+  color: red;
+}
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #4d90fe; /* Sets the color of the checkbox checkmark */
+}
+
+.checkbox-item label {
+  font-size: 14px;
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.checkbox-item input[type="checkbox"]:disabled + label {
+  color: #999;
+  cursor: not-allowed;
+}
+.submit-btn{
+
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: -25px;
+    box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: #6fb75d;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #49a138; /* Darken background on hover */
+        transform: translateY(-2px); /* Slightly move the button up on hover */
+
+    }
+    &:active {
+      background-color: #24c034; /* Even darker background when clicked */
+      transform: translateY(1px); /* Move button slightly down when clicked */
+    }
+
+  }

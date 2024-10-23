@@ -1,95 +1,150 @@
-<div class="content">
-  <div class="row home-image">
-    <div class="col">
-      <h4 class="sub-heading">We are here</h4>
-      <h2 class="main-heading">To grow your business</h2>
-      <p class="description">
-        The IT for Engineering and Research Labs - Life Cycle Management project
-        is designed to address several critical needs within engineering and
-        research laboratories. The motivation behind this project stems from the
-        challenges faced in optimizing lab management processes, and monitoring
-        equipments inside red zone.
-      </p>
-    </div>
-    <div class="col">
-      <div class="image-container">
-        <img src="assets/images/HOME_IMG3.png" alt="Kranti" />
+<!-- Existing Content -->
+<div class="main-container">
+  <div class="content">
+    <div class="row home-image">
+      <div class="col">
+        <h4 class="main-heading">Welcome to the Future of Lab Management!</h4>
+        <h2 class="sub-heading text-animation">
+          Streamline, Optimize, and Innovate!
+        </h2>
+        <p class="description">
+          Welcome to the cutting-edge solution for Engineering and Research Lab
+          Lifecycle Management. Our platform is designed to revolutionize the
+          way labs operate, ensuring efficiency, compliance, and streamlined
+          processes across all stages of the lab lifecycle.
+        </p>
+      </div>
+      <div class="col">
+        <div class="image-container1">
+          <img src="assets/images/HOME_IMG3.png" alt="Kranti" />
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div>
-  <div class="row mid-image">
-    <div class="col">
-      <div class="image-container">
-        <img src="assets/images/persons.png" alt="Kranti" />
+
+  <!-- Features Section -->
+  <div class="feat bg-gray pt-5 pb-5">
+    <div class="container">
+      <div class="section-head col-sm-12">
+        <h4><span>Explore our features</span></h4>
+        <p>
+          After exploring our features, you'll unlock unparalleled efficiency in
+          lab operations and compliance. Dive into the future of lab management
+          and discover how our solutions streamline processes, enhance security,
+          and drive innovation.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a [routerLink]="['/lab_commission']" class="item-link">
+              <span class="icon feature_box_col_lab"
+                ><i class="fa fa-flask"></i
+              ></span>
+              <h6>Comprehensive Lab Inception</h6>
+              <p>
+                Import and approve new lab data effortlessly using our intuitive
+                forms and templates.
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a routerLink="/self-check" class="item-link">
+              <span class="icon feature_box_col_two"
+                ><i class="fa fa-anchor"></i
+              ></span>
+              <h6>Streamlined Self-check</h6>
+              <p>
+                Automate annual self-audits and documentation, minimizing manual
+                effort and follow-ups.
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a routerLink="/software-tracking" class="item-link">
+              <span class="icon feature_box_col_monitoring"
+                ><i class="fa fa-chart-line"></i
+              ></span>
+              <h6>Software Monitoring</h6>
+              <p>Track the installed softwares in red zone PC's</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <a routerLink="/lab-decommission" class="item-link">
+              <span class="icon feature_box_col_four"
+                ><i class="fa fa-database"></i
+              ></span>
+              <h6>Lab Decommission</h6>
+              <p>
+                Manage the decommissioning process and archive lab artifacts
+                securely.
+              </p>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <span class="icon feature_box_col_five"
+              ><i class="fa fa-upload"></i
+            ></span>
+            <h6>Lab Movement</h6>
+            <p>Raise and track lab movement requests with ease.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <div class="item">
+            <span class="icon feature_box_col_ip"
+              ><i class="fa fa-network-wired"></i
+            ></span>
+            <h6>ACL IP Management</h6>
+            <p>
+              Manage the data of IP addresses of all the Engineering devices.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col mid-content">
-      <h4 class="sub-heading2">The IT for Engineering and Research Lab</h4>
-      <p class="description">
-        The IT for Engineering and Research Labs - Life Cycle Management project
-        is designed to address several critical needs within engineering and
-        research laboratories. The motivation behind this project stems from the
-        challenges faced in optimizing lab management processes, and monitoring
-        equipments inside red zone.
-      </p>
-      <button class="custom-button" routerLink="/about" color="primary">
-        About Us
-      </button>
+  </div>
+  <div>
+    <!-- Video Section -->
+
+    <div class="container3">
+      <section class="headline-section">
+        <h1 class="headline">
+          Discover more about ITL by watching the video below. After watching,
+          check your knowledge by proceeding to the quiz.
+        </h1>
+      </section>
+      <div id="video-section" class="video-section" id="target-section">
+        <video #videoPlayer class="video" controls>
+          <source src="assets/images/test.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <p class="description">
+          You'll need to watch this video before proceeding to quiz
+        </p>
+      </div>
+
+      <section class="info-section">
+        <p class="info-text">
+          Great job on watching the video! Now that you have a better
+          understanding of ITL, it’s time to test your knowledge. Click the
+          button below to start the quiz and see how much you’ve learned.
+        </p>
+      </section>
+      <section class="cta-section">
+        <button class="cta-button" (click)="navigateToQuiz()">
+          <mat-icon>quiz</mat-icon>Take the Quiz
+        </button>
+      </section>
     </div>
   </div>
-</div>
-
-<div class="text">
-  <h3 class="courgette-regular">We Provide you</h3>
-</div>
-
-<div class="container">
-  <mat-card class="example-card">
-    <img
-      mat-card-image
-      src="assets/images/monitoring.jpg"
-      alt="Monitoring Image"
-    />
-    <mat-card-content>
-      <h5 mat-card-title>Monitoring</h5>
-      <p mat-card-subtitle>Subtitle here</p>
-      <p mat-card-text>
-        This is a longer card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
-      </p>
-      <button mat-button>View</button>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="example-card">
-    <img mat-card-image src="assets/images/doc.jpg" alt="Documentation Image" />
-    <mat-card-content>
-      <h5 mat-card-title>Documentation</h5>
-      <p mat-card-subtitle>Subtitle here</p>
-      <p mat-card-text>
-        This is a longer card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
-      </p>
-      <button mat-button>View</button>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="example-card">
-    <img
-      mat-card-image
-      src="assets/images/colab.jfif"
-      alt="Collaboration Image"
-    />
-    <mat-card-content>
-      <h5 mat-card-title>Collaboration</h5>
-      <p mat-card-subtitle>Subtitle here</p>
-      <p mat-card-text>
-        This is a longer card with supporting text below as a natural lead-in to
-        additional content. This content is a little bit longer.
-      </p>
-      <button mat-button>View</button>
-    </mat-card-content>
-  </mat-card>
 </div>

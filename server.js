@@ -1,6 +1,3 @@
-
-
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -8,9 +5,13 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const ExcelJS = require('exceljs');
 //const upload = multer({ storage: multer.memoryStorage() });
-
+const User = require('./models/User');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
+const events = require('events');
+const { log } = require('console');
+events.EventEmitter.defaultMaxListeners = 20;
+
 
 // Middleware
 app.use(cors());
@@ -99,6 +100,7 @@ const itemSchema = new mongoose.Schema({
   "Is lab going to procure new equipment for Engineering/Red Zone?": String,
   "Shared Lab": String,
   "ACL Required": String,
+  "Self Audit Date": String,
   otherLabType: String,
   approvalStatus: {
     type: String,
@@ -109,65 +111,82 @@ const itemSchema = new mongoose.Schema({
 });
 
 const Item = mongoose.model('Item', itemSchema);
-
 module.exports = Item;
 
 
 // Configure Multer for file upload
 const upload = multer({ storage: multer.memoryStorage() });
+const REQUIRED_HEADERS = ['Region', 'Country', 'Location-Code','Entity','GB','Local-ITL','Local-ITL Proxy','Department Head (DH)','Department','Building','Floor','Lab No','Cost Center','Kind of Lab','Purpose of Lab in Brief',
+  'Description', 'ACL Required', 'Is lab going to procure new equipment for Engineering/Red Zone?','Shared Lab',
+];
 
+
+const REQUIRED_FIELDS = [
+  'Region', 'Country','Location-Code', 'Entity','GB','Local-ITL','Local-ITL Proxy','Department Head (DH)','Department','Building','Floor','Lab No','Cost Center','Kind of Lab','Purpose of Lab in Brief',
+  'Description', 'ACL Required', 'Is lab going to procure new equipment for Engineering/Red Zone?','Shared Lab'// Add fields that must not be empty
+];
 
 app.post('/upload-excel', upload.single('file'), async (req, res) => {
   if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({ error: 'No file uploaded' });
   }
 
   try {
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(req.file.buffer);
-    const worksheet = workbook.getWorksheet(1);
+      const workbook = new ExcelJS.Workbook();
+      await workbook.xlsx.load(req.file.buffer);
+      const worksheet = workbook.getWorksheet(1); // Get the first worksheet
 
-    if (!worksheet) {
-      return res.status(400).json({ error: 'Worksheet not found' });
-    }
-
-    // Get the first row to use as headers
-    const headerRow = worksheet.getRow(1);
-
-    // Ensure headerRow.values is an array and has elements
-    const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
-
-    if (headers.length === 0) {
-      return res.status(400).json({ error: 'No headers found' });
-    }
-
-    const items = [];
-
-    worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
-      const rowData = {};
-      headers.forEach((header, index) => {
-        if (header) {
-          rowData[header] = row.values[index + 1] || null;  // `index + 1` because `row.values` is 1-based index
-        }
-      });
-
-      // Skip if all values are header names
-      if (Object.values(rowData).every(value => headers.includes(value))) {
-        return;  // Skip this row
+      if (!worksheet) {
+          return res.status(400).json({ error: 'Worksheet not found' });
       }
 
-      items.push(rowData);
-      rowData.approvalStatus = 'Pending'; // Set initial approval status
-    });
+      // Get the first row to use as headers
+      const headerRow = worksheet.getRow(1);
+      const headers = headerRow.values && Array.isArray(headerRow.values) ? headerRow.values.slice(1) : [];
 
-    console.log('Data to insert:', items); // Log data to check before insertion
+      if (headers.length === 0) {
+          return res.status(400).json({ error: 'No headers found' });
+      }
 
-    // Insert all items into the database
-    await Item.insertMany(items);
-    res.status(201).json({ message: 'Data successfully uploaded and saved to MongoDB' });
+      // Check for missing required headers
+      const missingHeaders = REQUIRED_HEADERS.filter(header => !headers.includes(header));
+      if (missingHeaders.length > 0) {
+          return res.status(400).json({ error: 'Missing headers', missingHeaders });
+      }
+
+      const items = [];
+      const validationErrors = [];
+
+      worksheet.eachRow({ includeEmpty: false, from: 2 }, (row) => {
+          const rowData = {};
+          headers.forEach((header, index) => {
+              if (header) {
+                  rowData[header] = row.values[index + 1] || null; // `index + 1` because `row.values` is 1-based index
+              }
+          });
+
+          // Check for required fields
+          const missingFields = REQUIRED_FIELDS.filter(field => !rowData[field]);
+          if (missingFields.length > 0) {
+              validationErrors.push({ row: row.number, missingFields });
+          } else {
+              items.push({ ...rowData, approvalStatus: 'Pending' }); // Set initial approval status
+          }
+      });
+
+      // If there are validation errors, respond with them
+      if (validationErrors.length > 0) {
+          return res.status(400).json({ error: 'Validation errors', validationErrors });
+      }
+
+      console.log('Data to insert:', items); // Log data to check before insertion
+
+      // Insert all items into the database
+      await Item.insertMany(items);
+      res.status(201).json({ message: 'Data successfully uploaded and saved to MongoDB' });
   } catch (error) {
-    console.error('Error processing file:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error processing file:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -201,125 +220,76 @@ app.post('/Lablist/approve/:id', async (req, res) => {
   }
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const locationSchema = new mongoose.Schema({
+  Region: String,
+  Country: String,
+  LocationCode: String,
+
+});
+const Location = mongoose.model('Location', locationSchema);
+
+app.get('/api/locations', async (req, res) => {
+  try {
+      const locations = await Location.find({});
+      res.json(locations);
+  } catch (error) {
+      console.error('Error fetching locations:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 
+// Endpoint to get GB options
+app.get('/api/gb-options', async (req, res) => {
+  try {
+    const gbOptions = await Item.distinct('GB'); // Fetch unique GB values
+    res.json(gbOptions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching GB options');
+  }
+});
 
-// // Define the schema for pendingapp
-// const pendingAppSchema = new mongoose.Schema({
-//   Region: String,
-//   Country: String,
-//   Location: String,
-//   "Location-Code": String,
-//   Entity: String,
-//   GB: String,
-//   "Local-ITL": String,
-//   "Local-ITL Proxy": String,
-//   "Department Head (DH)": String,
-//   "Key Account Manager (KAM)": String,
-//   Department: String,
-//   Building: String,
-//   Floor: String,
-//   "Lab No": String,
-//   "Primary Lab Coordinator": String,
-//   "Secondary Lab Coordinator": String,
-//   "Cost Center": String,
-//   "Kind of Lab": String,
-//   "Purpose of Lab in Brief": String,
-//   Description: String,
-//   "No of Green Ports": String,
-//   "No of Yellow Ports": String,
-//   "No of Red Ports": String,
-//   "Is lab going to procure new equipment for Engineering/Red Zone?": String,
-//   "Shared Lab": String,
-//   "ACL Required": String,
-//   otherLabType: String,
-//   approvalStatus: {
-//     type: String,
-//     enum: ['Pending', 'Approved', 'Rejected'],
-//     default: 'Pending'
-//   },
-//   rejectionRemarks: String
-// });
+// Endpoint to get KAM suggestions based on selected GB
+app.get('/api/kam-suggestions', async (req, res) => {
+  const gbValue = req.query.gb;
 
-// const PendingApp = mongoose.model('PendingApp', pendingAppSchema);
+  try {
+    const items = await Item.find({ GB: gbValue }, { "Key Account Manager (KAM)": 1, _id: 0 });
+    const kamSuggestions = [...new Set(items.map(item => item["Key Account Manager (KAM)"]))]; // Unique KAM values
+    res.json(kamSuggestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching KAM suggestions');
+  }
+});
 
+app.get('/api/department-suggestions', async (req, res) => {
+  const gbValue = req.query.gb;
 
-// app.post('/Lablist', async (req, res) => {
-//   try {
-//     const formData = req.body;
-//     formData.approvalStatus = 'Pending'; // Set initial approval status
-//     const pendingApp = new PendingApp(formData);
-//     await pendingApp.save();
-//     res.status(201).json(pendingApp);
-//   } catch (error) {
-//     console.error('Error saving data:', error); // Log the error
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+  try {
+    const items = await Item.find({ GB: gbValue }, { Department: 1, _id: 0 });
+    const departmentSuggestions = [...new Set(items.map(item => item.Department))]; // Unique department values
+    res.json(departmentSuggestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching department suggestions');
+  }
+});
 
-// // API to get all pending items for approval
-// app.get('/Lablist/pending', async (req, res) => {
-//   try {
-//     const pendingItems = await PendingApp.find({ approvalStatus: 'Pending' });
-//     res.status(200).json(pendingItems);
-//   } catch (error) {
-//     console.error('Error fetching pending items:', error);
-//     res.status(500).json({ message: 'Internal Server Error', error });
-//   }
-// });
+// Endpoint to get Department Head suggestions based on selected Department
+app.get('/api/dh-suggestions', async (req, res) => {
+  const departmentValue = req.query.department;
 
-
-// // Example route for handling PATCH requests to approve an item
-// app.patch('/Lablist/:id/approve', async (req, res) => {
-//   const itemId = req.params.id;
-//   try {
-//     // Your logic to find and update the item in the database
-//     // Example using a mock database function
-//     const updatedItem = await updateItemStatus(itemId, 'approved');
-
-//     if (!updatedItem) {
-//       return res.status(404).json({ message: 'Item not found' });
-//     }
-
-//     res.status(200).json(updatedItem);
-//   } catch (error) {
-//     console.error('Error approving item:', error);
-//     res.status(500).json({ message: 'Internal Server Error' });
-//   }
-// });
-
-// // Mock function for demonstration
-// async function updateItemStatus(id, status) {
-//   // Replace this with actual database logic
-//   return { id, status }; // Example response
-// }
-
-
-
-// app.patch('/Lablist/reject', async (req, res) => {
-//   const { id } = req.params;
-//   const { rejectionRemarks } = req.body; // Expect rejectionRemarks in request body
-
-//   try {
-//     const pendingItem = await PendingApp.findById(id);
-//     if (!pendingItem) {
-//       return res.status(404).json({ message: 'Pending item not found' });
-//     }
-
-//     // Update the approval status to 'Rejected'
-//     pendingItem.approvalStatus = 'Rejected';
-//     pendingItem.rejectionRemarks = rejectionRemarks || '';
-
-//     // Save the updated item back to the pending collection
-//     await pendingItem.save();
-
-//     res.status(200).json({ message: 'Item rejected' });
-//   } catch (error) {
-//     console.error('Error rejecting item:', error);
-//     res.status(500).json({ message: 'Internal Server Error', error });
-//   }
-// });
-
-
-
+  try {
+    const items = await Item.find({ Department: departmentValue }, { "Department Head (DH)": 1, _id: 0 });
+    const dhSuggestions = [...new Set(items.map(item => item["Department Head (DH)"]))]; // Unique DH values
+    res.json(dhSuggestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching DH suggestions');
+  }
+});
 

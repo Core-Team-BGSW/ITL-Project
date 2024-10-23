@@ -1,0 +1,80 @@
+<div class="container">
+<!-- <h2> Before applying for role take quiz</h2>
+<button class="quiz-btn" (click)="navigateToTargetSection()">Go to home page</button> -->
+<div>
+
+
+  <!-- Role form -->
+<p class="first">NT-ID of User<span class="required"> *</span></p>
+    <div class="dropdown-container">
+      <div class="dropdown-item">
+
+        <input
+          type="text"
+          id="local-ITL"
+          placeholder="NTID"
+          required
+          minlength="7"
+
+        />
+
+        </div>
+      </div>
+
+    <div class="entity/GB">
+      <p>Entity and GB<span class="required"> *</span></p>
+      <div class="dropdown-container">
+        <div class="dropdown-item">
+          <input
+          type="text"
+          id="local-ITL"
+          placeholder="Entity Name"
+          required
+          minlength="7"/>
+      </div>
+
+      <div class="dropdown-item">
+        <input
+          type="text"
+          id="local-ITL"
+          placeholder="GB Name"
+          required
+          minlength="7"/>
+
+        </div>
+       </div>
+    </div>
+    <p>Select role you want to apply<span class="required"> *</span></p>
+    <div class="dropdown-container">
+      <div class="dropdown-item">
+
+        <select
+          id="regionSelect"
+          name="region">
+          <option value="">Select a Role</option>
+          <option value="primary_lab_cord">Primary Lab Coordinator</option>
+          <option value="secondary_lab_cord">Secondary Lab Coordinator</option>
+          <option value="local_itl">Local ITL</option>
+          <option value="local_itl_proxy">Local ITL Proxy</option>
+
+        </select>
+      </div>
+      </div>
+      <p class="first-field">Give the lab names<span class="required"> *</span></p>
+    <div class="dropdown-container">
+      <div class="dropdown-item">
+
+        <input
+          type="text"
+          id="local-ITL"
+          placeholder="description"
+          required
+          minlength="7"
+
+        />
+
+        </div>
+      </div>
+      <button class="success_btn" >Submit</button>
+    </div>
+  </div>

@@ -1,3 +1,7 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
+
+
+
 input[type=text]
 {
  width: 300px;
@@ -23,13 +27,13 @@ select
  box-sizing: border-box;
  border: 1.2px solid rgb(107, 124, 194);
 }
-.tooltip 
+.tooltip
 {
  position: relative;
  display: inline-block;
 
 }
-.tooltiptext 
+.tooltiptext
 {
  visibility: hidden;
 
@@ -55,18 +59,18 @@ select
     0 100%/100% calc(100% - var(--r)) no-repeat,
    conic-gradient(at calc(var(--r)/2) calc(var(--r)/2),#000 270deg,#0000 0)
     0 0/calc(100% - var(--r)/2) calc(100% - var(--r)/2) padding-box,
-   radial-gradient(50% 50%,#000 98%,#0000) 
+   radial-gradient(50% 50%,#000 98%,#0000)
     0 0/var(--r) var(--r) space padding-box;
  -webkit-mask: var(--m);
          mask: var(--m);
- 
-   
- 
+
+
+
  font-size: 15px;
- 
+
  color: #fff;
 }
- .tooltip:hover .tooltiptext 
+ .tooltip:hover .tooltiptext
  {
 
    visibility: visible;
@@ -74,7 +78,7 @@ select
  }
 .button
 {
- 
+
   background: rgb(38, 124, 237);
  border-radius: 10px;
  padding: 11px;
@@ -85,9 +89,9 @@ select
    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
    font-size: medium;
    font-weight: bold;
-   
+
 }
-.custom-card 
+.custom-card
 {
  /* Custom background color */
 border-radius: 0px; /* Rounded corners */
@@ -109,7 +113,7 @@ margin-left: 10px;
 margin-top: 10px;
 }
 
-.custom-input .mat-input-element  
+.custom-input .mat-input-element
 {
 color: #201f1f; /* Custom text color */
 font-size: 5px; /* Custom font size */
@@ -117,7 +121,7 @@ border-radius: 60px;
 
 }
 
-.custom-input .mat-form-field-underline 
+.custom-input .mat-form-field-underline
 {
 background-color: #007bff; /* Custom underline color */
 }
@@ -125,17 +129,17 @@ background-color: #007bff; /* Custom underline color */
 {
 padding: 20px;
 background-color: white;
-border-radius: 20px; 
+border-radius: 20px;
 
 }
 
-.small-input 
+.small-input
 {
 width: 230px; /* Custom width for the input box */
 height: 10px; /* Custom height for the input box */
 padding: 5px; /* Padding inside the input box */
 }
-.small-input1 
+.small-input1
 {
 width: 250px; /* Custom width for the input box */
 height: 10px; /* Custom height for the input box */
@@ -159,13 +163,13 @@ svg
 width: 20px;
 height: 15px;
 }
-.tooltip1 
+.tooltip1
 {
 position: relative;
 display: inline-block;
 
 }
-.tooltiptext1 
+.tooltiptext1
 {
 visibility: hidden;
 
@@ -216,7 +220,7 @@ h2
  text-align: center;
 
 }
- .btn 
+ .btn
  {
  font-size: 16px;
  padding: 10px 20px;
@@ -225,7 +229,7 @@ h2
  cursor: pointer;
  transition: background-color 0.3s, box-shadow 0.3s;
 }
- .primary 
+ .primary
  {
    background: rgb(240, 202, 96);
    color: rgb(68, 66, 66);
@@ -237,7 +241,7 @@ h2
   border-radius: 8px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
-  transition: background-color 0.3s ease, transform 0.3s ease; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
   left:40%;
  }
  .primary:hover{
@@ -251,7 +255,7 @@ h2
    color: rgb(46, 46, 46);
    position: relative;
    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-   left: 41%; 
+   left: 41%;
   border: none; /* Remove default border */
   padding: 12px 24px; /* Padding around the text */
   font-size: 16px; /* Increase font size */
@@ -260,15 +264,15 @@ h2
   cursor: pointer; /* Pointer cursor on hover */
   box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
   transition: background-color 0.3s ease, transform 0.3s ease;
- 
+
  }
  .success_btn:hover{
-  transform: translateY(-2px); 
+  transform: translateY(-2px);
  }
- 
- 
 
- .styled-table 
+
+
+ .styled-table
  {
    width: 100%;
    border-collapse: collapse;
@@ -293,7 +297,7 @@ h2
    font-size: large;
    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
  }
- .custom-input 
+ .custom-input
  {
    width: 300px;
    padding: 10px 15px;
@@ -305,19 +309,19 @@ h2
    box-sizing: border-box;
    border: 1.2px solid rgb(102, 122, 204);
  }
- 
+
  /* Custom label style */
  .custom-label
   {
    color: #3f51b5; /* Example color */
    font-weight: bold;
  }
- 
+
  /* Custom styles for the datepicker toggle icon */
- .custom-datepicker-toggle .mat-datepicker-toggle-default-icon 
+ .custom-datepicker-toggle .mat-datepicker-toggle-default-icon
  {
    color: #3f51b5; /* Example color */
-   
+
  }
  .custom-datepicker-toggle .mat-datepicker-toggle-default-icon {
   font-size: 45px; /* Adjust size as needed */
@@ -327,25 +331,25 @@ h2
 
 
 
- 
+
  /* Custom styles for mat-datepicker */
- .custom-datepicker .mat-datepicker-content 
+ .custom-datepicker .mat-datepicker-content
  {
    background-color: white; /* Example color */
  }
- 
+
  /* Custom styles for the mat-form-field underline */
- .custom-form-field .mat-form-field-underline 
+ .custom-form-field .mat-form-field-underline
  {
    background-color: #3f51b5; /* Example color */
  }
- 
+
  /* Custom styles for the mat-form-field wrapper */
- .custom-form-field .mat-form-field-wrapper 
+ .custom-form-field .mat-form-field-wrapper
  {
    background-color: white; /* Example color */
  }
- 
+
  h4{
   background-color: #2bb4ef;
   text-align: center;
@@ -376,11 +380,11 @@ margin-top: 10px;
   text-align: left;
   margin-top: 0;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-  
+
 }
 .checklist_table th,
 .checklist_table td{
-   
+
   text-align: center;
 }
 .checklist_table1{
@@ -391,13 +395,13 @@ margin-top: 10px;
   text-align: left;
   margin-top: 0;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
-  
+
 }
 .checklist_table1 th{
   text-align: center;
 }
 .checklist_table1 td{
-  
+
   text-align: center;
 }
 .document_table{
@@ -428,7 +432,7 @@ input[type=url]{
 h5{
   font-weight: 500;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}   
+}
 h3{
   color:#121b61;
  text-align: left;
@@ -470,10 +474,10 @@ h3{
 }
 .url_design{
   color: red;
-} 
+}
 .excel_btn{
   display: inline-block;
-  
+
   padding: 10px 10px;
   cursor: pointer;
   background-color: #3dda7e; /* Primary color */
@@ -485,7 +489,7 @@ h3{
   transition: background-color 0.3s ease;
   width: 150px;
   font-weight: bold;
-  
+
 }
 .excel_btn:hover{
   transform: translateY(-2px);
@@ -510,7 +514,7 @@ h3{
 }
 .btn_container{
   display: flex;
-  gap: 10px; 
+  gap: 10px;
   transform: translateY(-2px);
 }
 
@@ -520,7 +524,7 @@ h3{
 .form-control:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
+
 }
 
 /* Additional styling */
