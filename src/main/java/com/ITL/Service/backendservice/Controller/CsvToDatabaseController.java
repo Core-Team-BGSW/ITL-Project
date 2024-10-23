@@ -3,6 +3,8 @@ package com.ITL.Service.backendservice.Controller;
 import com.ITL.Service.backendservice.Service.CsvToDatabaseService;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -11,11 +13,12 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class CsvToDatabaseController {
     private final CsvToDatabaseService csvToDatabaseService;
-    public String uploadCsvToDatabase(String filePath) {
+    public ResponseEntity<String> uploadCsvToDatabase(String filePath) {
         try{
-            return csvToDatabaseService.saveCsvToDatabase(filePath);
+            ResponseEntity<String> res = csvToDatabaseService.saveCsvToDatabase(filePath);
+            return ResponseEntity.ok(res.toString());
         } catch (CsvValidationException | IOException e) {
-            return ("Error occurred while uploading CSV file: " + e.getMessage());
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while inserting CSV to Database: " + e.getMessage());
         }
     }
 }

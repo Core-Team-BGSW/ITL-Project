@@ -25,7 +25,6 @@ public class Entity {
     private long seqId;
     private String region;
     private String country;
-//    private String location;
     private String locationCode;
     private String entityName;
     @DBRef

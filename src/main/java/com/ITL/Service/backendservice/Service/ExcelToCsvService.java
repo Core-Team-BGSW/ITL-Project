@@ -1,9 +1,6 @@
 package com.ITL.Service.backendservice.Service;
 
 import com.ITL.Service.backendservice.Controller.CsvToDatabaseController;
-import com.azure.storage.blob.BlobClient;
-import com.azure.storage.blob.BlobClientBuilder;
-import com.opencsv.CSVWriter;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -16,7 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -25,11 +25,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class ExcelToCsvService {
-    @Value("${azure.storage.connection-string}")
-    private String connectionString;
-    @Value("${azure.storage.container-name}")
-    private String containerName;
-    @Value("${azure.storage.csv-file-directory}")
+    @Value("${csv.file.directory}")
     private String csvFileDirectory;
     private final CsvToDatabaseController csvToDatabaseController;
     private final FileService fileService;
@@ -57,34 +53,17 @@ public class ExcelToCsvService {
             String fileUniqueId = UUID.randomUUID().toString();
             csvFileName+=fileUniqueId;
             //System.out.println(csvFileName);
-              File csvFile = new File(csvFileName);
-              PrintWriter csvWriter = new PrintWriter(new FileWriter(csvFileName));
-              getCSV(sheet,csvWriter);
-              workbook.close();
-              uploadToBlob(csvFile,csvFileName);
-              csvToDatabaseController.uploadCsvToDatabase(path+"\\"+csvFileName);
-//            File csvFile = new File(csvFileDirectory + File.separator + csvFileName);
-//            PrintWriter csvWriter = new PrintWriter(new FileWriter(csvFile));
-//            getCSV(sheet,csvWriter);
-//            workbook.close();
-//            csvToDatabaseController.uploadCsvToDatabase(path + "\\" + csvFileName);
-//            Path deletePath = Paths.get(path + "\\" + csvFileName);
-//            fileService.deleteCsvFile(deletePath);
-            return ResponseEntity.ok("Converted Excel file to CSV and stored at: " + String.format("https://%s.blob.core.windows.net/%s/%s","iterlstorage", containerName, csvFileName));
+            File csvFile = new File(csvFileDirectory + File.separator + csvFileName);
+            PrintWriter csvWriter = new PrintWriter(new FileWriter(csvFile));
+            getCSV(sheet,csvWriter);
+            workbook.close();
+            csvToDatabaseController.uploadCsvToDatabase(path + "\\" + csvFileName);
+            Path deletePath = Paths.get(path + "\\" + csvFileName);
+            fileService.deleteCsvFile(deletePath);
+            return ResponseEntity.ok("Converted Excel file to CSV and stored at: " + csvFile.getAbsolutePath());
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error converting Excel to CSV: " + e.getMessage());
         }
-    }
-
-    private void uploadToBlob(File csvFile, String blobName) throws FileNotFoundException {
-        BlobClientBuilder blobClientBuilder = new BlobClientBuilder()
-                .connectionString(connectionString)
-                .containerName(containerName)
-                .blobName(csvFileDirectory + "/" + blobName);
-
-                blobClientBuilder.buildClient().upload(new FileInputStream(csvFile),csvFile.length(),true);
-
-
     }
 
     private void getCSV(Sheet sheet, PrintWriter csvWriter)

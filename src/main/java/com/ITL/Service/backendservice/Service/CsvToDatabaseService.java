@@ -8,6 +8,8 @@ import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
@@ -19,8 +21,9 @@ import java.util.*;
 public class CsvToDatabaseService {
     private final LabDataRepo labDataRepo;
     private final EntityRepo entityRepo;
-    public final SequenceGeneratorService sequenceGeneratorService;
-    public String saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
+    private final SequenceGeneratorService sequenceGeneratorService;
+    private final UserDetailsUpdateService userDetailsUpdateService;
+    public ResponseEntity<String> saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
             String[] nextRecord;
             csvReader.skip(2);
@@ -55,10 +58,11 @@ public class CsvToDatabaseService {
                 nextRecord = csvReader.readNext();
             }
             entityRepo.saveAll(entityMap.values());
-            return "The file is Successfully stored into Database";
+            userDetailsUpdateService.updateDatabase();
+            return ResponseEntity.ok("The file is Successfully stored into Database");
         }
         catch (IOException | CsvValidationException e) {
-            return ("Some error occurred while writing csv to database" + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while inserting CSV to Database: " + e.getMessage());
         }
     }
 

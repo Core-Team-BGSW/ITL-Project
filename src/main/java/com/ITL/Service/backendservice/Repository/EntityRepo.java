@@ -20,4 +20,5 @@ public interface EntityRepo extends MongoRepository<Entity,String> {
 
     @Query("{ 'labDataList._id' : ?0 }")
     Entity findByLabDataId(String labDataId);
+    List<Entity> findAllByEntityName(String name);
 }
