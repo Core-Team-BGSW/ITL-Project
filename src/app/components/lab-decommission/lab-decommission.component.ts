@@ -8,6 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ChangeDetectionStrategy, inject} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+
 import {
   MatDialog,
   MatDialogActions,
@@ -23,7 +25,7 @@ import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecomm
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe,  MatButtonModule],
+  imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe,  MatButtonModule,MatCardModule],
   templateUrl: './lab-decommission.component.html',
   styleUrl: './lab-decommission.component.scss'
 })

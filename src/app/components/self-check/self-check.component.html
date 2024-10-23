@@ -1,3 +1,5 @@
+<!-- Code written by Ishita Mukherjee -->
+
 <h2 >Self Audit Form :</h2>
 <i><b><p style="color:red"> (Select Lab for Audit)</p></b></i>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -10,10 +12,9 @@
         <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
           <div class="collapsible-header">
               <mat-card class="custom-card">
-              
                 <mat-card-content>
                  <p style="color: grey;" >  Lab No -> Entity -> GB ->  Department </p> 
-                  
+                  <!-- this will fetch the data from the backend  -->
              <b> {{ lab["Lab No"] }} ->
               
                {{ lab.Entity }}  ->  {{ lab.GB }}  ->  {{ lab.Department }}  </b>   
@@ -29,7 +30,8 @@
             </div> 
             </mat-card-content>
             </mat-card>
-            </div>    
+            </div> 
+              <!-- It will fetch the details of each and every lab from the backend  -->
       <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
         <p></p>
       

@@ -23,7 +23,6 @@ interface Question {
   answer: string;
   showAnswer: boolean;
 }
-
 @Component({
   selector: 'app-self-check',
   standalone: true,
@@ -60,9 +59,7 @@ dataList!: any[];
         error: (err) => this.errorMessage = err
       });
   }
- 
- 
-  onSearch(): void {
+    onSearch(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredLabList = this.labList.filter(lab =>
       Object.values(lab).some(value =>
@@ -79,11 +76,7 @@ dataList!: any[];
     } else {
       this.expandedLabId = labId; // Expand the selected lab
     }
-
   }
-  
-  
-  
   toggledetails1(audit:string):void{
     if (this.expandedaudit==audit){
       this.expandedaudit=null;
@@ -92,7 +85,6 @@ dataList!: any[];
       this.expandedaudit=audit;
     }
   }
- 
   // Check if a lab is expanded
   isExpanded(labId: string): boolean {
     return this.expandedLabId === labId;
@@ -101,22 +93,18 @@ dataList!: any[];
     return this.expandedaudit === audit;
   }
   isCollapsed = true;  // Initial state of the collapsible content
-
   toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
   }
   formsVisible = false;  // Initial state of the forms
-
   showForms(): void {
     this.formsVisible = !this.formsVisible;
   }
   isFormExpanded = false;
   toggleForm(): void {
     this.isFormExpanded = !this.isFormExpanded;
-  
-}
+ }
 isDropdownVisible = false;
-
 toggleDropdown() {
   this.isDropdownVisible = !this.isDropdownVisible;
 }
@@ -127,8 +115,7 @@ openForm(labEntity: string) {
       if(confirmed){
           window.open( 'https://apxbgswapexp.webapp.inside.bosch.cloud/apxbgswapexp/r/cibteapex_prod/itl-prd/self-claim-report?session=5134802335988');
       }
-   
-  } 
+     } 
   else if(labEntity=='rbin'){
     const confirmed = confirm('This page will redirect to ITL Self-audit tool,before self-audit please contact ITL Consulatncy team (bd_toa-ets1_itl_consultancy_team@bcn.bosch.com)');
       if(confirmed){
