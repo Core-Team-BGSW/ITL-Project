@@ -3,6 +3,7 @@ package com.ITL.Service.backendservice.Controller;
 import com.ITL.Service.backendservice.DTO.LabDataWithEntityDTO;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.LabDataService;
+import com.azure.core.annotation.Get;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,24 @@ public class LabDataController {
         return labDataService.deleteLabDataByPrimaryLabCoordinator(primary_lab_cord);
     }
 
+    @GetMapping("/labData/{primary_lab_cord}")
+    public List<LabData> getLabDataWithPrimaryLabCoordinator(@PathVariable("primary_lab_cord") String primary_lab_cord)
+    {
+        return labDataService.getLabDataWithPrimaryLabCoordinator(primary_lab_cord);
+    }
+
+    @GetMapping("/labData/{localItl}")
+    public List<LabData> getLabDataWithLocalItl(@PathVariable("local_itl") String localItl)
+    {
+        return labDataService.getLabDataWithLocalItl(localItl);
+    }
+
+    @GetMapping("/labData/{localItlProxy}")
+    public List<LabData> getLabDataWithLocalItlProxy(@PathVariable("local_itl_proxy") String localItlProxy)
+    {
+        return labDataService.getLabDataWithLocalItlProxy(localItlProxy);
+    }
+
     @GetMapping("/allLabs")
     public List<LabData> getAllLabsData()
     {
@@ -44,5 +63,23 @@ public class LabDataController {
     @GetMapping("/allLabsWithEntity")
     public List<LabDataWithEntityDTO> getAllLabDataWithEntities() {
         return labDataService.getAllLabDataWithEntities();
+    }
+
+    @GetMapping("/allGB")
+    public ResponseEntity<List<String>> getUniqueGbNames() {
+        List<String> uniqueGbNames = labDataService.getUniqueGbNames();
+        if (uniqueGbNames.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Return 204 No Content if empty
+        }
+        return ResponseEntity.ok(uniqueGbNames);
+    }
+
+    @GetMapping("/allEntity")
+    public ResponseEntity<List<String>> getUniqueEntityNames() {
+        List<String> uniqueEntityNames = labDataService.getUniqueEntityNames();
+        if (uniqueEntityNames.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Return 204 No Content if empty
+        }
+        return ResponseEntity.ok(uniqueEntityNames);
     }
 }

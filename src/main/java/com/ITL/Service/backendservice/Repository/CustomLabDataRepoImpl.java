@@ -1,5 +1,7 @@
 package com.ITL.Service.backendservice.Repository;
 
+import com.ITL.Service.backendservice.DTO.EntityNameResult;
+import com.ITL.Service.backendservice.DTO.GbResult;
 import com.ITL.Service.backendservice.Exception.ParametersNotValidException;
 import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.LabDataService;
@@ -8,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -120,5 +124,28 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
         }
         mongoTemplate.remove(query,LabData.class);
         return ResponseEntity.ok("The lab data with given Primary Lab Coordinator is deleted successfully");
+    }
+
+    @Override
+    public List<String> findUniqueGB() {
+        GroupOperation groupByGb = Aggregation.group("gb");
+        Aggregation aggregation = Aggregation.newAggregation(groupByGb);
+
+        AggregationResults<GbResult> results = mongoTemplate.aggregate(aggregation, "lab_data", GbResult.class);
+        return results.getMappedResults().stream()
+                .map(GbResult::getId)
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<String> findUniqueEntity() {
+        GroupOperation groupByEntityName = Aggregation.group("entityName");
+        Aggregation aggregation = Aggregation.newAggregation(groupByEntityName);
+
+        AggregationResults<EntityNameResult> results = mongoTemplate.aggregate(aggregation, "lab_data", EntityNameResult.class);
+        return results.getMappedResults().stream()
+                .map(EntityNameResult::getId)
+                .collect(Collectors.toList());
     }
 }

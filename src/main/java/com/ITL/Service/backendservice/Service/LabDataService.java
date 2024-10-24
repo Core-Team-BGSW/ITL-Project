@@ -22,12 +22,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class LabDataService {
     private final LabDataRepo labDataRepo;
-    private final CustomLabDataRepoImpl customLabDataRepo;
     private final MongoTemplate mongoTemplate;
     private final EntityRepo entityRepo;
 
     public List<LabData> getLabDataByEntityNameWithLabDataFields(Map<String,Object> parameters) {
-        return customLabDataRepo.findLabDataByEntityNameWithLabDataFields(parameters);
+        return labDataRepo.findLabDataByEntityNameWithLabDataFields(parameters);
     }
 
     public List<LabData> getLabDataByEntityNameAndGB(String entityName, String gb) {
@@ -35,11 +34,24 @@ public class LabDataService {
     }
 
     public ResponseEntity<String> deleteLabDataByPrimaryLabCoordinator(String primaryLabCord) {
-        return customLabDataRepo.deleteByPrimaryLabCoordinator(primaryLabCord);
+        return labDataRepo.deleteByPrimaryLabCoordinator(primaryLabCord);
     }
 
     public List<LabData> getAllLabsData() {
         return labDataRepo.findAll();
+    }
+
+    public List<String> getUniqueGbNames() {
+        return labDataRepo.findUniqueGB();
+    }
+
+    public List<String> getUniqueEntityNames() {
+        return labDataRepo.findUniqueEntity();
+    }
+
+    public List<LabData> getLabDataWithPrimaryLabCoordinator(String primaryLabCord)
+    {
+        return labDataRepo.findByPrimary_lab_cord(primaryLabCord);
     }
 
     public List<LabDataWithEntityDTO> getAllLabDataWithEntities() {
@@ -84,5 +96,13 @@ public class LabDataService {
         labDataWithEntityDTO.setEntityName(labData.getEntityName());
         labDataWithEntityDTO.setSelf_audit_date(labData.getSelf_audit_date());
         return labDataWithEntityDTO;
+    }
+
+    public List<LabData> getLabDataWithLocalItl(String localItl) {
+        return labDataRepo.findLabDataWithLocalItl(localItl);
+    }
+
+    public List<LabData> getLabDataWithLocalItlProxy(String localItlProxy) {
+        return labDataRepo.findLabDatWithLocalItlProxy(localItlProxy);
     }
 }

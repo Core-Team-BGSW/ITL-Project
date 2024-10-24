@@ -1,12 +1,16 @@
 package com.ITL.Service.backendservice.Repository;
 
 import com.ITL.Service.backendservice.Model.LabData;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @EnableMongoRepositories
@@ -22,4 +26,8 @@ public interface LabDataRepo extends MongoRepository<LabData,String>,CustomLabDa
     List<LabData> findByLocal_itl(String local_itl);
     @Query("{'local_itl_proxy' : ?0}")
     List<LabData> findByLocal_itl_proxy(String local_itl_proxy);
+
+    List<LabData> findLabDataWithLocalItl(String localItl);
+
+    List<LabData> findLabDatWithLocalItlProxy(String localItlProxy);
 }
