@@ -33,10 +33,12 @@ export class LabDecommissionComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   //Kranti Sonawane
+
   //To fetch lab details
   private http = inject(HttpClient);
   //Integrated endpoint to fetch lab data
-  private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
+  private apiurl = 'http://localhost:8080/api/labs/by-coordinator/';
+ntId: any;
 
   constructor(private dataService : DataService) {}
 
@@ -44,8 +46,9 @@ export class LabDecommissionComponent implements OnInit {
     this.loadLabList();
   }
   //function  for loading lab list
-  loadLabList(): void {
-    this.http.get<any[]>(`${this.apiurl}`).subscribe({
+  loadLabList(ntId?: string): void {
+    const url = ntId ? `${this.apiurl}${ntId}` : this.apiurl;  // Construct URL based on NT-ID
+    this.http.get<any[]>(url).subscribe({
       next: (data) => {
         this.labList = data;
         this.filteredLabList = this.labList;
@@ -53,7 +56,6 @@ export class LabDecommissionComponent implements OnInit {
       error: (err) => (this.errorMessage = err),
     });
   }
-
   removeLab(id: string): void {
     if (confirm('Are you sure you want to remove this lab?')) {
       this.http.delete<void>(`${this.apiurl}/delete/${id}`).subscribe({

@@ -1,115 +1,42 @@
 <!-- New Design -->
-<!-- <div class="sidebar"> -->
-  <!-- <div class="logo-details">
-    <i class='fab fa-creative-commons icon'></i>
-    <div class="logo_name">ITERL</div>
-    <i class='fas fa-bars' id="btn" (click)="toggleSidebar()"></i>
-  </div> -->
-  <!-- <ul class="nav-list">
-    <li>
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search..." />
-      <span class="tooltip">Search</span>
-    </li>
-    <li>
-      <a routerLink="/dashboard">
-        <i class="fas fa-tachometer-alt"></i>
-        <span class="links_name">Dashboard</span>
-      </a>
-      <span class="tooltip">Dashboard</span>
-    </li>
-    <li>
-      <a routerLink="/lab_commission">
-        <i class="fa-solid fa-plus"></i>
-        <span class="links_name">Lab Commission</span>
-      </a>
-      <span class="tooltip">Lab Commission</span>
-    </li>
 
+<div class="sidebar" [class.shift]="isOpen">
+  <ul class="nav-list">
     <li>
-      <a routerLink="/self-check">
-        <i class="fa-solid fa-list-check"></i>
-        <span class="links_name">Self check</span>
-      </a>
-      <span class="tooltip">Self-check</span>
-    </li>
-
-    <li>
-      <a routerLink="/lab-decommission">
-        <i class="fa-solid fa-file-zipper"></i>
-        <span class="links_name">Lab Decommission</span>
-      </a>
-      <span class="tooltip">Lab Decommission</span>
-    </li>
-
-    <li class="profile">
-      <div class="profile-details">
-        <img src="proficon.jpg" alt="profileImg" />
-        <div class="name_job">
-          <div class="name">Kranti S.</div>
-          <div class="job">Local ITL</div>
-        </div>
+      <div id="toggle-btn" (click)="toggleSidebar()">
+        <i [ngClass]="isOpen ? 'fas fa-times' : 'fas fa-bars'" [class.rotate]="isOpen" ></i>
       </div>
-      <i class="fas fa-sign-out-alt" id="log_out"></i>
     </li>
-  </ul>
-</div> -->
 
-<!-- <div class="sidebar">
-  <ul class="nav-list">
-    <li>
-      <i class="fas fa-search"></i>
-      <input
-        type="text"
-        placeholder="Search..."
-        [(ngModel)]="searchTerm"
-      />
-      <span class="tooltip">Search</span>
-    </li>
-    <ng-container *ngFor="let item of filteredNavItems">
-      <li>
-        <a [routerLink]="item.link">
-          <i [ngClass]="item.icon"></i>
-          <span class="links_name">{{ item.name }}</span>
-        </a>
-        <span class="tooltip">{{ item.name }}</span>
-      </li>
-    </ng-container>
-  </ul>
-</div> -->
-
-<div class="sidebar">
-  <ul class="nav-list">
-    <li>
+    <!-- <li>
       <i class="fas fa-search"></i>
       <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" />
       <span class="tooltip">Search</span>
-    </li>
+    </li> -->
+
     <ng-container *ngFor="let item of filteredNavItems">
-      <li>
+      <li *ngIf="navItems.includes(item)">
         <a [routerLink]="item.link">
           <i [ngClass]="item.icon"></i>
-          <span class="small-name">{{ item.name }}</span> <!-- Small name for collapsed state -->
           <span class="links_name">{{ item.name }}</span>
         </a>
         <span class="tooltip">{{ item.name }}</span>
       </li>
     </ng-container>
 
-    <li class="dropdown-toggle" (click)="dropdownOpen = !dropdownOpen">
+    <!-- Always show Lab Operations -->
+    <li class="dropdown-toggle" (click)="toggleDropdown()">
       <a href="javascript:void(0)">
         <i class="fas fa-cogs"></i>
-        <span class="links_name">Lab Operations</span>
-        <i class="dropdown-arrow fas fa-chevron-down" [ngClass]="{'rotate': dropdownOpen}"></i>
+        <span class="links_name">Lab Operations<i class="dropdown-arrow fas fa-chevron-down" [ngClass]="{'rotate': dropdownOpen}"></i></span>
       </a>
     </li>
 
     <ul *ngIf="dropdownOpen">
       <ng-container *ngFor="let dropdownItem of dropdownItems">
-        <li>
+        <li *ngIf="filteredNavItems.includes(dropdownItem)">
           <a [routerLink]="dropdownItem.link" (click)="menuItemClicked(dropdownItem.name)">
             <i [ngClass]="dropdownItem.icon"></i>
-            <span class="small-name">{{ dropdownItem.name }}</span> <!-- Small name for dropdown items -->
             <span class="links_name">{{ dropdownItem.name }}</span>
           </a>
           <span class="tooltip">{{ dropdownItem.name }}</span>

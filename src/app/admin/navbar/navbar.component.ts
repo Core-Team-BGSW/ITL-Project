@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, ContactComponent, RoleComponent, DashboardComponent, FormsModule],
+  imports: [CommonModule, RouterLink, RouterOutlet, ContactComponent, RoleComponent, DashboardComponent, FormsModule, FontAwesomeModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -21,6 +22,7 @@ export class NavbarComponent {
   @Input() isOpen: boolean = false; // Receive sidebar state
 
   toggleSidebar() {
+    this.isOpen = !this.isOpen; // Toggle the sidebar state
     this.sidebarToggle.emit();
   }
    //Logic for video and quiz popup

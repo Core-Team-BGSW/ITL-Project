@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-
-@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
 // Kranti Sonawane
 
@@ -24,16 +21,22 @@
 .navbar.open {
   margin-left: 250px; /* Shift when sidebar is expanded */
 }
+
 .main-content {
   display: flex;
   flex: 1;
   margin-top: 0; /* Reset margin since there's no top margin needed */
+  transition: margin-left 0.3s ease; /* Ensure main content shifts */
 }
 
 app-sidebar {
-  transition: width 0.5s ease, margin-left 0.5s ease;
+  transition: width 0.3s ease, margin-left 0.3s ease;
   height: calc(100vh - 64px); /* Adjust for navbar height */
   width: 78px; /* Default width when collapsed */
+}
+
+app-sidebar.open {
+  width: 250px; /* Width when expanded */
 }
 
 .content {
@@ -42,28 +45,16 @@ app-sidebar {
   overflow-y: auto;
   height: calc(100vh - 64px); /* Adjust for navbar height */
   margin-top: 0; /* No top margin needed */
-  transition: margin-left 0.5s ease, width 0.5s ease;
+  transition: margin-left 0.3s ease, width 0.3s ease;
   padding-top: 70px;
 }
 
-/* Adjust the navbar's margin when the sidebar is open */
 app-sidebar.open ~ .content {
-  width: calc(100% - 250px); /* Adjust width when sidebar is expanded */
-  margin-left: 180px; /* Margin when sidebar is expanded */
+
+  width: calc(100% - 250px); /* Adjust width for expanded sidebar */
 }
 
-app-sidebar.open ~ .navbar {
-  width: calc(100% - 250px);
-  margin-left: 180px; /* Navbar slides with the sidebar */
-}
-
-/* Adjust when sidebar is closed */
 app-sidebar ~ .content {
-  margin-left: 4px; /* Margin when sidebar is collapsed */
-  width: calc(100% - 40px); /* Adjust width for collapsed state */
-}
 
-app-sidebar ~ .navbar {
-  margin-left: 40px; /* Navbar when sidebar is collapsed */
-  width: calc(100% - 40px);
+  width: calc(100% - 78px); /* Adjust width for collapsed state */
 }

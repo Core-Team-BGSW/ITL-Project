@@ -1,8 +1,6 @@
 //
 
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -16,20 +14,21 @@ body {
   align-items: center;
   justify-content: center;
   background: #c1f7f5;
+  font-size: 14px;
 }
 
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between; /* Space between elements */
-  background: #eff1f2;
+  background: #ffffff;
   padding: 20px 15px;
   height: 50px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   position: fixed; /* Fixed position for the navbar */
   width: 100%; /* Full width */
   z-index: 2; /* Ensure it's above other elements */
-  margin-left: 78px;
+
 }
 .profile-popup {
   position: absolute;
@@ -48,7 +47,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  text-align: center;
+  text-align: left;
 
 }
 .close-icon {
@@ -98,27 +97,49 @@ h3 {
   font-size: 22px; /* Icon size */
   cursor: pointer; /* Pointer cursor */
   margin-right: 15px; /* Space between button and logo */
+  transition: margin-left 0.5s ease; /* Smooth transition for shifting */
+}
+#toggle-btn.shift {
+  margin-left: 250px; /* Adjust this value based on the sidebar width */
 }
 
 .nav-links {
   display: flex; /* Flexbox for horizontal alignment */
-  margin-right: 100px;
+  margin-left: auto;
 }
 
 .nav-links li {
   list-style: none;
-  margin: 0 12px; /* Space between nav items */
+  margin: 0 10px; /* Space between nav items */
+
+}
+.nav-links li i{
+  margin-top: 8px;
+  padding: 4px 8px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+  display: inline-block; /* Allow padding to work correctly */
+  font-size: 15px;
+}
+.nav-links li i:hover{
+  background-color:#eff1f2;
 
 }
 
-.nav-links li a {
-  position: relative;
-  color: #333; /* Link color */
-  font-size: 14px;
-  font-weight: 500;
-  padding: 6px 0;
-  text-decoration: none; /* No underline */
-  transition: color 0.3s; /* Smooth color transition */
+.nav-links a {
+  color: black; /* Text color */
+  text-decoration: none; /* Remove underline */
+  padding: 4px 8px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+  display: inline-block; /* Allow padding to work correctly */
+  font-size: 15px;
+}
+
+.nav-links a:hover {
+  background-color: #d0d4d8; /* Background color on hover */
+  //color: #fff; /* Text color on hover */
+  cursor: pointer;
 }
 
 .nav-links li a:before {
