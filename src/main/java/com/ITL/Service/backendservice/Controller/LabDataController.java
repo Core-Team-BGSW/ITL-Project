@@ -36,19 +36,19 @@ public class LabDataController {
         return labDataService.deleteLabDataByPrimaryLabCoordinator(primary_lab_cord);
     }
 
-    @GetMapping("/labData/{primary_lab_cord}")
+    @GetMapping("/labDataWithPrimaryLabCord/{primary_lab_cord}")
     public List<LabData> getLabDataWithPrimaryLabCoordinator(@PathVariable("primary_lab_cord") String primary_lab_cord)
     {
         return labDataService.getLabDataWithPrimaryLabCoordinator(primary_lab_cord);
     }
 
-    @GetMapping("/labData/{localItl}")
+    @GetMapping("/labDataWithLocalItl/{local_itl}")
     public List<LabData> getLabDataWithLocalItl(@PathVariable("local_itl") String localItl)
     {
         return labDataService.getLabDataWithLocalItl(localItl);
     }
 
-    @GetMapping("/labData/{localItlProxy}")
+    @GetMapping("/labDataLocalItlProxy/{local_itl_proxy}")
     public List<LabData> getLabDataWithLocalItlProxy(@PathVariable("local_itl_proxy") String localItlProxy)
     {
         return labDataService.getLabDataWithLocalItlProxy(localItlProxy);

@@ -26,8 +26,4 @@ public interface LabDataRepo extends MongoRepository<LabData,String>,CustomLabDa
     List<LabData> findByLocal_itl(String local_itl);
     @Query("{'local_itl_proxy' : ?0}")
     List<LabData> findByLocal_itl_proxy(String local_itl_proxy);
-
-    List<LabData> findLabDataWithLocalItl(String localItl);
-
-    List<LabData> findLabDatWithLocalItlProxy(String localItlProxy);
 }

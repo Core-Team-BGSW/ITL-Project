@@ -99,10 +99,10 @@ public class LabDataService {
     }
 
     public List<LabData> getLabDataWithLocalItl(String localItl) {
-        return labDataRepo.findLabDataWithLocalItl(localItl);
+        return labDataRepo.findByLocal_itl(localItl);
     }
 
     public List<LabData> getLabDataWithLocalItlProxy(String localItlProxy) {
-        return labDataRepo.findLabDatWithLocalItlProxy(localItlProxy);
+        return labDataRepo.findByLocal_itl_proxy(localItlProxy);
     }
 }
