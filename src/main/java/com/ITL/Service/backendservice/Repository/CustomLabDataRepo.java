@@ -11,4 +11,6 @@ public interface CustomLabDataRepo {
     ResponseEntity<String> deleteByPrimaryLabCoordinator(String primary_lab_cord);
     List<String> findUniqueGB();
     List<String> findUniqueEntity();
+
+
 }
