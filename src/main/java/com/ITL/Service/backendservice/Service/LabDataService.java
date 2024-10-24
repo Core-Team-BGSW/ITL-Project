@@ -105,4 +105,7 @@ public class LabDataService {
     public List<LabData> getLabDataWithLocalItlProxy(String localItlProxy) {
         return labDataRepo.findByLocal_itl_proxy(localItlProxy);
     }
+    public List<LabData> getLabsByPrimaryLabCoordinator(String primaryLabCoordinator) {
+        return labDataRepo.findByCoordinatorName(primaryLabCoordinator);
+    }
 }
