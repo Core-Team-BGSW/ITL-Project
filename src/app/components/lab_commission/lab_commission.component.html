@@ -148,22 +148,15 @@
           <label for="entityselect">Entity <span class="required"> *</span></label>
           <select id="entitySelect" name="entity" [(ngModel)]="selectedEntity" (change)="entityChange($event)">
             <option value>Select Entity</option>
-            <option value="BGSW">BGSW</option>
-            <option value="BGSV">BGSV</option>
-            <option value="DCIN">DCIN</option>
-            <option value="RBIN">RBIN</option>
-            <option value="RBDI">RBDI</option>
-            <option value="RBIC">RBIC</option>
-            <option value="RBCN">RBCN</option>
-            <option value="RBJP">RBJP</option>
+            <option *ngFor="let entityName of entityOptions" [value]="entityName">{{ entityName}}</option>
+
           </select>
         </div>
         <div class="userinput-item">
-          <label for="GBselect">GB <span class="required"> *</span></label>
+          <label for="GBselect">GB / Contacting Area <span class="required"> *</span></label>
           <select id="GBSelect" name="GB" [(ngModel)]="selectedGB">
             <option value>Select GB</option>
-            <option value="DCIN">DCIN</option>
-            <option *ngFor="let gb of gbOptions" [value]="gb">{{ gb }}</option>
+            <option *ngFor="let gbName of gbOptions" [value]="gbName">{{ gbName }}</option>
           </select>
         </div>
       </div>
@@ -223,9 +216,9 @@
               Department is required.
             </div>
           </div>
-          <ul *ngIf="filteredDepartmentSuggestions.length > 0" class="suggestions-list">
+          <!-- <ul *ngIf="filteredDepartmentSuggestions.length > 0" class="suggestions-list">
             <li *ngFor="let dep of filteredDepartmentSuggestions">{{ dep }}</li>
-          </ul>
+          </ul> -->
         </div>
         <div class="userinput-item">
           <label for="building">Building <span class="required"> *</span></label>
@@ -254,7 +247,7 @@
         </div>
 
         <div class="userinput-item">
-          <label for="labselect">Lab No. <span class="required"> *</span></label>
+          <label for="labselect">Lab No./ Lab Name <span class="required"> *</span></label>
           <input type="text" required placeholder="Lab No." [(ngModel)]="labno" #locationlabno="ngModel" />
           <div *ngIf="
               locationlabno.invalid &&
@@ -288,9 +281,9 @@
               Department Head (DH) must be at least 7 characters long.
             </div>
           </div>
-          <ul *ngIf="filteredDHSuggestions.length > 0" class="suggestions-list">
+          <!-- <ul *ngIf="filteredDHSuggestions.length > 0" class="suggestions-list">
             <li *ngFor="let dh of filteredDHSuggestions">{{ dh }}</li>
-          </ul>
+          </ul> -->
         </div>
 
         <div class="userinput-item">
@@ -310,9 +303,9 @@
               Key Account Manager (KAM) must be at least 7 characters long.
             </div>
           </div>
-          <ul *ngIf="filteredKAMSuggestions.length > 0" class="suggestions-list">
+          <!-- <ul *ngIf="filteredKAMSuggestions.length > 0" class="suggestions-list">
             <li *ngFor="let kam of filteredKAMSuggestions">{{ kam }}</li>
-          </ul>
+          </ul> -->
         </div>
       </div>
 

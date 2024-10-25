@@ -2,35 +2,31 @@
 //Edited By Jay Jambhale
 
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
-interface Location {
-  Region: string;
-  Country: string;
-  LocationCode: string;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  /**
+   * @param formData - The JSON string of the form data to submit.
+   * @returns An observable containing the response from the server.
+   */
+
   private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URLgit
   private locationUrl = 'http://localhost:8080/boschLabsLocation/location/api';
   private formsubmitUrl = 'http://localhost:8080/boschLabs/form/submit';
-  private entityUrl =
-    'http://localhost:8080/boschLabsByEntity/labData/allEntity';
+  private uniqueEntityUrl = 'http://localhost:8080/boschLabs/allEntity';
+  private allLabsUrl = 'http://localhost:8080/boschLabs/allLabs';
+  private uniqueGBUrl = 'http://localhost:8080/boschLabs/allGB';
 
   constructor(private http: HttpClient) {}
 
-  getAllData(): Observable<any[]> {
+  getAllLabData(): Observable<any[]> {
     return this.http
-      .get<any[]>(this.baseUrl)
+      .get<any[]>(this.allLabsUrl)
       .pipe(catchError(this.handleError));
   }
 
@@ -38,11 +34,6 @@ export class DataService {
     const url = `${this.baseUrl}/${id}`;
     return this.http.delete<void>(url).pipe(catchError(this.handleError));
   }
-
-  /**
-   * @param formData - The JSON string of the form data to submit.
-   * @returns An observable containing the response from the server.
-   */
 
   submitForm(formData: any): Observable<string> {
     const headers = new HttpHeaders({
@@ -55,9 +46,21 @@ export class DataService {
     });
   }
 
-  // getGBOptions(): Observable<string[]> {
-  //   return this.http.get<string[]>(this.entityUrl); // Adjust endpoint as needed
-  // }
+  getGBOptions(): Observable<any[]> {
+    return this.http.get<any[]>(this.uniqueGBUrl); // Adjust endpoint as needed
+  }
+
+  getEntityOptions(): Observable<any[]> {
+    return this.http.get<any[]>(this.uniqueEntityUrl);
+  }
+
+  getPendingApplications(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/pending`);
+  }
+
+  getLocations(): Observable<any> {
+    return this.http.get<any>(this.locationUrl);
+  }
 
   private handleError(error: any): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
@@ -89,42 +92,4 @@ export class DataService {
     console.error(errorMessage); // Log the error message
     return throwError(errorMessage); // Return an observable with a user-facing error message
   }
-
-  getPendingApplications(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/pending`);
-  }
-
-  updateApplicationStatus(
-    id: string,
-    status: string,
-    rejectionRemarks?: string
-  ): Observable<any> {
-    const body = { approvalStatus: status, rejectionRemarks };
-    return this.http.patch<any>(
-      `${this.baseUrl}/${id}/approve-or-reject`,
-      body
-    );
-  }
-
-  getLocations(): Observable<any> {
-    return this.http.get<any>(this.locationUrl);
-  }
-
-  // getKAMSuggestions(gb: string): Observable<string[]> {
-  //   return this.http.get<string[]>(`${this.apiURL}/kam-suggestions?gb=${gb}`);
-  // }
-
-  // // Method to get Department suggestions based on selected GB
-  // getDepartmentSuggestions(gb: string): Observable<string[]> {
-  //   return this.http.get<string[]>(
-  //     `${this.apiURL}/department-suggestions?gb=${gb}`
-  //   );
-  // }
-
-  // // Method to get DH suggestions based on selected Department
-  // getDHSuggestions(department: string): Observable<string[]> {
-  //   return this.http.get<string[]>(
-  //     `${this.apiURL}/dh-suggestions?department=${department}`
-  //   );
-  // }
 }
