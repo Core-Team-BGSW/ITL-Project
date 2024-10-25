@@ -42,6 +42,7 @@ public class LabDataController {
         return labDataService.getLabDataWithPrimaryLabCoordinator(primary_lab_cord);
     }
 
+
     @GetMapping("/labDataWithLocalItl/{local_itl}")
     public List<LabData> getLabDataWithLocalItl(@PathVariable("local_itl") String localItl)
     {

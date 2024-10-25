@@ -83,6 +83,7 @@ public class UserDetailsUpdateService {
             labData.setCost_center(userDetails.getCostCenter());
             labData.setDh(userDetails.getDepartmentHead());
             labData.setLocationCode(userDetails.getLocation());
+            labDataRepo.save(labData);
             List<Entity> entityList;
             if(!Objects.equals(labData.getEntityName(), userDetails.getEntity()))
             {
@@ -93,6 +94,7 @@ public class UserDetailsUpdateService {
                 {
                     if(locationUpdated) entity.setLocationCode(userDetails.getLocation());
                     entity.setEntityName(userDetails.getEntity());
+                    entityRepo.save(entity);
                 }
             }
         }

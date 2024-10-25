@@ -59,7 +59,7 @@ public class CsvToDatabaseService {
                 nextRecord = csvReader.readNext();
             }
             entityRepo.saveAll(entityMap.values());
-            //userDetailsUpdateService.updateDatabase();
+            userDetailsUpdateService.updateDatabase();
             return ResponseEntity.ok("The file is Successfully stored into Database");
         }
         catch (IOException | CsvValidationException e) {
