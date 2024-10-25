@@ -360,6 +360,7 @@ export class LabCommissionComponent {
 
   private ignoredHeaders: string[] = [
     'Key Account Manager (KAM)',
+    'Primary Lab Coordinator',
     'Secondary Lab Coordinator',
     'No of Green Ports',
     'No of Yellow Ports',
@@ -533,6 +534,8 @@ export class LabCommissionComponent {
     } else {
       this.localITL = ''; // Clear localITL for other entities
       this.localITLproxy = '';
+      this.primarylabco = 'Not Applicable';
+      this.secondarylabco = 'Not Applicable';
     }
   }
 
@@ -659,6 +662,7 @@ export class LabCommissionComponent {
   onDateSelected(date: Date) {
     console.log('Selected date:', date);
   }
+
   // GBChange(event: any) {
   //   this.selectedGB = event.target.value;
   //   if (this.selectedGB) {
