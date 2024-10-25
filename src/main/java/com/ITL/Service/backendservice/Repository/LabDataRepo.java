@@ -27,15 +27,8 @@ public interface LabDataRepo extends MongoRepository<LabData,String>,CustomLabDa
     @Query("{'local_itl_proxy' : ?0}")
     List<LabData> findByLocal_itl_proxy(String local_itl_proxy);
 
-    @Query("{ '$or': [ " +
-            "{ 'primary_lab_cord': ?0 }, " +
-            "{ 'dh': ?0 }, " +
-            "{ 'kam': ?0 } " +
-            "{ 'local_itl': ?0 }, " +
-            "{ 'local_itl_proxy': ?0 }, " +
-            "{ 'secondary_lab_cord': ?0 }, " +
-            "] }")
-    List<LabData> findByCoordinatorName(String coordinatorName);
+    @Query("{ '$or': [ " + "{ 'primary_lab_cord': ?0 }, " + "{ 'dh': ?0 }, " + "{ 'kam': ?0 } " + "{ 'local_itl': ?0 }, " + "{ 'local_itl_proxy': ?0 }, " + "{ 'secondary_lab_cord': ?0 }, " + "] }")
+    List<LabData> findByLabResponsible(String userId);
 
 
 }

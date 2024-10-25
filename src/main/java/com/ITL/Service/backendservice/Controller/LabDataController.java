@@ -83,10 +83,10 @@ public class LabDataController {
         }
         return ResponseEntity.ok(uniqueEntityNames);
     }
-    @GetMapping("/by-coordinator/{userId}")
-    public ResponseEntity<List<LabData>> getLabsByCoordinator(@PathVariable String userId) {
+    @GetMapping("/by-responsible/{userId}")
+    public ResponseEntity<List<LabDataWithEntityDTO >> getLabsByLabResponsible(@PathVariable String userId) {
 
-        List<LabData> labs = labDataService.getLabsByPrimaryLabCoordinator(userId);
+        List<LabDataWithEntityDTO > labs = labDataService.getLabsByLabResponsible(userId);
         return ResponseEntity.ok(labs);
     }
 }
