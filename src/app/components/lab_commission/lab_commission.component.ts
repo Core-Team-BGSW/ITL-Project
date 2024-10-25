@@ -25,22 +25,10 @@ import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data.service';
 import { LayoutComponent } from '../../admin/layout/layout.component';
-
-export interface Location {
-  region: string;
-  country: string;
-  locationCode: string;
-}
-
-export interface RegionWithCountries {
-  countries: string[];
-  region: string;
-}
-
-export interface countriesWithcode {
-  countries: string[];
-  locationCodes: string[];
-}
+import { LabData } from '../../../../models/LabData';
+import { Location } from '../../../../models/Location';
+import { RegionWithCountries } from '../../../../models/RegionWithCountries';
+import { countriesWithcode } from '../../../../models/countriesWithcode';
 
 @Component({
   selector: 'app-lab_commission',
@@ -98,6 +86,7 @@ export class LabCommissionComponent {
   selectedCode: string = '';
   entity: string = '';
   GB: string = '';
+  gb: string = '';
   localITLproxy: string = '';
   locationcode: string = '';
   selectedEntity: string = '';
@@ -147,16 +136,16 @@ export class LabCommissionComponent {
   nextUniqueId: number = 1; // Initial unique ID counter
   uniqueInstanceId: string = '';
   selectedHeader: string = '';
+  allLabs: LabData[] = [];
   gbOptions: string[] = [];
-  kamSuggestions: string[] = []; // All available KAM suggestions
+  entityOptions: string[] = [];
   departmentSuggestions: string[] = [];
   dhSuggestions: string[] = []; // All available DH suggestions
-  filteredDepartmentSuggestions: string[] = [];
-  filteredDHSuggestions: string[] = []; // Filtered DH suggestions
-  filteredKAMSuggestions: string[] = []; // Filtered suggestions based on user input
   uniqueRegions: RegionWithCountries[] = [];
   uniqueCountriesWithCodes: countriesWithcode[] = [];
   filteredLocationCode: String[] = [];
+  showOtherSection: boolean = false;
+  otherField: string = '';
 
   constructor(
     private dialog: MatDialog,
@@ -208,6 +197,9 @@ export class LabCommissionComponent {
         })
       ) as countriesWithcode[];
     });
+    this.loadGBOptions();
+    this.loadLabData();
+    this.loadEntityOptions();
   }
 
   /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
@@ -548,6 +540,7 @@ export class LabCommissionComponent {
     // Reload the page
     window.location.reload();
   }
+
   ////////////////////////////////////////////////////////////////////////onSubmit-formfill////////////////////////////////////////////////////////////////////////////
 
   onPreviewform(): void {
@@ -652,124 +645,32 @@ export class LabCommissionComponent {
     console.log('Updated submitted form data:', this.submittedFormData);
   }
 
-  showOtherSection: boolean = false;
-  otherField: string = '';
-
-  toggleOtherSection() {
-    this.showOtherSection = !this.showOtherSection;
-  }
-
   onDateSelected(date: Date) {
     console.log('Selected date:', date);
   }
 
-  // GBChange(event: any) {
-  //   this.selectedGB = event.target.value;
-  //   if (this.selectedGB) {
-  //     this.dataService
-  //       .getKAMSuggestions(this.selectedGB)
-  //       .subscribe((suggestions) => {
-  //         this.kamSuggestions = suggestions;
-  //         this.filteredKAMSuggestions = [];
-  //         this.KAM = '';
-  //       });
-  //     this.dataService
-  //       .getDepartmentSuggestions(this.selectedGB)
-  //       .subscribe((suggestions) => {
-  //         this.departmentSuggestions = suggestions;
-  //         this.filteredDepartmentSuggestions = [];
-  //         this.Dept = '';
-  //       });
-  //   } else {
-  //     this.resetFields();
-  //   }
-  // }
-  // resetFields() {
-  //   this.kamSuggestions = [];
-  //   this.filteredKAMSuggestions = [];
-  //   this.KAM = '';
-  //   this.departmentSuggestions = [];
-  //   this.filteredDepartmentSuggestions = [];
-  //   this.Dept = '';
-  //   this.dhSuggestions = [];
-  //   this.filteredDHSuggestions = [];
-  //   this.DH = ''; // Clear DH input
-  // }
+  //////////////////////////////////////////////////////////LoadAllLabData//////////////////////////////////////////////////////////////////////
+  loadLabData(): void {
+    this.dataService.getAllLabData().subscribe((allLabData) => {
+      this.allLabs = allLabData;
+    });
+  }
+  //////////////////////////////////////////////////////////LoadUniqueGB//////////////////////////////////////////////////////////////////////
 
-  // loadGBOptions() {
-  //   this.dataService.getGBOptions().subscribe((options) => {
-  //     this.gbOptions = options;
-  //   });
-  // }
+  loadGBOptions() {
+    this.dataService.getGBOptions().subscribe((options) => {
+      this.gbOptions = options;
+    });
+  }
 
-  // showKAMSuggestions() {
-  //   if (this.selectedGB) {
-  //     this.filteredKAMSuggestions = this.kamSuggestions; // Show all suggestions
-  //   }
-  // }
-  // // Method to fetch and display Department suggestions when Department input is focused
-  // showDepartmentSuggestions() {
-  //   if (this.selectedGB) {
-  //     this.filteredDepartmentSuggestions = this.departmentSuggestions;
-  //   }
-  // }
+  //////////////////////////////////////////////////////////LoadUniqueEntity//////////////////////////////////////////////////////////////////////
+  loadEntityOptions() {
+    this.dataService.getEntityOptions().subscribe((options) => {
+      this.entityOptions = options;
+    });
+  }
 
-  // // Method to fetch and display DH suggestions when DH input is focused
-  // showDHSuggestions() {
-  //   if (this.Dept) {
-  //     this.filteredDHSuggestions = this.dhSuggestions; // Show all DH suggestions if a department is selected
-  //   }
-  // }
-
-  // filterKAMSuggestions() {
-  //   const searchTerm = this.KAM.toLowerCase();
-  //   this.filteredKAMSuggestions = this.kamSuggestions.filter((kam) =>
-  //     kam.toLowerCase().includes(searchTerm)
-  //   );
-  // }
-
-  // filterDepartmentSuggestions() {
-  //   if (!this.selectedGB) return;
-
-  //   const searchTerm = this.Dept.toLowerCase();
-  //   this.filteredDepartmentSuggestions = this.departmentSuggestions.filter(
-  //     (dep) => dep.toLowerCase().includes(searchTerm)
-  //   );
-  // }
-
-  // onDepartmentChange() {
-  //   if (this.Dept) {
-  //     this.dataService.getDHSuggestions(this.Dept).subscribe((suggestions) => {
-  //       this.dhSuggestions = suggestions;
-  //       this.filteredDHSuggestions = []; // Clear previous filtered suggestions
-  //     });
-  //   } else {
-  //     this.filteredDHSuggestions = []; // Clear if no department is selected
-  //   }
-  // }
-
-  // filterDHSuggestions() {
-  //   if (!this.Dept) return;
-
-  //   const searchTerm = this.DH.toLowerCase();
-  //   this.filteredDHSuggestions = this.dhSuggestions.filter((dh) =>
-  //     dh.toLowerCase().includes(searchTerm)
-  //   );
-  // }
-
-  // selectKAM(kam: string) {
-  //   this.KAM = kam; // Set the KAM input value
-  //   this.filteredKAMSuggestions = []; // Clear suggestions after selection
-  // }
-
-  // selectDepartment(dep: string) {
-  //   this.Dept = dep; // Set the department input value
-  //   this.filteredDepartmentSuggestions = []; // Clear suggestions after selection
-  //   this.onDepartmentChange(); // Fetch DH suggestions
-  // }
-
-  // selectDH(dh: string) {
-  //   this.DH = dh; // Set the DH input value
-  //   this.filteredDHSuggestions = []; // Clear suggestions after selection
-  // }
+  toggleOtherSection() {
+    this.showOtherSection = !this.showOtherSection;
+  }
 }
