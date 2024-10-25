@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @EnableMongoRepositories
-public interface EntityRepo extends MongoRepository<Entity,String> {
+public interface EntityRepo extends MongoRepository<Entity,String>,CustomEntityDataRepo {
 
     @Query("{'entityName':  ?0, 'country' :  ?1}")
     List<LabData> findLabDataByEntityNameAndCountry(String entityName, String country);

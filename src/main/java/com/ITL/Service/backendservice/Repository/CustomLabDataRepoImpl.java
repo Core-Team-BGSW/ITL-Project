@@ -27,90 +27,6 @@ import java.util.stream.Collectors;
 public class CustomLabDataRepoImpl implements CustomLabDataRepo{
     private final MongoTemplate mongoTemplate;
 
-    @Override
-    public List<LabData> findLabDataByEntityNameWithLabDataFields(Map<String,Object> parameters) {
-        if(parameters.isEmpty())
-        {
-            throw new ParametersNotValidException("Please provide the valid parameters! The parameters can't be blank");
-        }
-
-        final Logger LOGGER = Logger.getLogger(LabDataService.class.getName());
-        List<AggregationOperation> operations = new ArrayList<>();
-
-        if(!parameters.containsKey("entityName"))
-        {
-            throw new ParametersNotValidException("Please provide the valid entityName it can't be null or blank");
-        }
-
-        operations.add(Aggregation.match(Criteria.where("entityName").is(parameters.get("entityName"))));
-        operations.add(Aggregation.lookup("entity", "entityName", "entityName", "entityDetails"));
-        operations.add(Aggregation.unwind("entityDetails"));
-        
-
-        if(parameters.containsKey("locationCode"))
-        {
-            operations.add(Aggregation.match(Criteria.where("entityDetails.locationCode").is(parameters.get("locationCode"))));
-        }
-
-        if(parameters.containsKey(("gb")))
-        {
-            operations.add(Aggregation.match(Criteria.where("gb").is(parameters.get("gb"))));
-        }
-
-        if (parameters.containsKey("country")) {
-            operations.add(Aggregation.match(Criteria.where("entityDetails.country").is(parameters.get("country"))));
-        }
-
-        if(parameters.containsKey("gb"))
-        {
-            if(parameters.containsKey("depName"))
-            {
-                operations.add(Aggregation.match(Criteria.where("dep_name").is(parameters.get("depName"))));
-            }
-        }
-        if(parameters.containsKey("dh"))
-        {
-            operations.add(Aggregation.match(Criteria.where("dh").is(parameters.get("dh"))));
-        }
-
-        if(parameters.containsKey("locationCode"))
-        {
-            if(parameters.containsKey("primary_lab_cord"))
-            {
-                operations.add(Aggregation.match(Criteria.where("primary_lab_cord").is(parameters.get("primaryLabCord"))));
-            }
-            if(parameters.containsKey("depName"))
-            {
-                operations.add(Aggregation.match(Criteria.where("dep_name").is(parameters.get("depName"))));
-            }
-            if(parameters.containsKey("building"))
-            {
-                operations.add(Aggregation.match(Criteria.where("building").is(parameters.get("building"))));
-            }
-            if(parameters.containsKey("building") && parameters.containsKey("floor")) {
-                operations.add(Aggregation.match(Criteria.where("floor").is(parameters.get("floor"))));
-            }
-            if(parameters.containsKey("building") && parameters.containsKey("labNo"))
-            {
-                operations.add(Aggregation.match(Criteria.where("labNo").is(parameters.get("labNo"))));
-            }
-        }
-        else {
-            throw new ParametersNotValidException("Location Code is required to fetch lab Data");
-        }
-
-        //Logging the operations of aggregation
-        LOGGER.info("Aggregation Operations: " + operations);
-        Aggregation aggregation = Aggregation.newAggregation(operations);
-
-        AggregationResults<LabData> res = mongoTemplate.aggregate(aggregation, LabData.class, LabData.class);
-        if(res.getMappedResults().isEmpty()) throw new ParametersNotValidException("Please check all the values you have provided to search the lab data because there is no lab matches according to your query!");
-
-        // Logging the results of the aggregation
-        LOGGER.info("Aggregation Results: " + res.getMappedResults());
-        return res.getMappedResults();
-    }
-
     // labName,departement,secondary lab coord.
     public ResponseEntity<String> deleteByPrimaryLabCoordinator(String primaryLabCord) {
         Query query = new Query();
@@ -147,5 +63,34 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
         return results.getMappedResults().stream()
                 .map(EntityNameResult::getId)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LabData> search(String query) {
+        String[] searchTerms = query.split(" ");
+        List<Criteria> criteriaList = new ArrayList<>();
+        Query searchQuery = new Query();
+        for(String term : searchTerms)
+        {
+            criteriaList.add((new Criteria().orOperator(
+                    Criteria.where("labNo").regex(term, "i"),
+                    Criteria.where("dep_name").regex(term, "i"),
+                    Criteria.where("building").regex(term, "i"),
+                    Criteria.where("cost_center").regex(term,"i"),
+                    Criteria.where("primary_lab_cord").regex(term,"i"),
+                    Criteria.where("secondary_lab_cord").regex(term,"i"),
+                    Criteria.where("local_itl").regex(term,"i"),
+                    Criteria.where("kind_of_lab").regex(term,"i"),
+                    Criteria.where("locationCode").regex(term,"i"),
+                    Criteria.where("local_itl_proxy").regex(term,"i"),
+                    Criteria.where("dh").regex(term,"i"),
+                    Criteria.where("kam").regex(term,"i"),
+                    Criteria.where("kind_of_lab").regex(term,"i"),
+                    Criteria.where("self_audit_date").regex(term,"i")
+            )));
+        }
+
+        searchQuery.addCriteria(new Criteria().orOperator(criteriaList.toArray(new Criteria[0])));
+        return mongoTemplate.find(searchQuery, LabData.class);
     }
 }

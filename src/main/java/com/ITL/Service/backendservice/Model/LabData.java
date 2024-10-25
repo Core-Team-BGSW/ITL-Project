@@ -8,14 +8,12 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-
 @Document(collection = "lab_data")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @CompoundIndexes({
-        @CompoundIndex(name = "unique_key", def = "{'locationCode' : 1, 'entityName' : 1, 'gb' : 1, 'labNo' : 1, 'primary_lab_cord' : 1, 'dep_name' : 1}", unique = true)
+        @CompoundIndex(name = "unique_key", def = "{'dep_name' : 1, 'labNo' : 1, 'primary_lab_cord' : 1, 'locationCode' : 1, 'entityName' : 1, 'gb' : 1}", unique = true)
 })
 public class LabData {
     @Id

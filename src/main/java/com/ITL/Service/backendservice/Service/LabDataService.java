@@ -25,10 +25,6 @@ public class LabDataService {
     private final MongoTemplate mongoTemplate;
     private final EntityRepo entityRepo;
 
-    public List<LabData> getLabDataByEntityNameWithLabDataFields(Map<String,Object> parameters) {
-        return labDataRepo.findLabDataByEntityNameWithLabDataFields(parameters);
-    }
-
     public List<LabData> getLabDataByEntityNameAndGB(String entityName, String gb) {
         return labDataRepo.findLabDataByEntityNameAndGb(entityName,gb);
     }

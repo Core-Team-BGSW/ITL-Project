@@ -24,12 +24,6 @@ public class LabDataController {
         return labDataService.getLabDataByEntityNameAndGB(entityName,gb);
     }
 
-    @GetMapping("/labs")
-    public List<LabData> getLabDataByEntityNameWithLabDataFields(@RequestParam Map<String, String> allParams){
-        Map<String, Object> parameters = new HashMap<>(allParams);
-        return labDataService.getLabDataByEntityNameWithLabDataFields(parameters);
-    }
-
     @DeleteMapping("/delete/labData")
     public ResponseEntity<String> deleteLabDataByPrimaryLabCoordinator(@RequestParam String primary_lab_cord)
     {
