@@ -37,7 +37,7 @@ export class LabDecommissionComponent implements OnInit {
   //To fetch lab details
   private http = inject(HttpClient);
   //Integrated endpoint to fetch lab data
-  private apiurl = 'http://localhost:8080/api/labs/by-coordinator/';
+  private apiurl = 'http://localhost:8080/boschLabs/by-responsible/';
 ntId: any;
 
   constructor(private dataService : DataService) {}

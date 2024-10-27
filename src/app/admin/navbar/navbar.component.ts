@@ -7,17 +7,19 @@ import { Router } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, ContactComponent, RoleComponent, DashboardComponent, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, RouterLink, RouterOutlet, ContactComponent, RoleComponent, DashboardComponent, FormsModule, FontAwesomeModule, MatIconModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) {}
+
   @Output() sidebarToggle = new EventEmitter<void>();
   @Input() isOpen: boolean = false; // Receive sidebar state
 
@@ -25,6 +27,11 @@ export class NavbarComponent {
     this.isOpen = !this.isOpen; // Toggle the sidebar state
     this.sidebarToggle.emit();
   }
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer, private router: Router
+  ) {
+    this.matIconRegistry.addSvgIcon("user", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/user.svg"));}
    //Logic for video and quiz popup
   onApplyForRoleClick(event: MouseEvent): void {
     event.preventDefault(); // Prevent the default anchor behavior

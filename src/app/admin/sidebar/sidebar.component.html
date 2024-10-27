@@ -1,47 +1,77 @@
-<!-- New Design -->
-
-<div class="sidebar" [class.shift]="isOpen">
-  <ul class="nav-list">
-    <li>
-      <div id="toggle-btn" (click)="toggleSidebar()">
-        <i [ngClass]="isOpen ? 'fas fa-times' : 'fas fa-bars'" [class.rotate]="isOpen" ></i>
-      </div>
-    </li>
-
-    <!-- <li>
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Search..." [(ngModel)]="searchTerm" />
-      <span class="tooltip">Search</span>
-    </li> -->
-
-    <ng-container *ngFor="let item of filteredNavItems">
-      <li *ngIf="navItems.includes(item)">
-        <a [routerLink]="item.link">
-          <i [ngClass]="item.icon"></i>
-          <span class="links_name">{{ item.name }}</span>
-        </a>
-        <span class="tooltip">{{ item.name }}</span>
+<!-- Kranti Sonawane -->
+    <div class="sidebar" [class.shift]="isOpen">
+      <li>
+        <div id="toggle-btn" (click)="toggleSidebar()">
+          <mat-icon svgIcon="{{ toggleIcon }}"></mat-icon>
+        </div>
       </li>
-    </ng-container>
+      <ul class="nav-list">
 
-    <!-- Always show Lab Operations -->
-    <li class="dropdown-toggle" (click)="toggleDropdown()">
-      <a href="javascript:void(0)">
-        <i class="fas fa-cogs"></i>
-        <span class="links_name">Lab Operations<i class="dropdown-arrow fas fa-chevron-down" [ngClass]="{'rotate': dropdownOpen}"></i></span>
-      </a>
-    </li>
-
-    <ul *ngIf="dropdownOpen">
-      <ng-container *ngFor="let dropdownItem of dropdownItems">
-        <li *ngIf="filteredNavItems.includes(dropdownItem)">
-          <a [routerLink]="dropdownItem.link" (click)="menuItemClicked(dropdownItem.name)">
-            <i [ngClass]="dropdownItem.icon"></i>
-            <span class="links_name">{{ dropdownItem.name }}</span>
+        <li>
+          <a [routerLink]="'/dashboard'">
+            <mat-icon svgIcon="home"></mat-icon>
+            <span class="links_name">Dashboard</span>
           </a>
-          <span class="tooltip">{{ dropdownItem.name }}</span>
+          <span class="tooltip">Dashboard</span>
         </li>
-      </ng-container>
-    </ul>
-  </ul>
-</div>
+        <li>
+          <a [routerLink]="'/lab_commission'">
+            <mat-icon svgIcon="addicon"></mat-icon>
+            <span class="links_name">Lab Commission</span>
+          </a>
+          <span class="tooltip">Lab Commission</span>
+        </li>
+        <li>
+          <a [routerLink]="'/lab-decommission'">
+            <mat-icon svgIcon="deleteicon"></mat-icon>
+            <span class="links_name">Lab Decommission</span>
+          </a>
+          <span class="tooltip">Lab Decommission</span>
+        </li>
+
+        <li class="dropdown-toggle" (click)="toggleDropdown()">
+          <a href="javascript:void(0)">
+            <mat-icon svgIcon="operation"></mat-icon>
+            <span class="links_name">Lab Operations</span><mat-icon class="arrow" svgIcon="arrow" [ngClass]="{'rotate': dropdownOpen}"></mat-icon>
+          </a>
+        </li>
+
+        <ul *ngIf="dropdownOpen">
+          <li>
+            <a [routerLink]="'/self-check'" (click)="menuItemClicked('Annual Self Check')">
+              <mat-icon svgIcon="home"></mat-icon>
+              <span class="links_name">Annual Self Check</span>
+            </a>
+            <span class="tooltip">Annual Self Check</span>
+          </li>
+          <li>
+            <a [routerLink]="'/software-track'" (click)="menuItemClicked('Software Tracking')">
+              <mat-icon svgIcon="operation"></mat-icon>
+              <span class="links_name">Software Tracking</span>
+            </a>
+            <span class="tooltip">Software Tracking</span>
+          </li>
+          <li>
+            <a [routerLink]="'/acl-ip-management'" (click)="menuItemClicked('ACL IP Management')">
+              <mat-icon svgIcon="operation"></mat-icon>
+              <span class="links_name">ACL IP Management</span>
+            </a>
+            <span class="tooltip">ACL IP Management</span>
+          </li>
+          <li>
+            <a [routerLink]="'/audit'" (click)="menuItemClicked('Audit')">
+              <mat-icon svgIcon="operation"></mat-icon>
+              <span class="links_name">Audit</span>
+            </a>
+            <span class="tooltip">Audit</span>
+          </li>
+          <li>
+            <a [routerLink]="'/lab-movement'" (click)="menuItemClicked('Lab Movement')">
+              <mat-icon svgIcon="operation"></mat-icon>
+              <span class="links_name">Lab Movement</span>
+            </a>
+            <span class="tooltip">Lab Movement</span>
+          </li>
+        </ul>
+      </ul>
+    </div>
