@@ -99,18 +99,27 @@ p.choosemethod {
   /* Align text to the left */
 }
 
-.missing {
+.error {
   background-color: red;
-  /* Highlight color */
+  /* Highlight cells with errors */
   color: white;
-  /* Text color */
+  /* Optional for better contrast */
+}
+
+.uploadbutton {
+  display: flex;
+  /* Use flexbox for alignment */
+  align-items: center;
+  /* Center items vertically */
+  margin: 20px 0;
+  /* Margin for spacing */
 }
 
 .importbutton {
-  margin-top: 16px;
-  display: flex;
-  gap: 20px;
+  margin-top: 12px;
+  display: grid;
 }
+
 
 input[type="text"] {
   width: 60%;
@@ -159,7 +168,8 @@ input[type="text"] {
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
-  margin-top: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .previewbutton:hover {
@@ -181,8 +191,28 @@ input[type="text"] {
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
+  margin-top: 1rem;
+  margin-top: 1rem;
+  font-size: 16px;
+}
+
+.choosebutton {
+  background-color: #43464a;
+  color: #fff;
+  padding: 10px 25px;
+  border: #2e72ee;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 8px;
   margin-top: 20px;
   font-size: 16px;
+
+}
+
+.choosebutton:hover {
+  background-color: #2e3033;
+
 }
 
 .templatebutton:hover {
@@ -276,7 +306,7 @@ select:hover {
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 18px;
 }
 

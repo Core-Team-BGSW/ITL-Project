@@ -1,4 +1,3 @@
-/* Edited By Jay Jambhale*/
 import { CommonModule } from '@angular/common';
 import { Component, Inject, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,7 +21,6 @@ export class DialogboxsubmitComponent {
 
   region: string = '';
   country: string = '';
-  location: string = '';
   locationcode: string = '';
   entity: string = '';
   GB: string = '';
@@ -40,17 +38,16 @@ export class DialogboxsubmitComponent {
   kindoflab: string = '';
   purposeoflab: string = '';
   description: string = '';
-  ACL: string = '';
-  otherLabType: string = '';
   cmdbradio: string = '';
+  otherLabType: string = '';
   sharedlabradio: string = '';
   ACLradio: string = '';
   greenports: string = '';
   yellowports: string = '';
   redports: string = '';
-  selfauditdate: string = '';
   selectedDate: string = '';
-  approvalStatus: string = 'Pending';
+  approvalStatus: string = 'Pending'; // Default approval status
+  formData: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -196,54 +193,48 @@ export class DialogboxsubmitComponent {
 
   onFormSubmit(): void {
     if (confirm('Are you sure you want to submit this form?')) {
-      const formData = {
-        Region: this.region,
-        Country: this.country,
-        'Location-Code': this.locationcode,
-        Entity: this.entity,
-        GB: this.GB,
-        'Local-ITL': this.localITL,
-        'Local-ITL Proxy': this.localITLproxy,
-        'Department Head (DH)': this.DH,
-        'Key Account Manager (KAM)': this.KAM,
-        Department: this.Dept,
-        Building: this.Building,
-        Floor: this.Floor,
-        'Lab No': this.labno,
-        'Primary Lab Coordinator': this.primarylabco,
-        'Secondary Lab Coordinator': this.secondarylabco,
-        'Cost Center': this.CC,
-        'Kind of Lab': this.kindoflab,
-        'Purpose of Lab in Brief': this.purposeoflab,
-        Description: this.description,
-        otherLabType: this.otherLabType,
-        'Is lab going to procure new equipment for Engineering/Red Zone?':
-          this.cmdbradio,
-        'Shared Lab': this.sharedlabradio,
-        'ACL Required': this.ACLradio,
-        'No. of Green Ports': this.greenports,
-        'No. of Yellow Ports': this.yellowports,
-        'No. of Red Ports': this.redports,
-        'Self Audit Date': this.selectedDate,
+      this.formData = {
+        region: this.region,
+        country: this.country,
+        locationCode: this.locationcode,
+        gb: this.GB,
+        local_itl: this.localITL,
+        entityName: this.entity,
+        local_itl_proxy: this.localITLproxy,
+        dh: this.DH,
+        kam: this.KAM,
+        dep_name: this.Dept,
+        building: this.Building,
+        floor: this.Floor,
+        labNo: this.labno,
+        primary_lab_cord: this.primarylabco,
+        secondary_lab_cord: this.secondarylabco,
+        cost_center: this.CC,
+        kind_of_lab: this.kindoflab,
+        purpose_of_lab: this.purposeoflab,
+        description: this.description,
+        new_equipment: this.otherLabType,
+        shared_lab: this.sharedlabradio,
+        acl_req: this.ACLradio,
+        green_ports: this.greenports,
+        yellow_ports: this.yellowports,
+        red_ports: this.redports,
+        self_audit_date: this.selectedDate,
         approvalStatus: this.approvalStatus,
       };
 
-      this.dataService.submitForm(formData).subscribe({
+      this.dataService.submitForm(this.formData).subscribe({
         next: (response) => {
           console.log('Form submitted successfully:', response);
-          this.dialogRef.close();
-          this.toastr.success('Process initiated', 'Waiting for approval');
+          this.toastr.success('Process Initiated for New lab Commission');
+          this.dialogRef.close(); // Close the dialog on successful submission
         },
         error: (error) => {
           console.error('Error submitting form:', error);
-          this.toastr.error('Submission failed. Please try again.');
         },
       });
-    } else {
-      console.log('Form submission cancelled by user.');
     }
   }
-
   closeDialog(): void {
     this.dialogRef.close();
   }
