@@ -31,7 +31,10 @@ export class NavbarComponent {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer, private router: Router
   ) {
-    this.matIconRegistry.addSvgIcon("user", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/user.svg"));}
+    this.matIconRegistry.addSvgIcon("user", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/user.svg"));
+    this.matIconRegistry.addSvgIcon("boschname", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/boschname.svg"));
+    this.matIconRegistry.addSvgIcon("boschlogo", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/bosch.svg"));
+  }
    //Logic for video and quiz popup
   onApplyForRoleClick(event: MouseEvent): void {
     event.preventDefault(); // Prevent the default anchor behavior

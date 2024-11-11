@@ -27,6 +27,11 @@ export class SidebarComponent {
     this.matIconRegistry.addSvgIcon("operation", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/operationicon.svg"));
     this.matIconRegistry.addSvgIcon("arrow", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/arrow1.svg"));
     this.matIconRegistry.addSvgIcon("deleteicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/deleteicon.svg"));
+    this.matIconRegistry.addSvgIcon("checkicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/check.svg"));
+    this.matIconRegistry.addSvgIcon("monitoricon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/monitor.svg"));
+    this.matIconRegistry.addSvgIcon("ipicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/ip.svg"));
+    this.matIconRegistry.addSvgIcon("auditicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/audit.svg"));
+    this.matIconRegistry.addSvgIcon("moveicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/move.svg"));
 
   }
   get toggleIcon() {
@@ -44,5 +49,11 @@ export class SidebarComponent {
   menuItemClicked(item: string) {
     console.log(`Clicked on ${item}`);
     this.dropdownOpen = false; // Close the dropdown after clicking an item
+  }
+  activeItem: string = ''; // Stores the active item name
+
+  // Function to set the active item
+  setActiveItem(item: string) {
+    this.activeItem = item;
   }
 }

@@ -1,16 +1,18 @@
 <!-- Kranti Sonawane -->
 <div class="navbar" [class.shift]="isOpen">
-  <!-- <div id="toggle-btn" (click)="toggleSidebar()">
-    <i class="fas fa-bars"></i>&nbsp;Menu
-  </div> -->
 
  <!-- Nav items -->
+  <div class="logo">
+    <mat-icon  class="boschlogo" svgIcon="boschlogo"></mat-icon>
+    <!-- <mat-icon class="boschname" svgIcon="boschname"></mat-icon> -->
+  </div>
   <ul class="nav-links">
+
     <li class="center">
       <a (click)="onApplyForRoleClick($event)">Apply for role</a>
     </li>
     <li class="upward"><a routerLink="/contact">Contact</a></li>
-    <li class="forward"><a routerLink="/">Feedback</a></li>
+    <li class="forward"><a routerLink="/feedback">Feedback</a></li>
     <li>
 
       <mat-icon svgIcon="user" (click)="toggleProfilePopup($event)"></mat-icon>

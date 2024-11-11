@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   padding: 0 15px; /* Padding for navbar */
-  transition: margin-left 0.5s ease; /* Add transition for sliding */
+  transition: margin-left 0.4s ease; /* Add transition for sliding */
 }
 
 .navbar.open {
@@ -26,13 +26,15 @@
   display: flex;
   flex: 1;
   margin-top: 0; /* Reset margin since there's no top margin needed */
-  transition: margin-left 0.3s ease; /* Ensure main content shifts */
+  transition: margin-left 0.2s ease; /* Ensure main content shifts */
 }
 
 app-sidebar {
-  transition: width 0.3s ease, margin-left 0.3s ease;
+  transition: width 1ms cubic-bezier(.4,0,.2,1), margin-left 1ms cubic-bezier(.4,0,.2,1); /* Smooth transition for both width and margin-left */
+  //transition: width 0.3s ease, margin-left 0.3s ease; /* Smooth transition for both width and margin-left */
   height: calc(100vh - 64px); /* Adjust for navbar height */
   width: 78px; /* Default width when collapsed */
+  position: relative; /* Ensure position is relative to animate margin */
 }
 
 app-sidebar.open {
@@ -41,20 +43,17 @@ app-sidebar.open {
 
 .content {
   flex: 1; /* Take the remaining space */
-  padding: 30px; /* Some padding */
   overflow-y: auto;
   height: calc(100vh - 64px); /* Adjust for navbar height */
   margin-top: 0; /* No top margin needed */
-  transition: margin-left 0.3s ease, width 0.3s ease;
-  padding-top: 70px;
+  transition: margin-left 0.3s ease, width 0.3s ease; /* Ensure content width adjusts smoothly */
+  padding-top: 62px;
 }
 
 app-sidebar.open ~ .content {
-
   width: calc(100% - 250px); /* Adjust width for expanded sidebar */
 }
 
 app-sidebar ~ .content {
-
   width: calc(100% - 78px); /* Adjust width for collapsed state */
 }

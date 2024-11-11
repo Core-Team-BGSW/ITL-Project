@@ -1,77 +1,81 @@
 <!-- Kranti Sonawane -->
-    <div class="sidebar" [class.shift]="isOpen">
-      <li>
-        <div id="toggle-btn" (click)="toggleSidebar()">
-          <mat-icon svgIcon="{{ toggleIcon }}"></mat-icon>
-        </div>
+<div class="sidebar" [class.shift]="isOpen">
+  <ul class="nav-list">
+    <li>
+      <div id="toggle-btn" (click)="toggleSidebar()">
+        <mat-icon svgIcon="{{ toggleIcon }}"></mat-icon>
+      </div>
+    </li>
+    <li [ngClass]="{'active': activeItem === 'dashboard'}">
+      <a [routerLink]="'/dashboard'" (click)="setActiveItem('dashboard')">
+        <mat-icon svgIcon="home"></mat-icon>
+        <span class="links_name">Dashboard</span>
+      </a>
+      <span class="tooltip" [ngClass]="{'show': activeItem !== 'dashboard' || isOpen}">Dashboard</span>
+    </li>
+    <li [ngClass]="{'active': activeItem === 'lab_commission'}">
+      <a [routerLink]="'/lab_commission'" (click)="setActiveItem('lab_commission')">
+        <mat-icon svgIcon="addicon"></mat-icon>
+        <span class="links_name">Lab Commission</span>
+      </a>
+      <span class="tooltip" [ngClass]="{'show': activeItem !== 'lab_commission' || isOpen}">Lab Commission</span>
+    </li>
+
+    <!-- IT Management Dropdown -->
+    <li class="dropdown-toggle" (click)="toggleDropdown()" [ngClass]="{'active': activeItem === 'it_management'}">
+      <a href="javascript:void(0)" (click)="setActiveItem('it_management')">
+        <mat-icon svgIcon="operation"></mat-icon>
+        <span class="links_name">IT Management</span>
+        <mat-icon class="arrow" svgIcon="arrow" [ngClass]="{'rotate': dropdownOpen}"></mat-icon>
+      </a>
+      <span class="tooltip" [ngClass]="{'show': activeItem !== 'it_management' || isOpen}">IT Management</span>
+    </li>
+
+    <!-- Dropdown Menu -->
+    <ul class="dropdown-menu" *ngIf="dropdownOpen">
+      <li [ngClass]="{'active': activeItem === 'self_check'}">
+        <a [routerLink]="'/self-check'" (click)="setActiveItem('self_check')">
+          <mat-icon svgIcon="checkicon"></mat-icon>
+          <span class="links_name">Annual Self Check</span>
+        </a>
+        <span class="tooltip" [ngClass]="{'show': activeItem !== 'self_check' || isOpen}">Annual Self Check</span>
       </li>
-      <ul class="nav-list">
+      <li [ngClass]="{'active': activeItem === 'software_track'}">
+        <a [routerLink]="'/software-track'" (click)="setActiveItem('software_track')">
+          <mat-icon svgIcon="monitoricon"></mat-icon>
+          <span class="links_name">Software Tracking</span>
+        </a>
+        <span class="tooltip" [ngClass]="{'show': activeItem !== 'software_track' || isOpen}">Software Tracking</span>
+      </li>
+      <li [ngClass]="{'active': activeItem === 'acl_ip_management'}">
+        <a [routerLink]="'/acl-ip-management'" (click)="setActiveItem('acl_ip_management')">
+          <mat-icon svgIcon="ipicon"></mat-icon>
+          <span class="links_name">ACL IP Management</span>
+        </a>
+        <span class="tooltip" [ngClass]="{'show': activeItem !== 'acl_ip_management' || isOpen}">ACL IP Management</span>
+      </li>
+      <li [ngClass]="{'active': activeItem === 'audit'}">
+        <a [routerLink]="'/audit'" (click)="setActiveItem('audit')">
+          <mat-icon svgIcon="auditicon"></mat-icon>
+          <span class="links_name">Audit</span>
+        </a>
+        <span class="tooltip" [ngClass]="{'show': activeItem !== 'audit' || isOpen}">Audit</span>
+      </li>
+      <li [ngClass]="{'active': activeItem === 'lab_movement'}">
+        <a [routerLink]="'/lab-movement'" (click)="setActiveItem('lab_movement')">
+          <mat-icon svgIcon="moveicon"></mat-icon>
+          <span class="links_name">Lab Movement</span>
+        </a>
+        <span class="tooltip" [ngClass]="{'show': activeItem !== 'lab_movement' || isOpen}">Lab Movement</span>
+      </li>
+    </ul>
 
-        <li>
-          <a [routerLink]="'/dashboard'">
-            <mat-icon svgIcon="home"></mat-icon>
-            <span class="links_name">Dashboard</span>
-          </a>
-          <span class="tooltip">Dashboard</span>
-        </li>
-        <li>
-          <a [routerLink]="'/lab_commission'">
-            <mat-icon svgIcon="addicon"></mat-icon>
-            <span class="links_name">Lab Commission</span>
-          </a>
-          <span class="tooltip">Lab Commission</span>
-        </li>
-        <li>
-          <a [routerLink]="'/lab-decommission'">
-            <mat-icon svgIcon="deleteicon"></mat-icon>
-            <span class="links_name">Lab Decommission</span>
-          </a>
-          <span class="tooltip">Lab Decommission</span>
-        </li>
-
-        <li class="dropdown-toggle" (click)="toggleDropdown()">
-          <a href="javascript:void(0)">
-            <mat-icon svgIcon="operation"></mat-icon>
-            <span class="links_name">Lab Operations</span><mat-icon class="arrow" svgIcon="arrow" [ngClass]="{'rotate': dropdownOpen}"></mat-icon>
-          </a>
-        </li>
-
-        <ul *ngIf="dropdownOpen">
-          <li>
-            <a [routerLink]="'/self-check'" (click)="menuItemClicked('Annual Self Check')">
-              <mat-icon svgIcon="home"></mat-icon>
-              <span class="links_name">Annual Self Check</span>
-            </a>
-            <span class="tooltip">Annual Self Check</span>
-          </li>
-          <li>
-            <a [routerLink]="'/software-track'" (click)="menuItemClicked('Software Tracking')">
-              <mat-icon svgIcon="operation"></mat-icon>
-              <span class="links_name">Software Tracking</span>
-            </a>
-            <span class="tooltip">Software Tracking</span>
-          </li>
-          <li>
-            <a [routerLink]="'/acl-ip-management'" (click)="menuItemClicked('ACL IP Management')">
-              <mat-icon svgIcon="operation"></mat-icon>
-              <span class="links_name">ACL IP Management</span>
-            </a>
-            <span class="tooltip">ACL IP Management</span>
-          </li>
-          <li>
-            <a [routerLink]="'/audit'" (click)="menuItemClicked('Audit')">
-              <mat-icon svgIcon="operation"></mat-icon>
-              <span class="links_name">Audit</span>
-            </a>
-            <span class="tooltip">Audit</span>
-          </li>
-          <li>
-            <a [routerLink]="'/lab-movement'" (click)="menuItemClicked('Lab Movement')">
-              <mat-icon svgIcon="operation"></mat-icon>
-              <span class="links_name">Lab Movement</span>
-            </a>
-            <span class="tooltip">Lab Movement</span>
-          </li>
-        </ul>
-      </ul>
-    </div>
+    <li [ngClass]="{'active': activeItem === 'lab_decommission'}">
+      <a [routerLink]="'/lab-decommission'" (click)="setActiveItem('lab_decommission')">
+        <mat-icon svgIcon="deleteicon"></mat-icon>
+        <span class="links_name">Lab Decommission</span>
+      </a>
+      <span class="tooltip" [ngClass]="{'show': activeItem !== 'lab_decommission' || isOpen}">Lab Decommission</span>
+    </li>
+  </ul>
+</div>

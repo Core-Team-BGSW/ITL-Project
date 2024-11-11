@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+
 }
 
 body {
@@ -23,7 +23,7 @@ body {
   justify-content: space-between; /* Space between elements */
   background: #ffffff;
   padding: 20px 15px;
-  height: 50px;
+  height: 42px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   position: fixed; /* Fixed position for the navbar */
   width: 100%; /* Full width */
@@ -99,8 +99,8 @@ h3 {
   background-repeat: no-repeat;
   display: inline-block;
   fill: currentColor;
-  height: 27px; // Ensure adequate height
-  width: 25px;  // Ensure adequate width
+  height: 25px; // Ensure adequate height
+  width: 27px;  // Ensure adequate width
   margin-top: 3px;
 }
 #toggle-btn {
@@ -131,10 +131,6 @@ h3 {
   display: inline-block; /* Allow padding to work correctly */
   font-size: 15px;
 }
-.nav-links li i:hover{
-  background-color:#eff1f2;
-
-}
 
 .nav-links a {
   color: black; /* Text color */
@@ -143,11 +139,11 @@ h3 {
   border-radius: 5px; /* Rounded corners */
   transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
   display: inline-block; /* Allow padding to work correctly */
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .nav-links a:hover {
-  background-color: #d0d4d8; /* Background color on hover */
+  background-color: #eff1f2; /* Background color on hover */
   //color: #fff; /* Text color on hover */
   cursor: pointer;
 }
@@ -159,7 +155,7 @@ h3 {
   left: 0;
   height: 3px;
   width: 0%;
-  background: #56b0ff;
+  //background: #56b0ff;
   border-radius: 12px;
   transition: all 0.4s ease; /* Transition effect */
 }
@@ -195,3 +191,10 @@ h3 {
   transform: scaleX(1);
   transform-origin: left;
 }
+
+.boschlogo {
+  height: 60px;
+  width: 90px;
+}
+
+

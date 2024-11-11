@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-//New design
-/* Google Font Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 * {
-  margin: 0;
+  margin: -2px;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+
 
 }
 
@@ -16,45 +12,52 @@
   left: 0;
   //top: 50px; /* Adjust this value based on navbar height and margin */
   height: 100%;
-  width: 78px;
+  width: 58px;
   background: #eff1f2;
   padding: 6px 14px;
   z-index: 99;
-  transition: all 0.5s ease;
-  margin-top:51px;
+  transition: all 0.3s ease;
+  margin-top:43px;
+
 
 }
 
 .sidebar.open {
-  width: 250px;
+  width: 230px;
 }
 
 #toggle-btn {
-  position: absolute;
+
   font-size: 90px; /* Icon size */
   cursor: pointer; /* Pointer cursor */
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
 
+}
+#toggle-btn:hover{
+  background: none;
 }
 .mat-icon {
-  -webkit-user-select: none;
-  user-select: none;
-  background-repeat: no-repeat;
-  display: inline-block;
-  fill: currentColor;
-  height: 32px; // Ensure adequate height
-  width: 32px;  // Ensure adequate width
-  overflow: visible !important;
-  opacity: 1;  // Ensure icons are visible
-}
 
+  background-repeat: no-repeat;
+  display: flex;
+  overflow: visible;
+  //opacity: 1;  // Ensure icons are visible
+}
+.mat-icon {
+  height: 32px; // Increase height for better visibility
+  width: 27px;  // Increase width for better visibility
+}
+.sidebar li a mat-icon {
+  margin-right: 9px; /* Adjust margin as needed for consistent spacing */
+
+}
 .rotate {
-  transition: transform 0.5s ease; /* Smooth rotation */
+  transition: transform 0.4s ease; /* Smooth rotation */
   transform: rotate(90deg); /* Rotate the icon */
 }
 
 .sidebar.open #toggle-btn {
-  margin-left: 189px; /* Adjust this to position when expanded */
+  margin-left: 180px; /* Adjust this to position when expanded */
 }
 .sidebar .logo-details {
   height: 60px;
@@ -63,49 +66,23 @@
   position: relative;
 }
 
-.sidebar .logo-details .icon {
-  opacity: 1;
-  transition: all 0.5s ease;
-}
-
-.sidebar .logo-details .logo_name {
-  color: black;
-  font-size: 20px;
-  font-weight: 600;
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-
-.sidebar.open .logo-details .icon,
-.sidebar.open .logo-details .logo_name {
-  opacity: 1;
-}
-
-.sidebar .logo-details #btn {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  font-size: 22px;
-  transition: all 0.4s ease;
-  font-size: 23px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.5s ease;
-}
 
 .sidebar .nav-list {
 
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
   height: 100%;
-  margin-top: 42px;
+  padding: 0;  /* Remove any default padding */
+  margin: 0;
 }
 
 .sidebar li {
   position: relative;
-  margin: 16px 0;
+  margin: 2px 0;
   list-style: none;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .sidebar li .tooltip {
@@ -138,30 +115,28 @@
 }
 
 
-.sidebar li a {
+.sidebar .nav-list li a {
   display: flex;
-  height: 100%;
-  width: 100%;
-  border: none; /* Remove border */
-  outline: none; /* Remove outline */
-  border-radius: 6px;
   align-items: center;
   text-decoration: none;
-  transition: all 0.4s ease;
-  background: transparent; /* Make background transparent */
-  font-size: 15px;
+  font-size: 16px;
+  width: 100%;
+
 }
 
-.sidebar li a:hover {
-  background: white; /* Change hover background as needed */
-  color: black;
+.sidebar .nav-list li a:hover{
+  background: white;
+  width: 100%;
+  transition: 0.3s ease;
 }
+
 .sidebar li a .links_name {
   color: black;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   white-space: nowrap;
   opacity: 0;
+  margin-right: -9px;
   pointer-events: none;
   transition: 0.4s;
 
@@ -172,24 +147,13 @@
   pointer-events: auto; // Allow interaction
 }
 
-.sidebar li mat-icon {
-  opacity: 1; // Ensure icons are visible even when collapsed
-}
-.sidebar li a:hover mat-icon {
-  opacity: 1; // Ensure icons are fully visible on hover
-}
-.mat-icon {
-  height: 32px; // Increase height for better visibility
-  width: 27px;  // Increase width for better visibility
-}
-.sidebar li a mat-icon {
-  margin-right: 10px; /* Adjust margin as needed for consistent spacing */
-}
-.sidebar li a:hover .links_name,
-.sidebar li a:hover i {
-  transition: all 0.5s ease;
-  color: black;
-}
+
+// .sidebar li a:hover .links_name,
+// .sidebar li a:hover i {
+//   transition: all 0.4s ease;
+//   color: black;
+
+// }
 
 .sidebar li .mat-icon {
   height: 50px;
@@ -197,8 +161,92 @@
   font-size: 18px;
   border-radius: 12px;
 }
+/* Active state styling */
+.sidebar li.active a {
+  background-color: #d0d4d8; /* Same as the hover effect */
+  color: black; /* Keep text color consistent */
+}
+
+.sidebar li.active a .links_name {
+  opacity: 1; /* Ensure text is visible in active state */
+  pointer-events: auto; /* Allow interaction */
+}
+
+.sidebar li.active .tooltip {
+  opacity: 0; /* Hide tooltip in active state */
+}
+
+/* Tooltip Visibility */
+.sidebar li:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Adjusting for collapsed sidebar - hide tooltips */
+.sidebar:not(.open) li .tooltip {
+  display: none;
+}
+
+/* When the sidebar is collapsed, adjust text and icon size */
+.sidebar:not(.open) li a mat-icon {
+  font-size: 20px; /* Smaller size when collapsed */
+  margin-right: -27px; /* Remove margin between icon and text */
+}
+
+.sidebar li a .links_name {
+  color: black;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  opacity: 0;
+  margin-right: -9px;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+/* Active state background and border */
+.sidebar li.active {
+  border-left: 4px solid #007bff; /* Blue left border for active item */
+  background-color: #f4f7f9; /* Change background for active item */
+}
+
+.dropdown-menu{
+
+    background: #e0e2e5;
+    padding: 10px 0;  // Optional, if you want to add padding to the dropdown
+    z-index: 100;  // Ensure the dropdown is on top of other elements
+    position: relative;
+
+}
+.sidebar:not(.open) .arrow{
+  opacity: 0;
+}
+
+/* Make the arrow visible when the sidebar is expanded */
+.sidebar.open .arrow {
+  opacity: 1;  /* Show the arrow when expanded */
+}
 .arrow {
-  font-size: 14px; /* Adjusted size for better fit */
+  font-size: 25px; /* Adjusted size for better fit */
   margin-left: 39px; /* Add space between text and arrow */
   width: 20px;
 }
+
+
+/* When the sidebar is collapsed, adjust text and icon size */
+.sidebar:not(.open) li a mat-icon {
+  font-size: 20px; /* Smaller size when collapsed */
+  margin-right: -27px; /* Remove margin between icon and text */
+}
+
+/* Adjust for collapsed state - hide text and keep icons visible */
+.sidebar:not(.open) li a .links_name {
+  opacity: 0; /* Hide text */
+  pointer-events: none; /* Disable interaction with text */
+  width: 0; /* Remove space taken by text */
+  transition: all 0.4s ease;
+}
+
