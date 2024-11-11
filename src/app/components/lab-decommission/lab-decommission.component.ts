@@ -7,6 +7,8 @@ import { FilterPipe } from '../../filter.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
+import { Location } from '../../../../models/Location';
+import { LabData } from '../../../../models/LabData';
 
 @Component({
   selector: 'app-lab-decommission',
