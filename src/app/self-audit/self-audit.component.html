@@ -3191,6 +3191,8 @@ Explanation<span class="required"> * </span> :
    <i><strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong></i> 
    
    
+
+   
    <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span>
     <p></p>
     
@@ -3198,10 +3200,11 @@ Explanation<span class="required"> * </span> :
      <mat-card-content>
        
        <strong>   No.of Internal Associates </strong> 
-          <input type="text" placeholder=" Internal Associates"><p></p>
-        <br> <strong>No.of External Associates </strong> 
+       <input type="text" placeholder="Internal Associates" [(ngModel)]="formData.firstName" name="firstName">
+        <p></p>
+       <br> <strong>No.of External Associates </strong> 
           
-          <input type="text" placeholder=" External Associates">
+       <input type="text" placeholder="External Associates" [(ngModel)]="formData.lastName" name="lastName">
         </mat-card-content>
                  
     </mat-card>
@@ -3212,7 +3215,7 @@ Explanation<span class="required"> * </span> :
      <p></p>
      <mat-card class="custom-card">
        
-        <input type="text" matInput placeholder="No.of devices">
+      <input type="text" placeholder="No.of Devices" [(ngModel)]="formData.deviceno" name="deviceno">
         
      </mat-card>
      <p></p>
@@ -3225,7 +3228,7 @@ Explanation<span class="required"> * </span> :
      <mat-card class="custom-card" >
        <mat-card-content>
          <!-- Your form and radio buttons here -->
-         <mat-radio-group [(ngModel)]="labelPosition">
+         <mat-radio-group [(ngModel)]="labelPosition" (ngModelChange)="onSelectionChange($event)">
            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
          </mat-radio-group>
@@ -3243,7 +3246,7 @@ Explanation<span class="required"> * </span> :
        <div class="dropdown-container">
        <div class="dropdown-item">
          Answers<span class="required"> * </span> :
-         <input type="text" placeholder="Answers ">
+         <input type="text" placeholder="Answers" [(ngModel)]="formData.answer1" name="answer1">
          </div>
          </div>
          
@@ -3256,7 +3259,7 @@ Explanation<span class="required"> * </span> :
        <div class="dropdown-container">
        <div class="dropdown-item">
          Explanation<span class="required"> * </span> :
-         <input type="text" placeholder="Explanation ">
+         <input type="text" placeholder="Explanation" [(ngModel)]="formData.explanation1" name="explanation1">
          </div>
          </div>
        
@@ -3270,7 +3273,7 @@ Explanation<span class="required"> * </span> :
      <mat-card class="custom-card">
        <mat-card-content>
          <!-- Your form and radio buttons here -->
-         <mat-radio-group [(ngModel)]="labelPosition1">
+         <mat-radio-group [(ngModel)]="labelPosition1" (ngModelChange)="onSelectionChange1($event)">
            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
          </mat-radio-group>
@@ -3496,6 +3499,7 @@ Explanation<span class="required"> * </span> :
                      
          </mat-card>
          <p></p>
-     <br>  <button class="primary">Save as Draft</button>
+     <br>  <button class="primary" (click)="saveDraft()">Save as Draft</button>
        <button class="success_btn" >Save</button>     
+       
  </mat-tab>

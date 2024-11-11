@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, Inject,PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup,ReactiveFormsModule,Validators,FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
@@ -11,6 +11,8 @@ import { MatDatepickerModule, matDatepickerAnimations } from '@angular/material/
 import { MatNativeDateModule } from '@angular/material/core';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { isPlatformBrowser } from '@angular/common';
+
 
 
 
@@ -65,6 +67,21 @@ export class SelfAuditComponent {
   selectedOption28: string = '';
   selectedOption29: string = '';
   selectedOption30: string = '';
+  loginArray:any={};
+  formData = {
+    firstName: '',
+    lastName: '',
+    deviceno: '',
+    labelPosition:'',
+    answer1:'',
+    explanation1:'',
+    labelPosition1:'',
+    downtime:'',
+    answer2:'',
+    selectedOption: ''
+    
+  };
+  isBrowser: boolean;
  
   showOptions = false;
 
@@ -146,7 +163,10 @@ notapplicableCount2: number = 0;
 }
 linkForm: FormGroup;
  
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
       website: ['', [Validators.required, Validators.pattern('https?://.+')]],
       website1: ['', [Validators.required, Validators.pattern('https?://.+')]],
@@ -154,7 +174,7 @@ linkForm: FormGroup;
       website3: ['', [Validators.required, Validators.pattern('https?://.+')]]
     });
   }
- 
+  
   onSubmit() {
     if (this.linkForm.valid) {
       console.log('Form Submitted!', this.linkForm.value);
@@ -210,8 +230,66 @@ generateExcelFile(): void {
   // Step 11: Save the file
   saveAs(blob, 'Copy of remote access list.xlsx');
 }
+ngOnInit(): void {
+  this.loadDraft();
+  const storedValue = localStorage.getItem('labelPosition');
+  const storedValue1 = localStorage.getItem('labelPosition1');
+  const storeddropdown = localStorage.getItem('selectedOption');
+    if (storedValue) {
+      this.labelPosition = storedValue;
+    }
+    if (storedValue1) {
+      this.labelPosition1 = storedValue1;
+    }
+    if (storeddropdown) {
+      this.selectedOption = storeddropdown;
+    }
     
 }
+saveDraft(): void {
+  if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+    localStorage.setItem('draftData', JSON.stringify(this.formData));
+    alert('Draft saved!');
+  }
+}
+loadDraft(): void {
+  if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+    const savedData = localStorage.getItem('draftData');
+    if (savedData) {
+      this.formData = JSON.parse(savedData);
+    }
+  }
+}
+private isLocalStorageAvailable(): boolean {
+  return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+}
+onSelectionChange(value: string): void {
+  // Save the selected value to localStorage whenever it changes
+  if (this.isBrowser) {
+    localStorage.setItem('labelPosition', value);
+    
+  }
+  
+
+}
+onSelectionChange1(value: string): void {
+  // Save the selected value to localStorage whenever it changes
+  if (this.isBrowser) {
+    localStorage.setItem('labelPosition1', value);
+  }
+}
+
+  
+ 
+}
+
+ 
+ 
+
+
+
+    
+
 
 
  

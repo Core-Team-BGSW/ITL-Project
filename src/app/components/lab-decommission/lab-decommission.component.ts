@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../filter.pipe';
 import { MatPaginator } from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {ChangeDetectionStrategy, inject} from '@angular/core';
+import {ChangeDetectionStrategy} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
@@ -23,18 +23,7 @@ import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecomm
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-<<<<<<< HEAD
   imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe,  MatButtonModule,MatCardModule],
-=======
-  imports: [
-    RouterLink,
-    CommonModule,
-    RouterOutlet,
-    FormsModule,
-    FilterPipe,
-    MatButtonModule,
-  ],
->>>>>>> 8248cb2c4ca65f02448b171358077bbe2bc7591a
   templateUrl: './lab-decommission.component.html',
   styleUrls: ['./lab-decommission.component.scss'],
 })
