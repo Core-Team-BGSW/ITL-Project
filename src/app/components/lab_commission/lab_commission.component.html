@@ -1,4 +1,6 @@
-<h2>New Lab Commission</h2>
+<div class="page-heading">
+  <a>New Lab Commission</a>
+</div>
 <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
   <mat-tab label="Import File/Form Fill">
     <mat-card>
@@ -598,10 +600,10 @@
       </div>
       <div class="form-button-container">
         <button mat-button class="form-button-res" (click)="onReset()">
-          Reset
+          <mat-icon svgIcon="reset"></mat-icon>Reset
         </button>
         <button mat-button class="form-button-sub" (click)="onPreviewform()">
-          "&nbsp;Preview"
+          <mat-icon svgIcon="submit"></mat-icon>Preview
         </button>
       </div>
     </div>

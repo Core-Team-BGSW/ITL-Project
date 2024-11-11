@@ -1,13 +1,22 @@
-// @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
+.page-heading {
+  font-size: 28px;
+  font-weight: 600;
+  border-bottom: 2px solid #9dc9ff;
+  width: 40%;
+}
 
 .note-choosemethod {
-  color: 007bc0;
-  font: size 100px;
+  font-size: 16px;
+  padding-top: 4px;
+  color: #004975;
+  font-weight: 600;
+  margin: 4px;
 }
 
 p.choosemethod {
   color: #2a0845;
-  font-size: 22px;
+  font-size: 20px;
+  margin: 4px;
 }
 
 .importfile {
@@ -39,24 +48,25 @@ p.choosemethod {
   margin-top: 16px;
 }
 
-.methodheading p {
-  color: #000000;
-  font-size: 36px;
-  font-weight: bold;
-  padding: 16px;
-  text-align: left;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border-bottom: 4px solid #9dc9ff;
-  /* Add a bottom border */
-  width: 96%;
-}
-
 p {
   font-size: 18px;
   padding-top: 4px;
   color: #007bc0;
   font-weight: 600;
+}
+
+.methodheading p {
+  color: #000000;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 4px;
+  text-align: left;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border-bottom: 4px solid #9dc9ff;
+  margin: 12px;
+  /* Add a bottom border */
+  //width: 96%;
 }
 
 .file-name {
@@ -130,7 +140,7 @@ input[type="text"] {
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: border-color 0.3s ease;
 }
@@ -256,7 +266,7 @@ select {
   border-radius: 0.5em;
   box-sizing: border-box;
   border-color: #e0e2e5;
-  font-size: 16px;
+  font-size: 14px;
   background: #ffffff;
   transition: background 0.3s;
 }
@@ -296,7 +306,7 @@ select:hover {
   border-color: #337ab7;
   box-sizing: border-box;
   border: solid 2px #337ab7;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .container-heading {
@@ -334,7 +344,7 @@ label {
   display: block;
   margin-bottom: 5px;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 

@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { AngularModule } from '../../angularmodule/angularmodule.module';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, CommonModule, MatIconModule],
+  imports: [RouterModule, CommonModule, AngularModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
@@ -20,19 +21,70 @@ export class SidebarComponent {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
-    this.matIconRegistry.addSvgIcon("home", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/homeicon1.svg"));
-    this.matIconRegistry.addSvgIcon("menu", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/menu.svg"));
-    this.matIconRegistry.addSvgIcon("cross", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/cross.svg"));
-    this.matIconRegistry.addSvgIcon("addicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/plus.svg"));
-    this.matIconRegistry.addSvgIcon("operation", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/operationicon.svg"));
-    this.matIconRegistry.addSvgIcon("arrow", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/arrow1.svg"));
-    this.matIconRegistry.addSvgIcon("deleteicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/deleteicon.svg"));
-    this.matIconRegistry.addSvgIcon("checkicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/check.svg"));
-    this.matIconRegistry.addSvgIcon("monitoricon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/monitor.svg"));
-    this.matIconRegistry.addSvgIcon("ipicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/ip.svg"));
-    this.matIconRegistry.addSvgIcon("auditicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/audit.svg"));
-    this.matIconRegistry.addSvgIcon("moveicon", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/move.svg"));
-
+    this.matIconRegistry.addSvgIcon(
+      'home',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/homeicon1.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'menu',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/menu.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'cross',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/cross.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'addicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/plus.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'operation',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/operationicon.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'arrow',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/arrow1.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'deleteicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/deleteicon.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'checkicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/check.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'monitoricon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/monitor.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'ipicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/ip.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'auditicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/audit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'moveicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/move.svg')
+    );
   }
   get toggleIcon() {
     return this.isOpen ? 'cross' : 'menu';

@@ -26,11 +26,13 @@ import axios from 'axios';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data.service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LayoutComponent } from '../../admin/layout/layout.component';
 import { LabData } from '../../../../models/LabData';
 import { Location } from '../../../../models/Location';
 import { RegionWithCountries } from '../../../../models/RegionWithCountries';
 import { countriesWithcode } from '../../../../models/countriesWithcode';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lab_commission',
@@ -153,8 +155,23 @@ export class LabCommissionComponent {
     private dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
     private toastr: ToastrService,
-    private dataService: DataService
-  ) {}
+    private dataService: DataService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'submit',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/submit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'reset',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/reset.svg'
+      )
+    );
+  }
 
   ngOnInit(): void {
     const today = new Date();
