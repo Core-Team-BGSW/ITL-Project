@@ -7,6 +7,8 @@
 <div class="search-bar">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search labs..." />
   <button (click)="onSearch()">Search</button>
+  <input type="text" [(ngModel)]="ntId" placeholder="Enter Lab Coordinator NT-ID..." />
+  <button (click)="loadLabList(ntId)">Search by NT-ID</button>
 </div>
 
 <!-- <ul class="lab-list">

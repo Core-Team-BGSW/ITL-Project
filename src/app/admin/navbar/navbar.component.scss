@@ -1,47 +1,151 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+//
+
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+
 }
 
 body {
-  height: 100vh;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #c1f7f5;
+  font-size: 14px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between elements */
+  background: #ffffff;
+  padding: 20px 15px;
+  height: 42px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  position: fixed; /* Fixed position for the navbar */
+  width: 100%; /* Full width */
+  z-index: 2; /* Ensure it's above other elements */
+
+}
+.profile-popup {
+  position: absolute;
+    top: 64px;
+    right: 17px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    //border-radius: 5px;
+    padding: 5px;
+    z-index: 1000;
+    height: 197px;
+    width: 186px;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: left;
+
+}
+.close-icon {
+  position: absolute;
+  top: -4px;
+  right: -1px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+h3 {
+  margin: 0 0 15px; /* Spacing below the title */
+  font-size: 18px;
+  color: #444; /* Title color */
+}
+
+.profile-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+
+.profile-list li {
+  padding: 9px 0; /* Space between list items */
+  border-bottom: 1px solid #eaeaea; /* Divider line */
+  color: #555; /* Text color */
+}
+
+.profile-list li:last-child {
+  border-bottom: none; /* Removed border from the last item */
+}
+
+.profile-list a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.profile-list a:hover {
+  text-decoration: solid;
+}
+.logo-details {
+  display: flex;
+  align-items: center;
+}
+.mat-icon {
+  -webkit-user-select: none;
+  user-select: none;
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 25px; // Ensure adequate height
+  width: 27px;  // Ensure adequate width
+  margin-top: 3px;
+}
+#toggle-btn {
+  font-size: 22px; /* Icon size */
+  cursor: pointer; /* Pointer cursor */
+  margin-right: 15px; /* Space between button and logo */
+  transition: margin-left 0.5s ease; /* Smooth transition for shifting */
+}
+#toggle-btn.shift {
+  margin-left: 250px; /* Adjust this value based on the sidebar width */
 }
 
 .nav-links {
-  display: flex;
-  position: fixed;
-  z-index: 2;
-  top: 0; // Fixes the navbar at the top
-  right: 0; // Aligns it to the right
-  left: 0; // Ensures it stretches full width
-  justify-content: flex-end; // Aligns items to the right
-  align-items: center;
-  background: #fff;
-  padding: 20px 15px;
-  border-radius: 0; // No rounding for full-width navbar
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  display: flex; /* Flexbox for horizontal alignment */
+  margin-left: auto;
 }
 
 .nav-links li {
   list-style: none;
-  margin: 0 12px;
+  margin: 0 10px; /* Space between nav items */
+
+}
+.nav-links li i{
+  margin-top: 8px;
+  padding: 4px 8px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+  display: inline-block; /* Allow padding to work correctly */
+  font-size: 15px;
 }
 
-.nav-links li a {
-  position: relative;
-  color: #333;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 6px 0;
-  text-decoration: none;
+.nav-links a {
+  color: black; /* Text color */
+  text-decoration: none; /* Remove underline */
+  padding: 4px 8px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+  display: inline-block; /* Allow padding to work correctly */
+  font-size: 13px;
+}
+
+.nav-links a:hover {
+  background-color: #eff1f2; /* Background color on hover */
+  //color: #fff; /* Text color on hover */
+  cursor: pointer;
 }
 
 .nav-links li a:before {
@@ -51,13 +155,13 @@ body {
   left: 0;
   height: 3px;
   width: 0%;
-  background: #56b0ff;
+  //background: #56b0ff;
   border-radius: 12px;
-  transition: all 0.4s ease;
+  transition: all 0.4s ease; /* Transition effect */
 }
 
 .nav-links li a:hover:before {
-  width: 100%;
+  width: 100%; /* Full width on hover */
 }
 
 .nav-links li.center a:before {
@@ -87,3 +191,10 @@ body {
   transform: scaleX(1);
   transform-origin: left;
 }
+
+.boschlogo {
+  height: 60px;
+  width: 90px;
+}
+
+

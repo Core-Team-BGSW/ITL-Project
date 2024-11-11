@@ -8,6 +8,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ChangeDetectorRef,
+  NgZone,
+  inject,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
