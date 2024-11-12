@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public interface LabDataRepo extends MongoRepository<LabData,String>,CustomLabDataRepo {
     @Query("{'entityName' :  ?0, 'gb' :  ?1}")
     List<LabData> findLabDataByEntityNameAndGb(String entityName, String gb);
-    @Query("{'locationCode' : ?0, 'entityName' :  ?1, 'gb':  ?2, 'labNo' : ?3, 'primary_lab_cord' : ?4}")
+    @Query("{'locationCode' : ?0, 'entityName' :  ?1, 'gb':  ?2, 'labNo' : ?3, 'primary_lab_cord' : ?4, 'dep_name' : ?5}")
     LabData findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cordAndDep_name(String locationCode, String entityName, String gb, String labNo,String primary_lab_cord, String dep_name);
     List<LabData> findAllById(Iterable<String> ids);
     @Query("{'primary_lab_cord' : ?0}")

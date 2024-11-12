@@ -2,13 +2,10 @@ package com.ITL.Service.backendservice.Repository;
 
 import com.ITL.Service.backendservice.DTO.EntityNameResult;
 import com.ITL.Service.backendservice.DTO.GbResult;
-import com.ITL.Service.backendservice.Exception.ParametersNotValidException;
 import com.ITL.Service.backendservice.Model.LabData;
-import com.ITL.Service.backendservice.Service.LabDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -18,8 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Repository

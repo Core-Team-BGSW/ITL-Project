@@ -22,7 +22,20 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/UserData
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: bd_toa-ets1_itl_consultancy_team@bcn.bosch.com
+#    password: {your-email-password}
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: true
 
 api:
     url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
     url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/
+    url :  http://localhost:8080
+

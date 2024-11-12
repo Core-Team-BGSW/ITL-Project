@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/upload")
@@ -14,9 +16,8 @@ public class ExcelToCsvController {
     private final ExcelToCsvService excelToCsvService;
 
     @PostMapping("/convert-excel-to-csv")
-    public ResponseEntity<String> convert(@RequestParam("file") MultipartFile file) {
-        ResponseEntity<String> res = excelToCsvService.excelToCsvConverter(file);
-        return res;
+    public ResponseEntity<String> convert(@RequestParam("file") MultipartFile file) throws IOException {
+        return excelToCsvService.excelToCsvConverter(file);
     }
 }
 
