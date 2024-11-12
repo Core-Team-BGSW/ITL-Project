@@ -10,70 +10,8 @@ input[type=text]
  background-color: white;
  border-radius: 8px;
  box-sizing: border-box;
- border: 1.7px solid rgb(102, 122, 204);
+ border: 1.2px solid rgb(107, 124, 194);
 }
-select
-{
- width: 400px;
- padding: 10px 15px;
- margin: 8px 0;
- display: inline-block;
- border: 2px solid #6e6d6d;
- background-color: white;
- border-radius: 8px;
- box-sizing: border-box;
- border: 1.7px solid rgb(102, 122, 204);
-}
-.tooltip
-{
- position: relative;
- display: inline-block;
-
-}
-.tooltiptext
-{
- visibility: hidden;
-
- --r: 10px; /* control the radius */
- --h: 10px; /* control the height of the tail */
- --p: 5%;  /* control the position of the tail */
-
- padding: 10px 0;
- width: 223px;
- background-color: rgb(143, 141, 146);
- color: #fff;
- text-align: center;
- font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
- border-radius: 10px;
- position: absolute;
- z-index: 1;
- top: -50px;
- left: 100%;
- border-bottom: var(--h) solid #0000;
- --m:
-   /* adjust the angles of the 1st conic-gradient to control the shape */
-   conic-gradient(from 30deg at var(--p) 100%,#0000,#000 1deg 30deg,#0000 31deg)
-    0 100%/100% calc(100% - var(--r)) no-repeat,
-   conic-gradient(at calc(var(--r)/2) calc(var(--r)/2),#000 270deg,#0000 0)
-    0 0/calc(100% - var(--r)/2) calc(100% - var(--r)/2) padding-box,
-   radial-gradient(50% 50%,#000 98%,#0000)
-    0 0/var(--r) var(--r) space padding-box;
- -webkit-mask: var(--m);
-         mask: var(--m);
-
-
-
- font-size: 15px;
-
- color: #fff;
-}
- .tooltip:hover .tooltiptext
- {
-
-   visibility: visible;
-
- }
-
 .custom-card
 {
  /* Custom background color */
@@ -91,96 +29,10 @@ transition: all 0.3s ease;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   background-color: #e6e8ea;
 }
-
-.custom-input .mat-input-element
-{
-color: #201f1f; /* Custom text color */
-font-size: 5px; /* Custom font size */
-border-radius: 60px;
-
-}
-
-.custom-input .mat-form-field-underline
-{
-background-color: #007bff; /* Custom underline color */
-}
-.dropdown-container
-{
-padding: 20px;
-background-color: white;
-border-radius: 20px;
-
-}
-
-.small-input
-{
-width: 230px; /* Custom width for the input box */
-height: 10px; /* Custom height for the input box */
-padding: 5px; /* Padding inside the input box */
-}
-.small-input1
-{
-width: 250px; /* Custom width for the input box */
-height: 10px; /* Custom height for the input box */
-padding: 5px; /* Padding inside the input box */
-text-align: left
-}
-.required
-{
-color: #fd0303;
-}
-u
-{
-color: rgb(233, 219, 32);
-}
 svg
 {
 width: 20px;
 height: 15px;
-}
-.tooltip1
-{
-position: relative;
-display: inline-block;
-
-}
-.tooltiptext1
-{
-visibility: hidden;
-
---r: 10px; /* control the radius */
---h: 10px; /* control the height of the tail */
---p: 5%;  /* control the position of the tail */
-
-
-padding: 10px 0;
- width: 500px;
-background-color: rgb(115, 207, 123);
-color:black;
-text-align: center;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-border-radius: 0px;
-
-border-color: #000;
-position: absolute;
-z-index: 1;
-top: -50px;
-left: 100%;
-border-bottom: var(--h) solid #0000;
-font-size: 15px;
-color: #fff;
-}
-.tooltip1:hover .tooltiptext1
-{
-   visibility: visible;
- }
-h1
-{
- font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
- font-size: 50px;
- color: rgb(110, 61, 61);
- text-align: center;
- background-color: #f3f1f1;
 }
 h2
 {
@@ -188,111 +40,7 @@ h2
  text-align: left;
  font-weight: 400;
  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Shadow */
-
-
 }
- .btn
- {
- font-size: 16px;
- padding: 10px 20px;
- border: none;
- border-radius: 5px;
- cursor: pointer;
- transition: background-color 0.3s, box-shadow 0.3s;
-}
- .primary
- {
-   background: rgb(101, 31, 54);
-   color: white;
-   border-radius: 10px;
- padding: 9px;
- width: 120px;
-   position: relative;
-   left: 35%;
-   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-   &:hover {
-     background-color: #336fae;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   }
- }
- .success_btn
- {
-   width: 100px;
-   border-radius: 10px;
- padding: 9px;
- width: 120px;
-   background: #3c7e02;
-   color: white;
-   position: relative;
-   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-   left: 36%;
-   &:hover {
-     background-color: #0dcf37;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-   }
- }
-
- .styled-table
- {
-   width: 100%;
-   border-collapse: collapse;
-   margin: 25px 0;
-   font-size: 18px;
-   text-align: left;
-   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
- }
- th
- {
-   height: 30px;
-   text-align: center;
- }
- td
- {
-   height: 30px;
- }
- .custom-input
- {
-   width: 340.5px;
-   padding: 10px 15px;
-   margin: 6px 0;
-   display: inline-block;
-   border: 2px solid #f7f0f0;
-   background-color: white;
-   border-radius: 8px;
-   box-sizing: border-box;
-   border: 1.7px solid rgb(102, 122, 204);
- }
-
- /* Custom label style */
- .custom-label
-  {
-   color: #3f51b5; /* Example color */
-   font-weight: bold;
- }
-
- /* Custom styles for the datepicker toggle icon */
- .custom-datepicker-toggle .mat-datepicker-toggle-default-icon
- {
-   color: #3f51b5; /* Example color */
- }
-
- /* Custom styles for mat-datepicker */
- .custom-datepicker .mat-datepicker-content
- {
-   background-color: white; /* Example color */
- }
-
- /* Custom styles for the mat-form-field underline */
- .custom-form-field .mat-form-field-underline
- {
-   background-color: #3f51b5; /* Example color */
- }
-
- /* Custom styles for the mat-form-field wrapper */
- .custom-form-field .mat-form-field-wrapper
- {
-   background-color: white; /* Example color */
- }
  .custom-card1
 {
   border-radius: 0px; /* Rounded corners */
@@ -307,14 +55,6 @@ h2
   color: rgb(80, 79, 79);
 }
 
-.custom-card2
-{
-background-color: rgb(251, 249, 249); /* Custom background color */
-border-radius: 0px; /* Rounded corners */
-padding: 3px;/* Padding inside the card */
-width: 900px;
-box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-}
 button {
   background-color: #4CAF50; /* Green */
   border: none;
@@ -347,32 +87,20 @@ button {
 }
 .container {
   display: flex;
-  justify-content: flex-end; /* Aligns content to the right */
-}
-strong{
-
-  text-align: end;
-  font-family :'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  justify-content: flex-end;
 }
 h4{
   color: #3f51b5;
   text-align: center;
   background-color: #e8e2e2;
 }
-* {
-  box-sizing: border-box;
-}
-
-/* Style the search field */
 form.search_btn input[type=text] {
   padding: 10px;
   font-size: 17px;
   border: 1px solid rgb(211, 210, 210);
   width: 50%;
   background: white;
-
 }
-/* Style the submit button */
 form.search_btn button {
 
   width: 5%;
@@ -381,44 +109,40 @@ form.search_btn button {
   color: white;
   font-size: 17px;
   border: 1px solid grey;
-  border-left: none; /* Prevent double borders */
+  border-left: none;
   cursor: pointer;
   margin-left: 10px;
-
 }
-
 form.example button:hover {
   background: #0b7dda;
 }
-
-/* Clear floats */
 form.example::after {
   content: "";
   clear: both;
   display: table;
 }
 .lab_btn{
-  background-color: #3d8bda; /* Green background */
-  color: white; /* White text */
-  border: none; /* Remove default border */
-  padding: 12px 24px; /* Padding around the text */
-  font-size: 16px; /* Increase font size */
-  font-weight: bold; /* Bold text */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  background-color: #3d8bda;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
   margin-right: 16px;
 }
 
 .lab_btn:hover {
-  background-color: #467cae; /* Darken background on hover */
-  transform: translateY(-2px); /* Slightly move the button up on hover */
+  background-color: #467cae;
+  transform: translateY(-2px);
 }
 
 .lab_btn:active {
-  background-color: #273081; /* Even darker background when clicked */
-  transform: translateY(1px); /* Move button slightly down when clicked */
+  background-color: #273081;
+  transform: translateY(1px);
 }
 .detail-label{
   color: #374e65;

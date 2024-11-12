@@ -14,6 +14,7 @@ import { ApplicationsComponent } from './components/applications/applications.co
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
 import { AuditComponent } from './components/audit/audit.component';
 import { LayoutComponent } from './admin/layout/layout.component';
+import { FeedbackComponent } from './admin/feedback/feedback.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,7 @@ export const routes: Routes = [
       { path: 'self-audit', component: SelfAuditComponent },
       { path: 'quiz', component: QuizComponent },
       { path: 'contact', component: ContactComponent },
+      { path: 'feedback', component: FeedbackComponent },
       { path: 'about', component: AboutComponent },
       { path: 'role', component: RoleComponent },
       { path: 'software-tracking', component: SoftwareTrackingComponent },

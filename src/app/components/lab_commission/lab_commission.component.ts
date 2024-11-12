@@ -8,6 +8,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   ChangeDetectorRef,
+  NgZone,
+  inject,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,26 +26,13 @@ import axios from 'axios';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data.service';
-import { inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NgZone } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LayoutComponent } from '../../admin/layout/layout.component';
-
-export interface Location {
-  region: string;
-  country: string;
-  locationCode: string;
-}
-
-export interface RegionWithCountries {
-  countries: string[];
-  region: string;
-}
-
-export interface countriesWithcode {
-  countries: string[];
-  locationCodes: string[];
-}
+import { LabData } from '../../../../models/LabData';
+import { Location } from '../../../../models/Location';
+import { RegionWithCountries } from '../../../../models/RegionWithCountries';
+import { countriesWithcode } from '../../../../models/countriesWithcode';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lab_commission',
@@ -101,6 +90,7 @@ export class LabCommissionComponent {
   selectedCode: string = '';
   entity: string = '';
   GB: string = '';
+  gb: string = '';
   localITLproxy: string = '';
   locationcode: string = '';
   selectedEntity: string = '';
@@ -150,23 +140,38 @@ export class LabCommissionComponent {
   nextUniqueId: number = 1; // Initial unique ID counter
   uniqueInstanceId: string = '';
   selectedHeader: string = '';
+  allLabs: LabData[] = [];
   gbOptions: string[] = [];
-  kamSuggestions: string[] = []; // All available KAM suggestions
+  entityOptions: string[] = [];
   departmentSuggestions: string[] = [];
   dhSuggestions: string[] = []; // All available DH suggestions
-  filteredDepartmentSuggestions: string[] = [];
-  filteredDHSuggestions: string[] = []; // Filtered DH suggestions
-  filteredKAMSuggestions: string[] = []; // Filtered suggestions based on user input
   uniqueRegions: RegionWithCountries[] = [];
   uniqueCountriesWithCodes: countriesWithcode[] = [];
   filteredLocationCode: String[] = [];
+  showOtherSection: boolean = false;
+  otherField: string = '';
 
   constructor(
     private dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
     private toastr: ToastrService,
-    private dataService: DataService
-  ) {}
+    private dataService: DataService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'submit',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/submit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'reset',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/reset.svg'
+      )
+    );
+  }
 
   ngOnInit(): void {
     const today = new Date();
@@ -197,20 +202,6 @@ export class LabCommissionComponent {
         })
       );
 
-      // this.locations.forEach((location) => {
-      //   if (!countryCodeMap.has(location.country)) {
-      //     countryCodeMap.set(location.country, new Set());
-      //   }
-      //   countryCodeMap.get(location.country)?.add(location.locationCode);
-      // });
-
-      // // Convert the map to an array of objects for easier use in the template
-      // this.uniqueCountriesWithCodes = Array.from(countryCodeMap.entries()).map(
-      //   ([country, locationCodes]) => ({
-      //     countries: country, // Match the interface
-      //     locationCode: Array.from(locationCodes), // Match the interface
-      //   })
-      // );
       this.locations.forEach((location) => {
         if (!countryCodeMap.has(location.country)) {
           countryCodeMap.set(location.country, new Set());
@@ -225,6 +216,9 @@ export class LabCommissionComponent {
         })
       ) as countriesWithcode[];
     });
+    this.loadGBOptions();
+    this.loadLabData();
+    this.loadEntityOptions();
   }
 
   /////////////////////////////////////////////////////////////////////onfileupload////////////////////////////////////////////////////////////////////////////
@@ -295,14 +289,10 @@ export class LabCommissionComponent {
         this.excelData = [];
         this.filteredData = []; // Initialize filtered data
 
-        // Extract the first row safely
+        // Extract the first row safely (headers)
         const firstRow = worksheet.getRow(1);
-        if (!firstRow) {
-          alert('First row not found. Please check the Excel file.');
-          return;
-        }
-
         const values = firstRow.values;
+
         if (
           !values ||
           (typeof values === 'object' && Object.keys(values).length < 1)
@@ -325,9 +315,10 @@ export class LabCommissionComponent {
           }
         });
 
-        // Start from the second row (row index 2)
+        // Start processing from the second row (row index 2)
         worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-          // Skip the first row
+          console.log(`Processing row ${rowNumber}:`, row.values);
+          // Skip the first row (headers)
           if (rowNumber === 1) return;
 
           const rowData: { [key: string]: any } = {};
@@ -337,6 +328,8 @@ export class LabCommissionComponent {
               typeof header === 'string' ? header : `Column${index + 1}`
             ] = cell ? cell.value : null;
           });
+
+          // Add the row data to the corresponding header
           this.excelData.forEach((item) => {
             item.rows.push(rowData);
           });
@@ -376,10 +369,16 @@ export class LabCommissionComponent {
     this.filterExcelData(header, value);
   }
 
-  private http = inject(HttpClient);
-  private ngZone = inject(NgZone);
+  private ignoredHeaders: string[] = [
+    'Key Account Manager (KAM)',
+    'Primary Lab Coordinator',
+    'Secondary Lab Coordinator',
+    'No of Green Ports',
+    'No of Yellow Ports',
+    'No of Red Ports',
+  ];
 
-  onfileSubmit() {
+  onFileSubmit() {
     if (!this.selectedFile) {
       console.log('No file selected');
       return;
@@ -394,9 +393,12 @@ export class LabCommissionComponent {
       return;
     }
 
-    // Remove the first row from excelData if it exists
-    if (this.excelData.length > 0) {
-      this.excelData.shift(); // Removes the first row
+    // Validate excelData before uploading
+    const validationErrors = this.validateExcelData();
+    if (validationErrors.length > 0) {
+      const errorMessages = validationErrors.join('\n');
+      alert('Validation Errors:\n' + errorMessages);
+      return; // Stop the upload process if validation fails
     }
 
     const formData = new FormData();
@@ -417,141 +419,87 @@ export class LabCommissionComponent {
         this.previewVisible = false;
       })
       .catch((error) => {
-        if (error.response && error.response.data) {
-          console.error('Error Response Data:', error.response.data);
-
-          // Handle missing headers
-          if (error.response.data.error === 'Missing headers') {
-            const missingHeaders = error.response.data.missingHeaders;
-            missingHeaders.forEach((missingHeader: string) => {
-              const headerIndex = this.excelData.findIndex(
-                (h) => h.header === missingHeader
-              );
-              if (headerIndex !== -1) {
-                this.excelData[headerIndex].isMissing = true; // Mark header as missing
-              }
-            });
-          }
-
-          // Handle validation errors for fields
-          if (error.response.data.validationErrors) {
-            const errorMessages = error.response.data.validationErrors
-              .map(
-                (e: any) =>
-                  `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
-              )
-              .join('\n');
-
-            error.response.data.validationErrors.forEach((e: any) => {
-              e.missingFields.forEach((missingField: string) => {
-                const headerIndex = this.excelData.findIndex(
-                  (h) => h.header === missingField
-                );
-                if (headerIndex !== -1) {
-                  this.excelData[headerIndex].isMissing = true; // Mark header as missing
-                }
-              });
-            });
-
-            alert('Validation Errors:\n' + errorMessages);
-          } else {
-            alert('Error: ' + error.response.data.error);
-          }
-        } else {
-          console.error('Error:', error);
-          alert('An unknown error occurred.');
-        }
-        // Trigger change detection to update UI
-        this.changeDetectorRef.detectChanges();
+        this.handleUploadError(error);
       });
   }
 
-  // onfileSubmit(): void {
-  //   if (!this.selectedFile) {
-  //     console.log('No file selected');
-  //     return;
-  //   }
+  private validateExcelData(): string[] {
+    const errors: string[] = [];
 
-  //   const confirmUpload = window.confirm(
-  //     'Are you sure you want to upload this file?'
-  //   );
+    // Check for missing headers, ignoring specified headers
+    this.excelData.forEach((header) => {
+      if (header.isMissing && !this.ignoredHeaders.includes(header.header)) {
+        errors.push(`Missing header: ${header.header}`);
+      }
+    });
 
-  //   if (!confirmUpload) {
-  //     console.log('File upload cancelled by user');
-  //     return;
-  //   }
+    // Validate required fields in each row, ignoring specified headers
+    this.excelData.forEach((header) => {
+      if (!this.ignoredHeaders.includes(header.header)) {
+        header.rows.forEach((row: { [key: string]: any }, index: number) => {
+          if (!row[header.header]) {
+            errors.push(
+              `Row ${index + 2} is missing the field: ${header.header}`
+            );
+            row[header.header + '_error'] = true; // Mark cell as having an error
+          } else {
+            row[header.header + '_error'] = false; // Clear any previous error
+          }
+        });
+      }
+    });
 
-  //   // Create FormData object
-  //   const formData = new FormData();
-  //   formData.append('file', this.selectedFile);
+    return errors;
+  }
 
-  //   // Use HttpClient to post the file
-  //   this.http
-  //     .post('http://localhost:8080/upload/convert-excel-to-csv', formData)
-  //     .subscribe({
-  //       next: (response) => {
-  //         console.log('File uploaded successfully:', response);
-  //         this.ngZone.run(() => {
-  //           alert('File uploaded successfully!');
-  //         });
+  private handleUploadError(error: any) {
+    if (error.response && error.response.data) {
+      console.error('Error Response Data:', error.response.data);
 
-  //         this.selectedFile = null;
-  //         this.excelData = [];
-  //         this.previewVisible = false;
-  //       },
-  //       error: (error) => {
-  //         // console.error('Error uploading file:', error);
-  //         if (error.response && error.response.data) {
-  //           console.error('Error Response Data:', error.response.data);
+      // Handle missing headers
+      if (error.response.data.error === 'Missing headers') {
+        const missingHeaders = error.response.data.missingHeaders;
+        missingHeaders.forEach((missingHeader: string) => {
+          const headerIndex = this.excelData.findIndex(
+            (h) => h.header === missingHeader
+          );
+          if (headerIndex !== -1) {
+            this.excelData[headerIndex].isMissing = true; // Mark header as missing
+          }
+        });
+      }
 
-  //           // Handle missing headers
-  //           if (error.response.data.error === 'Missing headers') {
-  //             const missingHeaders = error.response.data.missingHeaders;
-  //             missingHeaders.forEach((missingHeader: string) => {
-  //               const headerIndex = this.excelData.findIndex(
-  //                 (h) => h.header === missingHeader
-  //               );
-  //               if (headerIndex !== -1) {
-  //                 this.excelData[headerIndex].isMissing = true; // Mark header as missing
-  //               }
-  //             });
-  //           }
+      // Handle validation errors for fields
+      if (error.response.data.validationErrors) {
+        const errorMessages = error.response.data.validationErrors
+          .map(
+            (e: any) =>
+              `Row ${e.row}: Missing fields: ${e.missingFields.join(', ')}`
+          )
+          .join('\n');
 
-  //           // Handle validation errors for fields
-  //           if (error.response.data.validationErrors) {
-  //             const errorMessages = error.response.data.validationErrors
-  //               .map(
-  //                 (e: any) =>
-  //                   `Row ${e.row}: Missing fields: ${e.missingFields.join(
-  //                     ', '
-  //                   )}`
-  //               )
-  //               .join('\n');
+        error.response.data.validationErrors.forEach((e: any) => {
+          e.missingFields.forEach((missingField: string) => {
+            const headerIndex = this.excelData.findIndex(
+              (h) => h.header === missingField
+            );
+            if (headerIndex !== -1) {
+              this.excelData[headerIndex].isMissing = true; // Mark header as missing
+            }
+          });
+        });
 
-  //             error.response.data.validationErrors.forEach((e: any) => {
-  //               e.missingFields.forEach((missingField: string) => {
-  //                 const headerIndex = this.excelData.findIndex(
-  //                   (h) => h.header === missingField
-  //                 );
-  //                 if (headerIndex !== -1) {
-  //                   this.excelData[headerIndex].isMissing = true; // Mark header as missing
-  //                 }
-  //               });
-  //             });
-
-  //             alert('Validation Errors:\n' + errorMessages);
-  //           } else {
-  //             alert('Error: ' + error.response.data.error);
-  //           }
-  //         } else {
-  //           console.error('Error:', error);
-  //           alert('An unknown error occurred.');
-  //         }
-  //         // Trigger change detection to update UI
-  //         this.changeDetectorRef.detectChanges();
-  //       },
-  //     });
-  // }
+        alert('Validation Errors:\n' + errorMessages);
+      } else {
+        alert('Error: ' + error.response.data.error);
+      }
+    } else {
+      console.error('Error:', error);
+      alert('An unknown error occurred.');
+    }
+    // Trigger change detection to update UI
+    this.changeDetectorRef.detectChanges();
+  }
 
   // /////////////////////////////////////////////////////////////////////onDownloadTemplate////////////////////////////////////////////////////////////////////////////
 
@@ -571,17 +519,6 @@ export class LabCommissionComponent {
   }
 
   // // //////////////////////////////////////////////////////////////////////oncountrychange//////////////////////////////////////////////////////////////////////////////////////
-
-  // onCountryChange(): void {
-  //   const filteredLocationCode = this.locations.find(
-  //     (location) =>
-  //       location.country === this.selectedCountry &&
-  //       location.region === this.selectedRegion
-  //   );
-  //   this.selectedCode = filteredLocationCode
-  //     ? filteredLocationCode.locationCode
-  //     : '';
-  // }
   onCountryChange() {
     // Reset the selected location
     this.selectedLocation = '';
@@ -608,6 +545,8 @@ export class LabCommissionComponent {
     } else {
       this.localITL = ''; // Clear localITL for other entities
       this.localITLproxy = '';
+      this.primarylabco = 'Not Applicable';
+      this.secondarylabco = 'Not Applicable';
     }
   }
 
@@ -620,6 +559,7 @@ export class LabCommissionComponent {
     // Reload the page
     window.location.reload();
   }
+
   ////////////////////////////////////////////////////////////////////////onSubmit-formfill////////////////////////////////////////////////////////////////////////////
 
   onPreviewform(): void {
@@ -724,123 +664,32 @@ export class LabCommissionComponent {
     console.log('Updated submitted form data:', this.submittedFormData);
   }
 
-  showOtherSection: boolean = false;
-  otherField: string = '';
+  onDateSelected(date: Date) {
+    console.log('Selected date:', date);
+  }
+
+  //////////////////////////////////////////////////////////LoadAllLabData//////////////////////////////////////////////////////////////////////
+  loadLabData(): void {
+    this.dataService.getAllLabData().subscribe((allLabData) => {
+      this.allLabs = allLabData;
+    });
+  }
+  //////////////////////////////////////////////////////////LoadUniqueGB//////////////////////////////////////////////////////////////////////
+
+  loadGBOptions() {
+    this.dataService.getGBOptions().subscribe((options) => {
+      this.gbOptions = options;
+    });
+  }
+
+  //////////////////////////////////////////////////////////LoadUniqueEntity//////////////////////////////////////////////////////////////////////
+  loadEntityOptions() {
+    this.dataService.getEntityOptions().subscribe((options) => {
+      this.entityOptions = options;
+    });
+  }
 
   toggleOtherSection() {
     this.showOtherSection = !this.showOtherSection;
   }
-
-  onDateSelected(date: Date) {
-    console.log('Selected date:', date);
-  }
-  // GBChange(event: any) {
-  //   this.selectedGB = event.target.value;
-  //   if (this.selectedGB) {
-  //     this.dataService
-  //       .getKAMSuggestions(this.selectedGB)
-  //       .subscribe((suggestions) => {
-  //         this.kamSuggestions = suggestions;
-  //         this.filteredKAMSuggestions = [];
-  //         this.KAM = '';
-  //       });
-  //     this.dataService
-  //       .getDepartmentSuggestions(this.selectedGB)
-  //       .subscribe((suggestions) => {
-  //         this.departmentSuggestions = suggestions;
-  //         this.filteredDepartmentSuggestions = [];
-  //         this.Dept = '';
-  //       });
-  //   } else {
-  //     this.resetFields();
-  //   }
-  // }
-  // resetFields() {
-  //   this.kamSuggestions = [];
-  //   this.filteredKAMSuggestions = [];
-  //   this.KAM = '';
-  //   this.departmentSuggestions = [];
-  //   this.filteredDepartmentSuggestions = [];
-  //   this.Dept = '';
-  //   this.dhSuggestions = [];
-  //   this.filteredDHSuggestions = [];
-  //   this.DH = ''; // Clear DH input
-  // }
-
-  // loadGBOptions() {
-  //   this.dataService.getGBOptions().subscribe((options) => {
-  //     this.gbOptions = options;
-  //   });
-  // }
-
-  // showKAMSuggestions() {
-  //   if (this.selectedGB) {
-  //     this.filteredKAMSuggestions = this.kamSuggestions; // Show all suggestions
-  //   }
-  // }
-  // // Method to fetch and display Department suggestions when Department input is focused
-  // showDepartmentSuggestions() {
-  //   if (this.selectedGB) {
-  //     this.filteredDepartmentSuggestions = this.departmentSuggestions;
-  //   }
-  // }
-
-  // // Method to fetch and display DH suggestions when DH input is focused
-  // showDHSuggestions() {
-  //   if (this.Dept) {
-  //     this.filteredDHSuggestions = this.dhSuggestions; // Show all DH suggestions if a department is selected
-  //   }
-  // }
-
-  // filterKAMSuggestions() {
-  //   const searchTerm = this.KAM.toLowerCase();
-  //   this.filteredKAMSuggestions = this.kamSuggestions.filter((kam) =>
-  //     kam.toLowerCase().includes(searchTerm)
-  //   );
-  // }
-
-  // filterDepartmentSuggestions() {
-  //   if (!this.selectedGB) return;
-
-  //   const searchTerm = this.Dept.toLowerCase();
-  //   this.filteredDepartmentSuggestions = this.departmentSuggestions.filter(
-  //     (dep) => dep.toLowerCase().includes(searchTerm)
-  //   );
-  // }
-
-  // onDepartmentChange() {
-  //   if (this.Dept) {
-  //     this.dataService.getDHSuggestions(this.Dept).subscribe((suggestions) => {
-  //       this.dhSuggestions = suggestions;
-  //       this.filteredDHSuggestions = []; // Clear previous filtered suggestions
-  //     });
-  //   } else {
-  //     this.filteredDHSuggestions = []; // Clear if no department is selected
-  //   }
-  // }
-
-  // filterDHSuggestions() {
-  //   if (!this.Dept) return;
-
-  //   const searchTerm = this.DH.toLowerCase();
-  //   this.filteredDHSuggestions = this.dhSuggestions.filter((dh) =>
-  //     dh.toLowerCase().includes(searchTerm)
-  //   );
-  // }
-
-  // selectKAM(kam: string) {
-  //   this.KAM = kam; // Set the KAM input value
-  //   this.filteredKAMSuggestions = []; // Clear suggestions after selection
-  // }
-
-  // selectDepartment(dep: string) {
-  //   this.Dept = dep; // Set the department input value
-  //   this.filteredDepartmentSuggestions = []; // Clear suggestions after selection
-  //   this.onDepartmentChange(); // Fetch DH suggestions
-  // }
-
-  // selectDH(dh: string) {
-  //   this.DH = dh; // Set the DH input value
-  //   this.filteredDHSuggestions = []; // Clear suggestions after selection
-  // }
 }

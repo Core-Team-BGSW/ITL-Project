@@ -23,17 +23,17 @@ export class AuditComponent {
   readonly dialog = inject(MatDialog);
   constructor(private dataService: DataService) {}
   ngOnInit(): void {
-    this.loadLabList();
+    // this.loadLabList();
   }
-  loadLabList(): void {
-    this.dataService.getAllData().subscribe({
-      next: (data) => {
-        this.labList = data;
-        this.filteredLabList = data; // Initialize filtered list with all data
-      },
-      error: (err) => (this.errorMessage = err),
-    });
-  }
+  // loadLabList(): void {
+  //   this.dataService.getAllData().subscribe({
+  //     next: (data) => {
+  //       this.labList = data;
+  //       this.filteredLabList = data; // Initialize filtered list with all data
+  //     },
+  //     error: (err) => (this.errorMessage = err),
+  //   });
+  // }
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredLabList = this.labList.filter((lab) =>

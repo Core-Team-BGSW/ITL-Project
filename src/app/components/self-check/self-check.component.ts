@@ -179,28 +179,23 @@ export class SelfCheckComponent {
   ngOnInit(): void {
     this.loadLabList();
   }
+
+
+
   private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
 
-  // loadLabList(): void {
-  //   this.dataService.getAllData()
-  //     .subscribe({
-  //       next: (data) => {
-  //         this.labList = data;
-  //         this.filteredLabList = data; // Initialize filtered list with all data
-  //       },
-  //       error: (err) => this.errorMessage = err
-  //     });
-  // }
-
   loadLabList(): void {
-    this.http.get<any[]>(`${this.apiurl}`).subscribe({
-      next: (data) => {
-        this.labList = data;
+    this.http.get<any[]>(`${this.apiurl}`)
+      .subscribe({
+        next: (data) => {
+          this.labList = data;
         this.filteredLabList = this.labList;
-      },
-      error: (err) => (this.errorMessage = err),
-    });
+        },
+        error: (err) => this.errorMessage = err
+      });
   }
+
+
 
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
