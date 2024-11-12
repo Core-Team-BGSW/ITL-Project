@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @include mat.core();
 
+
 // Define the theme object.
 $Angular_app-theme: mat.define-theme((color: (theme-type: light,
         primary: mat.$azure-palette,

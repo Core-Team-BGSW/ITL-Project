@@ -1,3 +1,314 @@
+// @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
+
+
+// .subheading p {
+//   color: #ED0007;
+//   font-style: italic;
+//   font-size: 24px;
+// }
+
+// /* Container for the search bar */
+// .search-bar {
+//   display: flex;
+//   align-items: center;
+//   margin: 20px 0;
+//   /* Adjust spacing as needed */
+//   width: 40%;
+// }
+
+// /* Style for the input field */
+// .search-bar input[type="text"] {
+//   flex: 1;
+//   /* Make input take available space */
+//   padding: 8px 12px;
+//   /* Add padding inside the input */
+//   border: 1px solid #ccc;
+//   /* Light border */
+//   border-radius: 4px;
+//   /* Rounded corners */
+//   font-size: 16px;
+//   /* Adjust font size as needed */
+//   outline: none;
+//   /* Remove default outline */
+// }
+
+// /* Style for the button */
+// .search-bar button {
+//   padding: 8px 16px;
+//   /* Add padding inside the button */
+//   margin-left: 10px;
+//   /* Space between input and button */
+//   border: none;
+//   /* Remove default border */
+//   border-radius: 4px;
+//   /* Rounded corners */
+//   background-color: #007bff;
+//   /* Primary button color */
+//   color: white;
+//   /* Text color */
+//   font-size: 16px;
+//   /* Adjust font size */
+//   cursor: pointer;
+//   /* Change cursor on hover */
+//   transition: background-color 0.3s;
+//   /* Smooth transition for hover effect */
+// }
+
+// /* Style for the button on hover */
+// .search-bar button:hover {
+//   background-color: #0056b3;
+//   /* Darker shade on hover */
+// }
+
+// /* Style for the button on focus */
+// .search-bar button:focus {
+//   outline: none;
+//   /* Remove default outline */
+// }
+
+
+// /* Container for error messages */
+// .error {
+//   color: red;
+//   font-weight: bold;
+//   margin: 20px 0;
+// }
+
+// // /* List container */
+// .lab-list {
+//   list-style-type: none;
+//   /* Remove default bullets */
+//   padding: 0;
+//   /* Remove default padding */
+//   margin: 0;
+//   /* Remove default margin */
+//   z-index: 1;
+// }
+
+
+// .lab-item {
+//   border: 1px solid #ddd;
+//   /* Light border around items */
+//   border-radius: 12px;
+//   /* Rounded corners */
+//   padding: 6px;
+//   /* Padding inside each item */
+//   margin-bottom: 12px;
+//   /* Space between items */
+//   background-color: #f9f9f9;
+//   /* Light background color */
+//   transition: background-color 0.3s;
+//   box-shadow: 0 0 8px 1px #A4ABB3;
+//   margin-right: 8px;
+//   position: relative;
+//   /* To position the pseudo-element correctly */
+//   overflow: hidden;
+//   /* Ensure pseudo-element doesn't overflow */
+//   z-index: 1;
+//   margin-left: 0;
+// }
+
+// .lab-item::before {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 8%;
+//   width: 0;
+//   /* Initially set to 0 */
+//   background: -webkit-linear-gradient(left, #b6ede8, #79c5c0);
+//   transition: width 0.2s;
+//   /* Smooth transition for the line width */
+//   border-radius: 12px;
+//   z-index: 0;
+// }
+
+// .lab-item:hover::before {
+//   width: 100%;
+//   /* Expand to full width on hover */
+// }
+
+
+// // .lab-item:hover{
+
+// //   background: -webkit-linear-gradient(left, #FFD9D9, #FFEFD1);
+
+// // }
+
+// /* Styling for each detail */
+// .lab-detail {
+//   margin-bottom: 10px;
+//   /* Space between details */
+//   z-index: 1;
+// }
+
+// /* Header row styling */
+// .lab-header {
+//   display: flex;
+//   /* Flexbox for alignment */
+//   flex-direction: column;
+//   /* Stack items vertically */
+//   margin-bottom: 10px;
+//   /* Space below header */
+//   margin-top: 10px;
+//   ;
+//   align-items: flex-start;
+//   /* Align items to the start (left) */
+//   z-index: 1;
+// }
+
+// .lab-header ul {
+//   list-style-type: none;
+//   padding: 0;
+//   /* Remove default padding */
+//   margin: 0;
+//   z-index: 1;
+// }
+
+
+
+// .lab-header .lab-number {
+//   font-size: 20px;
+//   /* Adjust the font size as needed */
+//   font-weight: bold;
+//   /* Optional: Ensure it remains bold */
+//   color: #333;
+//   /* Optional: Adjust color if needed */
+//   list-style-type: none;
+//   z-index: 1;
+// }
+
+
+
+
+// .lab-header .lab-subheader {
+//   font-size: 14px;
+//   z-index: 1;
+// }
+
+// .lab-header .lab-number:hover {
+//   text-shadow: #D543CB;
+// }
+
+// /* Labels for details */
+// .detail-label {
+//   font-weight: bold;
+//   color: #333;
+//   /* Darker text color for labels */
+// }
+
+// /* Values for details */
+// .detail-value {
+//   margin-left: 5px;
+//   /* Space between label and value */
+//   color: #555;
+//   /* Slightly lighter color for values */
+// }
+
+
+// /* Styling for the Remove button */
+// .remove-button {
+//   background-color: #f44336;
+//   /* Red background */
+//   color: white;
+//   /* White text */
+//   border: none;
+//   /* No border */
+//   border-radius: 5px;
+//   /* Rounded corners */
+//   padding: 8px 15px;
+//   /* Padding inside button */
+//   cursor: pointer;
+//   /* Pointer cursor on hover */
+//   font-size: 14px;
+//   /* Font size */
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   /* Space above button */
+//   z-index: 1;
+// }
+
+// /* Remove button hover effect */
+// .remove-button:hover {
+//   background-color: #a10000;
+//   /* Darker red on hover */
+// }
+
+
+// .collapsible-header {
+//   cursor: pointer;
+//   display: flex;
+//   font-weight: bold;
+//   margin-left: 2px;
+//   margin-top: 2px;
+//   margin-bottom: 2px;
+//   z-index: 1;
+
+
+// }
+
+// .collapsible-header>span {
+//   display: flex;
+//   align-items: flex-start;
+//   flex-grow: 1;
+//   justify-content: center;
+//   z-index: 1;
+// }
+
+// .arrow {
+//   margin-left: auto;
+//   transition: transform 0.3s ease;
+//   width: 0;
+//   height: 0;
+//   border-left: 5px solid transparent;
+//   border-right: 5px solid transparent;
+//   border-top: 10px solid #000;
+//   /* Arrow direction */
+// }
+
+// .arrow.expanded {
+//   transform: rotate(180deg);
+// }
+
+// .collapsible-content {
+//   padding: 10px;
+//   border: 1px solid #ddd;
+//   border-top: none;
+//   z-index: 1;
+// }
+
+// .pagination-container {
+//   position: relative;
+//   /* Fixed to stay in the viewport */
+//   bottom: 0;
+//   right: 0;
+//   padding: 1rem;
+//   /* Optional padding for spacing */
+//   z-index: 1000;
+//   /* Ensure it's above other content if necessary */
+//   display: flex;
+//   justify-content: right;
+// }
+
+// .pagination-container .ngx-pagination {
+//   margin-right: 0rem;
+//   margin-bottom: 1rem;
+
+// }
+
+
+
+// // <div class="pagination-container">
+// //   <pagination-controls
+// //     (pageChange)="p = $event"
+// //     class="ngx-pagination"
+// //   ></pagination-controls>
+// // </div>
+
+
+
+// // | paginate : { itemsPerPage: 10, currentPage: p }
+
 .subheading {
   color: #ED0007;
   font-style: italic;
@@ -17,6 +328,15 @@ p {
   font-size: 20px;
 }
 
+
+
+
+
+
+
+
+
+
 /* Container for the search bar */
 .search-bar {
   display: flex;
@@ -27,37 +347,24 @@ p {
 
   =======margin: 20px 0;
   /* Adjust spacing as needed */
-  width: 40%;
-  >>>>>>>8248cb2c4ca65f02448b171358077bbe2bc7591a
+
+
 }
 
 /* Style for the input field */
 .search-bar input[type="text"] {
-  <<<<<<< HEAD padding: 10px;
+  padding: 10px;
   font-size: 17px;
   border: 1px solid rgb(211, 210, 210);
   width: 30%;
   background: white;
   border-radius: 7px;
 
-  =======flex: 1;
-  /* Make input take available space */
-  padding: 8px 12px;
-  /* Add padding inside the input */
-  border: 1px solid #ccc;
-  /* Light border */
-  border-radius: 4px;
-  /* Rounded corners */
-  font-size: 16px;
-  /* Adjust font size as needed */
-  outline: none;
-  /* Remove default outline */
-  >>>>>>>8248cb2c4ca65f02448b171358077bbe2bc7591a
 }
 
 /* Style for the button */
 .search-bar button {
-  <<<<<<< HEAD padding: 12px 19px;
+  padding: 12px 19px;
   /* Add padding inside the button */
   margin-left: 10px;
   /* Space between input and button */
@@ -66,24 +373,6 @@ p {
   border-radius: 7px;
   /* Rounded corners */
   background-color: #429af7;
-  /* Primary button color */
-  color: white;
-  /* Text color */
-  font-size: 16px;
-  /* Adjust font size */
-  cursor: pointer;
-  /* Change cursor on hover */
-  transition: background-color 0.3s;
-  /* Smooth transition for hover effect */
-  =======padding: 8px 16px;
-  /* Add padding inside the button */
-  margin-left: 10px;
-  /* Space between input and button */
-  border: none;
-  /* Remove default border */
-  border-radius: 4px;
-  /* Rounded corners */
-  background-color: #007bff;
   /* Primary button color */
   color: white;
   /* Text color */
@@ -104,7 +393,8 @@ p {
   /* Slightly move the button up on hover */
   =======background-color: #0056b3;
   /* Darker shade on hover */
-  >>>>>>>8248cb2c4ca65f02448b171358077bbe2bc7591a
+  transform: translateY(-2px);
+  /* Slightly move the button up on hover */
 }
 
 /* Style for the button on focus */
@@ -148,13 +438,13 @@ p {
   /* Light border around items */
   border-radius: 12px;
   /* Rounded corners */
-  padding: 6px;
+  padding: 16px;
   /* Padding inside each item */
   margin-bottom: 12px;
   /* Space between items */
-  background-color: #f9f9f9;
+  background-color: white;
   /* Light background color */
-  >>>>>>>8248cb2c4ca65f02448b171358077bbe2bc7591a transition: background-color 0.3s;
+  transition: background-color 0.3s;
   box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2);
   margin-right: 8px;
   position: relative;
@@ -170,16 +460,10 @@ p {
   position: absolute;
   top: 0;
   left: 0;
-  <<<<<<< HEAD height: 13%;
+  height: 13%;
   width: 0;
   /* Initially set to 0 */
   background: -webkit-linear-gradient(left, #b6ede8, #78bccd);
-  transition: width 0.2s;
-  /* Smooth transition for the line width */
-  =======height: 8%;
-  width: 0;
-  /* Initially set to 0 */
-  background: -webkit-linear-gradient(left, #b6ede8, #79c5c0);
   transition: width 0.2s;
   /* Smooth transition for the line width */
   >>>>>>>8248cb2c4ca65f02448b171358077bbe2bc7591a border-radius: 12px;
@@ -244,8 +528,14 @@ p {
 
 
 
-<<<<<<< HEAD .lab-header {
+.lab-header {
   font-size: 20px;
+  z-index: 1;
+}
+
+.lab-subheader {
+  color: #6a6969;
+  font-size: 16px;
   z-index: 1;
 }
 
@@ -278,57 +568,40 @@ p {
   }
 
 
-  /* Styling for the Remove button */
-  .remove-button {
-    <<<<<<< HEAD background-color: #dd7068;
-    /* Red background */
-    color: white;
-    /* White text */
-    border: none;
-    /* No border */
-    border-radius: 8px;
-    /* Rounded corners */
-    cursor: pointer;
-    /* Pointer cursor on hover */
-    font-size: 14px;
-    /* Font size */
-    =======background-color: #f44336;
-    /* Red background */
-    color: white;
-    /* White text */
-    border: none;
-    /* No border */
-    border-radius: 5px;
-    /* Rounded corners */
-    padding: 8px 15px;
-    /* Padding inside button */
-    cursor: pointer;
-    /* Pointer cursor on hover */
-    font-size: 14px;
-    /* Font size */
-    >>>>>>>8248cb2c4ca65f02448b171358077bbe2bc7591a margin-top: 10px;
-    margin-bottom: 10px;
-    /* Space above button */
-    z-index: 1;
-    border: none;
-    padding: 12px 24px;
-    box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-weight: bold;
+/* Styling for the Remove button */
+.remove-button {
+  background-color: #dd7068;
+  /* Red background */
+  color: white;
+  /* White text */
+  border: none;
+  /* No border */
+  border-radius: 8px;
+  /* Rounded corners */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  font-size: 14px;
+  /* Font size */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  /* Space above button */
+  z-index: 1;
+  border: none;
+  padding: 12px 24px;
+  box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
 
-  }
+}
 
-  /* Remove button hover effect */
-  .remove-button:hover {
-    <<<<<<< HEAD background-color: #de0707;
-    /* Darker red on hover */
-    transform: translateY(-2px);
+/* Remove button hover effect */
+.remove-button:hover {
+  background-color: #de0707;
+  /* Darker red on hover */
+  transform: translateY(-2px);
 
 
-    =======background-color: #a10000;
-    /* Darker red on hover */
-    >>>>>>>8248cb2c4ca65f02448b171358077bbe2bc7591a
-  }
+}
 
 
   .collapsible-header {
@@ -392,53 +665,39 @@ p {
 
   }
 
-  .custom-card {
-    /* Custom background color */
-    border-radius: 0px;
-    /* Rounded corners */
-    padding: 5px;
-    /* Padding inside the card */
-    width: 97%;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-  }
+.custom-card {
+  /* Custom background color */
+  border-radius: 0px;
+  /* Rounded corners */
+  padding: 5px;
+  /* Padding inside the card */
+  width: 97%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
 
-  .custom-card:hover {
-    transform: scale(1.01);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    background-color: #e6e8ea;
-  }
+.custom-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: #e6e8ea;
+}
 
-  .lab_details_table {
-    width: 100%;
-    border: 1px black;
-    margin: 25px 0;
-    font-size: 18px;
-    text-align: left;
-    margin-top: 0;
-    box-shadow: 0 0 25px rgba(88, 88, 88, 0.15);
-  }
+.lab_details_table {
+  width: 100%;
+  border: 1px black;
+  margin: 25px 0;
+  font-size: 18px;
+  text-align: left;
+  margin-top: 0;
+  box-shadow: 0 0 25px rgba(88, 88, 88, 0.15);
+}
 
-  .lab_details_table th {
-    text-align: center;
-  }
-
-  .lab_details_table td {
-    text-align: center;
-    color: #283747
-  }
+.lab_details_table th {
+  text-align: center;
+}
 
 
-  // <div class="pagination-container">
-  //   <pagination-controls
-  //     (pageChange)="p = $event"
-  //     class="ngx-pagination"
-  //   ></pagination-controls>
-  // </div>
-
-
-
-  // | paginate : { itemsPerPage: 10, currentPage: p }
+// | paginate : { itemsPerPage: 10, currentPage: p }

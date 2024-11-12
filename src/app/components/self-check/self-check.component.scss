@@ -11,19 +11,17 @@ input[type=text] {
   box-sizing: border-box;
   border: 1.2px solid rgb(107, 124, 194);
 }
-
-.custom-card {
-  /* Custom background color */
-  border-radius: 0px;
-  /* Rounded corners */
-  padding: 5px;
-  /* Padding inside the card */
-  width: 97%;
-  box-sizing: border-box;
-  margin-bottom: 16px;
-  box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
-  border-radius: 15px;
-  transition: all 0.3s ease;
+.custom-card
+{
+ /* Custom background color */
+border-radius: 0px; /* Rounded corners */
+padding: 5px;/* Padding inside the card */
+width: 97%;
+box-sizing: border-box;
+margin-bottom: 16px;
+box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
+border-radius: 15px;
+transition: all 0.3s ease;
 }
 
 .custom-card:hover {
@@ -31,25 +29,22 @@ input[type=text] {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   background-color: #e6e8ea;
 }
-
-svg {
-  width: 20px;
-  height: 15px;
+svg
+{
+width: 20px;
+height: 15px;
 }
-
-h2 {
-  color: #0e1126;
-  text-align: left;
-  font-weight: 400;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-  /* Shadow */
+h2
+{
+ color:#0e1126;
+ text-align: left;
+ font-weight: 400;
+ text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Shadow */
 }
-
-.custom-card1 {
-  border-radius: 0px;
-  /* Rounded corners */
-  padding: 5px;
-  /* Padding inside the card */
+ .custom-card1
+{
+  border-radius: 0px; /* Rounded corners */
+  padding: 5px;/* Padding inside the card */
   width: 97%;
   box-sizing: border-box;
   margin-bottom: 16px;
@@ -104,8 +99,7 @@ button {
   display: flex;
   justify-content: flex-end;
 }
-
-h4 {
+h4{
   color: #3f51b5;
   text-align: center;
   background-color: #e8e2e2;

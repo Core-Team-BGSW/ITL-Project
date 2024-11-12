@@ -1,7 +1,37 @@
+<!-- Kranti Sonawane -->
+<div class="navbar" [class.shift]="isOpen">
 
-<ul class="nav-links">
-  <li><a routerLink="/dashboard">Dashboard</a></li>
-  <li class="center"><a (click)="onApplyForRoleClick($event)">Apply for role</a></li>
-  <li class="upward"><a routerLink="/contact">Contact</a></li>
-  <li class="forward"><a routerLink="/">Feedback</a></li>
-</ul>
+ <!-- Nav items -->
+  <div class="logo">
+    <mat-icon  class="boschlogo" svgIcon="boschlogo"></mat-icon>
+    <!-- <mat-icon class="boschname" svgIcon="boschname"></mat-icon> -->
+  </div>
+  <ul class="nav-links">
+
+    <li class="center">
+      <a (click)="onApplyForRoleClick($event)">Apply for role</a>
+    </li>
+    <li class="upward"><a routerLink="/contact">Contact</a></li>
+    <li class="forward"><a routerLink="/feedback">Feedback</a></li>
+    <li>
+
+      <mat-icon svgIcon="user" (click)="toggleProfilePopup($event)"></mat-icon>
+    </li>
+  </ul>
+
+  <!-- Profile Popup -->
+  <div class="profile-popup" *ngIf="isProfilePopupOpen" (click)="closePopup($event)">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+      <span class="close-icon" (click)="toggleProfilePopup($event)">&times;</span>
+
+      <ul class="profile-list">
+        <li>Kranti Prakash Sonawane</li>
+      <li>NT_ID: 123456</li>
+      <li>Role: Administrator</li>
+      <li><a href="#">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
