@@ -78,13 +78,11 @@
 
 .sidebar li {
   position: relative;
-    margin: 2px 0;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    width: 102%;
-    padding: 2px 6px;
-
+  margin: 2px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .sidebar li .tooltip {
@@ -123,14 +121,13 @@
   text-decoration: none;
   font-size: 16px;
   width: 100%;
-  //padding: 0px 13px;
+
 }
 
 .sidebar .nav-list li a:hover{
   background: white;
-  width: 180%;
-  padding: 2px 6px;
-
+  width: 100%;
+  transition: 0.3s ease;
 }
 
 .sidebar li a .links_name {
@@ -150,6 +147,14 @@
   pointer-events: auto; // Allow interaction
 }
 
+
+// .sidebar li a:hover .links_name,
+// .sidebar li a:hover i {
+//   transition: all 0.4s ease;
+//   color: black;
+
+// }
+
 .sidebar li .mat-icon {
   height: 50px;
   line-height: 50px;
@@ -157,6 +162,11 @@
   border-radius: 12px;
 }
 /* Active state styling */
+.sidebar li.active a {
+  background-color: #d0d4d8; /* Same as the hover effect */
+  color: black; /* Keep text color consistent */
+}
+
 .sidebar li.active a .links_name {
   opacity: 1; /* Ensure text is visible in active state */
   pointer-events: auto; /* Allow interaction */
@@ -173,6 +183,11 @@
   transition: all 0.4s ease;
   top: 50%;
   transform: translateY(-50%);
+}
+
+/* Adjusting for collapsed sidebar - hide tooltips */
+.sidebar:not(.open) li .tooltip {
+  display: none;
 }
 
 /* When the sidebar is collapsed, adjust text and icon size */
@@ -194,8 +209,8 @@
 
 /* Active state background and border */
 .sidebar li.active {
-  border-left: 2px solid #007bff; /* Blue left border for active item */
-  background-color: white; /* Change background for active item */
+  border-left: 4px solid #007bff; /* Blue left border for active item */
+  background-color: #f4f7f9; /* Change background for active item */
 }
 
 .dropdown-menu{
@@ -224,7 +239,7 @@
 /* When the sidebar is collapsed, adjust text and icon size */
 .sidebar:not(.open) li a mat-icon {
   font-size: 20px; /* Smaller size when collapsed */
-  //margin-right: -27px; /* Remove margin between icon and text */
+  margin-right: -27px; /* Remove margin between icon and text */
 }
 
 /* Adjust for collapsed state - hide text and keep icons visible */

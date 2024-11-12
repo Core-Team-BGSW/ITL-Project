@@ -1,4 +1,6 @@
-<h2>New Lab Commission</h2>
+<div class="page-heading">
+  <a>New Lab Commission</a>
+</div>
 <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="center">
   <mat-tab label="Import File/Form Fill">
     <mat-card>
@@ -24,7 +26,6 @@
       <div class="methodheading">
         <p>Import File</p>
       </div>
-
       <div class="importfile">
         <div class="uploadbutton">
           <label>
@@ -36,7 +37,6 @@
             selectedFileName
             }}</span>
         </div>
-
         <div class="importbutton">
           <button class="templatebutton" (click)="onDownloadTemplate()">
             Download Template
@@ -106,262 +106,293 @@
       <div class="methodheading">
         <p>Application Form</p>
       </div>
-      <div>
-        <p>Site Details</p>
-        <div class="userinput-container">
-          <div class="userinput-item">
-            <label for="regionSelect">Region <span class="required"> *</span></label>
-            <select id="region" [(ngModel)]="selectedRegion" (change)="onRegionChange()">
-              <option value>Select Region</option>
-              <option *ngFor="let region of uniqueRegions">
-                {{ region.region }}
-              </option>
-            </select>
-          </div>
 
-          <div class="userinput-item">
-            <label for="countrySelect">Country<span class="required"> *</span></label>
-            <select id="countries" [(ngModel)]="selectedCountry" (change)="onCountryChange()"
-              [disabled]="!selectedRegion">
-              <option value disabled selected>Select Country</option>
-              <option *ngFor="let country of filteredCountries" [value]="country">
-                {{ country }}
-              </option>
-            </select>
+      <div class="container-row">
+        <div class="container">
+          <div class="container-heading">
+            <strong>Site Details</strong>
           </div>
+          <div class="userinput-container">
+            <div class="userinput-item">
+              <label for="regionSelect">Region <span class="required"> *</span></label>
+              <select id="region" [(ngModel)]="selectedRegion" (change)="onRegionChange()">
+                <option value>Select Region</option>
+                <option *ngFor="let region of uniqueRegions">
+                  {{ region.region }}
+                </option>
+              </select>
+            </div>
 
-          <div class="userinput-item">
-            <label for="code">Location-Code<span class="required"> *</span></label>
-            <select id="locationSelect" [(ngModel)]="selectedCode" [disabled]="!selectedCountry">
-              <option value disableed selected>Select Location Code</option>
-              <option *ngFor="let code of filteredLocationCode" [value]="code">
-                {{ code }}
-              </option>
-            </select>
+            <div class="userinput-item">
+              <label for="countrySelect">Country<span class="required"> *</span></label>
+              <select id="countries" [(ngModel)]="selectedCountry" (change)="onCountryChange()"
+                [disabled]="!selectedRegion">
+                <option value disabled selected>Select Country</option>
+                <option *ngFor="let country of filteredCountries" [value]="country">
+                  {{ country }}
+                </option>
+              </select>
+            </div>
+
+            <div class="userinput-item">
+              <label for="code">Location-Code<span class="required"> *</span></label>
+              <select id="locationSelect" [(ngModel)]="selectedCode" [disabled]="!selectedCountry">
+                <option value disableed selected>Select Location Code</option>
+                <option *ngFor="let code of filteredLocationCode" [value]="code">
+                  {{ code }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
+        <div class="container">
+          <div class="container-heading">
+            <strong>Entity and GB</strong>
+          </div>
+          <div class="userinput-container">
+            <div class="userinput-item">
+              <label for="entityselect">Entity <span class="required"> *</span></label>
+              <select id="entitySelect" name="entity" [(ngModel)]="selectedEntity" (change)="entityChange($event)">
+                <option value>Select Entity</option>
+                <option *ngFor="let entityName of entityOptions" [value]="entityName">{{ entityName}}</option>
+
+              </select>
+            </div>
+            <div class="userinput-item">
+              <label for="GBselect">GB / Contacting Area <span class="required"> *</span></label>
+              <select id="GBSelect" name="GB" [(ngModel)]="selectedGB">
+                <option value>Select GB</option>
+                <option *ngFor="let gbName of gbOptions" [value]="gbName">{{ gbName }}</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
-      <!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
-      <p>Entity and GB</p>
-      <div class="userinput-container">
-        <div class="userinput-item">
-          <label for="entityselect">Entity <span class="required"> *</span></label>
-          <select id="entitySelect" name="entity" [(ngModel)]="selectedEntity" (change)="entityChange($event)">
-            <option value>Select Entity</option>
-            <option *ngFor="let entityName of entityOptions" [value]="entityName">{{ entityName}}</option>
 
-          </select>
-        </div>
-        <div class="userinput-item">
-          <label for="GBselect">GB / Contacting Area <span class="required"> *</span></label>
-          <select id="GBSelect" name="GB" [(ngModel)]="selectedGB">
-            <option value>Select GB</option>
-            <option *ngFor="let gbName of gbOptions" [value]="gbName">{{ gbName }}</option>
-          </select>
-        </div>
-      </div>
-
-      <!-------------------------------------------ITL Details--------------------------------------------------------------------------------->
-      <p>ITL's</p>
-      <div class="userinput-container">
-        <div class="userinput-item">
-          <label for="local-ITL">Local-ITL <span class="required"> *</span></label>
-          <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" required
-            minlength="7" #localITLInput="ngModel" />
-          <div *ngIf="
+      <div class="container-row">
+        <!-------------------------------------------ITL Details--------------------------------------------------------------------------------->
+        <div class="container">
+          <div class="container-heading">
+            <strong>ITL's</strong>
+          </div>
+          <div class="userinput-container">
+            <div class="userinput-item">
+              <label for="local-ITL">Local-ITL <span class="required"> *</span></label>
+              <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" required
+                minlength="7" #localITLInput="ngModel" />
+              <div *ngIf="
               localITLInput.invalid &&
               (localITLInput.dirty || localITLInput.touched)
             ">
-            <div *ngIf="localITLInput.errors?.['required']" style="color: red">
-              Local-ITL is required.
+                <div *ngIf="localITLInput.errors?.['required']" style="color: red">
+                  Local-ITL is required.
+                </div>
+                <div *ngIf="localITLInput.errors?.['minlength']">
+                  Local-ITL NTID must be at least 7 characters long.
+                </div>
+              </div>
             </div>
-            <div *ngIf="localITLInput.errors?.['minlength']">
-              Local-ITL NTID must be at least 7 characters long.
+
+            <div class="userinput-item">
+              <label for="localITLproxy">Local-ITL Proxy <span class="required"> *</span></label>
+              <input type="text" id="localITLproxy" name="localITLproxy" [(ngModel)]="localITLproxy" placeholder="NTID"
+                required #localITLProxyInput="ngModel" />
+              <div *ngIf="
+              localITLProxyInput.invalid &&
+              (localITLProxyInput.dirty || localITLProxyInput.touched)
+            ">
+                <div *ngIf="localITLProxyInput.errors?.['required']" style="color: red">
+                  Local-ITL Proxy is required.
+                </div>
+                <div *ngIf="localITLProxyInput.errors?.['minlength']">
+                  Local-ITL Proxy NTID must be at least 7 characters long.
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="userinput-item">
-          <label for="localITLproxy">Local-ITL Proxy <span class="required"> *</span></label>
-          <input type="text" id="localITLproxy" name="localITLproxy" [(ngModel)]="localITLproxy" placeholder="NTID"
-            required #localITLProxyInput="ngModel" />
-          <div *ngIf="
-              localITLProxyInput.invalid &&
-              (localITLProxyInput.dirty || localITLProxyInput.touched)
+        <!-------------------------------------------Coordinator Details--------------------------------------------------------------------------------->
+        <div class="container">
+          <div class="container-heading">
+            <strong>Lab Coordinators</strong>
+          </div>
+          <div class="userinput-container">
+            <div class="userinput-item">
+              <label for="primary">Primary Lab Coordinator <span class="required"> *</span></label>
+              <input type="text" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
+                [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"
+                [(ngModel)]="primarylabco" />
+              <div *ngIf="
+              primaryLabCoord.invalid &&
+              (primaryLabCoord.dirty || primaryLabCoord.touched)
             ">
-            <div *ngIf="localITLProxyInput.errors?.['required']" style="color: red">
-              Local-ITL Proxy is required.
+                <div *ngIf="primaryLabCoord.errors?.['required']" style="color: red">
+                  Primary Lab Coordinator is required.
+                </div>
+              </div>
             </div>
-            <div *ngIf="localITLProxyInput.errors?.['minlength']">
-              Local-ITL Proxy NTID must be at least 7 characters long.
+            <div class="userinput-item">
+              <label for="secondary">Secondary Lab Coordinator </label>
+              <input type="text" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" #secondLabCoord="ngModel"
+                title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="secondarylabco" />
+            </div>
+
+            <div class="userinput-item">
+              <label for="CC">Cost Center<span class="required"> *</span> </label>
+              <input type="text" placeholder="Cost Center" [(ngModel)]="CC" />
             </div>
           </div>
         </div>
       </div>
 
       <!-------------------------------------------Location Details--------------------------------------------------------------------------------->
-
-      <p>Location Details</p>
-      <div class="userinput-container">
-        <div class="userinput-item">
-          <label for="deptselect">Department <span class="required"> *</span></label>
-          <input type="text" required placeholder="Department" [(ngModel)]="Dept" title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS"
-            #locationdept="ngModel" />
-          <div *ngIf="
+      <div class="container">
+        <div class="container-heading">
+          <strong>Location Details</strong>
+        </div>
+        <div class="userinput-container">
+          <div class="userinput-item">
+            <label for="deptselect">Department <span class="required"> *</span></label>
+            <input type="text" required placeholder="Department" [(ngModel)]="Dept"
+              title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS" #locationdept="ngModel" />
+            <div *ngIf="
               locationdept.invalid &&
               showValidationMessage &&
               (locationdept.dirty || locationdept.touched)
             ">
-            <div *ngIf="locationdept.errors?.['required']" style="color: red">
-              Department is required.
+              <div *ngIf="locationdept.errors?.['required']" style="color: red">
+                Department is required.
+              </div>
             </div>
-          </div>
-          <!-- <ul *ngIf="filteredDepartmentSuggestions.length > 0" class="suggestions-list">
+            <!-- <ul *ngIf="filteredDepartmentSuggestions.length > 0" class="suggestions-list">
             <li *ngFor="let dep of filteredDepartmentSuggestions">{{ dep }}</li>
           </ul> -->
-        </div>
-        <div class="userinput-item">
-          <label for="building">Building <span class="required"> *</span></label>
-          <input type="text" required placeholder="Building" [(ngModel)]="Building" #locationbuilding="ngModel" />
-          <div *ngIf="
+          </div>
+          <div class="userinput-item">
+            <label for="building">Building <span class="required"> *</span></label>
+            <input type="text" required placeholder="Building" [(ngModel)]="Building" #locationbuilding="ngModel" />
+            <div *ngIf="
               locationbuilding.invalid &&
               (locationbuilding.dirty || locationbuilding.touched)
             ">
-            <div *ngIf="locationbuilding.errors?.['required']" style="color: red">
-              Building is required.
+              <div *ngIf="locationbuilding.errors?.['required']" style="color: red">
+                Building is required.
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="userinput-item">
-          <label for="floorselect">Floor <span class="required"> *</span></label>
-          <input type="text" required placeholder="Floor" [(ngModel)]="Floor" #locationfloor="ngModel" />
-          <div *ngIf="
+          <div class="userinput-item">
+            <label for="floorselect">Floor <span class="required"> *</span></label>
+            <input type="text" required placeholder="Floor" [(ngModel)]="Floor" #locationfloor="ngModel" />
+            <div *ngIf="
               locationfloor.invalid &&
               (locationfloor.dirty || locationfloor.touched)
             ">
-            <div *ngIf="locationfloor.errors?.['required']" style="color: red">
-              Floor is required.
+              <div *ngIf="locationfloor.errors?.['required']" style="color: red">
+                Floor is required.
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="userinput-item">
-          <label for="labselect">Lab No./ Lab Name <span class="required"> *</span></label>
-          <input type="text" required placeholder="Lab No." [(ngModel)]="labno" #locationlabno="ngModel" />
-          <div *ngIf="
+          <div class="userinput-item">
+            <label for="labselect">Lab No./ Lab Name <span class="required"> *</span></label>
+            <input type="text" required placeholder="Lab No." [(ngModel)]="labno" #locationlabno="ngModel" />
+            <div *ngIf="
               locationlabno.invalid &&
               (locationlabno.dirty || locationlabno.touched)
             ">
-            <div *ngIf="locationlabno.errors?.['required']" style="color: red">
-              Lab no is required.
+              <div *ngIf="locationlabno.errors?.['required']" style="color: red">
+                Lab no is required.
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-------------------------------------------Site Details--------------------------------------------------------------------------------->
+      <!-------------------------------------------DH KAM Details--------------------------------------------------------------------------------->
 
-      <p>DH & KAM</p>
-      <div class="userinput-container">
-        <div class="userinput-item">
-          <label for="DH">
-            Department Head (DH) <span class="required"> *</span>
-          </label>
-          <input type="text" id="DH" name="DH" [(ngModel)]="DH" placeholder="NTID" required minlength="7"
-            #dhProxyInput="ngModel" />
-          <div *ngIf="
+      <div class="container">
+        <div class="container-heading">
+          <strong>DH & KAM Information</strong>
+        </div>
+        <div class="userinput-container">
+          <div class="userinput-item">
+            <label for="DH">
+              Department Head (DH) <span class="required"> *</span>
+            </label>
+            <input type="text" id="DH" name="DH" [(ngModel)]="DH" placeholder="NTID" required minlength="7"
+              #dhProxyInput="ngModel" />
+            <div *ngIf="
               dhProxyInput.invalid &&
               (dhProxyInput.dirty || dhProxyInput.touched)
             ">
-            <div *ngIf="dhProxyInput.errors?.['required']" style="color: red">
-              Department Head (DH) is required.
+              <div *ngIf="dhProxyInput.errors?.['required']" style="color: red">
+                Department Head (DH) is required.
+              </div>
+              <div *ngIf="dhProxyInput.errors?.['minlength']">
+                Department Head (DH) must be at least 7 characters long.
+              </div>
             </div>
-            <div *ngIf="dhProxyInput.errors?.['minlength']">
-              Department Head (DH) must be at least 7 characters long.
-            </div>
-          </div>
-          <!-- <ul *ngIf="filteredDHSuggestions.length > 0" class="suggestions-list">
+            <!-- <ul *ngIf="filteredDHSuggestions.length > 0" class="suggestions-list">
             <li *ngFor="let dh of filteredDHSuggestions">{{ dh }}</li>
           </ul> -->
-        </div>
+          </div>
 
-        <div class="userinput-item">
-          <label for="KAM">
-            Key Account Manager (KAM) <span class="required"> *</span>
-          </label>
-          <input type="text" id="KAM" name="KAM" [(ngModel)]="KAM" placeholder="NTID" required minlength="7"
-            #kamProxyInput="ngModel" />
-          <div *ngIf="
+          <div class="userinput-item">
+            <label for="KAM">
+              Key Account Manager (KAM) <span class="required"> *</span>
+            </label>
+            <input type="text" id="KAM" name="KAM" [(ngModel)]="KAM" placeholder="NTID" required minlength="7"
+              #kamProxyInput="ngModel" />
+            <div *ngIf="
               kamProxyInput.invalid &&
               (kamProxyInput.dirty || kamProxyInput.touched)
             ">
-            <div *ngIf="kamProxyInput.errors?.['required']" style="color: red">
-              Key Account Manager (KAM) is required.
+              <div *ngIf="kamProxyInput.errors?.['required']" style="color: red">
+                Key Account Manager (KAM) is required.
+              </div>
+              <div *ngIf="kamProxyInput.errors?.['minlength']">
+                Key Account Manager (KAM) must be at least 7 characters long.
+              </div>
             </div>
-            <div *ngIf="kamProxyInput.errors?.['minlength']">
-              Key Account Manager (KAM) must be at least 7 characters long.
-            </div>
-          </div>
-          <!-- <ul *ngIf="filteredKAMSuggestions.length > 0" class="suggestions-list">
+            <!-- <ul *ngIf="filteredKAMSuggestions.length > 0" class="suggestions-list">
             <li *ngFor="let kam of filteredKAMSuggestions">{{ kam }}</li>
           </ul> -->
+          </div>
         </div>
       </div>
 
-      <p>Lab Coordinator</p>
-      <div class="userinput-container">
-        <div class="userinput-item">
-          <label for="primary">Primary Lab Coordinator <span class="required"> *</span></label>
-          <input type="text" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
-            [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"
-            [(ngModel)]="primarylabco" />
-          <div *ngIf="
-              primaryLabCoord.invalid &&
-              (primaryLabCoord.dirty || primaryLabCoord.touched)
-            ">
-            <div *ngIf="primaryLabCoord.errors?.['required']" style="color: red">
-              Primary Lab Coordinator is required.
+      <div class="container">
+        <div class="container-heading">
+          <strong>Lab Work Details</strong>
+        </div>
+        <div class="userinput-container">
+          <div class="userinput-item">
+            <label for="kindoflab">Kind of Lab <span class="required"> *</span></label>
+            <select id="kindoflabselect" name="kindoflab" [(ngModel)]="selectedLabType" (change)="onLabTypeChange()">
+              <option value>Select</option>
+              <option value="EMV">EMV</option>
+              <option value="Reliability">Reliability</option>
+              <option value="Devlopment">Development</option>
+              <option value="Validation">Validation</option>
+              <option value="Other">Other</option>
+            </select>
+            <div *ngIf="showOtherField">
+              <label for="otherLab">Other Lab Type:</label>
+              <input type="text" id="otherLab" name="otherLab" [(ngModel)]="otherLabType" placeholder="other" />
             </div>
           </div>
-        </div>
-        <div class="userinput-item">
-          <label for="secondary">Secondary Lab Coordinator </label>
-          <input type="text" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" #secondLabCoord="ngModel"
-            title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="secondarylabco" />
-        </div>
-
-        <div class="userinput-item">
-          <label for="CC">Cost Center<span class="required"> *</span> </label>
-          <input type="text" placeholder="Cost Center" [(ngModel)]="CC" />
-        </div>
-      </div>
-
-      <p>Lab work details</p>
-      <div class="userinput-container">
-        <div class="userinput-item">
-          <label for="kindoflab">Kind of Lab <span class="required"> *</span></label>
-          <select id="kindoflabselect" name="kindoflab" [(ngModel)]="selectedLabType" (change)="onLabTypeChange()">
-            <option value>Select</option>
-            <option value="EMV">EMV</option>
-            <option value="Reliability">Reliability</option>
-            <option value="Devlopment">Development</option>
-            <option value="Validation">Validation</option>
-            <option value="Other">Other</option>
-          </select>
-          <div *ngIf="showOtherField">
-            <label for="otherLab">Other Lab Type:</label>
-            <input type="text" id="otherLab" name="otherLab" [(ngModel)]="otherLabType" placeholder="other" />
+          <div class="userinput-item">
+            <label for="purpose">Purpose of Lab in Brief<span class="required"> *</span></label>
+            <input type="text" placeholder="Purpose" [(ngModel)]="purposeoflab" />
           </div>
-        </div>
-        <div class="userinput-item">
-          <label for="purpose">Purpose of Lab in Brief<span class="required"> *</span></label>
-          <input type="text" placeholder="Purpose" [(ngModel)]="purposeoflab" />
-        </div>
-        <div class="userinput-item">
-          <label for="description">Description<span class="required"> *</span>
-          </label>
-          <input type="text" placeholder="Description" [(ngModel)]="description" />
+          <div class="userinput-item">
+            <label for="description">Description<span class="required"> *</span>
+            </label>
+            <input type="text" placeholder="Description" [(ngModel)]="description" />
+          </div>
         </div>
       </div>
 
@@ -569,18 +600,18 @@
       </div>
       <div class="form-button-container">
         <button mat-button class="form-button-res" (click)="onReset()">
-          Reset
+          <mat-icon svgIcon="reset"></mat-icon>Reset
         </button>
         <button mat-button class="form-button-sub" (click)="onPreviewform()">
-          Preview
+          <mat-icon svgIcon="submit"></mat-icon>Preview
         </button>
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="My Applications" class="approve-reject">
+  <!-- <mat-tab label="My Applications" class="approve-reject">
     <div>
       <p>Submitted Form Data:</p>
       <pre>{{ submittedFormData | json }}</pre>
     </div>
-  </mat-tab>
+  </mat-tab> -->
 </mat-tab-group>

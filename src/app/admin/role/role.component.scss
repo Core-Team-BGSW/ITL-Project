@@ -8,25 +8,37 @@
 
 /* Container styling for the whole form */
 .container {
-  width: 80%;
-  //margin: 0 auto;
-  padding: 20px;
+  flex: 1;
+    background-color: #eff1f2;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-color: #337ab7;
+    box-sizing: border-box;
+    border: solid 2px #337ab7;
+    margin-bottom: 16px;
+    width:86%;
 }
 
 /* Form box container */
 .form-box {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 20px;
+  // background-color: #f9f9f9;
+  // border-radius: 8px;
+  // padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Heading for the form box */
 .field-header {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  // font-size: 16px;
+  // font-weight: 600;
+  // margin-bottom: 20px;
+  color: #fff;
+    background-color: #337ab7;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 18px;
 }
 
 /* Group the inputs in the same line */
@@ -34,6 +46,7 @@
   display: flex;
   gap: 20px;
   justify-content: space-between;
+  padding-top: 20px;
 }
 
 /* Each input item (label + input) */
@@ -75,9 +88,10 @@ input[type="text"]:focus, select:focus {
 
 /* Submit button styling */
 .success_btn {
+  text-align: center;
   width: 120px;
   padding: 12px;
-  background-color: #35a71e;
+  background-color: #0096e8;
   color: white;
   border-radius: 6px;
   font-size: 16px;
@@ -85,10 +99,12 @@ input[type="text"]:focus, select:focus {
   cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   margin-top: 20px;
+  margin:20px 36%;
+
 }
 
 .success_btn:hover {
-  background-color: #0d4516;
+  background-color: #0088d4;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
