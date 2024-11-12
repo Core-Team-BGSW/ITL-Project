@@ -28,20 +28,18 @@ main-container{
   border: 0px solid #ccc; /* Example border for visualization */
 }
 .sub-heading {
-  font-size: 1.5rem; /* Adjust font size as needed */
-  font-weight: bold; /* Adjust font weight as needed */
-  margin-bottom: 2px; /* Adjust spacing between h4 and h2 */
-  margin-top: 30px;
-  padding-top: 10px;
-  color: rgb(16, 28, 193);
+  font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+    margin-top: -35px;
+    padding-top: -49px;
+    color: rgb(16, 28, 193);
 
 }
 
 .main-heading {
   font-size: 2rem; /* Adjust font size as needed */
   font-weight: bold; /* Adjust font weight as needed */
-  margin-top: 30px; /* Remove default margin */
-  padding-top: 30px;
   color: black;
 }
 .text-animation {
@@ -159,7 +157,7 @@ color: inherit;
 }
 .section-head {
 margin-bottom: 60px;
-padding-top: 80px;
+padding-top: 30px;
 }
 .section-head h4 {
 position: relative;
