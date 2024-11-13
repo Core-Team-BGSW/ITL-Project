@@ -15,7 +15,7 @@ export class DataService {
    * @returns An observable containing the response from the server.
    */
 
-  private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URLgit
+  //private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URLgit
   private locationUrl = 'http://localhost:8080/boschLabsLocation/location/api';
   private formsubmitUrl = 'http://localhost:8080/boschLabs/form/submit';
   private uniqueEntityUrl = 'http://localhost:8080/boschLabs/allEntity';
@@ -30,11 +30,10 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-
-  removeLab(id: string): Observable<void> {
-    const url = `${this.baseUrl}/${id}`;
-    return this.http.delete<void>(url).pipe(catchError(this.handleError));
-  }
+  // removeLab(id: string): Observable<void> {
+  //   const url = `${this.baseUrl}/${id}`;
+  //   return this.http.delete<void>(url).pipe(catchError(this.handleError));
+  // }
 
   submitForm(formData: any): Observable<string> {
     const headers = new HttpHeaders({
@@ -55,9 +54,9 @@ export class DataService {
     return this.http.get<any[]>(this.uniqueEntityUrl);
   }
 
-  getPendingApplications(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/pending`);
-  }
+  // getPendingApplications(): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.baseUrl}/pending`);
+  // }
 
   getLocations(): Observable<any> {
     return this.http.get<any>(this.locationUrl);

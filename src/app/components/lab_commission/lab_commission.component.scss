@@ -2,7 +2,11 @@
   font-size: 28px;
   font-weight: 600;
   border-bottom: 2px solid #9dc9ff;
-  width: 40%;
+  width: 98%;
+  background-color: #3c8dbc;
+  padding: 12px;
+  color: white;
+  border-radius: 8px;
 }
 
 .note-choosemethod {
@@ -22,9 +26,8 @@ p.choosemethod {
 .importfile {
   gap: 20px;
   background: white;
-  border: 0 none;
-  border-radius: 0px;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  border: solid 2px #337ab7;
   padding: 10px 20px;
   box-sizing: border-box;
   margin: 0 10%;
@@ -32,6 +35,7 @@ p.choosemethod {
   margin-left: 15px;
   margin-top: 10px;
   width: 95%;
+  background-color: #eff1f2;
 }
 
 .mat-mdc-card-content {
@@ -64,69 +68,49 @@ p {
   box-sizing: border-box;
   border-radius: 4px;
   border-bottom: 4px solid #9dc9ff;
-  margin: 12px;
-  /* Add a bottom border */
-  //width: 96%;
+  margin: 8px;
 }
 
 .file-name {
   margin-left: 10px;
-  /* Add some space between the button and file name */
   font-weight: bold;
-  /* Make the file name bold */
 }
 
 .table-container {
   max-width: 100%;
   height: 600px;
-  /* Ensures the container does not exceed the viewport width */
   overflow-x: auto;
-  /* Adds horizontal scrolling if needed */
   margin-top: 20px;
-  /* Adjust spacing if necessary */
 }
 
 .excel-table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 20px;
-  /* Optional: Adjust spacing */
 }
 
 .excel-table th {
   border: 2px solid darkgray;
-  /* Set border color for header */
   padding: 10px;
-  /* Add some padding */
   text-align: left;
-  /* Align text to the left */
   background-color: #f2f2f2;
-  /* Optional: light background for headers */
 }
 
 .excel-table td {
   border: 2px solid darkgray;
-  /* Set border color for cells */
   padding: 10px;
-  /* Add some padding */
   text-align: left;
-  /* Align text to the left */
 }
 
 .error {
   background-color: red;
-  /* Highlight cells with errors */
   color: white;
-  /* Optional for better contrast */
 }
 
 .uploadbutton {
   display: flex;
-  /* Use flexbox for alignment */
   align-items: center;
-  /* Center items vertically */
   margin: 20px 0;
-  /* Margin for spacing */
 }
 
 .importbutton {
@@ -147,9 +131,7 @@ input[type="text"] {
 
 .subbutton {
   background-color: #37A264;
-  /* darkgreen background color */
   color: #fff;
-  /* White text color */
   padding: 10px 25px;
   border: #2e72ee;
   cursor: pointer;
@@ -163,7 +145,6 @@ input[type="text"] {
 
 .subbutton:hover {
   background-color: #219557;
-  /* green on hover */
 }
 
 .sub {
@@ -173,9 +154,7 @@ input[type="text"] {
 
 .previewbutton {
   background-color: #C535BC;
-  /* darkgreen background color */
   color: #fff;
-  /* White text color */
   padding: 10px 25px;
   border: #2e72ee;
   cursor: pointer;
@@ -184,6 +163,12 @@ input[type="text"] {
   border-radius: 8px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  grid: 4px;
+  justify-content: center;
+  font-weight: 600;
 }
 
 .previewbutton:hover {
@@ -194,27 +179,30 @@ input[type="text"] {
   background-color: #ccc;
   color: #666;
   cursor: not-allowed;
+  align-items: center;
+  display: inline-flex;
 }
 
 .templatebutton {
-  background-color: #56B0FF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bc0;
+  border: #007bc0;
   color: #fff;
-  padding: 10px 25px;
-  border: #2e72ee;
+  padding: 12px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
-  margin-top: 1rem;
-  margin-top: 1rem;
   font-size: 16px;
+  font-weight: 600;
 }
 
 .choosebutton {
-  background-color: #43464a;
+  background-color: #18837e;
   color: #fff;
   padding: 10px 25px;
-  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -307,6 +295,7 @@ select:hover {
   box-sizing: border-box;
   border: solid 2px #337ab7;
   margin-bottom: 16px;
+  width: 99%;
 }
 
 .container-heading {
@@ -343,8 +332,9 @@ strong {
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
+  margin-left: 1px;
 }
 
 
@@ -353,44 +343,30 @@ label {
 }
 
 .userinput-item input[type="text"] {
-  /* Style for the input field */
   width: 100%;
-  /* Adjust width as needed */
   border-radius: 4px;
-  /* Rounded corners */
   box-sizing: border-box;
-  /* Ensure padding and border are included in width */
   color: #000000;
   padding: 1em;
   border-radius: 0.5em;
   border-color: #e0e2e5;
-  /* Ensures padding is included in width */
   font-size: 16px;
   background: #ffffff;
   transition: background 0.3s;
 }
 
 .userinput-item input[type="text"]:focus {
-  /* Style when input field is focused */
   outline: none;
-  /* Remove default outline */
   border-color: #4d90fe;
-  /* Example: Change border color on focus */
   box-shadow: 0 0 5px rgba(77, 144, 254, 0.5);
-  /* Add a box shadow */
 }
 
 .userinput-item input:disabled {
   background-color: #f2f2f2;
-  /* Light gray background */
   color: #999;
-  /* Light gray text color */
   cursor: not-allowed;
-  /* Show a "not-allowed" cursor */
   border: 1px solid #ccc;
-  /* Light gray border */
   padding: 1em;
-  /* Padding to maintain consistency */
 }
 
 .labsizelwh {
@@ -401,16 +377,12 @@ label {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  //background: white;
   border: 0 none;
   border-radius: 0px;
-  //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-  padding: 8px 20px;
+  padding: 6px;
   box-sizing: border-box;
   width: 90%;
-  margin: 0 10%;
   margin-bottom: 20px;
-  margin-left: 6px;
   margin-top: 10px;
 
 }
@@ -431,7 +403,6 @@ label {
   padding: 10px 20px;
   box-sizing: border-box;
   width: 96%;
-  //margin: 0 10%;
   margin-bottom: 20px;
   margin-left: 6px;
   margin-top: 10px;
@@ -439,7 +410,6 @@ label {
 
 .date-picker-container {
   margin-bottom: 8px;
-  /* Optional: Add spacing below date picker */
 }
 
 .form-button-container {
@@ -448,26 +418,20 @@ label {
 }
 
 .form-button-sub {
-  background-color: #22bf49;
-  /* darkgreen background color */
+  background-color: #00884a;
   color: #fff !important;
-  /* White text color */
   padding: 10px 25px;
   border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
-  // margin-top: 20px;
-  // margin-left: 20px
   margin: 1rem;
 }
 
 .form-button-res {
   background-color: #0daeff;
-  /* darkgreen background color */
   color: #fff !important;
-  /* White text color */
   padding: 10px 25px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -503,11 +467,8 @@ label {
 
 .arrow {
   font-size: 28px;
-  /* Adjust size as needed */
   margin-left: 5px;
-  /* Add spacing between "Other" and arrow */
   transition: transform 0.3s ease;
-  /* Smooth transition for rotation */
 }
 
 
@@ -524,18 +485,15 @@ label {
 
 .expanded {
   animation: rotate180 0.3s forwards;
-  /* Play the animation forwards */
 }
 
 .collapsed {
   animation: rotate180 0.3s reverse;
-  /* Reverse the animation */
 }
 
 .other-section {
   margin-top: 10px;
   padding: 10px;
-  //border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
 }
@@ -543,13 +501,11 @@ label {
 hr {
   border: none;
   border-top: 1px solid #ccc;
-  /* Adjust color and thickness as needed */
   margin-top: 12px;
   margin-bottom: 12px;
 
 }
 
-/* your-style.css */
 .suggestions-list {
   list-style-type: none;
   padding: 0;

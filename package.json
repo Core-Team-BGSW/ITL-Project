@@ -47,6 +47,7 @@
     "filter": "^0.1.1",
     "font-awesome": "^4.7.0",
     "for": "^0.0.1-dev.0",
+    "mongodb": "^6.10.0",
     "mongoose": "^8.7.0",
     "multer": "^1.4.5-lts.1",
     "ng2-search-filter": "^0.5.1",

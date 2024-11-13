@@ -39,11 +39,11 @@
         </div>
         <div class="importbutton">
           <button class="templatebutton" (click)="onDownloadTemplate()">
-            Download Template
+            <mat-icon svgIcon="download-file"></mat-icon>Download Template
           </button>
           <button class="previewbutton" title="Please choose file for upload" [disabled]="!fileSelected"
             (click)="onPreview()">
-            Preview
+            <mat-icon svgIcon="preview"></mat-icon>Preview
           </button>
         </div>
       </div>
@@ -220,7 +220,7 @@
           </div>
           <div class="userinput-container">
             <div class="userinput-item">
-              <label for="primary">Primary Lab Coordinator <span class="required"> *</span></label>
+              <label for="primary">Primary Lab Coord. <span class="required"> *</span></label>
               <input type="text" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
                 [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"
                 [(ngModel)]="primarylabco" />
@@ -234,7 +234,7 @@
               </div>
             </div>
             <div class="userinput-item">
-              <label for="secondary">Secondary Lab Coordinator </label>
+              <label for="secondary">Secondary Lab Coord. </label>
               <input type="text" placeholder="NTID" [disabled]="!isBGSWOrBGSV()" #secondLabCoord="ngModel"
                 title="Select BGSW or BGSV entity to enable this field" [(ngModel)]="secondarylabco" />
             </div>
@@ -453,7 +453,7 @@
                   <mat-hint>MM/DD/YYYY</mat-hint>
 
                   <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="isDatePickerDisabled">
-                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    <!-- <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon> -->
                   </mat-datepicker-toggle>
 
                   <mat-datepicker #picker [disabled]="isDatePickerDisabled"></mat-datepicker>
@@ -485,20 +485,24 @@
         </mat-card-content>
       </mat-card>
       <div class="portdetails" *ngIf="ACLradio === 'Yes'">
-        <p>Port Requirement Details</p>
-        <div class="userinput-container">
-          <div class="userinput-item">
-            <label for="greenPorts">No. of Green Ports<span class="required"> *</span></label>
-            <input type="text" placeholder="Green Ports" [(ngModel)]="greenports" />
+        <div class="container">
+          <div class="container-heading">
+            <strong>Port Requirement Details</strong>
           </div>
-          <div class="userinput-item">
-            <label for="yellowPort">No. of Yellow Ports<span class="required"> *</span></label>
-            <input type="text" placeholder="Yellow Ports" [(ngModel)]="yellowports" />
-          </div>
-          <div class="userinput-item">
-            <label for="redPorts">No. of Red Ports<span class="required"> *</span>
-            </label>
-            <input type="text" placeholder="Red Ports" [(ngModel)]="redports" />
+          <div class="userinput-container">
+            <div class="userinput-item">
+              <label for="greenPorts">No. of Green Ports<span class="required"> *</span></label>
+              <input type="text" placeholder="Green Ports" [(ngModel)]="greenports" />
+            </div>
+            <div class="userinput-item">
+              <label for="yellowPort">No. of Yellow Ports<span class="required"> *</span></label>
+              <input type="text" placeholder="Yellow Ports" [(ngModel)]="yellowports" />
+            </div>
+            <div class="userinput-item">
+              <label for="redPorts">No. of Red Ports<span class="required"> *</span>
+              </label>
+              <input type="text" placeholder="Red Ports" [(ngModel)]="redports" />
+            </div>
           </div>
         </div>
       </div>
@@ -603,10 +607,13 @@
           <mat-icon svgIcon="reset"></mat-icon>Reset
         </button>
         <button mat-button class="form-button-sub" (click)="onPreviewform()">
-          <mat-icon svgIcon="submit"></mat-icon>Preview
+          <mat-icon svgIcon="preview"></mat-icon>Preview
         </button>
       </div>
     </div>
+
+    <app-custom-dialog [isOpen]="isDialogOpen" (close)="closeDialog()" [data]="formData">
+    </app-custom-dialog>
   </mat-tab>
   <!-- <mat-tab label="My Applications" class="approve-reject">
     <div>

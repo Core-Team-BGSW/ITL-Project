@@ -1,0 +1,118 @@
+/* Overlay for the dialog */
+
+.page-heading {
+  font-size: 28px;
+  font-weight: 600;
+  border-bottom: 2px solid #9dc9ff;
+  width: 98%;
+  background-color: #3c8dbc;
+  padding: 12px;
+  color: white;
+  border-radius: 8px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.ng-trigger {
+  opacity: 1;
+}
+
+/* Modal window styling */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Center the modal */
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 80%;
+  /* Adjust width */
+  max-height: 80%;
+  /* Adjust height */
+  z-index: 1000;
+  /* Ensure it's above the overlay */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Button Styling */
+button {
+  padding: 14px 22px;
+  background-color: #007bc0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+
+}
+
+button:hover {
+  background-color: #3c8dbc;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Two equal-width columns */
+  gap: 20px;
+  /* Add space between columns */
+}
+
+.column {
+  padding: 10px;
+}
+
+.column p {
+  margin-bottom: 12px;
+  /* Space between paragraphs */
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.column strong {
+  color: #0000;
+  /* Strong text color */
+  font-weight: 600;
+}
+
+.column p:last-child {
+  margin-bottom: 0;
+  /* Remove bottom margin for the last paragraph */
+}
+
+.dialog-buttons {
+  justify-content: flex-end;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+}
+
+.send-dialog-button {
+  background-color: #00884a;
+  color: white;
+}

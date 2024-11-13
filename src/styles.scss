@@ -12,6 +12,10 @@ $Angular_app-theme: mat.define-theme((color: (theme-type: light,
 
 :root {
   @include mat.all-component-themes($Angular_app-theme);
+  --font-family: 'Bosch Sans', sans-serif;
+
+  /* Apply to all Material components globally */
+  font-family: var(--font-family);
 }
 
 html,
