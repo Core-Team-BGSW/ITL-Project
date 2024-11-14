@@ -1,50 +1,113 @@
 package com.ITL.Service.backendservice.Service;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import com.azure.identity.ClientSecretCredential;
+import com.azure.identity.ClientSecretCredentialBuilder;
+import com.microsoft.graph.authentication.TokenCredentialAuthProvider;
+import com.microsoft.graph.models.*;
+import com.microsoft.graph.requests.AttachmentCollectionPage;
+import com.microsoft.graph.requests.GraphServiceClient;
+import lombok.RequiredArgsConstructor;
+import okhttp3.Request;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EmailService {
+    @Value("${email}")
+    private String senderEmail;
 
-    private final JavaMailSender mailSender;
+    @Value("${azure.client-id}")
+    private String clientId;
 
-    @Value("${spring.mail.username}")
-    private String fromEmail;
+    @Value("${azure.client-secret}")
+    private String clientSecret;
 
-    public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+    @Value("${azure.tenant-id}")
+    private String tenantId;
+
+    private GraphServiceClient<Request> graphClient;
+
+
+    public void sendEmailWithAttachment(String toEmail, List<String> ccMails, String subject, String body, File attachment) {
+         try {
+             initializeGraphForAppOnlyAuth();
+         }
+         catch(Exception e) {
+             System.out.println("Facing some error while initializing the Microsoft API" +  e.getMessage());
+         }
+         try {
+             Message message = new Message();
+             message.subject = subject;
+             message.body = new ItemBody();
+             message.body.contentType = BodyType.TEXT;
+             message.body.content = body;
+             EmailAddress emailAddress = new EmailAddress();
+             emailAddress.address = toEmail;
+             Recipient recipient = new Recipient();
+             recipient.emailAddress = emailAddress;
+             message.toRecipients = Collections.singletonList(recipient);
+
+             message.ccRecipients = createCcRecipients(ccMails);
+             FileAttachment fileattachment= createFileAttachment(attachment);
+             message.attachments = (AttachmentCollectionPage) Collections.singletonList(fileattachment);
+             graphClient.users(senderEmail).sendMail(UserSendMailParameterSet.newBuilder()
+                     .withMessage(message)
+                     .build())
+                     .buildRequest()
+                     .post();
+         }
+         catch(MailException e)
+         {
+             System.out.println("Failed to send email." + e.getMessage());
+         }
     }
 
-    public void sendEmailWithAttachment(String toEmail, List<String> ccRecipients, String subject, String text, File attachment) {
-         try {
-             MimeMessage mimeMessage = mailSender.createMimeMessage();
-             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true); // true for multipart
+    private void initializeGraphForAppOnlyAuth() {
+        ClientSecretCredential clientSecretCredential = new ClientSecretCredentialBuilder().clientId(clientId).tenantId(tenantId).clientSecret(clientSecret).build();
+        if(graphClient == null)
+        {
+            final TokenCredentialAuthProvider authProvider = new TokenCredentialAuthProvider(List.of("https://graph.microsoft.com/.default"), clientSecretCredential);
+            graphClient = GraphServiceClient.builder().authenticationProvider(authProvider).buildClient();
+        }
+    }
 
-             helper.setFrom(fromEmail);
-             helper.setTo(toEmail);
-             helper.setSubject(subject);
-             helper.setText(text);
-             if (ccRecipients != null && !ccRecipients.isEmpty()) {
-                 String[] ccArray = ccRecipients.toArray(new String[0]);
-                 helper.setCc(ccArray);
-             }
+    private FileAttachment createFileAttachment(File file) {
+        FileAttachment attachment = new FileAttachment();
+        attachment.name = file.getName();  // Get the name of the file
+        attachment.contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";  // MIME type (adjust based on the file type, e.g., "application/pdf")
+        attachment.contentBytes = getFileBytes(file);  // Get the file bytes
 
-             // Attach the file
-             helper.addAttachment(attachment.getName(), attachment);
+        return attachment;
+    }
+    private static byte[] getFileBytes(File file) {
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
+            return new byte[(int) file.length()];
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new byte[0];
+        }
+    }
 
-             mailSender.send(mimeMessage);
-         }
-         catch(MailException | MessagingException e)
-         {
-             System.out.println("Failed to send email.");
-         }
+    private static List<Recipient> createCcRecipients(List<String> ccEmails) {
+        // Convert the list of CC emails to a list of Recipient objects
+        List<Recipient> ccRecipients = new java.util.ArrayList<>();
+        for (String ccEmail : ccEmails) {
+            EmailAddress ccEmailAddress = new EmailAddress();
+            ccEmailAddress.address = ccEmail;
+
+            Recipient ccRecipient = new Recipient();
+            ccRecipient.emailAddress = ccEmailAddress;
+
+            ccRecipients.add(ccRecipient);
+        }
+        return ccRecipients;
     }
 }

@@ -22,20 +22,48 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/UserData
-  mail:
-    host: smtp.example.com
-    port: 587
-    username: bd_toa-ets1_itl_consultancy_team@bcn.bosch.com
-#    password: {your-email-password}
-    properties:
-      mail:
-        smtp:
-          auth: false
-          starttls:
-            enable: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          azure:
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/backendservice/azure
+            client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
+            tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+            client-secret: 4ad4e24b-726f-4510-8f6c-5e2ed9318348
+            scope:
+              - Mail.Send
+              - User.Read
+              - openid
+              - profile
+              - email
+            authorization-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/token
+            client-name: Microsoft
+        provider:
+          azure:
+            authorization-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/token
+            user-info-uri: https://graph.microsoft.com/v1.0/me
 
 api:
     url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
     url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/
     url :  http://localhost:8080
+
+azure:
+  client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
+  tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+  client-secret: 4ad4e24b-726f-4510-8f6c-5e2ed9318348
+
+microsoft-graph:
+  send-mail-url: https://graph.microsoft.com/v1.0/me/sendMail
+  client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
+  tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+  client-secret: 4ad4e24b-726f-4510-8f6c-5e2ed9318348
+
+email:
+  mohit.somvanshi@in.bosch.com
 

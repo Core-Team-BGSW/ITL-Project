@@ -28,7 +28,6 @@ public class CsvToDatabaseService {
     private final EntityRepo entityRepo;
     private final SequenceGeneratorService sequenceGeneratorService;
     private final UserDetailsUpdateService userDetailsUpdateService;
-    @Lazy
     private final ExcelConverter excelConverter;
     public ResponseEntity<String> saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {

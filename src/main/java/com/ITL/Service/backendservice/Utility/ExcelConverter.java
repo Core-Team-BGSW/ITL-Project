@@ -20,7 +20,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ExcelConverter {
-    @Lazy
     private final SendEmailWithFile sendEmailWithFile;
     public void createExcelFileFromLabData(LabFormData labFormData) throws IOException, MessagingException {
         // Create a new workbook
