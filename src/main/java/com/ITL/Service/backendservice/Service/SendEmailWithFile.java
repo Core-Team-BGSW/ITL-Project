@@ -1,10 +1,9 @@
 package com.ITL.Service.backendservice.Service;
 
-import com.ITL.Service.backendservice.Model.UserDetails;
+import com.ITL.Service.backendservice.Model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
@@ -16,8 +15,7 @@ import java.util.List;
 public class SendEmailWithFile {
     private final RestTemplate restTemplate;
     private final EmailService emailService;
-    @Value("${api.url}")
-    private String userServiceUrl;
+
     public void emailWithFile(File file,String local_itl, String kam, String dh) {
         String kamEmail = getUserEmail(kam);
         String dhEmail = getUserEmail(dh);
@@ -30,17 +28,22 @@ public class SendEmailWithFile {
     }
     private String getUserEmail(String userId) {
         // Construct the URL to fetch user details
-        String url = userServiceUrl + "/userinfo/" + userId;
+        String url = "http://localhost:8080/userinfo/" + userId;
 
-        // Make the REST API call using RestTemplate
-        ResponseEntity<UserDetails> response = restTemplate.getForEntity(url, UserDetails.class);
+        try {
+            // Make the REST API call using RestTemplate
+            User user = restTemplate.getForObject(url, User.class);
+            System.out.println("Response: " + user);
 
-        // Extract and return the email from the response body
-        UserDetails userDetails = response.getBody();
-        if (userDetails != null) {
-            return userDetails.getEmail();
+            if (user!=null) {
+                return user.getEmail();
+            }
+
+            // Handle error if the response is not successful
+            throw new RuntimeException("User not found with ID: " + userId);
+        } catch (HttpClientErrorException e) {
+            System.err.println("Error calling the user info API: " + e.getMessage());
+            throw new RuntimeException("HTTP Error: " + e.getStatusCode() + " - " + e.getMessage());
         }
-        // If user not found, return a default or handle error
-        throw new RuntimeException("User not found with ID: " + userId);
     }
 }

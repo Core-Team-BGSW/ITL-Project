@@ -32,7 +32,7 @@ spring:
             redirect-uri: http://localhost:8080/login/oauth2/backendservice/azure
             client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
             tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-            client-secret: 4ad4e24b-726f-4510-8f6c-5e2ed9318348
+            client-secret: fsx8Q~rWahrNglfWgJG-AnXo4kqcdZLVV_goCctI
             scope:
               - Mail.Send
               - User.Read
@@ -51,18 +51,15 @@ spring:
 api:
     url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
     url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/
-    url :  http://localhost:8080
 
 azure:
   client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
   tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-  client-secret: 4ad4e24b-726f-4510-8f6c-5e2ed9318348
-
-microsoft-graph:
-  send-mail-url: https://graph.microsoft.com/v1.0/me/sendMail
-  client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
-  tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-  client-secret: 4ad4e24b-726f-4510-8f6c-5e2ed9318348
+  client-secret: fsx8Q~rWahrNglfWgJG-AnXo4kqcdZLVV_goCctI
+  scope:
+    - Mail.Send
+    - User.Read
+    - email
 
 email:
   mohit.somvanshi@in.bosch.com

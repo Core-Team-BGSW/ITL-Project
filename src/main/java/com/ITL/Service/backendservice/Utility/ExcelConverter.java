@@ -8,8 +8,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -94,7 +92,7 @@ public class ExcelConverter {
         // Return the created file
         sendEmailWithFile.emailWithFile(file,labFormData.getLocal_itl(),labFormData.getDh(),labFormData.getKam());
     }
-    @Async
+
     public void sendEmailToAllUsers(List<LabFormData> labFormDataList) throws MessagingException, IOException {
         for(LabFormData labFormData : labFormDataList)
         {

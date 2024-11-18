@@ -5,9 +5,9 @@ import com.azure.identity.ClientSecretCredentialBuilder;
 import com.microsoft.graph.authentication.TokenCredentialAuthProvider;
 import com.microsoft.graph.models.*;
 import com.microsoft.graph.requests.AttachmentCollectionPage;
+import com.microsoft.graph.requests.AttachmentCollectionResponse;
 import com.microsoft.graph.requests.GraphServiceClient;
 import lombok.RequiredArgsConstructor;
-import okhttp3.Request;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
 
 @Service
@@ -33,7 +33,8 @@ public class EmailService {
     @Value("${azure.tenant-id}")
     private String tenantId;
 
-    private GraphServiceClient<Request> graphClient;
+
+    GraphServiceClient graphClient;
 
 
     public void sendEmailWithAttachment(String toEmail, List<String> ccMails, String subject, String body, File attachment) {
@@ -56,13 +57,19 @@ public class EmailService {
              message.toRecipients = Collections.singletonList(recipient);
 
              message.ccRecipients = createCcRecipients(ccMails);
-             FileAttachment fileattachment= createFileAttachment(attachment);
-             message.attachments = (AttachmentCollectionPage) Collections.singletonList(fileattachment);
+             FileAttachment fileattachment;
+             fileattachment = createFileAttachment(attachment);
+             LinkedList<Attachment> attachmentsList = new LinkedList<>();
+             attachmentsList.add(fileattachment);
+             AttachmentCollectionResponse attachmentCollectionResponse = new AttachmentCollectionResponse();
+             attachmentCollectionResponse.value = attachmentsList;
+             message.attachments = new AttachmentCollectionPage(attachmentCollectionResponse,null);
              graphClient.users(senderEmail).sendMail(UserSendMailParameterSet.newBuilder()
                      .withMessage(message)
                      .build())
                      .buildRequest()
                      .post();
+             System.out.println("Successfully send the mail!!!");
          }
          catch(MailException e)
          {
@@ -71,16 +78,27 @@ public class EmailService {
     }
 
     private void initializeGraphForAppOnlyAuth() {
-        ClientSecretCredential clientSecretCredential = new ClientSecretCredentialBuilder().clientId(clientId).tenantId(tenantId).clientSecret(clientSecret).build();
-        if(graphClient == null)
-        {
-            final TokenCredentialAuthProvider authProvider = new TokenCredentialAuthProvider(List.of("https://graph.microsoft.com/.default"), clientSecretCredential);
-            graphClient = GraphServiceClient.builder().authenticationProvider(authProvider).buildClient();
-        }
+        final ClientSecretCredential clientSecretCredential = new ClientSecretCredentialBuilder()
+                .clientId(clientId)
+                .clientSecret(clientSecret)
+                .tenantId(tenantId)
+                .build();
+
+        List<String> scopes = new ArrayList<>();
+        scopes.add("https://graph.microsoft.com/.default");
+
+        final TokenCredentialAuthProvider tokenCredentialAuthProvider = new TokenCredentialAuthProvider(scopes, clientSecretCredential);
+
+         graphClient =
+                GraphServiceClient
+                        .builder()
+                        .authenticationProvider(tokenCredentialAuthProvider)
+                        .buildClient();
     }
 
     private FileAttachment createFileAttachment(File file) {
         FileAttachment attachment = new FileAttachment();
+        attachment.oDataType = "#microsoft.graph.fileAttachment";
         attachment.name = file.getName();  // Get the name of the file
         attachment.contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";  // MIME type (adjust based on the file type, e.g., "application/pdf")
         attachment.contentBytes = getFileBytes(file);  // Get the file bytes
