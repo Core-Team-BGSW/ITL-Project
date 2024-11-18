@@ -1,3 +1,0 @@
-Sr.No,Region,Country,Location-Code,Entity,GB,Local-ITL,Local-ITL Proxy,Department Head (DH),Key Account Manager (KAM),Department,Building,Floor,Lab No,Primary Lab Coordinator,Secondary Lab Coordinator,Cost Center,Kind of Lab,Purpose of Lab in Brief,Description,ACL Required,No of Green Ports,No of Yellow Ports,No of Red Ports,Is lab going to procure new equipment for Engineering/Red Zone?,Shared Lab,Self Audit Date 2024
-ex,APAC,IN,Ahm3,BGSW,CS,1234567.0,1234567.0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,Yes,Yes
-1.0,APAC,IN,Cob,BGSW,MS,OBV3KOR,VCK3KOR,BRC3KOR,GQQ2KOR,TOA/ETS-1,BAL-PUNE,5.0,C-308,MBN2KOR,ESB5KOR,652B02,Test,Endurance test ECU,Nexon EV endurance test on ECU,No,NA,null,null,No,No,Tue Jun 04 00:00:00 IST 2024
