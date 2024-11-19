@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../filter.pipe';
 import { MatPaginator } from '@angular/material/paginator';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {ChangeDetectionStrategy, inject} from '@angular/core';
+import {ChangeDetectionStrategy} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
@@ -19,25 +19,11 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
-import { Location } from '../../../../models/Location';
-import { LabData } from '../../../../models/LabData';
-import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-lab-decommission',
   standalone: true,
-<<<<<<< HEAD
   imports: [ RouterLink,CommonModule,RouterOutlet,FormsModule,FilterPipe,  MatButtonModule,MatCardModule],
-=======
-  imports: [
-    RouterLink,
-    CommonModule,
-    RouterOutlet,
-    FormsModule,
-    FilterPipe,
-    MatButtonModule,
-  ],
->>>>>>> 8248cb2c4ca65f02448b171358077bbe2bc7591a
   templateUrl: './lab-decommission.component.html',
   styleUrls: ['./lab-decommission.component.scss'],
 })
@@ -50,22 +36,19 @@ export class LabDecommissionComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   //Kranti Sonawane
-
   //To fetch lab details
   private http = inject(HttpClient);
   //Integrated endpoint to fetch lab data
-  private apiurl = 'http://localhost:8080/boschLabs/by-responsible/';
-  ntId: any;
+  private apiurl = 'http://localhost:8080/boschLabs/allLabsWithEntity';
 
-  constructor(private dataService: DataService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.loadLabList();
   }
   //function  for loading lab list
-  loadLabList(ntId?: string): void {
-    const url = ntId ? `${this.apiurl}${ntId}` : this.apiurl; // Construct URL based on NT-ID
-    this.http.get<any[]>(url).subscribe({
+  loadLabList(): void {
+    this.http.get<any[]>(`${this.apiurl}`).subscribe({
       next: (data) => {
         this.labList = data;
         this.filteredLabList = this.labList;
@@ -73,6 +56,7 @@ export class LabDecommissionComponent implements OnInit {
       error: (err) => (this.errorMessage = err),
     });
   }
+
   removeLab(id: string): void {
     if (confirm('Are you sure you want to remove this lab?')) {
       this.http.delete<void>(`${this.apiurl}/delete/${id}`).subscribe({

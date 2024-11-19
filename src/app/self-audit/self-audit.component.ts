@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, Inject,PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup,ReactiveFormsModule,Validators,FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
@@ -11,6 +11,11 @@ import { MatDatepickerModule, matDatepickerAnimations } from '@angular/material/
 import { MatNativeDateModule } from '@angular/material/core';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { isPlatformBrowser } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ResponseService } from '../services/response.service';
+
 
 
 
@@ -65,6 +70,22 @@ export class SelfAuditComponent {
   selectedOption28: string = '';
   selectedOption29: string = '';
   selectedOption30: string = '';
+  loginArray:any={};
+  formData = {
+    firstName: '',
+    lastName: '',
+    deviceno: '',
+    labelPosition:'',
+    answer1:'',
+    explanation1:'',
+    labelPosition1:'',
+    downtime:'',
+    answer2:'',
+    selectedOption: ''
+    
+  };
+  // private apiUrl = 'http://localhost:8080/responses';
+  isBrowser: boolean;
  
   showOptions = false;
 
@@ -146,20 +167,36 @@ notapplicableCount2: number = 0;
 }
 linkForm: FormGroup;
  
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private responseService: ResponseService
+    
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
       website: ['', [Validators.required, Validators.pattern('https?://.+')]],
       website1: ['', [Validators.required, Validators.pattern('https?://.+')]],
       website2: ['', [Validators.required, Validators.pattern('https?://.+')]],
-      website3: ['', [Validators.required, Validators.pattern('https?://.+')]]
+      website3: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      questionId: ['', Validators.required],
+      optionFlag: [''],
+      internalEmployeeCount: ['', [Validators.required]],
+      externalEmployeeCount: ['', [Validators.required]],
+      numberOfDevices: ['', Validators.required],
+      answers: ['', Validators.required],
+      explanation: ['', Validators.required]
     });
   }
- 
   onSubmit() {
     if (this.linkForm.valid) {
       console.log('Form Submitted!', this.linkForm.value);
     }
   }
+  // submitResponse(data: any): Observable<any> {
+  //   return this.http.post<any>(this.apiUrl, data)
+  // }
+  
+ 
   selectedFile: File | null = null;
 
   onFileSelected(event: Event): void {
@@ -210,8 +247,140 @@ generateExcelFile(): void {
   // Step 11: Save the file
   saveAs(blob, 'Copy of remote access list.xlsx');
 }
+// ngOnInit(): void {
+//   // this.loadDraft();
+//   // this.linkForm.get('questionId').valueChanges.subscribe((questionId) => {
+//   //   this.updateFieldVisibility(questionId, this.linkForm.get('optionFlag').value);
+//   // });
+//   this.linkForm = this.fb.group({
+//     internalEmployeeCount: ['', [Validators.required]], // For QuestionId 1
+//     externalEmployeeCount: ['', [Validators.required]], // For QuestionId 1
+//     numberOfDevices: [''], // For QuestionId 2
+//     optionFlag: [''], // For QuestionId 3
+//     answers: [''], // For QuestionId 3 if optionFlag = 0
+//     explanation: [''] // For QuestionId 3 if optionFlag = 1
+//   });
+//   const storedValue = localStorage.getItem('labelPosition');
+//   const storedValue1 = localStorage.getItem('labelPosition1');
+//   const storeddropdown = localStorage.getItem('selectedOption');
+//     if (storedValue) {
+//       this.labelPosition = storedValue;
+//     }
+//     if (storedValue1) {
+//       this.labelPosition1 = storedValue1;
+//     }
+//     if (storeddropdown) {
+//       this.selectedOption = storeddropdown;
+//     }
     
+    
+// }
+// private preparePayload(formData: any): any {
+//   const payload: any = {};
+
+//   // Example logic for QuestionId-specific handling
+//   if (formData.internalEmployeeCount || formData.externalEmployeeCount) {
+//     payload.questionId = 1;
+//     payload.optionDescription = 'Number of Internals and Externals';
+//     payload.optionAnswer = {
+//       internal: formData.internalEmployeeCount,
+//       external: formData.externalEmployeeCount
+//     };
+//   }
+// }
+// updateFieldVisibility(questionId: string, optionFlag: number): void {
+//   // Reset visibility
+//   this.showInternalExternalFields = false;
+//   // this.showNumberOfDevices = false;
+//   // this.showAnswers = false;
+//   // this.showExplanation = false;
+
+//   if (questionId === '1') {
+//     this.showInternalExternalFields = true;
+//   // } else if (questionId === '2') {
+//   //   this.showNumberOfDevices = true;
+//   // } else if (questionId === '3') {
+//   //   if (optionFlag === 0) {
+//   //     this.showAnswers = true;
+//   //   } else if (optionFlag === 1) {
+//   //     this.showExplanation = true;
+//   //   }
+//    }
+// saveDraft(): void {
+//   if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+//     localStorage.setItem('draftData', JSON.stringify(this.formData));
+//     alert('Draft saved!');
+//   }
+// }
+// loadDraft(): void {
+//   if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+//     const savedData = localStorage.getItem('draftData');
+//     if (savedData) {
+//       this.formData = JSON.parse(savedData);
+//     }
+//   }
+// }
+// private isLocalStorageAvailable(): boolean {
+//   return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+// }
+// onSelectionChange(value: string): void {
+//   // Save the selected value to localStorage whenever it changes
+//   if (this.isBrowser) {
+//     localStorage.setItem('labelPosition', value);
+    
+//   }
+  
+
 }
+// onSelectionChange1(value: string): void {
+//   // Save the selected value to localStorage whenever it changes
+//   if (this.isBrowser) {
+//     localStorage.setItem('labelPosition1', value);
+//   }
+// }
+//  onSubmit(): void {
+//   if (this.linkForm.valid) {
+//     const formData = this.linkForm.value;
+
+//     // Prepare data based on QuestionId logic
+//     const payload: any = this.preparePayload(formData);
+
+//     // Call the ResponseService to save the data
+//     this.responseService.saveResponse(payload).subscribe(
+//       (response) => {
+//         console.log('Response saved successfully:', response);
+//         alert('Response saved successfully!');
+//       },
+//       (error) => {
+//         console.error('Error saving response:', error);
+//         alert('Error saving response.');
+//       }
+//     );
+//   } else {
+//     console.error('Form is invalid!');
+//   }
+//   return payload;
+//  }
+// onSubmit(): void {
+//   if (this:linkForm.valid) {
+//     console.log('Form Data:', this.linkForm.value);
+//   }
+//    else {
+//     console.error('Form is invalid!');
+//   }
+// }
+
+  
+ 
+
+
+ 
+ 
+
+
+
+    
+
 
 
  
