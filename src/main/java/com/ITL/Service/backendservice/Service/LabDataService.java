@@ -96,4 +96,21 @@ public class LabDataService {
     public List<LabData> getLabDataWithLocalItlProxy(String localItlProxy) {
         return labDataRepo.findByLocal_itl_proxy(localItlProxy);
     }
+
+    public List<LabDataWithEntityDTO> getLabsByLabResponsible(String userId) {
+        List<LabData> labs = labDataRepo.findByLabResponsible(userId);
+
+        List<LabDataWithEntityDTO> labDataWithEntityDTOList = new ArrayList<>();
+        for(LabData labData : labs)
+        {
+            LabDataWithEntityDTO labDataWithEntityDTO = convertToLabDataWithEntityDTO(labData);
+            Entity entity = entityRepo.findByLabDataId(labData.getId());
+            labDataWithEntityDTO.setRegion(entity.getRegion());
+            labDataWithEntityDTO.setCountry(entity.getCountry());
+            labDataWithEntityDTOList.add(labDataWithEntityDTO);
+        }
+        return labDataWithEntityDTOList;
+    }
+
+
 }
