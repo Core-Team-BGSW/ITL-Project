@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface CustomLabDataRepo {
-    ResponseEntity<String> deleteByPrimaryLabCoordinator(String primary_lab_cord);
+    ResponseEntity<String> deleteByCustomQuery(String query);
     List<String> findUniqueGB();
     List<String> findUniqueEntity();
     List<LabData> search(String query);

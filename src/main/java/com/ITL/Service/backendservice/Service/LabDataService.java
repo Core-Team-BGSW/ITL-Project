@@ -3,20 +3,15 @@ package com.ITL.Service.backendservice.Service;
 import com.ITL.Service.backendservice.DTO.LabDataWithEntityDTO;
 import com.ITL.Service.backendservice.Model.Entity;
 import com.ITL.Service.backendservice.Model.LabData;
-import com.ITL.Service.backendservice.Repository.CustomLabDataRepoImpl;
 import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +24,8 @@ public class LabDataService {
         return labDataRepo.findLabDataByEntityNameAndGb(entityName,gb);
     }
 
-    public ResponseEntity<String> deleteLabDataByPrimaryLabCoordinator(String primaryLabCord) {
-        return labDataRepo.deleteByPrimaryLabCoordinator(primaryLabCord);
+    public ResponseEntity<String> deleteLabDataByCustomQuery(String query) {
+        return labDataRepo.deleteByCustomQuery(query);
     }
 
     public List<LabData> getAllLabsData() {

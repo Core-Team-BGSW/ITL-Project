@@ -23,6 +23,44 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/UserData
 
+  security:
+    oauth2:
+      client:
+        registration:
+          azure:
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/backendservice/azure
+            client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
+            tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+            client-secret: fsx8Q~rWahrNglfWgJG-AnXo4kqcdZLVV_goCctI
+            scope:
+              - Mail.Send
+              - User.Read
+              - openid
+              - profile
+              - email
+            authorization-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/token
+            client-name: Microsoft
+        provider:
+          azure:
+            authorization-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/0ae51e19-07c8-4e4b-bb6d-648ee58410f4/oauth2/v2.0/token
+            user-info-uri: https://graph.microsoft.com/v1.0/me
+
 api:
     url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
     url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/
+
+azure:
+  client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
+  tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+  client-secret: fsx8Q~rWahrNglfWgJG-AnXo4kqcdZLVV_goCctI
+  scope:
+    - Mail.Send
+    - User.Read
+    - email
+
+email:
+  mohit.somvanshi@in.bosch.com
+

@@ -36,7 +36,7 @@ public class UserDetailsUpdateService {
        }
    }
 
-   @Scheduled(cron = "0 0 */10 * * *")
+   @Scheduled(cron = "0 0 0 1/10 * *")
    public void updateDatabase() {
        System.out.println("working...");
        List<LabData> allLabData = labDataRepo.findAll();
