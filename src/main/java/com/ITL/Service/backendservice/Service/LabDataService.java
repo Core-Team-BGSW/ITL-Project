@@ -24,8 +24,8 @@ public class LabDataService {
         return labDataRepo.findLabDataByEntityNameAndGb(entityName,gb);
     }
 
-    public ResponseEntity<String> deleteLabDataByPrimaryLabCoordinator(String primaryLabCord) {
-        return labDataRepo.deleteByPrimaryLabCoordinator(primaryLabCord);
+    public ResponseEntity<String> deleteLabDataByCustomQuery(String query) {
+        return labDataRepo.deleteByCustomQuery(query);
     }
 
     public List<LabData> getAllLabsData() {

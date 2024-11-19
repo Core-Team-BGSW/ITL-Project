@@ -23,18 +23,18 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
     private final MongoTemplate mongoTemplate;
 
     // labName,departement,secondary lab coord.
-    public ResponseEntity<String> deleteByPrimaryLabCoordinator(String primaryLabCord) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("primary_lab_cord").is(primaryLabCord));
-        Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("primary_lab_cord").is(primaryLabCord)));
-        AggregationResults<LabData> temp = mongoTemplate.aggregate(aggregation,LabData.class,LabData.class);
-        List<LabData> res = temp.getMappedResults();
-        if(res.isEmpty())
+    public ResponseEntity<String> deleteByCustomQuery(String query) {
+        Query queryRes = searchForDelete(query);
+        if(queryRes == null)
         {
             return ResponseEntity.ok("The primary lab coordinator is invalid please enter valid lab coordinator Id");
         }
-        mongoTemplate.remove(query,LabData.class);
-        return ResponseEntity.ok("The lab data with given Primary Lab Coordinator is deleted successfully");
+        List<LabData> labDataList = mongoTemplate.find(queryRes,LabData.class);
+        if(labDataList.size() == 1) {
+            mongoTemplate.remove(queryRes, LabData.class);
+            return ResponseEntity.ok("The lab data with given Primary Lab Coordinator is deleted successfully");
+        }
+        return ResponseEntity.ok("There is no such labs which are related to your query");
     }
 
     @Override
@@ -63,6 +63,17 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
     @Override
     public List<LabData> search(String query) {
         String[] searchTerms = query.split(" ");
+        Query searchQuery = findLabDataWithCustomQuery(searchTerms);
+        return mongoTemplate.find(searchQuery, LabData.class);
+    }
+
+    public Query searchForDelete(String query)
+    {
+        String[] searchTerms = query.split(" ");
+        return findLabDataWithCustomQuery(searchTerms);
+    }
+
+    private Query findLabDataWithCustomQuery(String[] searchTerms) {
         List<Criteria> criteriaList = new ArrayList<>();
         Query searchQuery = new Query();
         for(String term : searchTerms)
@@ -84,8 +95,7 @@ public class CustomLabDataRepoImpl implements CustomLabDataRepo{
                     Criteria.where("self_audit_date").regex(term,"i")
             )));
         }
-
         searchQuery.addCriteria(new Criteria().orOperator(criteriaList.toArray(new Criteria[0])));
-        return mongoTemplate.find(searchQuery, LabData.class);
+        return searchQuery;
     }
 }

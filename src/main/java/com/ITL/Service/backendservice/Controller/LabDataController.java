@@ -25,9 +25,9 @@ public class LabDataController {
     }
 
     @DeleteMapping("/delete/labData")
-    public ResponseEntity<String> deleteLabDataByPrimaryLabCoordinator(@RequestParam String primary_lab_cord)
+    public ResponseEntity<String> deleteLabDataByCustomQuery(@RequestParam String query)
     {
-        return labDataService.deleteLabDataByPrimaryLabCoordinator(primary_lab_cord);
+        return labDataService.deleteLabDataByCustomQuery(query);
     }
 
     @GetMapping("/labDataWithPrimaryLabCord/{primary_lab_cord}")
