@@ -14,17 +14,19 @@ public class CheckListController {
     @Autowired
     private CheckListService checklistService;
 
+    // Endpoint to add new checklist questions
     @PostMapping("/add")
     public List<CheckList> addChecklistQuestions(@RequestBody List<String> questions) {
         return checklistService.addQuestions(questions);
     }
 
+    // Endpoint to get all questions
     @GetMapping("/")
     public List<CheckList> getAllQuestions() {
         return checklistService.getAllQuestions();
     }
 
-    // New endpoint to delete all questions
+    // Endpoint to delete all questions and reset questionId sequence
     @DeleteMapping("/deleteAll")
     public void deleteAllQuestions() {
         checklistService.deleteAllQuestions();

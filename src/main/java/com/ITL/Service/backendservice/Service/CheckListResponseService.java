@@ -15,16 +15,22 @@ public class CheckListResponseService {
 
     // Save responses to the checklist_response collection
     public CheckListResponse saveResponse(CheckListResponse response) {
-        return checkListResponseRepo.save(response);
+        System.out.println("Saving response: " + response);  // Log the response
+        response.validateFields(); // Validate fields
+        CheckListResponse savedResponse = checkListResponseRepo.save(response);
+        System.out.println("Saved response: " + savedResponse);  // Log the saved response
+        return savedResponse;
     }
 
     // Retrieve all responses for a given question
     public List<CheckListResponse> getResponsesByQuestionId(Integer questionId) {
+        System.out.println("Fetching responses for question ID: " + questionId); // Debugging log
         return checkListResponseRepo.findAll();  // Modify this as needed (e.g., custom query)
     }
 
     // Optionally, delete responses (e.g., by questionId or user)
     public void deleteResponse(String responseId) {
+        System.out.println("Deleting response with ID: " + responseId); // Debugging log
         checkListResponseRepo.deleteById(responseId);
     }
 }

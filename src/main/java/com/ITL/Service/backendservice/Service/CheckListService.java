@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +32,11 @@ public class CheckListService {
         if (checkLists.isEmpty()) {
             nextId = 1;  // Reset nextId to 1 if the collection is empty
         } else {
-            Integer maxId = checkLists.stream()
-                    .map(CheckList::getId)
-                    .max(Integer::compareTo)
-                    .orElse(0);  // Default to 0 if no documents exist
-            nextId = maxId + 1; // Otherwise, set nextId to max ID + 1
+            // Get the maximum ID using Integer comparison
+            nextId = checkLists.stream()
+                    .map(CheckList::getId)  // Get all IDs
+                    .max(Comparator.naturalOrder())  // Compare using natural order for Integers
+                    .orElse(0) + 1;   // Default to 0 if no documents exist, then increment by 1
         }
     }
 
@@ -55,10 +56,10 @@ public class CheckListService {
         return checklistRepository.findAll();
     }
 
-    // Method to delete all questions and reset nextId to 1
+    // Method to delete all questions and reset nextId to the highest ID in the database
     public void deleteAllQuestions() {
         checklistRepository.deleteAll();  // Delete all questions from the database
-        resetNextId();  // Reset nextId after deletion
+        resetNextId();  // Recalculate nextId based on the remaining data
     }
 
     // Method to delete a specific question by ID
@@ -66,7 +67,7 @@ public class CheckListService {
         Optional<CheckList> checkList = checklistRepository.findById(id);
         if (checkList.isPresent()) {
             checklistRepository.delete(checkList.get());  // Delete the specific question by ID
-            resetNextId();  // Reset nextId after deletion
+            resetNextId();  // Recalculate nextId based on the remaining data
         }
     }
 }

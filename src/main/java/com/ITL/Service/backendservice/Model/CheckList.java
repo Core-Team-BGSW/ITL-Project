@@ -7,12 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CheckList {
 
     @Id
-    private Integer id;  // Unique ID for each checklist question
+    private Integer id;  // Ensure this is Integer, not String
+
     private String question;  // The question text
 
     // Constructors, Getters, and Setters
-    public CheckList() {
-    }
+    public CheckList() {}
 
     public CheckList(Integer id, String question) {
         this.id = id;
