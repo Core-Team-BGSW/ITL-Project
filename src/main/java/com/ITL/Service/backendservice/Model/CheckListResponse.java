@@ -17,7 +17,7 @@ public class CheckListResponse {
     private String responsible;
     private String status;
     private Date dueDate;  // Use Date type for dueDate
-    private String fulfillmentStatus;
+    private String fulfillmentStatus;  // Store fulfillmentStatus here
 
     // Getters and Setters
 

@@ -39,7 +39,7 @@ public class CheckListResponseController {
                 responseDTO.getResponsible(),
                 responseDTO.getStatus(),
                 responseDTO.getDueDate(),
-                responseDTO.getFulfillmentStatus()
+                responseDTO.getFulfillmentStatus()  // Save the fulfillmentStatus too
         );
     }
 }

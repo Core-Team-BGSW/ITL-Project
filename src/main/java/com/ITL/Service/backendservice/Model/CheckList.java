@@ -1,8 +1,10 @@
 package com.ITL.Service.backendservice.Model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import java.util.List;
 
 @Document(collection = "lab_checklist") // MongoDB collection name
 public class CheckList {
@@ -13,8 +15,10 @@ public class CheckList {
     private Integer questionId;  // Unique question ID
     private String question;  // The actual checklist question
 
-    // Constructors, Getters, and Setters
+    @DBRef  // Reference to CheckListResponse (not embedding it)
+    private List<CheckListResponse> responses;  // List of references to responses
 
+    // Constructors, Getters, and Setters
     public CheckList() {}
 
     public CheckList(Integer questionId, String question) {
@@ -47,5 +51,14 @@ public class CheckList {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    // Getter and Setter for responses
+    public List<CheckListResponse> getResponses() {
+        return responses;
+    }
+
+    public void setResponses(List<CheckListResponse> responses) {
+        this.responses = responses;
     }
 }

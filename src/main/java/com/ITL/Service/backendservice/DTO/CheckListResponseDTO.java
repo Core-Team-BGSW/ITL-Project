@@ -2,18 +2,19 @@ package com.ITL.Service.backendservice.DTO;
 
 public class CheckListResponseDTO {
 
-    private Integer questionId;  // questionId to reference the CheckList question
+    private Integer questionId;
     private String explanation;
     private String measures;
     private String responsible;
     private String status;
     private String dueDate;
-    private String fulfillmentStatus;
+    private String fulfillmentStatus; // Add fulfillmentStatus here
 
     // Getters and Setters
 
     public Integer getQuestionId() {
         return questionId;
+
     }
 
     public void setQuestionId(Integer questionId) {

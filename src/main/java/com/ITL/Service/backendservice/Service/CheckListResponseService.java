@@ -22,6 +22,9 @@ public class CheckListResponseService {
         // Set the questionId from CheckList
         response.setQuestionId(checkList.getQuestionId());
 
+        // Always set the fulfillment status
+        response.setFulfillmentStatus(fulfillmentStatus); // Ensure that fulfillmentStatus is saved
+
         if ("completely-fulfilled".equals(fulfillmentStatus)) {
             // Only explanation is saved
             response.setExplanation(explanation);
