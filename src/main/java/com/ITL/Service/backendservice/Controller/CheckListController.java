@@ -23,7 +23,7 @@ public class CheckListController {
     // Endpoint to get all questions
     @GetMapping("/")
     public List<CheckList> getAllQuestions() {
-        return checklistService.getAllQuestions();
+        return checklistService.getAllQuestions();  // This calls the getAllQuestions() method in the service
     }
 
     // Endpoint to delete all questions and reset questionId sequence
@@ -32,9 +32,9 @@ public class CheckListController {
         checklistService.deleteAllQuestions();
     }
 
-    // Endpoint to delete a specific question by ID
-    @DeleteMapping("/delete/{id}")
-    public void deleteQuestion(@PathVariable Integer id) {
-        checklistService.deleteQuestion(id);
+    // Endpoint to delete a specific question by questionId
+    @DeleteMapping("/delete/{questionId}")
+    public void deleteQuestion(@PathVariable Integer questionId) {
+        checklistService.deleteQuestion(questionId);
     }
 }

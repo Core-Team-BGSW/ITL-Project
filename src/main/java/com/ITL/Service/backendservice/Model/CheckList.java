@@ -2,31 +2,45 @@ package com.ITL.Service.backendservice.Model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.bson.types.ObjectId;
 
-@Document(collection = "lab_checklist")  // MongoDB collection name
+@Document(collection = "lab_checklist") // MongoDB collection name
 public class CheckList {
 
     @Id
-    private Integer id;  // Ensure this is Integer, not String
+    private ObjectId id;  // MongoDB ID (this will be automatically managed by MongoDB)
 
-    private String question;  // The question text
+    private Integer questionId;  // Unique question ID
+    private String question;  // The actual checklist question
 
     // Constructors, Getters, and Setters
+
     public CheckList() {}
 
-    public CheckList(Integer id, String question) {
-        this.id = id;
+    public CheckList(Integer questionId, String question) {
+        this.questionId = questionId;
         this.question = question;
     }
 
-    public Integer getId() {
+    // Getter and Setter for questionId
+    public Integer getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
+    }
+
+    // Getter and Setter for id (MongoDB ID)
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
+    // Getter and Setter for question
     public String getQuestion() {
         return question;
     }

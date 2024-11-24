@@ -1,33 +1,16 @@
-package com.ITL.Service.backendservice.Model;
+package com.ITL.Service.backendservice.DTO;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class CheckListResponseDTO {
 
-import java.util.Date;
-
-@Document(collection = "checklist_response")
-public class CheckListResponse {
-
-    @Id
-    private String id;  // MongoDB's default ObjectId
-
-    private Integer questionId;  // The unique questionId from CheckList, referencing the question
+    private Integer questionId;  // questionId to reference the CheckList question
     private String explanation;
     private String measures;
     private String responsible;
     private String status;
-    private Date dueDate;  // Use Date type for dueDate
+    private String dueDate;
     private String fulfillmentStatus;
 
     // Getters and Setters
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Integer getQuestionId() {
         return questionId;
@@ -69,11 +52,11 @@ public class CheckListResponse {
         this.status = status;
     }
 
-    public Date getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
 

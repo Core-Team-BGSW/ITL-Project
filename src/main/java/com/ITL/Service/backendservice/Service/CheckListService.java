@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CheckListService {
@@ -16,58 +16,62 @@ public class CheckListService {
     @Autowired
     private CheckListRepo checklistRepository;
 
-    private int nextId;
-
-    // Initialize nextId based on the max ID found in the database, or set it to 1 if no entries exist.
-    @PostConstruct
-    public void init() {
-        resetNextId();  // Initial call to set the nextId
+    private int nextQuestionId;  // This will store the next available question_id
+    public CheckList getCheckListByQuestionId(Integer questionId) {
+        return checklistRepository.findByQuestionId(questionId);  // This will fetch the checklist by questionId
     }
 
-    private void resetNextId() {
-        // Fetch all CheckLists from the repository
+    // Initialize nextQuestionId based on the max questionId found in the database
+    @PostConstruct
+    public void init() {
+        resetNextQuestionId();  // Initial call to set the next question_id
+    }
+
+    // Method to reset nextQuestionId based on the max ID found in the database
+    private void resetNextQuestionId() {
         List<CheckList> checkLists = checklistRepository.findAll();
 
-        // Check if the collection is empty and reset nextId to 1, otherwise find the max ID and increment it
+        // If the list is empty, set nextQuestionId to 1, else find the max questionId and increment it
         if (checkLists.isEmpty()) {
-            nextId = 1;  // Reset nextId to 1 if the collection is empty
+            nextQuestionId = 1;
         } else {
-            // Get the maximum ID using Integer comparison
-            nextId = checkLists.stream()
-                    .map(CheckList::getId)  // Get all IDs
-                    .max(Comparator.naturalOrder())  // Compare using natural order for Integers
-                    .orElse(0) + 1;   // Default to 0 if no documents exist, then increment by 1
+            nextQuestionId = checkLists.stream()
+                    .map(CheckList::getQuestionId)  // Get all questionIds
+                    .max(Comparator.naturalOrder())  // Find the maximum questionId
+                    .orElse(0) + 1;  // Default to 1 if no questionIds are found
         }
     }
 
-    // Save a list of questions
+    // Save questions and generate unique questionId
     public List<CheckList> addQuestions(List<String> questions) {
-        // Create new CheckList objects with unique IDs
         List<CheckList> newCheckLists = questions.stream()
-                .map(question -> new CheckList(nextId++, question)) // Increment nextId for each new question
-                .toList();
+                .map(question -> new CheckList(nextQuestionId++, question))  // Generate unique questionId
+                .collect(Collectors.toList());
 
-        // Save all questions at once
-        checklistRepository.saveAll(newCheckLists);
+        checklistRepository.saveAll(newCheckLists);  // Save all questions at once to the repository
         return newCheckLists;
     }
 
+    // Fetch all questions from the database
     public List<CheckList> getAllQuestions() {
-        return checklistRepository.findAll();
+        return checklistRepository.findAll();  // This fetches all CheckList objects from the repository
     }
 
-    // Method to delete all questions and reset nextId to the highest ID in the database
+    // Method to delete all questions and reset nextQuestionId
     public void deleteAllQuestions() {
-        checklistRepository.deleteAll();  // Delete all questions from the database
-        resetNextId();  // Recalculate nextId based on the remaining data
+        checklistRepository.deleteAll();  // Delete all questions from the repository
+        resetNextQuestionId();  // Recalculate nextQuestionId
     }
 
-    // Method to delete a specific question by ID
-    public void deleteQuestion(Integer id) {
-        Optional<CheckList> checkList = checklistRepository.findById(id);
-        if (checkList.isPresent()) {
-            checklistRepository.delete(checkList.get());  // Delete the specific question by ID
-            resetNextId();  // Recalculate nextId based on the remaining data
-        }
+    // Method to delete a specific question by questionId
+    public void deleteQuestion(Integer questionId) {
+        checklistRepository.findAll()
+                .stream()
+                .filter(checkList -> checkList.getQuestionId().equals(questionId))  // Find question by ID
+                .findFirst()
+                .ifPresent(checkList -> {
+                    checklistRepository.delete(checkList);  // Delete the question
+                    resetNextQuestionId();  // Recalculate nextQuestionId after deletion
+                });
     }
 }
