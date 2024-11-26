@@ -33,18 +33,19 @@
             <input type="file" (change)="onFileChanged($event)" placeholder="Choose file" hidden />
             <span class="choosebutton">Choose File</span>
           </label>
-          <span *ngIf="selectedFileName" class="file-name">{{
+          <!-- <span *ngIf="selectedFileName" class="file-name">{{
             selectedFileName
-            }}</span>
-        </div>
-        <div class="importbutton">
-          <button class="templatebutton" (click)="onDownloadTemplate()">
-            <mat-icon svgIcon="download-file"></mat-icon>Download Template
-          </button>
-          <button class="previewbutton" title="Please choose file for upload" [disabled]="!fileSelected"
-            (click)="onPreview()">
-            <mat-icon svgIcon="preview"></mat-icon>Preview
-          </button>
+            }}</span> -->
+
+          <div class="importbutton">
+            <button class="templatebutton" (click)="onDownloadTemplate()">
+              <mat-icon svgIcon="download-file"></mat-icon>Download Template
+            </button>
+            <button class="previewbutton" title="Please choose file for upload" [disabled]="!fileSelected"
+              (click)="onPreview()">
+              <mat-icon svgIcon="preview"></mat-icon>Preview
+            </button>
+          </div>
         </div>
       </div>
       <div *ngIf="previewVisible">
@@ -92,7 +93,7 @@
         </div>
 
         <div class="sub">
-          <button mat-button class="subbutton" [disabled]="!selectedFile" (click)="onFileSubmit()">
+          <button class="subbutton" [disabled]="!selectedFile" (click)="onFileSubmit()">
             Submit
           </button>
         </div>

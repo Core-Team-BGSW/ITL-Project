@@ -7,9 +7,10 @@ import { FilterPipe } from '../../filter.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
-import { Location } from '../../../../models/Location';
-import { LabData } from '../../../../models/LabData';
 import { DataService } from '../../data.service';
+import { AngularModule } from '../../angularmodule/angularmodule.module';
+import { imagemodule } from '../../angularmodule/imagemodule.module';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lab-decommission',
@@ -21,6 +22,8 @@ import { DataService } from '../../data.service';
     FormsModule,
     FilterPipe,
     MatButtonModule,
+    AngularModule,
+    imagemodule,
   ],
   templateUrl: './lab-decommission.component.html',
   styleUrls: ['./lab-decommission.component.scss'],
