@@ -3336,41 +3336,25 @@ Explanation<span class="required"> * </span> :
    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
    <strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong> 
    
-   <p></p>
-  
-  <div class="container_design">
-   <div class="question_design">
+   
+
+   
    <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span>
    
     <p></p>
-    </div>
-  
     
-      <table style="border: spacing 10px;">
-        <thead>
-          <tr>
-            <td style="width: 5px;"></td>
-            <td><strong><label for="internalEmployeeCount">   No.of Internal Associates </label> </strong></td>
-            <td style="width: 5px;"></td>
-            <td> <b><br> <label for="externalEmployeeCount"> No.of External Associates </label></b>  </td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="width: 5px;"></td>
-            <!-- <div *ngIf="showInternalExternalFields"> -->
-            <td> <input  class="form-control" id="internalEmployeeCount" type="text" placeholder="Internal Associates"  [(ngModel)]="headcount[0]" name="headcount"></td>
-            <td style="width: 5px;"></td>
-            <td><input  class="form-control" id="externalEmployeeCount" type="text" placeholder="External Associates" [(ngModel)]="headcount[1]" name="headcount"></td>
-            <!-- </div> -->
-            </tr>
-        </tbody>
-      </table>
-   <p></p>        
-    </div>
-    
-    
+    <mat-card class="custom-card">
+     <mat-card-content>
+       
+       <strong>   No.of Internal Associates </strong> 
+       <input type="text" placeholder="Internal Associates" [(ngModel)]="formData.firstName" name="firstName">
+        <p></p>
+       <br> <strong>No.of External Associates </strong> 
+          
+       <input type="text" placeholder="External Associates" [(ngModel)]="formData.lastName" name="lastName">
+        </mat-card-content>
+                 
+    </mat-card>
    <p></p>
    <div class="container_design">
     <div class="question_design">
@@ -3383,11 +3367,10 @@ Explanation<span class="required"> * </span> :
       <p></p>
     </div>
        
-     
+      <input type="text" placeholder="No.of Devices" [(ngModel)]="formData.deviceno" name="deviceno">
+        
+     </mat-card>
      <p></p>
-     <div class="container_design">
-      <div class="question_design">
-        <p></p>
      <br> 3. Is the lab(s) (including IT systems) completely independent to network-dependent IT infrastructures into LAN?
     
      <span class="required"> * </span>
@@ -3398,7 +3381,7 @@ Explanation<span class="required"> * </span> :
      <p></p>
     
          <!-- Your form and radio buttons here -->
-         <mat-radio-group [(ngModel)]="dependancy[0]" >
+         <mat-radio-group [(ngModel)]="labelPosition" (ngModelChange)="onSelectionChange($event)">
            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL1-no" >No</mat-radio-button>
          </mat-radio-group>
@@ -3416,7 +3399,8 @@ Explanation<span class="required"> * </span> :
          
        <div class="dropdown-container">
        <div class="dropdown-item">
-         <input type="text" placeholder="Answers"  [(ngModel)]="dependancy[1]" name="dependancy">
+         Answers<span class="required"> * </span> :
+         <input type="text" placeholder="Answers" [(ngModel)]="formData.answer1" name="answer1">
          </div>
          </div>
          </div>
@@ -3427,8 +3411,8 @@ Explanation<span class="required"> * </span> :
         <div class="question_design">Explanation</div>  
        <div class="dropdown-container">
        <div class="dropdown-item">
-       
-         <input type="text" placeholder="Explanation" [(ngModel)]="dependancy[1]" name="dependancy">
+         Explanation<span class="required"> * </span> :
+         <input type="text" placeholder="Explanation" [(ngModel)]="formData.explanation1" name="explanation1">
          </div>
          </div>
        
@@ -3445,7 +3429,7 @@ Explanation<span class="required"> * </span> :
      
        <mat-card-content>
          <!-- Your form and radio buttons here -->
-         <mat-radio-group [(ngModel)]="wan[0]" >
+         <mat-radio-group [(ngModel)]="labelPosition1" (ngModelChange)="onSelectionChange1($event)">
            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
          </mat-radio-group>
@@ -3696,11 +3680,9 @@ Explanation<span class="required"> * </span> :
                         <p></p>
         </div>
          <p></p>
-     <br>  <button class="primary">Save as Draft</button>
-       <button type="button" class="success_btn" (click)="saveForm()">Save</button>     
-     <p></p>
-
-      
+     <br>  <button class="primary" (click)="saveDraft()">Save as Draft</button>
+       <button class="success_btn" >Save</button>     
+       
  </mat-tab>
  
  </mat-tab-group>

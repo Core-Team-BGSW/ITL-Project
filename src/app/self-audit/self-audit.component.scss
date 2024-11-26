@@ -350,7 +350,11 @@ h2
    background-color: white; /* Example color */
  }
 
- 
+ h4{
+  background-color: #2bb4ef;
+  text-align: left;
+  color: white;
+}
 .custom-card1{
   border-radius: 0px; /* Rounded corners */
 padding: 2px;/* Padding inside the card */
@@ -438,11 +442,12 @@ h5{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 h3{
-  color:#6a6b6f;
- font-weight: 500;
- font-size: 55px;
- text-align: left;
-//  background-color: #e8e7e7;
+  color:#121b61;
+ text-align: center;
+ font-weight: 400;
+ text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Shadow */
+ text-align: center;
+ background-color: #c6f1ff;
  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .custom-file-upload {
