@@ -33,9 +33,9 @@
             <input type="file" (change)="onFileChanged($event)" placeholder="Choose file" hidden />
             <span class="choosebutton">Choose File</span>
           </label>
-          <!-- <span *ngIf="selectedFileName" class="file-name">{{
+          <span *ngIf="selectedFileName" class="file-name">{{
             selectedFileName
-            }}</span> -->
+            }}</span>
 
           <div class="importbutton">
             <button class="templatebutton" (click)="onDownloadTemplate()">
