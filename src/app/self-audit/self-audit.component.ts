@@ -14,7 +14,9 @@ import { saveAs } from 'file-saver';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ResponseService } from '../services/response.service';
+import { FormAnswerService } from '../form-answer.service';
+import { response } from 'express';
+// import { FormAnswerService } from './form-answer.service';
 
 
 
@@ -71,6 +73,19 @@ export class SelfAuditComponent {
   selectedOption29: string = '';
   selectedOption30: string = '';
   loginArray:any={};
+
+  headcount: string[] = ['', ''];
+  itDevice:string="";
+  dependancy:string[]=[];
+  wan: string[] = ['', ''];
+  test:string[]=[];
+  downtime:string="";
+  criticalTest:string[]=[];
+  trial:string[]=[];
+  lan:string[]=[];
+  confidentiality:string="";
+  userId:string=""
+
   formData = {
     firstName: '',
     lastName: '',
@@ -81,11 +96,39 @@ export class SelfAuditComponent {
     labelPosition1:'',
     downtime:'',
     answer2:'',
-    selectedOption: ''
-    
+    selectedOption: '',
+    internalEmployeeCount: '',
+    externalEmployeeCount: '',
+    acceptabletime:',',
+    answer3:'',
+    answer4:'',
+    maxdowntime:'',
+    timerequired1:'',
+    answer5:'',
+    answer6:'',
+    answer7:'',
+    answer8:'',
+    answer9:'',
+    timereq:'',
+    answer10:'',
+    selecteddropdown:''
+
+
+
+
+
+
+
+  
   };
+
+
   // private apiUrl = 'http://localhost:8080/responses';
   isBrowser: boolean;
+  showInternalExternalFields: boolean = false;
+  showNumberOfDevices: boolean = false;
+  showAnswers: boolean = false;
+  showExplanation: boolean = false;
  
   showOptions = false;
 
@@ -169,7 +212,8 @@ linkForm: FormGroup;
  
   constructor(private fb: FormBuilder,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private responseService: ResponseService
+    private formAnswerService: FormAnswerService,
+    private http: HttpClient
     
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -187,11 +231,48 @@ linkForm: FormGroup;
       explanation: ['', Validators.required]
     });
   }
+  ngOnInit(): void {
+   
+    const storedValue = localStorage.getItem('labelPosition');
+    const storedValue1 = localStorage.getItem('labelPosition1');
+    const storeddropdown = localStorage.getItem('selectedOption');
+      if (storedValue) {
+        this.labelPosition = storedValue;
+      }
+      if (storedValue1) {
+        this.labelPosition1 = storedValue1;
+      }
+      if (storeddropdown) {
+        this.selectedOption = storeddropdown;
+      }
+      
+      
+  }
+  updateFieldVisibility(questionId: string, optionFlag: number): void {
+    // Reset visibility
+    this.showInternalExternalFields = false;
+    this.showNumberOfDevices = false;
+    this.showAnswers = false;
+    this.showExplanation = false;
+  
+    if (questionId === '1') {
+      this.showInternalExternalFields = true;
+    } else if (questionId === '2') {
+      this.showNumberOfDevices = true;
+    } else if (questionId === '3') {
+      if (optionFlag === 0) {
+        this.showAnswers = true;
+      } else if (optionFlag === 1) {
+        this.showExplanation = true;
+      }
+    }
+  }
   onSubmit() {
     if (this.linkForm.valid) {
       console.log('Form Submitted!', this.linkForm.value);
     }
   }
+ 
   // submitResponse(data: any): Observable<any> {
   //   return this.http.post<any>(this.apiUrl, data)
   // }
@@ -247,141 +328,76 @@ generateExcelFile(): void {
   // Step 11: Save the file
   saveAs(blob, 'Copy of remote access list.xlsx');
 }
-// ngOnInit(): void {
-//   // this.loadDraft();
-//   // this.linkForm.get('questionId').valueChanges.subscribe((questionId) => {
-//   //   this.updateFieldVisibility(questionId, this.linkForm.get('optionFlag').value);
-//   // });
-//   this.linkForm = this.fb.group({
-//     internalEmployeeCount: ['', [Validators.required]], // For QuestionId 1
-//     externalEmployeeCount: ['', [Validators.required]], // For QuestionId 1
-//     numberOfDevices: [''], // For QuestionId 2
-//     optionFlag: [''], // For QuestionId 3
-//     answers: [''], // For QuestionId 3 if optionFlag = 0
-//     explanation: [''] // For QuestionId 3 if optionFlag = 1
-//   });
-//   const storedValue = localStorage.getItem('labelPosition');
-//   const storedValue1 = localStorage.getItem('labelPosition1');
-//   const storeddropdown = localStorage.getItem('selectedOption');
-//     if (storedValue) {
-//       this.labelPosition = storedValue;
-//     }
-//     if (storedValue1) {
-//       this.labelPosition1 = storedValue1;
-//     }
-//     if (storeddropdown) {
-//       this.selectedOption = storeddropdown;
-//     }
-    
-    
-// }
-// private preparePayload(formData: any): any {
-//   const payload: any = {};
 
-//   // Example logic for QuestionId-specific handling
-//   if (formData.internalEmployeeCount || formData.externalEmployeeCount) {
-//     payload.questionId = 1;
-//     payload.optionDescription = 'Number of Internals and Externals';
-//     payload.optionAnswer = {
-//       internal: formData.internalEmployeeCount,
-//       external: formData.externalEmployeeCount
-//     };
-//   }
-// }
-// updateFieldVisibility(questionId: string, optionFlag: number): void {
-//   // Reset visibility
-//   this.showInternalExternalFields = false;
-//   // this.showNumberOfDevices = false;
-//   // this.showAnswers = false;
-//   // this.showExplanation = false;
+submitForm(): void {
+  if (this.linkForm.valid) {
+      // Log the form data for debugging
+      console.log('Form Data:', this.formData);
 
-//   if (questionId === '1') {
-//     this.showInternalExternalFields = true;
-//   // } else if (questionId === '2') {
-//   //   this.showNumberOfDevices = true;
-//   // } else if (questionId === '3') {
-//   //   if (optionFlag === 0) {
-//   //     this.showAnswers = true;
-//   //   } else if (optionFlag === 1) {
-//   //     this.showExplanation = true;
-//   //   }
-//    }
-// saveDraft(): void {
-//   if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
-//     localStorage.setItem('draftData', JSON.stringify(this.formData));
-//     alert('Draft saved!');
-//   }
-// }
-// loadDraft(): void {
-//   if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
-//     const savedData = localStorage.getItem('draftData');
-//     if (savedData) {
-//       this.formData = JSON.parse(savedData);
-//     }
-//   }
-// }
-// private isLocalStorageAvailable(): boolean {
-//   return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
-// }
-// onSelectionChange(value: string): void {
-//   // Save the selected value to localStorage whenever it changes
-//   if (this.isBrowser) {
-//     localStorage.setItem('labelPosition', value);
-    
-//   }
-  
+      // Send form data to the backend
+  //     // this.http.post('/api/employees', this.formData).subscribe(
+  //       (response) => {
+  //         console.log('Form submitted successfully:', response);
+  //       },
+  //       (error) => {
+  //         console.error('Error submitting form:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.log('Form is invalid');
+  //   }
+  // }
+}
+}
+
+saveForm(){
+  this.userId="HUL3KOR";
+  const data = {
+      userId: this.userId,  // This could be dynamic or from login info
+      sectionA:{
+        headCount:this.headcount,  // Example data
+        itDevice: this.itDevice,
+        dependancy: this.dependancy,
+        wan: this.wan,
+        test: this.test,
+        downtime: this.downtime,
+        criticalTest: this.criticalTest,
+        trial: this.trial,
+        lan: this.lan,
+        confidentiality: this.confidentiality
+      }
+    }
+
+  // console.log(data);
+  this.formAnswerService.saveFormAnswer(data).subscribe(
+    (response) =>{
+      console.log('Form Saved Successfully',response);
+    }
+  );
 
 }
-// onSelectionChange1(value: string): void {
-//   // Save the selected value to localStorage whenever it changes
-//   if (this.isBrowser) {
-//     localStorage.setItem('labelPosition1', value);
-//   }
+//   const formdata ={
+//     internalheadcount:this.headcount[0],
+//     externalheadcount:this.headcount[1],
+//     confidentiality:this.confidentiality
+
+//   };
+//   this.http.post('http://localhost:8080/save', formdata)
+//       .subscribe(response => {
+//         console.log('Form saved:', response);
+//         alert('Form saved successfully!');
+//       });
+  // console.log(this.headcount,this.itDevice,this.dependancy,this.wan,this.test,this.downtime,this.confidentiality);
+
+
+// this.formAnswerService.saveFormAnswer(this.formData).subscribe(
+//   (response: any) => {  // Use 'any' if you don't want to define a type
+//     console.log('Form saved successfully:', response);
+//     alert('Form saved successfully!');
+//   });
+//   // error => {
+//   //   console.error('Error saving form:', error);
+//   //   alert('There was an error saving the form.');
 // }
-//  onSubmit(): void {
-//   if (this.linkForm.valid) {
-//     const formData = this.linkForm.value;
-
-//     // Prepare data based on QuestionId logic
-//     const payload: any = this.preparePayload(formData);
-
-//     // Call the ResponseService to save the data
-//     this.responseService.saveResponse(payload).subscribe(
-//       (response) => {
-//         console.log('Response saved successfully:', response);
-//         alert('Response saved successfully!');
-//       },
-//       (error) => {
-//         console.error('Error saving response:', error);
-//         alert('Error saving response.');
-//       }
-//     );
-//   } else {
-//     console.error('Form is invalid!');
-//   }
-//   return payload;
-//  }
-// onSubmit(): void {
-//   if (this:linkForm.valid) {
-//     console.log('Form Data:', this.linkForm.value);
-//   }
-//    else {
-//     console.error('Form is invalid!');
-//   }
-// }
-
-  
- 
-
-
- 
- 
-
-
-
-    
-
-
-
- 
-
+// 
+}

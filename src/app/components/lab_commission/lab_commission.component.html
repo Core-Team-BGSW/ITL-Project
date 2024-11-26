@@ -26,26 +26,30 @@
       <div class="methodheading">
         <p>Import File</p>
       </div>
-      <div class="importfile">
-        <div class="uploadbutton">
+      <p></p>
+      <div class="container_design">
+        <!-- <div class="uploadbutton"> -->
           <label>
-            Choose File to upload:
+            <div class="question_design">
+          <div style="margin-left: 10px;">Choose File to upload:  
             <input type="file" (change)="onFileChanged($event)" placeholder="Choose file" hidden />
-            <span class="choosebutton">Choose File</span>
+            <span class="choosebutton">Choose File</span></div></div>
           </label>
           <span *ngIf="selectedFileName" class="file-name">{{
             selectedFileName
             }}</span>
-        </div>
-        <div class="importbutton">
-          <button class="templatebutton" (click)="onDownloadTemplate()">
+        <!-- </div> -->
+        <!-- <div class="btn_container"> -->
+          <button style="margin-left: 10px;" class="templatebutton" (click)="onDownloadTemplate()">
             Download Template
           </button>
-          <button class="previewbutton" title="Please choose file for upload" [disabled]="!fileSelected"
+          <button style="margin-left: 10px;" class="previewbutton" title="Please choose file for upload" [disabled]="!fileSelected"
             (click)="onPreview()">
             Preview
           </button>
-        </div>
+          
+        <!-- </div> -->
+        <p></p>
       </div>
       <div *ngIf="previewVisible">
         <div class="previewtextheading">
@@ -109,7 +113,7 @@
 
       <div class="container-row">
         <div class="container">
-          <div class="container-heading">
+          <div class="question_design">
             <strong>Site Details</strong>
           </div>
           <div class="userinput-container">
@@ -147,7 +151,7 @@
         </div>
         <!----------------------------------------------------------Site Details------------------------------------------------------------------------------------------------------------->
         <div class="container">
-          <div class="container-heading">
+          <div class="question_design">
             <strong>Entity and GB</strong>
           </div>
           <div class="userinput-container">
@@ -169,11 +173,12 @@
           </div>
         </div>
       </div>
-
+      <p></p>
       <div class="container-row">
         <!-------------------------------------------ITL Details--------------------------------------------------------------------------------->
+
         <div class="container">
-          <div class="container-heading">
+          <div class="question_design">
             <strong>ITL's</strong>
           </div>
           <div class="userinput-container">
@@ -215,7 +220,7 @@
 
         <!-------------------------------------------Coordinator Details--------------------------------------------------------------------------------->
         <div class="container">
-          <div class="container-heading">
+          <div class="question_design">
             <strong>Lab Coordinators</strong>
           </div>
           <div class="userinput-container">
@@ -242,14 +247,15 @@
             <div class="userinput-item">
               <label for="CC">Cost Center<span class="required"> *</span> </label>
               <input type="text" placeholder="Cost Center" [(ngModel)]="CC" />
+              <p></p>
             </div>
           </div>
         </div>
       </div>
-
+<p></p>
       <!-------------------------------------------Location Details--------------------------------------------------------------------------------->
       <div class="container">
-        <div class="container-heading">
+        <div class="question_design">
           <strong>Location Details</strong>
         </div>
         <div class="userinput-container">
@@ -310,11 +316,11 @@
           </div>
         </div>
       </div>
-
+ <p></p>
       <!-------------------------------------------DH KAM Details--------------------------------------------------------------------------------->
 
       <div class="container">
-        <div class="container-heading">
+        <div class="question_design">
           <strong>DH & KAM Information</strong>
         </div>
         <div class="userinput-container">
@@ -363,9 +369,10 @@
           </div>
         </div>
       </div>
+      <p></p>
 
       <div class="container">
-        <div class="container-heading">
+        <div class="question_design">
           <strong>Lab Work Details</strong>
         </div>
         <div class="userinput-container">
@@ -395,15 +402,16 @@
           </div>
         </div>
       </div>
-
+<p></p>
       <div class="radioflex">
-        <mat-card>
-          <mat-card-content>
-            <p>
+        <!-- <mat-card>
+          <mat-card-content> -->
+            <div class="container_design">
+              <div class="question_design">
               Is lab going to procure new equipment for Engineering/Red Zone?
-              <span class="required"> *</span>
-            </p>
-            <section class="radiocontainer">
+              <span class="required"> *</span></div>
+            
+            <!-- <section class="radiocontainer"> -->
               <mat-radio-group [(ngModel)]="cmdbradio" #cmdbradioGroup="ngModel" required>
                 <mat-radio-button value="Yes">Yes</mat-radio-button>
                 <mat-radio-button value="No">No</mat-radio-button>
@@ -422,13 +430,17 @@
                 <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/CMDB" target="_blank"
                   rel="noopener">SMT-CMDB</a>
               </p>
-            </section>
-          </mat-card-content>
-        </mat-card>
+            <!-- </section> -->
+            </div>
+          <!-- </mat-card-content>
+        </mat-card> -->
+        
 
-        <mat-card>
-          <mat-card-content>
-            <p>Shared Lab<span class="required"> *</span></p>
+        <!-- <mat-card>
+          <mat-card-content> -->
+            <div class="container_design">
+              <div class="question_design">
+            <div style="color: white;">Shared  Lab<span class="required"> *</span></div></div>
             <section class="radiocontainer">
               <mat-radio-group [(ngModel)]="sharedlabradio">
                 <mat-radio-button class="sharedlab-margin" value="Yes">Yes</mat-radio-button>
@@ -439,11 +451,14 @@
                 </p>
               </mat-radio-group>
             </section>
-          </mat-card-content>
-        </mat-card>
-        <mat-card>
-          <mat-card-content>
-            <p>Self Audit Due Date<span class="required"> *</span></p>
+            </div>
+          <!-- </mat-card-content>
+        </mat-card> -->
+        <!-- <mat-card>
+          <mat-card-content> -->
+            <div class="container_design">
+              <div class="question_design">
+           <div style="color: white;"> Self Audit Due Date<span class="required"> *</span></div></div>
             <section class="radiocontainer">
               <div class="date-picker-container">
                 <mat-form-field class="example-full-width">
@@ -464,13 +479,17 @@
                 commissioned.
               </p>
             </section>
-          </mat-card-content>
-        </mat-card>
+          <!-- </mat-card-content>
+        </mat-card> -->
       </div>
-      <mat-card>
-        <mat-card-content>
-          <p>ACL Required<span class="required"> *</span></p>
-          <section class="radiocontainer">
+      </div>
+      <!-- <mat-card>
+        <mat-card-content> -->
+          <p></p>
+          <div class="container_design">
+            <div class="question_design">
+          <div style="color:white">ACL Required<span class="required"> *</span> </div></div>
+          <!-- <section class="radiocontainer"> -->
             <mat-radio-group [(ngModel)]="ACLradio">
               <mat-radio-button value="Yes">Yes</mat-radio-button>
               <mat-radio-button value="No">No</mat-radio-button>
@@ -481,9 +500,10 @@
                   target="_blank" rel="noopener">Click Here</a>
               </p>
             </mat-radio-group>
-          </section>
-        </mat-card-content>
-      </mat-card>
+          <!-- </section> -->
+        <!-- </mat-card-content>
+      </mat-card> -->
+      </div>
       <div class="portdetails" *ngIf="ACLradio === 'Yes'">
         <p>Port Requirement Details</p>
         <div class="userinput-container">

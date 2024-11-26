@@ -131,18 +131,32 @@ p {
 
 .importbutton {
   margin-top: 12px;
-  display: grid;
+  display: flex;
+  gap: 15px;
 }
 
 
-input[type="text"] {
-  width: 60%;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease;
+// input[type="text"] {
+//   width: 60%;
+//   padding: 1rem;
+//   // border: 1px solid #ccc;
+//   background-color: rgb(239, 237, 237);
+//   border-radius: 4px;
+//   font-size: 14px;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+//   transition: border-color 0.3s ease;
+// }
+input[type=text]
+{
+ width: 320px;
+ padding:13px;
+ margin: 8px 0;
+ display: inline-block;
+ border: 2px solid #f7f0f0;
+ background-color: rgb(239, 237, 237);
+ border-radius: 3px;
+ box-sizing: border-box;
+ border: 1.2px solid rgb(221, 221, 221);
 }
 
 .subbutton {
@@ -176,7 +190,7 @@ input[type="text"] {
   /* darkgreen background color */
   color: #fff;
   /* White text color */
-  padding: 10px 25px;
+  padding: 10px 20px;
   border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -184,6 +198,8 @@ input[type="text"] {
   border-radius: 8px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  width: 200px;
+  // display: inline;
 }
 
 .previewbutton:hover {
@@ -194,12 +210,24 @@ input[type="text"] {
   background-color: #ccc;
   color: #666;
   cursor: not-allowed;
+  // padding: 10px 20px;
+  // border: 2px solid #2e72ee;
+  // cursor: pointer;
+  // transition: background-color 0.3s ease;
+  // text-decoration: none;
+  // border-radius: 8px;
+  // margin-top: 1rem;
+  // font-size: 16px;
+  // // color: #fff;
+  // text-align: center;
+  // width: 180px;
 }
 
 .templatebutton {
-  background-color: #56B0FF;
+  // background-color: #56B0FF;
+ background-color:  #9be4b3;
   color: #fff;
-  padding: 10px 25px;
+ padding:  10px 20px;
   border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -207,12 +235,14 @@ input[type="text"] {
   border-radius: 8px;
   margin-top: 1rem;
   margin-top: 1rem;
-  font-size: 16px;
+  // font-size: 16px;
+  width: 200px;
+  // display: inline;
 }
 
 .choosebutton {
-  background-color: #43464a;
-  color: #fff;
+  background-color: #e0e2e5;
+  color: black;
   padding: 10px 25px;
   border: #2e72ee;
   cursor: pointer;
@@ -225,7 +255,7 @@ input[type="text"] {
 }
 
 .choosebutton:hover {
-  background-color: #2e3033;
+  background-color: #c1c7cc;
 
 }
 
@@ -298,23 +328,26 @@ select:hover {
 }
 
 .container {
-  flex: 1;
-  background-color: #eff1f2;
-  padding: 0.5rem;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  border-color: #337ab7;
-  box-sizing: border-box;
-  border: solid 2px #337ab7;
-  margin-bottom: 16px;
+  // flex: 1;
+  // background-color: #eff1f2;
+  // padding: 0.5rem;
+  // border-radius: 8px;
+  // margin-bottom: 8px;
+  // border-color: #337ab7;
+  // box-sizing: border-box;
+  // border: solid 2px #337ab7;
+  // margin-bottom: 16px;
+  border: 0.5px solid #0044AA;
+  border-radius: 10px;
+  width: 95%;
 }
 
 .container-heading {
   color: #fff;
-  background-color: #337ab7;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-size: 18px;
+  background-color: #007bc0;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: larger;
 }
 
 strong {
@@ -363,6 +396,7 @@ label {
   color: #000000;
   padding: 1em;
   border-radius: 0.5em;
+  background-color: rgb(239, 237, 237) ;
   border-color: #e0e2e5;
   /* Ensures padding is included in width */
   font-size: 16px;
@@ -571,4 +605,41 @@ hr {
 
 .suggestions-list li:hover {
   background-color: #f0f0f0;
+}
+.question_design{
+  // background-color: #007bc0;
+  // color: white;
+  // font-size: larger;
+  // border-radius: 10px;
+  // width: 1300px;
+  // padding: 18px;
+  background-color: #007bc0;
+  color: white;
+  font-size: larger;
+  border-radius: 10px;
+  padding: 13px;
+  display: flex;
+
+  
+}
+.container_design{
+  border: 0.5px solid #0044AA;
+  border-radius: 10px;
+  width: 95%;
+}
+select
+{
+  width: 320px;
+  padding:13px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #f7f0f0;
+  background-color: rgb(239, 237, 237);
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1.2px solid rgb(221, 221, 221);
+}
+.btn_container{
+  display: flex; /* Ensures buttons are aligned side by side */
+  gap: 10px;
 }
