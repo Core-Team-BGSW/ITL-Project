@@ -51,10 +51,26 @@ public class CheckListService {
         checklistRepository.saveAll(newCheckLists);  // Save all questions at once to the repository
         return newCheckLists;
     }
+    public CheckListResponse saveCheckListResponse(CheckListResponse response) {
+        CheckListResponse savedResponse = checkListResponseRepository.save(response);
+        CheckList checkList = checkListRepository.findByQuestionId(response.getQuestionId());
+        if (checkList == null) {
+            throw new RuntimeException("Question not found");
+        }
+        checkList.addResponse(savedResponse);
+        checkListRepository.save(checkList);
+        return savedResponse;
+    }
+
 
     // Fetch all questions from the database
     public List<CheckList> getAllQuestions() {
         return checklistRepository.findAll();  // This fetches all CheckList objects from the repository
+    }
+    public List<Integer> getAllQuestionIds() {
+        return checklistRepository.findAll().stream()
+                .map(CheckList::getQuestionId)  // Extract questionId from each CheckList
+                .collect(Collectors.toList());  // Collect them into a list
     }
 
     // Method to delete all questions and reset nextQuestionId

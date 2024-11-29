@@ -15,8 +15,8 @@ public class CheckList {
     private Integer questionId;  // Unique question ID
     private String question;  // The actual checklist question
 
-    @DBRef  // Reference to CheckListResponse (not embedding it)
-    private List<CheckListResponse> responses;  // List of references to responses
+    @DBRef
+    private List<CheckListResponse> responses;  // Reference to CheckListResponse (not embedding it)
 
     // Constructors, Getters, and Setters
     public CheckList() {}
@@ -61,4 +61,11 @@ public class CheckList {
     public void setResponses(List<CheckListResponse> responses) {
         this.responses = responses;
     }
+
+
+
+    public void addResponse(CheckListResponse response) {
+        this.responses.add(response);
+    }
+
 }

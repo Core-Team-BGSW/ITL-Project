@@ -20,6 +20,11 @@ public class CheckListController {
         return checklistService.addQuestions(questions);
     }
 
+    @GetMapping("/ids")
+    public List<Integer> getAllQuestionIds() {
+        List<Integer> questionIds = checklistService.getAllQuestionIds();  // Fetch the questionIds from service
+        return checklistService.getAllQuestionIds();   // Return the list wrapped in ResponseEntity
+    }
     // Endpoint to get all questions
     @GetMapping("/")
     public List<CheckList> getAllQuestions() {
@@ -37,4 +42,12 @@ public class CheckListController {
     public void deleteQuestion(@PathVariable Integer questionId) {
         checklistService.deleteQuestion(questionId);
     }
+    @PostMapping("/responses")
+    public ResponseEntity<Void> addCheckListResponses(@RequestBody List<CheckListResponse> responses) {
+        for (CheckListResponse response : responses) {
+            checkListService.saveCheckListResponse(response);
+        }
+        return ResponseEntity.ok().build();
+    }
+
 }
