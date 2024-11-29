@@ -5,20 +5,17 @@ import com.ITL.Service.backendservice.Model.CheckListResponse;
 import com.ITL.Service.backendservice.DTO.CheckListResponseDTO;
 import com.ITL.Service.backendservice.Service.CheckListResponseService;
 import com.ITL.Service.backendservice.Service.CheckListService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 
 @RestController
 @RequestMapping("/checklist-response")
+@RequiredArgsConstructor
 public class CheckListResponseController {
-
-    @Autowired
-    private CheckListResponseService checkListResponseService;
-
-    @Autowired
-    private CheckListService checkListService;  // Service to retrieve CheckList by questionId
+    private final CheckListResponseService checkListResponseService;
+    private final CheckListService checkListService;  // Service to retrieve CheckList by questionId
 
     // Endpoint to save the user's response
     @PostMapping("/add")

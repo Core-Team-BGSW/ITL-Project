@@ -1,5 +1,12 @@
 package com.ITL.Service.backendservice.DTO;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CheckListResponseDTO {
 
     private Integer questionId;
@@ -9,63 +16,4 @@ public class CheckListResponseDTO {
     private String status;
     private String dueDate;
     private String fulfillmentStatus; // Add fulfillmentStatus here
-
-    // Getters and Setters
-
-    public Integer getQuestionId() {
-        return questionId;
-
-    }
-
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
-    }
-
-    public String getExplanation() {
-        return explanation;
-    }
-
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
-    }
-
-    public String getMeasures() {
-        return measures;
-    }
-
-    public void setMeasures(String measures) {
-        this.measures = measures;
-    }
-
-    public String getResponsible() {
-        return responsible;
-    }
-
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public String getFulfillmentStatus() {
-        return fulfillmentStatus;
-    }
-
-    public void setFulfillmentStatus(String fulfillmentStatus) {
-        this.fulfillmentStatus = fulfillmentStatus;
-    }
 }

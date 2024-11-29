@@ -1,47 +1,50 @@
 package com.ITL.Service.backendservice.Controller;
 
 import com.ITL.Service.backendservice.Model.CheckList;
+import com.ITL.Service.backendservice.Model.CheckListResponse;
 import com.ITL.Service.backendservice.Service.CheckListService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/checklist")
+@RequiredArgsConstructor
 public class CheckListController {
 
-    @Autowired
-    private CheckListService checklistService;
+    private final CheckListService checkListService;
 
     // Endpoint to add new checklist questions
     @PostMapping("/add")
     public List<CheckList> addChecklistQuestions(@RequestBody List<String> questions) {
-        return checklistService.addQuestions(questions);
+        return checkListService.addQuestions(questions);
     }
 
     @GetMapping("/ids")
     public List<Integer> getAllQuestionIds() {
-        List<Integer> questionIds = checklistService.getAllQuestionIds();  // Fetch the questionIds from service
-        return checklistService.getAllQuestionIds();   // Return the list wrapped in ResponseEntity
+        return checkListService.getAllQuestionIds();   // Fetch the questionIds from service and return
     }
     // Endpoint to get all questions
     @GetMapping("/")
     public List<CheckList> getAllQuestions() {
-        return checklistService.getAllQuestions();  // This calls the getAllQuestions() method in the service
+        return checkListService.getAllQuestions();  // This calls the getAllQuestions() method in the service
     }
 
     // Endpoint to delete all questions and reset questionId sequence
     @DeleteMapping("/deleteAll")
     public void deleteAllQuestions() {
-        checklistService.deleteAllQuestions();
+        checkListService.deleteAllQuestions();
     }
 
     // Endpoint to delete a specific question by questionId
     @DeleteMapping("/delete/{questionId}")
     public void deleteQuestion(@PathVariable Integer questionId) {
-        checklistService.deleteQuestion(questionId);
+        checkListService.deleteQuestion(questionId);
     }
+
+
     @PostMapping("/responses")
     public ResponseEntity<Void> addCheckListResponses(@RequestBody List<CheckListResponse> responses) {
         for (CheckListResponse response : responses) {
@@ -51,3 +54,4 @@ public class CheckListController {
     }
 
 }
+
