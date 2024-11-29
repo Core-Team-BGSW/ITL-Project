@@ -1,0 +1,28 @@
+csv:
+  file:
+    directory: C:\Users\KKQ3KOR\Documents\ITL_UserData\src\main\resources\static
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+server:
+  port: 8080
+spring:
+  application:
+    name: backendservice
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/UserData
+
+api:
+    url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
+    url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/
