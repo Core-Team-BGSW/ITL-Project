@@ -2,11 +2,7 @@
   font-size: 28px;
   font-weight: 600;
   border-bottom: 2px solid #9dc9ff;
-  width: 98%;
-  background-color: #3c8dbc;
-  padding: 12px;
-  color: white;
-  border-radius: 8px;
+  width: 40%;
 }
 
 .note-choosemethod {
@@ -26,8 +22,9 @@ p.choosemethod {
 .importfile {
   gap: 20px;
   background: white;
-  border-radius: 8px;
-  border: solid 2px #337ab7;
+  border: 0 none;
+  border-radius: 0px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
   margin: 0 10%;
@@ -35,7 +32,6 @@ p.choosemethod {
   margin-left: 15px;
   margin-top: 10px;
   width: 95%;
-  background-color: #eff1f2;
 }
 
 .mat-mdc-card-content {
@@ -53,7 +49,7 @@ p.choosemethod {
 }
 
 p {
-  font-size: 16px;
+  font-size: 18px;
   padding-top: 4px;
   color: #007bc0;
   font-weight: 600;
@@ -68,7 +64,7 @@ p {
   box-sizing: border-box;
   border-radius: 4px;
   border-bottom: 4px solid #9dc9ff;
-  margin: 8px;
+  margin: 12px;
 }
 
 .file-name {
@@ -115,25 +111,26 @@ p {
 
 .importbutton {
   margin-top: 12px;
-  display: grid;
+  display: flex;
+  gap: 15px;
 }
 
-
-input[type="text"] {
-  width: 60%;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease;
+input[type=text] {
+  width: 320px;
+  padding: 13px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #f7f0f0;
+  background-color: rgb(239, 237, 237);
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1.2px solid rgb(221, 221, 221);
 }
 
 .subbutton {
   background-color: #37A264;
-  color: #fff;
+  color: #fff !important;
   padding: 10px 25px;
-  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -141,7 +138,6 @@ input[type="text"] {
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 24px;
-  font-weight: 600;
 }
 
 .subbutton:hover {
@@ -156,17 +152,18 @@ input[type="text"] {
 .previewbutton {
   background-color: #C535BC;
   color: #fff;
-  padding: 10px 25px;
-  border: #2e72ee;
+  padding: 10px 22px;
+  border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  width: 200px;
   display: inline-flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 12px;
   grid: 4px;
   justify-content: center;
   font-weight: 600;
@@ -180,30 +177,32 @@ input[type="text"] {
   background-color: #ccc;
   color: #666;
   cursor: not-allowed;
-  align-items: center;
-  display: inline-flex;
 }
 
 .templatebutton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #007bc0;
-  border: #007bc0;
+  background-color: #4ab073;
   color: #fff;
-  padding: 12px;
+  padding: 10px 22px;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
   border-radius: 8px;
-  font-size: 16px;
+  margin-top: 1rem;
+  margin-top: 1rem;
+  font-size: 12px;
+  width: 200px;
   font-weight: 600;
 }
 
 .choosebutton {
-  background-color: #18837e;
-  color: #fff;
+  background-color: #e0e2e5;
+  color: black;
   padding: 10px 25px;
+  border: #2e72ee;
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
@@ -214,7 +213,7 @@ input[type="text"] {
 }
 
 .choosebutton:hover {
-  background-color: #2e3033;
+  background-color: #c1c7cc;
 
 }
 
@@ -258,6 +257,12 @@ select {
   font-size: 14px;
   background: #ffffff;
   transition: background 0.3s;
+  padding: 1rem;
+  margin: 8px 0;
+  display: inline-block;
+  background-color: #eff1f2;
+  box-sizing: border-box;
+  border: 1.2px solid #e0e2e5;
 }
 
 .selected {
@@ -287,24 +292,17 @@ select:hover {
 }
 
 .container {
-  flex: 1;
-  background-color: #eff1f2;
-  padding: 0.5rem;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  border-color: #337ab7;
-  box-sizing: border-box;
-  border: solid 2px #337ab7;
-  margin-bottom: 16px;
-  width: 99%;
+  border: 0.5px solid #0044AA;
+  border-radius: 10px;
+  width: 95%;
 }
 
 .container-heading {
   color: #fff;
-  background-color: #337ab7;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-size: 18px;
+  background-color: #007bc0;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: larger;
 }
 
 strong {
@@ -315,14 +313,8 @@ strong {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  //background: white;
-  //box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
   padding: 10px 20px;
   box-sizing: border-box;
-  //margin: 0 10%;
-  //margin-bottom: 20px;
-  // margin-left: 6px;
-  // margin-top: 10px;
 }
 
 .userinput-item {
@@ -333,11 +325,9 @@ strong {
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
-  margin-left: 1px;
 }
-
 
 .required {
   color: red;
@@ -350,9 +340,9 @@ label {
   color: #000000;
   padding: 1em;
   border-radius: 0.5em;
-  border-color: #e0e2e5;
+  background-color: #eff1f2;
+  border: 1.2px solid #e0e2e5;
   font-size: 16px;
-  background: #ffffff;
   transition: background 0.3s;
 }
 
@@ -363,10 +353,10 @@ label {
 }
 
 .userinput-item input:disabled {
-  background-color: #f2f2f2;
+  background-color: #d0d4d8;
   color: #999;
   cursor: not-allowed;
-  border: 1px solid #ccc;
+  border: 1px solid #ffecec;
   padding: 1em;
 }
 
@@ -380,33 +370,14 @@ label {
   gap: 20px;
   border: 0 none;
   border-radius: 0px;
-  padding: 6px;
+  padding: 8px 6px;
   box-sizing: border-box;
-  width: 90%;
-  margin-bottom: 20px;
-  margin-top: 10px;
-
+  width: 98%;
+  margin-top: 8px;
 }
 
 .choosemethod-container.radiotext {
   font-size: 24px;
-}
-
-.radiocontainer {
-
-  display: block;
-  justify-content: space-between;
-  gap: 20px;
-  background: white;
-  border: 0 none;
-  border-radius: 0px;
-  box-shadow: 0 0 15px 1px rgba(105, 142, 159, 0.4);
-  padding: 10px 20px;
-  box-sizing: border-box;
-  width: 96%;
-  margin-bottom: 20px;
-  margin-left: 6px;
-  margin-top: 10px;
 }
 
 .date-picker-container {
@@ -419,7 +390,7 @@ label {
 }
 
 .form-button-sub {
-  background-color: #00884a;
+  background-color: #22bf49;
   color: #fff !important;
   padding: 10px 25px;
   border: #2e72ee;
@@ -448,8 +419,7 @@ label {
 
 .radioflex {
   display: flex;
-  gap: 40px;
-
+  gap: 20px;
 }
 
 .radio-explain {
@@ -528,4 +498,90 @@ hr {
 
 .suggestions-list li:hover {
   background-color: #f0f0f0;
+}
+
+.question_design {
+  background-color: #007bc0;
+  color: white;
+  font-size: larger;
+  border-radius: 9px;
+  padding: 13px;
+  display: flex;
+}
+
+.container_design {
+  border: 0.5px solid #0044AA;
+  border-radius: 10px;
+  width: 95%;
+}
+
+.question_design1 {
+  background-color: #007bc0;
+  color: white;
+  font-size: larger;
+  border-radius: 10px;
+  padding: 13px;
+  display: flex;
+
+}
+
+.container_design1 {
+  border: 0.5px solid #0044AA;
+  border-radius: 10px;
+  width: 47%;
+}
+
+
+.btn_container {
+  display: flex;
+  /* Ensures buttons are aligned side by side */
+  gap: 10px;
+}
+
+.custom-input {
+  width: 300px;
+  padding: 10px 15px;
+  margin: 6px 0;
+  display: inline-block;
+  background-color: rgb(239, 237, 237);
+  border: 1.2px solid rgb(221, 221, 221);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.custom-label {
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+.custom-datepicker-toggle .mat-datepicker-toggle-default-icon {
+  color: #3f51b5;
+
+}
+
+.custom-datepicker-toggle .mat-datepicker-toggle-default-icon {
+  font-size: 55px;
+  /* Adjust size as needed */
+  height: 55px;
+  width: 55px;
+}
+
+
+
+/* Custom styles for mat-datepicker */
+.custom-datepicker .mat-datepicker-content {
+  background-color: white;
+  /* Example color */
+}
+
+/* Custom styles for the mat-form-field underline */
+.custom-form-field .mat-form-field-underline {
+  background-color: #3f51b5;
+  /* Example color */
+}
+
+/* Custom styles for the mat-form-field wrapper */
+.custom-form-field .mat-form-field-wrapper {
+  background-color: white;
+  /* Example color */
 }
