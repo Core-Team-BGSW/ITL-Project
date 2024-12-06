@@ -49,7 +49,6 @@
           </button>
           
         <!-- </div> -->
-        <p></p>
       </div>
       <div *ngIf="previewVisible">
         <div class="previewtextheading">
@@ -188,8 +187,7 @@
                 minlength="7" #localITLInput="ngModel" />
               <div *ngIf="
               localITLInput.invalid &&
-              (localITLInput.dirty || localITLInput.touched)
-            ">
+              (localITLInput.dirty || localITLInput.touched)">
                 <div *ngIf="localITLInput.errors?.['required']" style="color: red">
                   Local-ITL is required.
                 </div>
@@ -225,10 +223,12 @@
           </div>
           <div class="userinput-container">
             <div class="userinput-item">
+
               <label for="primary">Primary Lab Coordinator <span class="required"> *</span></label>
+              <div style="margin-bottom: 10px;">
               <input type="text" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
                 [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"
-                [(ngModel)]="primarylabco" />
+                [(ngModel)]="primarylabco" /></div>
               <div *ngIf="
               primaryLabCoord.invalid &&
               (primaryLabCoord.dirty || primaryLabCoord.touched)
@@ -247,7 +247,7 @@
             <div class="userinput-item">
               <label for="CC">Cost Center<span class="required"> *</span> </label>
               <input type="text" placeholder="Cost Center" [(ngModel)]="CC" />
-              <p></p>
+              
             </div>
           </div>
         </div>
@@ -406,8 +406,8 @@
       <div class="radioflex">
         <!-- <mat-card>
           <mat-card-content> -->
-            <div class="container_design">
-              <div class="question_design">
+            <div class="container_design1">
+              <div class="question_design1">
               Is lab going to procure new equipment for Engineering/Red Zone?
               <span class="required"> *</span></div>
             
@@ -424,12 +424,12 @@
                   Selection is required.
                 </div>
               </div>
-              <p class="radio-explain">
-                If yes, as per MD-07151, all the Engineering/Red Zone devices
+              <!-- <p class="radio-explain"> -->
+              <b> <div style="margin-left: 20px;color:red;margin-bottom: 20px;"> If yes, as per MD-07151, all the Engineering/Red Zone devices
                 should be updated in
                 <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/CMDB" target="_blank"
-                  rel="noopener">SMT-CMDB</a>
-              </p>
+                  rel="noopener">SMT-CMDB</a></div></b>
+              <!-- </p> -->
             <!-- </section> -->
             </div>
           <!-- </mat-card-content>
@@ -438,51 +438,57 @@
 
         <!-- <mat-card>
           <mat-card-content> -->
-            <div class="container_design">
-              <div class="question_design">
+            <div class="container_design1">
+              <div class="question_design1">
             <div style="color: white;">Shared  Lab<span class="required"> *</span></div></div>
-            <section class="radiocontainer">
+            <!-- <section class="radiocontainer"> -->
               <mat-radio-group [(ngModel)]="sharedlabradio">
                 <mat-radio-button class="sharedlab-margin" value="Yes">Yes</mat-radio-button>
                 <mat-radio-button class="sharedlab-margin" value="No">No</mat-radio-button>
-                <p class="radio-explain">
-                  If multiple Departments are working in same lab, please select
-                  "Yes"
-                </p>
+                <!-- <p class="radio-explain"> -->
+                <b> <div style="margin-left: 20px;color:red" > If multiple Departments are working in same lab, please select
+                  "Yes" </div></b>
+                
               </mat-radio-group>
-            </section>
+            <!-- </section> -->
+            </div>
             </div>
           <!-- </mat-card-content>
         </mat-card> -->
         <!-- <mat-card>
           <mat-card-content> -->
+           <p></p>
             <div class="container_design">
               <div class="question_design">
            <div style="color: white;"> Self Audit Due Date<span class="required"> *</span></div></div>
-            <section class="radiocontainer">
-              <div class="date-picker-container">
-                <mat-form-field class="example-full-width">
-                  <mat-label>Choose a date</mat-label>
+            <!-- <section class="radiocontainer"> -->
+              
+              <div class="date-picker-container" style="margin-left: 20px; margin-top: 10px;">
+                <!-- <mat-form-field class="example-full-width"> -->
+                  <!-- <mat-label>Choose a date</mat-label>
                   <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate"
                     (dateChange)="onDateSelected($event.value)" />
-                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-hint>MM/DD/YYYY</mat-hint> -->
+                  <input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker>
 
-                  <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="isDatePickerDisabled">
+                  <!-- <mat-datepicker-toggle matIconSuffix [for]="picker" [disabled]="isDatePickerDisabled">
                     <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                  </mat-datepicker-toggle>
+                  </mat-datepicker-toggle> -->
 
                   <mat-datepicker #picker [disabled]="isDatePickerDisabled"></mat-datepicker>
-                </mat-form-field>
+                <!-- </mat-form-field> -->
               </div>
-              <p class="radio-explain" style="color: red">
+              <b><div style="margin-left: 20px; color:red;margin-bottom: 20px; ">
                 Due date for self check audit is 180 days from the moment lab is
                 commissioned.
-              </p>
-            </section>
+              </div></b>
+            <!-- </section> -->
           <!-- </mat-card-content>
         </mat-card> -->
       </div>
-      </div>
+      
       <!-- <mat-card>
         <mat-card-content> -->
           <p></p>
@@ -490,7 +496,7 @@
             <div class="question_design">
           <div style="color:white">ACL Required<span class="required"> *</span> </div></div>
           <!-- <section class="radiocontainer"> -->
-            <mat-radio-group [(ngModel)]="ACLradio">
+           <div style="margin-bottom: 20px;"> <mat-radio-group [(ngModel)]="ACLradio">
               <mat-radio-button value="Yes">Yes</mat-radio-button>
               <mat-radio-button value="No">No</mat-radio-button>
               <p class="radio-explain" *ngIf="ACLradio === 'Yes'">
@@ -499,7 +505,9 @@
                 <a href="https://inside-docupedia.bosch.com/confluence2/display/RBITLConsulting/1.+ACL+Concept"
                   target="_blank" rel="noopener">Click Here</a>
               </p>
+              
             </mat-radio-group>
+            </div>
           <!-- </section> -->
         <!-- </mat-card-content>
       </mat-card> -->

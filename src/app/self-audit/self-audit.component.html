@@ -17,8 +17,8 @@ Checklist Form</div>
   </thead>
   <tbody>
     <tr>
-      <td>India_Test_123_ADU_JUL_24</td>
-      <td>Bangalore</td>
+      <td></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -3033,7 +3033,7 @@ Explanation<span class="required"> * </span> :
   <span class="required"> * </span>
  <div class="tooltip"><i class="icon-info-sign"></i>
     <span class="tooltiptext">The emergency plan contains the names of the contact person and proxy with contact details (e.g. telephone number, email).</span>
-    </div></div>
+ <p></p>   </div></div>
  <p></p> <div style="margin-left: 10px;">  <br>  Evaluation <span class="required"> * </span><div class="tooltip1">
   <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.86 122.88"><title>comment</title><path d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"/></svg>
         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
@@ -3331,64 +3331,97 @@ Explanation<span class="required"> * </span> :
 </mat-tab>
 <mat-tab label="Lab Questions">
   <p></p>
+  <!-- <div *ngFor="let question of questions" class="question_design"> -->
   <div class="heading_design">
    <h3>Lab Questions</h3></div>
    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
    <strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong> 
    
+   <p></p>
    
-
-   
-   <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span>
+  <div class="container_design">
+   <div class="question_design">
+    <div *ngIf="questions.length > 0">
+      <p></p>
+      <div style="color:white ; text-align:left"><strong>{{ questions[0]?.questionDescription }}</strong> <span class="required"> * </span>
+        </div>
+   <!-- <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span> -->
    
     <p></p>
+    </div>
+    </div>
+  
     
-    <mat-card class="custom-card">
-     <mat-card-content>
-       
-       <strong>   No.of Internal Associates </strong> 
-       <input type="text" placeholder="Internal Associates" [(ngModel)]="formData.firstName" name="firstName">
-        <p></p>
-       <br> <strong>No.of External Associates </strong> 
-          
-       <input type="text" placeholder="External Associates" [(ngModel)]="formData.lastName" name="lastName">
-        </mat-card-content>
-                 
-    </mat-card>
+      <table style="border: spacing 10px;">
+        <thead>
+          <tr>
+            <td style="width: 5px;"></td>
+            <td><strong><label for="internalEmployeeCount">   No.of Internal Associates </label> </strong></td>
+            <td style="width: 5px;"></td>
+            <td> <b><br> <label for="externalEmployeeCount"> No.of External Associates </label></b>  </td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width: 5px;"></td>
+            <!-- <div *ngIf="showInternalExternalFields"> -->
+            <td> <input  class="form-control" id="internalEmployeeCount" type="text" placeholder="Internal Associates"  [(ngModel)]="headCount[0]" name="externalandinternalassociatescount"></td>
+            <td style="width: 5px;"></td>
+            <td><input  class="form-control" id="externalEmployeeCount" type="text" placeholder="External Associates" [(ngModel)]="headCount[1]" name="externalandinternalassociatescount"></td>
+            <!-- </div> -->
+            </tr>
+        </tbody>
+      </table>
+   <p></p>        
+    </div>
+    
+    
    <p></p>
+   
    <div class="container_design">
     <div class="question_design">
-
-   <br> <p></p>2. How many IT end devices does the laboratory area have? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
-     <span class="tooltiptext">Used for estimating damage, failure, or action with respect to laboratory size.</span>
-    <p></p> </div></div>
+      <!-- <div *ngFor="let question of questions">
+      <p><strong>{{ question.questionDescription }}</strong></p></div> -->
+      <!-- <div *ngIf="questions.length > 1"> -->
+        <p></p>
+      <div style="color:white ; text-align:left"><strong>{{ questions[1]?.questionDescription }}</strong> <span class="required"> * </span>
+        <div class="tooltip"><i class="icon-info-sign"></i><span class="tooltiptext"> <div style="margin-left: 2px;">Used for estimating damage, failure, or action with respect to laboratory size.</div></span>
+          </div>
+      
+        </div>
+        <p></p>
+      </div>
      <p></p>
+     <!-- <div *ngIf="question.questionId === 2"> -->
      <input type="text" placeholder="No.of Devices" [(ngModel)]="itDevice" name="itDevice"  style="margin-left: 10px;">
-      <p></p>
-    </div>
+      <p></p></div>
+   
+    <!-- </div> -->
+    <!-- </div> -->
        
-      <input type="text" placeholder="No.of Devices" [(ngModel)]="formData.deviceno" name="deviceno">
-        
-     </mat-card>
+     
      <p></p>
-     <br> 3. Is the lab(s) (including IT systems) completely independent to network-dependent IT infrastructures into LAN?
+     <div class="container_design">
+      <div class="question_design">
+        <p></p>
+        <div style="color:white ; text-align:left"><strong>{{ questions[2]?.questionDescription }}</strong> <span class="required"> * </span>
+     <!-- <br> 3. Is the lab(s) (including IT systems) completely independent to network-dependent IT infrastructures into LAN?
     
-     <span class="required"> * </span>
+     <span class="required"> * </span> -->
      <div class="tooltip"><i class="icon-info-sign"></i>
          <span class="tooltiptext">Do components exist that can affect multiple labs if they fail?</span>
          <p></p>
-     </div></div>
+     </div></div></div>
      <p></p>
     
          <!-- Your form and radio buttons here -->
-         <mat-radio-group [(ngModel)]="labelPosition" (ngModelChange)="onSelectionChange($event)">
+         <mat-radio-group [(ngModel)]="dependancy[0]" >
            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL1-no" >No</mat-radio-button>
          </mat-radio-group>
        
-       <mat-card-actions>
-         <!-- Your action buttons here -->
-       </mat-card-actions>
+      <p></p>
      </div>
      <br>
      <p></p>
@@ -3399,8 +3432,7 @@ Explanation<span class="required"> * </span> :
          
        <div class="dropdown-container">
        <div class="dropdown-item">
-         Answers<span class="required"> * </span> :
-         <input type="text" placeholder="Answers" [(ngModel)]="formData.answer1" name="answer1">
+         <input type="text" placeholder="Answers"  [(ngModel)]="dependancy[1]" name="dependancy">
          </div>
          </div>
          </div>
@@ -3411,8 +3443,8 @@ Explanation<span class="required"> * </span> :
         <div class="question_design">Explanation</div>  
        <div class="dropdown-container">
        <div class="dropdown-item">
-         Explanation<span class="required"> * </span> :
-         <input type="text" placeholder="Explanation" [(ngModel)]="formData.explanation1" name="explanation1">
+       
+         <input type="text" placeholder="Explanation" [(ngModel)]="dependancy[1]" name="dependancy">
          </div>
          </div>
        
@@ -3422,21 +3454,21 @@ Explanation<span class="required"> * </span> :
      <div class="container_design">
       <div class="question_design">
         <p></p>
-    <br> 4. Can the lab tests be performed without a WAN connection or for how long? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
+        <div style="color:white ; text-align:left"><strong>{{ questions[3]?.questionDescription }}</strong> <span class="required"> * </span>
+    <!-- <br> 4. Can the lab tests be performed without a WAN connection or for how long? <span class="required"> * </span> -->
+    <div class="tooltip"><i class="icon-info-sign"></i>
      <span class="tooltiptext">What is the acceptable downtime for the WAN infrastructure?</span><p></p>
-     </div></div>
+     </div></div></div>
      <p></p>
      
        <mat-card-content>
          <!-- Your form and radio buttons here -->
-         <mat-radio-group [(ngModel)]="labelPosition1" (ngModelChange)="onSelectionChange1($event)">
+         <mat-radio-group [(ngModel)]="wan[0]" >
            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
          </mat-radio-group>
        </mat-card-content>
-       <mat-card-actions>
-         <!-- Your action buttons here -->
-       </mat-card-actions>
+      <p></p>
      </div>
      <br>
      <p></p>
@@ -3470,9 +3502,13 @@ Explanation<span class="required"> * </span> :
      <div class="container_design">
       <div class="question_design">
         <p></p>
-     <br> 5. Can other laboratories at Bosch perform the same tests?<span class="required"> * </span> <div class="tooltip"><i class="icon-info-sign"></i> 
+
+     <!-- <br> 5. Can other laboratories at Bosch perform the same tests?<span class="required"> * </span> -->
+     <div style="color:white ; text-align:left"><strong>{{ questions[4]?.questionDescription }}</strong> <span class="required"> * </span> 
+     
+     <div class="tooltip"><i class="icon-info-sign"></i> 
          <span class="tooltiptext">Reference to external redundancy. Could experiments be taken over by another RB lab in case of failures? What is the name of the laboratory and where is it located?</span>
-       <p></p></div></div>
+       <p></p></div></div></div>
        <p></p>
        
          <mat-card-content>
@@ -3482,9 +3518,7 @@ Explanation<span class="required"> * </span> :
              <mat-radio-button class="ACL-margin" value="ACL2-no">No</mat-radio-button>
            </mat-radio-group>
          </mat-card-content>
-         <mat-card-actions>
-           <!-- Your action buttons here -->
-         </mat-card-actions>
+         <p></p>
       </div>
        <br>
        <p></p>
@@ -3504,9 +3538,12 @@ Explanation<span class="required"> * </span> :
        <p></p>
        <div class="container_design">
         <div class="question_design"> 
-    <p></p> <br> 6. What is the maximum time the lab may be down? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
+          <p></p>
+    <!-- <p></p> <br> 6. What is the maximum time the lab may be down? <span class="required"> * </span> -->
+    <div style="color:white ; text-align:left"><strong>{{ questions[5]?.questionDescription }}</strong> <span class="required"> * </span> 
+    <div class="tooltip"><i class="icon-info-sign"></i> 
          <span class="tooltiptext">What is the maximum acceptable downtime (e. g. 1 hour, 1 day, 1 week) of the IT infrastructure or individual components?</span>
-        <p></p> </div></div>
+        <p></p> </div></div></div>
          <p></p>
          
            
@@ -3519,11 +3556,12 @@ Explanation<span class="required"> * </span> :
             <div class="container_design">
               <div class="question_design"> 
       <p></p>    
-   <br> 7. Do run-time critical tests take place over a longer period of time (e.g. endurance tests)? <span class="required"> * </span>
+   <!-- <br> 7. Do run-time critical tests take place over a longer period of time (e.g. endurance tests)? <span class="required"> * </span> -->
+   <div style="color:white ; text-align:left"><strong>{{ questions[6]?.questionDescription }}</strong> <span class="required"> * </span>
    <div class="tooltip"><i class="icon-info-sign"></i>
        <span class="tooltiptext">Reference to possible compensation through redundancies 
          (e. g. further local test stands or at other locations).</span>
-     <p></p></div></div>
+     <p></p></div></div></div>
      <p></p>
 
       <mat-card-content>
@@ -3533,10 +3571,9 @@ Explanation<span class="required"> * </span> :
            <mat-radio-button class="ACL-margin" value="ACL3-no">No</mat-radio-button>
          </mat-radio-group>
        
-       <mat-card-actions>
-         <!-- Your action buttons here -->
-       </mat-card-actions>
+     
        </mat-card-content>
+       <p></p>
     </div>
      <br>
      <p></p>
@@ -3569,10 +3606,12 @@ Explanation<span class="required"> * </span> :
      <div class="container_design">
       <div class="question_design">
         <p></p>
-   <br>8. Are other RB sites involved in the trials? Are other GBs affected by a failure?
-   <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
+   <!-- <br>8. Are other RB sites involved in the trials? Are other GBs affected by a failure?
+   <span class="required"> * </span> -->
+   <div style="color:white ; text-align:left"><strong>{{ questions[7]?.questionDescription }}</strong> <span class="required"> * </span>
+   <div class="tooltip"><i class="icon-info-sign"></i> 
        <span class="tooltiptext">Damage extension in the event of failures.</span>
-     <p></p>  </div></div>
+     <p></p>  </div></div> </div>
        <p></p>
          <mat-card-content>
            <!-- Your form and radio buttons here -->
@@ -3581,9 +3620,7 @@ Explanation<span class="required"> * </span> :
              <mat-radio-button class="ACL-margin" value="ACL-no">No</mat-radio-button>
            </mat-radio-group>
          </mat-card-content>
-         <mat-card-actions>
-           <!-- Your action buttons here -->
-         </mat-card-actions>
+       <p></p>
          </div>
        <p></p>
        <div class="portdetails" *ngIf="trial[0] === 'ACL-no'">
@@ -3616,10 +3653,11 @@ Explanation<span class="required"> * </span> :
        <div class="container_design">
         <div class="question_design">
           <p></p>
-   <br>9. Can the laboratory tests be performed on a test bench without LAN connection or for how long?<span class="required"> * </span>
+   <!-- <br>9. Can the laboratory tests be performed on a test bench without LAN connection or for how long?<span class="required"> * </span> -->
+   <div style="color:white ; text-align:left"><strong>{{ questions[8]?.questionDescription }}</strong> <span class="required"> * </span>
    <div class="tooltip"><i class="icon-info-sign"></i> 
        <span class="tooltiptext">Is the network structure of the laboratories (network zones, network transitions, redundant star structure, ...) implemented appropriately?</span>
-    <p></p>   </div></div>
+    <p></p>   </div></div></div>
        <p></p>
          <mat-card-content>
            <!-- Your form and radio buttons here -->
@@ -3628,9 +3666,7 @@ Explanation<span class="required"> * </span> :
              <mat-radio-button class="ACL-margin1" value="ACL4-no">No</mat-radio-button>
            </mat-radio-group>
          </mat-card-content>
-         <mat-card-actions>
-           <!-- Your action buttons here -->
-         </mat-card-actions>
+        <p></p>
        </div>
        <br>
        <p></p>
@@ -3663,11 +3699,13 @@ Explanation<span class="required"> * </span> :
       <p></p>
        <div class="container_design">
         <div class="question_design">
-   <p></p><br> 10.What is the confidentiality of the data processed in the laboratory?<span class="required"> * </span>
+          <p></p>
+   <!-- <p></p><br> 10.What is the confidentiality of the data processed in the laboratory?<span class="required"> * </span> -->
+   <div style="color:white ; text-align:left"><strong>{{ questions[9]?.questionDescription }}</strong> <span class="required"> * </span>
    <div class="tooltip"><i class="icon-info-sign"></i> 
        <span class="tooltiptext">Please indicate the highest confidentiality class 
            (C-SC0 to C-SC3) of the data that will be processed</span><p></p></div>
-       </div>
+       </div></div>
        <p></p>
         
                         <select  [(ngModel)]="confidentiality" name="confidentiality" style="margin-left: 10px;">
@@ -3680,10 +3718,10 @@ Explanation<span class="required"> * </span> :
                         <p></p>
         </div>
          <p></p>
-     <br>  <button class="primary" (click)="saveDraft()">Save as Draft</button>
-       <button class="success_btn" >Save</button>     
-       
+     <br>  <button class="primary">Save as Draft</button>
+       <button type="button" class="success_btn" (click)="saveForm()">Save</button>    
+     <p></p>
+ <!-- </div> -->
  </mat-tab>
  
  </mat-tab-group>
- 

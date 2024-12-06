@@ -119,9 +119,9 @@ export class SelfCheckComponent {
     }
   }
   // Check if a lab is expanded
-  isExpanded(labId: string): boolean {
-    return this.expandedLabId === labId;
-  }
+  // isExpanded(labId: string): boolean {
+  //   return this.expandedLabId === labId;
+  // }
   isExpanded1(audit: string): boolean {
     return this.expandedaudit === audit;
   }
@@ -164,5 +164,8 @@ export class SelfCheckComponent {
     } else {
       window.open('/self-audit');
     }
+  }
+  isLabDetailsVisible(labId: string): boolean {
+    return this.expandedLabId === labId;
   }
 }

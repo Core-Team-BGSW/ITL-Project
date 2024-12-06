@@ -1,3 +1,18 @@
+// import { Component, OnInit, Inject,PLATFORM_ID } from '@angular/core';
+// import { FormBuilder, FormGroup,ReactiveFormsModule,Validators,FormsModule } from '@angular/forms';
+// import { MatCardModule } from '@angular/material/card';
+// import { MatRadioModule } from '@angular/material/radio';
+// import { MatButtonModule } from '@angular/material/button';
+// import { CommonModule } from '@angular/common';
+// import { MatInputModule } from '@angular/material/input';
+// import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
+// import { Router } from '@angular/router';
+// import { MatDatepickerModule, matDatepickerAnimations } from '@angular/material/datepicker';
+// import { MatNativeDateModule } from '@angular/material/core';
+// import * as XLSX from 'xlsx';
+// import { saveAs } from 'file-saver';
+// import { isPlatformBrowser } from '@angular/common';
+// import { FormAnswerService } from '../form-answer.service';
 import { Component, OnInit, Inject,PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup,ReactiveFormsModule,Validators,FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -12,6 +27,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { isPlatformBrowser } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FormAnswerService } from '../form-answer.service';
+import { response } from 'express';
+import { Question } from '../question.model';
 
 
 
@@ -78,12 +98,42 @@ export class SelfAuditComponent {
     labelPosition1:'',
     downtime:'',
     answer2:'',
-    selectedOption: ''
-    
+    selectedOption: '',
+    internalEmployeeCount: '',
+    externalEmployeeCount: '',
+    acceptabletime:',',
+    answer3:'',
+    answer4:'',
+    maxdowntime:'',
+    timerequired1:'',
+    answer5:'',
+    answer6:'',
+    answer7:'',
+    answer8:'',
+    answer9:'',
+    timereq:'',
+    answer10:'',
+    selecteddropdown:''
   };
+  questions: Question[] = []; 
+  responses: { [key: number]: string } = {};
+  currentQuestionIndex: number = 0;
+ headCount: string[] = ['', ''];
+  itDevice:string="";
+  dependancy:string[]=[];
+  wan: string[] = ['', ''];
+  test:string[]=[];
+  downtime:string="";
+  criticalTest:string[]=[];
+  trial:string[]=[];
+  lan:string[]=[];
+  confidentiality:string="";
+  userId:string=""
   isBrowser: boolean;
  
   showOptions = false;
+  isSaved: boolean = false;
+
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -164,7 +214,9 @@ notapplicableCount2: number = 0;
 linkForm: FormGroup;
  
   constructor(private fb: FormBuilder,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private formAnswerService: FormAnswerService,
+    private http: HttpClient
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
@@ -181,7 +233,34 @@ linkForm: FormGroup;
       explanation: ['', Validators.required]
     });
   }
-  
+  ngOnInit(): void {
+    this.loadQuestions();
+  }
+
+  loadQuestions(): void {
+    this.formAnswerService.getAllQuestions().subscribe({
+      next: (data: Question[]) => {
+        // this.questions = data;
+        this.questions = data.sort((a, b) => a.questionId - b.questionId); // Assign the fetched data to the 'questions' array
+      },
+      error: (error) => {
+        console.error('Error fetching questions:', error); // Log error if something goes wrong
+      }
+    });
+  }
+  nextQuestion(): void {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+    }
+  }
+
+  // Function to go to the previous question
+  previousQuestion(): void {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+    }
+  }
+ 
   onSubmit() {
     if (this.linkForm.valid) {
       console.log('Form Submitted!', this.linkForm.value);
@@ -243,66 +322,51 @@ generateExcelFile(): void {
   // Step 11: Save the file
   saveAs(blob, 'Copy of remote access list.xlsx');
 }
-ngOnInit(): void {
-  this.loadDraft();
-  const storedValue = localStorage.getItem('labelPosition');
-  const storedValue1 = localStorage.getItem('labelPosition1');
-  const storeddropdown = localStorage.getItem('selectedOption');
-    if (storedValue) {
-      this.labelPosition = storedValue;
+saveForm(){
+  // this.userId="HUL3KOR";
+  const data = this.questions.map((question) => {
+    // Dynamically map questionId to its corresponding response field
+    if (question.questionId === 1) {
+      return {
+        questionId: question.questionId,
+        headCount: this.headCount // Assume this is bound to a form control or input
+      };
+    } else if (question.questionId === 2) {
+      return {
+        questionId: question.questionId,
+        itDevice: this.itDevice // Assume this is bound to a form control or input
+      };
+    }  else if (question.questionId === 3) {
+      return {
+        questionId: question.questionId,
+        dependancy: this.dependancy // Assume this is bound to a form control or input
+      };
     }
-    if (storedValue1) {
-      this.labelPosition1 = storedValue1;
+    else if (question.questionId === 4) {
+      return {
+        questionId: question.questionId,
+        wan: this.wan // Assume this is bound to a form control or input
+      };
     }
-    if (storeddropdown) {
-      this.selectedOption = storeddropdown;
+    else {
+      return {
+        questionId: question.questionId,
+        response: '' // Default placeholder for other questions
+      };
     }
     
-}
-saveDraft(): void {
-  if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
-    localStorage.setItem('draftData', JSON.stringify(this.formData));
-    alert('Draft saved!');
-  }
-}
-loadDraft(): void {
-  if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
-    const savedData = localStorage.getItem('draftData');
-    if (savedData) {
-      this.formData = JSON.parse(savedData);
-    }
-  }
-}
-private isLocalStorageAvailable(): boolean {
-  return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
-}
-onSelectionChange(value: string): void {
-  // Save the selected value to localStorage whenever it changes
-  if (this.isBrowser) {
-    localStorage.setItem('labelPosition', value);
-    
-  }
+  });
   
+  this.formAnswerService.saveFormAnswer(data).subscribe(
+    (response) =>{
+      console.log('Form Saved Successfully',response);
+      
+    }
+  );
 
 }
-onSelectionChange1(value: string): void {
-  // Save the selected value to localStorage whenever it changes
-  if (this.isBrowser) {
-    localStorage.setItem('labelPosition1', value);
-  }
+
 }
-
-  
- 
-}
-
- 
- 
-
-
-
-    
-
 
 
  

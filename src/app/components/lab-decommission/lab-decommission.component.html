@@ -1,131 +1,88 @@
-<h2>Lab List</h2>
-<div class="subheading">
-  <p>*Select Lab for Decommission</p>
+<div class="page-heading">
+  <a>Lab List</a>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="subheading">
+  <a>*Select Lab for Decommission</a>
+</div>
+
 <!-- Search Bar -->
 <div class="search-bar">
   <input type="text" [(ngModel)]="searchQuery" placeholder="Search labs..." />
-  <button class="search" (click)="onSearch()"><i class="fa fa-search"></i></button>
+  <button (click)="onSearch()">Search</button>
+  <input  type="text" style="margin-left: 10px;" [(ngModel)]="ntId" placeholder="Enter Lab Coordinator NT-ID..." />
+  <button (click)="loadLabList(ntId)">Search by NT-ID</button>
 </div>
-
 <ul class="lab-list">
   <li *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
-    
     <!-- Collapsible Section Header -->
     <div class="collapsible-header">
-      <span class="lab-header" (click)="toggleDetails(lab._id)">
-        <ul>
-          <li class="lab-number">{{ lab["labNo"] }}</li>
-          
-          <li class="lab-subheader">
-            {{ lab.entityName }} -> {{ lab.gb}} -> {{ lab.dep_name }}
-          </li>
-          
-        </ul>
-      </span>
-      <button
-        *ngIf="!isExpanded(lab._id)"
-        (click)="removeLab(lab._id)"
-        class="remove-button"
-      >
+      <div class="lab-name-container">
+        <span class="lab-header" (click)="toggleDetails(lab._id)">
+          <ul>
+            <li class="lab-number">{{ lab.labNo }}</li>
+            <li class="lab-subheader">
+              {{ lab.entityName }} -> {{ lab.gb }} -> {{ lab.dep_name }}
+            </li>
+          </ul>
+        </span>
+      </div>
+      <button *ngIf="!isExpanded(lab._id)" (click)="removeLab(lab._id)" class="remove-button">
         Decommission
       </button>
     </div>
     <!-- Collapsible Content -->
     <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
-      <p></p>
-            <table class="lab_details_table">
-              <thead>
-              <tr>
-                <th style="background-color:#0088d4">Region</th>
-                <th style="background-color:#0088d4">Country</th>
-                <th style="background-color:#0088d4">Location-Code</th>
-                <th style="background-color:#0088d4">Entity</th>
-                <th style="background-color:#0088d4">GB</th>
-              </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{ lab.region }} </td>
-                  <td>{{ lab.country }}</td>
-                  <td>{{ lab["locationCode"] }}</td>
-                  <td>{{ lab.entityName }}</td>
-                  <td>{{ lab.gb }}</td>
-                </tr>
-              </tbody>
-             </table>
-             <table class="lab_details_table">
-              <thead>
-                <tr>
-                <th style="background-color:#0088d4">Department Head (DH)</th>
-                <th style="background-color:#0088d4">Local-ITL </th>
-                <th style="background-color:#0088d4">Local-ITL Proxy</th>
-                <th style="background-color:#0088d4">Key Account Manager (KAM)</th>
-                </tr>
-              </thead>
-              <tr>
-                <td >{{ lab["dh"] }}</td>
-                <td>{{ lab["local_itl"] }}</td>
-                <td>{{ lab["local_itl_proxy"] }}</td>
-                <td>{{ lab["kam"] }}</td>
-              </tr>
-             </table>
-             <table class="lab_details_table">
-              <thead>
-                <tr>
-                  <th style="background-color:#0088d4">Department</th>
-                  <th style="background-color:#0088d4">Floor No</th>
-                  <th style="background-color:#0088d4">Lab No</th>
-                  <th style="background-color:#0088d4">Kind of Lab</th>
-                  <th style="background-color:#0088d4">Shared Lab</th>
-                </tr>
-              </thead>
-              <tbody >
-                <tr>
-                  <td>{{ lab["dep_name"] }}</td>
-                  <td>{{ lab["floor"] }}</td>
-                  <td>{{ lab["LabNo"] }}</td>
-                  <td>{{ lab["kind_of_lab"] }}</td>
-                  <td>{{ lab["shared_lab"] }}</td>
-                </tr>
-              </tbody>
-             </table>
-             <table class="lab_details_table">
-              <thead>
-                <tr>
-                  <th style="background-color:#0088d4">Primary Lab Coordinator</th>
-                  <th style="background-color:#0088d4">Secondary Lab Coordinator</th>
-                  <th style="background-color:#0088d4">Cost Center</th>
-                  <th style="background-color:#0088d4">ACL Required</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{ lab["primary_lab_cord"] }}</td>
-                  <td>{{ lab["secondary_lab_cord"] }}</td>
-                  <td>{{ lab["cost_center"] }}</td>
-                  <td>{{lab["acl_req"]}}</td>
-                </tr>
-              </tbody>
-             </table>
-             <table class="lab_details_table">
-              <thead>
-                <tr>
-                  <th style="background-color:#0088d4">Purpose of Lab in Brief </th>
-                  <th style="background-color:#0088d4">Description </th>
-                  <th style="background-color:#0088d4">Self Audit Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{lab["purpose_of_lab"]}}</td>
-                  <td>{{lab["description"]}}</td>
-                  <td>{{lab["self_audit_date"]}}</td>
-                </tr>
-              </tbody>
-             </table>
-    <button (click)="removeLab(lab._id)" class="remove-button">
+      <div class="grid-container">
+        <div class="column">
+          <!-- <div *ngFor="let item of lab"> -->
+            <p><strong>Region:</strong> {{ lab.region }}</p>
+          <p><strong>Country:</strong> {{ lab.country }}</p>
+          <p><strong>Location-Code:</strong> {{ lab.locationCode }}</p>
+          <p><strong>Entity:</strong> {{ lab.entityName }}</p>
+          <p><strong>GB:</strong> {{ lab.gb }}</p>
+          <p><strong>Local-ITL:</strong> {{ lab.local_itl }}</p>
+          <p><strong>Local-ITL Proxy:</strong> {{ lab.local_itl_proxy }}</p>
+          <p><strong>Department Head:</strong> {{lab. dh }}</p>
+          <p><strong>Key Account Manager:</strong> {{ lab.kam }}</p>
+          <p><strong>Department:</strong> {{ lab.dep_name }}</p>
+          <p><strong>Building:</strong> {{ lab.building }}</p>
+          <p><strong>Floor:</strong> {{ lab.floor }}</p>
+          <p><strong>Lab No/Lab Name :</strong> {{ lab.labNo }}</p>
+        </div>
+        <div class="column">
+          <p><strong>Primary Lab Coordinator:</strong> {{ lab.primary_lab_cord }}</p>
+          <p><strong>Secondary Lab Coordinator:</strong> {{ lab.secondary_lab_cord }}</p>
+          <p><strong>Cost Center:</strong> {{ lab.cost_center }}</p>
+          <p><strong>Kind of Lab:</strong> {{ lab.kind_of_lab }}</p>
+          <p><strong>Purpose of Lab:</strong> {{ lab.purpose_of_lab }}</p>
+          <p><strong>Description:</strong> {{ lab.description }}</p>
+
+          <p>
+            <strong>Is lab going to procure new equipment for Engineering/Red
+              Zone?</strong>
+            {{ lab.new_equipment}}
+          </p>
+          <p>
+            <strong>Shared Lab:</strong>
+            {{ lab.shared_lab}}
+          </p>
+          <p>
+            <strong>Self Audit Due Date:</strong>
+            {{ lab.selectedDate | date : "MM/dd/yyyy" }}
+          </p>
+          <p>
+            <strong>ACL Required:</strong>
+            {{ lab.acl_req}}
+          </p>
+             
+          <!-- <ng-container *ngIf="ACLradio === 'Yes'">
+            <p><strong>No. of Green Ports:</strong> {{ lab.greenports }}</p>
+            <p><strong>No. of Yellow Ports:</strong> {{ lab.yellowports }}</p>
+            <p><strong>No. of Red Ports:</strong> {{ lab.redports }}</p>
+          </ng-container> -->
+        </div> 
+     </div>
+      <button (click)="removeLab(lab._id)" class="remove-button">
         Decommission
       </button>
     </div>
