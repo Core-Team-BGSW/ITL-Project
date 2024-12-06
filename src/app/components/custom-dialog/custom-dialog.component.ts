@@ -99,6 +99,8 @@ export class CustomDialogComponent {
               timeOut: 5000,
             }
           );
+          this.isOpen = false;
+          this.close.emit();
           //window.location.reload();
         },
         error: (error) => {

@@ -12,12 +12,18 @@
   <input type="text" [(ngModel)]="ntId" placeholder="Enter Lab Coordinator NT-ID..." />
   <button (click)="loadLabList(ntId)">Search by NT-ID</button>
 </div>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  <mat-spinner></mat-spinner>
+  Loading Labs...
+</div>
+
 <ul class="lab-list">
-  <li *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
+  <li *ngFor="let lab of filteredLabList | filter : searchQuery" class="lab-item">
     <!-- Collapsible Section Header -->
     <div class="collapsible-header">
       <div class="lab-name-container">
-        <span class="lab-header" (click)="toggleDetails(lab._id)">
+        <span class="lab-header" (click)="toggleDetails(lab.id)">
           <ul>
             <li class="lab-number">{{ lab.labNo }}</li>
             <li class="lab-subheader">
@@ -26,12 +32,12 @@
           </ul>
         </span>
       </div>
-      <button *ngIf="!isExpanded(lab._id)" (click)="removeLab(lab._id)" class="remove-button">
+      <button *ngIf="!isExpanded(lab.id)" (click)="removeLab(lab.id)" class="remove-button">
         Decommission
       </button>
     </div>
     <!-- Collapsible Content -->
-    <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
+    <div *ngIf="isExpanded(lab.id)" class="collapsible-content">
       <div class="grid-container">
         <div class="column">
           <!-- <div *ngFor="let item of lab"> -->
@@ -68,20 +74,20 @@
           </p>
           <p>
             <strong>Self Audit Due Date:</strong>
-            {{ lab.selectedDate | date : "MM/dd/yyyy" }}
+            {{ lab.self_audit_date | dateFormat: 'MM/DD/yyyy'}}
           </p>
           <p>
             <strong>ACL Required:</strong>
             {{ lab.acl_req}}
           </p>
-          <!-- <ng-container *ngIf="ACLradio === 'Yes'">
-            <p><strong>No. of Green Ports:</strong> {{ lab.greenports }}</p>
-            <p><strong>No. of Yellow Ports:</strong> {{ lab.yellowports }}</p>
-            <p><strong>No. of Red Ports:</strong> {{ lab.redports }}</p>
-          </ng-container> -->
+
+          <p><strong>No. of Green Ports:</strong> {{ lab.green_ports }}</p>
+          <p><strong>No. of Yellow Ports:</strong> {{ lab.yellow_ports }}</p>
+          <p><strong>No. of Red Ports:</strong> {{ lab.red_ports }}</p>
+
         </div>
       </div>
-      <button (click)="removeLab(lab._id)" class="remove-button">
+      <button (click)="removeLab(lab.id)" class="remove-button">
         <mat-icon svgIcon="deletewh"></mat-icon>Decommission
       </button>
     </div>
