@@ -1,0 +1,42 @@
+csv:
+  file:
+    directory: C:\Users\BFM3KOR\IdeaProjects\ITL-Project9\src\main\resources\static
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+server:
+  port: 8080
+spring:
+  application:
+    name: backendservice
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: false
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/UserData
+
+api:
+    url1 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-gen/q/v1/contracts/
+    url2 : https://ews-bcn.api.bosch.com/information-and-data/master/hr/compas-org-gen/q/v1/orgoffices/
+
+azure:
+  client-id: ba5db62a-4802-4ba6-94fb-726fd8354973
+  tenant-id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
+  client-secret: fsx8Q~rWahrNglfWgJG-AnXo4kqcdZLVV_goCctI
+  scope:
+    - openid
+    - profile
+    - email
+    - Mail.Send
+
+email:
+  mohit.somvanshi@in.bosch.com
+
