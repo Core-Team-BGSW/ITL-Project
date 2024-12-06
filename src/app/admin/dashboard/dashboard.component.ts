@@ -16,6 +16,9 @@ import { LabCommissionComponent } from '../../components/lab_commission/lab_comm
 import { SelfCheckComponent } from '../../components/self-check/self-check.component';
 import { SoftwareTrackingComponent } from '../../components/software-tracking/software-tracking.component';
 import { LabDecommissionComponent } from '../../components/lab-decommission/lab-decommission.component';
+import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
+import { filter } from 'rxjs/internal/operators/filter';
+import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,9 +40,10 @@ import { LabDecommissionComponent } from '../../components/lab-decommission/lab-
 })
 export class DashboardComponent implements AfterViewInit {
   toggleProperty = true;
+  loginDisplay = false;
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute,private authService: MsalService, private msalBroadcastService: MsalBroadcastService) {}
 
   ngAfterViewInit(): void {
     // Use ActivatedRoute to access fragments
@@ -64,10 +68,31 @@ export class DashboardComponent implements AfterViewInit {
     }
   }
   ngOnInit(): void {
+    this.msalBroadcastService.msalSubject$
+    .pipe(
+      filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
+    )
+    .subscribe((result: EventMessage) => {
+      console.log(result);
+      const payload = result.payload as AuthenticationResult;
+      this.authService.instance.setActiveAccount(payload.account);
+    });
+
+  this.msalBroadcastService.inProgress$
+    .pipe(
+      filter((status: InteractionStatus) => status === InteractionStatus.None)
+    )
+    .subscribe(() => {
+      this.setLoginDisplay();
+    })
     // Initialization code here
   }
 
   toggle() {
     this.toggleProperty = !this.toggleProperty;
+  }
+
+  setLoginDisplay() {
+    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
 }

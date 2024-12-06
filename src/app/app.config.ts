@@ -68,7 +68,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideAnimationsAsync(),provideHttpClient(withFetch()), provideToastr(), provideAnimationsAsync(), provideClientHydration(), provideAnimationsAsync(), provideAnimationsAsync(),provideHttpClient(withFetch()), provideToastr(), provideAnimationsAsync(),
+  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideToastr(),
     importProvidersFrom(BrowserModule, MatButtonModule, MatToolbarModule, MatListModule, MatMenuModule),
     provideNoopAnimations(),
     provideHttpClient(withInterceptorsFromDi(), withFetch()),

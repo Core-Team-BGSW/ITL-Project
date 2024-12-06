@@ -13,6 +13,7 @@
     </li>
     <li class="upward"><a routerLink="/contact">Contact</a></li>
     <li class="forward"><a routerLink="/feedback">Feedback</a></li>
+    <li *ngIf="!this.authService.setLoginDisplay1()" class="forward"><a (click)="loginRedirect()">Login</a></li>
     <li>
 
       <mat-icon svgIcon="user" (click)="toggleProfilePopup($event)"></mat-icon>
@@ -25,10 +26,10 @@
       <span class="close-icon" (click)="toggleProfilePopup($event)">&times;</span>
 
       <ul class="profile-list">
-        <li>Kranti Prakash Sonawane</li>
-      <li>NT_ID: 123456</li>
-      <li>Role: Administrator</li>
-      <li><a href="#">Logout</a></li>
+        <li>{{this.username}}</li>
+      <li>NT_ID: {{this.ntid}}</li>
+      <!-- <li>Role: Administrator</li> -->
+      <li><a (click)="logout()">Logout</a></li>
       </ul>
     </div>
   </div>

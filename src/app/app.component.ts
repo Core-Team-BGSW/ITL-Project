@@ -9,19 +9,22 @@ import { AuditComponent } from './components/audit/audit.component';
 import { SelfAuditComponent } from './self-audit/self-audit.component';
 import { AngularModule } from './angularmodule/angularmodule.module';
 import { LayoutComponent } from './admin/layout/layout.component';
-import { MSAL_GUARD_CONFIG, MsalBroadcastService, MsalGuardConfiguration, MsalService } from '@azure/msal-angular';
+import { MSAL_GUARD_CONFIG, MsalBroadcastService, MsalGuardConfiguration, MsalModule, MsalService } from '@azure/msal-angular';
 import { LoginService } from './service/login.service';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 import { AuthenticationResult, EventMessage, InteractionStatus, PopupRequest, RedirectRequest,EventType } from '@azure/msal-browser';
 import { Subject, filter, takeUntil } from 'rxjs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [
+  imports: [CommonModule, MsalModule, MatToolbarModule, MatButtonModule, MatMenuModule,
     RouterOutlet,
     SidebarComponent,
     RouterLink,

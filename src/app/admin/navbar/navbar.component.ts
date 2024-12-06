@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { RouterOutlet, RouterLink} from '@angular/router';
 import { ContactComponent } from "../contact/contact.component";
 import { RoleComponent } from '../role/role.component';
@@ -9,15 +9,30 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet, ContactComponent, RoleComponent, DashboardComponent, FormsModule, FontAwesomeModule, MatIconModule],
+  imports: [CommonModule, RouterLink, RouterOutlet, ContactComponent, RoleComponent, DashboardComponent, FormsModule, MatIconModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  loginDisplay = false;
+  username="";
+  ntid:any="";
+  isLoggedIn:boolean= false;
+
+  ngOnInit(): void {
+    this.authService.loginDisplay$.subscribe((display) => {
+      this.loginDisplay = display;
+
+    });
+
+    this.getuserid();
+
+  }
 
 
   @Output() sidebarToggle = new EventEmitter<void>();
@@ -29,7 +44,7 @@ export class NavbarComponent {
   }
   constructor(
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer, private router: Router
+    private domSanitizer: DomSanitizer, private router: Router,public authService:LoginService
   ) {
     this.matIconRegistry.addSvgIcon("user", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/user.svg"));
     this.matIconRegistry.addSvgIcon("boschname", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/boschname.svg"));
@@ -68,5 +83,18 @@ isProfilePopupOpen = false;
     if (this.isProfilePopupOpen) {
       this.closePopup(event);
     }
+  }
+
+  getuserid(){
+    this.username=this.authService.getUserId();
+    this.ntid=this.authService.getNtId();
+  }
+
+  loginRedirect(){
+    this.authService.loginRedirect()
+  }
+
+  logout(popup?: boolean){
+    this.authService.logout()
   }
 }
