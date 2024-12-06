@@ -28,9 +28,10 @@ export class NavbarComponent implements OnInit {
     this.authService.loginDisplay$.subscribe((display) => {
       this.loginDisplay = display;
 
+
     });
 
-    this.getuserid();
+
 
   }
 
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit {
   toggleSidebar() {
     this.isOpen = !this.isOpen; // Toggle the sidebar state
     this.sidebarToggle.emit();
+
   }
   constructor(
     private matIconRegistry: MatIconRegistry,
@@ -71,6 +73,7 @@ isProfilePopupOpen = false;
   toggleProfilePopup(event: MouseEvent) {
     this.isProfilePopupOpen = !this.isProfilePopupOpen;
     event.stopPropagation(); // Prevent the click from bubbling up
+    this.getuserid();
   }
 
   closePopup(event: MouseEvent) {
