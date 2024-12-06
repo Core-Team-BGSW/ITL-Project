@@ -71,7 +71,7 @@
               <small *ngIf="linkForm.get('website')?.errors?.['required']">URL is required.</small>
               <small *ngIf="linkForm.get('website')?.errors?.['pattern']">Please enter a valid URL.</small>
             </div>
-            
+
           </form>
         </td>
       </tr>
@@ -179,89 +179,96 @@
 </tbody>
 </table>
 
-<br>  
-<button class="success_btn" >Submit</button> 
+<br>
+<button class="success_btn" >Submit</button>
 <p></p>
-  
+
   </mat-tab>
-  
+
 <mat-tab label="Check List">
   <div class="tab-content">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-      <p></p> 
+      <p></p>
     <h3>Organization </h3>
 
 
+
+
+
+
+<!-- Lab Check list -->
+ <!-- <div *ngFor="let questionId of questionIds; trackBy: trackByFn"> -->
+
  <b>1. Chapter MD 07151 Annex 2 (4.2.1.1 )</b>  : Is a local ITL nominated for the laboratory?
- <span class="required"> * </span> 
+ <span class="required"> * </span>
    <div class="tooltip"><i class="icon-info-sign"></i>
      <span class="tooltiptext">Has the responsible laboratory management nominated a Local-ITL?
      <p></p><br>  Is the Local-ITL an associate of the Bosch Group?
-     <p></p><br>  Is the Local-ITL known to the associates in the development lab? (e.g. organizational chart, web site, Bosch Connect). 
+     <p></p><br>  Is the Local-ITL known to the associates in the development lab? (e.g. organizational chart, web site, Bosch Connect).
      <p></p> <br> Is the nomination document signed by the responsible laboratory management available? (MD 07151 Annex 4)</span>
      </div>
- 
+
       <p></p>     <br>Evaluation<span class="required"> * </span>
-       
-        
+
+
      <div class="tooltip1">
        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.86 122.88"><title>comment</title><path d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"/></svg>
              <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.<p></p>
           <br> <b> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
              </div>
-             <mat-card class="custom-card"> 
-                   <select [(ngModel)]="selectedOption" (change)="onFulfilledChange($event)">
+             <mat-card class="custom-card">
+                   <select [(ngModel)]="selectedOption"(change)="onFulfilledChange($event)">
                      <option value="">Select an Option</option>
-                     
+
                      <option value="completely-fulfilled">Completely Fulfilled</option>
                      <option value="partially-fulfilled">Partially Fulfilled</option>
                      <option value="not-fulfilled">Not Fulfilled</option>
-                   </select> 
+                   </select>
            </mat-card>
  <div class="dropdown" *ngIf="selectedOption === 'completely-fulfilled'">
              <p></p>
              <mat-card class="custom-card">
               <div class="dropdown-item">
                 Explanation<span class="required"> * </span> :
-                <input type="text" placeholder="Explanation ">
+                <input [(ngModel)]="explanation" type="text" placeholder="Explanation ">
                 </div>
            </mat-card>
            </div>
             <div class="dropdown" *ngIf="selectedOption === 'partially-fulfilled'">
              <p></p>
-        <mat-card class="custom-card">        
+        <mat-card class="custom-card">
 <table>
                  <td>Explanation <span class="required"> *</span> :</td>
                  <td>Measures <span class="required"> *</span> : </td>
                  <td>Responsible<span class="required"> *</span> :</td>
                  <td>Due Date :<span class=required> * </span></td>
- 
+
                  <tr>
-                   <td><input type="text" size="30" placeholder="Explanation"></td>
-                   <td><input type="text" size="30" placeholder="Measures"></td>
-                   <td><input type="text" size="30" placeholder="Responsible"></td>
-                   <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                   <td><input [(ngModel)]="explanation" type="text" size="30" placeholder="Explanation"></td>
+                   <td><input [(ngModel)]="measures" type="text" size="30" placeholder="Measures"></td>
+                   <td><input [(ngModel)]="responsible" type="text" size="30" placeholder="Responsible"></td>
+                   <td><input [(ngModel)]="dueDate" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                     <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                     <mat-datepicker #picker class="custom-datepicker">
-                      
+
                     </mat-datepicker></td>
-                  
+
                  </tr>
                </table>
                <table>
                   <td>Status :<span class=required> * </span></td>
-                
+
                 <tr>
                   <td>
-                    <select>
+                    <select [(ngModel)]="status">
                       <option>Select an option</option>
                       <option>Open</option>
                       <option>In work</option>
                       <option>Done</option>
                     </select>
                   </td>
-                    
-                   
+
+
                     <td></td>
                 </tr>
                </table>
@@ -271,25 +278,28 @@
        <p></p>
        <mat-card class="custom-card">
                <table>
-                 <td>Explanation <span class="required"> *</span> :</td> 
+                 <td>Explanation <span class="required"> *</span> :</td>
                  <td>Measures <span class="required"> *</span> : </td>
                  <td>Responsible<span class="required"> *</span> :</td>
                  <td>Due Date :<span class=required> * </span></td>
-                                  <tr>
-                   <td><input type="text" size="30" placeholder="Explanation"></td>
-                   <td><input type="text" size="30" placeholder="Measures"></td>
-                   <td><input type="text" size="30" placeholder="Responsible"></td>
-                   <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-                 </tr>
+                 <tr>
+                  <td><input [(ngModel)]="explanation" type="text" size="30" placeholder="Explanation"></td>
+                  <td><input [(ngModel)]="measures" type="text" size="30" placeholder="Measures"></td>
+                  <td><input [(ngModel)]="responsible" type="text" size="30" placeholder="Responsible"></td>
+                  <td><input [(ngModel)]="dueDate" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                   <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                   <mat-datepicker #picker class="custom-datepicker">
+
+                   </mat-datepicker></td>
+
+                </tr>
                </table>
                <table>
-                
+
                 <td>Status :<span class=required> * </span></td>
                 <tr>
                   <td>
-                    <select>
+                    <select [(ngModel)]="status">
                       <option>Select an option</option>
                       <option>Open</option>
                       <option>In work</option>
@@ -300,12 +310,14 @@
                </table>
          </mat-card>
                </div>
-               </div>
+
                <p></p>
+</div>
+
                <b>2. Chapter MD 07151 Annex 2 (4.2.1.1 - 4.2.1.2)</b>  : Is a local ITL proxy nominated for the laboratory?  <span class="required"> * </span> <div class="tooltip"><i class="icon-info-sign"></i>
-                <span class="tooltiptext">Has the responsible laboratory management nominated a Local-ITL? 
+                <span class="tooltiptext">Has the responsible laboratory management nominated a Local-ITL?
                 <p></p><br>  Is the Local-ITL an associate of the Bosch Group?
-                <p></p><br>  Is the Local-ITL known to the associates in the development lab? (e.g. organizational chart, web site, Bosch Connect). 
+                <p></p><br>  Is the Local-ITL known to the associates in the development lab? (e.g. organizational chart, web site, Bosch Connect).
                 <p></p> <br> Is the nomination document signed by the responsible laboratory management available? (MD 07151 Annex 4)</span>
                 </div>
            <p></p>
@@ -317,7 +329,7 @@
                   <mat-card class="custom-card">
        <select [(ngModel)]="selectedOption1" (change)="onFulfilledChange($event)">
                       <option value="">Select an Option</option>
-                      
+
                       <option value="completely-fulfilled">Completely Fulfilled</option>
                       <option value="partially-fulfilled">Partially Fulfilled</option>
                       <option value="not-fulfilled">Not Fulfilled</option>
@@ -328,31 +340,31 @@
               <mat-card class="custom-card">
                 <div class="dropdown-item">
                   Explanation<span class="required"> * </span> :
-                  <input type="text" placeholder="Explanation ">
-                  </div> 
+                  <input [(ngModel)]="responses[questionId].explanation" type="text" placeholder="Explanation ">
+                  </div>
             </mat-card>
             </div>
             <div class="dropdown" *ngIf="selectedOption1 === 'partially-fulfilled'">
               <p></p>
               <mat-card class="custom-card">
-                
-                  
+
+
                 <table>
                   <td>Explanation <span class="required"> *</span> :</td>
                   <td>Measures <span class="required"> *</span> : </td>
                   <td>Responsible<span class="required"> *</span> :</td>
                   <td>Due Date :<span class=required> * </span></td>
                                  <tr>
-                    <td><input type="text" size="30" placeholder="Explanation"></td>
-                    <td><input type="text" size="30" placeholder="Measures"></td>
-              <td><input type="text" size="30" placeholder="Responsible"></td>
-              <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                    <td><input [(ngModel)]="responses[questionId].explanation" type="text" size="30" placeholder="Explanation"></td>
+                    <td><input [(ngModel)]="responses[questionId].measures" type="text" size="30" placeholder="Measures"></td>
+              <td><input [(ngModel)]="responses[questionId].responsible" type="text" size="30" placeholder="Responsible"></td>
+              <td><input [(ngModel)]="responses[questionId].dueDate" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
               <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
               </tr>
                 </table>
                 <table>
-                  
+
                   <tr>
                     <td>Status :<span class=required> * </span></td>
                   </tr>
@@ -365,7 +377,7 @@
                         <option>In work</option>
                         <option>Done</option>
                         </select>
-  
+
                     </td>
                   </tr>
                  </table>
@@ -375,7 +387,7 @@
                 <p></p>
                 <mat-card class="custom-card">
                 <table>
-                  <td>Explanation <span class="required"> *</span> :</td> 
+                  <td>Explanation <span class="required"> *</span> :</td>
                   <td>Measures <span class="required"> *</span> : </td>
                   <td>Responsible<span class="required"> *</span> :</td>
                   <td>Due Date<span class="required"> *</span> :</td>
@@ -434,8 +446,8 @@
       <input type="text" placeholder="Explanation ">
       </div>
       <strong style="color:brown"><i><span> * </span>Please Upload the Required Mail Proof in the Sharepoint</i></strong>
-    
-     
+
+
 </mat-card>
 </div>
 <div class="dropdown" *ngIf="selectedOption2 === 'partially-fulfilled'">
@@ -474,7 +486,7 @@
     <p></p>
     <mat-card class="custom-card">
     <table>
-      <td>Explanation <span class="required"> *</span> :</td> 
+      <td>Explanation <span class="required"> *</span> :</td>
       <td>Measures <span class="required"> *</span> : </td>
       <td>Responsible<span class="required"> *</span> :</td>
       <td>Due Date<span class="required"> *</span> :</td>
@@ -515,14 +527,14 @@
               <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
            <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
               </div>
-        <mat-card class="custom-card"> 
+        <mat-card class="custom-card">
           <select [(ngModel)]="selectedOption3" (change)="onFulfilledChange($event)"  >
             <option value="">Select an Option</option>
-            
+
             <option value="completely-fulfilled">Completely Fulfilled</option>
             <option value="partially-fulfilled">Partially Fulfilled</option>
             <option value="not-fulfilled">Not Fulfilled</option>
-          </select> 
+          </select>
   </mat-card>
 <div class="dropdown" *ngIf="selectedOption3 === 'completely-fulfilled'">
     <p></p>
@@ -541,7 +553,7 @@
         <td>Measures <span class="required"> *</span> : </td>
         <td>Responsible<span class="required"> *</span> :</td>
         <td>Due Date<span class="required"> *</span> :</td>
-      
+
         <tr>
           <td><input type="text" size="30" placeholder="Explanation"></td>
           <td><input type="text" size="30" placeholder="Measures"></td>
@@ -571,7 +583,7 @@
       <p></p>
       <mat-card class="custom-card">
       <table>
-        <td>Explanation <span class="required"> *</span> :</td> 
+        <td>Explanation <span class="required"> *</span> :</td>
         <td>Measures <span class="required"> *</span> : </td>
         <td>Responsible<span class="required"> *</span> :</td>
         <td>Due Date<span class="required"> *</span> :</td>
@@ -601,11 +613,11 @@
      </mat-card>
       </div>
       <br>
-<p></p> 
+<p></p>
 <b>5. Chapter MD 07151 Annex 2 (4.2.1.1)</b>  :Does the Local-ITL proxy have the knowledge required to implement the ITE lab-specific tasks?
       <span class="required"> * </span>
       <div class="tooltip"><i class="icon-info-sign"></i>
-        
+
         <span class="tooltiptext">Training measures are to be planned and implemented. </span>
         </div>
          <p></p>
@@ -615,14 +627,14 @@
                   <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
                <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
                   </div>
-           <mat-card class="custom-card"> 
+           <mat-card class="custom-card">
              <select [(ngModel)]="selectedOption4" (change)="onFulfilledChange($event)"  >
                <option value="">Select an Option</option>
-               
+
                <option value="completely-fulfilled">Completely Fulfilled</option>
                <option value="partially-fulfilled">Partially Fulfilled</option>
                <option value="not-fulfilled">Not Fulfilled</option>
-             </select> 
+             </select>
      </mat-card>
    <div class="dropdown" *ngIf="selectedOption4 === 'completely-fulfilled'">
        <p></p>
@@ -671,7 +683,7 @@
          <p></p>
          <mat-card class="custom-card">
          <table>
-           <td>Explanation <span class="required"> *</span> :</td> 
+           <td>Explanation <span class="required"> *</span> :</td>
            <td>Measures <span class="required"> *</span> : </td>
            <td>Responsible<span class="required"> *</span> :</td>
            <td>Due Date<span class="required"> *</span> :</td>
@@ -700,7 +712,7 @@
    </mat-card>
          </div>
 <p></p>
-<b>6. Chapter MD 07151 Annex 2 (4.2.1.4)</b>  :Have the associates in the laboratory been instructed on the subject of "Compliance with IT security in the <br> laboratories"? 
+<b>6. Chapter MD 07151 Annex 2 (4.2.1.4)</b>  :Have the associates in the laboratory been instructed on the subject of "Compliance with IT security in the <br> laboratories"?
 <span class="required"> * </span>
  <div class="tooltip"><i class="icon-info-sign"></i>
   <span class="tooltiptext">Are corresponding measures included,<br> e.g. in the induction plan for new associates? </span>
@@ -711,14 +723,14 @@
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-    <mat-card class="custom-card"> 
+    <mat-card class="custom-card">
       <select [(ngModel)]="selectedOption5" (change)="onFulfilledChange($event)" >
         <option value="">Select an Option</option>
-        
+
         <option value="completely-fulfilled">Completely Fulfilled</option>
         <option value="partially-fulfilled">Partially Fulfilled</option>
         <option value="not-fulfilled">Not Fulfilled</option>
-      </select> 
+      </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption5 === 'completely-fulfilled'">
 <p></p>
@@ -767,7 +779,7 @@
   <p></p>
   <mat-card class="custom-card">
   <table>
-    <td>Explanation <span class="required"> *</span> :</td> 
+    <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
@@ -797,7 +809,7 @@
 </mat-card>
   </div>
 <p></p>
-<b>7. Chapter MD 07151 Annex 2 (4.2.1.4)</b>  :Is there a regular information exchange between Local-ITL and VPR, DSO, network operators at CI? 
+<b>7. Chapter MD 07151 Annex 2 (4.2.1.4)</b>  :Is there a regular information exchange between Local-ITL and VPR, DSO, network operators at CI?
 Were these information <br> exchange documented? <span class="required"> * </span>
 <div class="tooltip"><i class="icon-info-sign"></i>
   <span class="tooltiptext">The frequency of information exchange and its documentation are defined and followed. </span>
@@ -808,14 +820,14 @@ Were these information <br> exchange documented? <span class="required"> * </spa
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-    <mat-card class="custom-card"> 
+    <mat-card class="custom-card">
       <select [(ngModel)]="selectedOption6" (change)="onFulfilledChange($event)" >
         <option value="">Select an Option</option>
-        
+
         <option value="completely-fulfilled">Completely Fulfilled</option>
         <option value="partially-fulfilled">Partially Fulfilled</option>
         <option value="not-fulfilled">Not Fulfilled</option>
-      </select> 
+      </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption6 === 'completely-fulfilled'">
 <p></p>
@@ -842,7 +854,7 @@ Were these information <br> exchange documented? <span class="required"> * </spa
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-      
+
     </tr>
   </table>
   <table>
@@ -864,7 +876,7 @@ Were these information <br> exchange documented? <span class="required"> * </spa
   <p></p>
   <mat-card class="custom-card">
   <table>
-    <td>Explanation <span class="required"> *</span> :</td> 
+    <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
@@ -909,14 +921,14 @@ Were these information exchange <br> documented?<span class="required"> * </span
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-    <mat-card class="custom-card"> 
+    <mat-card class="custom-card">
       <select [(ngModel)]="selectedOption7" (change)="onFulfilledChange($event)" >
         <option value="">Select an Option</option>
-        
+
         <option value="completely-fulfilled">Completely Fulfilled</option>
         <option value="partially-fulfilled">Partially Fulfilled</option>
         <option value="not-fulfilled">Not Fulfilled</option>
-      </select> 
+      </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption7 === 'completely-fulfilled'">
 <p></p>
@@ -964,7 +976,7 @@ Were these information exchange <br> documented?<span class="required"> * </span
   <p></p>
   <mat-card class="custom-card">
   <table>
-    <td>Explanation <span class="required"> *</span> :</td> 
+    <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
@@ -997,7 +1009,7 @@ Were these information exchange <br> documented?<span class="required"> * </span
 <b>9. Chapter MD 07151 Annex 2 (4.2.1.1)</b>:Is the Local-ITL registered in the division ITL distribution list?
 Were these information exchange documented?<span class="required"> * </span> <div class="tooltip">
                 <i class="icon-info-sign"></i>
-                <span class="tooltiptext">To be found in the Outlook address book under ITL-XX 
+                <span class="tooltiptext">To be found in the Outlook address book under ITL-XX
                   (XX = GB abbreviation).  </span>
                 </div>
                  <p></p>
@@ -1006,14 +1018,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
                      <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
                         </div>
-                  <mat-card class="custom-card"> 
+                  <mat-card class="custom-card">
                     <select [(ngModel)]="selectedOption8" (change)="onFulfilledChange($event)" >
                       <option value="">Select an Option</option>
-                      
+
                       <option value="completely-fulfilled">Completely Fulfilled</option>
                       <option value="partially-fulfilled">Partially Fulfilled</option>
                       <option value="not-fulfilled">Not Fulfilled</option>
-                    </select> 
+                    </select>
               </mat-card>
               <div class="dropdown" *ngIf="selectedOption8 === 'completely-fulfilled'">
               <p></p>
@@ -1061,7 +1073,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                 <p></p>
                 <mat-card class="custom-card">
                 <table>
-                  <td>Explanation <span class="required"> *</span> :</td> 
+                  <td>Explanation <span class="required"> *</span> :</td>
                   <td>Measures <span class="required"> *</span> : </td>
                   <td>Responsible<span class="required"> *</span> :</td>
                   <td>Due Date<span class="required"> *</span> :</td>
@@ -1099,14 +1111,14 @@ Were these information exchange<br> documented?<span class="required"> * </span>
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-    <mat-card class="custom-card"> 
+    <mat-card class="custom-card">
       <select [(ngModel)]="selectedOption9" (change)="onFulfilledChange($event)" >
         <option value="">Select an Option</option>
-        
+
         <option value="completely-fulfilled">Completely Fulfilled</option>
         <option value="partially-fulfilled">Partially Fulfilled</option>
         <option value="not-fulfilled">Not Fulfilled</option>
-      </select> 
+      </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption9 === 'completely-fulfilled'">
 <p></p>
@@ -1154,7 +1166,7 @@ Were these information exchange<br> documented?<span class="required"> * </span>
   <p></p>
   <mat-card class="custom-card">
   <table>
-    <td>Explanation <span class="required"> *</span> :</td> 
+    <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
@@ -1195,14 +1207,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-    <mat-card class="custom-card"> 
+    <mat-card class="custom-card">
       <select [(ngModel)]="selectedOption10" (change)="onFulfilledChange($event)"  >
         <option value="">Select an Option</option>
-        
+
         <option value="completely-fulfilled">Completely Fulfilled</option>
         <option value="partially-fulfilled">Partially Fulfilled</option>
         <option value="not-fulfilled">Not Fulfilled</option>
-      </select> 
+      </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption10 === 'completely-fulfilled'">
 <p></p>
@@ -1252,7 +1264,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <p></p>
   <mat-card class="custom-card">
   <table>
-    <td>Explanation <span class="required"> *</span> :</td> 
+    <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
@@ -1292,14 +1304,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-    <mat-card class="custom-card"> 
+    <mat-card class="custom-card">
       <select [(ngModel)]="selectedOption11" (change)="onFulfilledChange($event)"  >
         <option value="">Select an Option</option>
-        
+
         <option value="completely-fulfilled">Completely Fulfilled</option>
         <option value="partially-fulfilled">Partially Fulfilled</option>
         <option value="not-fulfilled">Not Fulfilled</option>
-      </select> 
+      </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption11 === 'completely-fulfilled'">
 <p></p>
@@ -1347,7 +1359,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <p></p>
   <mat-card class="custom-card">
   <table>
-    <td>Explanation <span class="required"> *</span> :</td> 
+    <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
@@ -1389,14 +1401,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
          <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
          </div>
-        <mat-card class="custom-card"> 
+        <mat-card class="custom-card">
          <select [(ngModel)]="selectedOption12" (change)="onFulfilled1Change($event)" >
          <option value="">Select an Option</option>
-                            
+
            <option value="completely-fulfilled">Completely Fulfilled</option>
            <option value="partially-fulfilled">Partially Fulfilled</option>
             <option value="not-fulfilled">Not Fulfilled</option>
-            </select> 
+            </select>
                     </mat-card>
                     <div class="dropdown" *ngIf="selectedOption12 === 'completely-fulfilled'">
                     <p></p>
@@ -1415,7 +1427,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
                         <td>Due Date<span class="required"> *</span> :</td>
-                                         
+
                         <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
@@ -1423,7 +1435,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                           <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                             <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-                                             
+
                         </tr>
                       </table>
                       <table>
@@ -1445,7 +1457,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                       <p></p>
                       <mat-card class="custom-card">
                       <table>
-                        <td>Explanation <span class="required"> *</span> :</td> 
+                        <td>Explanation <span class="required"> *</span> :</td>
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
                         <td>Due Date<span class="required"> *</span> :</td>
@@ -1485,14 +1497,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
                               <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
                            <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
                               </div>
-                        <mat-card class="custom-card"> 
+                        <mat-card class="custom-card">
                           <select [(ngModel)]="selectedOption13" (change)="onFulfilled1Change($event)" >
                             <option value="">Select an Option</option>
-                            
+
                             <option value="completely-fulfilled">Completely Fulfilled</option>
                             <option value="partially-fulfilled">Partially Fulfilled</option>
                             <option value="not-fulfilled">Not Fulfilled</option>
-                          </select> 
+                          </select>
                     </mat-card>
                     <div class="dropdown" *ngIf="selectedOption13 === 'completely-fulfilled'">
                     <p></p>
@@ -1511,7 +1523,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
                         <td>Due Date<span class="required"> *</span> :</td>
-                                          
+
                         <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
@@ -1520,7 +1532,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                             <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
 
-                                            
+
                         </tr>
                       </table>
                       <table>
@@ -1533,7 +1545,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                                       <option>In work</option>
                                       <option>Done</option>
                                     </select>
-        
+
                           </td>
                         </tr>
                        </table>
@@ -1543,7 +1555,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                       <p></p>
                       <mat-card class="custom-card">
                       <table>
-                        <td>Explanation <span class="required"> *</span> :</td> 
+                        <td>Explanation <span class="required"> *</span> :</td>
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
                         <td>Due Date<span class="required"> *</span> :</td>
@@ -1581,14 +1593,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-  <mat-card class="custom-card"> 
+  <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption14" (change)="onFulfilled1Change($event)">
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption14 === 'completely-fulfilled'">
 <p></p>
@@ -1635,7 +1647,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
 <p></p>
 <mat-card class="custom-card">
 <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -1674,14 +1686,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
                               <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
                            <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
                               </div>
-                        <mat-card class="custom-card"> 
+                        <mat-card class="custom-card">
                           <select [(ngModel)]="selectedOption15" (change)="onFulfilled1Change($event)">
                             <option value="">Select an Option</option>
-                            
+
                             <option value="completely-fulfilled">Completely Fulfilled</option>
                             <option value="partially-fulfilled">Partially Fulfilled</option>
                             <option value="not-fulfilled">Not Fulfilled</option>
-                          </select> 
+                          </select>
                       </mat-card>
                       <div class="dropdown" *ngIf="selectedOption15 === 'completely-fulfilled'">
                       <p></p>
@@ -1691,7 +1703,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                        <input type="text" placeholder="Explanation ">
                        </div>
                        <strong style="color:brown"><i><span> * </span>Please Upload the Required Supporting Documents in the Sharepoint</i></strong>
-                      
+
                       </mat-card>
                       </div>
                         <div class="dropdown" *ngIf="selectedOption15 === 'partially-fulfilled'">
@@ -1702,21 +1714,21 @@ Were these information exchange documented?<span class="required"> * </span> <di
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
                         <td>Due Date<span class="required"> *</span> :</td>
-                                             
+
                         <tr>
                           <td><input type="text" size="30" placeholder="Explanation"></td>
                           <td><input type="text" size="30" placeholder="Measures"></td>
                           <td><input type="text" size="30" placeholder="Responsible"></td>
                           <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                             <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>                     
+                            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                         </tr>
                       </table>
                       <table>
                         <td>Status :<span class=required> * </span></td>
                         <tr>
                           <td>
-                            <select>     
+                            <select>
                               <option>Select an option</option>
                                     <option>Open</option>
                                  <option>In work</option>
@@ -1731,7 +1743,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                       <p></p>
                       <mat-card class="custom-card">
                       <table>
-                        <td>Explanation <span class="required"> *</span> :</td> 
+                        <td>Explanation <span class="required"> *</span> :</td>
                         <td>Measures <span class="required"> *</span> : </td>
                         <td>Responsible<span class="required"> *</span> :</td>
                         <td>Due Date<span class="required"> *</span> :</td>
@@ -1764,21 +1776,21 @@ Were these information exchange documented?<span class="required"> * </span> <di
 <span class="required"> * </span><div class="tooltip">
   <i class="icon-info-sign"></i>
                       <span class="tooltiptext">Aim according to CD02900.001 Chap. A. 12.3 data are protected against loss. </span>
-                      </div>  
+                      </div>
 <p></p>
    <br>  Evaluation <span class="required"> * </span> <div class="tooltip1">
     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.86 122.88"><title>comment</title><path d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"/></svg>
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-    <mat-card class="custom-card"> 
+    <mat-card class="custom-card">
       <select [(ngModel)]="selectedOption16" (change)="onFulfilled1Change($event)">
         <option value="">Select an Option</option>
-        
+
         <option value="completely-fulfilled">Completely Fulfilled</option>
         <option value="partially-fulfilled">Partially Fulfilled</option>
         <option value="not-fulfilled">Not Fulfilled</option>
-      </select> 
+      </select>
   </mat-card>
   <div class="dropdown" *ngIf="selectedOption16 === 'completely-fulfilled'">
   <p></p>
@@ -1797,7 +1809,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
-    
+
     <tr>
       <td><input type="text" size="30" placeholder="Explanation"></td>
       <td><input type="text" size="30" placeholder="Measures"></td>
@@ -1827,7 +1839,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <p></p>
   <mat-card class="custom-card">
   <table>
-    <td>Explanation <span class="required"> *</span> :</td> 
+    <td>Explanation <span class="required"> *</span> :</td>
     <td>Measures <span class="required"> *</span> : </td>
     <td>Responsible<span class="required"> *</span> :</td>
     <td>Due Date<span class="required"> *</span> :</td>
@@ -1867,14 +1879,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
                   <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
                <br> <b> <p></p>(b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
                   </div>
-            <mat-card class="custom-card"> 
+            <mat-card class="custom-card">
               <select [(ngModel)]="selectedOption17" (change)="onFulfilled1Change($event)" >
                 <option value="">Select an Option</option>
 
                 <option value="completely-fulfilled">Completely Fulfilled</option>
                 <option value="partially-fulfilled">Partially Fulfilled</option>
                 <option value="not-fulfilled">Not Fulfilled</option>
-              </select> 
+              </select>
           </mat-card>
           <div class="dropdown" *ngIf="selectedOption17 === 'completely-fulfilled'">
           <p></p>
@@ -1894,7 +1906,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
             <td>Measures <span class="required"> *</span> : </td>
             <td>Responsible<span class="required"> *</span> :</td>
             <td>Due Date<span class="required"> *</span> :</td>
-                     
+
             <tr>
               <td><input type="text" size="30" placeholder="Explanation"></td>
               <td><input type="text" size="30" placeholder="Measures"></td>
@@ -1902,7 +1914,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
               <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                 <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                 <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-                       
+
             </tr>
           </table>
           <table>
@@ -1915,18 +1927,18 @@ Were these information exchange documented?<span class="required"> * </span> <di
                   <option>In work</option>
                   <option>Done</option>
                 </select>
-              </td>  
+              </td>
             </tr>
            </table>
                           </mat-card>
           </div>
-          
-          
+
+
           <div class="dropdown" *ngIf="selectedOption17 === 'not-fulfilled'">
           <p></p>
           <mat-card class="custom-card">
           <table>
-            <td>Explanation <span class="required"> *</span> :</td> 
+            <td>Explanation <span class="required"> *</span> :</td>
             <td>Measures <span class="required"> *</span> : </td>
             <td>Responsible<span class="required"> *</span> :</td>
             <td>Due Date<span class="required"> *</span> :</td>
@@ -1961,21 +1973,21 @@ Were these information exchange documented?<span class="required"> * </span> <di
               <div class="tooltip"><i class="icon-info-sign"></i>
                      <span class="tooltiptext">The process of firewall and ACL changes and approval is described in the ITL documentation.</span>
                      </div>
-                 
+
                   <p></p>
                            <br>  Evaluation <span class="required"> * </span> <div class="tooltip1">
                             <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.86 122.88"><title>comment</title><path d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"/></svg>
                                   <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
                                <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
                                   </div>
-                             <mat-card class="custom-card"> 
+                             <mat-card class="custom-card">
                               <select [(ngModel)]="selectedOption18" (change)="onFulfilled1Change($event)">
                                 <option value="">Select an Option</option>
-                                
+
                                 <option value="completely-fulfilled">Completely Fulfilled</option>
                                 <option value="partially-fulfilled">Partially Fulfilled</option>
                                 <option value="not-fulfilled">Not Fulfilled</option>
-                              </select> 
+                              </select>
                           </mat-card>
                           <div class="dropdown" *ngIf="selectedOption18 === 'completely-fulfilled'">
                           <p></p>
@@ -1994,7 +2006,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                             <td>Measures <span class="required"> *</span> : </td>
                             <td>Responsible<span class="required"> *</span> :</td>
                             <td>Due Date<span class="required"> *</span> :</td>
-                                                  
+
                             <tr>
                               <td><input type="text" size="30" placeholder="Explanation"></td>
                               <td><input type="text" size="30" placeholder="Measures"></td>
@@ -2002,7 +2014,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                               <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                                 <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
                                 <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-                                                       
+
                             </tr>
                           </table>
                           <table>
@@ -2021,13 +2033,13 @@ Were these information exchange documented?<span class="required"> * </span> <di
                            </table>
                                                          </mat-card>
                           </div>
-                          
-                          
+
+
                           <div class="dropdown" *ngIf="selectedOption18 === 'not-fulfilled'">
                           <p></p>
                           <mat-card class="custom-card">
                           <table>
-                            <td>Explanation <span class="required"> *</span> :</td> 
+                            <td>Explanation <span class="required"> *</span> :</td>
                             <td>Measures <span class="required"> *</span> : </td>
                             <td>Responsible<span class="required"> *</span> :</td>
                             <td>Due Date<span class="required"> *</span> :</td>
@@ -2062,21 +2074,21 @@ Were these information exchange documented?<span class="required"> * </span> <di
                   <div class="tooltip"><i class="icon-info-sign"></i>
                      <span class="tooltiptext">Recommendation: Perform firewall or ACL check as part of ITL self-check and describe results here.</span>
                      </div>
-                
-                  
+
+
                      <p> </p>      <br>  Evaluation <span class="required"> * </span> <div class="tooltip1">
                       <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.86 122.88"><title>comment</title><path d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"/></svg>
                             <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
                          <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
                             </div>
-                             <mat-card class="custom-card"> 
+                             <mat-card class="custom-card">
                               <select [(ngModel)]="selectedOption19" (change)="onFulfilled1Change($event)" >
                                 <option value="">Select an Option</option>
-                                
+
                                 <option value="completely-fulfilled">Completely Fulfilled</option>
                                 <option value="partially-fulfilled">Partially Fulfilled</option>
                                 <option value="not-fulfilled">Not Fulfilled</option>
-                              </select> 
+                              </select>
                           </mat-card>
                           <div class="dropdown" *ngIf="selectedOption19 === 'completely-fulfilled'">
                           <p></p>
@@ -2102,7 +2114,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
                               <td><input type="text" size="30" placeholder="Responsible"></td>
                               <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                                 <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>                         
+                                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
                             </tr>
                           </table>
                           <table>
@@ -2120,13 +2132,13 @@ Were these information exchange documented?<span class="required"> * </span> <di
                            </table>
                                                           </mat-card>
                           </div>
-                          
-                          
+
+
                           <div class="dropdown" *ngIf="selectedOption19 === 'not-fulfilled'">
                           <p></p>
                           <mat-card class="custom-card">
                           <table>
-                            <td>Explanation <span class="required"> *</span> :</td> 
+                            <td>Explanation <span class="required"> *</span> :</td>
                             <td>Measures <span class="required"> *</span> : </td>
                             <td>Responsible<span class="required"> *</span> :</td>
                             <td>Due Date<span class="required"> *</span> :</td>
@@ -2167,14 +2179,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b> <p></p>(b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-   <mat-card class="custom-card"> 
+   <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption20" (change)="onFulfilled1Change($event)" >
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption20 === 'completely-fulfilled'">
 <p></p>
@@ -2193,7 +2205,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
- 
+
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
@@ -2222,7 +2234,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
 <p></p>
 <mat-card class="custom-card">
 <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -2261,14 +2273,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
      <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
         </div>
-   <mat-card class="custom-card"> 
+   <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption21" (change)="onFulfilled1Change($event)" >
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption21 === 'completely-fulfilled'">
 <p></p>
@@ -2315,7 +2327,7 @@ Were these information exchange documented?<span class="required"> * </span> <di
 <p></p>
 <mat-card class="custom-card">
 <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -2353,14 +2365,14 @@ Were these information exchange documented?<span class="required"> * </span> <di
         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
      <br> <b> <p></p>(b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
         </div>
- <mat-card class="custom-card"> 
+ <mat-card class="custom-card">
   <select [(ngModel)]="selectedOption23" (change)="onFulfilled1Change($event)" >
     <option value="">Select an Option</option>
-    
+
     <option value="completely-fulfilled">Completely Fulfilled</option>
     <option value="partially-fulfilled">Partially Fulfilled</option>
     <option value="not-fulfilled">Not Fulfilled</option>
-  </select> 
+  </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption23 === 'completely-fulfilled'">
 <p></p>
@@ -2407,7 +2419,7 @@ Explanation<span class="required"> * </span> :
 <p></p>
 <mat-card class="custom-card">
 <table>
-<td>Explanation <span class="required"> *</span> :</td> 
+<td>Explanation <span class="required"> *</span> :</td>
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
 <td>Due Date<span class="required"> *</span> :</td>
@@ -2444,14 +2456,14 @@ Explanation<span class="required"> * </span> :
             <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
          <br> <b> <p></p>(b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
             </div>
-  <mat-card class="custom-card"> 
+  <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption22" (change)="onFulfilled1Change($event)">
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
   </mat-card>
   <div class="dropdown" *ngIf="selectedOption22 === 'completely-fulfilled'">
   <p></p>
@@ -2494,13 +2506,13 @@ Explanation<span class="required"> * </span> :
    </table>
        </mat-card>
   </div>
-  
-  
+
+
   <div class="dropdown" *ngIf="selectedOption22 === 'not-fulfilled'">
   <p></p>
   <mat-card class="custom-card">
   <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -2536,14 +2548,14 @@ Explanation<span class="required"> * </span> :
             <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
          <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
             </div>
-            <mat-card class="custom-card"> 
+            <mat-card class="custom-card">
               <select [(ngModel)]="selectedOption24" (change)="onFulfilled1Change($event)">
                 <option value="">Select an Option</option>
-                
+
                 <option value="completely-fulfilled">Completely Fulfilled</option>
                 <option value="partially-fulfilled">Partially Fulfilled</option>
                 <option value="not-fulfilled">Not Fulfilled</option>
-              </select> 
+              </select>
             </mat-card>
             <div class="dropdown" *ngIf="selectedOption24 === 'completely-fulfilled'">
             <p></p>
@@ -2572,7 +2584,7 @@ Explanation<span class="required"> * </span> :
               <td><input type="text" size="30" placeholder="Responsible"></td>
               <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
                 <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>  
+                <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
             </tr>
             </table>
             <table>
@@ -2590,13 +2602,13 @@ Explanation<span class="required"> * </span> :
              </table>
                           </mat-card>
             </div>
-            
-            
+
+
             <div class="dropdown" *ngIf="selectedOption24 === 'not-fulfilled'">
             <p></p>
             <mat-card class="custom-card">
             <table>
-            <td>Explanation <span class="required"> *</span> :</td> 
+            <td>Explanation <span class="required"> *</span> :</td>
             <td>Measures <span class="required"> *</span> : </td>
             <td>Responsible<span class="required"> *</span> :</td>
             <td>Due Date<span class="required"> *</span> :</td>
@@ -2632,14 +2644,14 @@ Explanation<span class="required"> * </span> :
           <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
        <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
           </div>
-  <mat-card class="custom-card"> 
+  <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption25" (change)="onFulfilled1Change($event)" >
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
   </mat-card>
   <div class="dropdown" *ngIf="selectedOption25 === 'completely-fulfilled'">
   <p></p>
@@ -2683,13 +2695,13 @@ Explanation<span class="required"> * </span> :
    </table>
       </mat-card>
   </div>
-  
-  
+
+
   <div class="dropdown" *ngIf="selectedOption25 === 'not-fulfilled'">
   <p></p>
   <mat-card class="custom-card">
   <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -2718,7 +2730,7 @@ Explanation<span class="required"> * </span> :
    </table>
     </mat-card>
   </div>
-  <p></p>  <b>15. Chapter MD 07151 Annex 2 (4.4.1)</b>  : Are the protection classes (C-SC, A-SC, I-SC) for the IT systems in the laboratory documented in the inventory? 
+  <p></p>  <b>15. Chapter MD 07151 Annex 2 (4.4.1)</b>  : Are the protection classes (C-SC, A-SC, I-SC) for the IT systems in the laboratory documented in the inventory?
   <span class="required"> * </span>
  <div class="tooltip"><i class="icon-info-sign"></i>
     <span class="tooltiptext">In accordance with CD02900-001 Chapter A8, information shall be classified with respect to the protection objectives of confidentiality, integrity, and availability.</span>
@@ -2728,14 +2740,14 @@ Explanation<span class="required"> * </span> :
             <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
          <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
             </div>
-  <mat-card class="custom-card"> 
+  <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption26" (change)="onFulfilled1Change($event)">
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
   </mat-card>
   <div class="dropdown" *ngIf="selectedOption26 === 'completely-fulfilled'">
   <p></p>
@@ -2779,13 +2791,13 @@ Explanation<span class="required"> * </span> :
    </table>
        </mat-card>
   </div>
-  
-  
+
+
   <div class="dropdown" *ngIf="selectedOption27 === 'not-fulfilled'">
   <p></p>
   <mat-card class="custom-card">
   <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -2824,14 +2836,14 @@ Explanation<span class="required"> * </span> :
             <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
          <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
             </div>
-  <mat-card class="custom-card"> 
+  <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption27" (change)="onFulfilled1Change($event)">
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
   </mat-card>
   <div class="dropdown" *ngIf="selectedOption27 === 'completely-fulfilled'">
   <p></p>
@@ -2850,7 +2862,7 @@ Explanation<span class="required"> * </span> :
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
- 
+
   <tr>
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
@@ -2879,7 +2891,7 @@ Explanation<span class="required"> * </span> :
   <p></p>
   <mat-card class="custom-card">
   <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -2909,7 +2921,7 @@ Explanation<span class="required"> * </span> :
     </mat-card>
   </div>
   <p></p>
-  <h3 >Emergency Plan </h3> 
+  <h3 >Emergency Plan </h3>
  <p></p> <b>1. Chapter MD 07151 Annex 2 (4.2.4 )</b>  : Are contact persons and measures for possible IT security incidents at laboratory level documented in the emergency <br> plan?
   <span class="required"> * </span>
  <div class="tooltip"><i class="icon-info-sign"></i>
@@ -2920,14 +2932,14 @@ Explanation<span class="required"> * </span> :
         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
      <br> <b> <p></p>(b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
         </div>
-  <mat-card class="custom-card"> 
+  <mat-card class="custom-card">
     <select [(ngModel)]="selectedOption28" (change)="onFulfilled2Change($event)" >
       <option value="">Select an Option</option>
-      
+
       <option value="completely-fulfilled">Completely Fulfilled</option>
       <option value="partially-fulfilled">Partially Fulfilled</option>
       <option value="not-fulfilled">Not Fulfilled</option>
-    </select> 
+    </select>
   </mat-card>
   <div class="dropdown" *ngIf="selectedOption28 === 'completely-fulfilled'">
   <p></p>
@@ -2950,11 +2962,11 @@ Explanation<span class="required"> * </span> :
     <td><input type="text" size="30" placeholder="Explanation"></td>
     <td><input type="text" size="30" placeholder="Measures"></td>
     <td><input type="text" size="30" placeholder="Responsible"></td>
-    
+
       <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
         <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
         <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-  
+
   </table>
   <table>
     <tr>
@@ -2977,7 +2989,7 @@ Explanation<span class="required"> * </span> :
   <p></p>
   <mat-card class="custom-card">
   <table>
-  <td>Explanation <span class="required"> *</span> :</td> 
+  <td>Explanation <span class="required"> *</span> :</td>
   <td>Measures <span class="required"> *</span> : </td>
   <td>Responsible<span class="required"> *</span> :</td>
   <td>Due Date<span class="required"> *</span> :</td>
@@ -3009,7 +3021,7 @@ Explanation<span class="required"> * </span> :
   <b>2. Chapter MD 07151 Annex 2 (4.2.4 )</b>  : After IT security incidents occurred and measures were derived and included in the emergency plan?
   <span class="required"> * </span>
 <div class="tooltip"><i class="icon-info-sign"></i>
-    <span class="tooltiptext">Measures have been established to prevent an IT security incident that has already occurred. 
+    <span class="tooltiptext">Measures have been established to prevent an IT security incident that has already occurred.
       E. g. workaround in the event of a failed IT system; switching from automatic to (partially) manual processing".</span>
     </div>
 <p></p>    <br>  Evaluation <span class="required"> * </span><div class="tooltip1">
@@ -3017,13 +3029,13 @@ Explanation<span class="required"> * </span> :
         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
      <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
         </div>
- <mat-card class="custom-card"> 
+ <mat-card class="custom-card">
   <select [(ngModel)]="selectedOption29" (change)="onFulfilled2Change($event)" >
     <option value="">Select an Option</option>
     <option value="completely-fulfilled">Completely Fulfilled</option>
     <option value="partially-fulfilled">Partially Fulfilled</option>
     <option value="not-fulfilled">Not Fulfilled</option>
-  </select> 
+  </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption29 === 'completely-fulfilled'">
 <p></p>
@@ -3071,7 +3083,7 @@ Explanation<span class="required"> * </span> :
 <p></p>
 <mat-card class="custom-card">
 <table>
-<td>Explanation <span class="required"> *</span> :</td> 
+<td>Explanation <span class="required"> *</span> :</td>
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
 <td>Due Date<span class="required"> *</span> :</td>
@@ -3111,14 +3123,14 @@ Explanation<span class="required"> * </span> :
         <span class="tooltiptext1"><b>(a) 'Partially fulfilled' : </b>Local-ITL is nominated, Nomination document is available, but not signed.
      <br> <b><p></p> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.</span>
         </div>
- <mat-card class="custom-card"> 
+ <mat-card class="custom-card">
   <select [(ngModel)]="selectedOption30" (change)="onFulfilled2Change($event)" >
     <option value="">Select an Option</option>
-    
+
     <option value="completely-fulfilled">Completely Fulfilled</option>
     <option value="partially-fulfilled">Partially Fulfilled</option>
     <option value="not-fulfilled">Not Fulfilled</option>
-  </select> 
+  </select>
 </mat-card>
 <div class="dropdown" *ngIf="selectedOption30 === 'completely-fulfilled'">
 <p></p>
@@ -3167,7 +3179,7 @@ Explanation<span class="required"> * </span> :
 <p></p>
 <mat-card class="custom-card">
 <table>
-<td>Explanation <span class="required"> *</span> :</td> 
+<td>Explanation <span class="required"> *</span> :</td>
 <td>Measures <span class="required"> *</span> : </td>
 <td>Responsible<span class="required"> *</span> :</td>
 <td>Due Date<span class="required"> *</span> :</td>
@@ -3198,29 +3210,184 @@ Explanation<span class="required"> * </span> :
 </div>
 <p></p>
 <button class="primary">Save as draft</button>
-<button class="success_btn">Save</button>
+<button (click)="onChecklistSubmit()" class="success_btn">Save</button>
 <p></p>
-</mat-tab>
+
+
+
+
+
+
+
+
+ -->
+
+
+
+
+ <!-- app.component.html -->
+<!-- <div *ngFor="let questionId of questionIds; trackBy: trackByFn"> -->
+  <!-- <div *ngFor="let question of questionIds; trackBy: trackByFn">
+
+    <b>{{ question.questionId  }}. {{ question.question }}</b>
+    <span class="required"> * </span>
+    <div class="tooltip">
+      <i class="icon-info-sign"></i>
+      <span class="tooltiptext">
+        {{ question.tooltip }}
+      </span>
+    </div>
+
+    <p></p>
+    <br>Evaluation<span class="required"> * </span>
+
+
+    <div class="tooltip1">
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.86 122.88">
+        <title>comment</title>
+
+        <path d="M30.28,110.09,49.37,91.78A3.84,3.84,0,0,1,52,90.72h60a2.15,2.15,0,0,0,2.16-2.16V9.82a2.16,2.16,0,0,0-.64-1.52A2.19,2.19,0,0,0,112,7.66H9.82A2.24,2.24,0,0,0,7.65,9.82V88.55a2.19,2.19,0,0,0,2.17,2.16H26.46a3.83,3.83,0,0,1,3.82,3.83v15.55ZM28.45,63.56a3.83,3.83,0,1,1,0-7.66h53a3.83,3.83,0,0,1,0,7.66Zm0-24.86a3.83,3.83,0,1,1,0-7.65h65a3.83,3.83,0,0,1,0,7.65ZM53.54,98.36,29.27,121.64a3.82,3.82,0,0,1-6.64-2.59V98.36H9.82A9.87,9.87,0,0,1,0,88.55V9.82A9.9,9.9,0,0,1,9.82,0H112a9.87,9.87,0,0,1,9.82,9.82V88.55A9.85,9.85,0,0,1,112,98.36Z"/>
+      </svg>
+      <span class="tooltiptext1">
+        <b>(a) 'Partially fulfilled' :</b> Local-ITL is nominated, Nomination document is available, but not signed.
+        <p></p>
+        <br><b> (b) 'Completely fulfilled':</b> Local-ITL is nominated. Nomination document is available and has been signed by the responsible laboratory management.
+      </span>
+    </div>
+
+
+    <mat-card class="custom-card">
+      <select [(ngModel)]="selectedOption" (change)="onFulfilledChange($event)">
+        <option value="">Select an Option</option>
+        <option value="completely-fulfilled">Completely Fulfilled</option>
+        <option value="partially-fulfilled">Partially Fulfilled</option>
+        <option value="not-fulfilled">Not Fulfilled</option>
+      </select>
+    </mat-card>
+
+
+    <div class="dropdown" *ngIf="selectedOption === 'completely-fulfilled'">
+      <p></p>
+      <mat-card class="custom-card">
+        <div class="dropdown-item">
+          Explanation <span class="required"> * </span> :
+          <input [(ngModel)]="responses[questionId].explanation" type="text" placeholder="Explanation">
+        </div>
+      </mat-card>
+    </div>
+
+
+    <div class="dropdown" *ngIf="selectedOption === 'partially-fulfilled'">
+      <p></p>
+      <mat-card class="custom-card">
+        <table>
+          <tr>
+            <td>Explanation <span class="required"> *</span> :</td>
+            <td>Measures <span class="required"> *</span> :</td>
+            <td>Responsible <span class="required"> *</span> :</td>
+            <td>Due Date : <span class="required"> * </span></td>
+          </tr>
+          <tr>
+            <td><input [(ngModel)]="responses[questionId].explanation" type="text" placeholder="Explanation"></td>
+            <td><input [(ngModel)]="responses[questionId].measures" type="text" placeholder="Measures"></td>
+            <td><input [(ngModel)]="responses[questionId].responsible" type="text" placeholder="Responsible"></td>
+            <td>
+              <input [(ngModel)]="responses[questionId].dueDate" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+              <mat-datepicker #picker class="custom-datepicker"></mat-datepicker>
+            </td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <td>Status :<span class="required"> * </span></td>
+          </tr>
+          <tr>
+            <td>
+              <select [(ngModel)]="responses[questionId].status">
+                <option>Select an option</option>
+                <option>Open</option>
+                <option>In work</option>
+                <option>Done</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </mat-card>
+    </div>
+
+
+    <div class="dropdown" *ngIf="selectedOption === 'not-fulfilled'">
+      <p></p>
+      <mat-card class="custom-card">
+        <table>
+          <tr>
+            <td>Explanation <span class="required"> *</span> :</td>
+            <td>Measures <span class="required"> *</span> :</td>
+            <td>Responsible <span class="required"> *</span> :</td>
+            <td>Due Date : <span class="required"> * </span></td>
+          </tr>
+          <tr>
+            <td><input [(ngModel)]="responses[questionId].explanation" type="text" placeholder="Explanation"></td>
+            <td><input [(ngModel)]="responses[questionId].measures" type="text" placeholder="Measures"></td>
+            <td><input [(ngModel)]="responses[questionId].responsible" type="text" placeholder="Responsible"></td>
+            <td>
+              <input [(ngModel)]="responses[questionId].dueDate" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+              <mat-datepicker #picker class="custom-datepicker"></mat-datepicker>
+            </td>
+          </tr>
+        </table>
+
+        <table>
+          <tr>
+            <td>Status :<span class="required"> * </span></td>
+          </tr>
+          <tr>
+            <td>
+              <select [(ngModel)]="responses[questionId].status">
+                <option>Select an option</option>
+                <option>Open</option>
+                <option>In work</option>
+                <option>Done</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </mat-card>
+    </div>
+
+    <p></p>
+  </div>
+
+<p></p>
+<button class="primary">Save as draft</button>
+<button (click)="onChecklistSubmit()" class="success_btn">Save</button>
+<p></p>
+
+
+<!-- Lab Questions -->
 <mat-tab label="Lab Questions">
   <p></p>
    <h3>Lab Questions</h3>
    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-   <i><strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong></i> 
-   
-   
+   <i><strong style="color:red">(Note: These questions are used for risk assessment e.g. for ITL audit planning by GB-ITE with the GB/DSO.)</strong></i>
+
+
    <p></p><br>1. How many associates does the laboratory area have?<span class="required"> * </span>
     <p></p>
-    
+
     <mat-card class="custom-card">
      <mat-card-content>
-       
-       <strong>   No.of Internal Associates </strong> 
+
+       <strong>   No.of Internal Associates </strong>
           <input type="text" placeholder=" Internal Associates"><p></p>
-        <br> <strong>No.of External Associates </strong> 
-          
+        <br> <strong>No.of External Associates </strong>
+
           <input type="text" placeholder=" External Associates">
         </mat-card-content>
-                 
+
     </mat-card>
    <p></p>
    <br> 2. How many IT end devices does the laboratory area have? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
@@ -3228,9 +3395,9 @@ Explanation<span class="required"> * </span> :
      </div>
      <p></p>
      <mat-card class="custom-card">
-       
+
         <input type="text" matInput placeholder="No.of devices">
-        
+
      </mat-card>
      <p></p>
      <br> 3. Is the lab(s) (including IT systems) completely independent to network-dependent IT infrastructures into LAN?
@@ -3246,7 +3413,7 @@ Explanation<span class="required"> * </span> :
            <mat-radio-button class="ACL-margin" value="ACL1-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL1-no">No</mat-radio-button>
          </mat-radio-group>
-       
+
        <mat-card-actions>
          <!-- Your action buttons here -->
        </mat-card-actions>
@@ -3256,27 +3423,27 @@ Explanation<span class="required"> * </span> :
      <p></p>
      <div class="portdetails" *ngIf="labelPosition === 'ACL1-yes'">
        <mat-card class="custom-card">
-         
+
        <div class="dropdown-container">
        <div class="dropdown-item">
          Answers<span class="required"> * </span> :
          <input type="text" placeholder="Answers ">
          </div>
          </div>
-         
+
          </mat-card>
      </div>
      <p></p>
      <div class="portdetails" *ngIf="labelPosition === 'ACL1-no'">
        <mat-card class="custom-card">
-         
+
        <div class="dropdown-container">
        <div class="dropdown-item">
          Explanation<span class="required"> * </span> :
          <input type="text" placeholder="Explanation ">
          </div>
          </div>
-       
+
          </mat-card>
      </div>
      <p></p>
@@ -3300,7 +3467,7 @@ Explanation<span class="required"> * </span> :
      <p></p>
      <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-yes'">
        <mat-card class="custom-card">
-        
+
        <div class="dropdown-container">
        <div class="dropdown-item">
          Acceptable downtime<span class="required"> * </span> :
@@ -3312,18 +3479,18 @@ Explanation<span class="required"> * </span> :
      <p></p>
      <div class="portdetails" *ngIf="labelPosition1 === 'ACL1-no'">
        <mat-card class="custom-card">
-         
+
        <div class="dropdown-container">
        <div class="dropdown-item">
          Answers<span class="required"> * </span> :
          <input type="text" placeholder="Answers">
          </div>
          </div>
-         
+
          </mat-card>
      </div>
      <p></p>
-     <br> 5. Can other laboratories at Bosch perform the same tests?<span class="required"> * </span> <div class="tooltip"><i class="icon-info-sign"></i> 
+     <br> 5. Can other laboratories at Bosch perform the same tests?<span class="required"> * </span> <div class="tooltip"><i class="icon-info-sign"></i>
          <span class="tooltiptext">Reference to external redundancy. Could experiments be taken over by another RB lab in case of failures? What is the name of the laboratory and where is it located?</span>
        </div>
        <p></p>
@@ -3343,31 +3510,31 @@ Explanation<span class="required"> * </span> :
        <p></p>
        <div class="portdetails" *ngIf="labelPosition2 === 'ACL2-yes'">
          <mat-card class="custom-card">
-           
+
          <div class="dropdown-container">
          <div class="dropdown-item">
             Name and Location of the Lab <span class="required"> * </span> :
            <input type="text" placeholder="Answers">
            </div>
        </div>
-           
+
            </mat-card>
        </div>
        <p></p>
-     <br> 6. What is the maximum time the lab may be down? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
+     <br> 6. What is the maximum time the lab may be down? <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
          <span class="tooltiptext">What is the maximum acceptable downtime (e. g. 1 hour, 1 day, 1 week) of the IT infrastructure or individual components?</span>
          </div>
          <p></p>
          <mat-card class="custom-card">
-           
-            
+
+
                <input  type="text" placeholder="Maximum acceptable downtime">
-              
-           
+
+
            </mat-card>
    <br> 7. Do run-time critical tests take place over a longer period of time (e.g. endurance tests)? <span class="required"> * </span>
    <div class="tooltip"><i class="icon-info-sign"></i>
-       <span class="tooltiptext">Reference to possible compensation through redundancies 
+       <span class="tooltiptext">Reference to possible compensation through redundancies
          (e. g. further local test stands or at other locations).</span>
      </div>
      <p></p>
@@ -3378,7 +3545,7 @@ Explanation<span class="required"> * </span> :
            <mat-radio-button class="ACL-margin" value="ACL3-yes">Yes</mat-radio-button>
            <mat-radio-button class="ACL-margin" value="ACL3-no">No</mat-radio-button>
          </mat-radio-group>
-       
+
        <mat-card-actions>
          <!-- Your action buttons here -->
        </mat-card-actions>
@@ -3388,7 +3555,7 @@ Explanation<span class="required"> * </span> :
      <p></p>
      <div class="portdetails" *ngIf="labelPosition3 === 'ACL3-yes'">
        <mat-card class="custom-card">
-         
+
        <div class="dropdown-container">
        <div class="dropdown-item">
          Total Time Required<span class="required"> * </span> :
@@ -3410,7 +3577,7 @@ Explanation<span class="required"> * </span> :
      </div>
      <p></p>
    <br>8. Are other RB sites involved in the trials? Are other GBs affected by a failure?
-   <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i> 
+   <span class="required"> * </span><div class="tooltip"><i class="icon-info-sign"></i>
        <span class="tooltiptext">Damage extension in the event of failures.</span>
        </div>
        <p></p>
@@ -3429,7 +3596,7 @@ Explanation<span class="required"> * </span> :
        <p></p>
        <div class="portdetails" *ngIf="labelPosition4 === 'ACL-no'">
          <mat-card class="custom-card">
-           
+
          <div class="dropdown-container">
          <div class="dropdown-item">
            Answers<span class="required"> * </span> :
@@ -3451,7 +3618,7 @@ Explanation<span class="required"> * </span> :
        </div>
        <p></p>
    <br>9. Can the laboratory tests be performed on a test bench without LAN connection or for how long?<span class="required"> * </span>
-   <div class="tooltip"><i class="icon-info-sign"></i> 
+   <div class="tooltip"><i class="icon-info-sign"></i>
        <span class="tooltiptext">Is the network structure of the laboratories (network zones, network transitions, redundant star structure, ...) implemented appropriately?</span>
        </div>
        <p></p>
@@ -3471,38 +3638,38 @@ Explanation<span class="required"> * </span> :
        <p></p>
        <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-yes'">
          <mat-card class="custom-card">
-           
+
          <div class="dropdown-container">
          <div class="dropdown-item">
            Total Time Required<span class="required"> * </span> :
            <input type="text" placeholder="Time Required">
            </div>
            </div>
-           
+
            </mat-card>
        </div>
        <p></p>
        <div class="portdetails" *ngIf="labelPosition5 === 'ACL4-no'">
          <mat-card class="custom-card">
-          
+
          <div class="dropdown-container">
          <div class="dropdown-item">
            Answers<span class="required"> * </span> :
            <input type="text" placeholder="Answers">
            </div>
            </div>
-           
+
            </mat-card>
        </div>
        <p></p>
    <br> 10.What is the confidentiality of the data processed in the laboratory?<span class="required"> * </span>
-   <div class="tooltip"><i class="icon-info-sign"></i> 
-       <span class="tooltiptext">Please indicate the highest confidentiality class 
+   <div class="tooltip"><i class="icon-info-sign"></i>
+       <span class="tooltiptext">Please indicate the highest confidentiality class
            (C-SC0 to C-SC3) of the data that will be processed</span>
        </div>
        <p></p>
        <mat-card class="custom-card">
-        
+
                         <select>
                          <option>Select an option</option>
                          <option>C-SC0</option>
@@ -3510,9 +3677,9 @@ Explanation<span class="required"> * </span> :
                          <option>C-SC2</option>
                          <option>C-SC3</option>
                         </select>
-                     
+
          </mat-card>
          <p></p>
      <br>  <button class="primary">Save as Draft</button>
-       <button class="success_btn" >Save</button>     
+       <button class="success_btn" >Save</button>
  </mat-tab>

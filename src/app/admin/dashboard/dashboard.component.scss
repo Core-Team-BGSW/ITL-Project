@@ -308,8 +308,12 @@ font-size:15px;
 line-height:26px;
 }
 .item h6 {
-margin-bottom:20px;
-color:#2f2f2f;
+
+    margin-bottom: 20px;
+    color: #2f2f2f;
+    font-size: large;
+    /* font-weight: bold; */
+    margin-top: 8px;
 }
 .mission p {
 margin-bottom: 10px;

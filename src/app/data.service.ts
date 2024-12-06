@@ -1,35 +1,42 @@
 // data.service.ts
-//Edited By Jay Jambhale
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+// Import the interface for checklist responses
+export interface CheckListResponseDTO {
+  questionId: number;
+  explanation: string;
+  measures?: string;
+  responsible?: string;
+  status: string;
+  dueDate?: string;
+  fulfillmentStatus: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  /**
-   * @param formData - The JSON string of the form data to submit.
-   * @returns An observable containing the response from the server.
-   */
 
-  private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URLgit
+  // Existing URLs
+  private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
   private locationUrl = 'http://localhost:8080/boschLabsLocation/location/api';
   private formsubmitUrl = 'http://localhost:8080/boschLabs/form/submit';
   private uniqueEntityUrl = 'http://localhost:8080/boschLabs/allEntity';
   private allLabsUrl = 'http://localhost:8080/boschLabs/allLabs';
   private uniqueGBUrl = 'http://localhost:8080/boschLabs/allGB';
 
+  // URL for submitting checklist responses
+  private checklistResponseUrl = 'http://localhost:8080/checklist-response/add'; // Update with your actual backend URL
+
   constructor(private http: HttpClient) {}
 
   getAllLabData(): Observable<any[]> {
-    return this.http
-      .get<any[]>(this.allLabsUrl)
-      .pipe(catchError(this.handleError));
+    return this.http.get<any[]>(this.allLabsUrl).pipe(catchError(this.handleError));
   }
-
 
   removeLab(id: string): Observable<void> {
     const url = `${this.baseUrl}/${id}`;
@@ -61,6 +68,27 @@ export class DataService {
 
   getLocations(): Observable<any> {
     return this.http.get<any>(this.locationUrl);
+  }
+
+//To fetch lab checklist questions
+  private apiChecklist = 'http://localhost:8080/checklist/ids';  // Replace with your actual API URL
+
+
+
+  getQuestions(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiChecklist); // Make sure this API returns an array of objects, not just IDs.
+  }
+  // Method for submitting checklist responses
+  submitCheckListResponse(responseDTO: CheckListResponseDTO): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    // Send the response to the backend
+    return this.http.post(this.checklistResponseUrl, JSON.stringify(responseDTO), {
+      headers,
+      responseType: 'json',
+    }).pipe(catchError(this.handleError));
   }
 
   private handleError(error: any): Observable<never> {

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, Inject,PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup,ReactiveFormsModule,Validators,FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
@@ -11,6 +11,10 @@ import { MatDatepickerModule, matDatepickerAnimations } from '@angular/material/
 import { MatNativeDateModule } from '@angular/material/core';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { isPlatformBrowser } from '@angular/common';
+import { DataService, CheckListResponseDTO } from '../data.service';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+
 
 
 
@@ -65,8 +69,28 @@ export class SelfAuditComponent {
   selectedOption28: string = '';
   selectedOption29: string = '';
   selectedOption30: string = '';
- 
+  loginArray:any={};
+  formData = {
+    firstName: '',
+    lastName: '',
+    deviceno: '',
+    labelPosition:'',
+    answer1:'',
+    explanation1:'',
+    labelPosition1:'',
+    downtime:'',
+    answer2:'',
+    selectedOption: ''
+
+  };
+  isBrowser: boolean;
+  questionIds: number[] = [];
+  responses: { [key: string]: { explanation: string, measures: string, responsible: string, status: string, dueDate: string, fulfillmentStatus: string } } = {};
+
+
   showOptions = false;
+questionId: any;
+
 
   toggleOptions() {
     this.showOptions = !this.showOptions;
@@ -90,9 +114,9 @@ onFulfilledChange(event: any) {
   else if (selectedValue === 'not-fulfilled') {
     this.notapplicableCount++;
   }
-    console.log('Fulfilled Count:', this.fulfilledCount); 
-    console.log('Fulfilled Count:', this.partiallyFulfilledCount); 
-    console.log('Fulfilled Count:', this.notFulfilledCount); 
+    console.log('Fulfilled Count:', this.fulfilledCount);
+    console.log('Fulfilled Count:', this.partiallyFulfilledCount);
+    console.log('Fulfilled Count:', this.notFulfilledCount);
     console.log('Fulfilled Count:', this.notapplicableCount);
 }
 fulfilledCount1: number = 0;
@@ -115,7 +139,7 @@ notapplicableCount1: number = 0;
     else if (selectedValue === 'not-fulfilled') {
       this.notapplicableCount1++;
     }
-    
+
     console.log('Fulfilled Count:', this.fulfilledCount1);
     console.log('Fulfilled Count:', this.partiallyFulfilledCount1);
     console.log('Fulfilled Count:', this.notFulfilledCount1);
@@ -145,16 +169,48 @@ notapplicableCount2: number = 0;
   console.log('Fulfilled Count:', this.notapplicableCount2);
 }
 linkForm: FormGroup;
- 
-  constructor(private fb: FormBuilder) {
+
+
+  constructor(private fb: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: Object, private dataService: DataService, private http: HttpClient
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
       website: ['', [Validators.required, Validators.pattern('https?://.+')]],
       website1: ['', [Validators.required, Validators.pattern('https?://.+')]],
       website2: ['', [Validators.required, Validators.pattern('https?://.+')]],
       website3: ['', [Validators.required, Validators.pattern('https?://.+')]]
     });
+  this.questionIds = [];
+  this.responses = {};
+
+  // Fetch question IDs from the dataService
+  this.dataService.getQuestions().subscribe(
+    (data: number[]) => {  // Expecting an array of numbers (questionIds)
+      if (Array.isArray(data) && data.length > 0) {
+        this.questionIds = data;
+
+        // Initialize responses for each questionId
+        this.questionIds.forEach((questionId) => {
+          this.responses[questionId] = {
+            explanation: '',
+            measures: '',
+            responsible: '',
+            dueDate: '',
+            status: '',
+            fulfillmentStatus: ''
+          };
+        });
+      } else {
+        console.error('Invalid data format:', data);
+      }
+    },
+    (error) => {
+      console.error('Error fetching question IDs:', error);
+    }
+  );
   }
- 
+
   onSubmit() {
     if (this.linkForm.valid) {
       console.log('Form Submitted!', this.linkForm.value);
@@ -174,7 +230,7 @@ data: any[] = [
 
 generateExcelFile(): void {
   const heading = [['Engineering Lab Asset Inventory - Client Hardware - IT Devices']];
-  const columnHeadings = [['Computer name', 'Common account', 'User access list']]; 
+  const columnHeadings = [['Computer name', 'Common account', 'User access list']];
   const worksheetData = [
     { Name: 'Name', Age: 'Age', Address: 'Address' },
     ...this.data
@@ -192,15 +248,15 @@ generateExcelFile(): void {
 
   // Step 7: Merge the first row across the three columns (A1:C1)
   worksheet['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: 2 } }];
-  
+
   // Step 8: Create a workbook and add the worksheet
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
   worksheet['!cols'] = [{ wpx: 200 }, { wpx: 200 }, { wpx: 200 }]; // Set column widths
- 
- 
-  
-  
+
+
+
+
   // Step 9: Generate buffer
   const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
@@ -210,9 +266,132 @@ generateExcelFile(): void {
   // Step 11: Save the file
   saveAs(blob, 'Copy of remote access list.xlsx');
 }
-    
+ngOnInit(): void {
+  this.loadDraft();
+  const storedValue = localStorage.getItem('labelPosition');
+  const storedValue1 = localStorage.getItem('labelPosition1');
+  const storeddropdown = localStorage.getItem('selectedOption');
+    if (storedValue) {
+      this.labelPosition = storedValue;
+    }
+    if (storedValue1) {
+      this.labelPosition1 = storedValue1;
+    }
+    if (storeddropdown) {
+      this.selectedOption = storeddropdown;
+    }
+
+}
+trackByFn(index: number, item: any): number {
+  return item; // Assuming questionId is a number or unique identifier
 }
 
 
- 
+saveDraft(): void {
+  if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+    localStorage.setItem('draftData', JSON.stringify(this.formData));
+    alert('Draft saved!');
+  }
+}
+loadDraft(): void {
+  if (isPlatformBrowser(this.platformId) && typeof localStorage !== 'undefined') {
+    const savedData = localStorage.getItem('draftData');
+    if (savedData) {
+      this.formData = JSON.parse(savedData);
+    }
+  }
+}
+private isLocalStorageAvailable(): boolean {
+  return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+}
+onSelectionChange(value: string): void {
+  // Save the selected value to localStorage whenever it changes
+  if (this.isBrowser) {
+    localStorage.setItem('labelPosition', value);
 
+  }
+
+
+}
+onSelectionChange1(value: string): void {
+  // Save the selected value to localStorage whenever it changes
+  if (this.isBrowser) {
+    localStorage.setItem('labelPosition1', value);
+  }
+}
+
+//Checklist submission
+
+
+
+//selectedOption: string = ''; // To bind to the select input
+explanation: string = '';
+measures: string = '';
+responsible: string = '';
+status: string = '';
+dueDate: string = ''; // To store date in string format
+fulfillmentStatus: string = '';
+
+onChecklistSubmit() {
+  const responseDTO: CheckListResponseDTO = {
+    questionId:1,  // Assuming this is the question ID for the example
+    explanation: this.explanation,
+    measures: this.measures,
+    responsible: this.responsible,
+    status: this.status,
+    dueDate: this.dueDate,
+    fulfillmentStatus: this.selectedOption
+  };
+
+
+  // Send the data to the backend using the service
+  this.dataService.submitCheckListResponse(responseDTO).subscribe(
+    response => {
+      console.log('Response saved successfully', response);
+      // Optionally handle success or reset form here
+    },
+    error => {
+      console.error('Error saving response', error);
+    }
+  );
+
+}
+
+
+
+
+
+
+
+
+
+    // onChecklistSubmit() {
+    //   const responseArray = Object.keys(this.responses).map((questionId: string | number) => ({
+    //     questionId: parseInt(questionId as string, 10),
+    //     explanation: this.responses[questionId].explanation,
+    //     measures: this.responses[questionId].measures || "",
+    //     responsible: this.responses[questionId].responsible || "",
+    //     status: this.responses[questionId].status || "",
+    //     dueDate: this.responses[questionId].dueDate ? new Date(this.responses[questionId].dueDate).toISOString().split('T')[0] : "",
+
+    //     fulfillmentStatus: this.responses[questionId].fulfillmentStatus || "",
+    //   }));
+
+    //   console.log('Request Data:', responseArray); // Log the request data to inspect its structure
+
+    //   this.http.post('http://localhost:8080/checklist-response/add', responseArray, {
+    //     headers: new HttpHeaders().set('Content-Type', 'application/json')
+    //   }).subscribe(
+    //     (response) => {
+    //       console.log('Responses saved successfully:', response);
+    //     },
+    //     (error) => {
+    //       console.error('Error saving responses:', error);
+    //     }
+    //   );
+    // }
+
+
+
+
+}

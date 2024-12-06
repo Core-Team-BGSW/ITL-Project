@@ -1,0 +1,94 @@
+/* Confirmation dialog container */
+.mat-container{
+  padding: 16px;
+}
+h1 {
+  margin: 0px 0px;
+  text-align: center;
+}
+.mat-dialog-container {
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Dialog title */
+.mat-dialog-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;  /* Add subtle border below title */
+  padding-bottom: 10px;
+}
+
+/* Dialog content (message) */
+.mat-dialog-content {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+/* Action buttons container */
+.mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  gap: 20px; /* Add spacing between buttons */
+}
+
+/* General button style */
+// button.mat-button {
+//   font-size: 1rem;
+//   font-weight: 500;
+//   padding: 10px 20px;
+//   border-radius: 25px; /* Round the corners of the buttons */
+//   transition: background-color 0.3s ease, transform 0.2s ease;
+//   text-align: center;
+//   width: 45%;
+// }
+button {
+  margin-left: 145px;
+    padding: 11px;
+    background-color: #56b0ff;
+    border: none;
+    width: 57px;
+    border-radius: 6px;
+    font-size: 17px;
+    height: 37px;
+
+}
+button:hover{
+  background-color: #00a4fd;
+}
+
+/* OK Button */
+button.mat-button:first-child {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+button.mat-button:first-child:hover {
+  background-color: #45a049;
+  transform: scale(1.05); /* Subtle hover effect */
+}
+
+/* Skip Button */
+button.mat-button:last-child {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+button.mat-button:last-child:hover {
+  background-color: #e53935;
+  transform: scale(1.05); /* Subtle hover effect */
+}

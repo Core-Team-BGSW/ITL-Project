@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-navbar',
@@ -23,33 +25,46 @@ export class NavbarComponent {
   @Output() sidebarToggle = new EventEmitter<void>();
   @Input() isOpen: boolean = false; // Receive sidebar state
 
+
   toggleSidebar() {
     this.isOpen = !this.isOpen; // Toggle the sidebar state
     this.sidebarToggle.emit();
   }
   constructor(
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer, private router: Router
+    private domSanitizer: DomSanitizer, private router: Router, private dialog: MatDialog
   ) {
     this.matIconRegistry.addSvgIcon("user", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/user.svg"));
     this.matIconRegistry.addSvgIcon("boschname", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/boschname.svg"));
     this.matIconRegistry.addSvgIcon("boschlogo", this.domSanitizer.bypassSecurityTrustResourceUrl("assets/images/bosch.svg"));
   }
    //Logic for video and quiz popup
-  onApplyForRoleClick(event: MouseEvent): void {
-    event.preventDefault(); // Prevent the default anchor behavior
+   onApplyForRoleClick(event: MouseEvent): void {
+    event.preventDefault(); // Prevent default anchor behavior
 
-    const confirmMessage = "You'll have to watch the video and take the quiz before applying for the role. Please, click on 'OK' to proceed";
-    if (confirm(confirmMessage)) {
-      // User clicked "OK"
-      // Redirect to a specific section of the homepage, e.g., #video
-      this.router.navigate(['/dashboard'], { fragment: 'target-section' });
-      //window.location.hash = 'video'; // Navigate to the specific section
-    } else {
-      // User clicked "Cancel"
-      // Do nothing or handle as needed
+    // Open the custom confirmation dialog
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+
+    // Handle the dialog result (OK or Skip)
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true) {
+        // User clicked "OK"
+        this.router.navigate(['/dashboard'], { fragment: 'target-section' }).then(() => {
+          this.scrollToVideo();
+        });
+      } else {
+        // User clicked "Skip"
+        this.router.navigate(['/role']);
+      }
+    });
+  }
+
+  private scrollToVideo() {
+    const element = document.getElementById('video-section');
+    if (element) {
+      // Scroll to the element with a smooth scrolling effect
+      element.scrollIntoView({ behavior: 'smooth' });
     }
-
 }
 isProfilePopupOpen = false;
 

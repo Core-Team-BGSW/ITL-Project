@@ -78,11 +78,12 @@
 
 .sidebar li {
   position: relative;
-  margin: 2px 0;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  width: 100%;
+    margin: 2px 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    //padding: 2px 6px;
+
 }
 
 .sidebar li .tooltip {
@@ -121,13 +122,19 @@
   text-decoration: none;
   font-size: 16px;
   width: 100%;
-
+  // padding: 5px 6px; /* Consistent padding with active */
+  // width: 100%; /* Ensure width remains consistent */
 }
 
 .sidebar .nav-list li a:hover{
-  background: white;
-  width: 100%;
-  transition: 0.3s ease;
+  background: #d0d4d8;
+  // padding: 5px 6px; /* Consistent padding with active */
+  // width: 100%; /* Ensure width remains consistent */
+
+
+  // width: 180%;
+  // padding: 2px 9px;
+
 }
 
 .sidebar li a .links_name {
@@ -138,7 +145,7 @@
   opacity: 0;
   margin-right: -9px;
   pointer-events: none;
-  transition: 0.4s;
+
 
 }
 
@@ -147,14 +154,6 @@
   pointer-events: auto; // Allow interaction
 }
 
-
-// .sidebar li a:hover .links_name,
-// .sidebar li a:hover i {
-//   transition: all 0.4s ease;
-//   color: black;
-
-// }
-
 .sidebar li .mat-icon {
   height: 50px;
   line-height: 50px;
@@ -162,11 +161,6 @@
   border-radius: 12px;
 }
 /* Active state styling */
-.sidebar li.active a {
-  background-color: #d0d4d8; /* Same as the hover effect */
-  color: black; /* Keep text color consistent */
-}
-
 .sidebar li.active a .links_name {
   opacity: 1; /* Ensure text is visible in active state */
   pointer-events: auto; /* Allow interaction */
@@ -180,14 +174,8 @@
 .sidebar li:hover .tooltip {
   opacity: 1;
   pointer-events: auto;
-  transition: all 0.4s ease;
   top: 50%;
-  transform: translateY(-50%);
-}
 
-/* Adjusting for collapsed sidebar - hide tooltips */
-.sidebar:not(.open) li .tooltip {
-  display: none;
 }
 
 /* When the sidebar is collapsed, adjust text and icon size */
@@ -209,8 +197,12 @@
 
 /* Active state background and border */
 .sidebar li.active {
-  border-left: 4px solid #007bff; /* Blue left border for active item */
-  background-color: #f4f7f9; /* Change background for active item */
+  border-left: 2px solid #007bff; /* Blue left border for active item */
+  //background-color: #d0d4d8; /* Change background for active item */
+  // padding: 5px 6px; /* Increased padding for hover box */
+  // width: 110%; /* Expand width when hovered */
+
+  // padding: 10px 0;
 }
 
 .dropdown-menu{
@@ -239,7 +231,7 @@
 /* When the sidebar is collapsed, adjust text and icon size */
 .sidebar:not(.open) li a mat-icon {
   font-size: 20px; /* Smaller size when collapsed */
-  margin-right: -27px; /* Remove margin between icon and text */
+  //margin-right: -27px; /* Remove margin between icon and text */
 }
 
 /* Adjust for collapsed state - hide text and keep icons visible */
@@ -247,6 +239,69 @@
   opacity: 0; /* Hide text */
   pointer-events: none; /* Disable interaction with text */
   width: 0; /* Remove space taken by text */
-  transition: all 0.4s ease;
+
 }
+
+
+
+
+
+
+
+
+// /* Sidebar Item Hover and Active Styles */
+// .sidebar .nav-list li a {
+//   display: flex;
+//   align-items: center;
+//   text-decoration: none;
+//   font-size: 16px;
+//   width: 100%; /* Ensure the width is 100% so the boxes are consistent */
+//   padding: 5px 15px; /* Same padding for hover and active */
+// }
+
+.sidebar li.active a {
+  background: #d0d4d8; /* Keep the background the same as hover for active state */
+  border-left: 2px solid #007bff; /* Active item border */
+}
+
+// .sidebar li a:hover {
+//   background: #d0d4d8; /* Hover background */
+//   padding: 5px 15px; /* Consistent padding with active */
+//   width: 100%; /* Ensure width remains consistent */
+// }
+
+// .sidebar li.active {
+//   background-color: #d0d4d8; /* Active background */
+//   padding: 5px 15px; /* Ensure padding is consistent for active state */
+// }
+
+// .sidebar li a .links_name {
+//   color: black;
+//   font-size: 14px;
+//   font-weight: 800;
+//   white-space: nowrap;
+//   opacity: 0;
+//   pointer-events: none;
+//   transition: 0.4s;
+// }
+
+// .sidebar.open li a .links_name {
+//   opacity: 1;
+//   pointer-events: auto;
+// }
+
+// .sidebar li .mat-icon {
+//   height: 50px;
+//   line-height: 50px;
+//   font-size: 18px;
+//   border-radius: 12px;
+// }
+
+// .sidebar .nav-list li a:hover,
+// .sidebar li.active a {
+//   /* Ensure the padding and width are the same on hover and active */
+//   background: #d0d4d8;
+//   padding: 5px 15px;
+//   width: 100%; /* Keeps the box the same size for hover and active */
+// }
 
