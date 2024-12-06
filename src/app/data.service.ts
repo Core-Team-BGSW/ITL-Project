@@ -2,7 +2,7 @@
 //Edited By Jay Jambhale
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -21,6 +21,9 @@ export class DataService {
   private uniqueEntityUrl = 'http://localhost:8080/boschLabs/allEntity';
   private allLabsUrl = 'http://localhost:8080/boschLabs/allLabs';
   private uniqueGBUrl = 'http://localhost:8080/boschLabs/allGB';
+  private archiveLabUrl = 'http://localhost:8080/boschLabs/labData/archive';
+  private byResponsibleLabsUrl =
+    'http://localhost:8080/boschLabs/by-responsible';
 
   constructor(private http: HttpClient) {}
 
@@ -29,11 +32,6 @@ export class DataService {
       .get<any[]>(this.allLabsUrl)
       .pipe(catchError(this.handleError));
   }
-
-  // removeLab(id: string): Observable<void> {
-  //   const url = `${this.baseUrl}/${id}`;
-  //   return this.http.delete<void>(url).pipe(catchError(this.handleError));
-  // }
 
   submitForm(formData: any): Observable<string> {
     const headers = new HttpHeaders({
@@ -54,12 +52,16 @@ export class DataService {
     return this.http.get<any[]>(this.uniqueEntityUrl);
   }
 
-  // getPendingApplications(): Observable<any[]> {
-  //   return this.http.get<any[]>(`${this.baseUrl}/pending`);
-  // }
-
   getLocations(): Observable<any> {
     return this.http.get<any>(this.locationUrl);
+  }
+
+  archiveSelectedLab(id: string): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`${this.archiveLabUrl}/${id}`);
+  }
+
+  reponsibleLabs(ntId?: string): Observable<any> {
+    return this.http.get<any[]>(`${this.byResponsibleLabsUrl}/${ntId}`);
   }
 
   private handleError(error: any): Observable<never> {

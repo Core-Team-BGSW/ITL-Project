@@ -512,12 +512,12 @@
 .column p {
   margin-bottom: 12px;
   /* Space between paragraphs */
-  font-size: 19px;
+  font-size: 18px;
   line-height: 1.6;
 }
 
 .column strong {
-  color: #333;
+  color: #005587;
   /* Strong text color */
   font-weight: bold;
   font-size: 16px;
@@ -528,24 +528,15 @@
   /* Remove bottom margin for the last paragraph */
 }
 
-.lab_details_table {
-  width: 95%;
-  border: 1px black;
-  margin: 25px 0;
-  font-size: 18px;
-  text-align: left;
-  margin-top: 0;
-  // box-shadow: 0 0 25px rgba(88, 88, 88, 0.15);
-}
-
-.lab_details_table th {
-  text-align: left;
-  color: white;
-  padding: 7px;
-}
-
-.lab_details_table td {
-  text-align: left;
-  color: #283747;
-  background-color: #eff1f2;
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 9999;
 }

@@ -107,7 +107,7 @@
 
     <!------------------------------------------------------------------------------------------------------------------------------------>
 
-    <div class="portdetails" *ngIf="choosemethod === 'method-formfill'">
+    <div *ngIf="choosemethod === 'method-formfill'">
       <div class="methodheading">
         <p>Application Form</p>
       </div>
@@ -629,6 +629,8 @@
         </button>
       </div>
     </div>
+    <app-custom-dialog [isOpen]="isDialogOpen" (close)="closeDialog()" [data]="formData">
+    </app-custom-dialog>
   </mat-tab>
   <!-- <mat-tab label="My Applications" class="approve-reject">
     <div>
