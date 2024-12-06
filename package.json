@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:Angular_app": "node dist/angular-app/server/server.mjs"
+    "serve:ssr:Angular_app": "node dist/angular-app/server/server.mjs",
+    "build-prod": "ng build --configuration=prod --output-hashing=all"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +48,8 @@
     "filter": "^0.1.1",
     "font-awesome": "^4.7.0",
     "for": "^0.0.1-dev.0",
+    "moment": "^2.30.1",
+    "mongodb": "^6.10.0",
     "mongoose": "^8.7.0",
     "multer": "^1.4.5-lts.1",
     "ng2-search-filter": "^0.5.1",
@@ -73,7 +76,7 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "@types/uuid": "^10.0.0",
-    "@types/xlsx": "^0.0.36",
+    "@types/xlsx": "^0.0.35",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

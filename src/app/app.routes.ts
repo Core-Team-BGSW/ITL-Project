@@ -10,7 +10,6 @@ import { RoleComponent } from './admin/role/role.component';
 import { QuizComponent } from './admin/quiz/quiz.component';
 import { SelfAuditComponent } from './self-audit/self-audit.component';
 import { SoftwareTrackingComponent } from './components/software-tracking/software-tracking.component';
-import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
 import { AuditComponent } from './components/audit/audit.component';
 import { LayoutComponent } from './admin/layout/layout.component';
@@ -34,7 +33,6 @@ export const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'role', component: RoleComponent },
       { path: 'software-tracking', component: SoftwareTrackingComponent },
-      { path: 'applications', component: ApplicationsComponent },
       { path: 'lab-decommission', component: LabDecommissionComponent },
       { path: 'audit', component: AuditComponent },
     ],

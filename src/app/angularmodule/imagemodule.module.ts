@@ -1,0 +1,141 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+
+@NgModule({
+  declarations: [],
+  imports: [CommonModule],
+})
+export class imagemodule {
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIcon(
+      'submit',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/submit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'reset',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/reset.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'download-file',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/download-file.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'preview',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/preview.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'send',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/send.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'back',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/back.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'user',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/user.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'boschname',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/boschname.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'boschlogo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/bosch.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'home',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/homeicon1.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'menu',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/menu.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'cross',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/cross.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'addicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/plus.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'operation',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/operationicon.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'arrow',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/arrow1.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'deleteicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/deleteicon.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'checkicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/check.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'monitoricon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/monitor.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'ipicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/ip.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'auditicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/audit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'moveicon',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/move.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'delete-white',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/delete-white.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'deletewh',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/deletewh.svg'
+      )
+    );
+  }
+}

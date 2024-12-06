@@ -4,12 +4,8 @@ import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { LabCommissionComponent } from './components/lab_commission/lab_commission.component';
 import { SelfCheckComponent } from './components/self-check/self-check.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogboxsubmitComponent } from './components/dialogboxsubmit/dialogboxsubmit.component';
-import { ApplicationsComponent } from './components/applications/applications.component';
 import { LabDecommissionComponent } from './components/lab-decommission/lab-decommission.component';
-import { DialogdecommissionComponent } from './lab-decommission/dialogdecommission/dialogdecommission.component';
 import { AuditComponent } from './components/audit/audit.component';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { SelfAuditComponent } from './self-audit/self-audit.component';
 import { AngularModule } from './angularmodule/angularmodule.module';
 import { LayoutComponent } from './admin/layout/layout.component';
@@ -26,7 +22,6 @@ import { LayoutComponent } from './admin/layout/layout.component';
     SelfCheckComponent,
     ReactiveFormsModule,
     FormsModule,
-    ApplicationsComponent,
     LabDecommissionComponent,
     ReactiveFormsModule,
     AuditComponent,

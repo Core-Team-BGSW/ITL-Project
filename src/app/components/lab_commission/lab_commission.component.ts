@@ -12,9 +12,7 @@ import {
   inject,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
-import { DialogboxsubmitComponent } from '../dialogboxsubmit/dialogboxsubmit.component';
 import {
   trigger,
   state,
@@ -32,7 +30,8 @@ import { LabData } from '../../../../models/LabData';
 import { Location } from '../../../../models/Location';
 import { RegionWithCountries } from '../../../../models/RegionWithCountries';
 import { countriesWithcode } from '../../../../models/countriesWithcode';
-import { MatIconRegistry } from '@angular/material/icon';
+import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
+import { imagemodule } from '../../angularmodule/imagemodule.module';
 
 @Component({
   selector: 'app-lab_commission',
@@ -68,6 +67,8 @@ import { MatIconRegistry } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     LayoutComponent,
+    CustomDialogComponent,
+    imagemodule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -126,6 +127,7 @@ export class LabCommissionComponent {
   showOtherField: boolean = false;
   otherLabType: string = '';
   applications: any[] = [];
+  formData: any = {};
   labForm!: FormGroup;
   selfauditdate: Date | null = null;
   selectedDate!: Date;
@@ -150,28 +152,13 @@ export class LabCommissionComponent {
   filteredLocationCode: String[] = [];
   showOtherSection: boolean = false;
   otherField: string = '';
+  isDialogOpen: boolean = false;
 
   constructor(
-    private dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
     private toastr: ToastrService,
-    private dataService: DataService,
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-  ) {
-    this.matIconRegistry.addSvgIcon(
-      'submit',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/submit.svg'
-      )
-    );
-    this.matIconRegistry.addSvgIcon(
-      'reset',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(
-        'assets/images/reset.svg'
-      )
-    );
-  }
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
     const today = new Date();
@@ -609,17 +596,14 @@ export class LabCommissionComponent {
       selectedDate: this.selectedDate,
     };
 
-    const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
-      width: '600px',
-      data: { ...data },
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('Dialog closed');
-    });
-
-    // Perform submission logic
+    this.formData = data;
+    this.isDialogOpen = true;
     console.log('Form previewed with:', { data });
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false; // Close the modal
+    console.log('Dialog closed');
   }
 
   // Method to validate fields and return missing ones
