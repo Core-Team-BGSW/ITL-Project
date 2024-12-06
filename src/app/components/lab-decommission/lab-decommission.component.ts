@@ -12,7 +12,7 @@ import { AngularModule } from '../../angularmodule/angularmodule.module';
 import { imagemodule } from '../../angularmodule/imagemodule.module';
 import { MatIconRegistry } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
-import { DateFormatPipe } from '../../pipe/date-format.pipe';
+import { DateFormatPipe } from '../../service/date-format.pipe';
 
 @Component({
   selector: 'app-lab-decommission',
