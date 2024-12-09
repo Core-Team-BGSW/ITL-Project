@@ -46,9 +46,13 @@ public class CheckListService {
     }
 
     // Save questions and generate unique questionId
-    public List<CheckList> addQuestions(List<String> questions) {
+    public List<CheckList> addQuestions(List<String> questions, List<String> tooltips) {
         List<CheckList> newCheckLists = questions.stream()
-                .map(question -> new CheckList(nextQuestionId++, question))  // Generate unique questionId
+                .map(question -> {
+                    int index = questions.indexOf(question);
+                    String tooltip = tooltips.size() > index ? tooltips.get(index) : ""; // Handle case where tooltips are fewer than questions
+                    return new CheckList(nextQuestionId++, question, tooltip);
+                })
                 .collect(Collectors.toList());
 
         checkListRepository.saveAll(newCheckLists);  // Save all questions at once to the repository
@@ -92,4 +96,16 @@ public class CheckListService {
                     resetNextQuestionId();  // Recalculate nextQuestionId after deletion
                 });
     }
+
+//    public CheckList updateTooltip(Integer questionId, String newTooltip) {
+//        Optional<CheckList> checkListOpt = Optional.ofNullable(checkListRepository.findByQuestionId(questionId));
+//        if (checkListOpt.isPresent()) {
+//            CheckList checkList = checkListOpt.get();
+//            checkList.setTooltip(newTooltip);  // Update the tooltip
+//            return checkListRepository.save(checkList);  // Save updated question with tooltip
+//        } else {
+//            throw new RuntimeException("Question not found");
+//        }
+//    }
+
 }
