@@ -9,7 +9,7 @@ import com.ITL.Service.backendservice.Utility.ExcelConverter;
 import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import jakarta.mail.MessagingException;
+//import jakarta.mail.MessagingException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
