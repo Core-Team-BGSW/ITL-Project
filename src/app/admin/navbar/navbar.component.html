@@ -1,21 +1,20 @@
 <!-- Kranti Sonawane -->
 <div class="navbar" [class.shift]="isOpen">
-
- <!-- Nav items -->
+  <!-- Nav items -->
   <div class="logo">
-    <mat-icon  class="boschlogo" svgIcon="boschlogo"></mat-icon>
+    <mat-icon class="boschlogo" svgIcon="boschlogo"></mat-icon>
     <!-- <mat-icon class="boschname" svgIcon="boschname"></mat-icon> -->
   </div>
   <ul class="nav-links">
-
     <li class="center">
       <a (click)="onApplyForRoleClick($event)">Apply for role</a>
     </li>
     <li class="upward"><a routerLink="/contact">Contact</a></li>
-    <li class="forward"><a routerLink="/feedback">Feedback</a></li>
-    <li *ngIf="!this.authService.setLoginDisplay1()" class="forward"><a (click)="loginRedirect()">Login</a></li>
+    <!-- <li class="forward"><a routerLink="/feedback">Feedback</a></li> -->
+    <li *ngIf="!this.authService.setLoginDisplay1()" class="forward">
+      <a (click)="loginRedirect()">Login</a>
+    </li>
     <li>
-
       <mat-icon svgIcon="user" (click)="toggleProfilePopup($event)"></mat-icon>
     </li>
   </ul>
@@ -26,13 +25,11 @@
       <span class="close-icon" (click)="toggleProfilePopup($event)">&times;</span>
 
       <ul class="profile-list">
-        <li>{{this.username}}</li>
-      <li>NT_ID: {{this.ntid}}</li>
-      <!-- <li>Role: Administrator</li> -->
-      <li><a (click)="logout()">Logout</a></li>
+        <li>{{ this.username }}</li>
+        <li>NTID: {{ this.ntid }}</li>
+        <!-- <li>Role: Administrator</li> -->
+        <li><a (click)="logout()">Logout</a></li>
       </ul>
     </div>
   </div>
 </div>
-
-

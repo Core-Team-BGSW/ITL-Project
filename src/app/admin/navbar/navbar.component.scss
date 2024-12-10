@@ -24,7 +24,7 @@ body {
   /* Space between elements */
   background: #ffffff;
   padding: 20px 15px;
-  height: 42px;
+  height: 56px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   position: fixed;
   /* Fixed position for the navbar */
@@ -44,8 +44,10 @@ body {
   //border-radius: 5px;
   padding: 5px;
   z-index: 1000;
-  height: 197px;
-  width: 186px;
+  height: 150px;
+  width: 220px;
+  border-radius: 4px;
+  border: solid 2px skyblue;
 }
 
 .popup-content {
@@ -76,15 +78,15 @@ h3 {
   list-style: none;
   padding: 0;
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .profile-list li {
-  padding: 9px 0;
+  padding: 9px 9px;
   /* Space between list items */
   border-bottom: 1px solid #eaeaea;
   /* Divider line */
-  color: #555;
+  color: black;
   /* Text color */
 }
 
@@ -94,12 +96,15 @@ h3 {
 }
 
 .profile-list a {
-  color: #007bff;
+  color: #0096e8;
   text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .profile-list a:hover {
   text-decoration: solid;
+  color: #007bc0;
 }
 
 .logo-details {
@@ -230,6 +235,6 @@ h3 {
 }
 
 .boschlogo {
-  height: 60px;
-  width: 90px;
+  height: 90px;
+  width: 124px;
 }

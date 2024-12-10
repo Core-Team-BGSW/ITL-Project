@@ -295,6 +295,7 @@ select:hover {
   border: 0.5px solid #0044AA;
   border-radius: 10px;
   width: 95%;
+  margin-top: 12px;
 }
 
 .container-heading {
@@ -474,7 +475,6 @@ hr {
   border-top: 1px solid #ccc;
   margin-top: 12px;
   margin-bottom: 12px;
-
 }
 
 .suggestions-list {
@@ -513,6 +513,7 @@ hr {
   border: 0.5px solid #0044AA;
   border-radius: 10px;
   width: 95%;
+  margin-top: 12px;
 }
 
 .question_design1 {
@@ -522,19 +523,18 @@ hr {
   border-radius: 10px;
   padding: 13px;
   display: flex;
-
 }
 
 .container_design1 {
   border: 0.5px solid #0044AA;
   border-radius: 10px;
   width: 47%;
+  margin-top: 12px;
 }
 
 
 .btn_container {
   display: flex;
-  /* Ensures buttons are aligned side by side */
   gap: 10px;
 }
 

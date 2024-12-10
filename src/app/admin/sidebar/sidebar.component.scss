@@ -1,4 +1,3 @@
-
 * {
   margin: -2px;
   padding: 0;
@@ -17,7 +16,7 @@
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.3s ease;
-  margin-top:43px;
+  margin-top: 56px;
 
 
 }
@@ -28,14 +27,18 @@
 
 #toggle-btn {
 
-  font-size: 90px; /* Icon size */
-  cursor: pointer; /* Pointer cursor */
+  font-size: 90px;
+  /* Icon size */
+  cursor: pointer;
+  /* Pointer cursor */
   transition: all 0.4s ease;
 
 }
-#toggle-btn:hover{
+
+#toggle-btn:hover {
   background: none;
 }
+
 .mat-icon {
 
   background-repeat: no-repeat;
@@ -43,22 +46,30 @@
   overflow: visible;
   //opacity: 1;  // Ensure icons are visible
 }
+
 .mat-icon {
   height: 32px; // Increase height for better visibility
-  width: 27px;  // Increase width for better visibility
+  width: 27px; // Increase width for better visibility
 }
+
 .sidebar li a mat-icon {
-  margin-right: 9px; /* Adjust margin as needed for consistent spacing */
+  margin-right: 9px;
+  /* Adjust margin as needed for consistent spacing */
 
 }
+
 .rotate {
-  transition: transform 0.4s ease; /* Smooth rotation */
-  transform: rotate(90deg); /* Rotate the icon */
+  transition: transform 0.4s ease;
+  /* Smooth rotation */
+  transform: rotate(90deg);
+  /* Rotate the icon */
 }
 
 .sidebar.open #toggle-btn {
-  margin-left: 180px; /* Adjust this to position when expanded */
+  margin-left: 180px;
+  /* Adjust this to position when expanded */
 }
+
 .sidebar .logo-details {
   height: 60px;
   display: flex;
@@ -70,9 +81,11 @@
 .sidebar .nav-list {
 
   display: flex;
-  flex-direction: column; /* Stack items vertically */
+  flex-direction: column;
+  /* Stack items vertically */
   height: 100%;
-  padding: 0;  /* Remove any default padding */
+  padding: 2px;
+  /* Remove any default padding */
   margin: 0;
 }
 
@@ -121,10 +134,11 @@
   text-decoration: none;
   font-size: 16px;
   width: 100%;
+  margin: auto;
 
 }
 
-.sidebar .nav-list li a:hover{
+.sidebar .nav-list li a:hover {
   background: white;
   width: 100%;
   transition: 0.3s ease;
@@ -161,19 +175,25 @@
   font-size: 18px;
   border-radius: 12px;
 }
+
 /* Active state styling */
 .sidebar li.active a {
-  background-color: #d0d4d8; /* Same as the hover effect */
-  color: black; /* Keep text color consistent */
+  background-color: #d0d4d8;
+  /* Same as the hover effect */
+  color: black;
+  /* Keep text color consistent */
 }
 
 .sidebar li.active a .links_name {
-  opacity: 1; /* Ensure text is visible in active state */
-  pointer-events: auto; /* Allow interaction */
+  opacity: 1;
+  /* Ensure text is visible in active state */
+  pointer-events: auto;
+  /* Allow interaction */
 }
 
 .sidebar li.active .tooltip {
-  opacity: 0; /* Hide tooltip in active state */
+  opacity: 0;
+  /* Hide tooltip in active state */
 }
 
 /* Tooltip Visibility */
@@ -192,8 +212,10 @@
 
 /* When the sidebar is collapsed, adjust text and icon size */
 .sidebar:not(.open) li a mat-icon {
-  font-size: 20px; /* Smaller size when collapsed */
-  margin-right: -27px; /* Remove margin between icon and text */
+  font-size: 20px;
+  /* Smaller size when collapsed */
+  margin-right: -27px;
+  /* Remove margin between icon and text */
 }
 
 .sidebar li a .links_name {
@@ -209,44 +231,55 @@
 
 /* Active state background and border */
 .sidebar li.active {
-  border-left: 4px solid #007bff; /* Blue left border for active item */
-  background-color: #f4f7f9; /* Change background for active item */
+  border-left: 1px solid #007bff;
+  /* Blue left border for active item */
+  background-color: #f4f7f9;
+  /* Change background for active item */
 }
 
-.dropdown-menu{
+.dropdown-menu {
 
-    background: #e0e2e5;
-    padding: 10px 0;  // Optional, if you want to add padding to the dropdown
-    z-index: 100;  // Ensure the dropdown is on top of other elements
-    position: relative;
+  background: #e0e2e5;
+  padding: 10px 0; // Optional, if you want to add padding to the dropdown
+  z-index: 100; // Ensure the dropdown is on top of other elements
+  position: relative;
 
 }
-.sidebar:not(.open) .arrow{
+
+.sidebar:not(.open) .arrow {
   opacity: 0;
 }
 
 /* Make the arrow visible when the sidebar is expanded */
 .sidebar.open .arrow {
-  opacity: 1;  /* Show the arrow when expanded */
+  opacity: 1;
+  /* Show the arrow when expanded */
 }
+
 .arrow {
-  font-size: 25px; /* Adjusted size for better fit */
-  margin-left: 39px; /* Add space between text and arrow */
+  font-size: 25px;
+  /* Adjusted size for better fit */
+  margin-left: 39px;
+  /* Add space between text and arrow */
   width: 20px;
 }
 
 
 /* When the sidebar is collapsed, adjust text and icon size */
 .sidebar:not(.open) li a mat-icon {
-  font-size: 20px; /* Smaller size when collapsed */
-  margin-right: -27px; /* Remove margin between icon and text */
+  font-size: 20px;
+  /* Smaller size when collapsed */
+  margin-right: -27px;
+  /* Remove margin between icon and text */
 }
 
 /* Adjust for collapsed state - hide text and keep icons visible */
 .sidebar:not(.open) li a .links_name {
-  opacity: 0; /* Hide text */
-  pointer-events: none; /* Disable interaction with text */
-  width: 0; /* Remove space taken by text */
+  opacity: 0;
+  /* Hide text */
+  pointer-events: none;
+  /* Disable interaction with text */
+  width: 0;
+  /* Remove space taken by text */
   transition: all 0.4s ease;
 }
-

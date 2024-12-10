@@ -174,10 +174,8 @@
           </div>
         </div>
       </div>
-      <p></p>
       <div class="container-row">
         <!-------------------------------------------ITL Details--------------------------------------------------------------------------------->
-
         <div class="container">
           <div class="question_design">
             <strong>ITL's</strong>
@@ -255,7 +253,6 @@
           </div>
         </div>
       </div>
-      <p></p>
       <!-------------------------------------------Location Details--------------------------------------------------------------------------------->
       <div class="container">
         <div class="question_design">
@@ -319,7 +316,6 @@
           </div>
         </div>
       </div>
-      <p></p>
       <!-------------------------------------------DH KAM Details--------------------------------------------------------------------------------->
 
       <div class="container">
@@ -372,8 +368,6 @@
           </div>
         </div>
       </div>
-      <p></p>
-
       <div class="container">
         <div class="question_design">
           <strong>Lab Work Details</strong>
@@ -405,7 +399,6 @@
           </div>
         </div>
       </div>
-      <p></p>
       <div class="radioflex">
         <!-- <mat-card>
           <mat-card-content> -->
@@ -434,15 +427,7 @@
                 rel="noopener">SMT-CMDB</a>
             </div>
           </b>
-          <!-- </p> -->
-          <!-- </section> -->
         </div>
-        <!-- </mat-card-content>
-        </mat-card> -->
-
-
-        <!-- <mat-card>
-          <mat-card-content> -->
         <div class="container_design1">
           <div class="question_design1">
             <div style="color: white;">Shared Lab<span class="required"> *</span></div>
@@ -459,11 +444,7 @@
           <!-- </section> -->
         </div>
       </div>
-      <!-- </mat-card-content>
-        </mat-card> -->
-      <!-- <mat-card>
-          <mat-card-content> -->
-      <p></p>
+
       <div class="container_design">
         <div class="question_design">
           <div style="color: white;"> Self Audit Due Date<span class="required"> *</span></div>
@@ -488,7 +469,6 @@
           </div>
         </b>
       </div>
-      <p></p>
       <div class="container_design">
         <div class="question_design">
           <div style="color:white">ACL Required<span class="required"> *</span> </div>
@@ -506,8 +486,10 @@
           </mat-radio-group>
         </div>
       </div>
-      <div class="portdetails" *ngIf="ACLradio === 'Yes'">
-        <p>Port Requirement Details</p>
+      <div class="container_design" *ngIf="ACLradio === 'Yes'">
+        <div class="question_design">
+          <div style="color:white">Port Details<span class="required"> *</span> </div>
+        </div>
         <div class="userinput-container">
           <div class="userinput-item">
             <label for="greenPorts">No. of Green Ports<span class="required"> *</span></label>
@@ -532,92 +514,111 @@
           Other Information
           <span class="arrow" [@rotateArrow]="showOtherSection ? 'expanded' : 'collapsed'">&#11167;</span>
         </p>
-        <div class="other-section" *ngIf="showOtherSection">
-          <p>Lab rack / tables Size</p>
-          <div class="userinput-container">
-            <div class="userinput-item">
-              <label for="setup">Setup </label>
-              <select id="setupselect" name="setupselect">
-                <!-- [(ngModel)]="setupselect" -->
-                <option value>Select</option>
-                <option value="Vertical">Vertical</option>
-                <option value="Horizontal">Horizontal</option>
-              </select>
+        <p></p>
+        <div *ngIf="showOtherSection">
+          <div class="container_design">
+            <div class="question_design">
+              <div style="color:white">Lab Rack/Table Size<span class="required"> *</span> </div>
+            </div>
+            <div class="userinput-container">
+              <div class="userinput-item">
+                <label for="setup">Setup </label>
+                <select id="setupselect" name="setupselect">
+                  <!-- [(ngModel)]="setupselect" -->
+                  <option value>Select</option>
+                  <option value="Vertical">Vertical</option>
+                  <option value="Horizontal">Horizontal</option>
+                </select>
+              </div>
+
+              <div class="userinput-item">
+                <label for="size">Size (in ft)</label>
+                <input type="text" class="labsizelwh" placeholder="Length" />
+                <input type="text" class="labsizelwh" placeholder="Width" />
+                <input type="text" class="labsizelwh" placeholder="Height" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
+
+              <div class="userinput-item">
+                <label for="count">Count of racks/tables</label>
+                <input type="text" placeholder="Count" />
+                <!-- [(ngModel)]="countselect" -->
+              </div>
             </div>
 
-            <div class="userinput-item">
-              <label for="size">Size (in ft)</label>
-              <input type="text" class="labsizelwh" placeholder="Length" />
-              <input type="text" class="labsizelwh" placeholder="Width" />
-              <input type="text" class="labsizelwh" placeholder="Height" />
-              <!-- [(ngModel)]="sizeselect" -->
-            </div>
-
-            <div class="userinput-item">
-              <label for="count">Count of racks/tables</label>
-              <input type="text" placeholder="Count" />
-              <!-- [(ngModel)]="countselect" -->
+            <div class="userinput-container">
+              <div class="userinput-item">
+                <label for="seatingfacility">Seating Facility</label>
+                <input type="text" placeholder="Seating Facility" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
+              <div class="userinput-item">
+                <label for="powerloadbox">Power Load box</label>
+                <input type="text" placeholder="Power Load box" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
+              <div class="userinput-item">
+                <label for="solderingstation">Soldering station</label>
+                <input type="text" placeholder="Soldering station" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
             </div>
           </div>
 
-          <div class="userinput-container">
-            <div class="userinput-item">
-              <label for="seatingfacility">Seating Facility</label>
-              <input type="text" placeholder="Seating Facility" />
-              <!-- [(ngModel)]="sizeselect" -->
+          <div class="container_design">
+            <div class="question_design">
+              <div style="color:white">Lab Space<span class="required"> *</span> </div>
             </div>
-            <div class="userinput-item">
-              <label for="powerloadbox">Power Load box</label>
-              <input type="text" placeholder="Power Load box" />
-              <!-- [(ngModel)]="sizeselect" -->
-            </div>
-            <div class="userinput-item">
-              <label for="solderingstation">Soldering station</label>
-              <input type="text" placeholder="Soldering station" />
-              <!-- [(ngModel)]="sizeselect" -->
-            </div>
-          </div>
-          <p>Lab Space</p>
-          <div class="userinput-container">
-            <div class="userinput-item">
-              <label for="totallabspace ">Total Lab space</label>
-              <input type="text" placeholder="Total Lab space " />
-              <!-- [(ngModel)]="sizeselect" -->
-            </div>
-            <div class="userinput-item">
-              <label for="freelabspace">Free Lab Space</label>
-              <input type="text" placeholder="Free Lab Space" />
-              <!-- [(ngModel)]="sizeselect" -->
+            <div class="userinput-container">
+              <div class="userinput-item">
+                <label for="totallabspace ">Total Lab space</label>
+                <input type="text" placeholder="Total Lab space " />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
+              <div class="userinput-item">
+                <label for="freelabspace">Free Lab Space</label>
+                <input type="text" placeholder="Free Lab Space" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
             </div>
           </div>
 
-          <p>AC</p>
-          <div class="userinput-container">
-            <div class="userinput-item">
-              <label for="ACinfo">PAC</label>
-              <input type="text" placeholder="No. of PAC" />
-              <!-- [(ngModel)]="sizeselect" -->
+          <div class="container_design">
+            <div class="question_design">
+              <div style="color:white">AC<span class="required"> *</span> </div>
             </div>
-            <div class="userinput-item">
-              <label for="ACinfo">Office AC</label>
-              <input type="text" placeholder="No. of office AC" />
-              <!-- [(ngModel)]="sizeselect" -->
+            <div class="userinput-container">
+              <div class="userinput-item">
+                <label for="ACinfo">PAC</label>
+                <input type="text" placeholder="No. of PAC" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
+              <div class="userinput-item">
+                <label for="ACinfo">Office AC</label>
+                <input type="text" placeholder="No. of office AC" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
             </div>
           </div>
 
-          <p>Power Supply</p>
-          <div class="userinput-container">
-            <div class="userinput-item">
-              <label for="powersupplyinfo">Voltage(V)</label>
-              <input type="text" placeholder="voltage" />
-              <!-- [(ngModel)]="sizeselect" -->
+          <div class="container_design">
+            <div class="question_design">
+              <div style="color:white">Power Supply<span class="required"> *</span> </div>
             </div>
-            <div class="userinput-item">
-              <label for="powersupplyinfo">Plug point near the table</label>
-              <input type="text" placeholder="Count" />
-              <!-- [(ngModel)]="sizeselect" -->
+            <div class="userinput-container">
+              <div class="userinput-item">
+                <label for="powersupplyinfo">Voltage(V)</label>
+                <input type="text" placeholder="voltage" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
+              <div class="userinput-item">
+                <label for="powersupplyinfo">Plug point near the table</label>
+                <input type="text" placeholder="Count" />
+                <!-- [(ngModel)]="sizeselect" -->
+              </div>
             </div>
           </div>
+
         </div>
       </div>
       <div class="form-button-container">
