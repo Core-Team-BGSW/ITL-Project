@@ -184,7 +184,7 @@
             <div class="userinput-item">
               <label for="local-ITL">Local-ITL <span class="required"> *</span></label>
               <input type="text" id="local-ITL" name="local-ITL" [(ngModel)]="localITL" placeholder="NTID" required
-                minlength="7" #localITLInput="ngModel" />
+                minlength="7" #localITLInput="ngModel" (ngModelChange)="fetchDataForLocalITL()" />
               <div *ngIf="
               localITLInput.invalid &&
               (localITLInput.dirty || localITLInput.touched)">
@@ -228,7 +228,7 @@
               <div style="margin-bottom: 10px;">
                 <input type="text" placeholder="NTID" pattern="[A-Za-z0-9]*" #primaryLabCoord="ngModel"
                   [disabled]="!isBGSWOrBGSV()" title="Select BGSW or BGSV entity to enable this field"
-                  [(ngModel)]="primarylabco" />
+                  [(ngModel)]="primarylabco" (ngModelChange)="fetchDataForPrimaryLabCoord()" />
               </div>
               <div *ngIf="
               primaryLabCoord.invalid &&
@@ -265,7 +265,7 @@
               title="ex.MS/EVO-ETAS-VOS, MS/EMR-PS" #locationdept="ngModel" />
             <div *ngIf="
               locationdept.invalid &&
-              showValidationMessage &&
+
               (locationdept.dirty || locationdept.touched)
             ">
               <div *ngIf="locationdept.errors?.['required']" style="color: red">

@@ -37,7 +37,7 @@
           </b>
 
           <div class="container">
-            <button (click)="toggleDetails(lab._id)" class="lab_btn">
+            <button (click)="toggleDetails(lab.id)" class="lab_btn">
               Lab Details
             </button>
             <button (click)="openForm(lab.Entity)">Self-Audit</button>
@@ -45,7 +45,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div *ngIf="isExpanded(lab._id)" class="collapsible-content">
+    <div *ngIf="isExpanded(lab.id)" class="collapsible-content">
       <p></p>
 
       <mat-card class="custom-card1">
@@ -207,7 +207,7 @@
             {{ lab.entityName }} -> {{ lab.gb }} -> {{ lab.dep_name }} </b> </div>
 
         <div class="container">
-          <button (click)="toggleDetails(lab._id)" class="lab_btn">
+          <button (click)="toggleDetails(lab.id)" class="lab_btn">
             Lab Details
           </button>
           <button class="audit_btn" (click)="openForm(lab.entityName)">Self-Audit </button>
@@ -216,7 +216,7 @@
       </div>
     </div>
     <!-- It will fetch the details of each and every lab from the backend  -->
-    <div *ngIf="isLabDetailsVisible(lab._id)" class="collapsible-content">
+    <div *ngIf="isLabDetailsVisible(lab.id)" class="collapsible-content">
       <p></p>
 
 

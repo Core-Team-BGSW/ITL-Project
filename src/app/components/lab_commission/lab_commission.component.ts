@@ -32,6 +32,8 @@ import { RegionWithCountries } from '../../../../models/RegionWithCountries';
 import { countriesWithcode } from '../../../../models/countriesWithcode';
 import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
 import { imagemodule } from '../../angularmodule/imagemodule.module';
+import { catchError, distinctUntilChanged, switchMap } from 'rxjs';
+import { filter } from 'rxjs/internal/operators/filter';
 
 @Component({
   selector: 'app-lab_commission',
@@ -110,7 +112,7 @@ export class LabCommissionComponent {
   Building: string = '';
   Floor: string = '';
   labno: string = '';
-  primarylabco: string = '';
+  primarylabco: any = '';
   secondarylabco: string = '';
   CC: string = '';
   kindoflab: string = '';
@@ -145,6 +147,7 @@ export class LabCommissionComponent {
   allLabs: LabData[] = [];
   gbOptions: string[] = [];
   entityOptions: string[] = [];
+  suggestions: string[] = [];
   departmentSuggestions: string[] = [];
   dhSuggestions: string[] = []; // All available DH suggestions
   uniqueRegions: RegionWithCountries[] = [];
@@ -153,6 +156,7 @@ export class LabCommissionComponent {
   showOtherSection: boolean = false;
   otherField: string = '';
   isDialogOpen: boolean = false;
+  isUserSelected: boolean = false;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -529,6 +533,8 @@ export class LabCommissionComponent {
     if (this.selectedEntity === 'BGSW') {
       this.localITL = 'MNU1KOR';
       this.localITLproxy = 'ada2kor';
+      this.primarylabco = '';
+      this.secondarylabco = '';
     } else {
       this.localITL = ''; // Clear localITL for other entities
       this.localITLproxy = '';
@@ -538,7 +544,22 @@ export class LabCommissionComponent {
   }
 
   isBGSWOrBGSV(): boolean {
-    return this.selectedEntity === 'BGSW' || this.selectedEntity === 'BGSV';
+    const result =
+      this.selectedEntity === 'BGSW' || this.selectedEntity === 'BGSV';
+    if (result) {
+      this.checkAndFetchData();
+    } else {
+      this.fetchDataForLocalITL();
+    }
+
+    return result;
+  }
+
+  checkAndFetchData() {
+    // Only fetch data if primarylabco is not empty and has at least 6 characters
+    if (this.primarylabco && this.primarylabco.length >= 6) {
+      this.fetchDataForPrimaryLabCoord(); // Fetch data for primary lab coordinator
+    }
   }
   /////////////////////////////////////////////////////////////////////onReset-formfill////////////////////////////////////////////////////////////////////////////
 
@@ -675,5 +696,37 @@ export class LabCommissionComponent {
 
   toggleOtherSection() {
     this.showOtherSection = !this.showOtherSection;
+  }
+
+  fetchDataForPrimaryLabCoord() {
+    if (this.primarylabco && this.primarylabco.length >= 6) {
+      this.dataService.getSuggestions(this.primarylabco).subscribe(
+        (data) => {
+          this.suggestions = data; // Store the suggestions data in suggestions
+          this.Dept = data.department;
+          this.CC = data.costCenter;
+          this.DH = data.departmentHead;
+        },
+        (error) => {
+          console.error('Error fetching suggestions:', error); // Handle any errors
+        }
+      );
+    }
+  }
+
+  fetchDataForLocalITL() {
+    if (this.localITL && this.localITL.length >= 6) {
+      this.dataService.getSuggestions(this.localITL).subscribe(
+        (data) => {
+          this.suggestions = data; // Store the suggestions data in suggestions
+          this.Dept = data.department;
+          this.CC = data.costCenter;
+          this.DH = data.departmentHead;
+        },
+        (error) => {
+          console.error('Error fetching suggestions:', error); // Handle any errors
+        }
+      );
+    }
   }
 }

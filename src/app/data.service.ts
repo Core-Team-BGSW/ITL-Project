@@ -35,6 +35,8 @@ export class DataService {
     'http://localhost:8080/boschLabs/by-responsible';
   private apiChecklist = 'http://localhost:8080/checklist/ids';
   private checklistResponseUrl = 'http://localhost:8080/checklist-response/add';
+  private baseUrl2 = 'http://localhost:8080/userinfo'; // Replace with your API URL
+
   constructor(private http: HttpClient) {}
 
   getAllLabData(): Observable<any[]> {
@@ -121,5 +123,9 @@ export class DataService {
 
     console.error(errorMessage); // Log the error message
     return throwError(errorMessage); // Return an observable with a user-facing error message
+  }
+
+  getSuggestions(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl2}/${userId}`);
   }
 }
