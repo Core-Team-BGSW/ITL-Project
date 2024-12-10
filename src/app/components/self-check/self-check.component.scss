@@ -1,183 +1,3 @@
-// @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
-
-// input[type=text]
-// {
-//  width: 300px;
-//  padding: 10px 15px;
-//  margin: 8px 0;
-//  display: inline-block;
-//  border: 2px solid #f7f0f0;
-//  background-color: white;
-//  border-radius: 8px;
-//  box-sizing: border-box;
-//  border: 1.2px solid rgb(107, 124, 194);
-// }
-// .custom-card
-// {
-//  /* Custom background color */
-// border-radius: 0px; /* Rounded corners */
-// padding: 5px;/* Padding inside the card */
-// width: 97%;
-// box-sizing: border-box;
-// margin-bottom: 16px;
-// box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
-// border-radius: 15px;
-// transition: all 0.3s ease;
-// }
-// .custom-card:hover{
-//   transform: scale(1.01);
-//   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-//   background-color: #e6e8ea;
-// }
-// svg
-// {
-// width: 20px;
-// height: 15px;
-// }
-// h2
-// {
-//  color:#0e1126;
-//  text-align: left;
-//  font-weight: 400;
-//  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Shadow */
-// }
-//  .custom-card1
-// {
-//   border-radius: 0px; /* Rounded corners */
-//   padding: 5px;/* Padding inside the card */
-//   width: 97%;
-//   box-sizing: border-box;
-//   margin-bottom: 16px;
-//   box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
-//   border-radius: 15px;
-// }
-// .lab-detail{
-//   color: rgb(80, 79, 79);
-// }
-
-// button {
-//   background-color: #4CAF50; /* Green */
-//   border: none;
-//   color: white;
-//   padding: 15px 32px;
-//   text-align: center;
-//   text-decoration: none;
-//   display: inline-block;
-//   font-size: 16px;
-//   margin-top: -25px;
-//   box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2); /* Add shadow */
-//   transition: background-color 0.3s ease, transform 0.3s ease;
-//   font-weight: bold;
-
-//   cursor: pointer;
-//   border-radius: 10px;
-//   transition: background-color 0.3s ease;
-//   &:hover {
-//     background-color: #6fb75d;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//       background-color: #49a138; /* Darken background on hover */
-//       transform: translateY(-2px); /* Slightly move the button up on hover */
-
-//   }
-//   &:active {
-//     background-color: #24c034; /* Even darker background when clicked */
-//     transform: translateY(1px); /* Move button slightly down when clicked */
-//   }
-
-// }
-// .container {
-//   display: flex;
-//   justify-content: flex-end;
-// }
-// h4{
-//   color: #3f51b5;
-//   text-align: center;
-//   background-color: #e8e2e2;
-// }
-// form.search_btn input[type=text] {
-//   padding: 10px;
-//   font-size: 17px;
-//   border: 1px solid rgb(211, 210, 210);
-//   width: 50%;
-//   background: white;
-// }
-// form.search_btn button {
-
-//   width: 5%;
-//   padding: 10px;
-//   background: #3298f1;
-//   color: white;
-//   font-size: 17px;
-//   border: 1px solid grey;
-//   border-left: none;
-//   cursor: pointer;
-//   margin-left: 10px;
-// }
-// form.example button:hover {
-//   background: #0b7dda;
-// }
-// form.example::after {
-//   content: "";
-//   clear: both;
-//   display: table;
-// }
-// .lab_btn{
-//   background-color: #3d8bda;
-//   color: white;
-//   border: none;
-//   padding: 12px 24px;
-//   font-size: 16px;
-//   font-weight: bold;
-//   border-radius: 8px;
-//   cursor: pointer;
-//   box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2);
-//   transition: background-color 0.3s ease, transform 0.3s ease;
-//   margin-right: 16px;
-// }
-
-// .lab_btn:hover {
-//   background-color: #467cae;
-//   transform: translateY(-2px);
-// }
-
-// .lab_btn:active {
-//   background-color: #273081;
-//   transform: translateY(1px);
-// }
-// .detail-label{
-//   color: #374e65;
-// }
-// .search{
-//   border-radius: 8px;
-
-// }
-// .btn_upload_doc{
-//   background-color: rgb(227, 186, 111);
-//   margin-right: 10px;
-// }
-// .form-control:focus,
-// .form-control:hover {
-//   transform: translateY(-5px);
-//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-// }
-// .lab_details_table{
-//   width: 100%;
-//   border:1px black;
-//   margin: 25px 0;
-//   font-size: 18px;
-//   text-align: left;
-//   margin-top: 0;
-//   box-shadow: 0 0 25px rgba(88, 88, 88, 0.15);
-// }
-// .lab_details_table th{
-//   text-align: center;
-// }
-// .lab_details_table td{
-//   text-align: center;
-//   color:#283747
-// }
-
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
 
 input[type=text] {
@@ -192,26 +12,6 @@ input[type=text] {
   border: 1.2px solid rgb(107, 124, 194);
 }
 
-.custom-card {
-  /* Custom background color */
-  border-radius: 0px;
-  /* Rounded corners */
-  padding: 5px;
-  /* Padding inside the card */
-  width: 97%;
-  box-sizing: border-box;
-  margin-bottom: 16px;
-  box-shadow: 0 0 20px 1px rgba(141, 160, 169, 0.4);
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.custom-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  background-color: #e6e8ea;
-}
-
 svg {
   width: 20px;
   height: 15px;
@@ -224,18 +24,7 @@ h2 {
   font-size: 30px;
   border-radius: 8px;
   width: 95%;
-}
-
-.custom-card1 {
-  border-radius: 0px;
-  /* Rounded corners */
-  padding: 5px;
-  /* Padding inside the card */
-  width: 97%;
-  box-sizing: border-box;
-  margin-bottom: 16px;
-  box-shadow: 0 0 20px 1px rgba(105, 142, 159, 0.4);
-  border-radius: 15px;
+  margin: 12px 0px;
 }
 
 .lab-detail {
@@ -286,18 +75,7 @@ button {
 
 .container {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 50px;
-  /* Center buttons vertically */
-
-
-}
-
-h4 {
-  color: #3f51b5;
-  text-align: center;
-  background-color: #e8e2e2;
+  gap: 10px;
 }
 
 form.search_btn input[type=text] {
@@ -306,11 +84,9 @@ form.search_btn input[type=text] {
   border: 1px solid rgb(211, 210, 210);
   width: 50%;
   background: white;
-
 }
 
 form.search_btn button {
-
   width: 5%;
   padding: 10px;
   background: #3298f1;
@@ -341,7 +117,7 @@ form.example::after {
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 80px;
+  //margin-bottom: 80px;
   box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2);
   transition: background-color 0.3s ease, transform 0.3s ease;
   margin-right: 16px;
@@ -366,7 +142,7 @@ form.example::after {
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 80px;
+  //margin-bottom: 80px;
   box-shadow: 0 8px 8px rgba(4, 4, 4, 0.2);
   transition: background-color 0.3s ease, transform 0.3s ease;
   margin-right: 16px;
@@ -380,55 +156,14 @@ form.example::after {
   transform: translateY(-2px);
 }
 
-.detail-label {
-  color: #374e65;
-}
-
 .search {
   border-radius: 8px;
-
-}
-
-.btn_upload_doc {
-  background-color: rgb(227, 186, 111);
-  margin-right: 10px;
-}
-
-.form-control:focus,
-.form-control:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-}
-
-.lab_details_table {
-  width: 95%;
-  border: 1px black;
-  margin: 25px 0;
-  font-size: 18px;
-  text-align: left;
-  margin-top: 0;
-  // box-shadow: 0 0 25px rgba(88, 88, 88, 0.15);
-}
-
-.lab_details_table th {
-  text-align: left;
-  color: white;
-  padding: 7px;
-}
-
-.lab_details_table td {
-  text-align: left;
-  color: #283747;
-  background-color: #eff1f2;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* Two equal-width columns */
   gap: 20px;
-  /* Add space between columns */
 }
 
 .column {
@@ -437,26 +172,30 @@ form.example::after {
 
 .column p {
   margin-bottom: 12px;
-  /* Space between paragraphs */
-  font-size: 19px;
-  line-height: 1.6;
+  font-size: 18px;
+  line-height: 1.2;
 }
 
 .column strong {
-  color: #333;
-  /* Strong text color */
+  color: #005587;
   font-weight: bold;
   font-size: 16px;
 }
 
 .column p:last-child {
   margin-bottom: 0;
-  /* Remove bottom margin for the last paragraph */
 }
 
 .container_design {
   border: 1px solid #337ab7;
   border-radius: 10px;
-  width: 95%;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.lab-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
 }

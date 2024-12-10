@@ -297,6 +297,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FilterPipe } from '../../filter.pipe';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../../service/login.service';
+import { DateFormatPipe } from '../../service/date-format.pipe';
 
 interface Question {
   question: string;
@@ -324,6 +325,7 @@ interface Question {
     FormsModule,
     MatMenuModule,
     FilterPipe,
+    DateFormatPipe,
   ],
   templateUrl: './self-check.component.html',
   styleUrl: './self-check.component.scss',
