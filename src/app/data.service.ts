@@ -6,6 +6,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+export interface CheckListResponseDTO {
+  questionId: number;
+  explanation: string;
+  measures?: string;
+  responsible?: string;
+  status: string;
+  dueDate?: string;
+  fulfillmentStatus: string;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -24,7 +33,8 @@ export class DataService {
   private archiveLabUrl = 'http://localhost:8080/boschLabs/labData/archive';
   private byResponsibleLabsUrl =
     'http://localhost:8080/boschLabs/by-responsible';
-
+  private apiChecklist = 'http://localhost:8080/checklist/ids';
+  private checklistResponseUrl = 'http://localhost:8080/checklist-response/add';
   constructor(private http: HttpClient) {}
 
   getAllLabData(): Observable<any[]> {
@@ -62,6 +72,24 @@ export class DataService {
 
   reponsibleLabs(ntId?: string): Observable<any> {
     return this.http.get<any[]>(`${this.byResponsibleLabsUrl}/${ntId}`);
+  }
+
+  getQuestions(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiChecklist); // Make sure this API returns an array of objects, not just IDs.
+  }
+  // Method for submitting checklist responses
+  submitCheckListResponse(responseDTO: CheckListResponseDTO): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    // Send the response to the backend
+    return this.http
+      .post(this.checklistResponseUrl, JSON.stringify(responseDTO), {
+        headers,
+        responseType: 'json',
+      })
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: any): Observable<never> {

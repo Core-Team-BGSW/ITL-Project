@@ -13,6 +13,7 @@ import { imagemodule } from '../../angularmodule/imagemodule.module';
 import { MatIconRegistry } from '@angular/material/icon';
 import { ToastrService } from 'ngx-toastr';
 import { DateFormatPipe } from '../../service/date-format.pipe';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-lab-decommission',
@@ -40,14 +41,20 @@ export class LabDecommissionComponent implements OnInit {
   ntId: any;
   readonly dialog = inject(MatDialog);
   isLoading: boolean = false;
-
+  userId: string | null = null;
   constructor(
     private dataService: DataService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: LoginService
   ) {}
 
   ngOnInit(): void {
-    this.loadLabList();
+    this.authService.userId$.subscribe((id) => {
+      this.userId = id;
+      if (id) {
+        this.loadLabList(id);
+      }
+    });
   }
   //function  for loading lab list
   loadLabList(ntId?: string): void {

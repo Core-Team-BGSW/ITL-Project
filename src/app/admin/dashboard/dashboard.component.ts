@@ -16,9 +16,7 @@ import { LabCommissionComponent } from '../../components/lab_commission/lab_comm
 import { SelfCheckComponent } from '../../components/self-check/self-check.component';
 import { SoftwareTrackingComponent } from '../../components/software-tracking/software-tracking.component';
 import { LabDecommissionComponent } from '../../components/lab-decommission/lab-decommission.component';
-import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-import { filter } from 'rxjs/internal/operators/filter';
-import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
+import { imagemodule } from '../../angularmodule/imagemodule.module';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,19 +32,25 @@ import { AuthenticationResult, EventMessage, EventType, InteractionStatus } from
     SoftwareTrackingComponent,
     LabDecommissionComponent,
     MatIconModule,
+    imagemodule,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit, OnInit {
   toggleProperty = true;
-  loginDisplay = false;
+  videoWatched = false; // To track if the video is watched completely
 
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
-  constructor(private router: Router, private route: ActivatedRoute,private authService: MsalService, private msalBroadcastService: MsalBroadcastService) {}
+
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    // Initialization code here
+  }
 
   ngAfterViewInit(): void {
-    // Use ActivatedRoute to access fragments
+    // Scroll to the target section if a fragment is provided in the URL
     this.route.fragment.subscribe((fragment) => {
       if (fragment) {
         const element = document.getElementById(fragment);
@@ -57,42 +61,12 @@ export class DashboardComponent implements AfterViewInit {
     });
   }
 
+  // Method to navigate to quiz after video completion
   navigateToQuiz() {
-    if (
-      this.videoPlayer.nativeElement.currentTime >=
-      this.videoPlayer.nativeElement.duration
-    ) {
-      this.router.navigate(['/quiz']);
-    } else {
-      alert('Please watch the entire video before proceeding.');
-    }
-  }
-  ngOnInit(): void {
-    this.msalBroadcastService.msalSubject$
-    .pipe(
-      filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
-    )
-    .subscribe((result: EventMessage) => {
-      console.log(result);
-      const payload = result.payload as AuthenticationResult;
-      this.authService.instance.setActiveAccount(payload.account);
-    });
-
-  this.msalBroadcastService.inProgress$
-    .pipe(
-      filter((status: InteractionStatus) => status === InteractionStatus.None)
-    )
-    .subscribe(() => {
-      this.setLoginDisplay();
-    })
-    // Initialization code here
+    this.router.navigate(['/quiz']);
   }
 
   toggle() {
     this.toggleProperty = !this.toggleProperty;
-  }
-
-  setLoginDisplay() {
-    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
 }

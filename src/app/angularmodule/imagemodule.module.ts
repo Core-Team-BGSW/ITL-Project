@@ -137,5 +137,9 @@ export class imagemodule {
         'assets/images/deletewh.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      'quiz',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/quiz.svg')
+    );
   }
 }
