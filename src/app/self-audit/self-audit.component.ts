@@ -27,6 +27,7 @@ import { FormAnswerService } from '../service/form-answer.service';
 import { response } from 'express';
 import { Question } from '../../../models/Question';
 import { DataService } from '../data.service';
+import { ToastrService } from 'ngx-toastr';
 
 export interface CheckListResponseDTO {
   questionId: number;
@@ -229,7 +230,8 @@ export class SelfAuditComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     private formAnswerService: FormAnswerService,
     private http: HttpClient,
-    private dataService: DataService
+    private dataService: DataService,
+    private toastr: ToastrService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
@@ -433,6 +435,7 @@ export class SelfAuditComponent {
 
     this.formAnswerService.saveFormAnswer(data).subscribe((response) => {
       console.log('Form Saved Successfully', response);
+      this.toastr.success('Response has been saved successfully');
     });
   }
 
@@ -511,6 +514,7 @@ export class SelfAuditComponent {
     this.dataService.submitCheckListResponse(responseDTO2).subscribe(
       (response) => {
         console.log('Response saved successfully', response);
+        this.toastr.success('Checklist Response has been Saved.');
         // Optionally handle success or reset form here
       },
       (error) => {
