@@ -704,7 +704,7 @@ export class LabCommissionComponent {
         (data) => {
           this.suggestions = data; // Store the suggestions data in suggestions
           this.Dept = data.department;
-          this.CC = data.costCenter;
+          this.CC = this.trimLeadingZeros(data.costCenter);
           this.DH = data.departmentHead;
         },
         (error) => {
@@ -720,7 +720,7 @@ export class LabCommissionComponent {
         (data) => {
           this.suggestions = data; // Store the suggestions data in suggestions
           this.Dept = data.department;
-          this.CC = data.costCenter;
+          this.CC = this.trimLeadingZeros(data.costCenter);
           this.DH = data.departmentHead;
         },
         (error) => {
@@ -728,5 +728,9 @@ export class LabCommissionComponent {
         }
       );
     }
+  }
+
+  trimLeadingZeros(value: string): string {
+    return value.replace(/^0+/, ''); // Remove all leading zeros
   }
 }
