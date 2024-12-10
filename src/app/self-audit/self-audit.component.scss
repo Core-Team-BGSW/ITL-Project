@@ -413,12 +413,18 @@ h4 {
 
 }
 
-.checklist_table th,
-.checklist_table td {
+.checklist_table th
+{
 
   text-align: left;
   padding: 7px;
   color: white;
+}
+.checklist_table td {
+  text-align: left;
+  padding: 7px;
+  color: black;
+
 }
 
 .checklist_table1 {
@@ -438,10 +444,11 @@ h4 {
   color: white;
 }
 
-.checklist_table1 td {
+.checklist_table1  td {
 
   text-align: left;
   padding: 7px;
+  color: rgb(0, 0, 0);
 
 }
 

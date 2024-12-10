@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class RoleComponent implements OnInit {
   username = '';
   ntid: any = '';
+  department:any="";
 
   constructor(private router: Router, private loginService: LoginService) {}
 
@@ -29,6 +30,7 @@ export class RoleComponent implements OnInit {
 
   getuserid() {
     this.username = this.loginService.getUserId();
-    this.ntid = this.loginService.getNtId();
+    this.ntid = (this.loginService.getNtId())?.toUpperCase();
+    this.department=this.username.match(/\(([^)]+)\)/)?.[1];
   }
 }
