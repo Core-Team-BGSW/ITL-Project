@@ -5,6 +5,7 @@ import com.ITL.Service.backendservice.Model.CheckListResponse;
 import com.ITL.Service.backendservice.Repository.CheckListRepo;
 import com.ITL.Service.backendservice.Repository.CheckListResponseRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
