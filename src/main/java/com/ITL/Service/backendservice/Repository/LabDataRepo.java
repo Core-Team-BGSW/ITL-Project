@@ -3,8 +3,8 @@ package com.ITL.Service.backendservice.Repository;
 import com.ITL.Service.backendservice.Model.LabData;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -33,4 +33,11 @@ public interface LabDataRepo extends MongoRepository<LabData, ObjectId>,CustomLa
     List<LabData> findByLocal_itl_proxy(String local_itl_proxy);
     @Query("{ '$or': [ " + "{ 'primary_lab_cord': ?0 }, " + "{ 'dh': ?0 }, " + "{ 'kam': ?0 } " + "{ 'local_itl': ?0 }, " + "{ 'local_itl_proxy': ?0 }, " + "{ 'secondary_lab_cord': ?0 }, " + "] }")
     List<LabData> findByLabResponsible(String userId);
+
+    //code for role management
+    @Aggregation(pipeline = {
+            "{ $group: { _id: '$primary_lab_cord' } }",
+            "{ $project: { _id: 0, labcordinator: '$_id' } }"
+    })
+    List<String> findDistinctlabcordinators();
 }
