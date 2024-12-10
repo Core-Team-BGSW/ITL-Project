@@ -34,6 +34,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "angular-app": "file:",
     "angular-oauth2-oidc": "^9.0.0",
     "angular-oauth2-oidc-jwks": "^17.0.2",
     "argon2": "^0.41.0",
