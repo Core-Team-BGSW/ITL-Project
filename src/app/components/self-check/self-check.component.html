@@ -1,188 +1,4 @@
-<!-- <h2>Self Audit Form :</h2>
-<i
-  ><b><p style="color: red">(Select Lab for Audit)</p></b></i
->
-<link
-  href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
-  rel="stylesheet"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
-<form class="search_btn" action="action_page.php">
-  <input
-    type="text"
-    [(ngModel)]="searchQuery"
-    placeholder="Search Lab ..."
-    name="search"
-    style="margin: auto; max-width: 300px"
-  />
-  <button class="search" (click)="onSearch()">
-    <i class="fa fa-search"></i>
-  </button>
-</form>
-<p></p>
-<div class="lab-list">
-  <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
-    <div class="collapsible-header">
-      <mat-card class="custom-card">
-        <mat-card-content>
-          <p style="color: grey">Lab No -> Entity -> GB -> Department</p>
-
-          <b>
-            {{ lab["Lab No"] }} ->
-
-            {{ lab.Entity }} -> {{ lab.GB }} -> {{ lab.Department }}
-          </b>
-
-          <div class="container">
-            <button (click)="toggleDetails(lab.id)" class="lab_btn">
-              Lab Details
-            </button>
-            <button (click)="openForm(lab.Entity)">Self-Audit</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div *ngIf="isExpanded(lab.id)" class="collapsible-content">
-      <p></p>
-
-      <mat-card class="custom-card1">
-        <mat-card-content>
-          <table class="lab_details_table">
-            <thead>
-              <tr>
-                <th style="background-color: rgb(212, 244, 252)">Region</th>
-                <th style="background-color: rgb(212, 244, 252)">Country</th>
-                <th style="background-color: rgb(212, 244, 252)">Location</th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Location-Code
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">Entity</th>
-                <th style="background-color: rgb(212, 244, 252)">GB</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ lab.Region }}</td>
-                <td>{{ lab.Country }}</td>
-                <td>{{ lab.Location }}</td>
-                <td>{{ lab["Location-Code"] }}</td>
-                <td>{{ lab.Entity }}</td>
-                <td>{{ lab.GB }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="lab_details_table">
-            <thead>
-              <tr>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Department Head (DH)
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">Local-ITL</th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Local-ITL Proxy
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Key Account Manager (KAM)
-                </th>
-              </tr>
-            </thead>
-            <tr>
-              <td>{{ lab["Department Head (DH)"] }}</td>
-              <td>{{ lab["Local-ITL"] }}</td>
-              <td>{{ lab["Local-ITL Proxy"] }}</td>
-              <td>{{ lab["Key Account Manager (KAM)"] }}</td>
-            </tr>
-          </table>
-          <table class="lab_details_table">
-            <thead>
-              <tr>
-                <th style="background-color: rgb(212, 244, 252)">Department</th>
-                <th style="background-color: rgb(212, 244, 252)">Floor No</th>
-                <th style="background-color: rgb(212, 244, 252)">Lab No</th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Kind of Lab
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">Shared Lab</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ lab["Department"] }}</td>
-                <td>{{ lab["Floor"] }}</td>
-                <td>{{ lab["Lab No"] }}</td>
-                <td>{{ lab["Kind of Lab"] }}</td>
-                <td>{{ lab["Shared lab"] }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="lab_details_table">
-            <thead>
-              <tr>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Primary Lab Coordinator
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Secondary Lab Coordinator
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Cost Center
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  ACL Required
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ lab["Primary Lab Coordinator"] }}</td>
-                <td>{{ lab["Secondary Lab Coordinator"] }}</td>
-                <td>{{ lab["Cost Center"] }}</td>
-                <td>{{ lab["ACL Required"] }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="lab_details_table">
-            <thead>
-              <tr>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Purpose of Lab in Brief
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Description
-                </th>
-                <th style="background-color: rgb(212, 244, 252)">
-                  Is lab going to procure new equipment for Engineering/Red
-                  Zone?
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ lab["Purpose of Lab in Brief"] }}</td>
-                <td>{{ lab["Description"] }}</td>
-                <td>
-                  {{
-                    lab[
-                      "Is lab going to procure new equipment for Engineering/Red Zone?"
-                    ]
-                  }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-  <div></div>
-</div> -->
-
-<!-- Code written by Ishita Mukherjee -->
-
-<h2>Self Audit Form </h2>
+<h2>Annual Self Check Audit</h2>
 <b>
   <p style="color:red;font-size:larger"> (Select Lab for Audit)</p>
 </b>
@@ -195,16 +11,19 @@
 <p></p>
 <div class="lab-list">
   <div *ngFor="let lab of labList | filter : searchQuery" class="lab-item">
-    <div class="collapsible-header">
-      <div class="container_design">
-        <p></p>
-        <div style="margin-left: 10px;color:#7d8389;font-size:large"> Lab No -> Entity -> GB -> Department </div>
-        <!-- this will fetch the data from the backend  -->
-        <p></p>
+    <div class="container_design">
+      <div class="lab-item">
+        <div class="lab-name">
+          <div style="margin-left: 10px;color:#7d8389;font-size:large">
+            Lab No ->Entity -> GB -> Department </div>
+          <!-- this will fetch the data from the backend  -->
+          <p></p>
 
-        <div style="margin-left: 10px;font-size:larger"><b> {{ lab["labNo"] }} ->
 
-            {{ lab.entityName }} -> {{ lab.gb }} -> {{ lab.dep_name }} </b> </div>
+          <div style="margin-left: 10px;font-size:larger"><b>
+              {{ lab["labNo"] }}->{{ lab.entityName }} -> {{ lab.gb }} -> {{ lab.dep_name }} </b>
+          </div>
+        </div>
 
         <div class="container">
           <button (click)="toggleDetails(lab.id)" class="lab_btn">
@@ -213,107 +32,68 @@
           <button class="audit_btn" (click)="openForm(lab.entityName,lab)">Self-Audit </button>
 
         </div>
-      </div>
-    </div>
-    <!-- It will fetch the details of each and every lab from the backend  -->
-    <div *ngIf="isLabDetailsVisible(lab.id)" class="collapsible-content">
-      <p></p>
 
-
-      <div class="grid-container">
-        <div class="column">
-          <!-- <div *ngFor="let item of lab"> -->
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Region:</strong></div>
-          <div> {{ lab.region }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Country:</strong></div>
-          <div> {{ lab.country }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Location-Code:</strong></div>
-          <div> {{ lab.locationCode }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Entity:</strong></div>
-          <div> {{ lab.entityName }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"> <strong>GB:</strong></div>
-          <div> {{ lab.gb }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"> <strong>Local-ITL:</strong></div>
-          <div> {{ lab.local_itl }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Local-ITL Proxy:</strong></div>
-          <div> {{ lab.local_itl_proxy }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Department Head:</strong></div>
-          <div> {{lab. dh }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Key Account Manager:</strong></div>
-          <div> {{ lab.kam }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Department:</strong></div>
-          <div> {{ lab.dep_name }} </div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Building:</strong></div>
-          <div> {{ lab.building }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Floor:</strong></div>
-          <div> {{ lab.floor }}</div>
-          <p></p>
-
-
-        </div>
-        <div class="column">
-
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Lab No/Lab Name :</strong></div>
-          <div> {{ lab.labNo }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"> <strong>Primary Lab Coordinator:</strong></div>
-          <div> {{ lab.primary_lab_cord }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;;width:90%"> <strong>Secondary Lab Coordinator:</strong>
-          </div>
-          <div> {{ lab.secondary_lab_cord }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Cost Center:</strong></div>
-          <div> {{ lab.cost_center }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Kind of Lab:</strong></div>
-          <div> {{ lab.kind_of_lab }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Purpose of Lab:</strong></div>
-          <div> {{ lab.purpose_of_lab }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%"><strong>Description:</strong></div>
-          <div> {{ lab.description }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%">
-            <strong>Is lab going to procure new equipment for Engineering/Red
-              Zone?</strong>
-          </div>
-          <div>{{ lab.new_equipment}}
-          </div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%">
-            <strong>Shared Lab:</strong>
-          </div>
-          <div> {{ lab.shared_lab}}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%">
-            <strong>Self Audit Due Date:</strong>
-          </div>
-          <div> {{ lab.selectedDate | date : "MM/dd/yyyy" }}</div>
-          <p></p>
-          <div style="background-color: #e8f1ff; padding:4px;width:90%">
-            <strong>ACL Required:</strong>
-          </div>
-          <div> {{ lab.acl_req}}</div>
-          <p></p>
-
-        </div>
       </div>
 
 
 
+      <!-- It will fetch the details of each and every lab from the backend  -->
+      <div *ngIf="isLabDetailsVisible(lab.id)" class="collapsible-content">
+        <p></p>
+
+        <div class="grid-container">
+          <div class="column">
+            <!-- <div *ngFor="let item of lab"> -->
+            <p><strong>Region:</strong> {{ lab.region }}</p>
+            <p><strong>Country:</strong> {{ lab.country }}</p>
+            <p><strong>Location-Code:</strong> {{ lab.locationCode }}</p>
+            <p><strong>Entity:</strong> {{ lab.entityName }}</p>
+            <p><strong>GB:</strong> {{ lab.gb }}</p>
+            <p><strong>Local-ITL:</strong> {{ lab.local_itl }}</p>
+            <p><strong>Local-ITL Proxy:</strong> {{ lab.local_itl_proxy }}</p>
+            <p><strong>Department Head:</strong> {{lab. dh }}</p>
+            <p><strong>Key Account Manager:</strong> {{ lab.kam }}</p>
+            <p><strong>Department:</strong> {{ lab.dep_name }}</p>
+            <p><strong>Building:</strong> {{ lab.building }}</p>
+            <p><strong>Floor:</strong> {{ lab.floor }}</p>
+            <p><strong>Lab No/Lab Name :</strong> {{ lab.labNo }}</p>
+          </div>
+          <div class="column">
+            <p><strong>Primary Lab Coordinator:</strong> {{ lab.primary_lab_cord
+              }}</p>
+            <p><strong>Secondary Lab Coordinator:</strong> {{
+              lab.secondary_lab_cord }}</p>
+            <p><strong>Cost Center:</strong> {{ lab.cost_center }}</p>
+            <p><strong>Kind of Lab:</strong> {{ lab.kind_of_lab }}</p>
+            <p><strong>Purpose of Lab:</strong> {{ lab.purpose_of_lab }}</p>
+            <p><strong>Description:</strong> {{ lab.description }}</p>
+
+            <p>
+              <strong>Is lab going to procure new equipment for Engineering/Red
+                Zone?</strong>
+              {{ lab.new_equipment}}
+            </p>
+            <p>
+              <strong>Shared Lab:</strong>
+              {{ lab.shared_lab}}
+            </p>
+            <p>
+              <strong>Self Audit Due Date:</strong>
+              {{ lab.self_audit_date | dateFormat: 'MM/DD/yyyy'}}
+            </p>
+            <p>
+              <strong>ACL Required:</strong>
+              {{ lab.acl_req}}
+            </p>
+
+            <p><strong>No. of Green Ports:</strong> {{ lab.green_ports }}</p>
+            <p><strong>No. of Yellow Ports:</strong> {{ lab.yellow_ports }}</p>
+            <p><strong>No. of Red Ports:</strong> {{ lab.red_ports }}</p>
+
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
   <div>

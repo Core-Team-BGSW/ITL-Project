@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class RoleComponent implements OnInit {
   username = '';
   ntid: any = '';
-  department:any="";
+  department: any = '';
 
   constructor(private router: Router, private loginService: LoginService) {}
 
