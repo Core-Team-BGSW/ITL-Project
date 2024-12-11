@@ -14,7 +14,6 @@ public class EntityService {
     private final EntityRepo entityRepo;
     public List<LabData> getLabDataByEntityNameAndCountry(String entityName, String country) {
         return entityRepo.findLabDataByEntityNameAndCountry(entityName,country);
-
     }
     public List<Entity> getAllEntityData() {
         return entityRepo.findAll();

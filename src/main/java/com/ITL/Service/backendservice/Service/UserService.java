@@ -100,9 +100,7 @@ public class UserService {
             user.setContractingArea(departmentDetails.getAbbreviation());
             departmentHead = getDeptHead(userDetails.getTargetManagerUserId());
             user.setDepartmentHead(departmentHead);
-
         }
-
         return user;
     }
 

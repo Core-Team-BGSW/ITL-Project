@@ -6,6 +6,8 @@ import com.ITL.Service.backendservice.Model.User;
 import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -23,6 +25,8 @@ public class UserDetailsUpdateService {
     private final LabDataRepo labDataRepo;
     private final EntityRepo entityRepo;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserDetailsUpdateService.class);
+
    private User fetchUserDetails(String userId)
    {
        try {
@@ -30,15 +34,14 @@ public class UserDetailsUpdateService {
            return restTemplate.getForObject(apiUrl, User.class);
        }
        catch (Exception e) {
-           System.err.println("Error fetching user details for userId: " + userId);
+           logger.error("Error fetching user Details for userID from Bosch User API");
            e.printStackTrace();
            return null; // Handle gracefully
        }
    }
 
-   @Scheduled(cron = "0 0 */10 * * *")
+   @Scheduled(cron = "0 0 0 1/10 * *")
    public void updateDatabase() {
-       System.out.println("working...");
        List<LabData> allLabData = labDataRepo.findAll();
        Set<String> processedUserId = new HashSet<>();
        for(LabData labData : allLabData)
@@ -76,6 +79,9 @@ public class UserDetailsUpdateService {
             labDataList = labDataRepo.findByLocal_itl(userDetails.getUserId());
         else if(labDataRepo.findByLocal_itl_proxy(userDetails.getUserId())!=null)
             labDataList = labDataRepo.findByLocal_itl_proxy(userDetails.getUserId());
+
+        if(labDataList == null) logger.info("LabDataList is null for userDetails!");
+
         assert labDataList != null;
         for(LabData labData : labDataList)
         {

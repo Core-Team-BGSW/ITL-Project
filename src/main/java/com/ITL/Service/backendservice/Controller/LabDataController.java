@@ -5,6 +5,7 @@ import com.ITL.Service.backendservice.Model.LabData;
 import com.ITL.Service.backendservice.Service.LabDataService;
 import com.azure.core.annotation.Get;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,16 +25,10 @@ public class LabDataController {
         return labDataService.getLabDataByEntityNameAndGB(entityName,gb);
     }
 
-    @GetMapping("/labs")
-    public List<LabData> getLabDataByEntityNameWithLabDataFields(@RequestParam Map<String, String> allParams){
-        Map<String, Object> parameters = new HashMap<>(allParams);
-        return labDataService.getLabDataByEntityNameWithLabDataFields(parameters);
-    }
-
-    @DeleteMapping("/delete/labData")
-    public ResponseEntity<String> deleteLabDataByPrimaryLabCoordinator(@RequestParam String primary_lab_cord)
+    @DeleteMapping("/labData/delete")
+    public ResponseEntity<String> deleteLabDataByCustomQuery(@RequestParam String query)
     {
-        return labDataService.deleteLabDataByPrimaryLabCoordinator(primary_lab_cord);
+        return labDataService.deleteLabDataByCustomQuery(query);
     }
 
     @GetMapping("/labDataWithPrimaryLabCord/{primary_lab_cord}")
@@ -89,4 +84,11 @@ public class LabDataController {
         List<LabDataWithEntityDTO > labs = labDataService.getLabsByLabResponsible(userId);
         return ResponseEntity.ok(labs);
     }
+
+    @DeleteMapping("/labData/archive/{id}")
+    public ResponseEntity<Map<String, String>> deleteLabDataById(@PathVariable("id") String id)
+    {
+        return labDataService.deleteLabDataById(id);
+    }
+
 }

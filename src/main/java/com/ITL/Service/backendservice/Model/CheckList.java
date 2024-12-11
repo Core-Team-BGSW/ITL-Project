@@ -37,4 +37,3 @@ public class CheckList {
 //        this.responses.add(response);
 //    }
 }
- 

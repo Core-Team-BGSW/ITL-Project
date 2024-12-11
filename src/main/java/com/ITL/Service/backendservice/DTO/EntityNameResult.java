@@ -1,22 +1,12 @@
 package com.ITL.Service.backendservice.DTO;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-
-@Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@RequiredArgsConstructor
+@Data
 public class EntityNameResult {
     private String id;
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class CheckListRequest {
-
-        private String question;  // The actual checklist question
-        private String tooltip;   // Tooltip for the question
-    }
 }

@@ -21,6 +21,7 @@ public class EntityController {
     {
         return entityService.getLabDataByEntityNameAndCountry(entityName,country);
     }
+
     @GetMapping("/allEntity")
     public List<Entity> getAllEntityData()
     {

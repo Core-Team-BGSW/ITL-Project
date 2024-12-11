@@ -8,9 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="backendservice (1)" />
-        <module name="backendservice" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="backendservice" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

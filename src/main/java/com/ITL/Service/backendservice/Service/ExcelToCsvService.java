@@ -6,6 +6,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,8 @@ public class ExcelToCsvService {
     private final CsvToDatabaseController csvToDatabaseController;
     private final FileService fileService;
 
+    private static final Logger logger = LoggerFactory.getLogger(ExcelToCsvService.class);
+
     public ResponseEntity<String> excelToCsvConverter(MultipartFile file) {
         Path path = Paths.get(csvFileDirectory);
         if (file.isEmpty()) {
@@ -38,6 +42,8 @@ public class ExcelToCsvService {
         try {
             Workbook workbook;
             String fileType = FilenameUtils.getExtension(file.getOriginalFilename());
+            if(fileType == null) logger.error("file type is not or File is not present in the System!");
+
             assert fileType != null;
             if (fileType.equals("xlsx")) {
                 workbook = new XSSFWorkbook(file.getInputStream());
@@ -45,6 +51,7 @@ public class ExcelToCsvService {
                 workbook = new HSSFWorkbook(file.getInputStream());
             } else {
                 file.getInputStream().close();
+                logger.error("File Not Found in the System!");
                 throw new IOException("File Not Found");
             }
 
@@ -52,8 +59,8 @@ public class ExcelToCsvService {
             String csvFileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()).replace(".xlsx", ".csv"));
             String fileUniqueId = UUID.randomUUID().toString();
             csvFileName+=fileUniqueId;
-            //System.out.println(csvFileName);
             File csvFile = new File(csvFileDirectory + File.separator + csvFileName);
+            logger.info("The csvFile path and directory!");
             PrintWriter csvWriter = new PrintWriter(new FileWriter(csvFile));
             getCSV(sheet,csvWriter);
             workbook.close();

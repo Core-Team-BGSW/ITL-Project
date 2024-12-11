@@ -2,13 +2,18 @@ package com.ITL.Service.backendservice.Service;
 
 import com.ITL.Service.backendservice.Model.Entity;
 import com.ITL.Service.backendservice.Model.LabData;
+import com.ITL.Service.backendservice.Model.LabFormData;
 import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
+import com.ITL.Service.backendservice.Utility.ExcelConverter;
 import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+//import jakarta.mail.MessagingException;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,12 +29,18 @@ public class CsvToDatabaseService {
     private final EntityRepo entityRepo;
     private final SequenceGeneratorService sequenceGeneratorService;
     private final UserDetailsUpdateService userDetailsUpdateService;
+    private final ExcelConverter excelConverter;
+
+    private static final Logger logger = LoggerFactory.getLogger(CsvToDatabaseService.class);
+
     public ResponseEntity<String> saveCsvToDatabase(String filePath) throws IOException, CsvValidationException {
         try(CSVReader csvReader = new CSVReader(new FileReader((filePath)))) {
             String[] nextRecord;
             csvReader.skip(2);
             nextRecord = csvReader.readNext();
             Map<AbstractMap.SimpleEntry<String,String>,Entity> entityMap = new HashMap<>();
+            List<LabFormData> labFormDataList = new ArrayList<>(List.of());
+            List<Entity> entities = new ArrayList<>(List.of());
             while((nextRecord != null))
             {
                 if(nextRecord.length < 2 || allElementsEmpty(nextRecord)) break;
@@ -47,6 +58,7 @@ public class CsvToDatabaseService {
                 Entity entity = entityMap.get(new AbstractMap.SimpleEntry<>(locationCode,entityName));
                 if(entity == null && entity1 == null)
                 {
+                    logger.info("The entity and entity Map are null. We are not creating the new entity and entityMap");
                     entity = getEntityData(nextRecord);
                     entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
                     entityMap.put(new AbstractMap.SimpleEntry<>(locationCode,entityName),entity);
@@ -54,17 +66,59 @@ public class CsvToDatabaseService {
                 if(entity == null)
                 {
                     entity = entity1;
+                    entity.getLabDataList().add(labData);
+                    entities.add(entity);
                 }
-                entity.getLabDataList().add(labData);
+                else entity.getLabDataList().add(labData);
+
+                LabFormData labFormData = ConvertToLabFormData(labData,entity);
+                labFormDataList.add(labFormData);
                 nextRecord = csvReader.readNext();
             }
-            entityRepo.saveAll(entityMap.values());
-            userDetailsUpdateService.updateDatabase();
+            if(!entityMap.isEmpty())
+               entityRepo.saveAll(entityMap.values());
+            else entityRepo.saveAll(entities);
+            logger.info("Fetching the latest data of the users in the database from the Bosch Network");
+            //userDetailsUpdateService.updateDatabase();
+            logger.info("Sending mails to all the local_ITL, DH and KAM for labData Approval");
+            //excelConverter.sendEmailToAllUsers(labFormDataList);
             return ResponseEntity.ok("The file is Successfully stored into Database");
         }
         catch (IOException | CsvValidationException e) {
+            //logger.error("Error while inserting CSV to Database! " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while inserting CSV to Database: " + e.getMessage());
         }
+    }
+
+    private LabFormData ConvertToLabFormData(LabData labData, Entity entity) {
+        LabFormData labFormData = new LabFormData();
+        labFormData.setAcl_req(labData.getAcl_req());
+        labFormData.setDh(labData.getDh());
+        labFormData.setCountry(entity.getCountry());
+        labFormData.setLabNo(labData.getLabNo());
+        labFormData.setBuilding(labData.getBuilding());
+        labFormData.setGb(labData.getGb());
+        labFormData.setFloor(labData.getFloor());
+        labFormData.setLocal_itl(labData.getLocal_itl());
+        labFormData.setDescription(labData.getDescription());
+        labFormData.setBuilding(labData.getBuilding());
+        labFormData.setAcl_req(labData.getAcl_req());
+        labFormData.setCost_center(labData.getCost_center());
+        labFormData.setYellow_ports(labData.getYellow_ports());
+        labFormData.setRed_ports(labData.getRed_ports());
+        labFormData.setGreen_ports(labData.getGreen_ports());
+        labFormData.setDep_name(labData.getDep_name());
+        labFormData.setEntityName(entity.getEntityName());
+        labFormData.setKam(labData.getKam());
+        labFormData.setKind_of_lab(labData.getKind_of_lab());
+        labFormData.setShared_lab(labData.getShared_lab());
+        labFormData.setSelf_audit_date(labData.getSelf_audit_date());
+        labFormData.setPurpose_of_lab(labData.getPurpose_of_lab());
+        labFormData.setLocationCode(entity.getLocationCode());
+        labFormData.setSecondary_lab_cord(labData.getSecondary_lab_cord());
+        labFormData.setPrimary_lab_cord(labData.getPrimary_lab_cord());
+        labFormData.setRegion(entity.getRegion());
+        return labFormData;
     }
 
     private Entity getEntityData(String[] nextRecord) {

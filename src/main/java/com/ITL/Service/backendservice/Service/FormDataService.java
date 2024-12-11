@@ -7,6 +7,8 @@ import com.ITL.Service.backendservice.Repository.EntityRepo;
 import com.ITL.Service.backendservice.Repository.LabDataRepo;
 import com.ITL.Service.backendservice.Utility.SequenceGeneratorService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,12 +19,16 @@ public class FormDataService {
     private final LabDataRepo labDataRepo;
     private final SequenceGeneratorService sequenceGeneratorService;
 
+    private static final Logger logger = LoggerFactory.getLogger(FormDataService.class);
+
     @Transactional
     public void saveFormData(LabFormData labFormData) {
         LabData labData = getLabData(labFormData);
         LabData temLabData = labDataRepo.findLabDataByLocationCodeAndEntityNameAndGbAndLabNoAndPrimary_lab_cordAndDep_name(labData.getLocationCode(), labData.getEntityName(), labData.getGb(), labData.getLabNo(), labData.getPrimary_lab_cord(), labData.getDep_name());
+        logger.info("temlabdattest {}",temLabData);
         if(temLabData == null)
         {
+            logger.info("The LabData is null we are storing new Lab data into the Database!");
             labData.setSeqId(sequenceGeneratorService.generateSequence(LabData.class.getName()));
             labData = labDataRepo.save(labData);
         }
@@ -30,13 +36,17 @@ public class FormDataService {
 
 
         Entity entity;
-        if(entityRepo.findByEntityName(labFormData.getEntityName())!=null)
+        if(entityRepo.findByLocationCodeAndEntityName(labData.getLocationCode(), labData.getEntityName())!=null)
         {
-            entity = entityRepo.findByEntityName(labFormData.getEntityName());
+
+            entity = entityRepo.findByLocationCodeAndEntityName(labData.getLocationCode(), labData.getEntityName());
             entity.getLabDataList().add(labData);
+            entityRepo.save(entity);
             return;
         }
+        logger.info("The entityData is null we are storing new Entity Data into the Database!");
         entity = getEntityData(labFormData);
+        logger.info("the entity name {}",entity.getEntityName());
         entity.getLabDataList().add(labData);
         entityRepo.save(entity);
         entity.setSeqId(sequenceGeneratorService.generateSequence(Entity.class.getName()));
@@ -46,6 +56,7 @@ public class FormDataService {
         LabData labData = new LabData();
         labData.setDh(labFormData.getDh());
         labData.setGb(labFormData.getGb());
+        labData.setEntityName(labFormData.getEntityName());
         labData.setBuilding(labFormData.getBuilding());
         labData.setLocationCode(labFormData.getLocationCode());
         labData.setAcl_req(labFormData.getAcl_req());

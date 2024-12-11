@@ -15,3 +15,4 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true); // If you need to send cookies
     }
 }
+
