@@ -31,6 +31,6 @@ export class RoleComponent implements OnInit {
   getuserid() {
     this.username = this.loginService.getUserId();
     this.ntid = (this.loginService.getNtId())?.toUpperCase();
-    this.department=this.username.match(/\(([^)]+)\)/)?.[1];
+    this.department=this.username?.match(/\(([^)]+)\)/)?.[1];
   }
 }

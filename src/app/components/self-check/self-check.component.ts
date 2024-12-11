@@ -297,6 +297,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FilterPipe } from '../../filter.pipe';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../../service/login.service';
+import { DatashareService } from './service/datashare.service';
 
 interface Question {
   question: string;
@@ -341,7 +342,8 @@ export class SelfCheckComponent {
     private dataService: DataService,
     private router: Router,
     private http: HttpClient,
-    private authService: LoginService
+    private authService: LoginService,
+    private datashareService: DatashareService
   ) {}
 
   ngOnInit(): void {
@@ -360,7 +362,7 @@ export class SelfCheckComponent {
         this.labList = data;
         this.filteredLabList = this.labList;
         this.isLoading = false;
-        console.log(data);
+
       },
       error: (err) => {
         this.errorMessage = err;
@@ -416,7 +418,8 @@ export class SelfCheckComponent {
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
-  openForm(labentityName: string) {
+
+  openForm(labentityName: string,lab:any) {
     // condition if the enitity is "BGSW"
     if (labentityName === 'BGSW') {
       const confirmed = confirm(
@@ -437,7 +440,10 @@ export class SelfCheckComponent {
         );
       }
     } else {
-      window.open('/self-audit');
+      // this.datashareService.setLabDetails(lab);
+      const labDetails = encodeURIComponent(JSON.stringify(lab));
+      window.open(`/self-audit?details=${labDetails}`, '_blank');
+      // this.router.navigate(['/self-audit']);
     }
   }
   isLabDetailsVisible(labId: string): boolean {

@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   MatDatepickerModule,
   matDatepickerAnimations,
@@ -28,6 +28,7 @@ import { response } from 'express';
 import { Question } from '../../../models/Question';
 import { DataService } from '../data.service';
 import { ToastrService } from 'ngx-toastr';
+import { DatashareService } from '../components/self-check/service/datashare.service';
 
 export interface CheckListResponseDTO {
   questionId: number;
@@ -156,6 +157,24 @@ export class SelfAuditComponent {
   showOptions = false;
   isSaved: boolean = false;
 
+  /////////Ashraf Shaikh - Code for checklist form data fetching///////////
+  checklistid='';
+  location = '';
+  gb = '';
+  country = '';
+  plant = '';
+  labroom='';
+  resp_mgt='';
+  litl='';
+  litl_proxy='';
+  date:Date=new Date();
+  lab_cord='';
+  acl:any;
+  dso_adit:any;
+  criticality='';
+  combinedData: string;
+  ////////////////////////////////////////////////////////////////////////
+
   toggleOptions() {
     this.showOptions = !this.showOptions;
   }
@@ -231,7 +250,8 @@ export class SelfAuditComponent {
     private formAnswerService: FormAnswerService,
     private http: HttpClient,
     private dataService: DataService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
@@ -276,10 +296,41 @@ export class SelfAuditComponent {
         console.error('Error fetching question IDs:', error);
       }
     );
+    const currentDate = new Date();
+    const month = currentDate.toLocaleString('default', { month: 'short' }).toUpperCase(); // e.g., OCT
+    const year = currentDate.getFullYear().toString().slice(-2);
+    this.combinedData = `${month}_${year}`
   }
 
   ngOnInit(): void {
     this.loadQuestions();
+
+    ////////Ashraf Shaikh- Checklist data
+    this.route.queryParams.subscribe(params => {
+      if (params['details']) {
+        const labDetails = JSON.parse(decodeURIComponent(params['details']));
+        this.location=labDetails.locationCode;
+        this.gb = labDetails.gb;
+        this.country = labDetails.country;
+        this.plant = labDetails.building;
+        this.labroom=labDetails.labNo;
+        this.resp_mgt=labDetails.dh;
+        this.litl=labDetails.local_itl;
+        this.litl_proxy=labDetails.local_itl_proxy;
+        this.date=new Date();
+        if(labDetails.primary_lab_cord=="null"){
+          this.lab_cord='NA';
+        }else{
+          this.lab_cord=labDetails.primary_lab_cord;
+        }
+        this.acl=labDetails.acl_req;
+        this.dso_adit="No";
+        this.criticality="";
+
+        this.checklistid=`${labDetails.country}_${labDetails.gb}_${labDetails.labNo}_${labDetails.locationCode}_${labDetails.building}_${this.combinedData}`
+        // Use the lab details here
+      }
+    });
   }
 
   loadQuestions(): void {
