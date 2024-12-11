@@ -101,7 +101,7 @@ public class LabDataService {
     }
 
     public List<LabDataWithEntityDTO> getLabsByLabResponsible(String userId) {
-        List<LabData> labs = labDataRepo.findByLabResponsibleIgnoreCase(userId);
+        List<LabData> labs = labDataRepo.findByLabResponsible(userId);
 
         List<LabDataWithEntityDTO> labDataWithEntityDTOList = new ArrayList<>();
         for(LabData labData : labs)
