@@ -31,15 +31,8 @@ public interface LabDataRepo extends MongoRepository<LabData, ObjectId>,CustomLa
     List<LabData> findByLocal_itl(String local_itl);
     @Query("{'local_itl_proxy' : ?0}")
     List<LabData> findByLocal_itl_proxy(String local_itl_proxy);
-    @Query("{ '$or': [ " +
-            "{ 'primary_lab_cord': { '$regex': '^' + ?0 + '$', '$options': 'i' } }, " +
-            "{ 'dh': { '$regex': '^' + ?0 + '$', '$options': 'i' } }, " +
-            "{ 'kam': { '$regex': '^' + ?0 + '$', '$options': 'i' } }, " +
-            "{ 'local_itl': { '$regex': '^' + ?0 + '$', '$options': 'i' } }, " +
-            "{ 'local_itl_proxy': { '$regex': '^' + ?0 + '$', '$options': 'i' } }, " +
-            "{ 'secondary_lab_cord': { '$regex': '^' + ?0 + '$', '$options': 'i' } } " +
-            "] }")
-    List<LabData> findByLabResponsibleIgnoreCase(String userId);
+    @Query("{ '$or': [ " + "{ 'primary_lab_cord': ?0 }, " + "{ 'dh': ?0 }, " + "{ 'kam': ?0 } " + "{ 'local_itl': ?0 }, " + "{ 'local_itl_proxy': ?0 }, " + "{ 'secondary_lab_cord': ?0 }, " + "] }")
+    List<LabData> findByLabResponsible(String userId);
 
     //code for role management
     @Aggregation(pipeline = {

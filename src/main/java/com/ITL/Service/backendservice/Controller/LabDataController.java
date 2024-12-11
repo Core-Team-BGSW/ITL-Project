@@ -79,9 +79,9 @@ public class LabDataController {
         return ResponseEntity.ok(uniqueEntityNames);
     }
     @GetMapping("/by-responsible/{userId}")
-    public ResponseEntity<List<LabDataWithEntityDTO >> getLabsByLabResponsible(@PathVariable String userId) {
+    public ResponseEntity<List<LabDataWithEntityDTO >> findByLabResponsibleIgnoreCase(@PathVariable String userId) {
 
-        List<LabDataWithEntityDTO > labs = labDataService.getLabsByLabResponsible(userId);
+        List<LabDataWithEntityDTO > labs = labDataService.findByLabResponsible(userId);
         return ResponseEntity.ok(labs);
     }
 

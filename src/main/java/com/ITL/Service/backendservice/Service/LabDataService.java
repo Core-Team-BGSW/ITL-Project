@@ -100,8 +100,8 @@ public class LabDataService {
         return labDataRepo.findByLocal_itl_proxy(localItlProxy);
     }
 
-    public List<LabDataWithEntityDTO> getLabsByLabResponsible(String userId) {
-        List<LabData> labs = labDataRepo.findByLabResponsibleIgnoreCase(userId);
+    public List<LabDataWithEntityDTO> findByLabResponsible(String userId) {
+        List<LabData> labs = labDataRepo.findByLabResponsible(userId);
 
         List<LabDataWithEntityDTO> labDataWithEntityDTOList = new ArrayList<>();
         for(LabData labData : labs)
