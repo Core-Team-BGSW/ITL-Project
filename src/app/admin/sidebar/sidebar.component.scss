@@ -17,7 +17,7 @@
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.3s ease;
-  margin-top:43px;
+  margin-top:56px;
 
 
 }
@@ -72,7 +72,7 @@
   display: flex;
   flex-direction: column; /* Stack items vertically */
   height: 100%;
-  padding: 0;  /* Remove any default padding */
+  padding: 2px;  /* Remove any default padding */
   margin: 0;
 }
 
@@ -122,6 +122,7 @@
   text-decoration: none;
   font-size: 16px;
   width: 100%;
+  margin: auto;
   // padding: 5px 6px; /* Consistent padding with active */
   // width: 100%; /* Ensure width remains consistent */
 }
@@ -197,12 +198,9 @@
 
 /* Active state background and border */
 .sidebar li.active {
-  border-left: 2px solid #007bff; /* Blue left border for active item */
-  //background-color: #d0d4d8; /* Change background for active item */
-  // padding: 5px 6px; /* Increased padding for hover box */
-  // width: 110%; /* Expand width when hovered */
+  border-left: 0px solid #007bff; /* Blue left border for active item */
 
-  // padding: 10px 0;
+
 }
 
 .dropdown-menu{

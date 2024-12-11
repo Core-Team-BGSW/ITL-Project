@@ -312,7 +312,7 @@
                </div>
 
                <p></p>
-</div>
+
 
                <b>2. Chapter MD 07151 Annex 2 (4.2.1.1 - 4.2.1.2)</b>  : Is a local ITL proxy nominated for the laboratory?  <span class="required"> * </span> <div class="tooltip"><i class="icon-info-sign"></i>
                 <span class="tooltiptext">Has the responsible laboratory management nominated a Local-ITL?
@@ -340,7 +340,7 @@
               <mat-card class="custom-card">
                 <div class="dropdown-item">
                   Explanation<span class="required"> * </span> :
-                  <input [(ngModel)]="responses[questionId].explanation" type="text" placeholder="Explanation ">
+                  <input [(ngModel)]="explanation1" type="text" placeholder="Explanation ">
                   </div>
             </mat-card>
             </div>
@@ -355,10 +355,10 @@
                   <td>Responsible<span class="required"> *</span> :</td>
                   <td>Due Date :<span class=required> * </span></td>
                                  <tr>
-                    <td><input [(ngModel)]="responses[questionId].explanation" type="text" size="30" placeholder="Explanation"></td>
-                    <td><input [(ngModel)]="responses[questionId].measures" type="text" size="30" placeholder="Measures"></td>
-              <td><input [(ngModel)]="responses[questionId].responsible" type="text" size="30" placeholder="Responsible"></td>
-              <td><input [(ngModel)]="responses[questionId].dueDate" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+                    <td><input [(ngModel)]="explanation1" type="text" size="30" placeholder="Explanation"></td>
+                    <td><input [(ngModel)]="measures1" type="text" size="30" placeholder="Measures"></td>
+              <td><input [(ngModel)]="responsible1" type="text" size="30" placeholder="Responsible"></td>
+              <td><input [(ngModel)]="dueDate1" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
               <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
             <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
               </tr>
@@ -371,7 +371,7 @@
                   <tr>
                     <td>
 
-                      <select>
+                      <select [(ngModel)]="status1">
                         <option>Select an option</option>
                         <option>Open</option>
                         <option>In work</option>
@@ -393,20 +393,20 @@
                   <td>Due Date<span class="required"> *</span> :</td>
 
                   <tr>
-                    <td><input type="text" size="30" placeholder="Explanation"></td>
-                    <td><input type="text" size="30" placeholder="Measures"></td>
-                    <td><input type="text" size="30" placeholder="Responsible"></td>
-                    <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-                      <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-                      <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-                  </tr>
+                    <td><input [(ngModel)]="explanation1" type="text" size="30" placeholder="Explanation"></td>
+                    <td><input [(ngModel)]="measures1" type="text" size="30" placeholder="Measures"></td>
+              <td><input [(ngModel)]="responsible1" type="text" size="30" placeholder="Responsible"></td>
+              <td><input [(ngModel)]="dueDate1" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+              <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+            <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+              </tr>
                 </table>
                 <table>
                   <td>Status :<span class=required> * </span></td>
                   <tr>
                     <td>
 
-                      <select>
+                      <select [(ngModel)]="status1">
                           <option>Select an option</option>
                           <option>Open</option>
                           <option>In work</option>
@@ -443,7 +443,7 @@
   <mat-card class="custom-card">
     <div class="dropdown-item">
       Explanation<span class="required"> * </span> :
-      <input type="text" placeholder="Explanation ">
+      <input [(ngModel)]="explanation2" type="text" placeholder="Explanation ">
       </div>
       <strong style="color:brown"><i><span> * </span>Please Upload the Required Mail Proof in the Sharepoint</i></strong>
 
@@ -458,20 +458,20 @@
       <td>Measures <span class="required"> *</span> : </td>
       <td>Responsible<span class="required"> *</span> :</td>
       <td>Due Date<span class="required"> *</span> :</td>
-            <tr>
-        <td><input type="text" size="30" placeholder="Explanation"></td>
-        <td><input type="text" size="30" placeholder="Measures"></td>
-        <td><input type="text" size="30" placeholder="Responsible"></td>
-        <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-          <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-          <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-             </tr>
+      <tr>
+        <td><input [(ngModel)]="explanation2" type="text" size="30" placeholder="Explanation"></td>
+        <td><input [(ngModel)]="measures2" type="text" size="30" placeholder="Measures"></td>
+  <td><input [(ngModel)]="responsible2" type="text" size="30" placeholder="Responsible"></td>
+  <td><input [(ngModel)]="dueDate2" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+  <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+<mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+  </tr>
     </table>
     <table>
       <td>Status :<span class=required> * </span></td>
       <tr>
         <td>
-          <select>
+          <select [(ngModel)]="status2">
             <option>Select an option</option>
             <option>Open</option>
             <option>In work</option>
@@ -490,21 +490,21 @@
       <td>Measures <span class="required"> *</span> : </td>
       <td>Responsible<span class="required"> *</span> :</td>
       <td>Due Date<span class="required"> *</span> :</td>
-            <tr>
-        <td><input type="text" size="30" placeholder="Explanation"></td>
-        <td><input type="text" size="30" placeholder="Measures"></td>
-        <td><input type="text" size="30" placeholder="Responsible"></td>
-        <td><input matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
-          <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
-          <mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
-            </tr>
+      <tr>
+        <td><input [(ngModel)]="explanation2" type="text" size="30" placeholder="Explanation"></td>
+        <td><input [(ngModel)]="measures2" type="text" size="30" placeholder="Measures"></td>
+  <td><input [(ngModel)]="responsible2" type="text" size="30" placeholder="Responsible"></td>
+  <td><input [(ngModel)]="dueDate2" matInput [matDatepicker]="picker" class="custom-input" placeholder="DD/MM/YYYY">
+  <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+<mat-datepicker #picker class="custom-datepicker"></mat-datepicker></td>
+  </tr>
     </table>
     <table>
       <td>Status :<span class=required> * </span></td>
       <tr>
         <td>
 
-          <select>
+          <select [(ngModel)]="status2">
             <option>Select an option</option>
             <option>Open</option>
             <option>In work</option>
@@ -3212,6 +3212,7 @@ Explanation<span class="required"> * </span> :
 <button class="primary">Save as draft</button>
 <button (click)="onChecklistSubmit()" class="success_btn">Save</button>
 <p></p>
+-->
 
 
 
@@ -3220,7 +3221,6 @@ Explanation<span class="required"> * </span> :
 
 
 
- -->
 
 
 

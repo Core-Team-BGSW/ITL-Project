@@ -16,9 +16,6 @@ import { DataService, CheckListResponseDTO } from '../data.service';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 
 
-
-
-
 @Component({
   selector: 'app-self-audit',
   standalone: true,
@@ -181,8 +178,8 @@ linkForm: FormGroup;
       website2: ['', [Validators.required, Validators.pattern('https?://.+')]],
       website3: ['', [Validators.required, Validators.pattern('https?://.+')]]
     });
-  this.questionIds = [];
-  this.responses = {};
+  //this.questionIds = [];
+  //this.responses = {};
 
   // Fetch question IDs from the dataService
   this.dataService.getQuestions().subscribe(
@@ -332,6 +329,20 @@ status: string = '';
 dueDate: string = ''; // To store date in string format
 fulfillmentStatus: string = '';
 
+explanation1: string = '';
+measures1: string = '';
+responsible1: string = '';
+status1: string = '';
+dueDate1: string = ''; // To store date in string format
+fulfillmentStatus1: string = '';
+
+explanation2: string = '';
+measures2: string = '';
+responsible2: string = '';
+status2: string = '';
+dueDate2: string = ''; // To store date in string format
+fulfillmentStatus2: string = '';
+
 onChecklistSubmit() {
   const responseDTO: CheckListResponseDTO = {
     questionId:1,  // Assuming this is the question ID for the example
@@ -342,7 +353,24 @@ onChecklistSubmit() {
     dueDate: this.dueDate,
     fulfillmentStatus: this.selectedOption
   };
-
+  const responseDTO1: CheckListResponseDTO = {
+    questionId:2,  // Assuming this is the question ID for the example
+    explanation: this.explanation1,
+    measures: this.measures1,
+    responsible: this.responsible1,
+    status: this.status1,
+    dueDate: this.dueDate1,
+    fulfillmentStatus: this.selectedOption1
+  };
+  const responseDTO2: CheckListResponseDTO = {
+    questionId:3,  // Assuming this is the question ID for the example
+    explanation: this.explanation2,
+    measures: this.measures2,
+    responsible: this.responsible2,
+    status: this.status2,
+    dueDate: this.dueDate2,
+    fulfillmentStatus: this.selectedOption2
+  };
 
   // Send the data to the backend using the service
   this.dataService.submitCheckListResponse(responseDTO).subscribe(
@@ -354,6 +382,25 @@ onChecklistSubmit() {
       console.error('Error saving response', error);
     }
   );
+  this.dataService.submitCheckListResponse(responseDTO1).subscribe(
+    response => {
+      console.log('Response saved successfully', response);
+      // Optionally handle success or reset form here
+    },
+    error => {
+      console.error('Error saving response', error);
+    }
+  );
+  this.dataService.submitCheckListResponse(responseDTO2).subscribe(
+    response => {
+      console.log('Response saved successfully', response);
+      // Optionally handle success or reset form here
+    },
+    error => {
+      console.error('Error saving response', error);
+    }
+  );
+
 
 }
 
