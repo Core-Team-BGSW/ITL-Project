@@ -297,7 +297,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FilterPipe } from '../../filter.pipe';
 import { HttpClient } from '@angular/common/http';
 import { LoginService } from '../../service/login.service';
-import { DatashareService } from './service/datashare.service';
 import { DateFormatPipe } from '../../service/date-format.pipe';
 
 interface Question {
@@ -345,7 +344,6 @@ export class SelfCheckComponent {
     private router: Router,
     private http: HttpClient,
     private authService: LoginService,
-    private datashareService: DatashareService
   ) {}
 
   ngOnInit(): void {
@@ -445,7 +443,7 @@ export class SelfCheckComponent {
       // this.datashareService.setLabDetails(lab);
       const labDetails = encodeURIComponent(JSON.stringify(lab));
       window.open(`/self-audit?details=${labDetails}`, '_blank');
-      // this.router.navigate(['/self-audit']);
+
     }
   }
   isLabDetailsVisible(labId: string): boolean {

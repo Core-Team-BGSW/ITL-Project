@@ -35,7 +35,7 @@ export class DataService {
     'http://localhost:8080/boschLabs/by-responsible';
   private apiChecklist = 'http://localhost:8080/checklist/ids';
   private checklistResponseUrl = 'http://localhost:8080/checklist-response/add';
-  private baseUrl2 = 'http://localhost:8080/userinfo'; // Replace with your API URL
+  private userinfoApi = 'http://localhost:8080/userinfo'; // Replace with your API URL
 
   constructor(private http: HttpClient) {}
 
@@ -126,6 +126,6 @@ export class DataService {
   }
 
   getSuggestions(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl2}/${userId}`);
+    return this.http.get<any>(`${this.userinfoApi}/${userId}`);
   }
 }

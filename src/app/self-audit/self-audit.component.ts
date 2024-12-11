@@ -28,7 +28,7 @@ import { response } from 'express';
 import { Question } from '../../../models/Question';
 import { DataService } from '../data.service';
 import { ToastrService } from 'ngx-toastr';
-import { DatashareService } from '../components/self-check/service/datashare.service';
+
 
 export interface CheckListResponseDTO {
   questionId: number;
@@ -333,6 +333,19 @@ export class SelfAuditComponent {
     });
   }
 
+  //////////////////////////Ashraf Shaikh////////////////////////////////////
+
+  getUserNameWithDept(ntid:string){
+
+
+    return "ashraf"
+  }
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+
   loadQuestions(): void {
     this.formAnswerService.getAllQuestions().subscribe({
       next: (data: Question[]) => {
@@ -573,4 +586,6 @@ export class SelfAuditComponent {
       }
     );
   }
+
+
 }
