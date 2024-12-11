@@ -1,26 +1,66 @@
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { AngularModule } from '../../angularmodule/angularmodule.module';
 import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
-@Component({
-  selector: 'app-sidebar',
-  standalone: true,
-  imports: [RouterModule, CommonModule, AngularModule],
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss'],
+@NgModule({
+  declarations: [],
+  imports: [CommonModule],
 })
-export class SidebarComponent {
-  dropdownOpen: boolean = false;
-  @Output() sidebarToggle = new EventEmitter<void>();
-  @Input() isOpen: boolean = false; // Receive sidebar state
-
+export class imagemodule {
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer
   ) {
+    this.matIconRegistry.addSvgIcon(
+      'submit',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/submit.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'reset',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/reset.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'download-file',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/download-file.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'preview',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/preview.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'send',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/send.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      'back',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/back.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'user',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/user.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'boschname',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/boschname.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'boschlogo',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/bosch.svg'
+      )
+    );
     this.matIconRegistry.addSvgIcon(
       'home',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
@@ -85,27 +125,21 @@ export class SidebarComponent {
       'moveicon',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/move.svg')
     );
-  }
-  get toggleIcon() {
-    return this.isOpen ? 'cross' : 'menu';
-  }
-  toggleSidebar() {
-    this.isOpen = !this.isOpen; // Toggle the sidebar state
-    this.sidebarToggle.emit(); // Emit the event
-  }
-
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
-
-  menuItemClicked(item: string) {
-    console.log(`Clicked on ${item}`);
-    this.dropdownOpen = false; // Close the dropdown after clicking an item
-  }
-  activeItem: string = ''; // Stores the active item name
-
-  // Function to set the active item
-  setActiveItem(item: string) {
-    this.activeItem = item;
+    this.matIconRegistry.addSvgIcon(
+      'delete-white',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/delete-white.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'deletewh',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/images/deletewh.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      'quiz',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/quiz.svg')
+    );
   }
 }

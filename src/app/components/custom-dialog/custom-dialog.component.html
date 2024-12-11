@@ -1,0 +1,77 @@
+<!-- Modal Overlay -->
+<div id="overlay" *ngIf="isOpen" (click)="closeDialog()"></div>
+
+<!-- Modal Dialog -->
+<div class="modal" *ngIf="isOpen">
+  <div class="modal-content">
+    <div class="page-heading">
+      <a>Application Form Preview</a>
+    </div>
+    <div *ngIf="data">
+      <div class="grid-container">
+        <div class="column">
+          <!-- <div *ngFor="let item of data"> -->
+          <p><strong>Region:</strong> {{ data.region }}</p>
+          <p><strong>Country:</strong> {{ data.country }}</p>
+          <p><strong>Location-Code:</strong> {{ data.locationcode }}</p>
+          <p><strong>Entity:</strong> {{ data.entity }}</p>
+          <p><strong>GB:</strong> {{ data.GB }}</p>
+          <p><strong>Local-ITL:</strong> {{ data.localITL }}</p>
+          <p><strong>Local-ITL Proxy:</strong> {{ data.localITLproxy }}</p>
+          <p><strong>Department Head:</strong> {{ data.DH }}</p>
+          <p><strong>Key Account Manager:</strong> {{ data.KAM }}</p>
+          <p><strong>Department:</strong> {{ data.Dept }}</p>
+          <p><strong>Building:</strong> {{ data.Building }}</p>
+          <p><strong>Floor:</strong> {{ data.Floor }}</p>
+          <p><strong>Lab No/Lab Name :</strong> {{ data.labno }}</p>
+        </div>
+        <div class="column">
+          <p>
+            <strong>Primary Lab Coordinator:</strong> {{ data.primarylabco }}
+          </p>
+          <p>
+            <strong>Secondary Lab Coordinator:</strong>
+            {{ data.secondarylabco }}
+          </p>
+          <p><strong>Cost Center:</strong> {{ data.CC }}</p>
+          <p><strong>Kind of Lab:</strong> {{ data.kindoflab }}</p>
+          <p><strong>Purpose of Lab:</strong> {{ data.purposeoflab }}</p>
+          <p><strong>Description:</strong> {{ data.description }}</p>
+
+          <p>
+            <strong
+              >Is lab going to procure new equipment for Engineering/Red
+              Zone?</strong
+            >
+            {{ data.cmdbradio === "Yes" ? "YES" : "NO" }}
+          </p>
+          <p>
+            <strong>Shared Lab:</strong>
+            {{ data.sharedlabradio === "Yes" ? "YES" : "NO" }}
+          </p>
+          <p>
+            <strong>Self Audit Due Date:</strong>
+            {{ data.selectedDate | date : "MM/dd/yyyy" }}
+          </p>
+          <p>
+            <strong>ACL Required:</strong>
+            {{ data.ACLradio === "Yes" ? "YES" : "NO" }}
+          </p>
+          <ng-container *ngIf="ACLradio === 'Yes'">
+            <p><strong>No. of Green Ports:</strong> {{ data.greenports }}</p>
+            <p><strong>No. of Yellow Ports:</strong> {{ data.yellowports }}</p>
+            <p><strong>No. of Red Ports:</strong> {{ data.redports }}</p>
+          </ng-container>
+        </div>
+      </div>
+      <div class="dialog-buttons">
+        <button class="back-dialog-button" (click)="closeDialog()">
+          <mat-icon svgIcon="back"></mat-icon>Back
+        </button>
+        <button class="send-dialog-button" (click)="onFormSubmit()">
+          <mat-icon svgIcon="send"></mat-icon>Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

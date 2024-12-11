@@ -8,7 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogdecommissionComponent } from '../../lab-decommission/dialogdecommission/dialogdecommission.component';
 import { DataService } from '../../data.service';
-
+import { AngularModule } from '../../angularmodule/angularmodule.module';
+import { imagemodule } from '../../angularmodule/imagemodule.module';
+import { MatIconRegistry } from '@angular/material/icon';
+import { ToastrService } from 'ngx-toastr';
+import { DateFormatPipe } from '../../service/date-format.pipe';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-lab-decommission',
@@ -20,6 +25,9 @@ import { DataService } from '../../data.service';
     FormsModule,
     FilterPipe,
     MatButtonModule,
+    AngularModule,
+    imagemodule,
+    DateFormatPipe,
   ],
   templateUrl: './lab-decommission.component.html',
   styleUrls: ['./lab-decommission.component.scss'],
@@ -30,48 +38,59 @@ export class LabDecommissionComponent implements OnInit {
   searchQuery: string = '';
   filteredLabList: any[] = [];
   expandedLabId: string | null = null;
-  readonly dialog = inject(MatDialog);
-
-  //Kranti Sonawane
-
-  //To fetch lab details
-  private http = inject(HttpClient);
-  //Integrated endpoint to fetch lab data
-  private apiurl = 'http://localhost:8080/boschLabs/by-responsible/';
   ntId: any;
-
-  constructor(private dataService : DataService) {}
+  readonly dialog = inject(MatDialog);
+  isLoading: boolean = false;
+  userId: string | null = null;
+  constructor(
+    private dataService: DataService,
+    private toastr: ToastrService,
+    private authService: LoginService
+  ) {}
 
   ngOnInit(): void {
-    this.loadLabList();
+    this.authService.userId$.subscribe((id) => {
+      this.userId = id;
+      if (id) {
+        this.loadLabList(id);
+      }
+    });
   }
   //function  for loading lab list
   loadLabList(ntId?: string): void {
-    const url = ntId ? `${this.apiurl}${ntId}` : this.apiurl;  // Construct URL based on NT-ID
-    this.http.get<any[]>(url).subscribe({
+    this.isLoading = true;
+    this.dataService.reponsibleLabs(ntId).subscribe({
       next: (data) => {
         this.labList = data;
         this.filteredLabList = this.labList;
+        this.isLoading = false;
+        console.log(data);
       },
-      error: (err) => (this.errorMessage = err),
+      error: (err) => {
+        this.errorMessage = err;
+        this.isLoading = false;
+      },
     });
   }
-  removeLab(id: string): void {
+
+  removeLab(id: any): void {
     if (confirm('Are you sure you want to remove this lab?')) {
-      this.http.delete<void>(`${this.apiurl}/delete/${id}`).subscribe({
-        next: () => {
+      const labId = id.timestamp ? id.timestamp : id;
+      console.log('Removing lab with Id:', labId);
+      this.dataService.archiveSelectedLab(labId.toString()).subscribe(
+        (response) => {
+          console.log('Lab data Archived:', response.message);
+          // Remove the deleted lab from the list
           this.labList = this.labList.filter((lab) => lab.id !== id);
-          this.filteredLabList = this.filteredLabList.filter(
-            (lab) => lab.id !== id
-          );
-          this.dialog.open(DialogdecommissionComponent, {
-            width: '40%',
-            height: '200px',
-          });
-          console.log('Lab removed successfully');
+          this.filteredLabList = [...this.labList]; // Update filtered list as well
+          this.toastr.success('Lab has been Archived Succesfully');
         },
-        error: (err) => (this.errorMessage = err),
-      });
+        (error) => {
+          console.error('Error Archiving lab:', error);
+          this.toastr.error('Error: Please contact Administrator');
+          alert('Error Archiving lab');
+        }
+      );
     }
   }
 

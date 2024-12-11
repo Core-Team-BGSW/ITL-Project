@@ -124,12 +124,23 @@
         </h1>
       </section>
       <div id="video-section" class="video-section" id="target-section">
-        <iframe  #videoplayer id="kmsembed-0_r0kh3h4j" class="video" width="400" height="285"
-        src="https://bosch.mediaspace.de.kaltura.com/embed/secure/iframe/entryId/0_r0kh3h4j/uiConfId/23448911/st/0"
-        allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *"
-        referrerPolicy="no-referrer-when-downgrade" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation"
-        frameborder="0" title="ITL_Awareness_2024">
-      </iframe>
+        <iframe
+          #videoplayer
+          id="kmsembed-0_r0kh3h4j"
+          class="video"
+          width="400"
+          height="285"
+          src="https://bosch.mediaspace.de.kaltura.com/embed/secure/iframe/entryId/0_r0kh3h4j/uiConfId/23448911/st/0"
+          allowfullscreen
+          webkitallowfullscreen
+          mozAllowFullScreen
+          allow="autoplay *; fullscreen *; encrypted-media *"
+          referrerPolicy="no-referrer-when-downgrade"
+          sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation"
+          frameborder="0"
+          title="ITL_Awareness_2024"
+        >
+        </iframe>
         <p class="description">
           You'll need to watch this video before proceeding to quiz
         </p>
@@ -144,7 +155,7 @@
       </section>
       <section class="cta-section">
         <button class="cta-button" (click)="navigateToQuiz()">
-          <mat-icon>quiz</mat-icon>Take the Quiz
+          <mat-icon svgIcon="quiz"></mat-icon>Take the Quiz
         </button>
       </section>
     </div>

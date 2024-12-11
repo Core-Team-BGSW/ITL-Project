@@ -1,11 +1,11 @@
 // data.service.ts
+//Edited By Jay Jambhale
 
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-// Import the interface for checklist responses
 export interface CheckListResponseDTO {
   questionId: number;
   explanation: string;
@@ -15,32 +15,34 @@ export interface CheckListResponseDTO {
   dueDate?: string;
   fulfillmentStatus: string;
 }
-
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  /**
+   * @param formData - The JSON string of the form data to submit.
+   * @returns An observable containing the response from the server.
+   */
 
-  // Existing URLs
-  private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URL
+  //private baseUrl = 'http://localhost:3000/Lablist'; // Replace with your backend server URLgit
   private locationUrl = 'http://localhost:8080/boschLabsLocation/location/api';
   private formsubmitUrl = 'http://localhost:8080/boschLabs/form/submit';
   private uniqueEntityUrl = 'http://localhost:8080/boschLabs/allEntity';
   private allLabsUrl = 'http://localhost:8080/boschLabs/allLabs';
   private uniqueGBUrl = 'http://localhost:8080/boschLabs/allGB';
-
-  // URL for submitting checklist responses
-  private checklistResponseUrl = 'http://localhost:8080/checklist-response/add'; // Update with your actual backend URL
+  private archiveLabUrl = 'http://localhost:8080/boschLabs/labData/archive';
+  private byResponsibleLabsUrl =
+    'http://localhost:8080/boschLabs/by-responsible';
+  private apiChecklist = 'http://localhost:8080/checklist/ids';
+  private checklistResponseUrl = 'http://localhost:8080/checklist-response/add';
+  private baseUrl2 = 'http://localhost:8080/userinfo'; // Replace with your API URL
 
   constructor(private http: HttpClient) {}
 
   getAllLabData(): Observable<any[]> {
-    return this.http.get<any[]>(this.allLabsUrl).pipe(catchError(this.handleError));
-  }
-
-  removeLab(id: string): Observable<void> {
-    const url = `${this.baseUrl}/${id}`;
-    return this.http.delete<void>(url).pipe(catchError(this.handleError));
+    return this.http
+      .get<any[]>(this.allLabsUrl)
+      .pipe(catchError(this.handleError));
   }
 
   submitForm(formData: any): Observable<string> {
@@ -62,18 +64,17 @@ export class DataService {
     return this.http.get<any[]>(this.uniqueEntityUrl);
   }
 
-  getPendingApplications(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/pending`);
-  }
-
   getLocations(): Observable<any> {
     return this.http.get<any>(this.locationUrl);
   }
 
-//To fetch lab checklist questions
-  private apiChecklist = 'http://localhost:8080/checklist/ids';  // Replace with your actual API URL
+  archiveSelectedLab(id: string): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(`${this.archiveLabUrl}/${id}`);
+  }
 
-
+  reponsibleLabs(ntId?: string): Observable<any> {
+    return this.http.get<any[]>(`${this.byResponsibleLabsUrl}/${ntId}`);
+  }
 
   getQuestions(): Observable<any[]> {
     return this.http.get<any[]>(this.apiChecklist); // Make sure this API returns an array of objects, not just IDs.
@@ -85,10 +86,12 @@ export class DataService {
     });
 
     // Send the response to the backend
-    return this.http.post(this.checklistResponseUrl, JSON.stringify(responseDTO), {
-      headers,
-      responseType: 'json',
-    }).pipe(catchError(this.handleError));
+    return this.http
+      .post(this.checklistResponseUrl, JSON.stringify(responseDTO), {
+        headers,
+        responseType: 'json',
+      })
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: any): Observable<never> {
@@ -120,5 +123,9 @@ export class DataService {
 
     console.error(errorMessage); // Log the error message
     return throwError(errorMessage); // Return an observable with a user-facing error message
+  }
+
+  getSuggestions(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl2}/${userId}`);
   }
 }

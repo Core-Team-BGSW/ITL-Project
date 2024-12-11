@@ -12,9 +12,7 @@ import {
   inject,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { DialogModule } from '@angular/cdk/dialog';
-import { DialogboxsubmitComponent } from '../dialogboxsubmit/dialogboxsubmit.component';
 import {
   trigger,
   state,
@@ -26,11 +24,16 @@ import axios from 'axios';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../data.service';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LayoutComponent } from '../../admin/layout/layout.component';
 import { LabData } from '../../../../models/LabData';
 import { Location } from '../../../../models/Location';
 import { RegionWithCountries } from '../../../../models/RegionWithCountries';
 import { countriesWithcode } from '../../../../models/countriesWithcode';
+import { CustomDialogComponent } from '../custom-dialog/custom-dialog.component';
+import { imagemodule } from '../../angularmodule/imagemodule.module';
+import { catchError, distinctUntilChanged, switchMap } from 'rxjs';
+import { filter } from 'rxjs/internal/operators/filter';
 
 @Component({
   selector: 'app-lab_commission',
@@ -66,6 +69,8 @@ import { countriesWithcode } from '../../../../models/countriesWithcode';
     FormsModule,
     ReactiveFormsModule,
     LayoutComponent,
+    CustomDialogComponent,
+    imagemodule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -107,7 +112,7 @@ export class LabCommissionComponent {
   Building: string = '';
   Floor: string = '';
   labno: string = '';
-  primarylabco: string = '';
+  primarylabco: any = '';
   secondarylabco: string = '';
   CC: string = '';
   kindoflab: string = '';
@@ -124,6 +129,7 @@ export class LabCommissionComponent {
   showOtherField: boolean = false;
   otherLabType: string = '';
   applications: any[] = [];
+  formData: any = {};
   labForm!: FormGroup;
   selfauditdate: Date | null = null;
   selectedDate!: Date;
@@ -141,6 +147,7 @@ export class LabCommissionComponent {
   allLabs: LabData[] = [];
   gbOptions: string[] = [];
   entityOptions: string[] = [];
+  suggestions: string[] = [];
   departmentSuggestions: string[] = [];
   dhSuggestions: string[] = []; // All available DH suggestions
   uniqueRegions: RegionWithCountries[] = [];
@@ -148,9 +155,10 @@ export class LabCommissionComponent {
   filteredLocationCode: String[] = [];
   showOtherSection: boolean = false;
   otherField: string = '';
+  isDialogOpen: boolean = false;
+  isUserSelected: boolean = false;
 
   constructor(
-    private dialog: MatDialog,
     private changeDetectorRef: ChangeDetectorRef,
     private toastr: ToastrService,
     private dataService: DataService
@@ -525,6 +533,8 @@ export class LabCommissionComponent {
     if (this.selectedEntity === 'BGSW') {
       this.localITL = 'MNU1KOR';
       this.localITLproxy = 'ada2kor';
+      this.primarylabco = '';
+      this.secondarylabco = '';
     } else {
       this.localITL = ''; // Clear localITL for other entities
       this.localITLproxy = '';
@@ -534,7 +544,22 @@ export class LabCommissionComponent {
   }
 
   isBGSWOrBGSV(): boolean {
-    return this.selectedEntity === 'BGSW' || this.selectedEntity === 'BGSV';
+    const result =
+      this.selectedEntity === 'BGSW' || this.selectedEntity === 'BGSV';
+    if (result) {
+      this.checkAndFetchData();
+    } else {
+      this.fetchDataForLocalITL();
+    }
+
+    return result;
+  }
+
+  checkAndFetchData() {
+    // Only fetch data if primarylabco is not empty and has at least 6 characters
+    if (this.primarylabco && this.primarylabco.length >= 6) {
+      this.fetchDataForPrimaryLabCoord(); // Fetch data for primary lab coordinator
+    }
   }
   /////////////////////////////////////////////////////////////////////onReset-formfill////////////////////////////////////////////////////////////////////////////
 
@@ -592,17 +617,14 @@ export class LabCommissionComponent {
       selectedDate: this.selectedDate,
     };
 
-    const dialogRef = this.dialog.open(DialogboxsubmitComponent, {
-      width: '600px',
-      data: { ...data },
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('Dialog closed');
-    });
-
-    // Perform submission logic
+    this.formData = data;
+    this.isDialogOpen = true;
     console.log('Form previewed with:', { data });
+  }
+
+  closeDialog() {
+    this.isDialogOpen = false; // Close the modal
+    console.log('Dialog closed');
   }
 
   // Method to validate fields and return missing ones
@@ -674,5 +696,41 @@ export class LabCommissionComponent {
 
   toggleOtherSection() {
     this.showOtherSection = !this.showOtherSection;
+  }
+
+  fetchDataForPrimaryLabCoord() {
+    if (this.primarylabco && this.primarylabco.length >= 6) {
+      this.dataService.getSuggestions(this.primarylabco).subscribe(
+        (data) => {
+          this.suggestions = data; // Store the suggestions data in suggestions
+          this.Dept = data.department;
+          this.CC = this.trimLeadingZeros(data.costCenter);
+          this.DH = data.departmentHead;
+        },
+        (error) => {
+          console.error('Error fetching suggestions:', error); // Handle any errors
+        }
+      );
+    }
+  }
+
+  fetchDataForLocalITL() {
+    if (this.localITL && this.localITL.length >= 6) {
+      this.dataService.getSuggestions(this.localITL).subscribe(
+        (data) => {
+          this.suggestions = data; // Store the suggestions data in suggestions
+          this.Dept = data.department;
+          this.CC = this.trimLeadingZeros(data.costCenter);
+          this.DH = data.departmentHead;
+        },
+        (error) => {
+          console.error('Error fetching suggestions:', error); // Handle any errors
+        }
+      );
+    }
+  }
+
+  trimLeadingZeros(value: string): string {
+    return value.replace(/^0+/, ''); // Remove all leading zeros
   }
 }

@@ -10,6 +10,7 @@ import { LabCommissionComponent } from '../../components/lab_commission/lab_comm
 import { SelfCheckComponent } from '../../components/self-check/self-check.component';
 import { SoftwareTrackingComponent } from '../../components/software-tracking/software-tracking.component';
 import { LabDecommissionComponent } from '../../components/lab-decommission/lab-decommission.component';
+import { imagemodule } from '../../angularmodule/imagemodule.module';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +26,7 @@ import { LabDecommissionComponent } from '../../components/lab-decommission/lab-
     SoftwareTrackingComponent,
     LabDecommissionComponent,
     MatIconModule,
+    imagemodule,
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
@@ -55,11 +57,15 @@ export class DashboardComponent implements AfterViewInit, OnInit {
 
   // Method to navigate to quiz after video completion
   navigateToQuiz() {
+<<<<<<< HEAD
     // if (this.videoWatched) {
       this.router.navigate(['/quiz']);
     // } else {
     //   alert('Please watch the entire video before proceeding.');
     // }
+=======
+    this.router.navigate(['/quiz']);
+>>>>>>> eb6997a7998da5b4648ed0cd5b77d8acb9464202
   }
 
   // // Method to handle video playback events and check if it's complete
