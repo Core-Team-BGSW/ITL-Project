@@ -68,8 +68,11 @@ export class DataService {
     return this.http.get<any>(this.locationUrl);
   }
 
-  archiveSelectedLab(id: string): Observable<{ message: string }> {
-    return this.http.delete<{ message: string }>(`${this.archiveLabUrl}/${id}`);
+  archiveSelectedLab(id: string): Observable<{ response: string }> {
+    // return this.http.delete<{ message: string }>(`${this.archiveLabUrl}/${id}`);
+    return this.http.patch<{ response: string }>(`${this.archiveLabUrl}/${id}`, {});
+
+
   }
 
   reponsibleLabs(ntId?: string): Observable<any> {

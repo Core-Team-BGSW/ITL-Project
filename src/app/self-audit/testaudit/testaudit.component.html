@@ -1,0 +1,94 @@
+<div class="container">
+  <h1>ITL Audit/Self-audit</h1>
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="responses">
+      <div *ngFor="let response of responses.controls; let i = index" [formGroupName]="i" class="question-block">
+
+        <!-- Section Label -->
+        <div *ngIf="questions[i]?.isSectionStart" class="section-label">
+          <h2>{{ questions[i]?.section }}</h2>
+        </div>
+        <div class='container_design'>
+          <div class='question_design'>
+        <!-- Question Text -->
+            <h3>
+              {{ questions[i]?.sectionIndex }}. {{ questions[i]?.text }}
+              <span class="required">*</span>
+              <span class="tooltip" *ngIf='questions[i]?.hint!==null && questions[i]?.hint!==""' title="{{ questions[i]?.hint }}">&#9432;</span>
+            </h3>
+
+          </div>
+
+          <!-- Evaluation -->
+          <div class="evaluation">
+            Evaluation <span class="required">*</span>
+
+            <span class="eval_tooltip" title="{{ questions[i]?.evaluation }}">&#9432;</span>
+          </div>
+
+
+          <input type="hidden" formControlName="questionId" />
+
+          <!-- Fulfillment Status Dropdown -->
+          <div>
+            <mat-card class="custom-card"  >
+              <select formControlName="fulfillmentStatus" (change)="onStatusChange(i)">
+                <option value="">Select</option>
+                <option value="Completely Fulfilled">Completely Fulfilled</option>
+                <option value="Partially Fulfilled">Partially Fulfilled</option>
+                <option value="Not Fulfilled">Not Fulfilled</option>
+              </select>
+            </mat-card>
+          </div>
+
+        <!-- Additional Fields -->
+        <div *ngIf="showAdditionalFields[i] || isCompletelyFulfilled[i]">
+          <mat-card class="custom-card">
+            <div>
+              <label>Explanation:</label>
+              <!-- <textarea
+                rows="2"
+                style="width: 100%; resize: none;"
+                formControlName="explanation">
+              </textarea> -->
+              <input type="text" formControlName="explanation"/>
+            </div>
+          <div *ngIf="showAdditionalFields[i]">
+            <div>
+              <label>Measures:</label>
+              <input type="text" formControlName="measures" />
+            </div>
+            <div class="table">
+              <table>
+                <td class="due_date"><label>Due Date:</label></td>
+                <td class="responsible"><label>Responsible:</label></td>
+                <td class="status"><label>Status:</label></td>
+                <tr>
+                  <td>
+                    <input formControlName="dueDate" matInput [matDatepicker]="picker" class="custom-input"
+                    placeholder="DD/MM/YYYY" />
+                    <mat-datepicker-toggle matSuffix [for]="picker" class="custom-datepicker-toggle"></mat-datepicker-toggle>
+                    <mat-datepicker #picker class="custom-datepicker"></mat-datepicker>
+                  </td>
+                  <td><input type="text" formControlName="responsible" /></td>
+                  <td>
+                    <select formControlName="status">
+                      <option value="In Progress">In Progress</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Pending">Pending</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    </div>
+    <button class="primary">Save as draft</button>
+    <button type="submit" class="submit-button">Submit</button>
+
+  </form>
+</div>

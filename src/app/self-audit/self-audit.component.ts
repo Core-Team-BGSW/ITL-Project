@@ -22,12 +22,13 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { FormAnswerService } from '../service/form-answer.service';
-import { response } from 'express';
 import { Question } from '../../../models/Question';
-import { DataService } from '../data.service';
 import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../data.service';
+import { TestauditComponent } from './testaudit/testaudit.component';
+
 
 
 export interface CheckListResponseDTO {
@@ -55,6 +56,7 @@ export interface CheckListResponseDTO {
     MatTabsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    TestauditComponent
   ],
   templateUrl: './self-audit.component.html',
   styleUrl: './self-audit.component.scss',
@@ -173,6 +175,8 @@ export class SelfAuditComponent {
   dso_adit:any;
   criticality='';
   combinedData: string;
+
+  // resp_mgt$!: Observable<string>;
   ////////////////////////////////////////////////////////////////////////
 
   toggleOptions() {
@@ -249,9 +253,13 @@ export class SelfAuditComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     private formAnswerService: FormAnswerService,
     private http: HttpClient,
-    private dataService: DataService,
+    private dataService:DataService,
     private toastr: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+
+    //////////////////////////////Ashraf //////////////
+
+    /////////////////////////////////////////////////
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
@@ -300,6 +308,10 @@ export class SelfAuditComponent {
     const month = currentDate.toLocaleString('default', { month: 'short' }).toUpperCase(); // e.g., OCT
     const year = currentDate.getFullYear().toString().slice(-2);
     this.combinedData = `${month}_${year}`
+
+    ////////////////////Ashraf////////////
+
+
   }
 
   ngOnInit(): void {
@@ -325,23 +337,26 @@ export class SelfAuditComponent {
         }
         this.acl=labDetails.acl_req;
         this.dso_adit="No";
-        this.criticality="";
+        this.criticality= "";
+
 
         this.checklistid=`${labDetails.country}_${labDetails.gb}_${labDetails.labNo}_${labDetails.locationCode}_${labDetails.building}_${this.combinedData}`
         // Use the lab details here
       }
     });
+
+
+
+
   }
 
   //////////////////////////Ashraf Shaikh////////////////////////////////////
-
-  getUserNameWithDept(ntid:string){
-
-
-    return "ashraf"
+  //getting name instead of ntid in form
+  getUserNameWithDept(ntid: string): Observable<string> {
+    return this.dataService.getSuggestions(ntid).pipe(
+      map((data) => `${data.lastName} ${data.firstName} (${data.department})`)
+    );
   }
-
-
 
 
   ///////////////////////////////////////////////////////////////////////////
@@ -586,6 +601,22 @@ export class SelfAuditComponent {
       }
     );
   }
+
+
+  /////////////////////////////////////ashraf Code////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

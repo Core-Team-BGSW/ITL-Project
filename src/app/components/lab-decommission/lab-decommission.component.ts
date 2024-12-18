@@ -79,7 +79,7 @@ export class LabDecommissionComponent implements OnInit {
       console.log('Removing lab with Id:', labId);
       this.dataService.archiveSelectedLab(labId.toString()).subscribe(
         (response) => {
-          console.log('Lab data Archived:', response.message);
+          console.log('Lab data Archived:', response.response);
           // Remove the deleted lab from the list
           this.labList = this.labList.filter((lab) => lab.id !== id);
           this.filteredLabList = [...this.labList]; // Update filtered list as well
