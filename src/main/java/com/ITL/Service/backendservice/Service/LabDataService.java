@@ -118,26 +118,69 @@ public class LabDataService {
         }
         return labDataWithEntityDTOList;
     }
-    public ResponseEntity<Map<String, String>> deleteLabDataById(String objId) {
-        ObjectId Id = new ObjectId(objId);
-        Map<String, String> response = new HashMap<>();
-        boolean isDeleted = false;
-        if(labDataRepo.existsById(Id))
+
+    public List<LabDataWithEntityDTO> getLabsByLabResponsibleArchieve(String userId) {
+        List<LabData> labs = labDataRepo.findByLabResponsibleIgnoreCaseArchievelab(userId);
+
+        List<LabDataWithEntityDTO> labDataWithEntityDTOList = new ArrayList<>();
+        for(LabData labData : labs)
         {
-            isDeleted = true;
-            Optional<LabData> labData = labDataRepo.findById(Id);
-            if(labData.isPresent()) {
-                String entityName = labData.get().getEntityName();
-                String locationCode = labData.get().getLocationCode();
-                entityRepo.findByEntityNameAndLocationCode(entityName,locationCode).getLabDataList().remove(labData.get());
-                labDataRepo.deleteById(Id);
+            LabDataWithEntityDTO labDataWithEntityDTO = convertToLabDataWithEntityDTO(labData);
+            logger.info("The type of ID: {}", labData.getId().getClass().getName());
+            Entity entity = entityRepo.findByLocationCodeAndEntityName(labData.getLocationCode(), labData.getEntityName());
+            logger.info("The type of entity Lab Data ID {}", entity.getLabDataList().getFirst().getId().getClass().getName());
+            entity = entityRepo.findByLabDataId(labData.getId());
+            logger.info("ENtity name :: {}",entity);
+            labDataWithEntityDTO.setRegion(entity.getRegion());
+            labDataWithEntityDTO.setCountry(entity.getCountry());
+            labDataWithEntityDTOList.add(labDataWithEntityDTO);
+        }
+        return labDataWithEntityDTOList;
+    }
+//    public ResponseEntity<Map<String, String>> deleteLabDataById(String objId) {
+//        ObjectId Id = new ObjectId(objId);
+//        Map<String, String> response = new HashMap<>();
+//        boolean isDeleted = false;
+//        if(labDataRepo.existsById(Id))
+//        {
+//            isDeleted = true;
+//            Optional<LabData> labData = labDataRepo.findById(Id);
+//            if(labData.isPresent()) {
+//                String entityName = labData.get().getEntityName();
+//                String locationCode = labData.get().getLocationCode();
+//                entityRepo.findByEntityNameAndLocationCode(entityName,locationCode).getLabDataList().remove(labData.get());
+//                labDataRepo.deleteById(Id);
+//            }
+//        }
+//        if (isDeleted) {
+//            response.put("Response:", "The lab is successfully archived with the given " +Id);
+//            return ResponseEntity.ok(response); // HTTP 200 OK with JSON response
+//        } else {
+//            response.put("Response:", "Lab Data with given " + Id + " not found");
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response); // HTTP 404 NOT FOUND with JSON response
+//        }
+//    }
+
+    public ResponseEntity<Map<String, String>> archiveLabDataById(String objId) {
+        ObjectId id = new ObjectId(objId);
+        Map<String, String> response = new HashMap<>();
+        boolean isUpdated = false;
+
+        if (labDataRepo.existsById(id)) {
+            Optional<LabData> labDataOptional = labDataRepo.findById(id);
+            if (labDataOptional.isPresent()) {
+                LabData labData = labDataOptional.get();
+                labData.setLab_status(false); // Set the status field to false
+                labDataRepo.save(labData); // Save the updated document
+                isUpdated = true;
             }
         }
-        if (isDeleted) {
-            response.put("Response:", "The lab is successfully archived with the given " +Id);
+
+        if (isUpdated) {
+            response.put("Response:", "The lab data has been successfully archived with the given ID: " + id);
             return ResponseEntity.ok(response); // HTTP 200 OK with JSON response
         } else {
-            response.put("Response:", "Lab Data with given " + Id + " not found");
+            response.put("Response:", "Lab data with the given ID: " + id + " not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response); // HTTP 404 NOT FOUND with JSON response
         }
     }

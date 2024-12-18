@@ -44,5 +44,7 @@ public class LabData {
     private String yellow_ports;
     private String red_ports;
     private String self_audit_date;
+    ///////Ashraf/////////
+    private boolean lab_status;
 }
 

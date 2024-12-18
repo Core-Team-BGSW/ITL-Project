@@ -36,4 +36,6 @@ public class LabFormData {
     private String yellow_ports;
     private String red_ports;
     private String self_audit_date;
+    //////ashraf//////
+    private boolean lab_status;
 }

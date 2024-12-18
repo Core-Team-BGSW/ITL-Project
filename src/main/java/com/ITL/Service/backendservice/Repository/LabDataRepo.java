@@ -33,8 +33,13 @@ public interface LabDataRepo extends MongoRepository<LabData, ObjectId>,CustomLa
     List<LabData> findByLocal_itl_proxy(String local_itl_proxy);
 
 
-    @Query("{ $or: [ { 'primary_lab_cord': { $regex: ?0, $options: 'i' } }, { 'dh': { $regex: ?0, $options: 'i' } }, { 'kam': { $regex: ?0, $options: 'i' } },{ 'local_itl': { $regex: ?0, $options: 'i' } },{ 'local_itl_proxy': { $regex: ?0, $options: 'i' } },{ 'secondary_lab_cord': { $regex: ?0, $options: 'i' } } ] }")
+//    @Query("{ $or: [ { 'primary_lab_cord': { $regex: ?0, $options: 'i' } }, { 'dh': { $regex: ?0, $options: 'i' } }, { 'kam': { $regex: ?0, $options: 'i' } },{ 'local_itl': { $regex: ?0, $options: 'i' } },{ 'local_itl_proxy': { $regex: ?0, $options: 'i' } },{ 'secondary_lab_cord': { $regex: ?0, $options: 'i' } } ] }")
+    @Query("{ $and: [ { $or: [ { 'primary_lab_cord': { $regex: ?0, $options: 'i' } }, { 'dh': { $regex: ?0, $options: 'i' } }, { 'kam': { $regex: ?0, $options: 'i' } }, { 'local_itl': { $regex: ?0, $options: 'i' } }, { 'local_itl_proxy': { $regex: ?0, $options: 'i' } }, { 'secondary_lab_cord': { $regex: ?0, $options: 'i' } } ] }, { 'lab_status': true } ] }")
     List<LabData> findByLabResponsibleIgnoreCase(String userId);
+
+    @Query("{ $and: [ { $or: [ { 'primary_lab_cord': { $regex: ?0, $options: 'i' } }, { 'dh': { $regex: ?0, $options: 'i' } }, { 'kam': { $regex: ?0, $options: 'i' } }, { 'local_itl': { $regex: ?0, $options: 'i' } }, { 'local_itl_proxy': { $regex: ?0, $options: 'i' } }, { 'secondary_lab_cord': { $regex: ?0, $options: 'i' } } ] }, { 'lab_status': false } ] }")
+    List<LabData> findByLabResponsibleIgnoreCaseArchievelab(String userId);
+
 
 
     //code for role management
