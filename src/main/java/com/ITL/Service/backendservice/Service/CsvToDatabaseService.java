@@ -118,6 +118,7 @@ public class CsvToDatabaseService {
         labFormData.setSecondary_lab_cord(labData.getSecondary_lab_cord());
         labFormData.setPrimary_lab_cord(labData.getPrimary_lab_cord());
         labFormData.setRegion(entity.getRegion());
+        labFormData.setLab_status(labFormData.isLab_status());
         return labFormData;
     }
 
@@ -156,6 +157,7 @@ public class CsvToDatabaseService {
         labData.setNew_equipment(nextRecord[24]);
         labData.setShared_lab(nextRecord[25]);
         labData.setSelf_audit_date(nextRecord[26]);
+        labData.setLab_status(true);
         return labData;
     }
 
