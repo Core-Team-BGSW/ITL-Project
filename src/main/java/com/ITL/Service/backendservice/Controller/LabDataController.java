@@ -85,10 +85,22 @@ public class LabDataController {
         return ResponseEntity.ok(labs);
     }
 
-    @DeleteMapping("/labData/archive/{id}")
-    public ResponseEntity<Map<String, String>> deleteLabDataById(@PathVariable("id") String id)
-    {
-        return labDataService.deleteLabDataById(id);
+    @GetMapping("archieve/by-responsible/{userId}")
+    public ResponseEntity<List<LabDataWithEntityDTO >> getLabsByLabResponsibleArchieve(@PathVariable String userId) {
+
+        List<LabDataWithEntityDTO > labs = labDataService.getLabsByLabResponsibleArchieve(userId);
+        return ResponseEntity.ok(labs);
+    }
+
+//    @DeleteMapping("/labData/archive/{id}")
+//    public ResponseEntity<Map<String, String>> deleteLabDataById(@PathVariable("id") String id)
+//    {
+//        return labDataService.deleteLabDataById(id);
+//    }
+
+    @PatchMapping("/labData/archive/{id}")
+    public ResponseEntity<Map<String, String>> archiveLabDataById(@PathVariable("id") String id) {
+        return labDataService.archiveLabDataById(id);
     }
 
 }
