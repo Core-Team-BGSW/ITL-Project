@@ -1,6 +1,6 @@
 csv:
   file:
-    directory: C:\Users\BFM3KOR\IdeaProjects\ITL-Project9\src\main\resources\static
+    directory: C:\6thDec\Backend\src\main\resources\static
 logging:
   level:
     org:
