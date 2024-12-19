@@ -118,3 +118,65 @@ input[type="text"]:focus, select:focus {
     margin-bottom: 10px;
   }
 }
+
+
+
+.container {
+  margin-bottom: 20px;
+}
+
+.form-box {
+  margin: 10px 0;
+}
+
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.input-item {
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.lab-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.lab-details input {
+  margin-right: 10px;
+}
+
+button {
+  margin-top: 15px;
+}
+
+.remove-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: darkred;
+}
+.add-btn{
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+
+}
+
+.add-btn:hover {
+  background-color: darkgreen;
+}
+
+button[type="button"] {
+  cursor: pointer;
+}

@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -57,30 +63,8 @@ export class DashboardComponent implements AfterViewInit, OnInit {
 
   // Method to navigate to quiz after video completion
   navigateToQuiz() {
-<<<<<<< HEAD
-    // if (this.videoWatched) {
-      this.router.navigate(['/quiz']);
-    // } else {
-    //   alert('Please watch the entire video before proceeding.');
-    // }
-=======
     this.router.navigate(['/quiz']);
->>>>>>> eb6997a7998da5b4648ed0cd5b77d8acb9464202
   }
-
-  // // Method to handle video playback events and check if it's complete
-  // onVideoEnd() {
-  //   this.videoWatched = true; // Set flag when video ends
-  // }
-
-  // // Method to control playback and ensure the video is watched completely
-  // handleVideoProgress() {
-  //   const videoElement = this.videoPlayer.nativeElement;
-  //   if (videoElement.currentTime === videoElement.duration) {
-  //     // Ensure that the video is watched fully
-  //     this.videoWatched = true;
-  //   }
-  // }
 
   toggle() {
     this.toggleProperty = !this.toggleProperty;
