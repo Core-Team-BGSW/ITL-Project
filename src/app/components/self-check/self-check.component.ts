@@ -343,7 +343,7 @@ export class SelfCheckComponent {
     private dataService: DataService,
     private router: Router,
     private http: HttpClient,
-    private authService: LoginService
+    private authService: LoginService,
   ) {}
 
   ngOnInit(): void {
@@ -362,7 +362,7 @@ export class SelfCheckComponent {
         this.labList = data;
         this.filteredLabList = this.labList;
         this.isLoading = false;
-        console.log(data);
+
       },
       error: (err) => {
         this.errorMessage = err;
@@ -418,7 +418,8 @@ export class SelfCheckComponent {
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
   }
-  openForm(labentityName: string) {
+
+  openForm(labentityName: string,lab:any) {
     // condition if the enitity is "BGSW"
     if (labentityName === 'BGSW') {
       const confirmed = confirm(
@@ -439,7 +440,10 @@ export class SelfCheckComponent {
         );
       }
     } else {
-      window.open('/self-audit');
+      // this.datashareService.setLabDetails(lab);
+      const labDetails = encodeURIComponent(JSON.stringify(lab));
+      window.open(`/self-audit?details=${labDetails}`, '_blank');
+
     }
   }
   isLabDetailsVisible(labId: string): boolean {

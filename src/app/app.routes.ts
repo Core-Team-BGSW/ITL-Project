@@ -14,6 +14,7 @@ import { LabDecommissionComponent } from './components/lab-decommission/lab-deco
 import { AuditComponent } from './components/audit/audit.component';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { FeedbackComponent } from './admin/feedback/feedback.component';
+import { TestauditComponent } from './self-audit/testaudit/testaudit.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,10 @@ export const routes: Routes = [
       { path: 'software-tracking', component: SoftwareTrackingComponent },
       { path: 'lab-decommission', component: LabDecommissionComponent },
       { path: 'audit', component: AuditComponent },
+
+      ////////////////////////////Ashraf//////////////////
+      { path: 'testaudit', component: TestauditComponent }
+
     ],
   },
 ];

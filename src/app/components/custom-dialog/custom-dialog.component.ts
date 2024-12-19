@@ -87,6 +87,7 @@ export class CustomDialogComponent {
         red_ports: this.data.redports,
         self_audit_date: this.data.selectedDate,
         approvalStatus: this.data.approvalStatus,
+        lab_status:true
       };
 
       this.dataService.submitForm(this.formData).subscribe({

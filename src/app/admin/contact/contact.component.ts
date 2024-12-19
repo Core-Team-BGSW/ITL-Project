@@ -23,9 +23,9 @@ export class ContactComponent implements OnInit{
 
 
   getuserid() {
-    this.username = this.loginService.getUserId();
+    this.username = (this.loginService.getUserId())?.split('(')[0].trim();
     this.ntid = (this.loginService.getNtId())?.toUpperCase();
-    this.department=this.username.match(/\(([^)]+)\)/)?.[1];
+    this.department=this.loginService.getUserId()?.match(/\(([^)]+)\)/)?.[1];
   }
 
 

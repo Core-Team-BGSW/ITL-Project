@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabLabel, MatTabsModule } from '@angular/material/tabs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   MatDatepickerModule,
   matDatepickerAnimations,
@@ -22,12 +22,14 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { FormAnswerService } from '../service/form-answer.service';
-import { response } from 'express';
 import { Question } from '../../../models/Question';
-import { DataService } from '../data.service';
 import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../data.service';
+import { TestauditComponent } from './testaudit/testaudit.component';
+
+
 
 export interface CheckListResponseDTO {
   questionId: number;
@@ -54,6 +56,7 @@ export interface CheckListResponseDTO {
     MatTabsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    TestauditComponent
   ],
   templateUrl: './self-audit.component.html',
   styleUrl: './self-audit.component.scss',
@@ -156,6 +159,26 @@ export class SelfAuditComponent {
   showOptions = false;
   isSaved: boolean = false;
 
+  /////////Ashraf Shaikh - Code for checklist form data fetching///////////
+  checklistid='';
+  location = '';
+  gb = '';
+  country = '';
+  plant = '';
+  labroom='';
+  resp_mgt='';
+  litl='';
+  litl_proxy='';
+  date:Date=new Date();
+  lab_cord='';
+  acl:any;
+  dso_adit:any;
+  criticality='';
+  combinedData: string;
+
+  // resp_mgt$!: Observable<string>;
+  ////////////////////////////////////////////////////////////////////////
+
   toggleOptions() {
     this.showOptions = !this.showOptions;
   }
@@ -230,8 +253,13 @@ export class SelfAuditComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     private formAnswerService: FormAnswerService,
     private http: HttpClient,
-    private dataService: DataService,
-    private toastr: ToastrService
+    private dataService:DataService,
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+
+    //////////////////////////////Ashraf //////////////
+
+    /////////////////////////////////////////////////
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
     this.linkForm = this.fb.group({
@@ -276,11 +304,62 @@ export class SelfAuditComponent {
         console.error('Error fetching question IDs:', error);
       }
     );
+    const currentDate = new Date();
+    const month = currentDate.toLocaleString('default', { month: 'short' }).toUpperCase(); // e.g., OCT
+    const year = currentDate.getFullYear().toString().slice(-2);
+    this.combinedData = `${month}_${year}`
+
+    ////////////////////Ashraf////////////
+
+
   }
 
   ngOnInit(): void {
     this.loadQuestions();
+
+    ////////Ashraf Shaikh- Checklist data
+    this.route.queryParams.subscribe(params => {
+      if (params['details']) {
+        const labDetails = JSON.parse(decodeURIComponent(params['details']));
+        this.location=labDetails.locationCode;
+        this.gb = labDetails.gb;
+        this.country = labDetails.country;
+        this.plant = labDetails.building;
+        this.labroom=labDetails.labNo;
+        this.resp_mgt=labDetails.dh;
+        this.litl=labDetails.local_itl;
+        this.litl_proxy=labDetails.local_itl_proxy;
+        this.date=new Date();
+        if(labDetails.primary_lab_cord=="null"){
+          this.lab_cord='NA';
+        }else{
+          this.lab_cord=labDetails.primary_lab_cord;
+        }
+        this.acl=labDetails.acl_req;
+        this.dso_adit="No";
+        this.criticality= "";
+
+
+        this.checklistid=`${labDetails.country}_${labDetails.gb}_${labDetails.labNo}_${labDetails.locationCode}_${labDetails.building}_${this.combinedData}`
+        // Use the lab details here
+      }
+    });
+
+
+
+
   }
+
+  //////////////////////////Ashraf Shaikh////////////////////////////////////
+  //getting name instead of ntid in form
+  getUserNameWithDept(ntid: string): Observable<string> {
+    return this.dataService.getSuggestions(ntid).pipe(
+      map((data) => `${data.lastName} ${data.firstName} (${data.department})`)
+    );
+  }
+
+
+  ///////////////////////////////////////////////////////////////////////////
 
   loadQuestions(): void {
     this.formAnswerService.getAllQuestions().subscribe({
@@ -522,4 +601,22 @@ export class SelfAuditComponent {
       }
     );
   }
+
+
+  /////////////////////////////////////ashraf Code////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

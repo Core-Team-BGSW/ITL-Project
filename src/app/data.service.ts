@@ -35,7 +35,7 @@ export class DataService {
     'http://localhost:8080/boschLabs/by-responsible';
   private apiChecklist = 'http://localhost:8080/checklist/ids';
   private checklistResponseUrl = 'http://localhost:8080/checklist-response/add';
-  private baseUrl2 = 'http://localhost:8080/userinfo'; // Replace with your API URL
+  private userinfoApi = 'http://localhost:8080/userinfo'; // Replace with your API URL
 
   constructor(private http: HttpClient) {}
 
@@ -68,8 +68,11 @@ export class DataService {
     return this.http.get<any>(this.locationUrl);
   }
 
-  archiveSelectedLab(id: string): Observable<{ message: string }> {
-    return this.http.delete<{ message: string }>(`${this.archiveLabUrl}/${id}`);
+  archiveSelectedLab(id: string): Observable<{ response: string }> {
+    // return this.http.delete<{ message: string }>(`${this.archiveLabUrl}/${id}`);
+    return this.http.patch<{ response: string }>(`${this.archiveLabUrl}/${id}`, {});
+
+
   }
 
   reponsibleLabs(ntId?: string): Observable<any> {
@@ -126,6 +129,6 @@ export class DataService {
   }
 
   getSuggestions(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl2}/${userId}`);
+    return this.http.get<any>(`${this.userinfoApi}/${userId}`);
   }
 }
